@@ -1,0 +1,34 @@
+.container{
+    background-color: #112350;
+    width: 780px;
+    height: 954px;
+    border-radius: 50px;
+    margin-left: 260px;
+    margin-top: 63px;
+}
+
+.container p{
+    color: rgba(255, 255, 255, 0.79);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.headerTxt{
+    display: flex;
+    justify-content: center;
+}
+
+.headerTxt p{
+    margin: 0px 60px;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #A5A5A5;
+    margin-top: 33px;
+}
+
+.txtInput{
+    margin-left: 36px;
+}

@@ -1,5 +1,6 @@
 .container{
     margin-top: 236px;
+    margin-left: 134px;
 }
 
 .container h1{
@@ -9,6 +10,7 @@
     width: 637px;
     height: 192px;
     margin: 0px;
+    margin-bottom: 40px;
 }
 
 .container p{
@@ -18,4 +20,5 @@
     width: 620px;
     height: 96px;
     margin: 0px;
+    margin-bottom: 45px;
 }
