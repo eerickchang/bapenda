@@ -1,0 +1,21 @@
+.container{
+    margin-top: 236px;
+}
+
+.container h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 64px;
+    width: 637px;
+    height: 192px;
+    margin: 0px;
+}
+
+.container p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    width: 620px;
+    height: 96px;
+    margin: 0px;
+}
