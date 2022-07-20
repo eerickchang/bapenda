@@ -1,6 +1,9 @@
-import React from "react";
-import styles from "./button.module.css";
+interface ButtonProps {
+  className: string;
+  title: string;
+}
 
-export default function Button() {
-  return <button className={styles.container}>Masuk</button>;
+export default function Button(props: ButtonProps) {
+  const { className, title } = props;
+  return <button className={className}>{title}</button>;
 }

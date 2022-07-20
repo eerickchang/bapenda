@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./logintxt.module.css";
+import styles from "./txtumum.module.css";
 import Image from "next/image";
 
-export default function LoginTxt() {
+export default function TxtUmum() {
   return (
     <div className={styles.container}>
       <h1>Selamat Datang di Sistem Kepatuhan </h1>

@@ -1,13 +1,31 @@
-import React from "react";
-import LoginCtn from "../../components/LoginCtn";
-import LoginTxt from "../../components/LoginTxt";
 import styles from "./login.module.css";
+import btnStyles from "../../components/Button/button.module.css";
+
+import { Gap, TxtInputLogin, LayoutUmum, Button } from "../../components";
 
 export default function Login() {
   return (
-    <div className={styles.container}>
-      <LoginTxt />
-      <LoginCtn />
-    </div>
+    <>
+      <LayoutUmum>
+        <div className={styles.txtInput}>
+          <TxtInputLogin />
+          <Gap height={40} width={0} />
+          <TxtInputLogin
+            image="/Password.svg"
+            title="Kata Sandi"
+            placeholder="Masukkan Kata Sandi"
+          />
+          <Gap height={66} width={0} />
+          <p>Lupa kata sandi ?</p>
+          <Gap height={130} width={0} />
+          <Button className={`${btnStyles.container}`} title="Masuk" />
+          <Gap height={45} width={0} />
+          <Button
+            className={`${btnStyles.container} ${btnStyles.btnDaftar}`}
+            title="Daftar"
+          />
+        </div>
+      </LayoutUmum>
+    </>
   );
 }

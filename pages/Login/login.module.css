@@ -1,3 +1,7 @@
 .container{
     display: flex;
 }
+
+.txtInput{
+    margin-left: 36px;
+}

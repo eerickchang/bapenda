@@ -1,7 +1,8 @@
-import LoginTxt from "./LoginTxt";
-import LoginCtn from "./LoginCtn";
+import TxtUmum from "./TxtUmum";
+import CtnUmum from "./CtnUmum";
 import TxtInputLogin from "./TxtInputLogin";
 import Gap from "./Gap";
 import Button from "./Button";
+import LayoutUmum from "./LayoutUmum";
 
-export { LoginTxt, LoginCtn, TxtInputLogin, Gap };
+export { CtnUmum, TxtUmum, TxtInputLogin, Gap, Button, LayoutUmum };

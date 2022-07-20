@@ -1,9 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Gap from "../Gap";
 import TxtInputLogin from "../TxtInputLogin";
-import styles from "./loginctn.module.css";
+import styles from "./ctnumum.module.css";
 
-export default function LoginCtn() {
+interface CtnUmumProps {
+  children: ReactNode;
+}
+
+export default function CtnUmum(props: CtnUmumProps) {
+  const { children } = props;
   return (
     <div className={styles.container}>
       <div className={styles.headerTxt}>
@@ -12,7 +17,13 @@ export default function LoginCtn() {
         <p>Sandi</p>
       </div>
       <Gap height={77} width={0} />
-      <div className={styles.txtInput}>
+      <div> {children} </div>
+    </div>
+  );
+}
+
+{
+  /* <div className={styles.txtInput}>
         <TxtInputLogin />
         <Gap height={40} width={0} />
         <TxtInputLogin
@@ -22,7 +33,5 @@ export default function LoginCtn() {
         />
         <Gap height={66} width={0} />
         <p>Lupa kata sandi ?</p>
-      </div>
-    </div>
-  );
+      </div> */
 }
