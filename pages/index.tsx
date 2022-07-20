@@ -1,7 +1,9 @@
-import React from 'react'
+import LupaSandi from '../pages/LupaSandi'
 
 export default function Home() {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <LupaSandi />
+    </div>
+  );
 }

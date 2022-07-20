@@ -1,0 +1,17 @@
+.container {
+  width: 780px;
+  height: 954px;
+  background-color: #112350;
+}
+
+.header {
+  display: inline-flex;
+}
+
+.header p{
+    color: #898C95;
+}
+
+.header b{
+    color: #fff;
+}
