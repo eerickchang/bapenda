@@ -14,11 +14,11 @@ export default function Login() {
             title="Kata Sandi"
             placeholder="Masukkan Kata Sandi"
           />
-          <Gap height={66} width={0} />
+          <Gap height={106} width={0} />
           <p className={styles.txtLupa}>Lupa kata sandi ?</p>
-          <Gap height={130} width={0} />
-          <Button className={`${btnStyles.container}`} title="Masuk" />
           <Gap height={45} width={0} />
+          <Button className={`${btnStyles.container}`} title="Masuk" />
+          <Gap height={23} width={0} />
           <Button
             className={`${btnStyles.container} ${btnStyles.btnDaftar}`}
             title="Daftar"

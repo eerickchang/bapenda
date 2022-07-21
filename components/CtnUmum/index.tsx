@@ -1,6 +1,5 @@
-import React, { ReactNode, useState, useEffect } from "react";
+import React, { ReactNode, useState } from "react";
 import Gap from "../Gap";
-import TxtInputLogin from "../TxtInputLogin";
 import styles from "./ctnumum.module.css";
 
 interface CtnUmumProps {
@@ -12,53 +11,39 @@ export default function CtnUmum(props: CtnUmumProps) {
   const [txtDaftar, setTxtDaftar] = useState(styles.txtNormal);
   const [txtSandi, setTxtSandi] = useState(styles.txtNormal);
   const { children } = props;
-  const [isToogle, setIsToogle] = useState(false);
+  const [isToogleMasuk, setIsToogleMasuk] = useState(true);
+  const [isToogleDaftar, setIsToogleDaftar] = useState(true);
+  const [isToogleSandi, setIsToogleSandi] = useState(true);
 
   const handleClickMasuk = () => {
     {
-      setIsToogle(!isToogle);
-      isToogle
+      setIsToogleMasuk(!isToogleMasuk);
+      isToogleMasuk
         ? setTxtMasuk(styles.txtMasukStyled)
         : setTxtMasuk(styles.txtNormal);
-      console.log(isToogle);
+      console.log(isToogleMasuk);
     }
   };
 
   const handleClickDaftar = () => {
     {
-      setIsToogle(!isToogle);
-      isToogle
+      setIsToogleDaftar(!isToogleDaftar);
+      isToogleDaftar
         ? setTxtDaftar(styles.txtDaftarStyled)
         : setTxtDaftar(styles.txtNormal);
+      console.log(isToogleDaftar);
     }
   };
 
   const handleClickSandi = () => {
     {
-      setIsToogle(!isToogle);
-      isToogle
+      setIsToogleSandi(!isToogleSandi);
+      isToogleSandi
         ? setTxtSandi(styles.txtSandiStyled)
         : setTxtSandi(styles.txtNormal);
+      console.log(isToogleSandi);
     }
   };
-
-  // if (isToogle === true) {
-  //   return (
-  //     <div className={styles.container}>
-  //       <div className={styles.headerTxt}>
-  //         <p className={styles.txtNormal}>Daftar</p>
-  //         <p className={txt} onClick={() => setIsToogle(!isToogle)}>
-  //           Masuk
-  //         </p>
-  //         <p className={styles.txtNormal}>Sandi</p>
-  //       </div>
-  //       <Gap height={77} width={0} />
-  //       <div> {children} </div>
-  //     </div>
-  //   );
-  // } else {
-  //   return <div>False</div>;
-  // }
 
   return (
     <div className={styles.container}>
@@ -73,7 +58,7 @@ export default function CtnUmum(props: CtnUmumProps) {
           Sandi
         </p>
       </div>
-      <Gap height={77} width={0} />
+      <Gap height={55} width={0} />
       <div> {children} </div>
     </div>
   );
