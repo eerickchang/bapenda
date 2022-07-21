@@ -16,7 +16,7 @@ export default function CtnUmum(props: CtnUmumProps) {
         <p>Masuk</p>
         <p>Sandi</p>
       </div>
-      <Gap height={77} width={0} />
+      <Gap height={55} width={0} />
       <div> {children} </div>
     </div>
   );

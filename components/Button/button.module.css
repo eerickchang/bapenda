@@ -1,25 +1,31 @@
-.container{
-    background-color: #1BDDBB;
-    width: 705px;
-    height: 70px;
-    border-radius: 90px;
-    border: none;
+.container {
+  background-color: #1bddbb;
+  width: 516px;
+  height: 53px;
+  border-radius: 90px;
+  border: none;
 }
 
-.container p{
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 36px;
-    margin: 0%;
-    transition: 0.5s;
+.container p {
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0%;
+  transition: 0.5s;
 }
 
-.container p:hover{
-    padding-right: 20px;
+.container p:hover {
+  padding-right: 20px;
 }
 
-.btnDaftar{
-    background: rgba(165, 165, 165, 0.43);
-    color: #A5A5A5;
+.btnDaftar {
+  background: rgba(165, 165, 165, 0.43);
+  color: #a5a5a5;
 }
+
+.btnSandi {
+  margin-top: 50px;
+}
+
+
