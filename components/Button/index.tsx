@@ -5,5 +5,9 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
   const { className, title } = props;
-  return <button className={className}>{title}</button>;
+  return (
+    <button className={className}>
+      <p>{title}</p>
+    </button>
+  );
 }

@@ -1,0 +1,17 @@
+.container{
+    background-color: #112350;
+    width: 140px;
+    height: 1080px;
+    border-radius: 0px 40px 40px 0px;
+    position: fixed;
+}
+
+.image{
+    padding: 50px 25px;
+}
+
+.content div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px;
+}
