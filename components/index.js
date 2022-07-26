@@ -10,9 +10,10 @@ import TxtInputRenaksi from "./TxtInputRenaksi";
 import CtnLogin from "./CtnLogin";
 import CtnLupaSandi from "./CtnLupaSandi";
 import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
-import CtnMasukRegister from "./CtnMasukRegister";
+import CtnMasukRegister from "./CtnDaftar";
 import CtnSandiBaru from "./CtnSandiBaru";
 import CtnSandiSukses from "./CtnSandiSukses";
+import txtInputDaftar from "./TxtInputDaftar";
 
 export {
   CtnUmum,
@@ -30,4 +31,5 @@ export {
   CtnMasukRegister,
   CtnSandiBaru,
   CtnSandiSukses,
+  txtInputDaftar,
 };

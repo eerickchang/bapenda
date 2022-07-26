@@ -12,7 +12,7 @@ export default function TxtInput({
   return (
     <div className={styles.container}>
       <div className={styles.logoTxt}>
-        <Gap width={63} height={0} />
+        <Gap width={33} height={0} />
         <Image
           src={image}
           width={25}
