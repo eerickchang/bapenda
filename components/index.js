@@ -7,7 +7,6 @@ import TxtUmum from "./TxtUmum";
 import Sidebar from "./Sidebar";
 import ContentInputRenaksiP from "./ContentInputRenaksiP";
 import TxtInputRenaksi from "./TxtInputRenaksi";
-import CtnLogin from "./CtnLogin";
 import CtnLupaSandi from "./CtnLupaSandi";
 import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
 import CtnMasukRegister from "./CtnMasukRegister";
@@ -24,7 +23,6 @@ export {
   Sidebar,
   ContentInputRenaksiP,
   TxtInputRenaksi,
-  CtnLogin,
   CtnLupaSandi,
   CtnLupaSandiOTP,
   CtnMasukRegister,
