@@ -19,7 +19,7 @@ export default function CtnLogin() {
   const btnMasuk = () => {};
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.headerTxt}>
         <p className={styles.txtNormal}>Daftar</p>
         <p className={styles.txtStyled}>Masuk</p>
