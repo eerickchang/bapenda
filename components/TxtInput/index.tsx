@@ -3,7 +3,7 @@ import styles from "./txtinputlogin.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 
-export default function TxtInputLogin({
+export default function TxtInput({
   image = "/Nip.svg",
   alt = "Nip",
   title = "NIP / NPNP",

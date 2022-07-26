@@ -12,7 +12,10 @@ export default function LayoutUmum(props: LayoutUmumProps) {
   return (
     <div className={styles.container}>
       <TxtUmum />
-      <CtnUmum children={children} />
+      <CtnUmum children={children} /> 
     </div>
   );
+}
+
+{
 }
