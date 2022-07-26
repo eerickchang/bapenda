@@ -7,18 +7,13 @@ interface CtnUmumProps {
 }
 
 export default function CtnUmum(props: CtnUmumProps) {
-  const {children} = props;
-  
-  return (
-    <div className={styles.container}>
-      {children}
-    </div>
-  );
+  const { children } = props;
+
+  return <div className={styles.container}>{children}</div>;
 }
 
-
-
-{/* <div className={styles.headerTxt}>
+{
+  /* <div className={styles.headerTxt}>
   <p className={txtDaftar} onClick={handleClickDaftar}>
     Daftar
   </p>
@@ -30,7 +25,8 @@ export default function CtnUmum(props: CtnUmumProps) {
   </p>
 </div>
 <Gap height={55} width={0} />
-<div> {children} </div> */}
+<div> {children} </div> */
+}
 
 // const [txtMasuk, setTxtMasuk] = useState(styles.txtNormal);
 // const [txtDaftar, setTxtDaftar] = useState(styles.txtNormal);
@@ -40,12 +36,8 @@ export default function CtnUmum(props: CtnUmumProps) {
 // const [isToogleDaftar, setIsToogleDaftar] = useState(true);
 // const [isToogleSandi, setIsToogleSandi] = useState(true);
 
-
-
-
-
 // const handleClickMasuk = () => {
-  //   {
+//   {
 //     setIsToogleMasuk(!isToogleMasuk);
 //     isToogleMasuk
 //       ? setTxtMasuk(styles.txtMasukStyled)

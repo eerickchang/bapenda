@@ -15,8 +15,8 @@ export default function TxtInput({
         <Gap width={63} height={0} />
         <Image
           src={image}
-          width={30}
-          height={35}
+          width={25}
+          height={30}
           alt={alt}
           className={styles.image}
         />

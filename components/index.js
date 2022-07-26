@@ -12,6 +12,7 @@ import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
 import CtnMasukRegister from "./CtnMasukRegister";
 import CtnSandiBaru from "./CtnSandiBaru";
 import CtnSandiSukses from "./CtnSandiSukses";
+import CtnLogin from "./CtnLogin";
 
 export {
   CtnUmum,
@@ -23,6 +24,7 @@ export {
   Sidebar,
   ContentInputRenaksiP,
   TxtInputRenaksi,
+  CtnLogin,
   CtnLupaSandi,
   CtnLupaSandiOTP,
   CtnMasukRegister,
