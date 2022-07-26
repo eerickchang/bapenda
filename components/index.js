@@ -7,13 +7,13 @@ import TxtUmum from "./TxtUmum";
 import Sidebar from "./Sidebar";
 import ContentInputRenaksiP from "./ContentInputRenaksiP";
 import TxtInputRenaksi from "./TxtInputRenaksi";
-import CtnLogin from "./CtnLogin";
 import CtnLupaSandi from "./CtnLupaSandi";
 import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
 import CtnMasukRegister from "./CtnDaftar";
 import CtnSandiBaru from "./CtnSandiBaru";
 import CtnSandiSukses from "./CtnSandiSukses";
 import txtInputDaftar from "./TxtInputDaftar";
+import CtnLogin from "./CtnLogin";
 
 export {
   CtnUmum,
