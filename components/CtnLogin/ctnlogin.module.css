@@ -1,12 +1,8 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-/* .txtInput {
-  margin-left: 36px;
-} */
 
 .txtLupa {
   color: rgba(255, 255, 255, 0.79);

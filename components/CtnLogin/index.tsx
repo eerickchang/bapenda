@@ -12,6 +12,12 @@ export default function CtnLogin() {
     router.push("/LupaSandi");
   };
 
+  const btnDaftar = () => {
+    router.push("/Daftar");
+  };
+
+  const btnMasuk = () => {};
+
   return (
     <div className={styles.container}>
       <div className={styles.headerTxt}>
@@ -37,6 +43,7 @@ export default function CtnLogin() {
         <Button
           className={`${btnStyles.container} ${btnStyles.btnDaftar}`}
           title="Daftar"
+          onClick={btnDaftar}
         />
       </div>
     </div>
