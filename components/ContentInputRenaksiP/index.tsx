@@ -10,7 +10,7 @@ export default function ContentInputRenaksiP() {
       <TxtInputRenaksi
         title="Kegiatan"
         className={`${txtInputStyle.container} ${txtInputStyle.program}`}
-        
+        width={1000}
       />
       <TxtInputRenaksi
         title="Program"

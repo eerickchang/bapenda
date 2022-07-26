@@ -1,15 +1,15 @@
 import styles from "../styles/login.module.css";
 import btnStyles from "../components/Button/button.module.css";
-import { Gap, TxtInputLogin, LayoutUmum, Button } from "../components";
+import { Gap, TxtInput, LayoutUmum, Button } from "../components";
 
 export default function Login() {
   return (
     <>
       <LayoutUmum>
-        <div className={styles.txtInput}>
-          <TxtInputLogin />
+        <div className={styles.txtInput}> 
+          <TxtInput />
           <Gap height={40} width={0} />
-          <TxtInputLogin
+          <TxtInput
             image="/Password.svg"
             title="Kata Sandi"
             placeholder="Masukkan Kata Sandi"
