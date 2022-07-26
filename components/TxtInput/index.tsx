@@ -8,6 +8,8 @@ export default function TxtInput({
   alt = "Nip",
   title = "NIP / NPNP",
   placeholder = "Masukkan NIP / NPNP",
+  width = 25,
+  height = 30
 }) {
   return (
     <div className={styles.container}>
@@ -15,8 +17,8 @@ export default function TxtInput({
         <Gap width={63} height={0} />
         <Image
           src={image}
-          width={25}
-          height={30}
+          width={width}
+          height={height}
           alt={alt}
           className={styles.image}
         />

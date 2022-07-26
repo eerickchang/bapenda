@@ -4,23 +4,18 @@
   align-items: center;
 }
 
-/* .txtInput {
-  margin-left: 36px;
-} */
-
-.txtLupa {
-  color: rgba(255, 255, 255, 0.79);
+.txtVerif {
+  color: #fff;
   font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  margin-left: 20px;
-  cursor: pointer;
+  font-weight: 600;
+  font-size: 35px;
+  margin: 0px;
+  margin-left: -152px;
 }
 
 .headerTxt {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .txtNormal {
