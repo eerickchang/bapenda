@@ -15,6 +15,8 @@ import CtnSandiSukses from "./CtnSandiSukses";
 import TxtInputDaftar from "./TxtInputDaftar";
 import CtnLogin from "./CtnLogin";
 import BtnBulan from './BtnBulan'
+import DashboardHeader from "./DashboardHeader";
+import SidebarHover from "./SidebarHover";
 
 export {
   CtnUmum,
@@ -33,5 +35,7 @@ export {
   CtnSandiBaru,
   CtnSandiSukses,
   TxtInputDaftar,
-  BtnBulan
+  BtnBulan,
+  DashboardHeader,
+  SidebarHover,
 };
