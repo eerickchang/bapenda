@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 export default function CtnLogin() {
   const router = useRouter();
+
   const handleClick = () => {
     router.push("/LupaSandi");
   };
@@ -16,7 +17,9 @@ export default function CtnLogin() {
     router.push("/Daftar");
   };
 
-  const btnMasuk = () => {};
+  const btnMasuk = () => {
+    router.push("/Dashboard");
+  };
 
   return (
     <div className={styles.container}>
@@ -38,7 +41,11 @@ export default function CtnLogin() {
           Lupa kata sandi ?
         </p>
         <Gap height={45} width={0} />
-        <Button className={`${btnStyles.container}`} title="Masuk" />
+        <Button
+          className={`${btnStyles.container}`}
+          title="Masuk"
+          onClick={btnMasuk}
+        />
         <Gap height={23} width={0} />
         <Button
           className={`${btnStyles.container} ${btnStyles.btnDaftar}`}

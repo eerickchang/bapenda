@@ -1,8 +1,8 @@
 .container{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 }
-
+/* 
 .content {
   background-color: #112350;
   width: 590px;
@@ -10,4 +10,4 @@
   border-radius: 50px;
   margin-left: 260px;
   margin-top: 63px;
-}
+} */

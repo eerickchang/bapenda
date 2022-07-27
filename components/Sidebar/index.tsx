@@ -1,8 +1,32 @@
-import styles from "./sidebar.module.css";
 import Image from "next/image";
-import Gap from "../Gap";
+import styles from "./sidebar.module.css";
+import { useRouter } from "next/router";
 
 export default function Sidebar() {
+  const router = useRouter();
+
+  const InputRenaksi = () => {
+    router.push("/InputRenaksi");
+  };
+  const Dashboard = () => {
+    router.push("/Dashboard");
+  };
+
+  // const History = () => {
+  //   router.push("/History");
+  // };
+
+  // const DaftarKegiatan = () => {
+  //   router.push("/DaftarKegiatan");
+  // };
+
+  // const Profile = () => {
+  //   router.push("/Profile");
+  // };
+
+  // const Notification = () => {
+  //   router.push("/Notification");
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.image}>
@@ -15,10 +39,22 @@ export default function Sidebar() {
       </div>
       <div className={styles.content}>
         <div>
-          <Image src="/Home.svg" width={40} height={40} alt="Sidebar Profile" />
+          <Image
+            src="/Home.svg"
+            width={40}
+            height={40}
+            alt="Sidebar Profile"
+            onClick={Dashboard}
+          />
         </div>
         <div>
-          <Image src="/Input.svg" width={40} height={40} alt="List" />
+          <Image
+            src="/Input.svg"
+            width={40}
+            height={40}
+            alt="List"
+            onClick={InputRenaksi}
+          />
         </div>
         <div>
           <Image src="/List.svg" width={40} height={40} alt="List" />
@@ -28,13 +64,13 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={styles.wrapperNavBawah}>
-        <div >
+        <div>
           <Image src="/IconNamaP.svg" width={25} height={30} alt="notif" />
         </div>
         <div>
           <Image src="/Notification.svg" width={40} height={40} alt="notif" />
         </div>
-        <div >
+        <div>
           <Image src="/Exit.svg" width={40} height={40} alt="notif" />
         </div>
       </div>
