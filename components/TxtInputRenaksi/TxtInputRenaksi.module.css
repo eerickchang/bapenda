@@ -16,8 +16,8 @@
   color: #4a4a4a;
 }
 
-.program{
-    width: 1500px;
+.program input{
+  width: 1500px;
 }
 
 .container input:focus{
