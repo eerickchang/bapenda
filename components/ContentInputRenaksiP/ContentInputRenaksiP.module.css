@@ -1,12 +1,42 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    padding-left: 60px;
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 60px;
 }
 
-.container p{
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
+.tahun {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  margin-top: 50px;
+}
+
+.wrapperInput {
+  display: flex;
+}
+/* .container p {
+  margin: 0;
+} */
+
+.wrapperRencana {
+  display: block;
+  flex-direction: column;
+}
+.rencana {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.wrapperRencana div {
+  margin-top: 7px;
+  width: 1170px;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-bottom: 23px;
+  border-bottom: 2px solid #1bddbb;
 }

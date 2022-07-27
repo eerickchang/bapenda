@@ -1,0 +1,34 @@
+.container {
+  background-color: #B8BDCA;
+  width: 70px;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+}
+
+.container p {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0%;
+  transition: 0.5s;
+}
+
+.container p:hover {
+  padding-right: 20px;
+}
+
+.btnType2 {
+ background-color: #1BDDBB;
+}
+
+.btnType3 {
+ background-color: #1BDDBB;
+ width: 172px;
+ height: 51px;
+}
+
+.btnSandi {
+  margin-top: 50px;
+}
