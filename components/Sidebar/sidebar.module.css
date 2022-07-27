@@ -1,57 +1,71 @@
-.container {
+.container{
   background-color: #112350;
   width: 140px;
   height: 100vh;
   border-radius: 0px 40px 40px 0px;
-  position: inherit;
-  display: grid;
-  align-content: space-around;
 }
 
-.image {
-  padding: 50px 25px;
-}
-
-.content {
+.contentAtas{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 352px;
-}
-
-.wrapperNavBawah {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 230px;
-}
-/* .content div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 70px;
-} */
-
-/* 
-.container{
-    background-color: #112350;
-    border-radius: 0px 40px 40px 0px;
-    position: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 140px;
 }
 
 .image{
-    padding: 50px 25px;
+  height: 188px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.content div{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 70px;
+.hoverKotak{
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
 }
 
+.hoverKeterangan{
+  position: absolute;
+  height: 50px;
+  width: 175px;
+  left: 140px;
+  background-color: #1BDDBB;
+  border-radius: 10px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40%);
+}
 
-*/
+.hoverKeterangan2{
+  width: 300px;
+}
+
+.hoverKotak:hover .hoverKeterangan {
+  opacity: 1;
+  transition: 0.5s;
+  left: 160px;
+}
+
+.hoverKotak:hover{
+  background-color: #1BDDBB;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: 0.5s;
+  margin-left: 20px;
+}
+
