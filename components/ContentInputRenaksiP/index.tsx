@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import btnStyles from "../Button/button.module.css";
 import Button from "../Button";
@@ -5,15 +6,25 @@ import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
 import txtInputStyle from "../TxtInputRenaksi/TxtInputRenaksi.module.css";
 import styles from "./ContentInputRenaksiP.module.css";
+import BtnBulan from "../BtnBulan";
+import btnFormat from "../BtnBulan/btnBulan.module.css";
 
 export default function ContentInputRenaksiP() {
   const router = useRouter();
   const handleClick = () => {
     router.push("/InputRenaksi");
   };
+
+  //!modals
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className={styles.container}>
       <p className={styles.tahun}>INPUT RENAKSI TAHUN 2023</p>
+      <BtnBulan
+        image={"/Excel.svg"}
+        className={`${btnFormat.container} ${btnFormat.btnExel}`}
+        title="Format Excel"
+      />
       <Gap height={46} width={0} />
       <TxtInputRenaksi
         title="Program"
@@ -40,71 +51,78 @@ export default function ContentInputRenaksiP() {
           <Button
             title={"Jan"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType1}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType1}`}
           />
           <Button
             title={"Feb"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType1}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType1}`}
           />
           <Button
             title={"Mar"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Apr"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Mei"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Jun"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Jul"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType1}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType1}`}
           />
           <Button
             title={"Agu"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Sep"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Okt"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType2}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType2}`}
           />
           <Button
             title={"Nov"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType1}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType1}`}
           />
           <Button
             title={"Des"}
             onClick={handleClick}
-            className={`${btnStyles.container} ${btnStyles.btnType1}`}
+            className={`${btnStyles.btnType1} ${btnStyles.btnType1}`}
           />
         </div>
       </div>
       <Gap height={30} width={0} />
       <Button
         title="Unggah"
-        onClick={handleClick}
-        className={`${btnStyles.container} ${btnStyles.btnType3}`}
+        onClick={() => setShowModal(true)}
+        className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
+      {showModal ? (
+        <div className={styles.modal}>
+          <p>
+            Input Renaksi Feerren Kalalo <b>Berhasil</b>
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 }

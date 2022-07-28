@@ -30,28 +30,33 @@
 
 /* ? Button di Input renaksi */
 .btnType1 {
-  background-color: red;
+  background-color: #1bddbb;
   width: 70px;
   height: 60px;
   border-radius: 10px;
   border: none;
   color: #fff;
-  font-size: 220px;
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.btnType1 p{
+  margin: 0;
 }
 
 .btnType2 {
-  background-color: #1bddbb;
-  font-size: 22px;
+  background-color: #B8BDCA;
   color: #fff;
 }
 
 .btnType3 {
   background-color: #1bddbb;
-  font-size: 22px;
   color: #fff;
   width: 172px;
   height: 51px;
   margin-left: 1381px;
+  font-size: 20px;
 }
 
 .btnType1 p:hover {
@@ -64,4 +69,21 @@
 
 .btnType3 p:hover {
   padding-right: 0;
+}
+
+.btnType4{
+  background-color: #B8BDCA;
+  width: 193px;
+  height: 55px;
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 48px;
+  left: 1502px;
+}
+
+.btnType4 p{
+  padding-left: 5px;
 }

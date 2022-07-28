@@ -1,17 +1,23 @@
 .container {
-  background-color: #B8BDCA;
-  width: 70px;
-  height: 60px;
+  background-color: #1BDDBB;
+  width: 193px;
+  height: 55px;
   border-radius: 10px;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 48px;
+  left: 1502px;
 }
 
 .container p {
   color: #fff;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 22px;
-  margin: 0%;
+  font-size: 20px;
+  margin-left: 5px;
   transition: 0.5s;
 }
 
