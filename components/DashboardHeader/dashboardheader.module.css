@@ -1,11 +1,15 @@
 .container{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    position: absolute;
+    /* position: absolute; */
     width: 1176px;
     height: 120px;
-    left: 186px;
-    top: 30px;
+    margin-left: 45px;
+    margin-top: 51px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
 }
 
 .head1{
@@ -14,4 +18,43 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     border-bottom: 2px solid #1BDDBB;
+    width: 107px;
+    height: 39.5px;
+    margin-left: 24px;
+}
+
+.jumlahKegiatan{
+    display: flex;
+}
+
+.txtNormal{
+    color: #4A4A4A;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    margin: 0px;
+
+}
+
+.txtBold{
+    color: rgba(0, 0, 0, 0.8);    
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin: 0px;
+
+}
+
+.txtWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.iconWrapper{
+    display: flex;
+    width: 914px;
+    justify-content: space-between;
+    margin-left: 85px;
 }

@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-.hoverKotak{
+.kotak{
   width: 65px;
   height: 65px;
   display: flex;
@@ -27,6 +27,19 @@
   align-items: center;
   transition: 0.5s;
   border-radius: 10px;
+  background-color: #112350;
+  border: none;
+}
+
+.kotak:focus {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color: #1BDDBB;
 }
 
 .hoverKeterangan{
@@ -45,19 +58,20 @@
   align-items: center;
   opacity: 0;
   transform: translateY(40%);
+  pointer-events: none;
 }
 
 .hoverKeterangan2{
-  width: 300px;
+  width: 265px;
 }
 
-.hoverKotak:hover .hoverKeterangan {
+.kotak:hover .hoverKeterangan {
   opacity: 1;
   transition: 0.5s;
   left: 160px;
 }
 
-.hoverKotak:hover{
+.kotak:hover{
   background-color: #1BDDBB;
   width: 65px;
   height: 65px;
@@ -69,3 +83,14 @@
   margin-left: 20px;
 }
 
+.kotakAktif{
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color: #1BDDBB;
+  border: none;
+}

@@ -1,4 +1,8 @@
 .container{
-    /* height: 100%; */
     display: flex;
+}
+
+.contentKanan{
+    margin-left: 47px;
+    margin-top: 0px;
 }
