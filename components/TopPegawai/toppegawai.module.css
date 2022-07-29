@@ -26,7 +26,7 @@
     margin-bottom: 30px;
 }
 
-.txtBold{
+.txtNama{
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 20px;
@@ -34,13 +34,13 @@
     margin: 0px;
 }
 
-.txtNormal{
+.txtSubid{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 20px;
     color: #4A4A4A;
     margin: 0px;
-    /* width: 226px; */
+    width: 350px;
 }
 
 .txtWrapper{

@@ -27,9 +27,11 @@
 
 .isiNotif{
     display: flex;
+    margin-left: 17px;
+    margin-top: 25px;
 }
 
-.txtBold{
+.txtTitleDiterima{
     margin: 0px;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
@@ -37,10 +39,19 @@
     color: #4A4A4A;
 }
 
-.txtNormal{
+.txtMessage{
     margin: 0px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 20px;
     color: #4A4A4A;
+}
+
+.image{
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.txtTitleDitolak{
+    color: #FF0164;
 }
