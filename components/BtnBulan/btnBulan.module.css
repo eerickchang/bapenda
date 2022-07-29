@@ -1,0 +1,40 @@
+.container {
+  background-color: #1BDDBB;
+  width: 193px;
+  height: 55px;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 48px;
+  left: 1502px;
+}
+
+.container p {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-left: 5px;
+  transition: 0.5s;
+}
+
+.container p:hover {
+  padding-right: 20px;
+}
+
+.btnType2 {
+ background-color: #1BDDBB;
+}
+
+.btnType3 {
+ background-color: #1BDDBB;
+ width: 172px;
+ height: 51px;
+}
+
+.btnSandi {
+  margin-top: 50px;
+}

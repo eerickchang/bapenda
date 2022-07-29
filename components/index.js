@@ -7,6 +7,8 @@ import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
 import CtnSandiBaru from "./CtnSandiBaru";
 import CtnSandiSukses from "./CtnSandiSukses";
 import CtnUmum from "./CtnUmum";
+import TxtInputDaftar from "./TxtInputDaftar";
+import BtnBulan from "./BtnBulan";
 import DashboardHeader from "./DashboardHeader";
 import Gap from "./Gap";
 import LayoutUmum from "./LayoutUmum";
@@ -34,7 +36,8 @@ export {
   CtnMasukRegister,
   CtnSandiBaru,
   CtnSandiSukses,
-  txtInputDaftar,
+  TxtInputDaftar,
+  BtnBulan,
   DashboardHeader,
   TopPegawai,
   BoxNotification,

@@ -1,18 +1,18 @@
-.container{
+.container {
   background-color: #112350;
   width: 140px;
   height: 100vh;
   border-radius: 0px 40px 40px 0px;
 }
 
-.contentAtas{
+.contentAtas {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.image{
+.image {
   height: 188px;
   display: flex;
   justify-content: center;
@@ -42,15 +42,15 @@
   background-color: #1BDDBB;
 }
 
-.hoverKeterangan{
+.hoverKeterangan {
   position: absolute;
   height: 50px;
   width: 175px;
   left: 140px;
-  background-color: #1BDDBB;
+  background-color: #1bddbb;
   border-radius: 10px;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 24px;
   display: flex;
