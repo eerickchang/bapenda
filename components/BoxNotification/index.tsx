@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./boxnotification.module.css";
 import Image from "next/image";
 
 export default function BoxNotification() {
+  const [notif, setNotif] = useState([
+    {
+      id: 1,
+      title: "Diterima",
+      message: "Renaksi tahun 2023 telah diterima",
+      image: (
+        <Image src="/NotifBiru.svg" width={25} height={25} alt="Notif Biru" />
+      ),
+      classTitle: styles.txtTitleDiterima,
+    },
+    {
+      id: 2,
+      title: "Ditolak",
+      message: "Permintaan penjadwalan ulang ditolak",
+      image: (
+        <Image src="/NotifMerah.svg" width={25} height={25} alt="Notif Merah" />
+      ),
+      classTitle: `${styles.txtTitleDiterima} ${styles.txtTitleDitolak} `,
+    },
+  ]);
+
   return (
     <div className={styles.container}>
       <div className={styles.notifHeader}>
@@ -14,15 +35,15 @@ export default function BoxNotification() {
           alt="Notifikasi Biru"
         />
       </div>
-      <div className={styles.isiNotif}>
-        <Image src="/NotifBiru.svg" width={25} height={25} alt="Notif Biru" />
-        <div>
-          <p className={styles.txtBold}>Diterima</p>
-          <p className={styles.txtNormal}>
-            Renaksi tahun 2023 telah di-approve
-          </p>
+      {notif.map((item) => (
+        <div className={styles.isiNotif} key={item.id}>
+          <div className={styles.image}>{item.image}</div>
+          <div>
+            <p className={item.classTitle}>{item.title}</p>
+            <p className={styles.txtMessage}>{item.message}</p>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }

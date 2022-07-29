@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.contentBawah{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
 .image {
   height: 188px;
   display: flex;
@@ -61,7 +69,7 @@
   pointer-events: none;
 }
 
-.hoverKeterangan2{
+.hoverKeteranganKegiatan{
   width: 265px;
 }
 

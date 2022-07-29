@@ -45,8 +45,8 @@ export default function TopPegawai() {
         <div className={styles.profile} key={item.id}>
           {item.image}
           <div className={styles.txtWrapper}>
-            <p className={styles.txtBold}>{item.nama}</p>
-            <p className={styles.txtNormal}>{item.subBidang}</p>
+            <p className={styles.txtNama}>{item.nama}</p>
+            <p className={styles.txtSubid}>{item.subBidang}</p>
           </div>
         </div>
       ))}
