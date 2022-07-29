@@ -30,6 +30,7 @@ export default function ContentInputRenaksiP() {
         image={"/Excel.svg"}
         className={`${btnFormat.container} ${btnFormat.btnExel}`}
         title="Format Excel"
+        onClick={handleClick}
       />
       <Gap height={46} width={0} />
       <TxtInputRenaksi

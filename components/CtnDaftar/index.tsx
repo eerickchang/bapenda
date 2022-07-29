@@ -25,7 +25,7 @@ export default function CtnDaftar() {
       <div className={styles.content}>
         <div className={styles.contentKiri}>
           <TxtInputDaftar />
-          <Gap width={0} height={40} />
+          <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/jabatanUmum.svg"
             width={30}
@@ -33,7 +33,7 @@ export default function CtnDaftar() {
             title="Jabatan"
             placeholder="Pilih Jabatan"
           />
-          <Gap width={0} height={40} />
+          <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/Nip.svg"
             width={25}
@@ -51,7 +51,7 @@ export default function CtnDaftar() {
             title="Bidang"
             placeholder="Pilih Sub Bidang"
           />
-          <Gap width={0} height={40} />
+          <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/noHpUmum.svg"
             width={28}
@@ -59,7 +59,7 @@ export default function CtnDaftar() {
             title="No HP"
             placeholder="Masukkan No HP"
           />
-          <Gap width={0} height={40} />
+          <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/Password.svg"
             width={20}
@@ -69,7 +69,7 @@ export default function CtnDaftar() {
           />
         </div>
       </div>
-      <Gap width={0} height={50} />
+      <Gap width={0} height={72} />
       <Button
         className={btnStyles.container}
         title="Daftar"

@@ -8,6 +8,11 @@
   padding-left: 0;
   padding: 0;
   padding-bottom: 11px;
+  color: rgba(165, 165, 165, 0.81);
+}
+
+.container input::placeholder{
+  color: rgba(165, 165, 165, 0.81)
 }
 
 .container p {
@@ -23,4 +28,8 @@
 
 .container input:focus{
   outline: none;
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  
 }

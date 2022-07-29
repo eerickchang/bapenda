@@ -46,7 +46,7 @@ export default function CtnLogin() {
           title="Masuk"
           onClick={btnMasuk}
         />
-        <Gap height={23} width={0} />
+        <Gap height={20} width={0} />
         <Button
           className={`${btnStyles.container} ${btnStyles.btnDaftar}`}
           title="Daftar"

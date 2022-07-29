@@ -9,9 +9,9 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
   const { className, title, onClick, image } = props;
   return (
-    <button className={className} onClick={onClick}>
-      <img src={image} width={35} height={35}/>
-      <p>{title}</p>
-    </button>
+      <button className={className} onClick={onClick}>
+        <img src={image} width={35} height={35} />
+        <p>{title}</p>
+      </button>
   );
 }
