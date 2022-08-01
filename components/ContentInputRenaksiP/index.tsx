@@ -26,12 +26,28 @@ export default function ContentInputRenaksiP() {
         {/* </div> */}
         <p className={styles.tahun}>MASUKAN RENAKSI</p>
       </div>
-      <BtnBulan
+      {/* <BtnBulan
         image={"/Excel.svg"}
-        className={`${btnFormat.container} ${btnFormat.btnExel}`}
+        className={`${btnFormat.container}`}
         title="Format Excel"
         onClick={handleClick}
-      />
+      /> */}
+      <div className={styles.wrapperBtnExcel}>
+      <div className={styles.btnExcel}>
+        <Image src={"/Excel.svg"} width={35} height={35} />
+        <p>Format Excel</p>
+      </div>
+      <div className={styles.selectFile}>
+        <div className={styles.selectItemFile}>
+          <Image src={"/IconUnduh.svg"} width={38} height={35} />
+          <p className={styles.selectItem}>Unduh File</p>
+        </div>
+        <div className={styles.selectItemFile}>
+          <Image src={"/IconUnggah.svg"} width={38} height={35} />
+          <p className={styles.selectItem}>Unggah File</p>
+        </div>
+      </div>
+      </div>
       <Gap height={46} width={0} />
       <TxtInputRenaksi
         title="Program"
@@ -62,6 +78,22 @@ export default function ContentInputRenaksiP() {
             title="Tupoksi Tambahan"
             placeholder="pilih tupoksi tambahan yang akan dilakukan"
           />
+          <div className={styles.dropdownTupoksi}>
+            <div className={styles.selectTupoksi}>
+              <Image src={"/Dropdown-tupoksi.svg"} width={30} height={30} />
+            </div>
+            <div className={styles.dropdownList}>
+              <div className={styles.dropdownList_item}>
+                <p>See Samrat</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Labeling</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Lainnya</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Gap height={80} width={0} />

@@ -25,6 +25,81 @@
   margin-left: 19px;
 }
 
+/* .wrapperBtnExcel { */
+  /* position: absolute;
+  top: 15px;
+  right: 20px;
+  display: inline-flex;
+} */
+
+.btnExcel {
+  width: 193px;
+  height: 55px;
+  background-color: #1bddbb;
+  border-radius: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  position: absolute;
+  top: 40px;
+  right: 200px;
+}
+
+.selectItemFile {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #000;
+  cursor: default;
+  height: 55px;
+  width: 171px;
+  border-radius: 10px;
+  margin-top: 11px;
+  margin-left: 10px;
+  /* position: absolute; */
+}
+
+.selectFile {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 193px;
+  height: 145px;
+  border: 1px solid #1bddbb;
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+  right: 200px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+}
+
+.wrapperBtnExcel:hover .selectFile {
+  opacity: 1;
+  visibility: visible;
+} 
+
+.selectItemFile:hover {
+  background-color: #1bddbb;
+  cursor: pointer;
+  color: #fff;
+}
+
+
+
+.btnExcel p {
+  margin-left: 5px;
+}
+
 .wrapperInput {
   display: flex;
 }
@@ -87,6 +162,54 @@
   background-color: #1bddbb;
 }
 
-/* .wrapperRencana button:hover{
+.dropdownTupoksi {
+  position: absolute;
+  top: 565px;
+  right: 220px;
+  display: inline-flex;
+}
 
-} */
+.dropdownList {
+  width: 477px;
+  height: 190px;
+  background-color: #fff;
+  border-radius: 20px;
+  position: absolute;
+  top: 50px;
+  right: -15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #4a4a4a;
+  border: 1px solid #8891a7;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+}
+
+.dropdownTupoksi:hover .dropdownList {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdownList_item {
+  /* padding: 10px; */
+  padding-left: 30px;
+  padding-top: 7px;
+  /* padding-top: ; */
+  cursor: default;
+}
+
+.dropdownList_item p {
+  margin: 0;
+  padding: 10px;
+  padding-left: 20px;
+  margin-right: 25px;
+  border-radius: 10px;
+}
+
+.dropdownList_item p:hover {
+  background-color: #112350;
+  cursor: pointer;
+  color: #fff;
+}
