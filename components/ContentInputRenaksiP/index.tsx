@@ -21,32 +21,24 @@ export default function ContentInputRenaksiP() {
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
-        {/* <div> */}
         <Image src={"/Input2.svg"} width={50} height={50} />
-        {/* </div> */}
-        <p className={styles.tahun}>MASUKAN RENAKSI</p>
+        <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
       </div>
-      {/* <BtnBulan
-        image={"/Excel.svg"}
-        className={`${btnFormat.container}`}
-        title="Format Excel"
-        onClick={handleClick}
-      /> */}
       <div className={styles.wrapperBtnExcel}>
-      <div className={styles.btnExcel}>
-        <Image src={"/Excel.svg"} width={35} height={35} />
-        <p>Format Excel</p>
-      </div>
-      <div className={styles.selectFile}>
-        <div className={styles.selectItemFile}>
-          <Image src={"/IconUnduh.svg"} width={38} height={35} />
-          <p className={styles.selectItem}>Unduh File</p>
+        <div className={styles.btnExcel}>
+          <Image src={"/Excel.svg"} width={35} height={35} />
+          <p>Format Excel</p>
         </div>
-        <div className={styles.selectItemFile}>
-          <Image src={"/IconUnggah.svg"} width={38} height={35} />
-          <p className={styles.selectItem}>Unggah File</p>
+        <div className={styles.selectFile}>
+          <div className={styles.selectItemFile}>
+            <Image src={"/IconUnduh.svg"} width={38} height={35} />
+            <p className={styles.selectItem}>Unduh File</p>
+          </div>
+          <div className={styles.selectItemFile}>
+            <Image src={"/IconUnggah.svg"} width={38} height={35} />
+            <p className={styles.selectItem}>Unggah File</p>
+          </div>
         </div>
-      </div>
       </div>
       <Gap height={46} width={0} />
       <TxtInputRenaksi

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export default function CtnDaftar() {
   const router = useRouter();
   const btnDaftar = () => {
-    router.push("/Daftar");
+    router.push("/DaftarSukses");
   };
 
   const btnMasuk = () => {

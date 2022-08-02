@@ -19,6 +19,8 @@ import TxtInputRenaksi from "./TxtInputRenaksi";
 import TxtUmum from "./TxtUmum";
 import TopPegawai from "./TopPegawai";
 import BoxNotification from "./BoxNotification";
+import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
+import CtnDaftarSukses from "./CtnDaftarSukses";
 
 export {
   CtnUmum,
@@ -41,4 +43,6 @@ export {
   DashboardHeader,
   TopPegawai,
   BoxNotification,
+  ContentDaftarKegiatan,
+  CtnDaftarSukses,
 };
