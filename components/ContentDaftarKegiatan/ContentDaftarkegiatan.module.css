@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 60px;
+}
+
+.wrapperTitleDaftarKegiatan {
+  display: flex;
+  width: 283px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: 7px;
+  margin-top: 34px;
+}
+
+.txtTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  /* margin-top: 1px; */
+  margin-left: 19px;
+}
+
+.wrapperDataPegawai {
+  display: flex;
+  margin-top: 57px;
+}
+
+.wrapperDataPegawai p {
+  margin: 0;
+}
+
+.wrapperTxt {
+  margin-left: 26px;
+}
+
+.txtNama {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+}
+
+.txtJabatan {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #686868;
+  /* margin-top: 10px; */
+}
+
+.txtPegawai {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #686868;
+}
+
+.wrapperFilter {
+}
+
+.btnFilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #112350;
+  border-radius: 5px;
+  width: 172px;
+  height: 51px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.btnFilter p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin-left: 11px;
+}
+
+.wrapperSelectStatus {
+  padding-top: 7px;
+  padding-bottom: 6px;
+  width: 172px;
+  height: 255px;
+  border: 1px solid #112350;
+  border-radius: 10px;
+  display: grid;
+}
+
+.wrapperSelectStatus p {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #112350;
+  margin: 0;
+  margin-left: 9px;
+  width: 150px;
+  height: 37px; 
+  padding-top: 5px;
+  padding-left: 12px;
+}
+
+.wrapperSelectStatus p:hover{
+  background-color: #112350;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}

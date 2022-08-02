@@ -20,6 +20,8 @@ import TxtUmum from "./TxtUmum";
 import TopPegawai from "./TopPegawai";
 import BoxNotification from "./BoxNotification";
 import ProfileKanan from "./ProfileKanan";
+import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
+import CtnDaftarSukses from "./CtnDaftarSukses";
 
 export {
   CtnUmum,
@@ -43,4 +45,6 @@ export {
   TopPegawai,
   BoxNotification,
   ProfileKanan,
+  ContentDaftarKegiatan,
+  CtnDaftarSukses,
 };
