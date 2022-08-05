@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.txtHeader {
+    font-family: 'Poppins', sans-serif;
+    color: #112350;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0px;
+    margin-left: 5px;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    height: 54px;
+    width: 440px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 60px;
+    border-bottom: 2px solid #1BDDBB;
+}
+
+.contentKiri{
+    width: 1311px;
+}
+
+.contentKanan{
+    display: flex;
+}

@@ -19,6 +19,7 @@ import TxtInputRenaksi from "./TxtInputRenaksi";
 import TxtUmum from "./TxtUmum";
 import TopPegawai from "./TopPegawai";
 import BoxNotification from "./BoxNotification";
+import ProfileKanan from "./ProfileKanan";
 import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
 import CtnDaftarSukses from "./CtnDaftarSukses";
 import ButtonAnimasi from "./ButtonAnimasi";
@@ -45,6 +46,7 @@ export {
   DashboardHeader,
   TopPegawai,
   BoxNotification,
+  ProfileKanan,
   ContentDaftarKegiatan,
   CtnDaftarSukses,
   ButtonAnimasi,

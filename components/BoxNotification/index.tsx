@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./boxnotification.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function BoxNotification() {
   const [notif, setNotif] = useState([
@@ -24,9 +25,14 @@ export default function BoxNotification() {
     },
   ]);
 
+  const router = useRouter();
+  const handleClickNotif = () => {
+    router.push("/Notifikasi");
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.notifHeader}>
+      <div className={styles.notifHeader} onClick={handleClickNotif}>
         <p className={styles.txtHeader}>Notifikasi</p>
         <Image
           src="/NotifBiru.svg"
