@@ -2,6 +2,7 @@ import React from "react";
 import {
   BoxNotification,
   DashboardHeader,
+  Gap,
   Sidebar,
   TopPegawai,
 } from "../../components";
@@ -12,6 +13,7 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       <Sidebar kotakHome={sidebarStyles.kotakAktif} />
+      <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <DashboardHeader />
       </div>

@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperTitleInputRenaksi {
+  display: flex;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: 7px;
+  padding-bottom: 11px;
+  margin: 0;
+}
+
+.txtTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  margin-top: 10px;
+  margin-left: 19px;
+}
+
+.wrapperNotif {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.contentNotif {
+  width: 1670px;
+  height: 157px;
+  background: rgba(0, 52, 185, 0.22);
+  border-radius: 20px;
+  display: flex;
+  padding-left: 50px;
+}
+
+.contentTengah {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  align-self: center;
+}
+
+.txtNama {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: #000;
+  margin: 0;
+}
+
+.txtJabatan {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #002da1;
+  margin: 0;
+  margin-bottom: 7px;
+}
+
+.txtPesan {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: #000;
+  margin: 0;
+}

@@ -43,7 +43,7 @@ export default function Sidebar({
   };
 
   return (
-    <div className={styles.container}>
+    <nav className={styles.container}>
       <div className={styles.image}>
         <Image src="/SidebarProfile.svg" width={90} height={90} />
       </div>
@@ -96,6 +96,6 @@ export default function Sidebar({
           <div className={`${styles.hoverKeterangan}`}>Keluar</div>
         </button>
       </div>
-    </div>
+    </nav>
   );
 }

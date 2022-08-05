@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import ButtonAnimasi from "../ButtonAnimasi";
 import styles from "./ContentDaftarkegiatan.module.css";
 
 export default function ContentDaftarKegiatan() {
@@ -73,5 +74,6 @@ export default function ContentDaftarKegiatan() {
         </div>
       </div>
     </div>
+
   );
 }

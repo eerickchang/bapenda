@@ -91,6 +91,15 @@
   border: 1px solid #112350;
   border-radius: 10px;
   display: grid;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.wrapperFilter:focus wrapperSelectStatus{
+  opacity: 0;
+  visibility: visible;
+  /* position: fixed;
+  background-color: red; */
 }
 
 .wrapperSelectStatus p {
@@ -112,3 +121,4 @@
   color: #fff;
   cursor: pointer;
 }
+

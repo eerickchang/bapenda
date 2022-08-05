@@ -21,6 +21,8 @@ import TopPegawai from "./TopPegawai";
 import BoxNotification from "./BoxNotification";
 import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
 import CtnDaftarSukses from "./CtnDaftarSukses";
+import ButtonAnimasi from "./ButtonAnimasi";
+import ContentNotifikasi from "./ContentNotifikasi";
 
 export {
   CtnUmum,
@@ -45,4 +47,6 @@ export {
   BoxNotification,
   ContentDaftarKegiatan,
   CtnDaftarSukses,
+  ButtonAnimasi,
+  ContentNotifikasi,
 };
