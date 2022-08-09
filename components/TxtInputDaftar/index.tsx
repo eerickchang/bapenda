@@ -9,6 +9,7 @@ export default function TxtInputDaftar({
   placeholder = "Masukkan Nama",
   width = 20,
   height = 25,
+  type= 'text'
 }) {
   return (
     <div className={styles.container}>
@@ -18,7 +19,7 @@ export default function TxtInputDaftar({
         <Gap height={0} width={25} />
         <p>{title}</p>
       </div>
-      <input placeholder={placeholder}></input>
+      <input type={type} placeholder={placeholder}></input>
     </div>
   );
 }

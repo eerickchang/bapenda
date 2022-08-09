@@ -9,7 +9,8 @@ export default function TxtInput({
   title = "NIP / NPNP",
   placeholder = "Masukkan NIP / NPNP",
   width = 25,
-  height = 30
+  height = 30,
+  type = 'text'
 }) {
   return (
     <div className={styles.container}>
@@ -26,7 +27,7 @@ export default function TxtInput({
         <p>{title}</p>
       </div>
       <Gap height={20} width={0} />
-      <input placeholder={placeholder} />
+      <input type={type} placeholder={placeholder} />
     </div>
   );
 }

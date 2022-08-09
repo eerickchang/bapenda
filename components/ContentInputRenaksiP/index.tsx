@@ -9,6 +9,8 @@ import styles from "./ContentInputRenaksiP.module.css";
 import BtnBulan from "../BtnBulan";
 import btnFormat from "../BtnBulan/btnBulan.module.css";
 import Image from "next/image";
+import ButtonAnimasi from "../ButtonAnimasi";
+import CheckboxBulan from "../CheckboxBulan";
 
 export default function ContentInputRenaksiP() {
   const router = useRouter();
@@ -41,14 +43,13 @@ export default function ContentInputRenaksiP() {
         </div>
       </div>
       <Gap height={46} width={0} />
-      <TxtInputRenaksi
-        title="Program"
-        placeholder="masukan program yang akan dilakukan"
-        className={`${txtInputStyle.container} ${txtInputStyle.program}`}
-      />
-      <Gap height={56} width={0} />
       <div className={styles.wrapperInput}>
         <div>
+          <TxtInputRenaksi
+            title="Program"
+            placeholder="masukan program yang akan dilakukan"
+          />
+          <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Kegiatan"
             placeholder="masukan kegiatan yang akan dilakukan"
@@ -61,6 +62,17 @@ export default function ContentInputRenaksiP() {
         </div>
         <Gap height={0} width={100} />
         <div>
+          <TxtInputRenaksi
+            title="THL"
+            placeholder="Pilih THL yang akan bertugas"
+          />
+          <div className={styles.dropdownTHL}>
+            <div className={styles.dropdownIcon}>
+              <Image src={"/Dropdown-tupoksi.svg"} width={30} height={30} />
+            </div>
+            <div className={styles.wrapperSelectTHL}></div>
+          </div>
+          <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Sub Kegiatan"
             placeholder="masukan sub kegiatan yang akan dilakukan"
@@ -92,6 +104,13 @@ export default function ContentInputRenaksiP() {
       <div className={styles.wrapperRencana}>
         <p className={styles.rencana}>Rencana</p>
         <div>
+          {/* <input type={"checkbox"} className={styles.input}/> */}
+          {/* <select className={styles.select}>
+            <option>unduh</option>
+            <option>unggah</option>
+          </select> */}
+          {/* <CheckboxBulan title='jan' /> */}
+
           <Button
             title={"Jan"}
             onClick={handleClick}
@@ -155,6 +174,8 @@ export default function ContentInputRenaksiP() {
         </div>
       </div>
       <Gap height={30} width={0} />
+
+      {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
         onClick={() => setShowModal(true)}

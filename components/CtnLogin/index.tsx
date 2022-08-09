@@ -29,12 +29,13 @@ export default function CtnLogin() {
         <p className={styles.txtNormal}>Sandi</p>
       </div>
       <div className={styles.txtInput}>
-        <TxtInput />
+        <TxtInput type="number" />
         <Gap height={40} width={0} />
         <TxtInput
           image="/Password.svg"
           title="Kata Sandi"
           placeholder="Masukkan Kata Sandi"
+          type="password"
         />
         <Gap height={106} width={0} />
         <p className={styles.txtLupa} onClick={handleClick}>

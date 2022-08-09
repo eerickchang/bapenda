@@ -39,3 +39,9 @@
     outline: none;
     border: 1px solid #1BDDBB;
   }
+
+.container input[type=number]::-webkit-inner-spin-button, 
+.container input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

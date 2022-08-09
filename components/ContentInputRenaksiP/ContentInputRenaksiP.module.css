@@ -79,12 +79,14 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s linear, visibility 0.2s linear;
+  z-index: 999;
+  background-color: #fff;
 }
-.wrapperBtnExcel{
+.wrapperBtnExcel {
   position: fixed;
   width: 193px;
   margin-left: 1305px;
-  margin-top: 40px;
+  margin-top: 49px;
 }
 
 .wrapperBtnExcel:hover .selectFile {
@@ -169,6 +171,7 @@
   margin-top: -40px;
   margin-left: 670px;
   display: flex;
+  z-index: 5;
 }
 
 .dropdownList {
@@ -213,4 +216,26 @@
   background-color: #112350;
   cursor: pointer;
   color: #fff;
+}
+
+.select {
+  width: 477px;
+  height: 40px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 2px solid red;
+}
+
+.select:focus .option {
+  /* width: 477px; */
+  height: 190px;
+}
+
+/* dropdown THL */
+.dropdownTHL{
+
+}
+
+.dropdownIcon{
+
 }

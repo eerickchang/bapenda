@@ -40,6 +40,7 @@ export default function CtnDaftar() {
             height={30}
             title="NIP / NPNP"
             placeholder="Masukkan NIP / NPNP"
+            type="number"
           />
         </div>
         <Gap width={67} height={0} />
@@ -58,6 +59,7 @@ export default function CtnDaftar() {
             height={28}
             title="No HP"
             placeholder="Masukkan No HP"
+            type="number"
           />
           <Gap width={0} height={35} />
           <TxtInputDaftar
@@ -66,6 +68,7 @@ export default function CtnDaftar() {
             height={25}
             title="Password"
             placeholder="Masukkan Kata Sandi"
+            type="password"
           />
         </div>
       </div>

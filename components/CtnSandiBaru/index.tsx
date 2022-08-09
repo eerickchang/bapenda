@@ -28,6 +28,7 @@ export default function CtnSandiBaru() {
         placeholder="Masukkan Kata Sandi Baru"
         width={25}
         height={30}
+        type='password'
       />
       <Gap height={40} width={20} />
       <TxtInput
@@ -37,6 +38,7 @@ export default function CtnSandiBaru() {
         placeholder="Konfirmasi Kata Sandi"
         width={33}
         height={19}
+        type='password'
       />
       <Button
         className={`${btnStyles.container} ${btnStyles.btnSandi}`}

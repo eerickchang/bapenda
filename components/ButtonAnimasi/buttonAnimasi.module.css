@@ -1,25 +1,35 @@
+/* .container{
+  width: 174px;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 .button {
   position: relative;
-  width: 100px;
-  height: 50px;
+  width: 172px;
+  height: 51px;
   font-size: 20px;
-  background-color: rgb(16, 155, 241);
+  background-color: #1BDDBB;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  transition: width 0.5s;
-  border-radius: 0.5s;
+  transition: width .5s;
+  border-radius: .5s;
   border: none;
   display: flex;
   align-self: center;
+  justify-content: center;
+  /* margin-left: 1000px; */
 }
 
 .button * {
   position: absolute;
-  top: 50%;
+  top: 50%; 
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: opacity 0.25s;
+  transition: opacity .25s;
 }
 
 .icon {
@@ -27,8 +37,8 @@
 }
 
 .button:focus {
-  width: 50px;
-  background-color: red;
+  width: 51px;
+  background-color: #B8BDCA;
   border-radius: 50%;
 }
 
@@ -38,5 +48,5 @@
 
 .button:focus .icon {
   opacity: 1;
-  transition-delay: 0.5s;
+  transition-delay: .5s;
 }

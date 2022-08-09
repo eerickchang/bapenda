@@ -24,6 +24,7 @@ import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
 import CtnDaftarSukses from "./CtnDaftarSukses";
 import ButtonAnimasi from "./ButtonAnimasi";
 import ContentNotifikasi from "./ContentNotifikasi";
+import CheckboxBulan from "./CheckboxBulan";
 
 export {
   CtnUmum,
@@ -51,4 +52,5 @@ export {
   CtnDaftarSukses,
   ButtonAnimasi,
   ContentNotifikasi,
+  CheckboxBulan,
 };

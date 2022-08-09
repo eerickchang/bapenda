@@ -19,7 +19,13 @@ export default function CtnLupaSandi() {
         <p className={styles.txtStyled}>Sandi</p>
       </div>
       {/* <Gap height={55} width={0} /> */}
-      <TxtInput image="/IconNamaP.svg" alt="iconNamaP" width={25} height={30} />
+      <TxtInput
+        image="/IconNamaP.svg"
+        alt="iconNamaP"
+        width={25}
+        height={30}
+        type="number"
+      />
       <Gap height={40} width={20} />
       <TxtInput
         image="/IconPhone.svg"
@@ -28,6 +34,7 @@ export default function CtnLupaSandi() {
         placeholder="Masukkan No. HP"
         width={32}
         height={32}
+        type="number"
       />
       <Button
         className={`${btnStyles.container} ${btnStyles.btnSandi}`}
