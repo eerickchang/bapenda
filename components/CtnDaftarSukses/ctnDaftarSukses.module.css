@@ -25,9 +25,9 @@
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 28px;
-  margin: 0px 35px;
+  margin: 0px 34px;
   margin-top: 32px;
-  margin-bottom: 83px;
+  margin-bottom: 78px;
 }
 
 .txtStyled {
@@ -39,6 +39,6 @@
   margin-top: 25px;
   border-bottom: 2px solid #1bddbb;
   height: 50px;
-  width: 115px;
+  width: 125px;
   text-align: center;
 }

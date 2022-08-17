@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import btnStyles from "../Button/button.module.css";
+import { useState } from "react";
 import Button from "../Button";
+import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
-import txtInputStyle from "../TxtInputRenaksi/TxtInputRenaksi.module.css";
 import styles from "./ContentInputRenaksiP.module.css";
-import BtnBulan from "../BtnBulan";
-import btnFormat from "../BtnBulan/btnBulan.module.css";
-import Image from "next/image";
-import ButtonAnimasi from "../ButtonAnimasi";
-import CheckboxBulan from "../CheckboxBulan";
 
 export default function ContentInputRenaksiP() {
   const router = useRouter();
@@ -20,6 +15,82 @@ export default function ContentInputRenaksiP() {
 
   //!modals
   const [showModal, setShowModal] = useState(false);
+
+  //!NAMA THL
+  const [namaTHL, setNamaTHL] = useState([
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      nama: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+  ]);
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
@@ -70,7 +141,16 @@ export default function ContentInputRenaksiP() {
             <div className={styles.dropdownIcon}>
               <Image src={"/Dropdown-tupoksi.svg"} width={30} height={30} />
             </div>
-            <div className={styles.wrapperSelectTHL}></div>
+            <div className={styles.wrapperSelectTHL}>
+              <div className={styles.wrapper}>
+                {namaTHL.map((item) => (
+                  <div className={styles.listNama}>
+                    {item.image}
+                    <p>{item.nama}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <Gap height={56} width={0} />
           <TxtInputRenaksi

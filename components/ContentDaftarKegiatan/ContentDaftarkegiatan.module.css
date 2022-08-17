@@ -60,9 +60,6 @@
   color: #686868;
 }
 
-.wrapperFilter {
-}
-
 .btnFilter {
   display: flex;
   justify-content: center;
@@ -98,8 +95,6 @@
 .wrapperFilter:focus wrapperSelectStatus{
   opacity: 0;
   visibility: visible;
-  /* position: fixed;
-  background-color: red; */
 }
 
 .wrapperSelectStatus p {

@@ -35,3 +35,61 @@
   flex-direction: column;
   align-items: center;
 }
+
+.dropdownTupoksi {
+  position: absolute;
+  margin-top: -41px;
+  margin-left: 173px;
+  z-index: 997;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+}
+
+.dropdownList {
+  width: 300px;
+  height: 267px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: -208px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #4a4a4a;
+  border: 1px solid #8891a7;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+}
+
+.dropdownTupoksi:hover .dropdownList {
+  opacity: 1;
+  visibility: visible;
+}
+
+.selectTupoksi {
+  opacity: 1;
+}
+
+.dropdownList_item {
+  /* padding: 10px; */
+  padding-left: 30px;
+  padding-top: 7px;
+  /* padding-top: ; */
+  cursor: default;
+}
+
+.dropdownList_item p {
+  margin: 0;
+  padding: 10px;
+  padding-left: 20px;
+  margin-right: 25px;
+  border-radius: 10px;
+}
+
+.dropdownList_item p:hover {
+  background-color: #112350;
+  cursor: pointer;
+  color: #fff;
+}

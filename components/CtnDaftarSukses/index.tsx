@@ -13,9 +13,9 @@ export default function CtnDaftarSukses() {
   return (
     <div className={styles.container}>
       <div className={styles.headerTxt}>
-        <p className={styles.txtNormal}>Daftar</p>
+        <p className={styles.txtStyled}>Daftar</p>
         <p className={styles.txtNormal}>Masuk</p>
-        <p className={styles.txtStyled}>Sandi</p>
+        <p className={styles.txtNormal}>Sandi</p>
       </div>
       <Image src="/Successmark.svg" width={220} height={220} />
       <p className={styles.txtSukses}>Sukses Mendaftar</p>

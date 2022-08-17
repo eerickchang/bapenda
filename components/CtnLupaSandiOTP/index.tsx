@@ -26,6 +26,7 @@ export default function CtnLupaSandiOTP() {
         placeholder="Masukkan kode OTP dari SMS yang diterima"
         width={30}
         height={30}
+        type='number'
       />
       <Button
         title="Verifikasi"

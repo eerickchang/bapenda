@@ -4,6 +4,7 @@ import TxtInputDaftar from "../TxtInputDaftar";
 import styles from "./ctndaftar.module.css";
 import btnStyles from "../Button/button.module.css";
 import { useRouter } from "next/router";
+import Image from 'next/image'
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -33,6 +34,23 @@ export default function CtnDaftar() {
             title="Jabatan"
             placeholder="Pilih Jabatan"
           />
+          {/* DROPDOWN JABATAN */}
+          <div className={styles.dropdownTupoksi}>
+            <div className={styles.selectTupoksi}>
+              <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
+            </div>
+            <div className={styles.dropdownList}>
+              <div className={styles.dropdownList_item}>
+                <p>See Samrat</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Labeling</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Lainnya</p>
+              </div>
+            </div>
+          </div>
           <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/Nip.svg"

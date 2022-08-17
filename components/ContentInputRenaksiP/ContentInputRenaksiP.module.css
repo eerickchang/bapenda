@@ -25,13 +25,6 @@
   margin-left: 19px;
 }
 
-/* .wrapperBtnExcel { */
-/* position: absolute;
-  top: 15px;
-  right: 20px;
-  display: inline-flex;
-} */
-
 .btnExcel {
   width: 193px;
   height: 55px;
@@ -45,8 +38,8 @@
   font-size: 20px;
   color: #fff;
   position: relative;
-  /* top: -45px;
-  left: 1305px; */
+  top: 0;
+  /* left: 1305px; */
 }
 
 .selectItemFile {
@@ -83,10 +76,12 @@
   background-color: #fff;
 }
 .wrapperBtnExcel {
-  position: fixed;
+  position: absolute;
   width: 193px;
-  margin-left: 1305px;
+  height: 55px;
+  margin-left: 1310px;
   margin-top: 49px;
+  z-index: 999;
 }
 
 .wrapperBtnExcel:hover .selectFile {
@@ -167,11 +162,13 @@
 }
 
 .dropdownTupoksi {
-  position: fixed;
+  position: absolute;
   margin-top: -40px;
-  margin-left: 670px;
-  display: flex;
-  z-index: 5;
+  margin-left: 669px;
+  z-index: 997;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
 }
 
 .dropdownList {
@@ -179,8 +176,8 @@
   height: 190px;
   background-color: #fff;
   border-radius: 20px;
-  margin-top: 40px;
-  margin-left: -475px;
+  margin-top: 10px;
+  margin-left: -445px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 22px;
@@ -194,6 +191,10 @@
 .dropdownTupoksi:hover .dropdownList {
   opacity: 1;
   visibility: visible;
+}
+
+.selectTupoksi{
+  opacity: 1;
 }
 
 .dropdownList_item {
@@ -232,10 +233,75 @@
 }
 
 /* dropdown THL */
-.dropdownTHL{
-
+.dropdownTHL {
+  position: absolute;
+  margin-top: -39px;
+  margin-left: 670px;
+  z-index: 998;
+  width: 30px;
+  height: 30px;
 }
 
-.dropdownIcon{
-
+.dropdownIcon {
+  /* margin-left: 590px; */
+  /* right: -138px;
+    top: -10px;
+    position: absolute; */
 }
+
+.wrapperSelectTHL {
+  /* position: absolute; */
+  /* height: 40px; */
+  /* width: 484px; */
+  opacity: 0;
+  z-index: 999;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+  margin-left: -590px;
+}
+
+.wrapper {
+  background-color: #fff;
+  width: 619px;
+  height: 450px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding-top: 22px;
+  padding-left: 23px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: overlay;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.listNama {
+  width: 253px;
+  height: 70px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  display: flex;
+  margin-right: 44px;
+}
+
+.listNama p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #112350;
+  margin-left: 15px;
+}
+
+.dropdownTHL:hover .wrapperSelectTHL {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* .dropdownTHL:hover .dropdownList {
+  opacity: 0;
+  z-index: 1;
+} */
