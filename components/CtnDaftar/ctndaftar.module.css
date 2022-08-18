@@ -36,10 +36,10 @@
   align-items: center;
 }
 
-.dropdownTupoksi {
+.dropdownJabatan {
   position: absolute;
-  margin-top: -41px;
-  margin-left: 173px;
+  margin-top: -43px;
+  margin-left: 175px;
   z-index: 997;
   width: 30px;
   height: 30px;
@@ -47,49 +47,128 @@
 }
 
 .dropdownList {
-  width: 300px;
+  width: 223px;
   height: 267px;
-  background-color: #fff;
+  background: #112350;
   border-radius: 20px;
   margin-top: 10px;
-  margin-left: -208px;
+  margin-left: -175px;
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  color: #4a4a4a;
-  border: 1px solid #8891a7;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #27335d;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s linear, visibility 0.2s linear;
+  transition: opacity 0.3s linear, visibility 0.9s linear;
 }
 
-.dropdownTupoksi:hover .dropdownList {
+.dropdownJabatan:hover .dropdownList {
   opacity: 1;
   visibility: visible;
 }
 
-.selectTupoksi {
+.selectJabatan {
   opacity: 1;
 }
 
 .dropdownList_item {
-  /* padding: 10px; */
-  padding-left: 30px;
-  padding-top: 7px;
-  /* padding-top: ; */
-  cursor: default;
+  padding-top: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .dropdownList_item p {
   margin: 0;
-  padding: 10px;
-  padding-left: 20px;
-  margin-right: 25px;
   border-radius: 10px;
+  /* padding: 10px; */
+  padding-left: 15px;
+  padding-top: 5px;
+  /* margin-right: 25px; */
 }
 
 .dropdownList_item p:hover {
-  background-color: #112350;
+  background-color: #fff;
   cursor: pointer;
+  color: #112350;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* DROPDOWN BIDANG */
+.dropdownBidang {
+  position: absolute;
+  margin-top: -43px;
+  margin-left: 175px;
+  z-index: 997;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+}
+
+.wrapperSelectBidang {
+  /* position: absolute; */
+  /* height: 40px; */
+  /* width: 484px; */
+  opacity: 0;
+  z-index: 999;
+  visibility: hidden;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
+  /* margin-left: -590px; */
+}
+
+.dropdownListBidang {
+  width: 223px;
+  height: 228px;
+  background: #112350;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: -175px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
   color: #fff;
+  border: 1px solid #27335d;
+  overflow: overlay;
+  /* opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s linear, visibility 0.9s linear; */
+}
+
+.dropdownListBidang::-webkit-scrollbar{
+  display: none;
+}
+
+.dropdownBidang:hover .wrapperSelectBidang {
+  opacity: 1;
+  visibility: visible;
+}
+
+.selectBidang {
+  opacity: 1;
+}
+
+.dropdownListBidang_item {
+  padding-top: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.dropdownListBidang_item p {
+  margin: 0;
+  border-radius: 10px;
+  /* padding: 10px; */
+  padding-left: 15px;
+  padding-top: 5px;
+  /* margin-right: 25px; */
+}
+
+.dropdownListBidang_item p:hover {
+  background-color: #fff;
+  cursor: pointer;
+  color: #112350;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
 }

@@ -4,7 +4,7 @@ import TxtInputDaftar from "../TxtInputDaftar";
 import styles from "./ctndaftar.module.css";
 import btnStyles from "../Button/button.module.css";
 import { useRouter } from "next/router";
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -35,19 +35,28 @@ export default function CtnDaftar() {
             placeholder="Pilih Jabatan"
           />
           {/* DROPDOWN JABATAN */}
-          <div className={styles.dropdownTupoksi}>
-            <div className={styles.selectTupoksi}>
+          <div className={styles.dropdownJabatan}>
+            <div className={styles.selectJabatan}>
               <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
             </div>
             <div className={styles.dropdownList}>
               <div className={styles.dropdownList_item}>
-                <p>See Samrat</p>
+                <p>Kepala Badan</p>
               </div>
               <div className={styles.dropdownList_item}>
-                <p>Labeling</p>
+                <p>Sekertaris</p>
               </div>
               <div className={styles.dropdownList_item}>
-                <p>Lainnya</p>
+                <p>Kepala Sub Bagian</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Kepala Bidang</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Kepala Sub Bidang</p>
+              </div>
+              <div className={styles.dropdownList_item}>
+                <p>Staff</p>
               </div>
             </div>
           </div>
@@ -70,6 +79,34 @@ export default function CtnDaftar() {
             title="Bidang"
             placeholder="Pilih Sub Bidang"
           />
+          {/* DROPDOWN BIDANG */}
+          <div className={styles.dropdownBidang}>
+            <div className={styles.selectBidang}>
+              <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
+            </div>
+            <div className={styles.wrapperSelectBidang}>
+              <div className={styles.dropdownListBidang}>
+                <div className={styles.dropdownList_item}>
+                  <p>Sekertaris</p>
+                </div>
+                <div className={styles.dropdownListBidang_item}>
+                  <p>Pajak Daerah</p>
+                </div>
+                <div className={styles.dropdownListBidang_item}>
+                  <p>Retribusi & Lain-lain ...</p>
+                </div>
+                <div className={styles.dropdownListBidang_item}>
+                  <p>Perencanaan dan ...</p>
+                </div>
+                <div className={styles.dropdownListBidang_item}>
+                  <p>Pengendalian dan ...</p>
+                </div>
+                <div className={styles.dropdownListBidang_item}>
+                  <p>Staff</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/noHpUmum.svg"
