@@ -70,6 +70,7 @@
   height: 51px;
   margin-bottom: 8px;
   cursor: pointer;
+  user-select: none;
 }
 
 .btnFilter p {
@@ -88,14 +89,9 @@
   border: 1px solid #112350;
   border-radius: 10px;
   display: grid;
-  opacity: 0;
-  visibility: hidden;
+  user-select: none;
 }
 
-.wrapperFilter:focus wrapperSelectStatus{
-  opacity: 0;
-  visibility: visible;
-}
 
 .wrapperSelectStatus p {
   font-family: "Poppins", sans-serif;
@@ -116,4 +112,3 @@
   color: #fff;
   cursor: pointer;
 }
-
