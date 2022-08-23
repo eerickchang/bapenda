@@ -31,6 +31,69 @@ export default function CtnDaftar() {
     router.push("/");
   };
 
+  const [activeSubBidang1, setActiveSubBidang1] = useState(false);
+  const [activeSubBidang2, setActiveSubBidang2] = useState(false);
+  const [activeSubBidang3, setActiveSubBidang3] = useState(false);
+  const [activeSubBidang4, setActiveSubBidang4] = useState(false);
+  const [activeSubBidang5, setActiveSubBidang5] = useState(false);
+
+  const [jabatan, setJabatan] = useState([
+    {
+      namaJabatan: "Kepala Badan",
+    },
+    {
+      namaJabatan: "Sekertaris",
+    },
+    {
+      namaJabatan: "Kepala Sub Bagian",
+    },
+    {
+      namaJabatan: "Kepala Bidang",
+    },
+    {
+      namaJabatan: "Kepala Sub Bidang",
+    },
+    {
+      namaJabatan: "Staff",
+    },
+  ]);
+
+  const [bidang, setBidang] = useState([
+    {
+      namaBidang: "Sekertaris",
+    },
+    {
+      namaBidang: "Pajak Daerah",
+      namaSetBid1: "Administrasi & ...",
+      namaSetBid2: "PKB & BBN-KB",
+      namaSetBid3: "PBBKB, PAP & ...",
+    },
+    {
+      namaBidang: "Retribusi dan lain...",
+      namaSetBid1: "Retribusi",
+      namaSetBid2: "Bagi Hasil Pajak & ...",
+      namaSetBid3: "Lain-lain Pendapat...",
+    },
+    {
+      namaBidang: "Perencanaan dan ...",
+      namaSetBid1: "Pengelolaan & ...",
+      namaSetBid2: "Pengembangan & ...",
+      namaSetBid3: "Pelaporan Data ...",
+    },
+    {
+      namaBidang: "Pajak Daerah",
+      namaSetBid1: "Administrasi & ...",
+      namaSetBid2: "PKB & BBN-KB",
+      namaSetBid3: "PBBKB, PAP & ...",
+    },
+    {
+      namaBidang: "Pengendalian dan ...",
+      namaSetBid1: "Evaluasi Kinerja",
+      namaSetBid2: "Pengendalian & ...",
+      namaSetBid3: "Pengendalian Pendapat...",
+    },
+  ]);
+
   const handleChange = () => {};
 
   return (
@@ -69,24 +132,11 @@ export default function CtnDaftar() {
               <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
             </div>
             <div className={styles.dropdownList}>
-              <div className={styles.dropdownList_item}>
-                <p>Kepala Badan</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Sekertaris</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Kepala Sub Bagian</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Kepala Bidang</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Kepala Sub Bidang</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Staff</p>
-              </div>
+              {jabatan.map((jab) => (
+                <div className={styles.dropdownList_item}>
+                  <p>{jab.namaJabatan}</p>
+                </div>
+              ))}
             </div>
           </div>
           <Gap width={0} height={35} />
@@ -120,37 +170,98 @@ export default function CtnDaftar() {
             </div>
             <div className={styles.wrapperSelectBidang}>
               <div className={styles.dropdownListBidang}>
-                <div className={styles.dropdownList_item}>
-                  <p>Sekertaris</p>
-                </div>
                 <div className={styles.dropdownListBidang_item}>
-                  <p>Pajak Daerah</p>
+                  <div>
+                    <p>Sekertaris</p>
+                  </div>
                 </div>
-                <div className={styles.dropdownListBidang_item}>
-                  <p>Retribusi & Lain-lain ...</p>
+                <div
+                  className={styles.dropdownListBidang_item}
+                  onClick={(e) => setActiveSubBidang2(!activeSubBidang2)}
+                >
+                  <div>
+                    <p>Pajak Daerah</p>
+                  </div>
+                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {activeSubBidang2 && (
+                    <div className={styles.dropdownSubBidang}>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Administrasi & ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>PKB & BBN-KB</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>PBBKB, PAP & ...</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className={styles.dropdownListBidang_item}>
-                  <div className="div">
+                <div
+                  className={styles.dropdownListBidang_item}
+                  onClick={(e) => setActiveSubBidang3(!activeSubBidang3)}
+                >
+                  <div>
+                    <p>Retribusi dan lain...</p>
+                  </div>
+                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {activeSubBidang3 && (
+                    <div className={styles.dropdownSubBidang}>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Retribusi</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Bagi Hasil Pajak & ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Lain-lain Pendapat...</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div
+                  className={styles.dropdownListBidang_item}
+                  onClick={(e) => setActiveSubBidang4(!activeSubBidang4)}
+                >
+                  <div>
                     <p>Perencanaan dan ...</p>
                   </div>
-                  //! CONTOH DROPDOWN SUB-BIDANG
-                  {/* <div className={styles.dropdownSubBidang}>
-                    <div className={styles.dropdownListSubBidang}>
-                      <p>Pengelolaan</p>
+                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {activeSubBidang4 && (
+                    <div className={styles.dropdownSubBidang}>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Pengelolaan & ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Pengembangan & ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Pelaporan Data ...</p>
+                      </div>
                     </div>
-                    <div className={styles.dropdownListSubBidang}>
-                      <p>Pengembangan</p>
-                    </div>
-                    <div className={styles.dropdownListSubBidang}>
-                      <p>Pelaporan</p>
-                    </div>
-                  </div> */}
+                  )}
                 </div>
-                <div className={styles.dropdownListBidang_item}>
-                  <p>Pengendalian dan ...</p>
-                </div>
-                <div className={styles.dropdownListBidang_item}>
-                  <p>Staff</p>
+                <div
+                  className={styles.dropdownListBidang_item}
+                  onClick={(e) => setActiveSubBidang5(!activeSubBidang5)}
+                >
+                  <div>
+                    <p>Pengendalian dan ...</p>
+                  </div>
+                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {activeSubBidang5 && (
+                    <div className={styles.dropdownSubBidang}>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Evaluasi Kinerja</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Pengendalian & ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Pengendalian Pendapat...</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
