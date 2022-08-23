@@ -12,15 +12,25 @@ const db = mysql.createPool({
 });
 
 app.use(cors());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("api/insert", (req, res) => {
-  const nama = req.body.namaReg;
-  const password = req.body.passwordReg;
+// app.get("/", (req, res) => {
+//   const sqlInsert = "INSERT INTO staff (nama, sandi) VALUES ('Erick', '123');";
+//   db.query(sqlInsert, (err, result) => {
+//     res.send("Hello World");
+//     console.log(result);
+//   });
+// });
 
-  const sqlInsert = "INSERT INTO staff (nama, password) VALUES (?,?)";
-  db.query(sqlInsert, [nama, password], (err, result) => {
-    console.log(err);
+app.post("/api/insert", (req, res) => {
+  const nama = req.body.nama;
+  const sandi = req.body.sandi;
+  const nip = req.body.nip;
+
+  const sqlInsert = "INSERT INTO staff (nama, sandi, nip) VALUES (?,?,?)";
+  db.query(sqlInsert, [nama, sandi, nip], (err, result) => {
+    console.log(result);
   });
 });
 

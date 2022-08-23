@@ -10,10 +10,17 @@ import Axios from "axios";
 
 export default function CtnDaftar() {
   const router = useRouter();
+
+  const [namaReg, setNamaReg] = useState("");
+  const [sandiReg, setSandiReg] = useState("");
+  const [nipReg, setNipReg] = useState("");
+  const [activeSubBidang, setActiveSubBidang] = useState(false);
+
   const btnDaftar = () => {
     Axios.post("http://localhost:3001/api/insert", {
       nama: namaReg,
-      password: passwordReg,
+      sandi: sandiReg,
+      nip: nipReg,
     }).then(() => {
       alert("successfull insert");
     });
@@ -24,11 +31,7 @@ export default function CtnDaftar() {
     router.push("/");
   };
 
-  const [namaReg, setNamaReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-
   const handleChange = () => {};
-  const [activeSubBidang, setActiveSubBidang] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -93,7 +96,9 @@ export default function CtnDaftar() {
             height={30}
             title="NIP / NPNP"
             placeholder="Masukkan NIP / NPNP"
-            onChange={handleChange}
+            onChange={(e) => {
+              setNipReg(e.target.value);
+            }}
             type="number"
           />
         </div>
@@ -169,7 +174,7 @@ export default function CtnDaftar() {
             placeholder="Masukkan Kata Sandi"
             type="password"
             onChange={(e) => {
-              setPasswordReg(e.target.value);
+              setSandiReg(e.target.value);
             }}
           />
         </div>
