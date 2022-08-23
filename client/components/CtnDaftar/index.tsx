@@ -28,6 +28,7 @@ export default function CtnDaftar() {
   const [passwordReg, setPasswordReg] = useState("");
 
   const handleChange = () => {};
+  const [activeSubBidang, setActiveSubBidang] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -124,7 +125,21 @@ export default function CtnDaftar() {
                   <p>Retribusi & Lain-lain ...</p>
                 </div>
                 <div className={styles.dropdownListBidang_item}>
-                  <p>Perencanaan dan ...</p>
+                  <div className="div">
+                    <p>Perencanaan dan ...</p>
+                  </div>
+                  //! CONTOH DROPDOWN SUB-BIDANG
+                  {/* <div className={styles.dropdownSubBidang}>
+                    <div className={styles.dropdownListSubBidang}>
+                      <p>Pengelolaan</p>
+                    </div>
+                    <div className={styles.dropdownListSubBidang}>
+                      <p>Pengembangan</p>
+                    </div>
+                    <div className={styles.dropdownListSubBidang}>
+                      <p>Pelaporan</p>
+                    </div>
+                  </div> */}
                 </div>
                 <div className={styles.dropdownListBidang_item}>
                   <p>Pengendalian dan ...</p>

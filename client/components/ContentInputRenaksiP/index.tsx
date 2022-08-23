@@ -91,27 +91,36 @@ export default function ContentInputRenaksiP() {
       image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
     },
   ]);
+
+  const [activeFormat, setActiveFormat] = useState(false);
+
   return (
+    
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
         <Image src={"/Input2.svg"} width={50} height={50} />
         <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
       </div>
-      <div className={styles.wrapperBtnExcel}>
+      <div
+        className={styles.wrapperBtnExcel}
+        onClick={(e) => setActiveFormat(!activeFormat)}
+      >
         <div className={styles.btnExcel}>
           <Image src={"/Excel.svg"} width={35} height={35} />
           <p>Format Excel</p>
         </div>
-        <div className={styles.selectFile}>
-          <div className={styles.selectItemFile}>
-            <Image src={"/IconUnduh.svg"} width={38} height={35} />
-            <p className={styles.selectItem}>Unduh File</p>
+        {activeFormat && (
+          <div className={styles.selectFile}>
+            <div className={styles.selectItemFile}>
+              <Image src={"/IconUnduh.svg"} width={38} height={35} />
+              <p className={styles.selectItem}>Unduh File</p>
+            </div>
+            <div className={styles.selectItemFile}>
+              <Image src={"/IconUnggah.svg"} width={38} height={35} />
+              <p className={styles.selectItem}>Unggah File</p>
+            </div>
           </div>
-          <div className={styles.selectItemFile}>
-            <Image src={"/IconUnggah.svg"} width={38} height={35} />
-            <p className={styles.selectItem}>Unggah File</p>
-          </div>
-        </div>
+        )}
       </div>
       <Gap height={46} width={0} />
       <div className={styles.wrapperInput}>

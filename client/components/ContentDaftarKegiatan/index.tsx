@@ -46,6 +46,8 @@ export default function ContentDaftarKegiatan() {
     },
   ]);
 
+  const [activeDropdown, setActiveDropdown] = useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleDaftarKegiatan}>
@@ -63,17 +65,21 @@ export default function ContentDaftarKegiatan() {
         </div>
       ))}
       <div className={styles.wrapperFilter}>
-        <div className={styles.btnFilter}>
+        <div
+          className={styles.btnFilter}
+          onClick={(e) => setActiveDropdown(!activeDropdown)}
+        >
           <Image src={"/Filter.svg"} width={23} height={23} />
           <p>Filter</p>
         </div>
-        <div className={styles.wrapperSelectStatus}>
-          {filter.map((item) => (
-            <p key={item.id}>{item.status}</p>
-          ))}
-        </div>
+        {activeDropdown && (
+          <div className={styles.wrapperSelectStatus} onClick={() => setActiveDropdown(false)}>
+            {filter.map((item) => (
+              <p key={item.id}>{item.status}</p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-
   );
 }
