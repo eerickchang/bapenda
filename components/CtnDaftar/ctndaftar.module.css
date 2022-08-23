@@ -48,7 +48,7 @@
 
 .dropdownList {
   width: 223px;
-  height: 267px;
+  height: 200px;
   background: #112350;
   border-radius: 20px;
   margin-top: 10px;
@@ -58,9 +58,23 @@
   font-size: 16px;
   color: #fff;
   border: 1px solid #27335d;
+  overflow: overlay;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s linear, visibility 0.9s linear;
+}
+
+.dropdownList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dropdownList::-webkit-scrollbar-track {
+  background: #152351;
+}
+
+.dropdownList::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #d9d9d9;
 }
 
 .dropdownJabatan:hover .dropdownList {
@@ -120,7 +134,7 @@
 
 .dropdownListBidang {
   width: 223px;
-  height: 228px;
+  height: 185px;
   background: #112350;
   border-radius: 20px;
   margin-top: 10px;
@@ -131,13 +145,23 @@
   color: #fff;
   border: 1px solid #27335d;
   overflow: overlay;
-  /* opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s linear, visibility 0.9s linear; */
 }
 
-.dropdownListBidang::-webkit-scrollbar{
-  display: none;
+.dropdownListBidang::-webkit-scrollbar {
+  /* display: none; */
+}
+
+.dropdownListBidang::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dropdownListBidang::-webkit-scrollbar-track {
+  background: #152351;
+}
+
+.dropdownListBidang::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #d9d9d9;
 }
 
 .dropdownBidang:hover .wrapperSelectBidang {
@@ -171,4 +195,12 @@
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 16px;
+}
+
+.dropdownSubBidang {
+  padding-left: 20px;
+}
+
+.dropdownListBidang_item:focus .dropdownSubBidang{
+  background-color: red;
 }
