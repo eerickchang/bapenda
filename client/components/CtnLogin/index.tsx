@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ctnlogin.module.css";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
@@ -21,6 +21,8 @@ export default function CtnLogin() {
     router.push("/Daftar");
   };
 
+  Axios.defaults.withCredentials = true;
+
   const btnMasuk = () => {
     Axios.post("http://localhost:3001/masuk", {
       nip: nip,
@@ -34,6 +36,15 @@ export default function CtnLogin() {
       }
     });
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      console.log(response.data);
+      if (response.data.loggedIn == true) {
+        router.push("/Dashboard");
+      }
+    });
+  }, []);
 
   return (
     <div className={styles.container}>

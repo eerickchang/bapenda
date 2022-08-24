@@ -1,15 +1,19 @@
+// LIBRARY UNTUK EXPRESS
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const mysql = require("mysql");
 
+// LIBRARY UNTUK SESSION & COOKIE
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
+// LIBRARY UNTUK HASH PASSWORD
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+// CONNECT DATABASE
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -17,6 +21,7 @@ const db = mysql.createPool({
   database: "bapenda_kepatuhan",
 });
 
+// COOKIE
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -24,10 +29,26 @@ app.use(
     credentials: true,
   })
 );
+
+// SESSION
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
+
+// MIDDLEWARE
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// AUTHENTIKASI LOGIN
 app.post("/masuk", (req, res) => {
   const nama = req.body.nama;
   const sandi = req.body.sandi;
@@ -39,11 +60,10 @@ app.post("/masuk", (req, res) => {
     }
 
     if (result.length > 0) {
-      console.log("Sandi DB: ", result[0].sandi);
-      console.log("Sandi FE: ", sandi);
       bcrypt.compare(sandi, result[0].sandi, (error, response) => {
         if (response) {
-          res.send(response);
+          req.session.user = result;
+          res.send(result);
         } else {
           res.send({ message: "Wrong username/password combination!" });
         }
@@ -54,6 +74,16 @@ app.post("/masuk", (req, res) => {
   });
 });
 
+// MENYIMPAN CACHE AGAR STATUS USER TETAP LOGGED IN
+app.get("/masuk", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
+// REGISTRASI ATAU INPUT DATA REGISTER
 app.post("/daftar", (req, res) => {
   const nama = req.body.nama;
   const sandi = req.body.sandi;
@@ -72,6 +102,25 @@ app.post("/daftar", (req, res) => {
   });
 });
 
+// INPUT RENAKSI
+app.post("/inputRenaksi", (req, res) => {
+  const program = req.body.program;
+  const kegiatan = req.body.kegiatan;
+  const tupoksiInti = req.body.tupoksiInti;
+  const subKegiatan = req.body.subKegiatan;
+
+  const sqlInsert =
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan) VALUES (?,?,?,?)";
+  db.query(
+    sqlInsert,
+    [program, kegiatan, tupoksiInti, subKegiatan],
+    (err, result) => {
+      console.log(result);
+    }
+  );
+});
+
+// PADA PORT BERAPA BACKEND DIJALANAKAN
 app.listen(3001, () => {
   console.log("running on port 3001");
 });

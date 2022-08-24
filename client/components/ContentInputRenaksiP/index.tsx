@@ -1,3 +1,4 @@
+import Axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -11,6 +12,24 @@ export default function ContentInputRenaksiP() {
   const router = useRouter();
   const handleClick = () => {
     router.push("/InputRenaksi");
+  };
+
+  const [inProgram, setInProgram] = useState("");
+  const [inKegiatan, setInKegiatan] = useState("");
+  const [inTupoksiInti, setInTupoksiInti] = useState("");
+  const [inSubKegiatan, setInSubKegiatan] = useState("");
+
+  const btnUnggah = () => {
+    Axios.post("http://localhost:3001/inputRenaksi", {
+      program: inProgram,
+      kegiatan: inKegiatan,
+      tupoksiInti: inTupoksiInti,
+      subKegiatan: inSubKegiatan,
+    });
+
+    // if (Response.length > 0) {
+    //   setShowModal(true);
+    // }
   };
 
   //!modals
@@ -95,7 +114,6 @@ export default function ContentInputRenaksiP() {
   const [activeFormat, setActiveFormat] = useState(false);
 
   return (
-    
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
         <Image src={"/Input2.svg"} width={50} height={50} />
@@ -128,16 +146,22 @@ export default function ContentInputRenaksiP() {
           <TxtInputRenaksi
             title="Program"
             placeholder="masukan program yang akan dilakukan"
+            onChange={(e) => setInProgram(e.target.value)}
+            className={""}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Kegiatan"
             placeholder="masukan kegiatan yang akan dilakukan"
+            onChange={(e) => setInKegiatan(e.target.value)}
+            className={""}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Tupoksi Inti"
             placeholder="masukan tupoksi inti yang akan dilakukan"
+            onChange={(e) => setInTupoksiInti(e.target.value)}
+            className={""}
           />
         </div>
         <Gap height={0} width={100} />
@@ -145,6 +169,8 @@ export default function ContentInputRenaksiP() {
           <TxtInputRenaksi
             title="THL"
             placeholder="Pilih THL yang akan bertugas"
+            onChange={(e) => setInProgram(e.target.value)}
+            className={""}
           />
           <div className={styles.dropdownTHL}>
             <div className={styles.dropdownIcon}>
@@ -165,11 +191,15 @@ export default function ContentInputRenaksiP() {
           <TxtInputRenaksi
             title="Sub Kegiatan"
             placeholder="masukan sub kegiatan yang akan dilakukan"
+            onChange={(e) => setInSubKegiatan(e.target.value)}
+            className={""}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Tupoksi Tambahan"
             placeholder="pilih tupoksi tambahan yang akan dilakukan"
+            onChange={(e) => setInProgram(e.target.value)}
+            className={""}
           />
           <div className={styles.dropdownTupoksi}>
             <div className={styles.selectTupoksi}>
@@ -267,7 +297,7 @@ export default function ContentInputRenaksiP() {
       {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
-        onClick={() => setShowModal(true)}
+        onClick={btnUnggah}
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
       {showModal ? (
