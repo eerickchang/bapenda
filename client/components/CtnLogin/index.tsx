@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ctnlogin.module.css";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInput from "../TxtInput";
 import { useRouter } from "next/router";
+import Axios from "axios";
 
 export default function CtnLogin() {
   const router = useRouter();
+
+  const [nip, setNip] = useState("");
+  const [sandi, setSandi] = useState("");
 
   const handleClick = () => {
     router.push("/LupaSandi");
@@ -18,7 +22,17 @@ export default function CtnLogin() {
   };
 
   const btnMasuk = () => {
-    router.push("/Dashboard");
+    Axios.post("http://localhost:3001/masuk", {
+      nip: nip,
+      sandi: sandi,
+    }).then((response) => {
+      if (response.data.message) {
+        console.log(response.data.message);
+      } else {
+        // console.log(response.data[0].nama);
+        router.push("/Dashboard");
+      }
+    });
   };
 
   return (
@@ -29,13 +43,26 @@ export default function CtnLogin() {
         <p className={styles.txtNormal}>Sandi</p>
       </div>
       <div className={styles.txtInput}>
-        <TxtInput type="number" />
+        <TxtInput
+          image="/Nip.svg"
+          alt="Nip"
+          title="NIP / NPNP"
+          placeholder="Masukkan NIP / NPNP"
+          width={25}
+          height={30}
+          type="text"
+          onChange={(e) => setNip(e.target.value)}
+        />
         <Gap height={40} width={0} />
         <TxtInput
           image="/Password.svg"
+          alt="Password"
           title="Kata Sandi"
           placeholder="Masukkan Kata Sandi"
           type="password"
+          width={25}
+          height={30}
+          onChange={(e) => setSandi(e.target.value)}
         />
         <Gap height={106} width={0} />
         <p className={styles.txtLupa} onClick={handleClick}>

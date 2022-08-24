@@ -3,15 +3,20 @@ import styles from "./txtinputlogin.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 
-export default function TxtInput({
-  image = "/Nip.svg",
-  alt = "Nip",
-  title = "NIP / NPNP",
-  placeholder = "Masukkan NIP / NPNP",
-  width = 25,
-  height = 30,
-  type = 'text'
-}) {
+interface TxtInputProps {
+  image: string;
+  alt: string;
+  title: string;
+  placeholder: string;
+  width: number;
+  height: number;
+  type: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+}
+
+export default function TxtInput(props: TxtInputProps) {
+  const { onChange, image, alt, title, placeholder, width, height, type } =
+    props;
   return (
     <div className={styles.container}>
       <div className={styles.logoTxt}>
@@ -27,7 +32,7 @@ export default function TxtInput({
         <p>{title}</p>
       </div>
       <Gap height={20} width={0} />
-      <input type={type} placeholder={placeholder} />
+      <input type={type} placeholder={placeholder} onChange={onChange} />
     </div>
   );
 }

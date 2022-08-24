@@ -5,8 +5,8 @@ import styles from "./ctndaftar.module.css";
 import btnStyles from "../Button/button.module.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useState } from "react";
 import Axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -14,13 +14,22 @@ export default function CtnDaftar() {
   const [namaReg, setNamaReg] = useState("");
   const [sandiReg, setSandiReg] = useState("");
   const [nipReg, setNipReg] = useState("");
+  const [noHpReg, setNoHpReg] = useState("");
+  const [dataUser, setDataUser] = useState([]);
   const [activeSubBidang, setActiveSubBidang] = useState(false);
 
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3001/api/get").then((response) => {
+  //     setDataUser(response.data);
+  //   });
+  // }, []);
+
   const btnDaftar = () => {
-    Axios.post("http://localhost:3001/api/insert", {
+    Axios.post("http://localhost:3001/daftar", {
       nama: namaReg,
       sandi: sandiReg,
       nip: nipReg,
+      nohp: noHpReg,
     }).then(() => {
       alert("successfull insert");
     });
@@ -118,29 +127,6 @@ export default function CtnDaftar() {
           />
           <Gap width={0} height={35} />
           <TxtInputDaftar
-            image="/jabatanUmum.svg"
-            width={30}
-            height={35}
-            title="Jabatan"
-            placeholder="Pilih Jabatan"
-            onChange={handleChange}
-            type="text"
-          />
-          {/* DROPDOWN JABATAN */}
-          <div className={styles.dropdownJabatan}>
-            <div className={styles.selectJabatan}>
-              <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
-            </div>
-            <div className={styles.dropdownList}>
-              {jabatan.map((jab) => (
-                <div className={styles.dropdownList_item}>
-                  <p>{jab.namaJabatan}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <Gap width={0} height={35} />
-          <TxtInputDaftar
             image="/Nip.svg"
             width={25}
             height={30}
@@ -151,9 +137,7 @@ export default function CtnDaftar() {
             }}
             type="number"
           />
-        </div>
-        <Gap width={67} height={0} />
-        <div className={styles.contentKanan}>
+          <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/bidangUmum.svg"
             width={30}
@@ -266,6 +250,32 @@ export default function CtnDaftar() {
               </div>
             </div>
           </div>
+        </div>
+        <Gap width={67} height={0} />
+        <div className={styles.contentKanan}>
+          <TxtInputDaftar
+            image="/jabatanUmum.svg"
+            width={30}
+            height={35}
+            title="Jabatan"
+            placeholder="Pilih Jabatan"
+            onChange={handleChange}
+            type="text"
+          />
+          {/* DROPDOWN JABATAN */}
+          <div className={styles.dropdownJabatan}>
+            <div className={styles.selectJabatan}>
+              <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
+            </div>
+            <div className={styles.dropdownList}>
+              {jabatan.map((jab) => (
+                <div className={styles.dropdownList_item}>
+                  <p>{jab.namaJabatan}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <Gap width={0} height={35} />
           <TxtInputDaftar
             image="/noHpUmum.svg"
@@ -274,7 +284,7 @@ export default function CtnDaftar() {
             title="No HP"
             placeholder="Masukkan No HP"
             type="number"
-            onChange={handleChange}
+            onChange={(e) => setNoHpReg(e.target.value)}
           />
           <Gap width={0} height={35} />
           <TxtInputDaftar
