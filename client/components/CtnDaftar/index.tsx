@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState } from "react";
 import Axios from "axios";
+import Select from "react-select";
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function CtnDaftar() {
     router.push("/");
   };
 
-  const [activeSubBidang1, setActiveSubBidang1] = useState(false);
+  // const [activeSubBidang1, setActiveSubBidang1] = useState(false);
   const [activeSubBidang2, setActiveSubBidang2] = useState(false);
   const [activeSubBidang3, setActiveSubBidang3] = useState(false);
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
