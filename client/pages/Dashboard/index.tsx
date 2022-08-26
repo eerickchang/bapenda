@@ -29,7 +29,6 @@ export default function Dashboard() {
         borderRadius: 10,
       },
     ],
-    legend: false,
   });
 
   return (
