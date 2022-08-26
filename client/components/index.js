@@ -25,6 +25,7 @@ import CtnDaftarSukses from "./CtnDaftarSukses";
 import ButtonAnimasi from "./ButtonAnimasi";
 import ContentNotifikasi from "./ContentNotifikasi";
 import CheckboxBulan from "./CheckboxBulan";
+import BarChart from "./BarChart";
 
 export {
   CtnUmum,
@@ -53,4 +54,5 @@ export {
   ButtonAnimasi,
   ContentNotifikasi,
   CheckboxBulan,
+  BarChart,
 };
