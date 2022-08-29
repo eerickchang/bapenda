@@ -6,7 +6,11 @@ import btnStyles from "../Button/button.module.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Axios from "axios";
+<<<<<<< HEAD
+import Select from "react-select";
+=======
 import { useState, useEffect } from "react";
+>>>>>>> 9028af438631d54ece05cebec917806fb3d7d3a2
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -40,7 +44,7 @@ export default function CtnDaftar() {
     router.push("/");
   };
 
-  const [activeSubBidang1, setActiveSubBidang1] = useState(false);
+  // const [activeSubBidang1, setActiveSubBidang1] = useState(false);
   const [activeSubBidang2, setActiveSubBidang2] = useState(false);
   const [activeSubBidang3, setActiveSubBidang3] = useState(false);
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);

@@ -150,6 +150,16 @@
   background-color: #1bddbb;
 }
 
+
+
+.selectTupoksi{
+  /* border: none; */
+  /* height: 20px; */
+}
+
+
+
+
 .dropdownTupoksi {
   position: absolute;
   margin-top: -40px;

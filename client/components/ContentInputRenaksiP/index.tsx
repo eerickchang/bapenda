@@ -7,6 +7,7 @@ import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
 import styles from "./ContentInputRenaksiP.module.css";
+import Select from "react-select";
 
 export default function ContentInputRenaksiP() {
   const router = useRouter();
@@ -113,6 +114,96 @@ export default function ContentInputRenaksiP() {
 
   const [activeFormat, setActiveFormat] = useState(false);
 
+  const optionsTupoksi = [
+    {
+      value: "see-samrat",
+      label: "See Samrat",
+    },
+    {
+      value: "labeling",
+      label: "Labeling",
+    },
+    {
+      value: "lainnya",
+      label: "Lainnya",
+    },
+  ];
+
+  // const customStyles = {
+  //   option: (provided, state) => ({
+  //     ...provided,
+  //     border: "none",
+  //     color: state.isSelected ? "white" : "rgba(74, 74, 74, 1)",
+  //     background: state.isSelected ? "rgba(17, 35, 80, 1)" : "white",
+  //     backgroundColor: state.isHover ? "rgba(17, 35, 80, 1)" : "white",
+  //     padding: 0,
+  //     margin: 0,
+  //     width: 460,
+  //     height: 60,
+  //     borderRadius: 10,
+  //     fontFamily: 'Poppins',
+  //     fontWeight: 700,
+  //     fontSize: 22
+  //   }),
+  //   control: () => ({
+  //     // none of react-select's styles are passed to <Control />
+  //     width: 700,
+  //     height: 99,
+  //     borderBottom: "2px solid rgba(27, 221, 187, 1)",
+  //     fontFamily: "Inter",
+  //     fontWeight: 500,
+  //     fontSize: 22,
+  //     color: "rgba(165, 165, 165, 0.81)",
+  //   }),
+  //   singleValue: (provided, state) => {
+  //     const opacity = state.isDisabled ? 0.5 : 1;
+  //     const transition = "opacity 300ms";
+
+  //     return { ...provided, opacity, transition };
+  //   },
+  // };
+
+  const customStyles = {
+    menu: (provided, state) => ({
+      ...provided,
+      // width: state.selectProps.width,
+      borderBottom: "none",
+      // color: state.selectProps.menuColor,
+      // color: "rgba(74, 74, 74, 1)",
+      // background: 'red',
+      padding: 0,
+      margin: 0,
+      width: 460,
+      height: 190,
+      paddingTop: 18,
+      paddingLeft: 8,
+      paddingRight: 8,
+      borderRadius: 10,
+      fontFamily: "Poppins",
+      fontWeight: 700,
+      fontSize: 22,
+      marginLeft: 240,
+      color: state.isSelected ? "white" : "rgba(74, 74, 74, 1)",
+      background: state.isHoover ? "rgba(17, 35, 80, 1)" : "white",
+    }),
+
+    control: (_, { selectProps: { width } }) => ({
+      width: width,
+      borderBottom: "2px solid rgba(27, 221, 187, 1)",
+      fontFamily: "Inter",
+      fontWeight: 500,
+      fontSize: 22,
+      color: "rgba(165, 165, 165, 0.81)",
+    }),
+
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = "opacity 300ms";
+
+      return { ...provided, opacity, transition };
+    },
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
@@ -195,7 +286,12 @@ export default function ContentInputRenaksiP() {
             className={""}
           />
           <Gap height={56} width={0} />
-          <TxtInputRenaksi
+          <Select
+            styles={customStyles}
+            options={optionsTupoksi}
+            placeholder={"pilih tupoksi tambahan yang akan dilakukan"}
+          />
+          {/* <TxtInputRenaksi
             title="Tupoksi Tambahan"
             placeholder="pilih tupoksi tambahan yang akan dilakukan"
             onChange={(e) => setInProgram(e.target.value)}
@@ -216,7 +312,7 @@ export default function ContentInputRenaksiP() {
                 <p>Lainnya</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <Gap height={80} width={0} />
