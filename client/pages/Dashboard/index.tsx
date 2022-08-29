@@ -27,6 +27,7 @@ export default function Dashboard() {
         data: UserData.map((data) => data.userGain),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
+        // hoverBackgroundColor: ["#112350"],\
       },
     ],
   });
