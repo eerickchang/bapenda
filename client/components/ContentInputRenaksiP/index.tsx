@@ -1,4 +1,3 @@
-import Axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,30 +6,13 @@ import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
 import styles from "./ContentInputRenaksiP.module.css";
-import Select from "react-select";
+import Select, { components, DropdownIndicatorProps } from "react-select";
+import { colors } from "react-select/dist/declarations/src/theme";
 
 export default function ContentInputRenaksiP() {
   const router = useRouter();
   const handleClick = () => {
     router.push("/InputRenaksi");
-  };
-
-  const [inProgram, setInProgram] = useState("");
-  const [inKegiatan, setInKegiatan] = useState("");
-  const [inTupoksiInti, setInTupoksiInti] = useState("");
-  const [inSubKegiatan, setInSubKegiatan] = useState("");
-
-  const btnUnggah = () => {
-    Axios.post("http://localhost:3001/inputRenaksi", {
-      program: inProgram,
-      kegiatan: inKegiatan,
-      tupoksiInti: inTupoksiInti,
-      subKegiatan: inSubKegiatan,
-    });
-
-    // if (Response.length > 0) {
-    //   setShowModal(true);
-    // }
   };
 
   //!modals
@@ -126,82 +108,265 @@ export default function ContentInputRenaksiP() {
     {
       value: "lainnya",
       label: "Lainnya",
+      // customAbbreviation: <Image src={"/Input2.svg"} width={50} height={50} />,
     },
   ];
 
-  // const customStyles = {
-  //   option: (provided, state) => ({
-  //     ...provided,
-  //     border: "none",
-  //     color: state.isSelected ? "white" : "rgba(74, 74, 74, 1)",
-  //     background: state.isSelected ? "rgba(17, 35, 80, 1)" : "white",
-  //     backgroundColor: state.isHover ? "rgba(17, 35, 80, 1)" : "white",
-  //     padding: 0,
-  //     margin: 0,
-  //     width: 460,
-  //     height: 60,
-  //     borderRadius: 10,
-  //     fontFamily: 'Poppins',
-  //     fontWeight: 700,
-  //     fontSize: 22
-  //   }),
-  //   control: () => ({
-  //     // none of react-select's styles are passed to <Control />
-  //     width: 700,
-  //     height: 99,
-  //     borderBottom: "2px solid rgba(27, 221, 187, 1)",
-  //     fontFamily: "Inter",
-  //     fontWeight: 500,
-  //     fontSize: 22,
-  //     color: "rgba(165, 165, 165, 0.81)",
-  //   }),
-  //   singleValue: (provided, state) => {
-  //     const opacity = state.isDisabled ? 0.5 : 1;
-  //     const transition = "opacity 300ms";
 
-  //     return { ...provided, opacity, transition };
-  //   },
+  const optionsTHL = [
+    {
+      value: "geo",
+      label: "George Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "andre",
+      label: "Andreas Waani",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "poco",
+      label: "Ryan Mamitoho",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "ando",
+      label: "Rolando",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "lomo",
+      label: "Salomo",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "geral",
+      label: "Gerald W",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "gerry",
+      label: "Gerry W",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "monic",
+      label: "Monica T",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "veren",
+      label: "Verren K",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "abe",
+      label: "Abelard P",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "ryan",
+      label: "Mamitoho",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "jere",
+      label: "Jeremia W",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "geoo",
+      label: "Georrge Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "andreee",
+      label: "Andreeeeas Waani",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "pocooo",
+      label: "Ryan Mamitohooo",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "geeeo",
+      label: "Geeeorge Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "annndre",
+      label: "Annndreas W",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "poccco",
+      label: "Ryannn Mamitoho",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "geop",
+      label: "Georgep Olaf",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+    {
+      value: "andrre",
+      label: "Andrreas Waani",
+      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
+    },
+  ];
+
+  const formatOptionTHL = ({ label, image }) => (
+    //value-input
+    <div
+      style={{
+        // flexDirection: "row-reverse",
+        // display: "-ms-inline-flexbox",
+        // width: 1000
+        // height: 500
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          alignItems: "center",
+          display: "-webkit-inline-flex",
+        }}
+      >
+        <div>{image}</div>
+        <div style={{marginLeft: 10}}>{label}</div>
+      </div>
+    </div>
+  );
+
+  const customStylesTHL = {
+    //OPTION List
+    option: (base, state) => ({
+      ...base,
+      flex: 1,
+      borderRadius: 10,
+      flexDirection: "row",
+      cursor: "pointer",
+      height: 70,
+      width: 253,
+      color: state.isFocused ? "white" : "rgba(17, 35, 80, 1)",
+      backgroundColor: state.isFocused ? "rgba(17, 35, 80, 1)" : "white",
+    }),
+    //CONTAINER OPTION
+    menu: (provided, state) => ({
+      ...provided,
+      width: 290,
+      // height: 300,
+      paddingTop: 7,
+      paddingLeft: 8,
+      paddingRight: 8,
+      marginLeft: 390,
+      backgroundColor: state.isSelected ? "rgba(17, 35, 80, 1)" : "white",
+      flexWrap: "wrap",
+      flexDirection: 'row',
+      // display: "-webkit-flex",
+    }),
+
+    //INPUT
+    control: (_, { selectProps: { width, height } }) => ({
+      // width: width,
+      // maxWidth:
+      // height: height,
+      paddingLeft: -20,
+      paddingTop: 20,
+      width: 700,
+      height: 70,
+      marginTop: -33,
+      overflow: "overlay",
+      scroll: null,
+borderBottom: "2px solid rgba(27, 221, 187, 1)",
+      fontFamily: "Inter",
+      fontWeight: 500,
+      fontSize: 22,
+    }),
+
+    singleValue: (styles, state) => ({
+      ...styles,
+      color: "rgba(165, 165, 165, 0.81)",
+      fontFamily: "Inter",
+      fontWeight: 500,
+      fontSize: 29,
+      cursor: "pointer",
+    }),
+  };
+
+  const formatOptionTupoksi = ({ value, label }) => (
+    // <div
+    // className={styles.formatOptionTupoksi}
+    <div
+      style={{
+        display: "flex",
+        padding: 0,
+        margin: 0,
+        width: 450,
+        height: 40,
+        paddingTop: 5,
+        border: 10,
+        fontFamily: "Poppins",
+        fontWeight: 600,
+        fontSize: 22,
+        cursor: "pointer",
+      }}
+    >
+      <div>{label} </div>
+    </div>
+  );
+  // const DropdownIndicator = (
+  //   props: DropdownIndicatorProps
+  // ) => {
+  //   return (
+  //     <components.DropdownIndicator {...props}>
+  //       <Image
+  //         src={"./Dropdown-tupoksi.svg"}
+  //       />
+  //     </components.DropdownIndicator>
+  //   );
   // };
 
   const customStyles = {
+    option: (base, state) => ({
+      ...base,
+      // ...state,
+      borderRadius: 10,
+      backgroundColor: state.isSelected ? "#112350" : "white",
+      color: state.isFocused ? "white" : "#4A4A4A",
+      background: state.isFocused ? "#112350" : "white",
+    }),
+
     menu: (provided, state) => ({
       ...provided,
-      // width: state.selectProps.width,
-      borderBottom: "none",
-      // color: state.selectProps.menuColor,
-      // color: "rgba(74, 74, 74, 1)",
-      // background: 'red',
-      padding: 0,
-      margin: 0,
-      width: 460,
+      width: 480,
+      borderRadius: 20,
       height: 190,
-      paddingTop: 18,
+      paddingTop: 7,
       paddingLeft: 8,
       paddingRight: 8,
-      borderRadius: 10,
-      fontFamily: "Poppins",
-      fontWeight: 700,
-      fontSize: 22,
-      marginLeft: 240,
-      color: state.isSelected ? "white" : "rgba(74, 74, 74, 1)",
-      background: state.isHoover ? "rgba(17, 35, 80, 1)" : "white",
+      marginLeft: 220,
+      backgroundColor: state.isSelected ? "rgba(17, 35, 80, 1)" : "white",
     }),
 
     control: (_, { selectProps: { width } }) => ({
       width: width,
+      width: 700,
       borderBottom: "2px solid rgba(27, 221, 187, 1)",
       fontFamily: "Inter",
       fontWeight: 500,
       fontSize: 22,
-      color: "rgba(165, 165, 165, 0.81)",
+      cursor: "pointer",
     }),
 
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = "opacity 300ms";
-
-      return { ...provided, opacity, transition };
-    },
+    singleValue: (styles, state) => ({
+      ...styles,
+      color: "rgba(165, 165, 165, 0.81)",
+      fontFamily: "Inter",
+      fontWeight: 500,
+      fontSize: 29,
+    }),
   };
 
   return (
@@ -237,31 +402,23 @@ export default function ContentInputRenaksiP() {
           <TxtInputRenaksi
             title="Program"
             placeholder="masukan program yang akan dilakukan"
-            onChange={(e) => setInProgram(e.target.value)}
-            className={""}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Kegiatan"
             placeholder="masukan kegiatan yang akan dilakukan"
-            onChange={(e) => setInKegiatan(e.target.value)}
-            className={""}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Tupoksi Inti"
             placeholder="masukan tupoksi inti yang akan dilakukan"
-            onChange={(e) => setInTupoksiInti(e.target.value)}
-            className={""}
           />
         </div>
         <Gap height={0} width={100} />
         <div>
-          <TxtInputRenaksi
+          {/* <TxtInputRenaksi
             title="THL"
             placeholder="Pilih THL yang akan bertugas"
-            onChange={(e) => setInProgram(e.target.value)}
-            className={""}
           />
           <div className={styles.dropdownTHL}>
             <div className={styles.dropdownIcon}>
@@ -277,25 +434,48 @@ export default function ContentInputRenaksiP() {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
+          <p className={styles.titleTupoksi}>THL</p>
+          {/* <Gap width={0} height={5}/>  */}
+          <Select
+            downChevron
+            isMulti
+            formatOptionLabel={formatOptionTHL}
+            options={optionsTHL}
+            styles={customStylesTHL}
+            components={{
+              DropdownIndicator: null,
+              ClearIndicator: null,
+              options: optionsTHL,
+            }}
+            placeholder={
+              <div className={styles.placeholder}>
+                pilih THL yang akan bertugas
+              </div>
+            }
+          />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Sub Kegiatan"
             placeholder="masukan sub kegiatan yang akan dilakukan"
-            onChange={(e) => setInSubKegiatan(e.target.value)}
-            className={""}
           />
           <Gap height={56} width={0} />
+          <p className={styles.titleTupoksi}>Tupoksi tambahan</p>
           <Select
+            formatOptionLabel={formatOptionTupoksi}
+            components={{ DropdownIndicator: null }}
+            // ClearIndicator
             styles={customStyles}
             options={optionsTupoksi}
-            placeholder={"pilih tupoksi tambahan yang akan dilakukan"}
+            placeholder={
+              <div className={styles.placeholder}>
+                pilih tupoksi tambahan yang akan dilakukan
+              </div>
+            }
           />
           {/* <TxtInputRenaksi
             title="Tupoksi Tambahan"
             placeholder="pilih tupoksi tambahan yang akan dilakukan"
-            onChange={(e) => setInProgram(e.target.value)}
-            className={""}
           />
           <div className={styles.dropdownTupoksi}>
             <div className={styles.selectTupoksi}>
@@ -319,13 +499,6 @@ export default function ContentInputRenaksiP() {
       <div className={styles.wrapperRencana}>
         <p className={styles.rencana}>Rencana</p>
         <div>
-          {/* <input type={"checkbox"} className={styles.input}/> */}
-          {/* <select className={styles.select}>
-            <option>unduh</option>
-            <option>unggah</option>
-          </select> */}
-          {/* <CheckboxBulan title='jan' /> */}
-
           <Button
             title={"Jan"}
             onClick={handleClick}
@@ -393,7 +566,7 @@ export default function ContentInputRenaksiP() {
       {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
-        onClick={btnUnggah}
+        onClick={() => setShowModal(true)}
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
       {showModal ? (

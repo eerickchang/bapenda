@@ -6,11 +6,8 @@ import btnStyles from "../Button/button.module.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Axios from "axios";
-<<<<<<< HEAD
 import Select from "react-select";
-=======
 import { useState, useEffect } from "react";
->>>>>>> 9028af438631d54ece05cebec917806fb3d7d3a2
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -50,62 +47,68 @@ export default function CtnDaftar() {
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
   const [activeSubBidang5, setActiveSubBidang5] = useState(false);
 
-  const [jabatan, setJabatan] = useState([
+  const jabatan = [
     {
-      namaJabatan: "Kepala Badan",
+      value: "kepalaBadan",
+      label: "Kepala Badan",
     },
     {
-      namaJabatan: "Sekertaris",
+      value: "sekertaris",
+      label: "Sekertaris",
     },
     {
-      namaJabatan: "Kepala Sub Bagian",
+      value: "kepalaSubBagian",
+      label: "Kepala Sub Bagian",
     },
     {
-      namaJabatan: "Kepala Bidang",
+      value: "kepalaBidang",
+      label: "Kepala Bidang",
     },
     {
-      namaJabatan: "Kepala Sub Bidang",
+      value: "kepalaSubBidang",
+      label: "Kepala Sub Bidang",
     },
     {
-      namaJabatan: "Staff",
+      value: "staff",
+      label: "Staff",
     },
-  ]);
+  ];
 
-  const [bidang, setBidang] = useState([
-    {
-      namaBidang: "Sekertaris",
-    },
-    {
-      namaBidang: "Pajak Daerah",
-      namaSetBid1: "Administrasi & ...",
-      namaSetBid2: "PKB & BBN-KB",
-      namaSetBid3: "PBBKB, PAP & ...",
-    },
-    {
-      namaBidang: "Retribusi dan lain...",
-      namaSetBid1: "Retribusi",
-      namaSetBid2: "Bagi Hasil Pajak & ...",
-      namaSetBid3: "Lain-lain Pendapat...",
-    },
-    {
-      namaBidang: "Perencanaan dan ...",
-      namaSetBid1: "Pengelolaan & ...",
-      namaSetBid2: "Pengembangan & ...",
-      namaSetBid3: "Pelaporan Data ...",
-    },
-    {
-      namaBidang: "Pajak Daerah",
-      namaSetBid1: "Administrasi & ...",
-      namaSetBid2: "PKB & BBN-KB",
-      namaSetBid3: "PBBKB, PAP & ...",
-    },
-    {
-      namaBidang: "Pengendalian dan ...",
-      namaSetBid1: "Evaluasi Kinerja",
-      namaSetBid2: "Pengendalian & ...",
-      namaSetBid3: "Pengendalian Pendapat...",
-    },
-  ]);
+  // const [bidang, setBidang] = useState([
+  //   {
+  //     namaBidang: "Sekertaris",
+  //   },
+  //   {
+  //     namaBidang: "Pajak Daerah",
+  //     namaSetBid1: "Administrasi & ...",
+  //     namaSetBid2: "PKB & BBN-KB",
+  //     namaSetBid3: "PBBKB, PAP & ...",
+  //   },
+  //   {
+  //     namaBidang: "Retribusi dan lain...",
+  //     namaSetBid1: "Retribusi",
+  //     namaSetBid2: "Bagi Hasil Pajak & ...",
+  //     namaSetBid3: "Lain-lain Pendapat...",
+  //   },
+  //   {
+  //     namaBidang: "Perencanaan dan ...",
+  //     namaSetBid1: "Pengelolaan & ...",
+  //     namaSetBid2: "Pengembangan & ...",
+  //     namaSetBid3: "Pelaporan Data ...",
+  //   },
+  //   {
+  //     namaBidang: "Pajak Daerah",
+  //     namaSetBid1: "Administrasi & ...",
+  //     namaSetBid2: "PKB & BBN-KB",
+  //     namaSetBid3: "PBBKB, PAP & ...",
+  //   },
+  //   {
+  //     namaBidang: "Pengendalian dan ...",
+  //     namaSetBid1: "Evaluasi Kinerja",
+  //     namaSetBid2: "Pengendalian & ...",
+  //     namaSetBid3: "Pengendalian Pendapat...",
+  //   },
+  // ]);
 
   const handleChange = () => {};
 
@@ -136,7 +139,7 @@ export default function CtnDaftar() {
             height={30}
             title="NIP / NPNP"
             placeholder="Masukkan NIP / NPNP"
-            onChange={(e) => {
+            onChange= {(e) => {
               setNipReg(e.target.value);
             }}
             type="number"
@@ -266,6 +269,7 @@ export default function CtnDaftar() {
             onChange={handleChange}
             type="text"
           />
+
           {/* DROPDOWN JABATAN */}
           <div className={styles.dropdownJabatan}>
             <div className={styles.selectJabatan}>
