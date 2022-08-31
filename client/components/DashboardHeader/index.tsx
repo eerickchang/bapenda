@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./dashboardheader.module.css";
 import Image from "next/image";
+import Axios from "axios";
 
 export default function DashboardHeader() {
+  useEffect(() => {
+    Axios.get("http://localhost:3001/cakin").then((response) => {
+      // console.log(response.data[0]);
+      setCakin(response.data[0]);
+    });
+  }, []);
+
+  const [cakin, setCakin] = useState();
   return (
     <div className={styles.container}>
       <h1 className={styles.head1}>Agustus</h1>

@@ -10,30 +10,118 @@ import {
 import styles from "./dashboard.module.css";
 import sidebarStyles from "../../components/Sidebar/sidebar.module.css";
 import Axios from "axios";
-import { UserData } from "../../components/Data";
+// import { UserData } from "../../components/Data";
 
 export default function Dashboard() {
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3001/masuk").then((response) => {
-  //     console.log(response.data.user[0]);
-  //   });
-  // }, []);
+  Axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      // console.log(response.data.user[0].nama);
+
+      setNama(response.data.user[0].nama);
+      // console.log(nama);
+    });
+    Axios.get("http://localhost:3001/cakin").then((response) => {
+      // console.log("Console: ", response.data);
+      // setCakin(response.data);
+    });
+  }, []);
+
+  const [nama, setNama] = useState();
+  const [cakin, setCakin] = useState([]);
+  const [dataUser, setDataUser] = useState([
+    {
+      id: 1,
+      year: 2016,
+      userGain: 10,
+      userLost: 823,
+    },
+    {
+      id: 2,
+      year: 2017,
+      userGain: 20,
+      userLost: 423,
+    },
+    {
+      id: 3,
+      year: 2018,
+      userGain: 60,
+      userLost: 1200,
+    },
+    {
+      id: 4,
+      year: 2019,
+      userGain: 90,
+      userLost: 588,
+    },
+    {
+      id: 5,
+      year: 2020,
+      userGain: 40,
+      userLost: 678,
+    },
+    {
+      id: 6,
+      year: 2021,
+      userGain: 70,
+      userLost: 678,
+    },
+    {
+      id: 7,
+      year: 2022,
+      userGain: 70,
+      userLost: 678,
+    },
+    {
+      id: 8,
+      year: 2023,
+      userGain: 80,
+      userLost: 678,
+    },
+    {
+      id: 9,
+      year: 2024,
+      userGain: 50,
+      userLost: 678,
+    },
+    {
+      id: 10,
+      year: 2025,
+      userGain: 95,
+      userLost: 678,
+    },
+    {
+      id: 11,
+      year: 2026,
+      userGain: 55,
+      userLost: 678,
+    },
+    {
+      id: 12,
+      year: 2027,
+      userGain: 67,
+      userLost: 678,
+    },
+  ]);
 
   const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.year),
+    labels: dataUser.map((data) => data.year),
     datasets: [
       {
         label: "Users Gained",
-        data: UserData.map((data) => data.userGain),
+        data: dataUser.map((data) => data.userGain),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
-        // hoverBackgroundColor: ["#112350"],\
+        // hoverBackgroundColor: ["#112350"],
       },
     ],
   });
 
   return (
     <div className={styles.container}>
+      {/* {console.log("Cakin: ", cakin)} */}
+      {/* {console.log(nama)} */}
       <Sidebar kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>

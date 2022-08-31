@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
@@ -10,6 +10,8 @@ import styles from "./ContentInputRenaksiP.module.css";
 import Select from "react-select";
 
 export default function ContentInputRenaksiP() {
+  Axios.defaults.withCredentials = true;
+
   const router = useRouter();
   const handleClick = () => {
     router.push("/InputRenaksi");
@@ -19,6 +21,7 @@ export default function ContentInputRenaksiP() {
   const [inKegiatan, setInKegiatan] = useState("");
   const [inTupoksiInti, setInTupoksiInti] = useState("");
   const [inSubKegiatan, setInSubKegiatan] = useState("");
+  const [nip, setNip] = useState("");
 
   const btnUnggah = () => {
     Axios.post("http://localhost:3001/inputRenaksi", {
@@ -26,12 +29,23 @@ export default function ContentInputRenaksiP() {
       kegiatan: inKegiatan,
       tupoksiInti: inTupoksiInti,
       subKegiatan: inSubKegiatan,
+      nip: nip,
     });
 
     // if (Response.length > 0) {
     //   setShowModal(true);
     // }
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      // console.log("NIP: ", response.data.user[0].nip);
+      setNip(response.data.user[0].nip);
+    });
+    // if (Response.length > 0) {
+    //   setShowModal(true);
+    // }
+  }, []);
 
   //!modals
   const [showModal, setShowModal] = useState(false);

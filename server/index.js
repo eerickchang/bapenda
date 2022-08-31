@@ -38,7 +38,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24,
+      expires: 60 * 60 * 200,
     },
   })
 );
@@ -108,16 +108,26 @@ app.post("/inputRenaksi", (req, res) => {
   const kegiatan = req.body.kegiatan;
   const tupoksiInti = req.body.tupoksiInti;
   const subKegiatan = req.body.subKegiatan;
+  const nip = req.body.nip;
 
   const sqlInsert =
-    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan) VALUES (?,?,?,?)";
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip) VALUES (?,?,?,?,?)";
   db.query(
     sqlInsert,
-    [program, kegiatan, tupoksiInti, subKegiatan],
+    [program, kegiatan, tupoksiInti, subKegiatan, nip],
     (err, result) => {
       console.log(result);
     }
   );
+});
+
+//AMBIL DATA CAKIN
+app.get("/cakin", (req, res) => {
+  const sqlSelect = "SELECT * FROM cakin";
+
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
 });
 
 // PADA PORT BERAPA BACKEND DIJALANAKAN

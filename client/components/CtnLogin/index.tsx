@@ -41,7 +41,7 @@ export default function CtnLogin() {
     Axios.get("http://localhost:3001/masuk").then((response) => {
       console.log(response.data);
       if (response.data.loggedIn == true) {
-        router.push("/Dashboard");
+        // router.push("/Dashboard");
       }
     });
   }, []);
