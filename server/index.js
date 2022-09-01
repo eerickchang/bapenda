@@ -54,7 +54,7 @@ app.post("/masuk", (req, res) => {
   const sandi = req.body.sandi;
   const nip = req.body.nip;
 
-  db.query("SELECT * FROM staff WHERE nip = ?", nip, (err, result) => {
+  db.query("SELECT * FROM pegawai WHERE nip = ?", nip, (err, result) => {
     if (err) {
       res.send({ err: err });
     }
@@ -89,14 +89,15 @@ app.post("/daftar", (req, res) => {
   const sandi = req.body.sandi;
   const nip = req.body.nip;
   const nohp = req.body.nohp;
+  const jabatan = req.body.jabatan;
 
   bcrypt.hash(sandi, saltRounds, (err, hash) => {
     if (err) {
       console.log(err);
     }
     const sqlInsert =
-      "INSERT INTO staff (nama, sandi, nip, no_hp) VALUES (?,?,?,?)";
-    db.query(sqlInsert, [nama, hash, nip, nohp], (err, result) => {
+      "INSERT INTO pegawai (nama, sandi, nip, no_hp, jabatan) VALUES (?,?,?,?,?)";
+    db.query(sqlInsert, [nama, hash, nip, nohp, jabatan], (err, result) => {
       console.log(result);
     });
   });

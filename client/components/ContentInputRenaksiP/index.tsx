@@ -23,7 +23,7 @@ export default function ContentInputRenaksiP() {
   const [inTupoksiInti, setInTupoksiInti] = useState("");
   const [inSubKegiatan, setInSubKegiatan] = useState("");
   const [nip, setNip] = useState("");
-  const [tupoksiTambahan, setTupoksiTambahan] = useState("");
+  const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
 
   const btnUnggah = () => {
     Axios.post("http://localhost:3001/inputRenaksi", {
@@ -32,8 +32,14 @@ export default function ContentInputRenaksiP() {
       tupoksiInti: inTupoksiInti,
       subKegiatan: inSubKegiatan,
       nip: nip,
-      tupoksiTambahan: tupoksiTambahan,
+      tupoksiTambahan: inTupoksiTambahan,
     });
+    // useEffect(() => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+    // });
     // useEffect(() => {
     // setShowModal(true);
     // }, [3]);
@@ -43,9 +49,12 @@ export default function ContentInputRenaksiP() {
     // }
   };
 
-  useEffect(() => {
-    setShowModal(true);
-  }, [1000]);
+  // useEffect(() => {
+  //   setShowModal(true);
+  //   setTimeout(() => {
+  //     setShowModal(false);
+  //   }, 2000);
+  // });
 
   useEffect(() => {
     Axios.get("http://localhost:3001/masuk").then((response) => {
@@ -519,7 +528,7 @@ export default function ContentInputRenaksiP() {
                 pilih tupoksi tambahan yang akan dilakukan
               </div>
             }
-            onChange={(e) => setTupoksiTambahan(e?.label)}
+            onChange={(e) => setInTupoksiTambahan(e?.label)}
           />
           {/* <TxtInputRenaksi
             title="Tupoksi Tambahan"

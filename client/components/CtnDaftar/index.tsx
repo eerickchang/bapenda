@@ -16,6 +16,7 @@ export default function CtnDaftar() {
   const [sandiReg, setSandiReg] = useState("");
   const [nipReg, setNipReg] = useState("");
   const [noHpReg, setNoHpReg] = useState("");
+  const [jabatanReg, setJabatanReg] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [activeSubBidang, setActiveSubBidang] = useState(false);
 
@@ -31,6 +32,7 @@ export default function CtnDaftar() {
       sandi: sandiReg,
       nip: nipReg,
       nohp: noHpReg,
+      jabatan: jabatanReg,
     }).then(() => {
       alert("successfull insert");
     });
@@ -294,23 +296,23 @@ export default function CtnDaftar() {
         <div className={styles.contentKanan}>
           {/* DROPDOWN JABATAN */}
           <div className={styles.wrapperTitleBidangJabatan}>
-            <Image src="/jabatanUmum.svg" width={30} height={35}/>
+            <Image src="/jabatanUmum.svg" width={30} height={35} />
             <p className={styles.placeholder}>Jabatan</p>
           </div>
           <Select
-          // filterOption={createFilter()}
+            // filterOption={createFilter()}
             placeholder={<p style={{ marginLeft: -100 }}>Pilih Jabatan</p>}
             formatOptionLabel={formatOptionLabelJabatan}
             styles={customStylesDropdownJabatan}
             options={optionsJabatan}
             components={{ DropdownIndicator: null }}
+            onChange={(e) => setJabatanReg(e?.label)}
             // menuIsOpen
             // openMenuOnClick
             // menuShouldScrollIntoView
             // menuPositionu
             // menuPlacement
             onMenuOpen
-
           />
 
           {/* <TxtInputDaftar
