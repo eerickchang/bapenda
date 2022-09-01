@@ -472,6 +472,9 @@ export default function ContentInputRenaksiP() {
           <p className={styles.titleTupoksi}>THL</p>
           {/* <Gap width={0} height={5}/>  */}
           <Select
+            downChevron
+            isMulti
+            menuShouldBlockScroll={false}
             // menuShouldScrollIntoView={false}
             formatOptionLabel={formatOptionTHL}
             options={optionsTHL}

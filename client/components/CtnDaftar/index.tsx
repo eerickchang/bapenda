@@ -47,6 +47,49 @@ export default function CtnDaftar() {
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
   const [activeSubBidang5, setActiveSubBidang5] = useState(false);
 
+
+
+  const optinsBidang = [
+    {
+      value1: 'sub-a',
+      value2: 'sub-b',
+      value3: 'sub-c',
+
+      label1: 'Sub-A',
+      label2: 'Sub-B',
+      label3: 'Sub-C',
+    },
+    {
+      value1: 'sub-a',
+      value2: 'sub-b',
+      value3: 'sub-c',
+
+      label1: 'Sub-A',
+      label2: 'Sub-B',
+      label3: 'Sub-C',
+    },
+    {
+      value1: 'sub-a',
+      value2: 'sub-b',
+      value3: 'sub-c',
+
+      label1: 'Sub-A',
+      label2: 'Sub-B',
+      label3: 'Sub-C',
+    },
+    {
+      value1: 'sub-a',
+      value2: 'sub-b',
+      value3: 'sub-c',
+
+      label1: 'Sub-A',
+      label2: 'Sub-B',
+      label3: 'Sub-C',
+    },
+  ]
+
+
+
   const optionsJabatan = [
     {
       value: "kepalaBadan",
@@ -74,6 +117,26 @@ export default function CtnDaftar() {
     },
   ];
 
+  //OPTION JABATAN DROPDOWN
+  const formatOptionLabelBidang = ({ label1, label2, label3 }) => (
+    <div
+      style={{
+        display: "flex",
+        padding: 0,
+        margin: 0,
+        // paddingTop: 5,
+        fontFamily: "Inter",
+        fontWeight: 400,
+        fontSize: 17,
+        cursor: "pointer",
+        // color: 'white'
+      }}
+    >
+      <div>{label1}</div>
+      <div>{label2}</div>
+      <div>{label3}</div>
+    </div>
+  );
   //OPTION JABATAN DROPDOWN
   const formatOptionLabelJabatan = ({ value, label }) => (
     <div
@@ -136,9 +199,9 @@ export default function CtnDaftar() {
     singleValue: (styles, state) => ({
       ...styles,
       color: "white",
-      // fontFamily: "Inter",
-      // fontWeight: 600,
-      // fontSize: 29,
+      fontFamily: "Inter",
+      fontWeight: 600,
+      fontSize: 29,
     }),
   };
 
