@@ -47,7 +47,7 @@ export default function CtnDaftar() {
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
   const [activeSubBidang5, setActiveSubBidang5] = useState(false);
 
-  const jabatan = [
+  const optionsJabatan = [
     {
       value: "kepalaBadan",
       label: "Kepala Badan",
@@ -74,41 +74,73 @@ export default function CtnDaftar() {
     },
   ];
 
-  // const [bidang, setBidang] = useState([
-  //   {
-  //     namaBidang: "Sekertaris",
-  //   },
-  //   {
-  //     namaBidang: "Pajak Daerah",
-  //     namaSetBid1: "Administrasi & ...",
-  //     namaSetBid2: "PKB & BBN-KB",
-  //     namaSetBid3: "PBBKB, PAP & ...",
-  //   },
-  //   {
-  //     namaBidang: "Retribusi dan lain...",
-  //     namaSetBid1: "Retribusi",
-  //     namaSetBid2: "Bagi Hasil Pajak & ...",
-  //     namaSetBid3: "Lain-lain Pendapat...",
-  //   },
-  //   {
-  //     namaBidang: "Perencanaan dan ...",
-  //     namaSetBid1: "Pengelolaan & ...",
-  //     namaSetBid2: "Pengembangan & ...",
-  //     namaSetBid3: "Pelaporan Data ...",
-  //   },
-  //   {
-  //     namaBidang: "Pajak Daerah",
-  //     namaSetBid1: "Administrasi & ...",
-  //     namaSetBid2: "PKB & BBN-KB",
-  //     namaSetBid3: "PBBKB, PAP & ...",
-  //   },
-  //   {
-  //     namaBidang: "Pengendalian dan ...",
-  //     namaSetBid1: "Evaluasi Kinerja",
-  //     namaSetBid2: "Pengendalian & ...",
-  //     namaSetBid3: "Pengendalian Pendapat...",
-  //   },
-  // ]);
+  //OPTION JABATAN DROPDOWN
+  const formatOptionLabelJabatan = ({ value, label }) => (
+    <div
+      style={{
+        display: "flex",
+        padding: 0,
+        margin: 0,
+        // paddingTop: 5,
+        fontFamily: "Inter",
+        fontWeight: 400,
+        fontSize: 17,
+        cursor: "pointer",
+        // color: 'white'
+      }}
+    >
+      <div>{label} </div>
+    </div>
+  );
+
+  const customStylesDropdownJabatan = {
+    option: (base, state) => ({
+      ...base,
+      // ...state,
+      // width: 500,
+      borderRadius: 10,
+      backgroundColor: state.isSelected ? "#112350" : "white",
+      color: state.isFocused ? "#112350" : "white",
+      background: state.isFocused ? "white" : "#112350",
+    }),
+
+    menu: (provided, state) => ({
+      ...provided,
+      borderRadius: 10,
+      border: "1px solid #23335B",
+      // width: 223,
+      // height: 2100,
+      paddingTop: 7,
+      paddingLeft: 8,
+      paddingRight: 8,
+      marginLeft: 0,
+      backgroundColor: "#112350",
+    }),
+
+    control: (_, { selectProps: { width } }) => ({
+      width: width,
+      background: "rgba(194, 194, 194, 0.1)",
+      width: 223,
+      height: 53,
+      fontFamily: "Inter",
+      fontWeight: 500,
+      fontSize: 16,
+      cursor: "pointer",
+      border: "1px solid #293961",
+      borderRadius: 90,
+      textAlign: "center",
+      display: "flex",
+      paddingLeft: 22,
+    }),
+
+    singleValue: (styles, state) => ({
+      ...styles,
+      color: "white",
+      // fontFamily: "Inter",
+      // fontWeight: 600,
+      // fontSize: 29,
+    }),
+  };
 
   const handleChange = () => {};
 
@@ -139,7 +171,7 @@ export default function CtnDaftar() {
             height={30}
             title="NIP / NPNP"
             placeholder="Masukkan NIP / NPNP"
-            onChange= {(e) => {
+            onChange={(e) => {
               setNipReg(e.target.value);
             }}
             type="number"
@@ -260,7 +292,28 @@ export default function CtnDaftar() {
         </div>
         <Gap width={67} height={0} />
         <div className={styles.contentKanan}>
-          <TxtInputDaftar
+          {/* DROPDOWN JABATAN */}
+          <div className={styles.wrapperTitleBidangJabatan}>
+            <Image src="/jabatanUmum.svg" width={30} height={35}/>
+            <p className={styles.placeholder}>Jabatan</p>
+          </div>
+          <Select
+          // filterOption={createFilter()}
+            placeholder={<p style={{ marginLeft: -100 }}>Pilih Jabatan</p>}
+            formatOptionLabel={formatOptionLabelJabatan}
+            styles={customStylesDropdownJabatan}
+            options={optionsJabatan}
+            components={{ DropdownIndicator: null }}
+            // menuIsOpen
+            // openMenuOnClick
+            // menuShouldScrollIntoView
+            // menuPositionu
+            // menuPlacement
+            onMenuOpen
+
+          />
+
+          {/* <TxtInputDaftar
             image="/jabatanUmum.svg"
             width={30}
             height={35}
@@ -268,10 +321,10 @@ export default function CtnDaftar() {
             placeholder="Pilih Jabatan"
             onChange={handleChange}
             type="text"
-          />
+          />*/}
 
           {/* DROPDOWN JABATAN */}
-          <div className={styles.dropdownJabatan}>
+          {/* <div className={styles.dropdownJabatan}>
             <div className={styles.selectJabatan}>
               <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
             </div>
@@ -282,7 +335,7 @@ export default function CtnDaftar() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <Gap width={0} height={35} />
           <TxtInputDaftar
