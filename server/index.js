@@ -109,12 +109,13 @@ app.post("/inputRenaksi", (req, res) => {
   const tupoksiInti = req.body.tupoksiInti;
   const subKegiatan = req.body.subKegiatan;
   const nip = req.body.nip;
+  const tupoksiTambahan = req.body.tupoksiTambahan;
 
   const sqlInsert =
-    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip) VALUES (?,?,?,?,?)";
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan) VALUES (?,?,?,?,?,?)";
   db.query(
     sqlInsert,
-    [program, kegiatan, tupoksiInti, subKegiatan, nip],
+    [program, kegiatan, tupoksiInti, subKegiatan, nip, tupoksiTambahan],
     (err, result) => {
       console.log(result);
     }
