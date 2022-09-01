@@ -201,6 +201,23 @@
   padding-left: 20px;
 }
 
-.dropdownListBidang_item:focus .dropdownSubBidang{
+.dropdownListBidang_item:focus .dropdownSubBidang {
   background-color: red;
+}
+
+.placeholder {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 24px;
+  color: white;
+}
+
+.wrapperTitleBidangJabatan{
+  display: flex;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.wrapperTitleBidangJabatan p{
+  margin: 0;
+  margin-left: 28px;
 }

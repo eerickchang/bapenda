@@ -277,7 +277,17 @@ export default function ContentInputRenaksiP() {
         }}
       >
         <div>{image}</div>
-        <div style={{ marginLeft: 10 }}>{label}</div>
+        <div
+          style={{
+            marginLeft: 10,
+            fontFamily: "Poppins",
+            fontWeight: 500,
+            fontSize: 18,
+            // color: 'rgba(17, 35, 80, 1)',
+          }}
+        >
+          {label}
+        </div>
       </div>
     </div>
   );
@@ -295,6 +305,7 @@ export default function ContentInputRenaksiP() {
       color: state.isFocused ? "white" : "rgba(17, 35, 80, 1)",
       backgroundColor: state.isFocused ? "rgba(17, 35, 80, 1)" : "white",
     }),
+
     //CONTAINER OPTION
     menu: (provided, state) => ({
       ...provided,
@@ -338,7 +349,7 @@ export default function ContentInputRenaksiP() {
     }),
   };
 
-  const formatOptionTupoksi = ({ value, label }) => (
+  const formatOptionLabelTupoksi = ({ value, label }) => (
     // <div
     // className={styles.formatOptionTupoksi}
     <div
@@ -359,17 +370,6 @@ export default function ContentInputRenaksiP() {
       <div>{label} </div>
     </div>
   );
-  // const DropdownIndicator = (
-  //   props: DropdownIndicatorProps
-  // ) => {
-  //   return (
-  //     <components.DropdownIndicator {...props}>
-  //       <Image
-  //         src={"./Dropdown-tupoksi.svg"}
-  //       />
-  //     </components.DropdownIndicator>
-  //   );
-  // };
 
   const customStyles = {
     option: (base, state) => ({
@@ -484,8 +484,7 @@ export default function ContentInputRenaksiP() {
           <p className={styles.titleTupoksi}>THL</p>
           {/* <Gap width={0} height={5}/>  */}
           <Select
-            downChevron
-            isMulti
+            // menuShouldScrollIntoView={false}
             formatOptionLabel={formatOptionTHL}
             options={optionsTHL}
             styles={customStylesTHL}
@@ -510,7 +509,7 @@ export default function ContentInputRenaksiP() {
           <Gap height={56} width={0} />
           <p className={styles.titleTupoksi}>Tupoksi tambahan</p>
           <Select
-            formatOptionLabel={formatOptionTupoksi}
+            formatOptionLabel={formatOptionLabelTupoksi}
             components={{ DropdownIndicator: null }}
             // ClearIndicator
             styles={customStyles}
