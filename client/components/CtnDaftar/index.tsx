@@ -245,9 +245,9 @@ export default function CtnDaftar() {
             height={35}
             title="Bidang"
             placeholder="Pilih Sub Bidang"
-            onChange={() => setBidangReg("Pengembangan & Teknologi")}
+            onChange={handleChange}
             type="text"
-            value="Pengembangan & Teknologi"
+            value={bidangReg}
           />
           {console.log(bidangReg)}
           {/* DROPDOWN BIDANG */}
@@ -259,7 +259,7 @@ export default function CtnDaftar() {
               <div className={styles.dropdownListBidang}>
                 <div className={styles.dropdownListBidang_item}>
                   <div>
-                    <p>Sekertaris</p>
+                    <p onClick={() => setBidangReg("Sekretaris")}>Sekertaris</p>
                   </div>
                 </div>
                 <div
