@@ -10,6 +10,7 @@ interface TxtInputDaftarProps {
   width: number;
   height: number;
   type: string;
+  value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -22,6 +23,7 @@ export default function TxtInputDaftar(props: TxtInputDaftarProps) {
     width = 20,
     height = 25,
     type = "text",
+    value,
   } = props;
 
   return (
@@ -32,7 +34,12 @@ export default function TxtInputDaftar(props: TxtInputDaftarProps) {
         <Gap height={0} width={25} />
         <p>{title}</p>
       </div>
-      <input type={type} placeholder={placeholder} onChange={onChange}></input>
+      <input
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      ></input>
     </div>
   );
 }

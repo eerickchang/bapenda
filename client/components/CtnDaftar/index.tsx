@@ -17,6 +17,7 @@ export default function CtnDaftar() {
   const [nipReg, setNipReg] = useState("");
   const [noHpReg, setNoHpReg] = useState("");
   const [jabatanReg, setJabatanReg] = useState("");
+  const [bidangReg, setBidangReg] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [activeSubBidang, setActiveSubBidang] = useState(false);
 
@@ -49,48 +50,44 @@ export default function CtnDaftar() {
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
   const [activeSubBidang5, setActiveSubBidang5] = useState(false);
 
-
-
   const optinsBidang = [
     {
-      value1: 'sub-a',
-      value2: 'sub-b',
-      value3: 'sub-c',
+      value1: "sub-a",
+      value2: "sub-b",
+      value3: "sub-c",
 
-      label1: 'Sub-A',
-      label2: 'Sub-B',
-      label3: 'Sub-C',
+      label1: "Sub-A",
+      label2: "Sub-B",
+      label3: "Sub-C",
     },
     {
-      value1: 'sub-a',
-      value2: 'sub-b',
-      value3: 'sub-c',
+      value1: "sub-a",
+      value2: "sub-b",
+      value3: "sub-c",
 
-      label1: 'Sub-A',
-      label2: 'Sub-B',
-      label3: 'Sub-C',
+      label1: "Sub-A",
+      label2: "Sub-B",
+      label3: "Sub-C",
     },
     {
-      value1: 'sub-a',
-      value2: 'sub-b',
-      value3: 'sub-c',
+      value1: "sub-a",
+      value2: "sub-b",
+      value3: "sub-c",
 
-      label1: 'Sub-A',
-      label2: 'Sub-B',
-      label3: 'Sub-C',
+      label1: "Sub-A",
+      label2: "Sub-B",
+      label3: "Sub-C",
     },
     {
-      value1: 'sub-a',
-      value2: 'sub-b',
-      value3: 'sub-c',
+      value1: "sub-a",
+      value2: "sub-b",
+      value3: "sub-c",
 
-      label1: 'Sub-A',
-      label2: 'Sub-B',
-      label3: 'Sub-C',
+      label1: "Sub-A",
+      label2: "Sub-B",
+      label3: "Sub-C",
     },
-  ]
-
-
+  ];
 
   const optionsJabatan = [
     {
@@ -248,9 +245,11 @@ export default function CtnDaftar() {
             height={35}
             title="Bidang"
             placeholder="Pilih Sub Bidang"
-            onChange={handleChange}
+            onChange={() => setBidangReg("Pengembangan & Teknologi")}
             type="text"
+            value="Pengembangan & Teknologi"
           />
+          {console.log(bidangReg)}
           {/* DROPDOWN BIDANG */}
           <div className={styles.dropdownBidang}>
             <div className={styles.selectBidang}>
