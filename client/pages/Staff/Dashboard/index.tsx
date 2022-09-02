@@ -4,11 +4,11 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  Sidebar,
+  SidebarStaff,
   TopPegawai,
-} from "../../components";
+} from "../../../components";
 import styles from "./dashboard.module.css";
-import sidebarStyles from "../../components/Sidebar/sidebar.module.css";
+import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
 import Axios from "axios";
 // import { UserData } from "../../components/Data";
 
@@ -122,7 +122,7 @@ export default function Dashboard() {
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
       {/* {console.log(nama)} */}
-      <Sidebar kotakHome={sidebarStyles.kotakAktif} />
+      <SidebarStaff kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <DashboardHeader />

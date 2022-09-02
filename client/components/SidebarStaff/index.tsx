@@ -15,31 +15,31 @@ export default function Sidebar({
 }) {
   const router = useRouter();
   const clickHome = () => {
-    router.push("/Dashboard");
+    router.push("/Staff/Dashboard");
   };
 
   const clickInput = () => {
-    router.push("/InputRenaksi");
+    router.push("/Staff/InputRenaksi");
   };
 
   const clickDaftarKegiatan = () => {
-    router.push("/DaftarKegiatan");
+    router.push("/Staff/DaftarKegiatan");
   };
 
   const clickRiwayatKegiatan = () => {
-    router.push("/RiwayatKegiatan");
+    router.push("/Staff/RiwayatKegiatan");
   };
 
   const clickProfil = () => {
-    router.push("/Profil");
+    router.push("/Staff/Profil");
   };
 
   const clickNotif = () => {
-    router.push("/Notifikasi");
+    router.push("/Staff/Notifikasi");
   };
 
   const clickLogOut = () => {
-    router.push("/LogOut");
+    router.push("/Staff/LogOut");
   };
 
   return (

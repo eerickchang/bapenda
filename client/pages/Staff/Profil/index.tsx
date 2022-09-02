@@ -1,13 +1,13 @@
 import React from "react";
-import { Gap, ProfileKanan, Sidebar } from "../../components";
+import { Gap, ProfileKanan, SidebarStaff } from "../../../components";
 import styles from "./profil.module.css";
-import sidebarStyles from "../../components/Sidebar/sidebar.module.css";
+import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
 import Image from "next/image";
 
 export default function Profil() {
   return (
     <div className={styles.container}>
-      <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
+      <SidebarStaff kotakProfil={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <div className={styles.header}>

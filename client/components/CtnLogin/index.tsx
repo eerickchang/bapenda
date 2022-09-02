@@ -32,7 +32,7 @@ export default function CtnLogin() {
         console.log(response.data.message);
       } else {
         // console.log(response.data[0].nama);
-        router.push("/Dashboard");
+        router.push("/Staff/Dashboard");
       }
     });
   };

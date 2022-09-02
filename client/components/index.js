@@ -12,7 +12,7 @@ import BtnBulan from "./BtnBulan";
 import DashboardHeader from "./DashboardHeader";
 import Gap from "./Gap";
 import LayoutUmum from "./LayoutUmum";
-import Sidebar from "./Sidebar";
+import SidebarStaff from "./SidebarStaff";
 import TxtInput from "./TxtInput";
 import txtInputDaftar from "./TxtInputDaftar";
 import TxtInputRenaksi from "./TxtInputRenaksi";
@@ -34,7 +34,7 @@ export {
   Gap,
   Button,
   LayoutUmum,
-  Sidebar,
+  SidebarStaff,
   ContentInputRenaksiP,
   TxtInputRenaksi,
   CtnLogin,
