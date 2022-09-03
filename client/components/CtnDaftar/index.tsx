@@ -44,165 +44,54 @@ export default function CtnDaftar() {
     router.push("/");
   };
 
-  // const [activeSubBidang1, setActiveSubBidang1] = useState(false);
+  const [activeSubBidang1, setActiveSubBidang1] = useState(false);
   const [activeSubBidang2, setActiveSubBidang2] = useState(false);
   const [activeSubBidang3, setActiveSubBidang3] = useState(false);
   const [activeSubBidang4, setActiveSubBidang4] = useState(false);
   const [activeSubBidang5, setActiveSubBidang5] = useState(false);
+  const [activeJabatan, setActiveJabatan] = useState(true);
 
-  const optinsBidang = [
+  const jabatan = [
     {
-      value1: "sub-a",
-      value2: "sub-b",
-      value3: "sub-c",
-
-      label1: "Sub-A",
-      label2: "Sub-B",
-      label3: "Sub-C",
+      namaJabatan: "Kepala Badan",
     },
     {
-      value1: "sub-a",
-      value2: "sub-b",
-      value3: "sub-c",
-
-      label1: "Sub-A",
-      label2: "Sub-B",
-      label3: "Sub-C",
+      namaJabatan: "Sekretaris",
     },
     {
-      value1: "sub-a",
-      value2: "sub-b",
-      value3: "sub-c",
-
-      label1: "Sub-A",
-      label2: "Sub-B",
-      label3: "Sub-C",
+      namaJabatan: "Kasubag",
     },
     {
-      value1: "sub-a",
-      value2: "sub-b",
-      value3: "sub-c",
-
-      label1: "Sub-A",
-      label2: "Sub-B",
-      label3: "Sub-C",
+      namaJabatan: "Kabid",
+    },
+    {
+      namaJabatan: "Kasubid",
+    },
+    {
+      namaJabatan: "Staff",
+    },
+    {
+      namaJabatan: "THL",
     },
   ];
 
-  const optionsJabatan = [
+  const bidang = [
     {
-      value: "kepalaBadan",
-      label: "Kepala Badan",
+      namaBidang: "Sekretaris",
     },
     {
-      value: "sekertaris",
-      label: "Sekertaris",
+      namaBidang: "Pajak Daerah",
     },
     {
-      value: "kepalaSubBagian",
-      label: "Kepala Sub Bagian",
+      namaBidang: "Retribusi dan Lain Lain Pendapatan",
     },
     {
-      value: "kepalaBidang",
-      label: "Kepala Bidang",
+      namaBidang: "Perencanaan dan Pengembangan",
     },
     {
-      value: "kepalaSubBidang",
-      label: "Kepala Sub Bidang",
-    },
-    {
-      value: "staff",
-      label: "Staff",
+      namaBidang: "Pengendalian dan Evaluasi",
     },
   ];
-
-  //OPTION JABATAN DROPDOWN
-  const formatOptionLabelBidang = ({ label1, label2, label3 }) => (
-    <div
-      style={{
-        display: "flex",
-        padding: 0,
-        margin: 0,
-        // paddingTop: 5,
-        fontFamily: "Inter",
-        fontWeight: 400,
-        fontSize: 17,
-        cursor: "pointer",
-        // color: 'white'
-      }}
-    >
-      <div>{label1}</div>
-      <div>{label2}</div>
-      <div>{label3}</div>
-    </div>
-  );
-  //OPTION JABATAN DROPDOWN
-  const formatOptionLabelJabatan = ({ value, label }) => (
-    <div
-      style={{
-        display: "flex",
-        padding: 0,
-        margin: 0,
-        // paddingTop: 5,
-        fontFamily: "Inter",
-        fontWeight: 400,
-        fontSize: 17,
-        cursor: "pointer",
-        // color: 'white'
-      }}
-    >
-      <div>{label} </div>
-    </div>
-  );
-
-  const customStylesDropdownJabatan = {
-    option: (base, state) => ({
-      ...base,
-      // ...state,
-      // width: 500,
-      borderRadius: 10,
-      backgroundColor: state.isSelected ? "#112350" : "white",
-      color: state.isFocused ? "#112350" : "white",
-      background: state.isFocused ? "white" : "#112350",
-    }),
-
-    menu: (provided, state) => ({
-      ...provided,
-      borderRadius: 10,
-      border: "1px solid #23335B",
-      // width: 223,
-      // height: 2100,
-      paddingTop: 7,
-      paddingLeft: 8,
-      paddingRight: 8,
-      marginLeft: 0,
-      backgroundColor: "#112350",
-    }),
-
-    control: (_, { selectProps: { width } }) => ({
-      width: width,
-      background: "rgba(194, 194, 194, 0.1)",
-      width: 223,
-      height: 53,
-      fontFamily: "Inter",
-      fontWeight: 500,
-      fontSize: 16,
-      cursor: "pointer",
-      border: "1px solid #293961",
-      borderRadius: 90,
-      textAlign: "center",
-      display: "flex",
-      paddingLeft: 22,
-    }),
-
-    singleValue: (styles, state) => ({
-      ...styles,
-      color: "white",
-      fontFamily: "Inter",
-      fontWeight: 600,
-      fontSize: 29,
-    }),
-  };
 
   const handleChange = () => {};
 
@@ -250,17 +139,37 @@ export default function CtnDaftar() {
             value={bidangReg}
           />
           {console.log(bidangReg)}
-          {/* DROPDOWN BIDANG */}
+          {/* DROPDOWN BIDANG (KHUSUS KABID) */}
           <div className={styles.dropdownBidang}>
             <div className={styles.selectBidang}>
               <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
             </div>
+
             <div className={styles.wrapperSelectBidang}>
+              {bidang.map((item) => (
+                <div>Oke</div>
+              ))}
               <div className={styles.dropdownListBidang}>
-                <div className={styles.dropdownListBidang_item}>
+                <div
+                  className={styles.dropdownListBidang_item}
+                  onClick={(e) => setActiveSubBidang1(!activeSubBidang1)}
+                >
                   <div>
                     <p onClick={() => setBidangReg("Sekretaris")}>Sekertaris</p>
                   </div>
+                  {activeSubBidang1 && (
+                    <div className={styles.dropdownSubBidang}>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Hukum dan Kepeg</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Perencanaan dan ...</p>
+                      </div>
+                      <div className={styles.dropdownListSubBidang}>
+                        <p>Umum</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
@@ -269,7 +178,7 @@ export default function CtnDaftar() {
                   <div>
                     <p>Pajak Daerah</p>
                   </div>
-                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {/* //! DROPDOWN SUB-BIDANG PAJAK DAERAH */}
                   {activeSubBidang2 && (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
@@ -291,7 +200,7 @@ export default function CtnDaftar() {
                   <div>
                     <p>Retribusi dan lain...</p>
                   </div>
-                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {/* //! DROPDOWN SUB-BIDANG RETRIBUSI DAN LAIN LAIN PENDAPATAN */}
                   {activeSubBidang3 && (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
@@ -313,7 +222,7 @@ export default function CtnDaftar() {
                   <div>
                     <p>Perencanaan dan ...</p>
                   </div>
-                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {/* //! DROPDOWN SUB-BIDANG PERENCANAAN DAN PENGEMBANGAN */}
                   {activeSubBidang4 && (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
@@ -335,7 +244,7 @@ export default function CtnDaftar() {
                   <div>
                     <p>Pengendalian dan ...</p>
                   </div>
-                  {/* //! CONTOH DROPDOWN SUB-BIDANG */}
+                  {/* //! DROPDOWN SUB-BIDANG PENGENDALIAN DAN EVALUASI */}
                   {activeSubBidang5 && (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
@@ -356,28 +265,7 @@ export default function CtnDaftar() {
         </div>
         <Gap width={67} height={0} />
         <div className={styles.contentKanan}>
-          {/* DROPDOWN JABATAN */}
-          <div className={styles.wrapperTitleBidangJabatan}>
-            <Image src="/jabatanUmum.svg" width={30} height={35} />
-            <p className={styles.placeholder}>Jabatan</p>
-          </div>
-          <Select
-            // filterOption={createFilter()}
-            placeholder={<p style={{ marginLeft: -100 }}>Pilih Jabatan</p>}
-            formatOptionLabel={formatOptionLabelJabatan}
-            styles={customStylesDropdownJabatan}
-            options={optionsJabatan}
-            components={{ DropdownIndicator: null }}
-            onChange={(e) => setJabatanReg(e?.label)}
-            // menuIsOpen
-            // openMenuOnClick
-            // menuShouldScrollIntoView
-            // menuPositionu
-            // menuPlacement
-            onMenuOpen
-          />
-
-          {/* <TxtInputDaftar
+          <TxtInputDaftar
             image="/jabatanUmum.svg"
             width={30}
             height={35}
@@ -385,21 +273,33 @@ export default function CtnDaftar() {
             placeholder="Pilih Jabatan"
             onChange={handleChange}
             type="text"
-          />*/}
+            value={jabatanReg}
+          />
 
           {/* DROPDOWN JABATAN */}
-          {/* <div className={styles.dropdownJabatan}>
+          <div className={styles.dropdownJabatan}>
             <div className={styles.selectJabatan}>
               <Image src={"/Dropdown_umum.svg"} width={30} height={30} />
             </div>
-            <div className={styles.dropdownList}>
-              {jabatan.map((jab) => (
-                <div className={styles.dropdownList_item}>
-                  <p>{jab.namaJabatan}</p>
-                </div>
-              ))}
-            </div>
-          </div> */}
+            {activeJabatan && (
+              <div className={styles.dropdownList}>
+                {jabatan.map((jab) => (
+                  <div
+                    className={styles.dropdownList_item}
+                    onClick={() => {
+                      setJabatanReg(`${jab.namaJabatan}`);
+                      setActiveJabatan(!activeJabatan);
+                      setTimeout(() => {
+                        setActiveJabatan(true);
+                      }, 10);
+                    }}
+                  >
+                    <p>{jab.namaJabatan}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           <Gap width={0} height={35} />
           <TxtInputDaftar
