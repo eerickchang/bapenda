@@ -14,11 +14,11 @@ export default function CtnLogin() {
   const [sandi, setSandi] = useState("");
 
   const handleClick = () => {
-    router.push("/LupaSandi");
+    router.push("/Umum/LupaSandi");
   };
 
   const btnDaftar = () => {
-    router.push("/Daftar");
+    router.push("/Umum/Daftar");
   };
 
   Axios.defaults.withCredentials = true;

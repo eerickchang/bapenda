@@ -1,4 +1,4 @@
-import { CtnSandiBaru, LayoutUmum } from "../../components";
+import { CtnSandiBaru, LayoutUmum } from "../../../components";
 
 export default function SandiBaru() {
   return (

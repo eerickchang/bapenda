@@ -9,7 +9,7 @@ import {useRouter} from 'next/router';
 export default function CtnLupaSandi() {
   const router = useRouter();
   const handleClick = () => {
-    router.push("/LupaSandiOTP");
+    router.push("/Umum/LupaSandiOTP");
   };
   return (
     <div className={styles.container}>

@@ -46,7 +46,7 @@ export default function CtnDaftar() {
     }).then(() => {
       alert("successfull insert");
     });
-    router.push("/DaftarSukses");
+    router.push("/Umum/DaftarSukses");
   };
 
   const btnMasuk = () => {
@@ -175,7 +175,7 @@ export default function CtnDaftar() {
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
-                  onClick={(e) => setActiveSubBidang2(!activeSubBidang2)}
+                  onClick={() => setActiveSubBidang2(!activeSubBidang2)}
                 >
                   <div>
                     <p onClick={() => setBidangReg("Pajak Daerah")}>
@@ -213,7 +213,7 @@ export default function CtnDaftar() {
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
-                  onClick={(e) => setActiveSubBidang3(!activeSubBidang3)}
+                  onClick={() => setActiveSubBidang3(!activeSubBidang3)}
                 >
                   <div>
                     <p
@@ -253,7 +253,7 @@ export default function CtnDaftar() {
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
-                  onClick={(e) => setActiveSubBidang4(!activeSubBidang4)}
+                  onClick={() => setActiveSubBidang4(!activeSubBidang4)}
                 >
                   <div>
                     <p
@@ -297,7 +297,7 @@ export default function CtnDaftar() {
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
-                  onClick={(e) => setActiveSubBidang5(!activeSubBidang5)}
+                  onClick={() => setActiveSubBidang5(!activeSubBidang5)}
                 >
                   <div>
                     <p

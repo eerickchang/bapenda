@@ -1,4 +1,4 @@
-import { CtnLupaSandi, LayoutUmum } from "../../components";
+import { CtnLupaSandi, LayoutUmum } from "../../../components";
 
 export default function LupaSandi() {
   return (

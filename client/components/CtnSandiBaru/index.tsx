@@ -9,7 +9,7 @@ import {useRouter} from 'next/router'
 export default function CtnSandiBaru() {
   const router = useRouter();
   const handleClick = () => {
-    router.push("/SandiSukses");
+    router.push("/Umum/SandiSukses");
   };
   return (
     <div className={styles.container}>
