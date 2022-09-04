@@ -9,8 +9,56 @@ import styles from "./ContentInputRenaksiP.module.css";
 import Select, { components, DropdownIndicatorProps } from "react-select";
 import { colors } from "react-select/dist/declarations/src/theme";
 import Axios from "axios";
+import Modal from "react-modal";
 
 export default function ContentInputRenaksiP() {
+  const custom = {
+    content: {
+      // position: 'absolute',
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingTop: 40,
+      paddingLeft: 61,
+      height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: 'white',
+      
+    },
+    overlay: {
+      position: "absolute",
+      marginTop: 20,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      opacity: 0.5,
+      backgroundColor: "#112350",
+      // overlay: "#112350",
+    },
+  };
+
+  // let subtitle;
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   Axios.defaults.withCredentials = true;
 
   const router = useRouter();
@@ -626,9 +674,51 @@ export default function ContentInputRenaksiP() {
       {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
-        onClick={btnUnggah}
+        // onClick={btnUnggah}
+        onClick={() => {
+          btnUnggah;
+          openModal();
+        }}
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
+
+      {/* <button onClick={openModal}>Open Modal</button> */}
+      <Modal
+        
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={custom}
+        contentLabel="Example Modal"
+      >
+        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
+        <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
+        <Gap height={20} width={0} />
+        <input
+          className={styles.inputBuktiLap}
+          placeholder="Tambah keterangan untuk lampiran bukti"
+        />
+        <Gap height={20} width={0} />
+
+        <div className={styles.wrapperBtnModal}>
+          <Button
+            // onClick={}
+            title="Pilih File"
+            className={`${btnStyles.btnPilihFile}`}
+          />
+          <Gap width={193} height={0} />
+          <button className={styles.btnKirim}>
+            <img src={"/Kirim.svg"} width={20} height={20} />
+            <p className={styles.txt}>Kirim</p>
+          </button>
+          <Gap width={24} height={0} />
+          <button className={styles.btnBatal}>
+            <img src={"/Batal.svg"} width={20} height={20} />
+            <p className={styles.txt}>Batal</p>
+          </button>
+        </div>
+      </Modal>
+
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
