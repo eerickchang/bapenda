@@ -30,12 +30,20 @@ export default function CtnLogin() {
     }).then((response) => {
       if (response.data.message) {
         console.log(response.data.message);
-      } else {
-        // console.log(response.data[0].nama);
+      } else if (response.data[0].jabatan === "Kepala Badan") {
+        router.push("/Kaban/Dashboard");
+      } else if (response.data[0].jabatan === "Staff") {
         router.push("/Staff/Dashboard");
       }
     });
   };
+
+  // console.log(response.data[0].jabatan);
+  // if ((response.data[0].jabatan = "Staff")) {
+  //   router.push("/Kaban/Dashboard");
+  // } else if ((response.data[0].jabatan = "Kaban")) {
+  //   router.push("/Staff/Dashboard");
+  // }
 
   useEffect(() => {
     Axios.get("http://localhost:3001/masuk").then((response) => {

@@ -90,16 +90,22 @@ app.post("/daftar", (req, res) => {
   const nip = req.body.nip;
   const nohp = req.body.nohp;
   const jabatan = req.body.jabatan;
+  const bidang = req.body.bidang;
+  const subBidang = req.body.subBidang;
 
   bcrypt.hash(sandi, saltRounds, (err, hash) => {
     if (err) {
       console.log(err);
     }
     const sqlInsert =
-      "INSERT INTO pegawai (nama, sandi, nip, no_hp, jabatan) VALUES (?,?,?,?,?)";
-    db.query(sqlInsert, [nama, hash, nip, nohp, jabatan], (err, result) => {
-      console.log(result);
-    });
+      "INSERT INTO pegawai (nama, sandi, nip, no_hp, jabatan, bidang, sub_bidang) VALUES (?,?,?,?,?,?,?)";
+    db.query(
+      sqlInsert,
+      [nama, hash, nip, nohp, jabatan, bidang, subBidang],
+      (err, result) => {
+        console.log(result);
+      }
+    );
   });
 });
 
