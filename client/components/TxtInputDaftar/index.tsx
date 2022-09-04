@@ -11,6 +11,7 @@ interface TxtInputDaftarProps {
   height: number;
   type: string;
   value: string;
+  className: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -24,10 +25,11 @@ export default function TxtInputDaftar(props: TxtInputDaftarProps) {
     height = 25,
     type = "text",
     value,
+    className = styles.container,
   } = props;
 
   return (
-    <div className={styles.container}>
+    <div className={className}>
       <div className={styles.iconText}>
         <Gap height={0} width={19} />
         <Image src={image} width={width} height={height} />

@@ -8,6 +8,7 @@ import Image from "next/image";
 import Axios from "axios";
 import Select from "react-select";
 import { useState, useEffect } from "react";
+import inputStyles from "../TxtInputDaftar/txtinputdaftar.module.css";
 
 export default function CtnDaftar() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function CtnDaftar() {
   const [jabatanReg, setJabatanReg] = useState("");
   const [bidangReg, setBidangReg] = useState("");
   const [subBidangReg, setSubBidangReg] = useState("");
+  const [valueTxt, setValueTxt] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [activeSubBidang, setActiveSubBidang] = useState(false);
 
@@ -29,13 +31,8 @@ export default function CtnDaftar() {
   // }, []);
 
   const btnDaftar = () => {
-    if (bidangReg === "Pengembangan Teknologi") {
-      setBidangReg("Perencanaan dan");
-      setSubBidangReg("Pengembangan Teknologi");
-      console.log("Bidang: ", bidangReg);
-      console.log("Sub Bidang: ", subBidangReg);
-    }
-
+    console.log(subBidangReg);
+    console.log(bidangReg);
     Axios.post("http://localhost:3001/daftar", {
       nama: namaReg,
       sandi: sandiReg,
@@ -43,6 +40,7 @@ export default function CtnDaftar() {
       nohp: noHpReg,
       jabatan: jabatanReg,
       bidang: bidangReg,
+      subBidang: subBidangReg,
     }).then(() => {
       alert("successfull insert");
     });
@@ -127,7 +125,8 @@ export default function CtnDaftar() {
             placeholder="Pilih Sub Bidang"
             onChange={handleChange}
             type="text"
-            value={bidangReg}
+            value={valueTxt}
+            className={`${inputStyles.container} ${inputStyles.bidang}`}
           />
           {/* {console.log(bidangReg)} */}
           {/* DROPDOWN BIDANG (KHUSUS KABID) */}
@@ -142,74 +141,104 @@ export default function CtnDaftar() {
                   onClick={(e) => setActiveSubBidang1(!activeSubBidang1)}
                 >
                   <div>
-                    <p onClick={() => setBidangReg("Sekretaris")}>Sekretaris</p>
+                    <p onClick={() => setValueTxt("Sekretaris")}>Sekretaris</p>
                   </div>
-
                   {/* {jabatanReg === "Kabid"
                     ? activeSubBidang1 === false
                     : activeSubBidang1 === true} */}
-
-                  {activeSubBidang1 && (
+                  {activeSubBidang1 &&
+                  (jabatanReg === "Staff" ||
+                    jabatanReg === "THL" ||
+                    jabatanReg === "Kasubid" ||
+                    jabatanReg === "Kasubag") ? (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() => setBidangReg("Hukum dan Kepegawaian")}
+                          onClick={() => {
+                            setSubBidangReg("Hukum dan Kepegawaian");
+                            setBidangReg("Sekretaris");
+                            setValueTxt("Hukum dan Kepegawaian");
+                          }}
                         >
                           Hukum & Kepegawaian
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("Perencanaan dan Keuangan")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("Perencanaan & Keuangan");
+                            setBidangReg("Sekretaris");
+                            setValueTxt("Perencanaan & Keuangan");
+                          }}
                         >
                           Perencanaan & Keuangan
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
-                        <p onClick={() => setBidangReg("Umum")}>Umum</p>
+                        <p
+                          onClick={() => {
+                            setSubBidangReg("Umum");
+                            setBidangReg("Sekretaris");
+                            setValueTxt("Umum");
+                          }}
+                        >
+                          Umum
+                        </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
                   onClick={() => setActiveSubBidang2(!activeSubBidang2)}
                 >
                   <div>
-                    <p onClick={() => setBidangReg("Pajak Daerah")}>
+                    <p onClick={() => setValueTxt("Pajak Daerah")}>
                       Pajak Daerah
                     </p>
                   </div>
                   {/* //! DROPDOWN SUB-BIDANG PAJAK DAERAH */}
-                  {activeSubBidang2 && (
+                  {activeSubBidang2 &&
+                  (jabatanReg === "Staff" ||
+                    jabatanReg === "THL" ||
+                    jabatanReg === "Kasubid" ||
+                    jabatanReg === "Kasubag") ? (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("Administrasi dan Pelayanan Pajak")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("Administrasi dan Pelayanan Pajak");
+                            setBidangReg("Pajak Daerah");
+                            setValueTxt("Administrasi dan Pelayanan Pajak");
+                          }}
                         >
                           Administrasi & Pelayanan Pajak
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
-                        <p onClick={() => setBidangReg("PKB dan BBN-KB")}>
+                        <p
+                          onClick={() => {
+                            setSubBidangReg("PKB dan BBN-KB");
+                            setBidangReg("Pajak Daerah");
+                            setValueTxt("PKB dan BBN-KB");
+                          }}
+                        >
                           PKB & BBN-KB
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("PBBKB, PAP dan Pajak Rokok")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("PBBKB, PAP dan Pajak Rokok");
+                            setBidangReg("Pajak Daerah");
+                            setValueTxt("PBBKB, PAP dan Pajak Rokok");
+                          }}
                         >
                           PBBKB, PAP & Pajak Rokok
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
@@ -218,38 +247,58 @@ export default function CtnDaftar() {
                   <div>
                     <p
                       onClick={() =>
-                        setBidangReg("Retribusi dan Lain-lain Pendapatan")
+                        setValueTxt("Retribusi dan Lain-lain Pendapatan")
                       }
                     >
                       Retribusi & Lain-lain Pendapatan
                     </p>
                   </div>
                   {/* //! DROPDOWN SUB-BIDANG RETRIBUSI DAN LAIN LAIN PENDAPATAN */}
-                  {activeSubBidang3 && (
+                  {activeSubBidang3 &&
+                  (jabatanReg === "Staff" ||
+                    jabatanReg === "THL" ||
+                    jabatanReg === "Kasubid" ||
+                    jabatanReg === "Kasubag") ? (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
-                        <p onClick={() => setBidangReg("Retribusi")}>
+                        <p
+                          onClick={() => {
+                            setSubBidangReg("Retribusi");
+                            setBidangReg("Retribusi dan Lain-lain Pendapatan");
+                            setValueTxt("Retribusi");
+                          }}
+                        >
                           Retribusi
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg(
+                          onClick={() => {
+                            setSubBidangReg(
                               "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak"
-                            )
-                          }
+                            );
+                            setBidangReg("Retribusi dan Lain-lain Pendapatan");
+                            setValueTxt(
+                              "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak"
+                            );
+                          }}
                         >
                           Bagi Hasil Pajak & Bagi Hasil Bukan Pajak
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
-                        <p onClick={() => setBidangReg("Lain-lain Pendapatan")}>
+                        <p
+                          onClick={() => {
+                            setSubBidangReg("Lain-lain Pendapatan");
+                            setBidangReg("Retribusi dan Lain-lain Pendapatan");
+                            setValueTxt("Lain-lain Pendapatan");
+                          }}
+                        >
                           Lain-lain Pendapatan
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
@@ -258,84 +307,110 @@ export default function CtnDaftar() {
                   <div>
                     <p
                       onClick={() =>
-                        setBidangReg("Perencanaan dan Pengembangan")
+                        setValueTxt("Perencanaan dan Pengembangan")
                       }
                     >
                       Perencanaan & Pengembangan
                     </p>
                   </div>
                   {/* //! DROPDOWN SUB-BIDANG PERENCANAAN DAN PENGEMBANGAN */}
-                  {activeSubBidang4 && (
+                  {activeSubBidang4 &&
+                  (jabatanReg === "Staff" ||
+                    jabatanReg === "THL" ||
+                    jabatanReg === "Kasubid" ||
+                    jabatanReg === "Kasubag") ? (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("Pengelolaan Pendapatan Daerah")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("Pengelolaan Pendapatan Daerah");
+                            setBidangReg("Perencanaan dan Pengembangan");
+                            setValueTxt("Pengelolaan Pendapatan Daerah");
+                          }}
                         >
                           Pengelolaan Pendapatan Daerah
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() => setBidangReg("Pengembangan Teknologi")}
+                          onClick={() => {
+                            setSubBidangReg("Pengembangan Teknologi");
+                            setBidangReg("Perencanaan dan Pengembangan");
+                            setValueTxt("Pengembangan Teknologi");
+                          }}
                         >
                           Pengembangan Teknologi
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("Pelaporan Data Pendapatan")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("Pelaporan Data Pendapatan");
+                            setBidangReg("Perencanaan dan Pengembangan");
+                            setValueTxt("Pelaporan Data Pendapatan");
+                          }}
                         >
                           Pelaporan Data Pendapatan
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
                 <div
                   className={styles.dropdownListBidang_item}
                   onClick={() => setActiveSubBidang5(!activeSubBidang5)}
                 >
                   <div>
-                    <p
-                      onClick={() => setBidangReg("Pengendalian dan Evaluasi")}
-                    >
+                    <p onClick={() => setValueTxt("Pengendalian dan Evaluasi")}>
                       Pengendalian & Evaluasi
                     </p>
                   </div>
                   {/* //! DROPDOWN SUB-BIDANG PENGENDALIAN DAN EVALUASI */}
-                  {activeSubBidang5 && (
+                  {activeSubBidang5 &&
+                  (jabatanReg === "Staff" ||
+                    jabatanReg === "THL" ||
+                    jabatanReg === "Kasubid" ||
+                    jabatanReg === "Kasubag") ? (
                     <div className={styles.dropdownSubBidang}>
                       <div className={styles.dropdownListSubBidang}>
-                        <p onClick={() => setBidangReg("Evaluasi Kinerja")}>
+                        <p
+                          onClick={() => {
+                            setSubBidangReg("Evaluasi Kinerja");
+                            setBidangReg("Pengendalian dan Evaluasi");
+                            setValueTxt("Evaluasi Kinerja");
+                          }}
+                        >
                           Evaluasi Kinerja
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg(
+                          onClick={() => {
+                            setSubBidangReg(
                               "Pengendalian dan Pembinaan Administrasi"
-                            )
-                          }
+                            );
+                            setBidangReg("Pengendalian dan Evaluasi");
+                            setValueTxt(
+                              "EPengendalian dan Pembinaan Administrasi"
+                            );
+                          }}
                         >
                           Pengendalian & Pembinaan Administrasi
                         </p>
                       </div>
                       <div className={styles.dropdownListSubBidang}>
                         <p
-                          onClick={() =>
-                            setBidangReg("Pengendalian Pendapatan Daerah")
-                          }
+                          onClick={() => {
+                            setSubBidangReg("Pengendalian Pendapatan Daerah");
+                            setBidangReg("Pengendalian dan Evaluasi");
+                            setValueTxt("Pengendalian Pendapatan Daerah");
+                          }}
                         >
                           Pengendalian Pendapatan Daerah
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
