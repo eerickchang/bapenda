@@ -7,11 +7,11 @@ import TableMUI from "../../../components/TableMUI";
 export default function DaftarKegiatan() {
   return (
     <div className={styles.container}>
-      
+
       <SidebarStaff kotakDaftarKegiatan={sidebarStyles.kotakAktif} />
       <Gap height={0} width={140} />
-      {/* <ContentDaftarKegiatan /> */}
-      <TableMUI/>
+      <ContentDaftarKegiatan />
+      {/* <TableMUI/> */}
     </div>
   );
 }
