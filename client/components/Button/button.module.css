@@ -39,6 +39,7 @@
   font-size: 22px;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .btnType1 p{
@@ -87,3 +88,50 @@
 .btnType4 p{
   padding-left: 5px;
 }
+
+/* button pilih file upload  bukti*/
+.btnPilihFile{
+  background-color: white;
+  width: 198px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnKirim{
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnbatal{
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

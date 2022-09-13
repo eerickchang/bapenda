@@ -12,7 +12,7 @@ export default function Sidebar({
   kotakProfil = styles.kotak,
   kotakNotif = styles.kotak,
   kotakLogOut = styles.kotak,
-}) {
+}){
   const router = useRouter();
   const clickHome = () => {
     router.push("/Staff/Dashboard");

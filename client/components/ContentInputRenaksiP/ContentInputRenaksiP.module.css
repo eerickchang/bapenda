@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-left: 60px;
+  padding-left: 40px;
 }
 
 .wrapperTitleInputRenaksi {
   display: flex;
-  width: 315px;
+  width: 299px;
   height: 50px;
   text-align: center;
   align-items: center;
@@ -21,7 +21,8 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   margin: 0;
-  margin-top: 10px;
+  width: 300px;
+  /* margin-top: 1px; */
   margin-left: 19px;
 }
 
@@ -338,3 +339,81 @@
   font-size: 29;
   margin-top: 100;
 }
+
+.headerTxtModal{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+}
+
+.inputBuktiLap{
+  height: 133px;
+  width: 755px;
+}
+
+.inputBuktiLap::placeholder{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inputBuktiLap:focus{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  outline: none;
+}
+
+.wrapperBtnModal{
+  display: inline-flex;
+}
+
+.btnBatal{
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnKirim{
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnKirim p{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal p{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+/* .labelRencana{
+  position: absolute;
+  padding-left: 30px;
+  color: 'white';
+} */
