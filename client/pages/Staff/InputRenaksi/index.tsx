@@ -14,7 +14,7 @@ export default function InputRenaksi() {
   return (
     <div className={styles.container}>
       <SidebarStaff kotakInput={sidebarStyles.kotakAktif} />
-      <Gap height={0} width={141} />
+      <Gap height={0} width={140} />
       <ContentInputRenaksiP />
     </div>
   );

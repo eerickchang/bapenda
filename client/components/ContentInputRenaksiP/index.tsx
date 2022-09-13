@@ -9,55 +9,60 @@ import styles from "./ContentInputRenaksiP.module.css";
 import Select, { components, DropdownIndicatorProps } from "react-select";
 import { colors } from "react-select/dist/declarations/src/theme";
 import Axios from "axios";
-import Modal from "react-modal";
+
+import { styled } from "@mui/material/styles";
+import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
+import { FormControlLabel, Typography } from "@mui/material";
+
+
 
 export default function ContentInputRenaksiP() {
-  const custom = {
-    content: {
-      // position: 'absolute',
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: 878,
-      borderRadius: 20,
-      paddingTop: 40,
-      paddingLeft: 61,
-      height: 362,
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      overlay: "#112350",
-      backgroundColor: 'white',
-      
+  // !CHECKBOX RENCANA BULAN
+  const BpIcon = styled("span")(({ theme }) => ({
+    borderRadius: 10,
+    width: 70,
+    height: 60,
+    boxShadow:
+      theme.palette.mode === "dark"
+        ? "0 0 0 1px rgb(16 22 26 / 40%)"
+        : "inset 0 10 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
+    backgroundColor:
+      theme.palette.mode === "dark" ? "" : "rgba(17, 35, 80, 0.3)",
+
+    "input:hover ~ &": {
+      backgroundColor:
+        theme.palette.mode === "dark" ? "#30404d" : "rgba(27, 221, 187, 1)",
     },
-    overlay: {
-      position: "absolute",
-      marginTop: 20,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      opacity: 0.5,
-      backgroundColor: "#112350",
-      // overlay: "#112350",
+    "input:disabled ~ &": {
+      boxShadow: "none",
+      background:
+        theme.palette.mode === "dark" ? "yellow" : "rgba(206,217,224,.5)",
     },
-  };
+  }));
 
-  // let subtitle;
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const BpCheckedIcon = styled(BpIcon)({
+    backgroundColor: "rgba(27, 221, 187, 1)",
+    "input:hover ~ &": {
+      backgroundColor: "rgba(27, 221, 187, 1)",
+    },
+  });
 
-  function openModal() {
-    setIsOpen(true);
+  // Inspired by blueprintjs
+  function BpCheckbox(props: CheckboxProps) {
+    return (
+      <Checkbox
+        disableRipple
+        color="default"
+        checkedIcon={<BpCheckedIcon />}
+        icon={<BpIcon />}
+        inputProps={{ "aria-label": "Checkbox demo" }}
+        {...props}
+      />
+    );
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+ 
 
   Axios.defaults.withCredentials = true;
 
@@ -604,7 +609,7 @@ export default function ContentInputRenaksiP() {
         </div>
       </div>
       <Gap height={80} width={0} />
-      <div className={styles.wrapperRencana}>
+      {/* <div className={styles.wrapperRencana}>
         <p className={styles.rencana}>Rencana</p>
         <div>
           <Button
@@ -668,57 +673,145 @@ export default function ContentInputRenaksiP() {
             className={`${btnStyles.btnType1}`}
           />
         </div>
+      </div> */}
+
+      <div>
+
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Jan
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Feb
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Mar
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Apr
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Mei
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Jun
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Jul
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Agu
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Sep
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Okt
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Nov
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
+        <FormControlLabel
+          label={
+            <Typography
+              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+            >
+              Des
+            </Typography>
+          }
+          control={<BpCheckbox />}
+        />
       </div>
+
       <Gap height={30} width={0} />
 
       {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
         // onClick={btnUnggah}
-        onClick={() => {
-          btnUnggah;
-          openModal();
-        }}
+        onClick={btnUnggah}
+        
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
 
       {/* <button onClick={openModal}>Open Modal</button> */}
-      <Modal
-        
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={custom}
-        contentLabel="Example Modal"
-      >
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
-        <Gap height={20} width={0} />
-        <input
-          className={styles.inputBuktiLap}
-          placeholder="Tambah keterangan untuk lampiran bukti"
-        />
-        <Gap height={20} width={0} />
-
-        <div className={styles.wrapperBtnModal}>
-          <Button
-            // onClick={}
-            title="Pilih File"
-            className={`${btnStyles.btnPilihFile}`}
-          />
-          <Gap width={193} height={0} />
-          <button className={styles.btnKirim}>
-            <img src={"/Kirim.svg"} width={20} height={20} />
-            <p className={styles.txt}>Kirim</p>
-          </button>
-          <Gap width={24} height={0} />
-          <button className={styles.btnBatal}>
-            <img src={"/Batal.svg"} width={20} height={20} />
-            <p className={styles.txt}>Batal</p>
-          </button>
-        </div>
-      </Modal>
-
+      
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>

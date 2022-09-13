@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-left: 60px;
+  padding-left: 40px;
 }
 
 .wrapperTitleInputRenaksi {
   display: flex;
-  width: 315px;
+  width: 299px;
   height: 50px;
   text-align: center;
   align-items: center;
@@ -21,7 +21,8 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   margin: 0;
-  margin-top: 10px;
+  width: 300px;
+  /* margin-top: 1px; */
   margin-left: 19px;
 }
 
@@ -351,18 +352,16 @@
 }
 
 .inputBuktiLap::placeholder{
-  padding-left: 12px;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 18px;
-  /* padding-bottom: 20px; */
 }
 
 .inputBuktiLap:focus{
-  padding-left: 12px;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   font-size: 18px;
+  outline: none;
 }
 
 .wrapperBtnModal{
@@ -412,3 +411,9 @@
   font-size: 18px;
   margin-left: 12px;
 }
+
+/* .labelRencana{
+  position: absolute;
+  padding-left: 30px;
+  color: 'white';
+} */
