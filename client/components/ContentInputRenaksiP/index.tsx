@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
@@ -9,6 +9,10 @@ import styles from "./ContentInputRenaksiP.module.css";
 import Select, { components, DropdownIndicatorProps } from "react-select";
 import { colors } from "react-select/dist/declarations/src/theme";
 import Axios from "axios";
+import { INSPECT_MAX_BYTES } from "buffer";
+import { optionCSS } from "react-select/dist/declarations/src/components/Option";
+import next from "next";
+import { copyFileSync } from "fs";
 
 export default function ContentInputRenaksiP() {
   Axios.defaults.withCredentials = true;
@@ -18,12 +22,33 @@ export default function ContentInputRenaksiP() {
     router.push("/InputRenaksi");
   };
 
+  const pilihTHL = () => {
+    // Axios.get("http://localhost:3001/THL").then((response) => {
+    //   console.log("Subid THL: ", response.data);
+    //   response.data.map((data) => {
+    //     if (data.sub_bidang === subid) {
+    //       // setThlId([...thlId, data]);
+    //       setThlId((nextData) => {
+    //         return [data, ...nextData];
+    //       });
+    //       // setPortate({ ...setPortate, value: data.nama, label: data.nama });
+    //       // console.log(data);
+    //     }
+    //   });
+    // });
+  };
+
   const [inProgram, setInProgram] = useState("");
   const [inKegiatan, setInKegiatan] = useState("");
   const [inTupoksiInti, setInTupoksiInti] = useState("");
   const [inSubKegiatan, setInSubKegiatan] = useState("");
   const [nip, setNip] = useState("");
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
+
+  const [subid, setSubid] = useState("");
+  const [thlId, setThlId] = useState([]);
+  const [user, setUser] = useState("");
+  const [thl, setThl] = useState();
 
   const btnUnggah = () => {
     Axios.post("http://localhost:3001/inputRenaksi", {
@@ -33,37 +58,66 @@ export default function ContentInputRenaksiP() {
       subKegiatan: inSubKegiatan,
       nip: nip,
       tupoksiTambahan: inTupoksiTambahan,
+      thl: thl,
     });
-    // useEffect(() => {
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
+    // thlId.map((data) => {
+    //   console.log("ID 1: ", data);
     // });
-    // useEffect(() => {
-    // setShowModal(true);
-    // }, [3]);
-
-    // if (Response.length > 0) {
-    //   setShowModal(true);
-    // }
+    // console.log(portate);
+    // console.log(thlId);
+    // //!! AMBIL DATA THL BERDASARKAN NIP
+    // Axios.get("http://localhost:3001/THL").then((response) => {
+    //   response.data.map((data) => {
+    //     // console.log("ID 2: ", data.nip);
+    //     thlId.map((item) => {
+    //       if (data.nip === item) {
+    //         console.log("Nama: ", data.nama);
+    //       }
+    //     });
+    //   });
+    // });
+    // console.log(thl);
   };
 
-  // useEffect(() => {
-  //   setShowModal(true);
-  //   setTimeout(() => {
-  //     setShowModal(false);
-  //   }, 2000);
-  // });
+  const getLoggedInData = () => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setNip(response.data.user[0].nip);
+      setSubid(response.data.user[0].sub_bidang);
+      // console.log("Subid User Logged In: ", response.data.user[0].sub_bidang);
+
+      Axios.get("http://localhost:3001/THL").then((result) => {
+        result.data.map((item) => {
+          // console.log(item.sub_bidang);
+
+          // console.log(item);
+          if (item.sub_bidang === response.data.user[0].sub_bidang) {
+            // console.log("NIP: ", item.nip);
+            // console.log(item);
+            setPortate(
+              result.data.map((data) => ({
+                ...setPortate,
+                value: data.nama,
+                label: data.nama,
+                id: data.nip,
+              }))
+            );
+            // setPortate((nextData) => {
+            //   return [value: item.nama, ];
+            // });
+          }
+        });
+      });
+    });
+  };
+
+  const [portate, setPortate] = useState({ value: "", label: "" });
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/masuk").then((response) => {
-      // console.log("NIP: ", response.data.user[0].nip);
-      setNip(response.data.user[0].nip);
-    });
-    // if (Response.length > 0) {
-    //   setShowModal(true);
-    // }
+    getLoggedInData();
   }, []);
 
   //!modals
@@ -424,6 +478,11 @@ export default function ContentInputRenaksiP() {
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
+        {/* <ul>
+          {thlId.map((item) => (
+            <li>{item.nama}</li>
+          ))}
+        </ul> */}
         <Image src={"/Input2.svg"} width={50} height={50} />
         <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
       </div>
@@ -494,11 +553,23 @@ export default function ContentInputRenaksiP() {
           {/* <Gap width={0} height={5}/>  */}
           <Select
             downChevron
-            isMulti
             menuShouldBlockScroll={false}
             // menuShouldScrollIntoView={false}
+            onMenuOpen={pilihTHL}
             formatOptionLabel={formatOptionTHL}
-            options={optionsTHL}
+            options={portate}
+            onChange={(e) => {
+              e.length === 0 ? console.log("Empty Array") : setThl(e?.id);
+            }}
+            // {
+            //   value: "andrre",
+            //   label: "Andrreas Waani",
+            //   image: (
+            //     <Image src="/SidebarProfile.svg" width={50} height={50} />
+            //   ),
+            // },
+            // onMenuClose={pilihTHL}
+            // onMenuOpen={pilihTHL}
             styles={customStylesTHL}
             components={{
               DropdownIndicator: null,
@@ -511,7 +582,7 @@ export default function ContentInputRenaksiP() {
               </div>
             }
           />
-
+          {thlId}
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Sub Kegiatan"

@@ -10,6 +10,7 @@ import {
 import styles from "./dashboard.module.css";
 import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
 import Axios from "axios";
+import moment from "moment";
 // import { UserData } from "../../components/Data";
 
 export default function Dashboard() {
@@ -18,17 +19,24 @@ export default function Dashboard() {
   useEffect(() => {
     Axios.get("http://localhost:3001/masuk").then((response) => {
       // console.log(response.data.user[0].nama);
-
+      console.log(response.data);
       setNama(response.data.user[0].nama);
       // console.log(nama);
+      Axios.get("http://localhost:3001/cakin").then((result) => {
+        // console.log(result.data);
+        result.data.map((data) => {
+          if (response.data.user[0].nip === data.nip) {
+          }
+        });
+      });
     });
-    Axios.get("http://localhost:3001/cakin").then((response) => {
-      // console.log("Console: ", response.data);
-      // setCakin(response.data);
-    });
+
+    let tahunSkrg = moment().format("YYYY");
+    setTahunSkrg(tahunSkrg);
   }, []);
 
   const [nama, setNama] = useState();
+  const [tahunSkrg, setTahunSkrg] = useState("");
   const [cakin, setCakin] = useState([]);
   const [dataUser, setDataUser] = useState([
     {
@@ -127,7 +135,9 @@ export default function Dashboard() {
       <div className={styles.contentKiri}>
         <DashboardHeader />
         <div className={styles.chartWrapper}>
-          <h1 className={styles.headerChart}>Grafik Kinerja Tahun 2022</h1>
+          <h1 className={styles.headerChart}>
+            Grafik Kinerja Tahun {tahunSkrg}
+          </h1>
           <BarChart chartData={userData} />
         </div>
       </div>

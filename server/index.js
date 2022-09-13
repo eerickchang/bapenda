@@ -38,7 +38,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 200,
+      expires: 60 * 60 * 999999,
     },
   })
 );
@@ -117,12 +117,13 @@ app.post("/inputRenaksi", (req, res) => {
   const subKegiatan = req.body.subKegiatan;
   const nip = req.body.nip;
   const tupoksiTambahan = req.body.tupoksiTambahan;
+  const thl = req.body.thl;
 
   const sqlInsert =
-    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan) VALUES (?,?,?,?,?,?)";
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl) VALUES (?,?,?,?,?,?,?)";
   db.query(
     sqlInsert,
-    [program, kegiatan, tupoksiInti, subKegiatan, nip, tupoksiTambahan],
+    [program, kegiatan, tupoksiInti, subKegiatan, nip, tupoksiTambahan, thl],
     (err, result) => {
       console.log(result);
     }
@@ -132,6 +133,15 @@ app.post("/inputRenaksi", (req, res) => {
 //AMBIL DATA CAKIN
 app.get("/cakin", (req, res) => {
   const sqlSelect = "SELECT * FROM cakin";
+
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//AMBIL DATA THL BERDASARKAN SUBID
+app.get("/THL", (req, res) => {
+  const sqlSelect = "SELECT * FROM pegawai WHERE jabatan = 'THL'";
 
   db.query(sqlSelect, (err, result) => {
     res.send(result);
