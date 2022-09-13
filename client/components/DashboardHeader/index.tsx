@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./dashboardheader.module.css";
 import Image from "next/image";
 import Axios from "axios";
-import moment from "moment";
-
-Axios.defaults.withCredentials = true;
 
 export default function DashboardHeader() {
   useEffect(() => {
@@ -12,16 +9,12 @@ export default function DashboardHeader() {
       // console.log(response.data[0]);
       setCakin(response.data[0]);
     });
-
-    let blnSkrg = moment().format("MMMM");
-    setBlnSkrg(blnSkrg);
   }, []);
 
   const [cakin, setCakin] = useState();
-  const [blnSkrg, setBlnSkrg] = useState("");
   return (
     <div className={styles.container}>
-      <h1 className={styles.head1}>{blnSkrg}</h1>
+      <h1 className={styles.head1}>Agustus</h1>
       <div className={styles.iconWrapper}>
         <div className={styles.jumlahKegiatan}>
           <Image
