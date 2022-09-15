@@ -94,6 +94,14 @@ export default function ContentInputRenaksiP() {
     // }, 2000);
     console.log(portate);
   };
+  // });
+  // useEffect(() => {
+  // setShowModal(true);
+  // }, [3]);
+
+  // if (Response.length > 0) {
+  //   setShowModal(true);
+  // }
 
   const shouldLog = useRef(true);
 

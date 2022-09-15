@@ -119,7 +119,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
+  const [modalHapusRenaksiIsOpen, setIsOpenMOdalHapusRenaksi] = useState(false);
 
+  // MODAL UNGGAH LAPORAN
   function openModal() {
     setIsOpen(true);
   }
@@ -131,6 +134,36 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+
+  // MODAL UBAH JADAWAL
+  function openModalUbah() {
+    setIsOpenModalUbahJadwal(true)
+  }
+
+  function afterOpenModalUbah() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalUbah() {
+    setIsOpenModalUbahJadwal(false)
+  }
+
+
+  // MODAL HAPUS RENAKSI
+  function openModalHapus() {
+    setIsOpenMOdalHapusRenaksi(true)
+  }
+
+  function afterOpenModalHapus() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalHapus() {
+    setIsOpenMOdalHapusRenaksi(false)
   }
 
   return (
@@ -166,7 +199,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               <div>
                 <p className={styles.p}>Ubah Jadwal Renaksi</p>
                 <button
-                  onClick={() => openModal()}
+                  onClick={() => openModalUbah()}
                   className={styles.btnUbahJadwal}
                 >
                   <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
@@ -174,9 +207,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 </button>
               </div>
               <Gap width={750} height={0} />
-              <div className={styles.wrapperBtnModal}>
+              <div>
                 <p className={styles.p}>Hapus Renaksi</p>
-                <button onClick={() => openModal()} className={styles.btnHapus}>
+                <button
+                  onClick={() => openModalHapus()}
+                  className={styles.btnHapus}
+                >
                   <img src={"/HapusIcon.svg"} width={20} height={20} />
                   <p className={styles.txt}>Hapus</p>
                 </button>
@@ -186,6 +222,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableBody>
       </Collapse>
 
+      {/* MODAL UNGGAH LAPORAN */}
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -214,14 +251,80 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </button>
         </div>
       </Modal>
+
+      {/* MODAL UBAH JADWAL */}
+      <Modal
+        isOpen={modalUbahJadwalIsOpen}
+        onAfterOpen={afterOpenModalUbah}
+        onRequestClose={closeModalUbah}
+        style={custom}
+        contentLabel="Example Modal"
+      >
+        <h2 className={styles.headerTxtModal}>Pengajuan Ubah Jadwal</h2>
+        <Gap height={20} width={0} />
+        <input
+          className={styles.inputBuktiLap}
+          placeholder="Tambah keterangan untuk mengubah jadwal"
+        />
+        <Gap height={20} width={0} />
+        <div className={styles.wrapperBtnModal}>
+          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+          <Gap width={193} height={0} />
+          <button className={styles.btnKirim}>
+            <img src={"/Kirim.svg"} width={20} height={20} />
+            <p className={styles.txt}>Kirim</p>
+          </button>
+          <Gap width={24} height={0} />
+          <button className={styles.btnBatal}>
+            <img src={"/Batal.svg"} width={20} height={20} />
+            <p>Batal</p>
+          </button>
+        </div>
+      </Modal>
+
+      {/* MODAL HAPUS RENAKSI */}
+      <Modal
+        isOpen={modalHapusRenaksiIsOpen}
+        onAfterOpen={afterOpenModalHapus}
+        onRequestClose={closeModalHapus}
+        style={custom}
+        contentLabel="Example Modal"
+      >
+        <h2 className={styles.headerTxtModal}>
+          Pengajuan Penghapusan Renaksi{" "}
+        </h2>
+        <Gap height={20} width={0} />
+        <input
+          className={styles.inputBuktiLap}
+          placeholder="Tambah keterangan untuk menghapus renaksi"
+        />
+        <Gap height={20} width={0} />
+        <div className={styles.wrapperBtnModal}>
+          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+          <Gap width={193} height={0} />
+          <button className={styles.btnKirim}>
+            <img src={"/Kirim.svg"} width={20} height={20} />
+            <p className={styles.txt}>Kirim</p>
+          </button>
+          <Gap width={24} height={0} />
+          <button className={styles.btnBatal}>
+            <img src={"/Batal.svg"} width={20} height={20} />
+            <p>Batal</p>
+          </button>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 }
 
 export default function CollapsibleTable() {
   return (
-    <TableContainer style={{ paddingLeft: 40, paddingRight: 40 }}>
-      <Table sx={{tableLayout: 'fixed'}}>
+    <TableContainer style={{ paddingLeft: 50, paddingRight: 40 }}>
+      <Typography className={styles.wrapperTitleInputRenaksi}>
+        <Image src={"/Input2.svg"} width={50} height={50} />
+        <p className={styles.txtTitle}>DAFTAR KEGIATAN</p>
+      </Typography>
+      <Table sx={{ tableLayout: "fixed" }}>
         <TableHead>
           <TableRow>
             <TableCell className={styles.headerTable} width={0}>

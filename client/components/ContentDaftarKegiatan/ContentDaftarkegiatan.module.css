@@ -1,7 +1,15 @@
+.wrap {
+  display: block;
+  margin-left: 140px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   padding-left: 40px;
+  /* background-color: #ffa; */
+  /* position: fixed; */
+  /* width: 2100px; */
 }
 
 .wrapperTitleDaftarKegiatan {
@@ -13,6 +21,9 @@
   border-bottom: 2.5px solid #1bddbb;
   padding-left: 7px;
   margin-top: 34px;
+  /* background-color: #fff;
+  position: fixed; */
+  z-index: 999;
 }
 
 .txtTitle {
@@ -22,7 +33,7 @@
   color: rgba(0, 0, 0, 0.8);
   margin: 0;
   width: 300px;
-  /* margin-top: 1px; */
+  margin-top: 1px;
   margin-left: 19px;
 }
 
@@ -51,7 +62,7 @@
   font-size: 24px;
   font-weight: 500;
   color: #686868;
-  /* margin-top: 10px; */
+  margin-top: 10px;
 }
 
 .txtPegawai {
@@ -75,13 +86,14 @@
   border-radius: 5px;
   width: 172px;
   height: 51px;
-  margin-bottom: 8px;
+  /* margin-bottom: 80px; */
+  /* margin-top: 20px; */
   cursor: pointer;
   user-select: none;
   position: absolute;
   background-color: #fff;
-  /* top: 0;
-  left: 0; */
+  top: 0;
+  left: 0;
 }
 
 .btnFilter p {
@@ -98,12 +110,12 @@
   width: 172px;
   height: 255px;
   border: 1px solid #112350;
-  border-radius: 10px;
+  border-radius: 5px;
   display: grid;
   user-select: none;
   position: absolute;
   background-color: #fff;
-  top: 60px;
+  top: 55px;
 }
 
 .wrapperSelectStatus p {
@@ -125,9 +137,9 @@
   color: #fff;
   cursor: pointer;
 }
-
+/* 
 .table td {
-  /* border-bottom: 2px solid red; */
+  border-bottom: 2px solid red;
   padding-bottom: 20px;
   padding-top: 20px;
   height: 161px;
@@ -136,14 +148,14 @@
 .table tr {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  /* width: 1000px; */
-  /* border-bottom: 2px solid red; */
-  /* margin-bottom: 20px; */
+  width: 1000px;
+  border-bottom: 2px solid red;
+  margin-bottom: 20px;
 }
 
 .tablee {
   width: 1690px;
-  /* height: 161px; */
+  height: 161px;
 }
 
 .headerTable {
@@ -162,16 +174,16 @@
 }
 
 
-/* Button Unggah Expand */
+Button Unggah Expand
 .btnUnggah{
   background-color: rgba(27, 221, 187, 1);
   width: 209px;
   height: 71px;
   border: none;
   border-radius: 12px;
-  /* font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 18px; */
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,16 +197,16 @@
   margin-left: 12px;
 }
 
-/* Button Ubah Jadwal Expand */
+Button Ubah Jadwal Expand
 .btnUbahJadwal{
   background-color: rgba(221, 202, 27, 1);
   width: 246px;
   height: 71px;
   border: none;
   border-radius: 12px;
-  /* font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 18px; */
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,16 +220,16 @@
   margin-left: 12px;
 }
 
-/* Button Hapus Expand */
+Button Hapus Expand
 .btnHapus{
   background-color: rgba(255, 1, 100, 1);
   width: 209px;
   height: 71px;
   border: none;
   border-radius: 12px;
-  /* font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 22px; */
+  font-size: 22px;
   color: black;
   display: flex;
   justify-content: center;
@@ -230,4 +242,4 @@
   font-size: 22px;
   margin-left: 12px;
 }
-
+ */
