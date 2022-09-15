@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styles from "./dashboardheader.module.css";
 import Image from "next/image";
-import Axios from "axios";
 
-export default function DashboardHeader() {
-  useEffect(() => {
-    Axios.get("http://localhost:3001/cakin").then((response) => {
-      // console.log(response.data[0]);
-      setCakin(response.data[0]);
-    });
-  }, []);
+interface DashboardHeaderProps {
+  blnSkrg: string;
+  jumlahKegiatan: string;
+  lampiranDisubmit: string;
+  belumDisubmit: string;
+}
 
-  const [cakin, setCakin] = useState();
+export default function DashboardHeader(props: DashboardHeaderProps) {
+  const { blnSkrg, jumlahKegiatan, lampiranDisubmit, belumDisubmit } = props;
+  // let [blnSkrg, setBlnSkrg] = useState();
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3001/cakin").then((response) => {
+  //     Axios.get("http://localhost:3001/pegawai");
+  //   });
+  //   // setBlnSkrg(moment().format("MMMM"));
+  // }, []);
+
+  // const [cakin, setCakin] = useState();
   return (
     <div className={styles.container}>
-      <h1 className={styles.head1}>Agustus</h1>
+      <h1 className={styles.head1}>{blnSkrg}</h1>
       <div className={styles.iconWrapper}>
         <div className={styles.jumlahKegiatan}>
           <Image
@@ -25,7 +33,7 @@ export default function DashboardHeader() {
           />
           <div className={styles.txtWrapper}>
             <p className={styles.txtNormal}>Jumlah Kegiatan</p>
-            <p className={styles.txtBold}>12 Kegiatan</p>
+            <p className={styles.txtBold}>{jumlahKegiatan}</p>
           </div>
         </div>
 
@@ -38,7 +46,7 @@ export default function DashboardHeader() {
           />
           <div className={styles.txtWrapper}>
             <p className={styles.txtNormal}>Lampiran Disubmit</p>
-            <p className={styles.txtBold}>8 Kegiatan</p>
+            <p className={styles.txtBold}>{lampiranDisubmit}</p>
           </div>
         </div>
 
@@ -51,7 +59,7 @@ export default function DashboardHeader() {
           />
           <div className={styles.txtWrapper}>
             <p className={styles.txtNormal}>Belum Disubmit</p>
-            <p className={styles.txtBold}>4 Kegiatan</p>
+            <p className={styles.txtBold}>{belumDisubmit}</p>
           </div>
         </div>
       </div>

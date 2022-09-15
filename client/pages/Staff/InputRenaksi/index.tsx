@@ -7,7 +7,7 @@ import Axios from "axios";
 export default function InputRenaksi() {
   useEffect(() => {
     Axios.get("http://localhost:3001/masuk").then((response) => {
-      console.log(response.data.user[0]);
+      // console.log(response.data.user[0]);
     });
   }, []);
 

@@ -1,20 +1,22 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
 import styles from "./ContentInputRenaksiP.module.css";
-import Select, { components, DropdownIndicatorProps } from "react-select";
+import Select, {
+  components,
+  DropdownIndicatorProps,
+  useStateManager,
+} from "react-select";
 import { colors } from "react-select/dist/declarations/src/theme";
 import Axios from "axios";
 
 import { styled } from "@mui/material/styles";
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
 import { FormControlLabel, Typography } from "@mui/material";
-
-
 
 export default function ContentInputRenaksiP() {
   // !CHECKBOX RENCANA BULAN
@@ -61,9 +63,6 @@ export default function ContentInputRenaksiP() {
     );
   }
 
-
- 
-
   Axios.defaults.withCredentials = true;
 
   const router = useRouter();
@@ -77,47 +76,62 @@ export default function ContentInputRenaksiP() {
   const [inSubKegiatan, setInSubKegiatan] = useState("");
   const [nip, setNip] = useState("");
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
+  const [thl, setThl] = useState();
 
   const btnUnggah = () => {
-    Axios.post("http://localhost:3001/inputRenaksi", {
-      program: inProgram,
-      kegiatan: inKegiatan,
-      tupoksiInti: inTupoksiInti,
-      subKegiatan: inSubKegiatan,
-      nip: nip,
-      tupoksiTambahan: inTupoksiTambahan,
-    });
-    // useEffect(() => {
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+    // Axios.post("http://localhost:3001/inputRenaksi", {
+    //   program: inProgram,
+    //   kegiatan: inKegiatan,
+    //   tupoksiInti: inTupoksiInti,
+    //   subKegiatan: inSubKegiatan,
+    //   nip: nip,
+    //   tupoksiTambahan: inTupoksiTambahan,
+    //   thl: thl,
     // });
-    // useEffect(() => {
     // setShowModal(true);
-    // }, [3]);
-
-    // if (Response.length > 0) {
-    //   setShowModal(true);
-    // }
+    // setTimeout(() => {
+    //   setShowModal(false);
+    // }, 2000);
+    console.log(portate);
   };
 
-  // useEffect(() => {
-  //   setShowModal(true);
-  //   setTimeout(() => {
-  //     setShowModal(false);
-  //   }, 2000);
-  // });
+  const shouldLog = useRef(true);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/masuk").then((response) => {
-      // console.log("NIP: ", response.data.user[0].nip);
-      setNip(response.data.user[0].nip);
-    });
-    // if (Response.length > 0) {
-    //   setShowModal(true);
-    // }
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      Axios.get("http://localhost:3001/masuk").then((response) => {
+        // console.log("NIP: ", response.data.user[0].nip);
+        setNip(response.data.user[0].nip);
+        Axios.get("http://localhost:3001/THL").then((result) => {
+          result.data.map((data) => {
+            // console.log(data.nip);
+            if (response.data.user[0].sub_bidang === data.sub_bidang) {
+              setPortate((nextData) => {
+                return [
+                  ...nextData,
+                  { value: data.nama, label: data.nama, id: data.nip },
+                ];
+              });
+              // setPortate(
+              //   result.data.map((item) => ({
+              //     ...setPortate,
+              //     value: item.nama,
+              //     label: item.nama,
+              //     id: item.nip,
+              //   }))
+              // );
+            }
+          });
+        });
+      });
+      // if (Response.length > 0) {
+      //   setShowModal(true);
+      // }
+    }
   }, []);
+
+  const [portate, setPortate] = useState([]);
 
   //!modals
   const [showModal, setShowModal] = useState(false);
@@ -547,11 +561,13 @@ export default function ContentInputRenaksiP() {
           {/* <Gap width={0} height={5}/>  */}
           <Select
             downChevron
-            isMulti
             menuShouldBlockScroll={false}
+            onChange={(e) => {
+              e.length === 0 ? console.log("Empty Array") : setThl(e.id);
+            }}
             // menuShouldScrollIntoView={false}
             formatOptionLabel={formatOptionTHL}
-            options={optionsTHL}
+            options={portate}
             styles={customStylesTHL}
             components={{
               DropdownIndicator: null,
@@ -676,11 +692,17 @@ export default function ContentInputRenaksiP() {
       </div> */}
 
       <div>
-
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Jan
             </Typography>
@@ -690,7 +712,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Feb
             </Typography>
@@ -700,7 +729,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Mar
             </Typography>
@@ -710,7 +746,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Apr
             </Typography>
@@ -720,7 +763,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Mei
             </Typography>
@@ -730,7 +780,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Jun
             </Typography>
@@ -740,7 +797,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Jul
             </Typography>
@@ -750,7 +814,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Agu
             </Typography>
@@ -760,7 +831,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Sep
             </Typography>
@@ -770,7 +848,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Okt
             </Typography>
@@ -780,7 +865,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Nov
             </Typography>
@@ -790,7 +882,14 @@ export default function ContentInputRenaksiP() {
         <FormControlLabel
           label={
             <Typography
-              style={{ color: "white", marginLeft: 22, position: "absolute", fontFamily: 'Poppins', fontWeight: 'bold', fontSize: 22 }}
+              style={{
+                color: "white",
+                marginLeft: 22,
+                position: "absolute",
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                fontSize: 22,
+              }}
             >
               Des
             </Typography>
@@ -806,12 +905,11 @@ export default function ContentInputRenaksiP() {
         title="Unggah"
         // onClick={btnUnggah}
         onClick={btnUnggah}
-        
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
 
       {/* <button onClick={openModal}>Open Modal</button> */}
-      
+
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
