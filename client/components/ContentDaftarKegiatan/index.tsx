@@ -1,7 +1,4 @@
-// import Image from "next/image";
-// import { useState } from "react";
 import stylesS from "./ContentDaftarkegiatan.module.css";
-// import data from "./data";
 
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
@@ -157,6 +154,31 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
   const [modalHapusRenaksiIsOpen, setIsOpenMOdalHapusRenaksi] = useState(false);
+  //!modals
+  const [showModal, setShowModal] = useState(false);
+  const [showModal_Ubah, setShowModal_Ubah] = useState(false);
+  const [showModal_Hapus, setShowModal_Hapus] = useState(false);
+
+  const btnUnggah = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+  };
+
+  const btnUbah = () => {
+    setShowModal_Ubah(true);
+    setTimeout(() => {
+      setShowModal_Ubah(false);
+    }, 3000);
+  };
+
+  const btnHapus = () => {
+    setShowModal_Hapus(true);
+    setTimeout(() => {
+      setShowModal_Hapus(false);
+    }, 3000);
+  };
 
   // ! MODAL UNGGAH LAPORAN
   function openModal() {
@@ -274,17 +296,33 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <div className={styles.wrapperBtnModal}>
           <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
           <Gap width={193} height={0} />
-          <button className={styles.btnKirim}>
+          <button
+            onClick={() => {
+              closeModal();
+              btnUnggah();
+            }}
+            className={styles.btnKirim}
+          >
             <img src={"/Kirim.svg"} width={20} height={20} />
             <p className={styles.txt}>Kirim</p>
           </button>
           <Gap width={24} height={0} />
-          <button className={styles.btnBatal}>
+          <button onClick={closeModal} className={styles.btnBatal}>
             <img src={"/Batal.svg"} width={20} height={20} />
             <p>Batal</p>
           </button>
         </div>
       </Modal>
+      {showModal ? (
+        <div className={styles.modal} onClick={() => setShowModal(false)}>
+          <p>
+            Lampiran Kegiatan Berhasil <b>Diunggah</b>
+            <div className={styles.checkCircle}>
+              <Image src={"/Check-circle.svg"} width={25} height={25} />
+            </div>
+          </p>
+        </div>
+      ) : null}
 
       {/* MODAL UBAH JADWAL */}
       <Modal
@@ -299,20 +337,41 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           className={styles.inputBuktiLap_Ubah}
           placeholder="Tambah keterangan untuk mengubah jadwal"
         />
-        <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+        <div>
+          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+        </div>
         {/* <div className={styles.wrapperBtnModal}> */}
         <Gap width={0} height={24} />
-        <button className={styles.btnKirim_Ubah}>
+        <button
+          onClick={() => {
+            closeModalUbah();
+            btnUbah();
+          }}
+          className={styles.btnKirim_Ubah}
+        >
           <img src={"/Kirim.svg"} width={20} height={20} />
           <p className={styles.txt}>Kirim</p>
         </button>
         <Gap width={0} height={10} />
-        <button className={styles.btnBatal_Ubah}>
+        <button onClick={closeModalUbah} className={styles.btnBatal_Ubah}>
           <img src={"/Batal.svg"} width={20} height={20} />
           <p>Batal</p>
         </button>
         {/* </div> */}
       </Modal>
+      {showModal_Ubah ? (
+        <div
+          className={styles.modal_Ubah}
+          onClick={() => setShowModal_Ubah(false)}
+        >
+          <p>
+            Pengajuan Penjadwalan Ulang berhasil <b>Diubah</b>
+            <div className={styles.checkCircle_Ubah}>
+              <Image src={"/Check-circle.svg"} width={25} height={25} />
+            </div>
+          </p>
+        </div>
+      ) : null}
 
       {/* MODAL HAPUS RENAKSI */}
       <Modal
@@ -334,23 +393,44 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <div className={styles.wrapperBtnModal}>
           <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
           <Gap width={193} height={0} />
-          <button className={styles.btnKirim}>
+          <button
+            onClick={() => {
+              closeModalHapus();
+              btnHapus();
+            }}
+            className={styles.btnKirim}
+          >
             <img src={"/Kirim.svg"} width={20} height={20} />
             <p className={styles.txt}>Kirim</p>
           </button>
           <Gap width={24} height={0} />
-          <button className={styles.btnBatal}>
+          <button onClick={closeModalHapus} className={styles.btnBatal}>
             <img src={"/Batal.svg"} width={20} height={20} />
             <p>Batal</p>
           </button>
         </div>
       </Modal>
+      {showModal_Hapus ? (
+        <div
+          className={styles.modal_Hapus}
+          onClick={() => setShowModal_Hapus(false)}
+        >
+          <p>
+            Pengajuan Hapus Renaksi Berhasil <b>Diunggah</b>
+            <div className={styles.checkCircle_Hapus}>
+              <Image src={"/Check-circle.svg"} width={25} height={25} />
+            </div>
+          </p>
+        </div>
+      ) : null}
     </React.Fragment>
   );
 }
 
+
+
 export default function ContentDaftarKegiatan() {
-  const [dataPegawai, setDataPegawai] = useState([
+  const dataPegawai = [
     {
       id: 1,
       image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
@@ -358,7 +438,7 @@ export default function ContentDaftarKegiatan() {
       jabatan: "Kepala Bidang  Pajak Daerah",
       pegawai: "ASN",
     },
-  ]);
+  ];
 
   const filter = [
     {
@@ -435,10 +515,6 @@ export default function ContentDaftarKegiatan() {
       <TableContainer
         style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
       >
-        {/* <Typography className={styles.wrapperTitleInputRenaksi}>
-              <Image src={"/Input2.svg"} width={50} height={50} />
-              <p className={styles.txtTitle}>DAFTAR KEGIATAN</p>
-            </Typography> */}
         <Table sx={{ tableLayout: "fixed" }}>
           <TableHead>
             <TableRow>
@@ -475,54 +551,3 @@ export default function ContentDaftarKegiatan() {
     </div>
   );
 }
-
-// <table className={styles.tablee}>
-//   <thead className={styles.headerTable}>
-//     <tr>
-//       <td width={50}>Program</td>
-//       <td>Kegiatan</td>
-//       <td>Sub Kegiatan</td>
-//       <td>Tupoksi Inti</td>
-//       <td>Rekan</td>
-//       <td>Rencana</td>
-//       <td>Status</td>
-//     </tr>
-//   </thead>
-//   <tbody className={styles.table}>
-//     {data.map((val) => (
-//       <>
-//         <tr
-//           className={styles.tableTr}
-//           key={val.id}
-//           onClick={() => setActiveExpand(!activeExpand)}
-//         >
-//           <td>{val.program}</td>
-//           <td>{val.kegiatan}</td>
-//           <td>{val.subKegiatan}</td>
-//           <td>{val.tupoksiinti}</td>
-//           <td>{val.rekan}</td>
-//           <td>{val.rencana}</td>
-//           <td>{val.status}</td>
-//         </tr>
-//         {activeExpand && (
-//           <div className={styles.wrapperExpandableRow}>
-//             <button className={styles.btnUnggah}>
-//               <img src={"/Batal.svg"} width={20} height={20} />
-//               <p className={styles.txt}>Unggah</p>
-//             </button>
-
-//             <button className={styles.btnUbahJadwal}>
-//               <img src={"/Batal.svg"} width={20} height={20} />
-//               <p className={styles.txt}>Ubah Jadwal</p>
-//             </button>
-
-//             <button className={styles.btnHapus}>
-//               <img src={"/Batal.svg"} width={20} height={20} />
-//               <p className={styles.txt}>Hapus</p>
-//             </button>
-//           </div>
-//         )}
-//       </>
-//     ))}
-//   </tbody>
-// </table>
