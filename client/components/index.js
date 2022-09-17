@@ -26,6 +26,8 @@ import ButtonAnimasi from "./ButtonAnimasi";
 import ContentNotifikasi from "./ContentNotifikasi";
 import CheckboxBulan from "./CheckboxBulan";
 import BarChart from "./BarChart";
+import HorBar from "./HorBar";
+import ProfileKananKonten from "./ProfileKananKonten";
 
 export {
   CtnUmum,
@@ -55,4 +57,6 @@ export {
   ContentNotifikasi,
   CheckboxBulan,
   BarChart,
+  HorBar,
+  ProfileKananKonten,
 };

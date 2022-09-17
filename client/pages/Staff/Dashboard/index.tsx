@@ -90,7 +90,6 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.contentKanan}>
-        <button onClick={() => console.log(grafik)}>Click</button>
         <TopPegawai />
         <BoxNotification />
       </div>
