@@ -237,46 +237,50 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.protein2}</TableCell>
       </TableRow>
-      <Collapse in={open} timeout="auto">
-        <TableBody>
-          <TableRow>
-            <div className={styles.wrapperContentModal}>
-              <div className={styles.wrapperTitleBtn}>
-                <p className={styles.titleBtnUnggah}>Unggah Bukti Laporan</p>
-                <button
-                  onClick={() => openModal()}
-                  className={styles.btnUnggah}
-                >
-                  <img src={"/Batal.svg"} width={20} height={20} />
-                  <p className={styles.txt}>Unggah</p>
-                </button>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 10, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto">
+            {/* <TableBody> */}
+            <TableRow>
+              <div className={styles.wrapperContentModal}>
+                <div className={styles.wrapperTitleBtn}>
+                  <p className={styles.titleBtnUnggah}>Unggah Bukti Laporan</p>
+                  <button
+                    onClick={() => openModal()}
+                    className={styles.btnUnggah}
+                  >
+                    <img src={"/Batal.svg"} width={20} height={20} />
+                    <p className={styles.txt}>Unggah</p>
+                  </button>
+                </div>
+                <Gap width={87} height={0} />
+                <div>
+                  <p className={styles.p}>Ubah Jadwal Renaksi</p>
+                  <button
+                    onClick={() => openModalUbah()}
+                    className={styles.btnUbahJadwal}
+                  >
+                    <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
+                    <p className={styles.txt}>Ubah Jadwal</p>
+                  </button>
+                </div>
+                <Gap width={750} height={0} />
+                <div>
+                  <p className={styles.p}>Hapus Renaksi</p>
+                  <button
+                    onClick={() => openModalHapus()}
+                    className={styles.btnHapus}
+                  >
+                    <img src={"/HapusIcon.svg"} width={20} height={20} />
+                    <p className={styles.txt}>Hapus</p>
+                  </button>
+                </div>
               </div>
-              <Gap width={87} height={0} />
-              <div>
-                <p className={styles.p}>Ubah Jadwal Renaksi</p>
-                <button
-                  onClick={() => openModalUbah()}
-                  className={styles.btnUbahJadwal}
-                >
-                  <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
-                  <p className={styles.txt}>Ubah Jadwal</p>
-                </button>
-              </div>
-              <Gap width={750} height={0} />
-              <div>
-                <p className={styles.p}>Hapus Renaksi</p>
-                <button
-                  onClick={() => openModalHapus()}
-                  className={styles.btnHapus}
-                >
-                  <img src={"/HapusIcon.svg"} width={20} height={20} />
-                  <p className={styles.txt}>Hapus</p>
-                </button>
-              </div>
-            </div>
-          </TableRow>
-        </TableBody>
-      </Collapse>
+            </TableRow>
+            {/* </TableBody> */}
+          </Collapse>
+        </TableCell>
+      </TableRow>
 
       {/* MODAL UNGGAH LAPORAN */}
       <Modal
@@ -427,8 +431,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-
-
 export default function ContentDaftarKegiatan() {
   const dataPegawai = [
     {
@@ -542,9 +544,13 @@ export default function ContentDaftarKegiatan() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* <TableRow>
+              <TableCell> */}
             {rows.map((row) => (
               <Row key={row.id} row={row} />
             ))}
+            {/* </TableCell>
+            </TableRow> */}
           </TableBody>
         </Table>
       </TableContainer>
