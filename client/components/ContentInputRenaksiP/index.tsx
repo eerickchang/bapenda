@@ -77,22 +77,24 @@ export default function ContentInputRenaksiP() {
   const [nip, setNip] = useState("");
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
   const [thl, setThl] = useState();
+  const [rencana, setRencana] = useState("");
 
   const btnUnggah = () => {
-    // Axios.post("http://localhost:3001/inputRenaksi", {
-    //   program: inProgram,
-    //   kegiatan: inKegiatan,
-    //   tupoksiInti: inTupoksiInti,
-    //   subKegiatan: inSubKegiatan,
-    //   nip: nip,
-    //   tupoksiTambahan: inTupoksiTambahan,
-    //   thl: thl,
-    // });
-    // setShowModal(true);
-    // setTimeout(() => {
-    //   setShowModal(false);
-    // }, 2000);
-    console.log(portate);
+    Axios.post("http://localhost:3001/inputRenaksi", {
+      program: inProgram,
+      kegiatan: inKegiatan,
+      tupoksiInti: inTupoksiInti,
+      subKegiatan: inSubKegiatan,
+      nip: nip,
+      tupoksiTambahan: inTupoksiTambahan,
+      thl: thl,
+      rencana: rencana,
+    });
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+    // console.log(rencana);
   };
   // });
   // useEffect(() => {
@@ -716,6 +718,9 @@ export default function ContentInputRenaksiP() {
             </Typography>
           }
           control={<BpCheckbox />}
+          onClick={() => {
+            setRencana("Januari");
+          }}
         />
         <FormControlLabel
           label={

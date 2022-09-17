@@ -1,6 +1,6 @@
 import stylesS from "./ContentDaftarkegiatan.module.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -20,6 +20,10 @@ import Modal from "react-modal";
 import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
+import Axios from "axios";
+import { useTabPanel } from "@mui/base";
+
+Axios.defaults.withCredentials = true;
 
 const rows = [
   {
@@ -63,7 +67,7 @@ const rows = [
     protein2: 40,
   },
   {
-    id: 4,
+    id: 5,
     name: "angurs",
     calories: 10,
     fat: 22,
@@ -73,7 +77,7 @@ const rows = [
     protein2: 40,
   },
   {
-    id: 4,
+    id: 6,
     name: "angurs",
     calories: 10,
     fat: 22,
@@ -475,42 +479,95 @@ export default function ContentDaftarKegiatan() {
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
+  const [domLoaded, setDomLoaded] = useState(false);
+  const [asn, setAsn] = useState("");
+
+  useEffect(() => {
+    setDomLoaded(true);
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setAsn(response.data.user[0]);
+    });
+  }, []);
 
   return (
-    <div className={stylesS.wrap}>
-      <div className={stylesS.container}>
-        <div className={stylesS.wrapperTitleDaftarKegiatan}>
-          <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-          <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
-        </div>
-        {dataPegawai.map((item) => (
-          <div className={stylesS.wrapperDataPegawai} key={item.id}>
-            {item.image}
-            <div className={stylesS.wrapperTxt}>
-              <p className={stylesS.txtNama}>{item.nama}</p>
-              <p className={stylesS.txtJabatan}>{item.jabatan}</p>
-              <p className={stylesS.txtPegawai}>{item.pegawai}</p>
+    <>
+      {domLoaded && (
+        <div className={stylesS.wrap}>
+          <div className={stylesS.container}>
+            <div className={stylesS.wrapperTitleDaftarKegiatan}>
+              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
+              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+            </div>
+            {dataPegawai.map((item) => (
+              <div className={stylesS.wrapperDataPegawai} key={item.id}>
+                {item.image}
+                <div className={stylesS.wrapperTxt}>
+                  <p className={stylesS.txtNama}>{asn.nama}</p>
+                  <p className={stylesS.txtJabatan}>
+                    {`${asn.jabatan}
+                    ${asn.sub_bidang}`}
+                  </p>
+                  <p className={stylesS.txtPegawai}>{item.pegawai}</p>
+                </div>
+              </div>
+            ))}
+            <div className={stylesS.wrapperFilter}>
+              <div
+                className={stylesS.btnFilter}
+                onClick={() => setActiveDropdown(!activeDropdown)}
+              >
+                <Image src={"/Filter.svg"} width={23} height={23} />
+                <p>Filter</p>
+              </div>
+              {activeDropdown && (
+                <div
+                  className={stylesS.wrapperSelectStatus}
+                  onClick={() => setActiveDropdown(false)}
+                >
+                  {filter.map((item) => (
+                    <p key={item.id}>{item.status}</p>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        ))}
-        <div className={stylesS.wrapperFilter}>
-          <div
-            className={stylesS.btnFilter}
-            onClick={(e) => setActiveDropdown(!activeDropdown)}
+          <Gap height={106} width={0} />
+          <TableContainer
+            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
-            <Image src={"/Filter.svg"} width={23} height={23} />
-            <p>Filter</p>
-          </div>
-          {activeDropdown && (
-            <div
-              className={stylesS.wrapperSelectStatus}
-              onClick={() => setActiveDropdown(false)}
-            >
-              {filter.map((item) => (
-                <p key={item.id}>{item.status}</p>
-              ))}
-            </div>
-          )}
+            <Table sx={{ tableLayout: "fixed" }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Program
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Kegiatan
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Sub Kegiatan
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Tupoksi
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Rekan
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Rencana
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Status
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <Row key={row.id} row={row} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
       <Gap height={106} width={0} />
@@ -555,5 +612,7 @@ export default function ContentDaftarKegiatan() {
         </Table>
       </TableContainer>
     </div>
+      )}
+    </>
   );
 }

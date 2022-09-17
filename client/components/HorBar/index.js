@@ -1,8 +1,8 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, HorizontalBar } from "react-chartjs-2";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 
-export default function BarChart({ chartData }) {
+export default function HorBar({ chartData }) {
   const options = {
     plugins: {
       legend: {
@@ -12,9 +12,7 @@ export default function BarChart({ chartData }) {
     labels: {
       render: "percentage",
     },
-    // responsive: true,
-    maintainAspectRatio: false,
   };
 
-  return <Bar data={chartData} options={options} />;
+  return <HorizontalBar data={chartData} options={options} />;
 }
