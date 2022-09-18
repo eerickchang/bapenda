@@ -150,20 +150,20 @@ export default function Profil() {
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
         <div className={styles.barWrapper1}>
-          <p className={styles.txtJudul}>PERENCANAAN & PENGEMBANGAN</p>
+          <p className={styles.txtJudul}>{dataAsn.bidang}</p>
           <div className={styles.barResize}>
             <BarChart chartData={bidangChart} />
           </div>
         </div>
         <div className={styles.barWrapper2}>
-          <p className={styles.txtJudul}>PENGEMBANGAN TEKNOLOGI</p>
+          <p className={styles.txtJudul}>{dataAsn.sub_bidang}</p>
           <div className={styles.barResize}>
             <BarChart chartData={subBidangChart} />
           </div>
         </div>
         <div className={styles.barWrapper3}>
           <div className={styles.txtWrapper3}>
-            <p className={styles.txtJudulLain}>FERREN KALALO</p>
+            <p className={styles.txtJudulLain}>{dataAsn.nama}</p>
             <div className={styles.lihatDetailWrapper}>
               <p className={styles.lihatDetail}>lihat detail</p>
               <div className={styles.lihatDetailImg}>
