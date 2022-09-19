@@ -86,6 +86,16 @@ const rows = [
     protein1: 40,
     protein2: 40,
   },
+  {
+    id: 7,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
 ];
 
 function Row(props: { row: ReturnType<typeof createData> }) {
@@ -226,6 +236,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
+  function colorFunction() {
+    document.getElementById("styles.tableRow").style.backgroundColor = "orange";
+  }
+
   return (
     <React.Fragment>
       <TableRow
@@ -241,9 +255,25 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.protein2}</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 10, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto">
+      <TableContainer
+        style={{
+          width: 1670,
+          marginTop: -20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+        }}
+      >
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell
+          onClick={colorFunction}
+          style={{ padding: 0, width: 2000 }}
+          colSpan={6}
+        >
+          <Collapse
+            style={{ background: "rgba(232, 232, 232, 1)" }}
+            in={open}
+            timeout="auto"
+          >
             {/* <TableBody> */}
             <TableRow>
               <div className={styles.wrapperContentModal}>
@@ -284,7 +314,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             {/* </TableBody> */}
           </Collapse>
         </TableCell>
-      </TableRow>
+        {/* </div> */}
+      </TableContainer>
 
       {/* MODAL UNGGAH LAPORAN */}
       <Modal
@@ -532,7 +563,7 @@ export default function ContentDaftarKegiatan() {
             </div>
           </div>
           <Gap height={106} width={0} />
-          <TableContainer
+          <TableContainer 
             style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
@@ -569,49 +600,6 @@ export default function ContentDaftarKegiatan() {
             </Table>
           </TableContainer>
         </div>
-      </div>
-      <Gap height={106} width={0} />
-      <TableContainer
-        style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-      >
-        <Table sx={{ tableLayout: "fixed" }}>
-          <TableHead>
-            <TableRow>
-              <TableCell className={styles.headerTable} width={0}>
-                Program
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Kegiatan
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Sub Kegiatan
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Tupoksi
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Rekan
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Rencana
-              </TableCell>
-              <TableCell className={styles.headerTable} width={0}>
-                Status
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* <TableRow>
-              <TableCell> */}
-            {rows.map((row) => (
-              <Row key={row.id} row={row} />
-            ))}
-            {/* </TableCell>
-            </TableRow> */}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
       )}
     </>
   );
