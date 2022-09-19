@@ -149,6 +149,7 @@ export default function Profil() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
+
         <div className={styles.barWrapper1}>
           <p className={styles.txtJudul}>{dataAsn.bidang}</p>
           <div className={styles.barResize}>
