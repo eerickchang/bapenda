@@ -240,7 +240,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
-
   return (
     <React.Fragment>
       <TableRow
@@ -270,19 +269,22 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           marginTop: -20,
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
+          // paddingBottom: 35,
         }}
       >
         {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell
-          style={{ padding: 0, width: 2000 }}
-          colSpan={6}
-        >
+        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
           <Collapse
-            style={{ background: "rgba(232, 232, 232, 1)" }}
+            style={{
+              background: "rgba(232, 232, 232, 1)",
+              borderTopColor: "rgba(165, 165, 165, 0.5)",
+              borderTopWidth: 2,
+              borderTopStyle: "solid",
+              marginBottom: 35
+            }}
             in={open}
             timeout="auto"
           >
-            {/* <TableBody> */}
             <TableRow>
               <div className={styles.wrapperContentModal}>
                 <div className={styles.wrapperTitleBtn}>
@@ -319,10 +321,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 </div>
               </div>
             </TableRow>
-            {/* </TableBody> */}
           </Collapse>
         </TableCell>
-        {/* </div> */}
       </TableContainer>
 
       {/* MODAL UNGGAH LAPORAN */}
@@ -571,7 +571,7 @@ export default function ContentDaftarKegiatan() {
             </div>
           </div>
           <Gap height={106} width={0} />
-          <TableContainer 
+          <TableContainer
             style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
