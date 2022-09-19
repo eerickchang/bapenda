@@ -598,6 +598,48 @@ export default function ContentDaftarKegiatan() {
                 ))}
               </TableBody>
             </Table>
+
+            <Gap height={106} width={0} />
+            <TableContainer
+              style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Program
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Kegiatan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Sub Kegiatan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Tupoksi
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Rekan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Rencana
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Status
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* <TableRow>
+              <TableCell> */}
+                  {rows.map((row) => (
+                    <Row key={row.id} row={row} />
+                  ))}
+                  {/* </TableCell>
+            </TableRow> */}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </TableContainer>
         </div>
       )}
