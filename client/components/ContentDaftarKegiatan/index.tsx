@@ -236,9 +236,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
-  function colorFunction() {
-    document.getElementById("styles.tableRow").style.backgroundColor = "orange";
-  }
 
   return (
     <React.Fragment>
@@ -265,7 +262,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       >
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell
-          onClick={colorFunction}
           style={{ padding: 0, width: 2000 }}
           colSpan={6}
         >
