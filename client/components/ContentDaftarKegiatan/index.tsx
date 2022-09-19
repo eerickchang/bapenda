@@ -164,6 +164,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     },
   };
 
+  //style row
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
+
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
@@ -240,8 +244,16 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   return (
     <React.Fragment>
       <TableRow
-        className={styles.tableRow}
-        onClick={() => setOpen(!open)}
+        className={`${styles.tableRow} ${styleRow}`}
+        onClick={() => {
+          setOpen(!open);
+          {
+            rowClik
+              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                setRowClick(!rowClik))
+              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+          }
+        }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
         <TableCell>{row.name}</TableCell>

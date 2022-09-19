@@ -2,18 +2,13 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   height: 161px;
-  border: 'none';
-  /* background-color: red; */
 }
 
-.tableRow:active::before{
-  background-color: rgba(232, 232, 232, 1);
+.tableRowClick{
+  background-color: #E8E8E8;
+  border-radius: 20px;
+  height: 161px;
 }
-/* .tableRow:focus{
-  background-color: red;
-} */
-
-
 
 .headerTable {
   font-family: "Poppins", sans-serif;
@@ -57,6 +52,9 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 20px;
+  border-width: 2px red;
+  margin-top: 35px;
+  /* padding-top:5px; */
   /* background-color: #112350; */
 }
 
@@ -70,6 +68,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .btnUnggah p {
