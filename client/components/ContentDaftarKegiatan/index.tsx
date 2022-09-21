@@ -1,19 +1,14 @@
 import stylesS from "./ContentDaftarkegiatan.module.css";
 
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import styles from "./TableMUI.module.css";
-import { height } from "@mui/system";
 import Image from "next/image";
 
 import Modal from "react-modal";
@@ -21,7 +16,6 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
-import { useTabPanel } from "@mui/base";
 
 Axios.defaults.withCredentials = true;
 
@@ -78,6 +72,16 @@ const rows = [
   },
   {
     id: 6,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
+  {
+    id: 7,
     name: "angurs",
     calories: 10,
     fat: 22,
@@ -253,10 +257,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.protein2}</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 10, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto">
-            {/* <TableBody> */}
+      <TableContainer
+        style={{
+          width: 1670,
+          marginTop: -20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          // paddingBottom: 35,
+        }}
+      >
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+          <Collapse
+            style={{
+              background: "rgba(232, 232, 232, 1)",
+              borderTopColor: "rgba(165, 165, 165, 0.5)",
+              borderTopWidth: 2,
+              borderTopStyle: "solid",
+              marginBottom: 35,
+            }}
+            in={open}
+            timeout="auto"
+          >
             <TableRow>
               <div className={styles.wrapperContentModal}>
                 <div className={styles.wrapperTitleBtn}>
@@ -293,10 +315,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 </div>
               </div>
             </TableRow>
-            {/* </TableBody> */}
           </Collapse>
         </TableCell>
-      </TableRow>
+      </TableContainer>
 
       {/* MODAL UNGGAH LAPORAN */}
       <Modal
@@ -592,48 +613,6 @@ export default function ContentDaftarKegiatan() {
                 ))}
               </TableBody>
             </Table>
-
-            <Gap height={106} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-            >
-              <Table sx={{ tableLayout: "fixed" }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Program
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Sub Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Tupoksi
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rekan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rencana
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Status
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* <TableRow>
-              <TableCell> */}
-                  {rows.map((row) => (
-                    <Row key={row.id} row={row} />
-                  ))}
-                  {/* </TableCell>
-            </TableRow> */}
-                </TableBody>
-              </Table>
-            </TableContainer>
           </TableContainer>
         </div>
       )}

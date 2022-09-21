@@ -39,6 +39,12 @@
   margin-left: 19px;
 }
 
+.backgroundRowExpand {
+  padding-bottom: 0px;
+  padding-top: 0;
+  background-color: 'red';
+}
+
 .wrapperContentModal {
   display: inline-flex;
   margin-top: 35px;
@@ -46,6 +52,10 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 20px;
+  border-width: 2px red;
+  margin-top: 35px;
+  /* padding-top:5px; */
+  /* background-color: #112350; */
 }
 
 .btnUnggah {
@@ -58,6 +68,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .btnUnggah p {
@@ -117,12 +128,11 @@
   font-weight: 500;
 }
 
-.wrapperBtnModal{
+.wrapperBtnModal {
   display: inline-flex;
 }
 
-
-.inputBuktiLap_Ubah{
+.inputBuktiLap_Ubah {
   height: 133px;
   width: 755px;
   border: 1px solid black;
@@ -130,48 +140,46 @@
   border-radius: 4px;
 }
 
-
-.inputBuktiLap_Ubah::placeholder{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap_Ubah::placeholder {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
 }
 
-.inputBuktiLap_Ubah:focus{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap_Ubah:focus {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   outline: none;
 }
 
-.inputBuktiLap{
+.inputBuktiLap {
   height: 133px;
   width: 755px;
   border: 1px solid black;
   border-radius: 4px;
 }
 
-.inputBuktiLap::placeholder{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap::placeholder {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
 }
 
-.inputBuktiLap:focus{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap:focus {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   outline: none;
 }
 
-
-.btnBatal_Ubah{
+.btnBatal_Ubah {
   background-color: rgba(255, 1, 100, 1);
   width: 754px;
   height: 34px;
   border: none;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -180,13 +188,13 @@
   align-items: center;
 }
 
-.btnKirim_Ubah{
+.btnKirim_Ubah {
   background-color: rgba(27, 221, 187, 1);
   width: 754px;
   height: 34px;
   border: none;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -195,28 +203,27 @@
   align-items: center;
 }
 
-
-.btnKirim_Ubah p{
-  font-family: 'Poppins', sans-serif;
+.btnKirim_Ubah p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
 }
 
-.btnBatal_Ubah p{
-  font-family: 'Poppins', sans-serif;
+.btnBatal_Ubah p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
 }
 
-.btnBatal{
+.btnBatal {
   background-color: rgba(255, 1, 100, 1);
   width: 170px;
   height: 34px;
   border: none;
   border-radius: 4px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -225,13 +232,13 @@
   align-items: center;
 }
 
-.btnKirim{
+.btnKirim {
   background-color: rgba(27, 221, 187, 1);
   width: 170px;
   height: 34px;
   border: none;
   border-radius: 4px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -240,26 +247,25 @@
   align-items: center;
 }
 
-.btnKirim p{
-  font-family: 'Poppins', sans-serif;
+.btnKirim p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
 }
 
-.btnBatal p{
-  font-family: 'Poppins', sans-serif;
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
 }
 
-.headerTxtModal{
-  font-family: 'Poppins', sans-serif;
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 26px;
 }
-
 
 /* MODAL BERHASIL LAMPIRKAN LAPORAN */
 .modal {
