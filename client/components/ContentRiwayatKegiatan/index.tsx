@@ -1,34 +1,245 @@
-import React, { useMemo, useState } from "react";
-// import { useReactTable } from '@tanstack/react-table'
-import { useTable, useExpanded } from "react-table";
-import { COLUMNS } from "./columns";
-import MOCK_DATA from "./MOCK_DATA.json";
+import React, { useEffect, useState } from "react";
+import stylesS from "./ContentRiwayatKegiatan.module.css";
 
-import styles from "./ContentRiwayatKegiatan.module.css";
+import Collapse from "@mui/material/Collapse";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
+
+const rows = [
+  {
+    id: 1,
+    name: "anggursss",
+    calories: 20,
+    fat: 42,
+    carbs: 69,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 80,
+    protein2: 80,
+  },
+  {
+    id: 2,
+    name: "anggur",
+    calories: 90,
+    fat: 82,
+    carbs: 79,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 60,
+    protein2: 60,
+  },
+  {
+    id: 3,
+    name: "urusss",
+    calories: 50,
+    fat: 42,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 20,
+    protein2: 20,
+  },
+  {
+    id: 4,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
+  {
+    id: 5,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
+  {
+    id: 6,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
+  {
+    id: 7,
+    name: "angurs",
+    calories: 10,
+    fat: 22,
+    carbs: 39,
+    protein: <Image src={"/User1.svg"} width={50} height={50} />,
+    protein1: 40,
+    protein2: 40,
+  },
+];
+
+function Row(props: { row: ReturnType<typeof createData> }) {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
+
+  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingLeft: 61,
+      height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
+  const customUbah = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingLeft: 61,
+      height: 433,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  //style row
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
+
+  return (
+    <React.Fragment>
+      <TableRow
+        className={`${styles.tableRow} ${styleRow}`}
+        onClick={() => {
+          setOpen(!open);
+          {
+            rowClik
+              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                setRowClick(!rowClik))
+              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+          }
+        }}
+        sx={{ "& > *": { borderBottom: "" } }}
+      >
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.calories}</TableCell>
+        <TableCell>{row.fat}</TableCell>
+        <TableCell>{row.carbs}</TableCell>
+        <TableCell>{row.protein}</TableCell>
+        <TableCell>{row.protein1}</TableCell>
+        <TableCell>{row.protein2}</TableCell>
+      </TableRow>
+      <TableContainer
+        style={{
+          width: 1680,
+          marginTop: -20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          // paddingBottom: 35,
+        }}
+      >
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+          <Collapse
+            style={{
+              background: "rgba(232, 232, 232, 1)",
+              borderTopColor: "rgba(165, 165, 165, 0.5)",
+              borderTopWidth: 2,
+              borderTopStyle: "solid",
+              marginBottom: 35,
+            }}
+            in={open}
+            timeout="auto"
+          >
+            <TableRow>
+              <div className={styles.wrapperExpand}>
+                <div className={styles.wrapperTanggapan}>
+                  <p>Tanggapan:</p>
+                  <p className={styles.txtTanggapan}>
+                    Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
+                    yang diberikan tidak dapat diterima
+                  </p>
+                </div>
+                <div className={styles.wrapperLampiran}>
+                  <p>Lampiran:</p>
+                  <p></p>
+                </div>
+                <div className={styles.wrapperRencanaUbah}>
+                  <p>Rencana Ubah Jadwal:</p>
+                  <p></p>
+                </div>
+              </div>
+            </TableRow>
+          </Collapse>
+        </TableCell>
+      </TableContainer>
+    </React.Fragment>
+  );
+}
 
 export const ContentRiwayatKegiatan = () => {
-  // const columns = useMemo(() => COLUMNS, []);
-  // const data = useMemo(() => MOCK_DATA, []);
+  const [activeDropdown, setActiveDropdown] = useState(false);
+  const [domLoaded, setDomLoaded] = useState(false);
+  const [asn, setAsn] = useState("");
 
-  // const tableInstance = useTable(
-  //   {
-  //     columns,
-  //     data,
-  //   },
-  //   useExpanded
-  // );
-
-  // const {
-  //   getTableProps,
-  //   getTableBodyProps,
-  //   headerGroups,
-  //   rows,
-  //   prepareRow,
-  //   visibleColumns,
-  //   state: { expanded },
-  // } = tableInstance;
+  useEffect(() => {
+    setDomLoaded(true);
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setAsn(response.data.user[0]);
+    });
+  }, []);
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownBulan, setActiveDropdownBulan] = useState(false);
@@ -135,118 +346,134 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 1,
       unduh: "Excel",
-      image: <Image src={"/Excel1.svg"} width={38} height={35} />,
+      // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
     },
     {
       id: 2,
       unduh: "PDF",
-      image: <Image src={"/Pdf.svg"} width={35} height={35} />,
+      // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
     },
   ];
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapperTitleInputRenaksi}>
-        <Image src={"/RiwayatIcon.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
-      </div>
-      <Gap height={153} width={0} />
-      <div className={styles.wrapperFilter}>
-        <div className={styles.wrapperFilterTahun}>
-          <div
-            className={styles.btnFilterTahun}
-            onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-          >
-            <Image src={"/TahunIcon.svg"} width={23} height={23} />
-            <p>Tahun</p>
-          </div>
-          {activeDropdownTahun && (
-            <div
-              className={styles.wrapperSelectFilterTahun}
-              onClick={() => setActiveDropdownTahun(false)}
-            >
-              {tahun.map((item) => (
-                <p key={item.id}>{item.tahun}</p>
-              ))}
+    <>
+      {domLoaded && (
+        <div className={stylesS.wrap}>
+          <div className={stylesS.container}>
+            <div className={stylesS.wrapperRiwayatKegiatan}>
+              <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
+              <p className={stylesS.txtTitle}>RIWAYAT KEGIATAN TAHUN 2021 </p>
             </div>
-          )}
-        </div>
-        <div className={styles.wrapperFilterBulan}>
-          <div
-            className={styles.btnFilterBulan}
-            onClick={() => setActiveDropdownBulan(!activeDropdownBulan)}
-          >
-            <Image src={"/TahunIcon.svg"} width={23} height={23} />
-            <p>Bulan</p>
-          </div>
-          {activeDropdownBulan && (
-            <div
-              className={styles.wrapperSelectFilterBulan}
-              onClick={() => setActiveDropdownBulan(false)}
-            >
-              {bulan.map((item) => (
-                <p key={item.id}>{item.bulan}</p>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className={styles.wrapperUnduh}>
-          <div
-            className={styles.btnUnduh}
-            onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
-          >
-            <Image src={"/UnduhIcon.svg"} width={23} height={23} />
-            <p>Unduh</p>
-          </div>
-          {activeDropdownUnduh && (
-            <div
-              className={styles.wrapperSelectUnduh}
-              onClick={() => setActiveDropdownUnduh(false)}
-            >
-              {unduh.map((item) => (
+            <Gap height={153} width={0} />
+            <div className={stylesS.wrapperFilter}>
+              <div className={stylesS.wrapperFilterTahun}>
                 <div
-                  style={{
-                    display: "flex",
-                    fontFamily: "Poppins",
-                    fontWeight: 700,
-                    fontSize: 22,
-                  }}
-                  key={item.id}
+                  className={stylesS.btnFilterTahun}
+                  onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
                 >
-                  {item.image} {item.unduh}
+                  <Image src={"/TahunIcon.svg"} width={23} height={23} />
+                  <p>Tahun</p>
                 </div>
-              ))}
+                {activeDropdownTahun && (
+                  <div
+                    className={stylesS.wrapperSelectFilterTahun}
+                    onClick={() => setActiveDropdownTahun(false)}
+                  >
+                    {tahun.map((item) => (
+                      <p key={item.id}>{item.tahun}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className={stylesS.wrapperFilterBulan}>
+                <div
+                  className={stylesS.btnFilterBulan}
+                  onClick={() => setActiveDropdownBulan(!activeDropdownBulan)}
+                >
+                  <Image src={"/TahunIcon.svg"} width={23} height={23} />
+                  <p>Bulan</p>
+                </div>
+                {activeDropdownBulan && (
+                  <div
+                    className={stylesS.wrapperSelectFilterBulan}
+                    onClick={() => setActiveDropdownBulan(false)}
+                  >
+                    {bulan.map((item) => (
+                      <p key={item.id}>{item.bulan}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className={stylesS.wrapperUnduh}>
+                <div
+                  className={stylesS.btnUnduh}
+                  onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
+                >
+                  <Image src={"/UnduhIcon.svg"} width={23} height={23} />
+                  <p>Unduh</p>
+                </div>
+                {activeDropdownUnduh && (
+                  <div
+                    className={stylesS.wrapperSelectUnduh}
+                    onClick={() => setActiveDropdownUnduh(false)}
+                  >
+                    {unduh.map((item) => (
+                      <div
+                        style={{
+                          display: "flex",
+                          fontFamily: "Poppins",
+                          fontWeight: 700,
+                          fontSize: 22,
+                        }}
+                        key={item.id}
+                      >
+                        <p>{item.unduh}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* <table {...getTableProps()} className={styles.header}>
-        <thead className={styles.headerTable}>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <td {...column.getHeaderProps()}>{column.render("Header")}</td>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} className={styles.tableTr}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
-              </tr>
-              
-            );
-          })}
-        </tbody>
-      </table> */}
-    </div>
+            <TableContainer
+              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Program
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Kegiatan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Sub Kegiatan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Tupoksi
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Rekan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Rencana
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Status
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <Row key={row.id} row={row} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

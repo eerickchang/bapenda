@@ -28,6 +28,7 @@ import CheckboxBulan from "./CheckboxBulan";
 import BarChart from "./BarChart";
 import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
+import ContentDetailCaKin from "./ContentDetailCaKin";
 
 export {
   CtnUmum,
@@ -59,4 +60,5 @@ export {
   BarChart,
   HorBar,
   ProfileKananKonten,
+  ContentDetailCaKin,
 };

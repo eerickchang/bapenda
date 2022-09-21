@@ -14,7 +14,7 @@
   align-items: center;
 }
 
-.contentBawah{
+.contentBawah {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-.kotak{
+.kotak {
   width: 65px;
   height: 65px;
   display: flex;
@@ -49,7 +49,30 @@
   align-items: center;
   transition: 0.5s;
   border-radius: 10px;
-  background-color: #1BDDBB;
+  background-color: #1bddbb;
+}
+
+.kotakLogOut {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color: #112350;
+  border: none;
+}
+
+.kotakLogOut:focus {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color: #112350;
 }
 
 .hoverKeterangan {
@@ -71,7 +94,7 @@
   pointer-events: none;
 }
 
-.hoverKeteranganKegiatan{
+.hoverKeteranganKegiatan {
   width: 265px;
 }
 
@@ -81,8 +104,8 @@
   left: 160px;
 }
 
-.kotak:hover{
-  background-color: #1BDDBB;
+.kotak:hover {
+  background-color: #1bddbb;
   width: 65px;
   height: 65px;
   display: flex;
@@ -93,7 +116,25 @@
   margin-left: 20px;
 }
 
-.kotakAktif{
+.kotakLogOut:hover .hoverKeterangan {
+  opacity: 1;
+  transition: 0.5s;
+  left: 160px;
+}
+
+.kotakLogOut:hover {
+  background-color: #1bddbb;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: 0.5s;
+  margin-left: 20px;
+}
+
+.kotakAktif {
   width: 65px;
   height: 65px;
   display: flex;
@@ -101,6 +142,88 @@
   align-items: center;
   transition: 0.5s;
   border-radius: 10px;
-  background-color: #1BDDBB;
+  background-color: #1bddbb;
   border: none;
+}
+
+.kotakAktifLogOut {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color: #112350;
+  border: none;
+}
+
+.headerTxtModal {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dialog {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+
+.wrapperBtnModal {
+  display: inline-flex;
+  bottom: 1;
+  position: absolute;
+  bottom: 0;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.btnYa {
+  width: 245.5px;
+  height: 62px;
+  border: none;
+  margin: 0;
+  border-bottom-left-radius: 20px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255, 1, 100, 1);
+  border-top: 1px solid rgba(17, 35, 80, 0.5);
+  border-right: 1px solid rgba(17, 35, 80, 0.5);
+}
+
+.btnTidak {
+  width: 245.5px;
+  height: 62px;
+  border: none;
+  margin: 0;
+  border-bottom-right-radius: 20px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  border-top: 1px solid rgba(17, 35, 80, 0.5);
+  border-left: 1px solid rgba(17, 35, 80, 0.5);
+}
+
+.btnYa p {
+  margin: 0;
+}
+
+.btnTidak p {
+  margin: 0;
 }

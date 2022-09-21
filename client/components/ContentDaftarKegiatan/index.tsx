@@ -1,19 +1,14 @@
 import stylesS from "./ContentDaftarkegiatan.module.css";
 
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import styles from "./TableMUI.module.css";
-import { height } from "@mui/system";
 import Image from "next/image";
 
 import Modal from "react-modal";
@@ -21,7 +16,6 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
-import { useTabPanel } from "@mui/base";
 
 Axios.defaults.withCredentials = true;
 
@@ -280,7 +274,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               borderTopColor: "rgba(165, 165, 165, 0.5)",
               borderTopWidth: 2,
               borderTopStyle: "solid",
-              marginBottom: 35
+              marginBottom: 35,
             }}
             in={open}
             timeout="auto"
@@ -606,48 +600,6 @@ export default function ContentDaftarKegiatan() {
                 ))}
               </TableBody>
             </Table>
-
-            <Gap height={106} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-            >
-              <Table sx={{ tableLayout: "fixed" }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Program
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Sub Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Tupoksi
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rekan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rencana
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Status
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* <TableRow>
-              <TableCell> */}
-                  {rows.map((row) => (
-                    <Row key={row.id} row={row} />
-                  ))}
-                  {/* </TableCell>
-            </TableRow> */}
-                </TableBody>
-              </Table>
-            </TableContainer>
           </TableContainer>
         </div>
       )}

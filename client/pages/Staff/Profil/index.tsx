@@ -11,6 +11,9 @@ import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
 import Image from "next/image";
 import moment from "moment";
 import Axios from "axios";
+import { useRouter } from "next/router";
+
+
 
 export default function Profil() {
   const [tahun, setTahun] = useState("");
@@ -138,6 +141,14 @@ export default function Profil() {
       },
     ],
   };
+
+  
+  const router = useRouter();
+  const clickLihatDetail = () => {
+    router.push("/Staff/DetailCaKin");
+  }
+
+
   return (
     <div className={styles.container}>
       <SidebarStaff kotakProfil={sidebarStyles.kotakAktif} />
@@ -165,7 +176,10 @@ export default function Profil() {
         <div className={styles.barWrapper3}>
           <div className={styles.txtWrapper3}>
             <p className={styles.txtJudulLain}>{dataAsn.nama}</p>
-            <div className={styles.lihatDetailWrapper}>
+            <div
+              onClick={clickLihatDetail}
+              className={styles.lihatDetailWrapper}
+            >
               <p className={styles.lihatDetail}>lihat detail</p>
               <div className={styles.lihatDetailImg}>
                 <Image
