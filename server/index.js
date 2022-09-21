@@ -4,6 +4,25 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const mysql = require("mysql");
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client/public");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      path.parse(file.originalname).name +
+        "_" +
+        Date.now() +
+        path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage });
 
 // LIBRARY UNTUK SESSION & COOKIE
 const session = require("express-session");
@@ -47,6 +66,28 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../client")));
+
+// UPLOAD FOTO
+app.post("/uploadFoto", upload.single("photo"), (req, res) => {
+  // let finalImageURL =
+  //   req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
+  let finalImageURL = req.file.filename;
+  res.json({ status: "success", image: finalImageURL });
+});
+
+// SIMPAN FOTO DB
+app.post("/simpanFotoDB", (req, res) => {
+  const foto = req.body.foto;
+  const nip = req.body.nip;
+
+  const sqlUpdate = "UPDATE pegawai SET foto = ? WHERE nip = ?";
+  let data = [foto, nip];
+
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+});
 
 // AUTHENTIKASI LOGIN
 app.post("/masuk", (req, res) => {

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./sidebar.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 import { useRouter } from "next/router";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
 
 export default function Sidebar({
   kotakHome = styles.kotak,
@@ -12,7 +15,15 @@ export default function Sidebar({
   kotakProfil = styles.kotak,
   kotakNotif = styles.kotak,
   kotakLogOut = styles.kotak,
-}){
+}) {
+  useEffect(() => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setImage(response.data.user[0].foto);
+      // console.log(response.data.user[0]);
+    });
+  }, []);
+
+  const [image, setImage] = useState(null);
   const router = useRouter();
   const clickHome = () => {
     router.push("/Staff/Dashboard");
@@ -45,7 +56,16 @@ export default function Sidebar({
   return (
     <nav className={styles.container}>
       <div className={styles.image}>
-        <Image src="/SidebarProfile.svg" width={90} height={90} />
+        {!image ? (
+          <Image src="/SidebarProfile.svg" width={90} height={90} />
+        ) : (
+          <Image
+            src={image}
+            width={90}
+            height={90}
+            style={{ borderRadius: 90 }}
+          />
+        )}
       </div>
       <div className={styles.contentAtas}>
         <button className={kotakHome} onClick={clickHome}>

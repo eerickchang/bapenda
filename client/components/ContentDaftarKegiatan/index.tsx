@@ -493,11 +493,13 @@ export default function ContentDaftarKegiatan() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     setDomLoaded(true);
     Axios.get("http://localhost:3001/masuk").then((response) => {
       setAsn(response.data.user[0]);
+      setImage(response.data.user[0].foto);
     });
   }, []);
 
@@ -512,7 +514,18 @@ export default function ContentDaftarKegiatan() {
             </div>
             {dataPegawai.map((item) => (
               <div className={stylesS.wrapperDataPegawai} key={item.id}>
-                {item.image}
+                <div>
+                  {!image ? (
+                    <Image src="/SidebarProfile.svg" width={90} height={90} />
+                  ) : (
+                    <Image
+                      src={image}
+                      width={90}
+                      height={90}
+                      style={{ borderRadius: 90 }}
+                    />
+                  )}
+                </div>
                 <div className={stylesS.wrapperTxt}>
                   <p className={stylesS.txtNama}>{asn.nama}</p>
                   <p className={stylesS.txtJabatan}>

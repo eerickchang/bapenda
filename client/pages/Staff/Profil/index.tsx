@@ -190,6 +190,7 @@ export default function Profil() {
           subBidang={dataAsn.sub_bidang}
           jabatan={dataAsn.jabatan}
           noHp={dataAsn.no_hp}
+          fotoProfil={dataAsn.foto}
         />
       </div>
     </div>
