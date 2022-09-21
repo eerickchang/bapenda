@@ -181,6 +181,15 @@ app.post("/inputRenaksi", (req, res) => {
   );
 });
 
+//AMBIL DATA RENAKSI
+
+app.get("/ambilRenaksi", (req, res) => {
+  const sqlSelect = "SELECT * FROM data_renaksi";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
 //AMBIL DATA CAKIN
 app.get("/cakin", (req, res) => {
   const sqlSelect = "SELECT * FROM cakin";

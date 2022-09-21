@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./ContentDetailCakin.module.css";
 
 import Paper from "@mui/material/Paper";
@@ -13,17 +13,38 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Gap from "../Gap";
 import { borderRadius } from "@mui/system";
+import Axios from "axios";
+import { userAgent } from "next/server";
+
+Axios.defaults.withCredentials = true;
 
 export default function ContentDetailCaKin() {
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+
+      Axios.get("http://localhost:3001/ambilRenaksi").then((response) => {
+        response.data.map((item) => {
+          setDataCakin((nextData) => {
+            return [...nextData, item];
+          });
+        });
+      });
+    }
+  }, []);
+
   const router = useRouter();
 
   const clickBack = () => {
     router.push("/Staff/Profil");
+    // console.log(dataCakin);
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
 
+  const [dataCakin, setDataCakin] = useState([]);
   const tahun = [
     {
       id: 1,
@@ -169,35 +190,30 @@ export default function ContentDetailCaKin() {
     createData("France", "FR", 67022000, 640679, 123, 123, 123),
   ];
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.wrapperTitle}>
           <Image
-            style={{ cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             onClick={clickBack}
             src={"/Back.svg"}
             width={50}
             height={50}
           />
-          <Image
-            src={"/DetailCaKin.svg"}
-            width={50.38}
-            height={50}
-          />
+          <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
           <p className={styles.txtTitle}>
             DETAIL CAPAIAN KINERJA - GEORGE OLAF
           </p>
