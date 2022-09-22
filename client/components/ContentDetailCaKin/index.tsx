@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./ContentDetailCakin.module.css";
 
 import Paper from "@mui/material/Paper";
@@ -13,17 +13,38 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Gap from "../Gap";
 import { borderRadius } from "@mui/system";
+import Axios from "axios";
+import { userAgent } from "next/server";
+
+Axios.defaults.withCredentials = true;
 
 export default function ContentDetailCaKin() {
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+
+      Axios.get("http://localhost:3001/ambilRenaksi").then((response) => {
+        response.data.map((item) => {
+          setDataCakin((nextData) => {
+            return [...nextData, item];
+          });
+        });
+      });
+    }
+  }, []);
+
   const router = useRouter();
 
   const clickBack = () => {
     router.push("/Staff/Profil");
+    // console.log(dataCakin);
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
 
+  const [dataCakin, setDataCakin] = useState([]);
   const tahun = [
     {
       id: 1,
