@@ -92,112 +92,243 @@ export default function ContentDetailCaKin() {
       label: "Bulan",
       minWidth: 100,
       align: "center",
-      format: (value) => value.toLocaleString("en-US"),
+      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "jumlahkegiatan",
       label: "Jumlah Kegiatan",
       minWidth: 100,
       align: "center",
-      format: (value) => value.toLocaleString("en-US"),
+      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "realisasikegiatan",
       label: "Realisasi Kegiatan",
       minWidth: 100,
       align: "center",
-      format: (value) => value.toFixed(2),
+      // format: (value) => value.toFixed(2),
     },
     {
       id: "belumdilaksanakan",
       label: "Belum Dilaksanakan",
       minWidth: 100,
       align: "center",
-      format: (value) => value.toFixed(2),
+      // format: (value) => value.toFixed(2),
     },
     {
       id: "hasilkinerja",
       label: "Hasil Kinerja",
       minWidth: 100,
       align: "center",
-      format: (value) => value.toFixed(2),
+      // format: (value) => value.toFixed(2),
     },
   ];
 
-  function createData(
-    nama,
-    jabatan,
-    bulan,
-    jumlahkegiatan,
-    realisasikegiatan,
-    belumdilaksanakan,
-    hasilkinerja
-  ) {
-    return {
-      nama,
-      jabatan,
-      bulan,
-      jumlahkegiatan,
-      realisasikegiatan,
-      belumdilaksanakan,
-      hasilkinerja,
-    };
-  }
+  // function createData(
+  //   nama,
+  //   jabatan,
+  //   bulan,
+  //   jumlahkegiatan,
+  //   realisasikegiatan,
+  //   belumdilaksanakan,
+  //   hasilkinerja
+  // ) {
+  //   return {
+  //     nama,
+  //     jabatan,
+  //     bulan,
+  //     jumlahkegiatan,
+  //     realisasikegiatan,
+  //     belumdilaksanakan,
+  //     hasilkinerja,
+  //   };
+  // }
 
   const rows = [
-    createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    createData("France", "FR", 67022000, 640679, 123, 123, 123),
-    createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    createData("France", "FR", 67022000, 640679, 123, 123, 123),
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'andre',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'erik',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'erik',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'erik',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'erik',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+    {
+      nama: 'erik',
+      jabatan: 'Kabid',
+      bulan: 'januari',
+      jumlahkegiatan: 10,
+      realisasikegiatan: 3,
+      belumdilaksanakan: 7,
+      hasilkinerja: 30,
+    },
+
+    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
+    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
+    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
+    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
+    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
+    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
+    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
+    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
+    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
+    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
+    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
+    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
+    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
+    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
+    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
+    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
+    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
+    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
+    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
+    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
+    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
+    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
   ];
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.wrapperTitle}>
           <Image
-            style={{ cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             onClick={clickBack}
             src={"/Back.svg"}
             width={50}
             height={50}
           />
-          <Image
-            src={"/DetailCaKin.svg"}
-            width={50.38}
-            height={50}
-          />
+          <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
           <p className={styles.txtTitle}>
             DETAIL CAPAIAN KINERJA - GEORGE OLAF
           </p>
@@ -261,12 +392,6 @@ export default function ContentDetailCaKin() {
           maxHeight: 766,
           width: 1660,
           marginTop: 8,
-          scrollbarWidth: "none",
-          //   borderTopRightRadius: 20,
-          //   borderTopLeftRadius: 20,
-          //   borderBottomRightRadius: 20,
-          //   borderBottomLeftRadius: 20,
-          //   borderBottom: 2,
           color: "rgba(27, 221, 187, 1)",
           border: 2,
           borderRadius: 6,
@@ -301,12 +426,101 @@ export default function ContentDetailCaKin() {
             </TableRow>
           </TableHead>
           <TableBody>
+
+            {/* AMBIL DATA ROW */}
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-10} key={row.code}>
-                    {columns.map((column) => {
+                  <TableRow hover>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.nama}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.jabatan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.bulan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.jumlahkegiatan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.realisasikegiatan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.belumdilaksanakan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                      }}
+                    >
+                      {row.hasilkinerja}
+                    </TableCell>
+
+
+
+                    {/* {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell
@@ -325,7 +539,7 @@ export default function ContentDetailCaKin() {
                             : value}
                         </TableCell>
                       );
-                    })}
+                    })} */}
                   </TableRow>
                 );
               })}
