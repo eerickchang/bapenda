@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
 import Image from "next/image";
+import moment from "moment";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
@@ -172,19 +173,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [showModal_Ubah, setShowModal_Ubah] = useState(false);
   const [showModal_Hapus, setShowModal_Hapus] = useState(false);
 
-  // data renaksi
-  const [dataRenaksi, setDataRenaksi] = useState([]);
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-      result.data.map((item) => {
-        setDataRenaksi((nextData) => {
-          return [...nextData, item];
-        });
-      });
-    });
-  }, []);
-
   const btnUnggah = () => {
     setShowModal(true);
     setTimeout(() => {
@@ -267,9 +255,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
         <TableCell>{row.tupoksi_tambahan}</TableCell>
-        <TableCell>{row.protein}</TableCell>
+        <TableCell>{row.thl}</TableCell>
         <TableCell>{row.protein1}</TableCell>
-        <TableCell>{row.protein2}</TableCell>
+        <TableCell>{row.status}</TableCell>
       </TableRow>
       <TableContainer
         style={{
@@ -539,14 +527,27 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setAsn(response.data.user[0]);
         setImage(response.data.user[0].foto);
-      });
-      Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-        result.data.map((item) => {
-          setDataRenaksi((nextData) => {
-            return [...nextData, item];
+
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (
+              response.data.user[0].nip === item.nip &&
+              moment(item.end_date).format("YYYY") === moment().format("YYYY")
+            ) {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
           });
         });
       });
+      // Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+      //   result.data.map((item) => {
+      //     setDataRenaksi((nextData) => {
+      //       return [...nextData, item];
+      //     });
+      //   });
+      // });
     }
   }, []);
 
