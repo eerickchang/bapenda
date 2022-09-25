@@ -1,6 +1,6 @@
 import stylesS from "./ContentDaftarkegiatan.module.css";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,7 +16,6 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
-import next from "next";
 
 Axios.defaults.withCredentials = true;
 
@@ -172,19 +171,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [showModal_Ubah, setShowModal_Ubah] = useState(false);
   const [showModal_Hapus, setShowModal_Hapus] = useState(false);
 
-  // data renaksi
-  const [dataRenaksi, setDataRenaksi] = useState([]);
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-      result.data.map((item) => {
-        setDataRenaksi((nextData) => {
-          return [...nextData, item];
-        });
-      });
-    });
-  }, []);
-
   const btnUnggah = () => {
     setShowModal(true);
     setTimeout(() => {
@@ -263,10 +249,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
-        <TableCell>{row.program}</TableCell>
-        <TableCell>{row.kegiatan}</TableCell>
-        <TableCell>{row.sub_kegiatan}</TableCell>
-        <TableCell>{row.tupoksi_tambahan}</TableCell>
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.calories}</TableCell>
+        <TableCell>{row.fat}</TableCell>
+        <TableCell>{row.carbs}</TableCell>
         <TableCell>{row.protein}</TableCell>
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.protein2}</TableCell>
@@ -529,31 +515,14 @@ export default function ContentDaftarKegiatan() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
-  const [dataRenaksi, setDataRenaksi] = useState([]);
 
-  const shouldLog = useRef(true);
   useEffect(() => {
-    if (shouldLog.current) {
-      shouldLog.current = false;
-      setDomLoaded(true);
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        setAsn(response.data.user[0]);
-        setImage(response.data.user[0].foto);
-      });
-      Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-        result.data.map((item) => {
-          setDataRenaksi((nextData) => {
-            return [...nextData, item];
-          });
-        });
-      });
-    }
+    setDomLoaded(true);
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setAsn(response.data.user[0]);
+      setImage(response.data.user[0].foto);
+    });
   }, []);
-
-  const btnFilter = () => {
-    setActiveDropdown(!activeDropdown);
-    // console.log(dataRenaksi);
-  };
 
   return (
     <>
@@ -589,7 +558,10 @@ export default function ContentDaftarKegiatan() {
               </div>
             ))}
             <div className={stylesS.wrapperFilter}>
-              <div className={stylesS.btnFilter} onClick={btnFilter}>
+              <div
+                className={stylesS.btnFilter}
+                onClick={() => setActiveDropdown(!activeDropdown)}
+              >
                 <Image src={"/Filter.svg"} width={23} height={23} />
                 <p>Filter</p>
               </div>
@@ -636,8 +608,8 @@ export default function ContentDaftarKegiatan() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataRenaksi.map((row) => (
-                  <Row key={row.id_renaksi} row={row} />
+                {rows.map((row) => (
+                  <Row key={row.id} row={row} />
                 ))}
               </TableBody>
             </Table>

@@ -177,7 +177,7 @@ export default function Sidebar({
             contentLabel="Example Modal"
             className={styles.modal}
           >
-            <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
+            <h2 className={styles.headerTxtModal}>Log Out</h2>
             <h2 className={styles.dialog}>Apakah anda yakin ingin keluar?</h2>
             <Gap height={20} width={0} />
             <div className={styles.wrapperBtnModal}>
