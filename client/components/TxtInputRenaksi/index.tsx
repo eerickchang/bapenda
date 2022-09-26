@@ -5,6 +5,7 @@ interface InputProps {
   title: string;
   placeholder: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  value: string;
 }
 
 export default function TxtInputRenaksi(props: InputProps) {
@@ -12,12 +13,18 @@ export default function TxtInputRenaksi(props: InputProps) {
     title = "Program",
     placeholder = "masukan program yang akan dilakukan",
     onChange,
+    value,
   } = props;
 
   return (
     <div className={styles.container}>
       <p>{title}</p>
-      <input type="text" placeholder={placeholder} onChange={onChange} />
+      <input
+        type="text"
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      />
     </div>
   );
 }

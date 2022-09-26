@@ -1,6 +1,6 @@
 import stylesS from "./ContentDaftarkegiatan.module.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
 import Image from "next/image";
+import moment from "moment";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
@@ -254,8 +255,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.fat}</TableCell>
         <TableCell>{row.carbs}</TableCell>
         <TableCell>{row.protein}</TableCell>
+        <TableCell>{row.program}</TableCell>
+        <TableCell>{row.kegiatan}</TableCell>
+        <TableCell>{row.sub_kegiatan}</TableCell>
+        <TableCell>{row.tupoksi_tambahan}</TableCell>
+        <TableCell>{row.thl}</TableCell>
         <TableCell>{row.protein1}</TableCell>
-        <TableCell>{row.protein2}</TableCell>
+        <TableCell>{row.status}</TableCell>
       </TableRow>
       <TableContainer
         style={{
@@ -516,12 +522,36 @@ export default function ContentDaftarKegiatan() {
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
 
+  const shouldLog = useRef(true);
   useEffect(() => {
-    setDomLoaded(true);
-    Axios.get("http://localhost:3001/masuk").then((response) => {
-      setAsn(response.data.user[0]);
-      setImage(response.data.user[0].foto);
-    });
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      setDomLoaded(true);
+      Axios.get("http://localhost:3001/masuk").then((response) => {
+        setAsn(response.data.user[0]);
+        setImage(response.data.user[0].foto);
+
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (
+              response.data.user[0].nip === item.nip &&
+              moment(item.end_date).format("YYYY") === moment().format("YYYY")
+            ) {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        });
+      });
+      // Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+      //   result.data.map((item) => {
+      //     setDataRenaksi((nextData) => {
+      //       return [...nextData, item];
+      //     });
+      //   });
+      // });
+    }
   }, []);
 
   return (

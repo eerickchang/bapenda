@@ -6,12 +6,7 @@ import btnStyles from "../Button/button.module.css";
 import Gap from "../Gap";
 import TxtInputRenaksi from "../TxtInputRenaksi";
 import styles from "./ContentInputRenaksiP.module.css";
-import Select, {
-  components,
-  DropdownIndicatorProps,
-  useStateManager,
-} from "react-select";
-import { colors } from "react-select/dist/declarations/src/theme";
+import Select from "react-select";
 import Axios from "axios";
 
 import { styled } from "@mui/material/styles";
@@ -76,8 +71,10 @@ export default function ContentInputRenaksiP() {
   const [inSubKegiatan, setInSubKegiatan] = useState("");
   const [nip, setNip] = useState("");
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
-  const [thl, setThl] = useState();
+  const [thl, setThl] = useState("");
   const [rencana, setRencana] = useState("");
+
+  const selectInputRef = useRef();
 
   const btnUnggah = () => {
     Axios.post("http://localhost:3001/inputRenaksi", {
@@ -94,7 +91,14 @@ export default function ContentInputRenaksiP() {
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
+    setInProgram("");
+    setInKegiatan("");
+    setInTupoksiInti("");
+    setInSubKegiatan("");
+    // selectInputRef.current.select.clearValue();
+    // setInTupoksiTambahan("");
     // console.log(rencana);
+    // document.getElementById("inputFieldTupoksiTambahan")?.nodeValue = "";
   };
   // });
   // useEffect(() => {
@@ -146,82 +150,6 @@ export default function ContentInputRenaksiP() {
   //!modals
   const [showModal, setShowModal] = useState(false);
 
-  //!NAMA THL
-  const [namaTHL, setNamaTHL] = useState([
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      nama: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-  ]);
-
   const [activeFormat, setActiveFormat] = useState(false);
 
   const optionsTupoksi = [
@@ -237,109 +165,6 @@ export default function ContentInputRenaksiP() {
       value: "lainnya",
       label: "Lainnya",
       // customAbbreviation: <Image src={"/Input2.svg"} width={50} height={50} />,
-    },
-  ];
-
-  const optionsTHL = [
-    {
-      value: "geo",
-      label: "George Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "andre",
-      label: "Andreas Waani",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "poco",
-      label: "Ryan Mamitoho",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "ando",
-      label: "Rolando",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "lomo",
-      label: "Salomo",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "geral",
-      label: "Gerald W",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "gerry",
-      label: "Gerry W",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "monic",
-      label: "Monica T",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "veren",
-      label: "Verren K",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "abe",
-      label: "Abelard P",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "ryan",
-      label: "Mamitoho",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "jere",
-      label: "Jeremia W",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "geoo",
-      label: "Georrge Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "andreee",
-      label: "Andreeeeas Waani",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "pocooo",
-      label: "Ryan Mamitohooo",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "geeeo",
-      label: "Geeeorge Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "annndre",
-      label: "Annndreas W",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "poccco",
-      label: "Ryannn Mamitoho",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "geop",
-      label: "Georgep Olaf",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
-    },
-    {
-      value: "andrre",
-      label: "Andrreas Waani",
-      image: <Image src="/SidebarProfile.svg" width={50} height={50} />,
     },
   ];
 
@@ -532,18 +357,21 @@ export default function ContentInputRenaksiP() {
             title="Program"
             placeholder="masukan program yang akan dilakukan"
             onChange={(e) => setInProgram(e.target.value)}
+            value={inProgram}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Kegiatan"
             placeholder="masukan kegiatan yang akan dilakukan"
             onChange={(e) => setInKegiatan(e.target.value)}
+            value={inKegiatan}
           />
           <Gap height={56} width={0} />
           <TxtInputRenaksi
             title="Tupoksi Inti"
             placeholder="masukan tupoksi inti yang akan dilakukan"
             onChange={(e) => setInTupoksiInti(e.target.value)}
+            value={inTupoksiInti}
           />
         </div>
         <Gap height={0} width={100} />
@@ -567,14 +395,15 @@ export default function ContentInputRenaksiP() {
               </div>
             </div>
           </div> */}
-          <p className={styles.titleTupoksi}>THL</p>
           {/* <Gap width={0} height={5}/>  */}
-          <Select
+          {/* <Select
             downChevron
             menuShouldBlockScroll={false}
-            onChange={(e) => {
-              e.length === 0 ? console.log("Empty Array") : setThl(e.id);
-            }}
+            // onChange={(e) => {
+              //   e.length === 0 ? console.log("Empty Array") : setThl(e.id);
+            // }}
+            // value={thl}
+            onChange={(e) => setThl(e.id)}
             // menuShouldScrollIntoView={false}
             formatOptionLabel={formatOptionTHL}
             options={portate}
@@ -582,27 +411,49 @@ export default function ContentInputRenaksiP() {
             components={{
               DropdownIndicator: null,
               ClearIndicator: null,
-              options: optionsTHL,
             }}
+            placeholder={
+              <div className={styles.placeholder}>
+              pilih THL yang akan bertugas
+              </div>
+            }
+          /> */}
+          <TxtInputRenaksi
+            title="Sub Kegiatan"
+            placeholder="masukan sub kegiatan yang akan dilakukan"
+            onChange={(e) => setInSubKegiatan(e.target.value)}
+            value={inSubKegiatan}
+          />
+
+          <Gap height={56} width={0} />
+          <p className={styles.titleTupoksi}>THL</p>
+          <Select
+            downChevron
+            menuShouldBlockScroll={false}
+            formatOptionLabel={formatOptionTHL}
+            components={{
+              DropdownIndicator: null,
+              ClearIndicator: null,
+            }}
+            styles={customStylesTHL}
+            options={portate}
             placeholder={
               <div className={styles.placeholder}>
                 pilih THL yang akan bertugas
               </div>
             }
-          />
-
-          <Gap height={56} width={0} />
-          <TxtInputRenaksi
-            title="Sub Kegiatan"
-            placeholder="masukan sub kegiatan yang akan dilakukan"
-            onChange={(e) => setInSubKegiatan(e.target.value)}
+            onChange={(e) => setThl(e.id)}
           />
           <Gap height={56} width={0} />
           <p className={styles.titleTupoksi}>Tupoksi tambahan</p>
           <Select
+            downChevron
+            menuShouldBlockScroll={false}
             formatOptionLabel={formatOptionLabelTupoksi}
-            components={{ DropdownIndicator: null }}
-            // ClearIndicator
+            components={{
+              DropdownIndicator: null,
+              ClearIndicator: null,
+            }}
             styles={customStyles}
             options={optionsTupoksi}
             placeholder={
@@ -612,6 +463,7 @@ export default function ContentInputRenaksiP() {
             }
             onChange={(e) => setInTupoksiTambahan(e?.label)}
           />
+
           {/* <TxtInputRenaksi
             title="Tupoksi Tambahan"
             placeholder="pilih tupoksi tambahan yang akan dilakukan"

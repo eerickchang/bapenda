@@ -57,7 +57,7 @@ export default function ProfileKanan(props: ProfileKananProps) {
           // window.location.href = data.image;
           setImage(`/${data.image}`);
 
-          console.log(data.image);
+          console.log("Success: ", data.image);
 
           Axios.post("http://localhost:3001/simpanFotoDB", {
             foto: `/${data.image}`,
