@@ -21,7 +21,7 @@ export default function Dashboard() {
       shouldLog.current = false;
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        setNama(response.data.user[0].nama);
+        console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -75,7 +75,7 @@ export default function Dashboard() {
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
       {/* {console.log(nama)} */}
-      <SidebarStaff  kotakHome={sidebarStyles.kotakAktif} />
+      <SidebarStaff kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <DashboardHeader

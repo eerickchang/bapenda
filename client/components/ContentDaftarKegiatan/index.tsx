@@ -18,6 +18,7 @@ import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
 import next from "next";
+import { classNames } from "react-select/dist/declarations/src/utils";
 
 Axios.defaults.withCredentials = true;
 
@@ -255,7 +256,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
         <TableCell>{row.tupoksi_tambahan}</TableCell>
-        <TableCell>{row.thl}</TableCell>
+        <TableCell>{row.nama}</TableCell>
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.status}</TableCell>
       </TableRow>
@@ -484,31 +485,129 @@ export default function ContentDaftarKegiatan() {
   const filter = [
     {
       id: 1,
-      status: "Jadwal diubah",
+      status: "Semua",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (
+              moment(item.end_date).format("YYYY") === moment().format("YYYY")
+            ) {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
     },
-
     {
       id: 2,
-      status: "Sementara",
+      status: "Jadwal diubah",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 3,
-      status: "Menunggu",
+      status: "Sementara",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 4,
-      status: "Selesai",
+      status: "Menunggu",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 5,
-      status: "Hapus",
+      status: "Selesai",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 6,
+      status: "Hapus",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
+    },
+
+    {
+      id: 7,
       status: "Ditambah",
     },
   ];
@@ -518,6 +617,7 @@ export default function ContentDaftarKegiatan() {
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [contoh, setContoh] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -531,7 +631,6 @@ export default function ContentDaftarKegiatan() {
         Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
           result.data.map((item) => {
             if (
-              response.data.user[0].nip === item.nip &&
               moment(item.end_date).format("YYYY") === moment().format("YYYY")
             ) {
               setDataRenaksi((nextData) => {
@@ -541,13 +640,6 @@ export default function ContentDaftarKegiatan() {
           });
         });
       });
-      // Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-      //   result.data.map((item) => {
-      //     setDataRenaksi((nextData) => {
-      //       return [...nextData, item];
-      //     });
-      //   });
-      // });
     }
   }, []);
 
@@ -600,7 +692,9 @@ export default function ContentDaftarKegiatan() {
                   onClick={() => setActiveDropdown(false)}
                 >
                   {filter.map((item) => (
-                    <p key={item.id}>{item.status}</p>
+                    <p key={item.id} onClick={item.onclick}>
+                      {item.status}
+                    </p>
                   ))}
                 </div>
               )}
