@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-left: 40px;
+  padding-left: 180px;
 }
 .wrapperTitleDaftarKegiatan {
   display: flex;
@@ -70,6 +70,7 @@
   position: absolute;
   background-color: #fff;
   top: 55px;
+  z-index: 1000;
 }
 
 .wrapperSelectStatus p {

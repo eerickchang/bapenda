@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styles from "./cDaftarKegiatanSubid.module.css";
 
-
-import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,127 +17,108 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-
-  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
-  // const custom = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 362,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
-
-  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
-  // const customUbah = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 433,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
 
   //style row
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
+  const rows = [
+    {
+      nama: "andre",
+      tupoksi_inti: "andre",
+      tupoksi_tambahan: "andre",
+      kegiatan: "andre",
+      sub_kegiatan: "andre",
+      sub_kegiatan1: "andre",
+      sub_kegiatan2: "andre",
+      status: "andre",
+    },
+    {
+      nama: "andre",
+      tupoksi_inti: "andre",
+      tupoksi_tambahan: "andre",
+      kegiatan: "andre",
+      sub_kegiatan: "andre",
+      sub_kegiatan1: "andre",
+      sub_kegiatan2: "andre",
+      status: "andre",
+    },
+    {
+      nama: "andre",
+      tupoksi_inti: "andre",
+      tupoksi_tambahan: "andre",
+      kegiatan: "andre",
+      sub_kegiatan: "andre",
+      sub_kegiatan1: "andre",
+      sub_kegiatan2: "andre",
+      status: "andre",
+    },
+    {
+      nama: "andre",
+      tupoksi_inti: "andre",
+      tupoksi_tambahan: "andre",
+      kegiatan: "andre",
+      sub_kegiatan: "andre",
+      sub_kegiatan1: "andre",
+      sub_kegiatan2: "andre",
+      status: "andre",
+    },
+  ];
   return (
     <React.Fragment>
-      <TableRow
-        className={`${styleTable.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(
-                  `${styleTable.tableRow} ${styleTable.tableRowClick}`
-                ),
-                setRowClick(!rowClik))
-              : (setStyleRow(styleTable.tableRow), setRowClick(!rowClik));
-          }
-        }}
-        sx={{ "& > *": { borderBottom: "" } }}
-      >
-        <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            <Image src={"/Check-circle.svg"} width={40} height={40} />
-            {/* //!{ambil data} */}
-            <div style={{ marginLeft: 10 }}>
-              <p className={styleTable.rekanNama}>{row.nama}</p>
-              <p className={styleTable.rekanPegawai}>jabatan</p>
-              <p className={styleTable.rekanAsn}>ASN</p>
+      {rows.map((row) => (
+        <TableRow
+          className={`${styleTable.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(
+                    `${styleTable.tableRow} ${styleTable.tableRowClick}`
+                  ),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styleTable.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          <TableCell>
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              <Image src={"/Check-circle.svg"} width={40} height={40} />
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={styleTable.rekanNama}>{ro.nama}</p>
+                <p className={styleTable.rekanPegawai}>jabatan</p>
+                <p className={styleTable.rekanAsn}>ASN</p>
+              </div>
             </div>
-          </div>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTupoksi}>Inti</p>
-          <p className={styleTable.styleTxtRow}>{row.tupoksi_inti}</p>
-          <p className={styleTable.styleTupoksiTambahan}>Tambahan</p>
-          <p className={styleTable.styleTxtRow}>{row.tupoksi_tambahan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={styleTable.styleTxtRow}>{row.status}</p>
-        </TableCell>
-      </TableRow>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTupoksi}>Inti</p>
+            <p className={styleTable.styleTxtRow}>{row.tupoksi_inti}</p>
+            <p className={styleTable.styleTupoksiTambahan}>Tambahan</p>
+            <p className={styleTable.styleTxtRow}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTxtRow}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTxtRow}>{row.sub_kegiatan1}</p>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTxtRow}>{row.sub_kegiatan2}</p>
+          </TableCell>
+          <TableCell>
+            <p className={styleTable.styleTxtRow}>{row.status}</p>
+          </TableCell>
+        </TableRow>
+      ))}
       <TableContainer
         style={{
           width: 1680,
@@ -150,44 +129,43 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
       >
         {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+        {/* <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
           <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
+          style={{
+            background: "rgba(232, 232, 232, 1)",
+            borderTopColor: "rgba(165, 165, 165, 0.5)",
+            borderTopWidth: 2,
+            borderTopStyle: "solid",
+            marginBottom: 35,
+          }}
+          in={open}
+          timeout="auto"
           >
-            <TableRow>
-              <div className={styleTable.wrapperExpand}>
-                <div className={styleTable.wrapperTanggapan}>
-                  <p>Tanggapan:</p>
-                  <p className={styleTable.txtTanggapan}>
-                    Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
+          <TableRow>
+          <div className={styleTable.wrapperExpand}>
+          <div className={styleTable.wrapperTanggapan}>
+          <p>Tanggapan:</p>
+          <p className={styleTable.txtTanggapan}>
+          Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
                     yang diberikan tidak dapat diterima
-                  </p>
+                    </p>
                 </div>
                 <div className={styleTable.wrapperLampiran}>
                   <p>Lampiran:</p>
                   <p></p>
-                </div>
+                  </div>
                 <div className={styleTable.wrapperRencanaUbah}>
                   <p>Rencana Ubah Jadwal:</p>
                   <p></p>
-                </div>
-              </div>
-            </TableRow>
-          </Collapse>
-        </TableCell>
+                  </div>
+                  </div>
+                  </TableRow>
+                  </Collapse>
+                </TableCell> */}
       </TableContainer>
     </React.Fragment>
   );
 }
-
 
 export default function CDaftarKegiatanSubid() {
   const router = useRouter();
@@ -339,6 +317,8 @@ export default function CDaftarKegiatanSubid() {
     setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
   };
+
+  const [dataRenaksi, setDataRenaksi] = useState([]);
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleDaftarKegiatan}>
@@ -370,10 +350,51 @@ export default function CDaftarKegiatanSubid() {
           </div>
         )}
       </div>
+      <TableContainer
+        style={{
+          paddingLeft: 40,
+          paddingRight: 40,
+          zIndex: 998,
+          marginTop: 180,
+        }}
+      >
+        <Table sx={{ tableLayout: "fixed" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Program
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Kegiatan
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Sub Kegiatan
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Tupoksi
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Rekan
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Rencana
+              </TableCell>
+              <TableCell className={styleTable.headerTable} width={0}>
+                Status
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {dataRenaksi.map((row) => (
+              <Row key={row.id_renaksi} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* <div></div>
       <div></div>
       <div></div>
-      <div></div>
-      <div></div>
+      <div></div> */}
     </div>
   );
 }
