@@ -163,11 +163,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  //select row
   const [selectedFile, setSelectedFile] = useState(null);
-
-  //simpan keterangan pegawai
   const [ketPegawai, setKetPegawai] = useState("");
+  const [image, setImage] = useState("");
 
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -295,13 +293,54 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell>
           <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            <Image src={"/Check-circle.svg"} width={40} height={40} />
-            {/* {ambil data} */}
+            {/* {row.thl === null ? console.log("oke") : console.log("tidak oke")} */}
+            {!image ? (
+              <Image
+                src={"/SidebarProfile.svg"}
+                width={40}
+                height={40}
+                alt="User 2"
+                style={{ borderRadius: 40 }}
+              />
+            ) : (
+              <Image
+                src={image}
+                width={40}
+                height={40}
+                alt="User 2"
+                style={{ borderRadius: 40 }}
+              />
+            )}
             <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama}</p>
-              <p className={stylesS.rekanPegawai}>jabatan</p>
+              <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+              <p className={stylesS.rekanPegawai}>THL</p>
             </div>
           </div>
+
+          {/* <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            {}
+            {!image ? (
+              <Image
+                src={"/SidebarProfile.svg"}
+                width={40}
+                height={40}
+                alt="User 2"
+                style={{ borderRadius: 40 }}
+              />
+            ) : (
+              <Image
+                src={image}
+                width={40}
+                height={40}
+                alt="User 2"
+                style={{ borderRadius: 40 }}
+              />
+            )}
+            <div style={{ marginLeft: 10 }}>
+              <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+              <p className={stylesS.rekanPegawai}>THL</p>
+            </div>
+          </div> */}
         </TableCell>
         <TableCell>
           {/* ambil data rencana */}
@@ -658,6 +697,7 @@ export default function ContentDaftarKegiatan() {
     {
       id: 7,
       status: "Ditambah",
+      onclick: () => console.log(dataRenaksi),
     },
   ];
 
