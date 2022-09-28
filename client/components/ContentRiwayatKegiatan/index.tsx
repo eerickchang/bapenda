@@ -179,11 +179,27 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       >
         <TableCell>
           <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            <Image src={"/Check-circle.svg"} width={40} height={40} />
+            {row.foto === "" ? (
+              <Image
+                src={"/SidebarProfile.svg"}
+                width={70}
+                height={70}
+                alt="User 2"
+                style={{ borderRadius: 150 }}
+              />
+            ) : (
+              <Image
+                src={row.foto}
+                width={70}
+                height={70}
+                alt="User 2"
+                style={{ borderRadius: 150 }}
+              />
+            )}
             {/* //!{ambil data} */}
             <div style={{ marginLeft: 10 }}>
               <p className={stylesS.rekanNama}>{row.nama}</p>
-              <p className={stylesS.rekanPegawai}>jabatan</p>
+              <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
               <p className={stylesS.rekanAsn}>ASN</p>
             </div>
           </div>
@@ -302,7 +318,7 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 1,
       tahun: "2015",
-      onclick: () => setThnSkrg("2015"),
+      onclick: () => console.log(dataRenaksi),
     },
     {
       id: 2,

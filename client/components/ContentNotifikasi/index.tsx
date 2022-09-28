@@ -4,7 +4,7 @@ import styles from "./contentNotifikasi.module.css";
 import Gap from "../Gap";
 
 export default function ContentNotifikasi() {
-  const data= [
+  const data = [
     {
       id: 1,
       nama: "Olvie Atteng S.E., M.SI.",
@@ -55,12 +55,12 @@ export default function ContentNotifikasi() {
   ];
   return (
     <div className={styles.container}>
-      <Gap height={50} width={0}/>
+      <Gap height={50} width={0} />
       <div className={styles.wrapperTitleInputRenaksi}>
         <Image src={"/IconNotif.svg"} width={50} height={50} />
         <p className={styles.txtTitle}>Notifikasi</p>
       </div>
-      <Gap height={40} width={0}/>
+      <Gap height={40} width={0} />
       {data.map((item) => (
         <div key={item.id} className={styles.wrapperNotif}>
           <div className={styles.contentNotif}>
@@ -70,8 +70,23 @@ export default function ContentNotifikasi() {
               <p className={styles.txtJabatan}>{item.jabatan}</p>
               <p className={styles.txtPesan}>{item.pesan}</p>
             </div>
-            <div style={{ flexDirection: 'column', marginLeft: 100, position: 'absolute', right: 80}}>
-              <p style={{ fontWeight: 500, fontFamily: 'Poppins', color: 'rgba(0, 45, 161, 1)'}}>08.00 Pagi, 12 juli 2022</p>
+            <div
+              style={{
+                flexDirection: "column",
+                marginLeft: 100,
+                position: "absolute",
+                right: 80,
+              }}
+            >
+              <p
+                style={{
+                  fontWeight: 500,
+                  fontFamily: "Poppins",
+                  color: "rgba(0, 45, 161, 1)",
+                }}
+              >
+                08.00 Pagi, 12 juli 2022
+              </p>
               <div className={styles.styleStatusDiterima}>Diterima</div>
               <div className={styles.styleStatusDitolak}>Ditolak</div>
             </div>
