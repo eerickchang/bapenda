@@ -422,7 +422,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
       </TableContainer>
 
-      {/* MODAL UNGGAH LAPORAN */}
+      {/* //? MODAL UNGGAH LAPORAN */}
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -474,7 +474,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </div>
       ) : null}
 
-      {/* MODAL UBAH JADWAL */}
+      {/* //?  MODAL UBAH JADWAL */}
       <Modal
         isOpen={modalUbahJadwalIsOpen}
         onAfterOpen={afterOpenModalUbah}
@@ -487,7 +487,17 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           className={styles.inputBuktiLap_Ubah}
           placeholder="Tambah keterangan untuk mengubah jadwal"
         />
-        <div>
+        <div style={{ flexDirection: "row", display: "flex", marginTop: -10 }}>
+          <div className={styles.wrapperPickMonth}>
+            <div>
+              <p>Dari tanggal*</p>
+              <input type="month" />
+            </div>
+            <div style={{ marginRight: 88, marginLeft: 50}}>
+              <p>Sampai tanggal*</p>
+              <input type="month" />
+            </div>
+          </div>
           <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
         </div>
         {/* <div className={styles.wrapperBtnModal}> */}
@@ -523,7 +533,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </div>
       ) : null}
 
-      {/* MODAL HAPUS RENAKSI */}
+      {/* //?  MODAL HAPUS RENAKSI */}
       <Modal
         isOpen={modalHapusRenaksiIsOpen}
         onAfterOpen={afterOpenModalHapus}

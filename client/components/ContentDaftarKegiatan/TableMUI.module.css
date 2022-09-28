@@ -133,7 +133,7 @@
 }
 
 .inputBuktiLap_Ubah {
-  height: 133px;
+  height: 120px;
   width: 755px;
   border: 1px solid black;
   margin-bottom: 35px;
@@ -269,6 +269,8 @@
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 26px;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
 /* MODAL BERHASIL LAMPIRKAN LAPORAN */
@@ -353,4 +355,36 @@
   position: absolute;
   top: 22px;
   left: 515px;
+}
+
+
+
+
+
+.wrapperPickMonth {
+  display: flex;
+  /* margin-top: -10px; */
+}
+.wrapperPickMonth {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.wrapperPickMonth p{
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.wrapperPickMonth input {
+  padding: 10px;
+  background-color: rgba(223, 223, 223, 0.43);
+  border: 1px solid rgba(27, 221, 187, 1);
+  border-radius: 10px;
+  width: 210px;
+  height: 40px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(148, 148, 148, 1);
 }
