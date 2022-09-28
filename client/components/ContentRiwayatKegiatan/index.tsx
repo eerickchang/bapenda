@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import stylesS from "./ContentRiwayatKegiatan.module.css";
 
 import Collapse from "@mui/material/Collapse";
@@ -12,6 +12,8 @@ import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 import Axios from "axios";
+import moment from "moment";
+import XLSX from "xlsx";
 
 Axios.defaults.withCredentials = true;
 
@@ -173,13 +175,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
-        <TableCell>{row.name}</TableCell>
-        <TableCell>{row.calories}</TableCell>
-        <TableCell>{row.fat}</TableCell>
-        <TableCell>{row.carbs}</TableCell>
-        <TableCell>{row.protein}</TableCell>
+        <TableCell>{row.program}</TableCell>
+        <TableCell>{row.kegiatan}</TableCell>
+        <TableCell>{row.sub_kegiatan}</TableCell>
+        <TableCell>{row.tupoksi_tambahan}</TableCell>
+        <TableCell>{row.nama}</TableCell>
         <TableCell>{row.protein1}</TableCell>
-        <TableCell>{row.protein2}</TableCell>
+        <TableCell>{row.status}</TableCell>
       </TableRow>
       <TableContainer
         style={{
@@ -233,13 +235,33 @@ export const ContentRiwayatKegiatan = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
+  const [thnSkrg, setThnSkrg] = useState("");
+  const [dataRenaksi, setDataRenaksi] = useState([]);
 
+  const shouldLog = useRef(true);
   useEffect(() => {
-    setDomLoaded(true);
-    Axios.get("http://localhost:3001/masuk").then((response) => {
-      setAsn(response.data.user[0]);
-    });
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      setDomLoaded(true);
+      setThnSkrg(moment().format("YYYY"));
+      Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+        result.data.map((item) => {
+          if (
+            moment(item.end_date).format("YYYY") === moment().format("YYYY")
+          ) {
+            setDataRenaksi((nextData) => {
+              return [...nextData, item];
+            });
+          }
+        });
+      });
+    }
   }, []);
+
+  const btnFilterBulan = () => {
+    // setActiveDropdownBulan(!activeDropdownBulan);
+    console.log(dataRenaksi);
+  };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownBulan, setActiveDropdownBulan] = useState(false);
@@ -249,6 +271,7 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 1,
       tahun: "2015",
+      onclick: () => setThnSkrg("2015"),
     },
     {
       id: 2,
@@ -269,14 +292,53 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 6,
       tahun: "2020",
+      onclick: () => (
+        setThnSkrg("2020"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2020") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 7,
       tahun: "2021",
+      onclick: () => (
+        setThnSkrg("2021"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2021") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 8,
       tahun: "2022",
+      onclick: () => (
+        setThnSkrg("2022"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2022") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 9,
@@ -342,10 +404,26 @@ export const ContentRiwayatKegiatan = () => {
     },
   ];
 
+  const btnDwExcel = () => {
+    const workSheet = XLSX.utils.json_to_sheet(dataRenaksi);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "dataRenaksi");
+
+    //BUFFER
+    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
+
+    //BINARY STRING
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
+
+    //DOWNLOAD
+    XLSX.writeFile(workBook, "DataRenaksi.xlsx");
+  };
+
   const unduh = [
     {
       id: 1,
       unduh: "Excel",
+      onclick: btnDwExcel,
       // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
     },
     {
@@ -362,7 +440,9 @@ export const ContentRiwayatKegiatan = () => {
           <div className={stylesS.container}>
             <div className={stylesS.wrapperRiwayatKegiatan}>
               <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>RIWAYAT KEGIATAN TAHUN 2021 </p>
+              <p className={stylesS.txtTitle}>
+                RIWAYAT KEGIATAN TAHUN {thnSkrg}{" "}
+              </p>
             </div>
             <Gap height={153} width={0} />
             <div className={stylesS.wrapperFilter}>
@@ -380,15 +460,17 @@ export const ContentRiwayatKegiatan = () => {
                     onClick={() => setActiveDropdownTahun(false)}
                   >
                     {tahun.map((item) => (
-                      <p key={item.id}>{item.tahun}</p>
+                      <p key={item.id} onClick={item.onclick}>
+                        {item.tahun}
+                      </p>
                     ))}
                   </div>
                 )}
               </div>
-              <div className={stylesS.wrapperFilterBulan}>
+              {/* <div className={stylesS.wrapperFilterBulan}>
                 <div
                   className={stylesS.btnFilterBulan}
-                  onClick={() => setActiveDropdownBulan(!activeDropdownBulan)}
+                  onClick={btnFilterBulan}
                 >
                   <Image src={"/TahunIcon.svg"} width={23} height={23} />
                   <p>Bulan</p>
@@ -403,7 +485,7 @@ export const ContentRiwayatKegiatan = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className={stylesS.wrapperUnduh}>
                 <div
                   className={stylesS.btnUnduh}
@@ -426,6 +508,7 @@ export const ContentRiwayatKegiatan = () => {
                           fontSize: 22,
                         }}
                         key={item.id}
+                        onClick={item.onclick}
                       >
                         <p>{item.unduh}</p>
                       </div>
@@ -465,8 +548,8 @@ export const ContentRiwayatKegiatan = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <Row key={row.id} row={row} />
+                  {dataRenaksi.map((row) => (
+                    <Row key={row.id_renaksi} row={row} />
                   ))}
                 </TableBody>
               </Table>

@@ -167,140 +167,113 @@ export default function ContentDetailCaKin() {
 
   const rows = [
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'andre',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'erik',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
     },
     {
-      nama: 'erik',
-      jabatan: 'Kabid',
-      bulan: 'januari',
+      nama: "andre",
+      jabatan: "Kabid",
+      bulan: "januari",
       jumlahkegiatan: 10,
       realisasikegiatan: 3,
       belumdilaksanakan: 7,
       hasilkinerja: 30,
-    },
-    {
-      nama: 'erik',
-      jabatan: 'Kabid',
-      bulan: 'januari',
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
-    {
-      nama: 'erik',
-      jabatan: 'Kabid',
-      bulan: 'januari',
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
-    {
-      nama: 'erik',
-      jabatan: 'Kabid',
-      bulan: 'januari',
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
+    }
 
     // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
     // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
@@ -410,9 +383,9 @@ export default function ContentDetailCaKin() {
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
       <TableContainer
         sx={{
-          maxHeight: 766,
+          maxHeight: 810,
           width: 1660,
-          marginTop: 8,
+          marginTop: 4,
           color: "rgba(27, 221, 187, 1)",
           border: 2,
           borderRadius: 6,
@@ -434,7 +407,7 @@ export default function ContentDetailCaKin() {
                     background: "rgba(27, 221, 187, 1)",
                     fontFamily: "Poppins",
                     fontWeight: 600,
-                    fontSize: 23,
+                    fontSize: 22,
                     color: "#fff",
                   }}
                   key={column.id}
@@ -447,10 +420,9 @@ export default function ContentDetailCaKin() {
             </TableRow>
           </TableHead>
           <TableBody>
-
             {/* AMBIL DATA ROW */}
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover>
@@ -539,8 +511,6 @@ export default function ContentDetailCaKin() {
                       {row.hasilkinerja}
                     </TableCell>
 
-
-
                     {/* {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -567,7 +537,7 @@ export default function ContentDetailCaKin() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
         count={rows.length}
@@ -575,8 +545,8 @@ export default function ContentDetailCaKin() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        // style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
-      />
+        style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
+      /> */}
       {/* </Paper> */}
     </div>
   );

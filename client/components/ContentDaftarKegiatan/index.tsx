@@ -17,6 +17,8 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
+import next from "next";
+import { classNames } from "react-select/dist/declarations/src/utils";
 
 Axios.defaults.withCredentials = true;
 
@@ -250,16 +252,17 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
-        <TableCell>{row.name}</TableCell>
-        <TableCell>{row.calories}</TableCell>
-        <TableCell>{row.fat}</TableCell>
-        <TableCell>{row.carbs}</TableCell>
-        <TableCell>{row.protein}</TableCell>
         <TableCell>{row.program}</TableCell>
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
         <TableCell>{row.tupoksi_tambahan}</TableCell>
-        <TableCell>{row.thl}</TableCell>
+        <TableCell>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            <Image src={"/Check-circle.svg"} width={25} height={25} />
+            {/* {ambil data} */}
+            <p style={{marginLeft: 10}}>{row.nama}</p>
+          </div>
+        </TableCell>
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.status}</TableCell>
       </TableRow>
@@ -488,31 +491,129 @@ export default function ContentDaftarKegiatan() {
   const filter = [
     {
       id: 1,
-      status: "Jadwal diubah",
+      status: "Semua",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (
+              moment(item.end_date).format("YYYY") === moment().format("YYYY")
+            ) {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
     },
-
     {
       id: 2,
-      status: "Sementara",
+      status: "Jadwal diubah",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 3,
-      status: "Menunggu",
+      status: "Sementara",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 4,
-      status: "Selesai",
+      status: "Menunggu",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 5,
-      status: "Hapus",
+      status: "Selesai",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
     },
 
     {
       id: 6,
+      status: "Hapus",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") === moment().format("YYYY")
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        )
+      ),
+    },
+
+    {
+      id: 7,
       status: "Ditambah",
     },
   ];
@@ -521,6 +622,8 @@ export default function ContentDaftarKegiatan() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
+  const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [contoh, setContoh] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -534,7 +637,6 @@ export default function ContentDaftarKegiatan() {
         Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
           result.data.map((item) => {
             if (
-              response.data.user[0].nip === item.nip &&
               moment(item.end_date).format("YYYY") === moment().format("YYYY")
             ) {
               setDataRenaksi((nextData) => {
@@ -544,15 +646,13 @@ export default function ContentDaftarKegiatan() {
           });
         });
       });
-      // Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-      //   result.data.map((item) => {
-      //     setDataRenaksi((nextData) => {
-      //       return [...nextData, item];
-      //     });
-      //   });
-      // });
     }
   }, []);
+
+  const btnFilter = () => {
+    setActiveDropdown(!activeDropdown);
+    // console.log(dataRenaksi);
+  };
 
   return (
     <>
@@ -588,10 +688,7 @@ export default function ContentDaftarKegiatan() {
               </div>
             ))}
             <div className={stylesS.wrapperFilter}>
-              <div
-                className={stylesS.btnFilter}
-                onClick={() => setActiveDropdown(!activeDropdown)}
-              >
+              <div className={stylesS.btnFilter} onClick={btnFilter}>
                 <Image src={"/Filter.svg"} width={23} height={23} />
                 <p>Filter</p>
               </div>
@@ -601,7 +698,9 @@ export default function ContentDaftarKegiatan() {
                   onClick={() => setActiveDropdown(false)}
                 >
                   {filter.map((item) => (
-                    <p key={item.id}>{item.status}</p>
+                    <p key={item.id} onClick={item.onclick}>
+                      {item.status}
+                    </p>
                   ))}
                 </div>
               )}
@@ -638,8 +737,8 @@ export default function ContentDaftarKegiatan() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <Row key={row.id} row={row} />
+                {dataRenaksi.map((row) => (
+                  <Row key={row.id_renaksi} row={row} />
                 ))}
               </TableBody>
             </Table>
