@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   BarChart,
   Gap,
@@ -13,19 +13,39 @@ import moment from "moment";
 import Axios from "axios";
 import { useRouter } from "next/router";
 
-
-
 export default function Profil() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
+  const [grafikPersonal, setGrafikPersonal] = useState([]);
 
+  const shouldLog = useRef(true);
   useEffect(() => {
-    let thn = moment().format("YYYY");
-    setTahun(thn);
+    if (shouldLog.current) {
+      shouldLog.current = false;
 
-    Axios.get("http://localhost:3001/masuk").then((response) => {
-      setDataAsn(response.data.user[0]);
-    });
+      let thn = moment().format("YYYY");
+      setTahun(thn);
+
+      Axios.get("http://localhost:3001/masuk").then((response) => {
+        setDataAsn(response.data.user[0]);
+      });
+
+      Axios.get("http://localhost:3001/masuk").then((response) => {
+        console.log(response.data.user[0].nip);
+        Axios.get("http://localhost:3001/cakin").then((result) => {
+          result.data.map((item) => {
+            if (
+              response.data.user[0].nip === item.nip &&
+              moment(item.bulan).format("YYYY") === moment().format("YYYY")
+            ) {
+              setGrafikPersonal((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        });
+      });
+    }
   }, []);
 
   const UserData = [
@@ -126,11 +146,11 @@ export default function Profil() {
   };
 
   const personalChart = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikPersonal?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         indexAxis: "y",
@@ -142,12 +162,10 @@ export default function Profil() {
     ],
   };
 
-  
   const router = useRouter();
   const clickLihatDetail = () => {
     router.push("/Staff/DetailCaKin");
-  }
-
+  };
 
   return (
     <div className={styles.container}>

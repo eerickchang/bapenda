@@ -13,7 +13,9 @@ import Image from "next/image";
 import Gap from "../Gap";
 import Axios from "axios";
 import moment from "moment";
-import XLSX from "xlsx";
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 Axios.defaults.withCredentials = true;
 
@@ -255,6 +257,10 @@ export const ContentRiwayatKegiatan = () => {
           }
         });
       });
+
+      Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
+        setAsn(dataPegawai.data.user[0]);
+      });
     }
   }, []);
 
@@ -416,7 +422,52 @@ export const ContentRiwayatKegiatan = () => {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, "DataRenaksi.xlsx");
+    XLSX.writeFile(workBook, `Data Renaksi ${asn.nama}.xlsx`);
+  };
+
+  const btnDwPDF = () => {
+    const unit = "pt";
+    const size = "A3";
+    const orientation = "portrait";
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = `Data Renaksi ${asn.nama}`;
+    const headers = [
+      [
+        "Program",
+        "Kegiatan",
+        "Sub Kegiatan",
+        "Tupoksi",
+        "Rekan",
+        "Rencana",
+        "Status",
+      ],
+    ];
+
+    const data = dataRenaksi.map((item) => [
+      item.program,
+      item.kegiatan,
+      item.sub_kegiatan,
+      item.tupoksi_tambahan,
+      item.nama,
+      item.end_date,
+      item.status,
+    ]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data,
+      theme: "grid",
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save(`Data Renaksi ${asn.nama}`);
   };
 
   const unduh = [
@@ -429,6 +480,7 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 2,
       unduh: "PDF",
+      onclick: btnDwPDF,
       // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
     },
   ];
