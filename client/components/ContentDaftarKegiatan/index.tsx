@@ -17,8 +17,6 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
-import next from "next";
-import { classNames } from "react-select/dist/declarations/src/utils";
 
 Axios.defaults.withCredentials = true;
 
@@ -255,15 +253,26 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.program}</TableCell>
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
-        <TableCell>{row.tupoksi_tambahan}</TableCell>
+        <TableCell>
+          <p className={stylesS.styleTupoksi}>Inti</p>
+          {row.tupoksi_inti}
+          <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+          {row.tupoksi_tambahan}
+        </TableCell>
         <TableCell>
           <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            <Image src={"/Check-circle.svg"} width={25} height={25} />
+            <Image src={"/Check-circle.svg"} width={40} height={40} />
             {/* {ambil data} */}
-            <p style={{marginLeft: 10}}>{row.nama}</p>
+            <div style={{ marginLeft: 10 }}>
+              <p className={stylesS.rekanNama}>{row.nama}</p>
+              <p className={stylesS.rekanPegawai}>jabatan</p>
+            </div>
           </div>
         </TableCell>
-        <TableCell>{row.protein1}</TableCell>
+        <TableCell>
+          {/* ambil data rencana */}
+          {row.nama} - {row.nama}
+        </TableCell>
         <TableCell>{row.status}</TableCell>
       </TableRow>
       <TableContainer

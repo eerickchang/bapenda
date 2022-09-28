@@ -175,10 +175,25 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
-        <TableCell>{row.program}</TableCell>
+        <TableCell>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            <Image src={"/Check-circle.svg"} width={40} height={40} />
+            {/* {ambil data} */}
+            <div style={{ marginLeft: 10 }}>
+              <p className={stylesS.rekanNama}>{row.nama}</p>
+              <p className={stylesS.rekanPegawai}>jabatan</p>
+              <p className={stylesS.rekanAsn}>ASN</p>
+            </div>
+          </div>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTupoksi}>Inti</p>
+          {row.tupoksi_inti}
+          <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+          {row.tupoksi_tambahan}
+        </TableCell>
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
-        <TableCell>{row.tupoksi_tambahan}</TableCell>
         <TableCell>{row.nama}</TableCell>
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.status}</TableCell>
@@ -525,25 +540,25 @@ export const ContentRiwayatKegiatan = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell className={styles.headerTable} width={0}>
-                      Program
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Sub Kegiatan
+                      Profil
                     </TableCell>
                     <TableCell className={styles.headerTable} width={0}>
                       Tupoksi
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rekan
                     </TableCell>
                     <TableCell className={styles.headerTable} width={0}>
                       Rencana
                     </TableCell>
                     <TableCell className={styles.headerTable} width={0}>
                       Status
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Keterangan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Diajukan
+                    </TableCell>
+                    <TableCell className={styles.headerTable} width={0}>
+                      Kondisi
                     </TableCell>
                   </TableRow>
                 </TableHead>
