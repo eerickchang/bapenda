@@ -290,7 +290,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>{row.kegiatan}</TableCell>
         <TableCell>{row.sub_kegiatan}</TableCell>
         <TableCell>{row.tupoksi_tambahan}</TableCell>
-        <TableCell>{row.nama}</TableCell>
+        <TableCell>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            <Image src={"/Check-circle.svg"} width={25} height={25} />
+            {/* {ambil data} */}
+            <p style={{marginLeft: 10}}>{row.nama}</p>
+          </div>
+        </TableCell>
         <TableCell>{row.protein1}</TableCell>
         <TableCell>{row.status}</TableCell>
       </TableRow>

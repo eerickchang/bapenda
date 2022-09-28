@@ -12,9 +12,11 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Gap from "../Gap";
-import { borderRadius } from "@mui/system";
 import Axios from "axios";
-import { userAgent } from "next/server";
+import moment from "moment";
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 Axios.defaults.withCredentials = true;
 
@@ -24,12 +26,18 @@ export default function ContentDetailCaKin() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/ambilRenaksi").then((response) => {
-        response.data.map((item) => {
-          setDataCakin((nextData) => {
-            return [...nextData, item];
-          });
+      Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+        ambilCakin.data.map((cakin) => {
+          if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
+            setDataCakin((nextData) => {
+              return [...nextData, cakin];
+            });
+          }
         });
+      });
+
+      Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
+        setNama(dataAsn.data.user[0].nama);
       });
     }
   }, []);
@@ -45,38 +53,69 @@ export default function ContentDetailCaKin() {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
 
   const [dataCakin, setDataCakin] = useState([]);
+  const [tahunClick, setTahunClick] = useState("");
+  const [nama, setNama] = useState("");
+
   const tahun = [
-    {
-      id: 1,
-      tahun: "2015",
-    },
-    {
-      id: 2,
-      tahun: "2016",
-    },
-    {
-      id: 3,
-      tahun: "2017",
-    },
-    {
-      id: 4,
-      tahun: "2018",
-    },
-    {
-      id: 5,
-      tahun: "2019",
-    },
     {
       id: 6,
       tahun: "2020",
+      onclick: () => (
+        setTahunClick("2020"),
+        setDataCakin([]),
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY") ===
+              moment("2020").format("YYYY")
+            ) {
+              setDataCakin((nextData) => {
+                return [...nextData, cakin];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 7,
       tahun: "2021",
+      onclick: () => (
+        setTahunClick("2021"),
+        setDataCakin([]),
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY") ===
+              moment("2021").format("YYYY")
+            ) {
+              setDataCakin((nextData) => {
+                return [...nextData, cakin];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 8,
       tahun: "2022",
+      onclick: () => (
+        setTahunClick("2022"),
+        setDataCakin([]),
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY") ===
+              moment("2022").format("YYYY")
+            ) {
+              setDataCakin((nextData) => {
+                return [...nextData, cakin];
+              });
+            }
+          });
+        })
+      ),
     },
     {
       id: 9,
@@ -92,16 +131,78 @@ export default function ContentDetailCaKin() {
     },
   ];
 
+  const btnDwExcel = () => {
+    const workSheet = XLSX.utils.json_to_sheet(dataCakin);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "dataCakin");
+
+    //BUFFER
+    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
+
+    //BINARY STRING
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
+
+    //DOWNLOAD
+    XLSX.writeFile(workBook, `Data Cakin ${nama}.xlsx`);
+  };
+
+  const btnDwPDF = () => {
+    const unit = "pt";
+    const size = "A3";
+    const orientation = "portrait";
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = `Data Cakin ${nama}`;
+    const headers = [
+      [
+        "Nama",
+        "Jabatan",
+        "Bulan",
+        "Jumlah Kegiatan",
+        "Realisasi Kegiatan",
+        "Belum Dilaksanakan",
+        "Hasil Kinerja",
+      ],
+    ];
+
+    const data = dataCakin.map((item) => [
+      item.nama,
+      item.jabatan,
+      moment(item.bulan).format("MMM"),
+      item.jumlah_kegiatan,
+      item.lampiran_disubmit,
+      item.lampiran_bsubmit,
+      item.hasil_kinerja,
+    ]);
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data,
+      theme: "grid",
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save(`Data Cakin ${nama}`);
+  };
+
   const unduh = [
     {
       id: 1,
       unduh: "Excel",
       // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
+      onclick: btnDwExcel,
     },
     {
       id: 2,
       unduh: "PDF",
       // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
+      onclick: btnDwPDF,
     },
   ];
 
@@ -144,26 +245,6 @@ export default function ContentDetailCaKin() {
       // format: (value) => value.toFixed(2),
     },
   ];
-
-  // function createData(
-  //   nama,
-  //   jabatan,
-  //   bulan,
-  //   jumlahkegiatan,
-  //   realisasikegiatan,
-  //   belumdilaksanakan,
-  //   hasilkinerja
-  // ) {
-  //   return {
-  //     nama,
-  //     jabatan,
-  //     bulan,
-  //     jumlahkegiatan,
-  //     realisasikegiatan,
-  //     belumdilaksanakan,
-  //     hasilkinerja,
-  //   };
-  // }
 
   const rows = [
     {
@@ -257,7 +338,7 @@ export default function ContentDetailCaKin() {
       hasilkinerja: 30,
     },
     {
-      nama: "erik",
+      nama: "andre",
       jabatan: "Kabid",
       bulan: "januari",
       jumlahkegiatan: 10,
@@ -266,34 +347,7 @@ export default function ContentDetailCaKin() {
       hasilkinerja: 30,
     },
     {
-      nama: "erik",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
-    {
-      nama: "erik",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
-    {
-      nama: "erik",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
-    },
-    {
-      nama: "erik",
+      nama: "andre",
       jabatan: "Kabid",
       bulan: "januari",
       jumlahkegiatan: 10,
@@ -370,7 +424,9 @@ export default function ContentDetailCaKin() {
                 onClick={() => setActiveDropdownTahun(false)}
               >
                 {tahun.map((item) => (
-                  <p key={item.id}>{item.tahun}</p>
+                  <p key={item.id} onClick={item.onclick}>
+                    {item.tahun}
+                  </p>
                 ))}
               </div>
             )}
@@ -397,6 +453,7 @@ export default function ContentDetailCaKin() {
                       fontSize: 22,
                     }}
                     key={item.id}
+                    onClick={item.onclick}
                   >
                     <p>{item.unduh}</p>
                   </div>
@@ -410,9 +467,9 @@ export default function ContentDetailCaKin() {
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
       <TableContainer
         sx={{
-          maxHeight: 766,
+          maxHeight: 810,
           width: 1660,
-          marginTop: 8,
+          marginTop: 4,
           color: "rgba(27, 221, 187, 1)",
           border: 2,
           borderRadius: 6,
@@ -434,7 +491,7 @@ export default function ContentDetailCaKin() {
                     background: "rgba(27, 221, 187, 1)",
                     fontFamily: "Poppins",
                     fontWeight: 600,
-                    fontSize: 23,
+                    fontSize: 22,
                     color: "#fff",
                   }}
                   key={column.id}
@@ -448,8 +505,8 @@ export default function ContentDetailCaKin() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            {dataCakin
+              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover>
@@ -487,7 +544,7 @@ export default function ContentDetailCaKin() {
                         fontSize: 18,
                       }}
                     >
-                      {row.bulan}
+                      {moment(row.bulan).format("MMM")}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -499,7 +556,7 @@ export default function ContentDetailCaKin() {
                         fontSize: 18,
                       }}
                     >
-                      {row.jumlahkegiatan}
+                      {row.jumlah_kegiatan}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -511,7 +568,7 @@ export default function ContentDetailCaKin() {
                         fontSize: 18,
                       }}
                     >
-                      {row.realisasikegiatan}
+                      {row.lampiran_disubmit}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -523,7 +580,7 @@ export default function ContentDetailCaKin() {
                         fontSize: 18,
                       }}
                     >
-                      {row.belumdilaksanakan}
+                      {row.lampiran_bsubmit}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -535,7 +592,7 @@ export default function ContentDetailCaKin() {
                         fontSize: 18,
                       }}
                     >
-                      {row.hasilkinerja}
+                      {row.hasil_kinerja}
                     </TableCell>
 
                     {/* {columns.map((column) => {
@@ -564,7 +621,7 @@ export default function ContentDetailCaKin() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
         count={rows.length}
@@ -572,8 +629,8 @@ export default function ContentDetailCaKin() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        // style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
-      />
+        style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
+      /> */}
       {/* </Paper> */}
     </div>
   );

@@ -519,7 +519,7 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
-              <div className={stylesS.wrapperFilterBulan}>
+              {/* <div className={stylesS.wrapperFilterBulan}>
                 <div
                   className={stylesS.btnFilterBulan}
                   onClick={btnFilterBulan}
@@ -537,7 +537,7 @@ export const ContentRiwayatKegiatan = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className={stylesS.wrapperUnduh}>
                 <div
                   className={stylesS.btnUnduh}

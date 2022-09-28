@@ -151,15 +151,10 @@
   background-color: #1bddbb;
 }
 
-
-
-.selectTupoksi{
+.selectTupoksi {
   /* border: none; */
   /* height: 20px; */
 }
-
-
-
 
 .dropdownTupoksi {
   position: absolute;
@@ -193,7 +188,7 @@
   visibility: visible;
 }
 
-.selectTupoksi{
+.selectTupoksi {
   opacity: 1;
 }
 
@@ -306,27 +301,22 @@
   z-index: 1;
 } */
 
-
-
 /* placeholder_select_tupoksi */
-.placeholder{
+.placeholder {
   color: rgba(165, 165, 165, 0.81);
   margin-left: -10px;
   /* margin-top: 30px; */
   /* padding-top: -100px; */
 }
 
-
-.titleTupoksi{
+.titleTupoksi {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 24px;
   color: #4a4a4a;
 }
 
-
-
-.formatOptionTupoksi{
+.formatOptionTupoksi {
   /* display:flex; */
   padding: 0;
   margin: 0;
@@ -340,41 +330,41 @@
   margin-top: 100;
 }
 
-.headerTxtModal{
-  font-family: 'Poppins', sans-serif;
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 26px;
 }
 
-.inputBuktiLap{
+.inputBuktiLap {
   height: 133px;
   width: 755px;
 }
 
-.inputBuktiLap::placeholder{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap::placeholder {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
 }
 
-.inputBuktiLap:focus{
-  font-family: 'Poppins', sans-serif;
+.inputBuktiLap:focus {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   outline: none;
 }
 
-.wrapperBtnModal{
+.wrapperBtnModal {
   display: inline-flex;
 }
 
-.btnBatal{
+.btnBatal {
   background-color: rgba(255, 1, 100, 1);
   width: 170px;
   height: 34px;
   border: none;
   border-radius: 4px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -383,13 +373,13 @@
   align-items: center;
 }
 
-.btnKirim{
+.btnKirim {
   background-color: rgba(27, 221, 187, 1);
   width: 170px;
   height: 34px;
   border: none;
   border-radius: 4px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -398,15 +388,15 @@
   align-items: center;
 }
 
-.btnKirim p{
-  font-family: 'Poppins', sans-serif;
+.btnKirim p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
 }
 
-.btnBatal p{
-  font-family: 'Poppins', sans-serif;
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   margin-left: 12px;
@@ -417,3 +407,37 @@
   padding-left: 30px;
   color: 'white';
 } */
+
+.monthPicker {
+  font-family: sans-serif;
+  text-align: left;
+  max-width: 300px;
+  margin: 20px auto;
+  line-height: 1.5;
+}
+
+.wrapperPickMonth {
+  display: flex;
+  margin-top: -10px;
+}
+.wrapperPickMonth {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.wrapperPickMonth input {
+  padding: 20px;
+  background-color: rgba(223, 223, 223, 0.43);
+  border: 1px solid rgba(27, 221, 187, 1);
+  border-radius: 10px;
+  width: 446px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: rgba(148, 148, 148, 1);
+}
+
+
+
+

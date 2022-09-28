@@ -20,6 +20,8 @@ export default function Dashboard() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
+      setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
+
       Axios.get("http://localhost:3001/masuk").then((response) => {
         console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
@@ -104,6 +106,7 @@ export default function Dashboard() {
   const [jlhKegiatan, setJlhKegiatan] = useState([]);
   const [lprSubmit, setLprSubmit] = useState([]);
   const [blmSubmit, setBlmSubmit] = useState([]);
+  const [prevMonth, setPrevMonth] = useState("");
 
   const userData = {
     labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
@@ -138,7 +141,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.contentKanan}>
-        <TopPegawai />
+        <TopPegawai bulan={prevMonth} />
         <BoxNotification />
       </div>
     </div>

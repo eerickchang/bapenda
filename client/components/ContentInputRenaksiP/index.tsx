@@ -11,9 +11,44 @@ import Axios from "axios";
 
 import { styled } from "@mui/material/styles";
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
-import { FormControlLabel, Typography } from "@mui/material";
+
+// import Flatpickr from "react-flatpickr";
+import RangePlugin from "flatpickr/dist/plugins/rangePlugin";
+import "flatpickr/dist/flatpickr.min.css";
+import "flatpickr/dist/themes/light.css";
+
+// import flatpickr from "flatpickr";
+import moment from "moment";
+// const flatpickr = require("flatpickr");
+
+import React from "react";
 
 export default function ContentInputRenaksiP() {
+  // !MONTH PICKER
+  // const [selected, setSelected] = useState(null);
+  // const presets = [
+  //   {
+  //     title: "This month",
+  //     start: moment().startOf("month").toDate(),
+  //     end: moment().endOf("month").toDate(),
+  //   },
+  //   {
+  //     title: "Past 3 months",
+  //     start: moment().subtract(2, "month").startOf("month").toDate(),
+  //     end: moment().endOf("month").toDate(),
+  //   },
+  //   {
+  //     title: "Past 6 months",
+  //     start: moment().subtract(5, "month").startOf("month").toDate(),
+  //     end: moment().endOf("month").toDate(),
+  //   },
+  //   {
+  //     title: "This Year",
+  //     start: moment().startOf("year").toDate(),
+  //     end: moment().endOf("year").toDate(),
+  //   },
+  // ];
+
   // !CHECKBOX RENCANA BULAN
   const BpIcon = styled("span")(({ theme }) => ({
     borderRadius: 10,
@@ -323,6 +358,9 @@ export default function ContentInputRenaksiP() {
     }),
   };
 
+  const [startDate, setStartDate] = useState(new Date("2014/02/08"));
+  const [endDate, setEndDate] = useState(new Date("2090/04/08"));
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleInputRenaksi}>
@@ -464,307 +502,23 @@ export default function ContentInputRenaksiP() {
             onChange={(e) => setInTupoksiTambahan(e?.label)}
           />
 
-          {/* <TxtInputRenaksi
-            title="Tupoksi Tambahan"
-            placeholder="pilih tupoksi tambahan yang akan dilakukan"
-          />
-          <div className={styles.dropdownTupoksi}>
-            <div className={styles.selectTupoksi}>
-              <Image src={"/Dropdown-tupoksi.svg"} width={30} height={30} />
-            </div>
-            <div className={styles.dropdownList}>
-              <div className={styles.dropdownList_item}>
-                <p>See Samrat</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Labeling</p>
-              </div>
-              <div className={styles.dropdownList_item}>
-                <p>Lainnya</p>
-              </div>
-            </div>
-          </div> */}
+          
         </div>
       </div>
-      <Gap height={80} width={0} />
-      {/* <div className={styles.wrapperRencana}>
-        <p className={styles.rencana}>Rencana</p>
+      <Gap height={24} width={0} />
+      <p className={styles.titleTupoksi}>Rencana Pelaksana</p>
+      <div className={styles.wrapperPickMonth}>
         <div>
-          <Button
-            title={"Jan"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Feb"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Mar"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Apr"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Mei"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Jun"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Jul"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Agu"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Sep"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Okt"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Nov"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
-          <Button
-            title={"Des"}
-            onClick={handleClick}
-            className={`${btnStyles.btnType1}`}
-          />
+          <p>Dari tanggal*</p>
+          <input type="month"/>
         </div>
-      </div> */}
-
-      <div>
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Jan
-            </Typography>
-          }
-          control={<BpCheckbox />}
-          onClick={() => {
-            setRencana("Januari");
-          }}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Feb
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Mar
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Apr
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Mei
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Jun
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Jul
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Agu
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Sep
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Okt
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Nov
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
-        <FormControlLabel
-          label={
-            <Typography
-              style={{
-                color: "white",
-                marginLeft: 22,
-                position: "absolute",
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                fontSize: 22,
-              }}
-            >
-              Des
-            </Typography>
-          }
-          control={<BpCheckbox />}
-        />
+        <div style={{ marginLeft: 133 }}>
+          <p>Sampai tanggal*</p>
+          <input type="month" />
+        </div>
       </div>
 
-      <Gap height={30} width={0} />
-
+      {/* <Gap height={30} width={0} /> */}
       {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
@@ -772,9 +526,7 @@ export default function ContentInputRenaksiP() {
         onClick={btnUnggah}
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
-
       {/* <button onClick={openModal}>Open Modal</button> */}
-
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>

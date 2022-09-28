@@ -204,6 +204,7 @@
   color: rgba(255, 1, 100, 1);
   border-top: 1px solid rgba(17, 35, 80, 0.5);
   border-right: 1px solid rgba(17, 35, 80, 0.5);
+  cursor: pointer
 }
 
 .btnTidak {
@@ -218,6 +219,7 @@
   font-weight: 700;
   border-top: 1px solid rgba(17, 35, 80, 0.5);
   border-left: 1px solid rgba(17, 35, 80, 0.5);
+  cursor: pointer
 }
 
 .btnYa p {
