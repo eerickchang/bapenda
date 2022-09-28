@@ -501,8 +501,6 @@ export default function ContentInputRenaksiP() {
             }
             onChange={(e) => setInTupoksiTambahan(e?.label)}
           />
-
-          
         </div>
       </div>
       <Gap height={24} width={0} />
@@ -510,7 +508,7 @@ export default function ContentInputRenaksiP() {
       <div className={styles.wrapperPickMonth}>
         <div>
           <p>Dari tanggal*</p>
-          <input type="month"/>
+          <input type="month" />
         </div>
         <div style={{ marginLeft: 133 }}>
           <p>Sampai tanggal*</p>
@@ -530,7 +528,7 @@ export default function ContentInputRenaksiP() {
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
-            Input Renaksi Feren Kalalo <b>Berhasil</b>
+            Input Renaksi Feren <b>Berhasil</b>
             <div className={styles.checkCircle}>
               <Image src={"/Check-circle.svg"} width={25} height={25} />
             </div>
