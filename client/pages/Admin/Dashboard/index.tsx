@@ -4,6 +4,7 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
+  SidebarAdmin,
   SidebarStaff,
   TopPegawai,
 } from "../../../components";
@@ -126,7 +127,7 @@ export default function Dashboard() {
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
       {/* {console.log(nama)} */}
-      <SidebarStaff kotakHome={sidebarStyles.kotakAktif} />
+      <SidebarAdmin kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <DashboardHeader
@@ -141,7 +142,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.contentKanan}>
-        <TopPegawai bulan={prevMonth} title="Top Pegawai" />
+        <TopPegawai bulan={prevMonth} title="Top Sub Bidang" />
         <BoxNotification />
       </div>
     </div>

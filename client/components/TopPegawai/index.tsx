@@ -5,10 +5,11 @@ import Gap from "../Gap";
 
 interface TopPegawaiProps {
   bulan: string;
+  title: string;
 }
 
 export default function TopPegawai(props: TopPegawaiProps) {
-  const { bulan } = props;
+  const { bulan, title } = props;
   const [dataPegawai, setDataPegawai] = useState([
     {
       id: 1,
@@ -44,7 +45,9 @@ export default function TopPegawai(props: TopPegawaiProps) {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.txtHeader}>Top Pegawai per Bidang, {bulan}</h1>
+      <h1 className={styles.txtHeader}>
+        {title}, {bulan}
+      </h1>
       <Gap height={20} width={0} />
       {dataPegawai.map((item) => (
         <div className={styles.profile} key={item.id}>
