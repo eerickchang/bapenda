@@ -163,6 +163,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
+  //select row
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  //simpan keterangan pegawai
+  const [ketPegawai, setKetPegawai] = useState("");
+
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
@@ -235,6 +241,34 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
+  const btnUnggahExp = () => {
+    console.log(row.nip);
+    console.log(ketPegawai);
+
+    const formData = new FormData();
+
+    formData.append("MyFile", selectedFile, selectedFile.name);
+    console.log(selectedFile);
+
+    Axios.post("http://localhost:3001/unggahLaporan", {
+      idRenaksi: row.id_renaksi,
+      ketPegawai: ketPegawai,
+      formData,
+    });
+
+    closeModal();
+    btnUnggah();
+  };
+
+  const btnHapusExp = () => {
+    Axios.post("http://localhost:3001/hapusRenaksi", {
+      idRenaksi: row.id_renaksi,
+    });
+
+    closeModalHapus();
+    btnHapus();
+  };
+
   return (
     <React.Fragment>
       <TableRow
@@ -305,7 +339,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     onClick={() => openModal()}
                     className={styles.btnUnggah}
                   >
-                    <img src={"/Batal.svg"} width={20} height={20} />
+                    <img src={"/Kirim.svg"} width={20} height={20} />
                     <p className={styles.txt}>Unggah</p>
                   </button>
                 </div>
@@ -350,18 +384,24 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <input
           className={styles.inputBuktiLap}
           placeholder="Tambah keterangan untuk lampiran bukti"
+          onChange={(e) => setKetPegawai(e.target.value)}
         />
         <Gap height={20} width={0} />
         <div className={styles.wrapperBtnModal}>
-          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+          <input
+            type="file"
+            style={{ display: "none" }}
+            id="pilihFile"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          />
+          <label for="pilihFile">
+            <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+            {/* <Button
+              title="Pilih File"
+              className={`${btnStyles.btnPilihFile}`} */}
+          </label>
           <Gap width={193} height={0} />
-          <button
-            onClick={() => {
-              closeModal();
-              btnUnggah();
-            }}
-            className={styles.btnKirim}
-          >
+          <button onClick={btnUnggahExp} className={styles.btnKirim}>
             <img src={"/Kirim.svg"} width={20} height={20} />
             <p className={styles.txt}>Kirim</p>
           </button>
@@ -452,13 +492,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <div className={styles.wrapperBtnModal}>
           <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
           <Gap width={193} height={0} />
-          <button
-            onClick={() => {
-              closeModalHapus();
-              btnHapus();
-            }}
-            className={styles.btnKirim}
-          >
+          <button onClick={btnHapusExp} className={styles.btnKirim}>
             <img src={"/Kirim.svg"} width={20} height={20} />
             <p className={styles.txt}>Kirim</p>
           </button>
@@ -632,7 +666,6 @@ export default function ContentDaftarKegiatan() {
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
-  const [contoh, setContoh] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {

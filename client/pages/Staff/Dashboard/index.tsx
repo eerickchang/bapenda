@@ -20,6 +20,8 @@ export default function Dashboard() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
+      setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
+
       Axios.get("http://localhost:3001/masuk").then((response) => {
         console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
@@ -33,16 +35,61 @@ export default function Dashboard() {
               });
             }
           });
+        });
+      });
 
-          result.data.map((data) => {
+      //AMBIL CAKIN JUMLAH KEGIATAN
+      Axios.get("http://localhost:3001/jumlahKegiatan").then(
+        (jumlahKegiatan) => {
+          jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
             if (
-              response.data.user[0].nip === data.nip &&
-              moment(data.bulan).format("YYYY-MM") ===
-                moment().format("YYYY-MM")
+              moment().format("YYYY-MM") >=
+                moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
+              moment().format("YYYY-MM") ===
+                moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
             ) {
-              setCakin(data);
+              // console.log(ambilRenaksiMAP);
+              setJlhKegiatan((nextData) => {
+                return [...nextData, jumlahKegiatanMAP];
+              });
             }
           });
+        }
+      );
+
+      //AMBIL CAKIN LAMPIRAN DISUBMIT
+      Axios.get("http://localhost:3001/lampiranDisubmit").then(
+        (lampiranDisubmit) => {
+          lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
+            if (
+              moment().format("YYYY-MM") >=
+                moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
+              moment().format("YYYY-MM") ===
+                moment(lampiranDisubmitMAP.end_date).format("YYYY-MM")
+            ) {
+              // console.log(ambilRenaksiMAP);
+              setLprSubmit((nextData) => {
+                return [...nextData, lampiranDisubmitMAP];
+              });
+            }
+          });
+        }
+      );
+
+      //AMBIL CAKIN BELUM DISUBMIT
+      Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
+        belumSubmit.data.map((belumSubmitMAP) => {
+          if (
+            moment().format("YYYY-MM") >=
+              moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
+            moment().format("YYYY-MM") ===
+              moment(belumSubmitMAP.end_date).format("YYYY-MM")
+          ) {
+            // console.log(ambilRenaksiMAP);
+            setBlmSubmit((nextData) => {
+              return [...nextData, belumSubmitMAP];
+            });
+          }
         });
       });
 
@@ -56,6 +103,10 @@ export default function Dashboard() {
   const [nama, setNama] = useState();
   const [grafik, setGrafik] = useState([]);
   const [cakin, setCakin] = useState([]);
+  const [jlhKegiatan, setJlhKegiatan] = useState([]);
+  const [lprSubmit, setLprSubmit] = useState([]);
+  const [blmSubmit, setBlmSubmit] = useState([]);
+  const [prevMonth, setPrevMonth] = useState("");
 
   const userData = {
     labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
@@ -80,9 +131,9 @@ export default function Dashboard() {
       <div className={styles.contentKiri}>
         <DashboardHeader
           blnSkrg={blnSkrg}
-          jumlahKegiatan={cakin.jumlah_kegiatan}
-          lampiranDisubmit={cakin.lampiran_disubmit}
-          belumDisubmit={cakin.lampiran_bsubmit}
+          jumlahKegiatan={jlhKegiatan.length}
+          lampiranDisubmit={lprSubmit.length}
+          belumDisubmit={blmSubmit.length}
         />
         <div className={styles.chartWrapper}>
           <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
@@ -90,7 +141,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.contentKanan}>
-        <TopPegawai />
+        <TopPegawai bulan={prevMonth} />
         <BoxNotification />
       </div>
     </div>

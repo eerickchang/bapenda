@@ -3,7 +3,12 @@ import styles from "./toppegawai.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 
-export default function TopPegawai() {
+interface TopPegawaiProps {
+  bulan: string;
+}
+
+export default function TopPegawai(props: TopPegawaiProps) {
+  const { bulan } = props;
   const [dataPegawai, setDataPegawai] = useState([
     {
       id: 1,
@@ -39,7 +44,7 @@ export default function TopPegawai() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.txtHeader}>Top Pegawai per Bidang, Juli 2022</h1>
+      <h1 className={styles.txtHeader}>Top Pegawai per Bidang, {bulan}</h1>
       <Gap height={20} width={0} />
       {dataPegawai.map((item) => (
         <div className={styles.profile} key={item.id}>
