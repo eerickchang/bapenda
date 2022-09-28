@@ -284,14 +284,22 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         }}
         sx={{ "& > *": { borderBottom: "" } }}
       >
-        <TableCell>{row.program}</TableCell>
-        <TableCell>{row.kegiatan}</TableCell>
-        <TableCell>{row.sub_kegiatan}</TableCell>
+        {/* //! DATA ROW */}
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.program}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
         <TableCell>
           <p className={stylesS.styleTupoksi}>Inti</p>
-          {row.tupoksi_inti}
+
+          <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
           <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-          {row.tupoksi_tambahan}
+          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
         </TableCell>
         <TableCell>
           <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
@@ -305,9 +313,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell>
           {/* ambil data rencana */}
-          {row.nama} - {row.nama}
+          <p className={stylesS.styleTxtRowRencana}>
+            {row.nama} - {row.nama}
+          </p>
         </TableCell>
-        <TableCell>{row.status}</TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.status}</p>
+        </TableCell>
       </TableRow>
       <TableContainer
         style={{
