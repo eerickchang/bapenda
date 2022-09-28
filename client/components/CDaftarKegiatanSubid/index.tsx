@@ -12,7 +12,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styleTable from "./TableMUI.module.css";
-import Image from "next/image";
 import Gap from "../Gap";
 import Axios from "axios";
 import moment from "moment";
@@ -164,19 +163,19 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             timeout="auto"
           >
             <TableRow>
-              <div className={styles.wrapperExpand}>
-                <div className={styles.wrapperTanggapan}>
+              <div className={styleTable.wrapperExpand}>
+                <div className={styleTable.wrapperTanggapan}>
                   <p>Tanggapan:</p>
-                  <p className={styles.txtTanggapan}>
+                  <p className={styleTable.txtTanggapan}>
                     Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
                     yang diberikan tidak dapat diterima
                   </p>
                 </div>
-                <div className={styles.wrapperLampiran}>
+                <div className={styleTable.wrapperLampiran}>
                   <p>Lampiran:</p>
                   <p></p>
                 </div>
-                <div className={styles.wrapperRencanaUbah}>
+                <div className={styleTable.wrapperRencanaUbah}>
                   <p>Rencana Ubah Jadwal:</p>
                   <p></p>
                 </div>
