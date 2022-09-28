@@ -141,7 +141,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.contentKanan}>
-        <TopPegawai bulan={prevMonth} />
+        <TopPegawai bulan={prevMonth} title="Top Pegawai" />
         <BoxNotification />
       </div>
     </div>

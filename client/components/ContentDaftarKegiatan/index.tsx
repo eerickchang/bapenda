@@ -240,8 +240,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   }
 
   const btnUnggahExp = () => {
-    console.log(row.nip);
-    console.log(ketPegawai);
+    // console.log(row.nip);
+    // console.log(ketPegawai);
 
     const formData = new FormData();
 
@@ -252,6 +252,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       idRenaksi: row.id_renaksi,
       ketPegawai: ketPegawai,
       formData,
+    }).then((response) => {
+      console.log(response);
     });
 
     closeModal();
@@ -294,39 +296,38 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell>
           <p className={stylesS.styleTupoksi}>Inti</p>
-
           <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
           <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
           <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
         </TableCell>
         <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {/* {row.thl === null ? console.log("oke") : console.log("tidak oke")} */}
-            {!image ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            ) : (
-              <Image
-                src={image}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            )}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-              <p className={stylesS.rekanPegawai}>THL</p>
+          {row.thl === null ? null : (
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              {!image ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={40}
+                  height={40}
+                  alt="User 2"
+                  style={{ borderRadius: 40 }}
+                />
+              ) : (
+                <Image
+                  src={image}
+                  width={40}
+                  height={40}
+                  alt="User 2"
+                  style={{ borderRadius: 40 }}
+                />
+              )}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                <p className={stylesS.rekanPegawai}>THL</p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {}
             {!image ? (
               <Image
                 src={"/SidebarProfile.svg"}
@@ -353,7 +354,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>
           {/* ambil data rencana */}
           <p className={stylesS.styleTxtRowRencana}>
-            {row.nama} - {row.nama}
+            {moment(row.start_date).format("MMM")} -{" "}
+            {moment(row.end_date).format("MMM")}
           </p>
         </TableCell>
         <TableCell>
@@ -439,18 +441,26 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         />
         <Gap height={20} width={0} />
         <div className={styles.wrapperBtnModal}>
-          <input
-            type="file"
-            style={{ display: "none" }}
-            id="pilihFile"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-          />
-          <label for="pilihFile">
-            <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            {/* <Button
+          <form
+            id="uploadForm"
+            action="http://localhost:3001/uploadFile"
+            method="post"
+            encType="multipart/form-data"
+          >
+            <input
+              type="file"
+              style={{ display: "none" }}
+              id="pilihFile"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+              name="sampleFile"
+            />
+            <label for="pilihFile">
+              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+              {/* <Button
               title="Pilih File"
               className={`${btnStyles.btnPilihFile}`} */}
-          </label>
+            </label>
+          </form>
           <Gap width={193} height={0} />
           <button onClick={btnUnggahExp} className={styles.btnKirim}>
             <img src={"/Kirim.svg"} width={20} height={20} />
@@ -638,27 +648,6 @@ export default function ContentDaftarKegiatan() {
       onclick: () => (
         setDataRenaksi([]),
         Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
-      ),
-    },
-
-    {
-      id: 4,
-      status: "Menunggu",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
           (result) => {
             result.data.map((item) => {
               if (
