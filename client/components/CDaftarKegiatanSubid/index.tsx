@@ -3,6 +3,193 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styles from "./cDaftarKegiatanSubid.module.css";
 
+
+import Collapse from "@mui/material/Collapse";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import styleTable from "./TableMUI.module.css";
+import Image from "next/image";
+import Gap from "../Gap";
+import Axios from "axios";
+import moment from "moment";
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+
+function Row(props: { row: ReturnType<typeof createData> }) {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
+
+  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
+  // const custom = {
+  //   content: {
+  //     position: "absolute",
+  //     top: "50%",
+  //     left: "50%",
+  //     right: "auto",
+  //     bottom: "auto",
+  //     width: 878,
+  //     borderRadius: 20,
+  //     paddingLeft: 61,
+  //     height: 362,
+  //     marginRight: "-50%",
+  //     transform: "translate(-50%, -50%)",
+  //     overlay: "#112350",
+  //     backgroundColor: "white",
+  //     zIndex: 1001,
+  //     scroll: false,
+  //   },
+  //   overlay: {
+  //     position: "fixed",
+  //     marginTop: 0,
+  //     top: 0,
+  //     bottom: 0,
+  //     left: 0,
+  //     right: 0,
+  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
+  //     zIndex: 1000,
+  //   },
+  // };
+
+  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
+  // const customUbah = {
+  //   content: {
+  //     position: "absolute",
+  //     top: "50%",
+  //     left: "50%",
+  //     right: "auto",
+  //     bottom: "auto",
+  //     width: 878,
+  //     borderRadius: 20,
+  //     paddingLeft: 61,
+  //     height: 433,
+  //     marginRight: "-50%",
+  //     transform: "translate(-50%, -50%)",
+  //     overlay: "#112350",
+  //     backgroundColor: "white",
+  //     zIndex: 1001,
+  //     scroll: false,
+  //   },
+  //   overlay: {
+  //     position: "fixed",
+  //     marginTop: 0,
+  //     top: 0,
+  //     bottom: 0,
+  //     left: 0,
+  //     right: 0,
+  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
+  //     zIndex: 1000,
+  //   },
+  // };
+
+  //style row
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
+
+  return (
+    <React.Fragment>
+      <TableRow
+        className={`${styleTable.tableRow} ${styleRow}`}
+        onClick={() => {
+          setOpen(!open);
+          {
+            rowClik
+              ? (setStyleRow(
+                  `${styleTable.tableRow} ${styleTable.tableRowClick}`
+                ),
+                setRowClick(!rowClik))
+              : (setStyleRow(styleTable.tableRow), setRowClick(!rowClik));
+          }
+        }}
+        sx={{ "& > *": { borderBottom: "" } }}
+      >
+        <TableCell>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            <Image src={"/Check-circle.svg"} width={40} height={40} />
+            {/* //!{ambil data} */}
+            <div style={{ marginLeft: 10 }}>
+              <p className={styleTable.rekanNama}>{row.nama}</p>
+              <p className={styleTable.rekanPegawai}>jabatan</p>
+              <p className={styleTable.rekanAsn}>ASN</p>
+            </div>
+          </div>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTupoksi}>Inti</p>
+          <p className={styleTable.styleTxtRow}>{row.tupoksi_inti}</p>
+          <p className={styleTable.styleTupoksiTambahan}>Tambahan</p>
+          <p className={styleTable.styleTxtRow}>{row.tupoksi_tambahan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTxtRow}>{row.kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={styleTable.styleTxtRow}>{row.status}</p>
+        </TableCell>
+      </TableRow>
+      <TableContainer
+        style={{
+          width: 1680,
+          marginTop: -20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          // paddingBottom: 35,
+        }}
+      >
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+          <Collapse
+            style={{
+              background: "rgba(232, 232, 232, 1)",
+              borderTopColor: "rgba(165, 165, 165, 0.5)",
+              borderTopWidth: 2,
+              borderTopStyle: "solid",
+              marginBottom: 35,
+            }}
+            in={open}
+            timeout="auto"
+          >
+            <TableRow>
+              <div className={styles.wrapperExpand}>
+                <div className={styles.wrapperTanggapan}>
+                  <p>Tanggapan:</p>
+                  <p className={styles.txtTanggapan}>
+                    Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
+                    yang diberikan tidak dapat diterima
+                  </p>
+                </div>
+                <div className={styles.wrapperLampiran}>
+                  <p>Lampiran:</p>
+                  <p></p>
+                </div>
+                <div className={styles.wrapperRencanaUbah}>
+                  <p>Rencana Ubah Jadwal:</p>
+                  <p></p>
+                </div>
+              </div>
+            </TableRow>
+          </Collapse>
+        </TableCell>
+      </TableContainer>
+    </React.Fragment>
+  );
+}
+
+
 export default function CDaftarKegiatanSubid() {
   const router = useRouter();
   const clickBack = () => {
