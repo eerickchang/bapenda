@@ -180,7 +180,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>
           <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
             <Image src={"/Check-circle.svg"} width={40} height={40} />
-            {/* {ambil data} */}
+            {/* //!{ambil data} */}
             <div style={{ marginLeft: 10 }}>
               <p className={stylesS.rekanNama}>{row.nama}</p>
               <p className={stylesS.rekanPegawai}>jabatan</p>
@@ -190,15 +190,25 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell>
           <p className={stylesS.styleTupoksi}>Inti</p>
-          {row.tupoksi_inti}
+          <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
           <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-          {row.tupoksi_tambahan}
+          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
         </TableCell>
-        <TableCell>{row.kegiatan}</TableCell>
-        <TableCell>{row.sub_kegiatan}</TableCell>
-        <TableCell>{row.nama}</TableCell>
-        <TableCell>{row.protein1}</TableCell>
-        <TableCell>{row.status}</TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.status}</p>
+        </TableCell>
       </TableRow>
       <TableContainer
         style={{
