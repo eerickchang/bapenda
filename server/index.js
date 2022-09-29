@@ -191,7 +191,7 @@ app.post("/inputRenaksi", (req, res) => {
   const endDate = req.body.endDate;
 
   const sqlInsert =
-    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, start_date, end_date, status) VALUES (?,?,?,?,?,?,?,?,?, 'Menunggu')";
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, start_date, end_date, status, kirim_ke) VALUES (?,?,?,?,?,?,?,?,?, 'Menunggu Renaksi Diterima', 'Kasubid')";
   db.query(
     sqlInsert,
     [
@@ -315,7 +315,7 @@ app.post("/unggahLaporan", (req, res) => {
   const fileURL = req.body.fileURL;
 
   const sqlUpdate =
-    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Selesai' WHERE id_renaksi = ?";
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Selesai', kirim_ke = 'Kasubid' WHERE id_renaksi = ?";
   let data = [ketPegawai, fileURL, idRenaksi];
 
   db.query(sqlUpdate, data, (err, result) => {
@@ -332,7 +332,7 @@ app.post("/ubahJadwal", (req, res) => {
   const endDate = req.body.endDate;
 
   const sqlUpdate =
-    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, req_start_date = ?, req_end_date = ?, status = 'Menunggu Jadwal Diubah' WHERE id_renaksi = ?";
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, req_start_date = ?, req_end_date = ?, status = 'Menunggu Jadwal Diubah', kirim_ke = 'Kasubid' WHERE id_renaksi = ?";
   let data = [ketPegawai, fileURL, startDate, endDate, idRenaksi];
 
   db.query(sqlUpdate, data, (err, result) => {
@@ -347,11 +347,39 @@ app.post("/hapusRenaksi", (req, res) => {
   const fileURL = req.body.fileURL;
 
   const sqlUpdate =
-    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Menunggu Renaksi Dihapus' WHERE id_renaksi = ?";
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Menunggu Renaksi Dihapus', kirim_ke = 'Kasubid' WHERE id_renaksi = ?";
   let data = [ketPegawai, fileURL, idRenaksi];
 
   db.query(sqlUpdate, data, (err, result) => {
     console.log(err);
+  });
+});
+
+//KASUBID AMBIL RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
+app.get("/kasubidAmbilRenaksiMRD", (req, res) => {
+  const sqlSelect =
+    "SELECT * FROM data_renaksi WHERE status = 'Menunggu Renaksi Diterima'";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//KASUBID AMBIL PEGAWAI DENGAN JABATAN STAFF
+app.get("/kasubidAmbilPegawai", (req, res) => {
+  const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan IN ("Staff")';
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//KASUBID MENERIMA RENAKSI
+app.post("/kasubidMenerimaRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Kabid" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
   });
 });
 

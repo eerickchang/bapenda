@@ -21,79 +21,6 @@ import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -164,11 +91,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const [file, setFile] = useState(null);
-  const [ketPegawai, setKetPegawai] = useState("");
-  const [image, setImage] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [renaksiPegawai, setRenaksiPegawai] = useState([]);
 
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -198,6 +121,24 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setTimeout(() => {
       setShowModal_Hapus(false);
     }, 3000);
+  };
+
+  const btnTerima = () => {
+    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksiMRD) => {
+          if (row.nip === renaksiMRD.nip) {
+            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+              idRenaksi: renaksiMRD.id_renaksi,
+            });
+
+            setRenaksiPegawai((nextData) => {
+              return [...nextData, renaksiMRD];
+            });
+          }
+        });
+      }
+    );
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -242,136 +183,30 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
-  const btnUnggahExp = () => {
-    const data = new FormData();
-    data.append("file", file);
-
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/unggahLaporan", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-          }).then((unggahLaporan) => {
-            console.log(unggahLaporan);
-          });
-        } else {
-          Axios.post("http://localhost:3001/unggahLaporan", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-          }).then((unggahLaporan) => {
-            console.log(unggahLaporan);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    closeModal();
-    btnUnggah();
-  };
-
-  const btnUbahJadwalExp = () => {
-    const data = new FormData();
-    data.append("file", file);
-
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/ubahJadwal", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-            startDate: startDate,
-            endDate: endDate,
-          }).then((ubahJadwal) => {
-            console.log(ubahJadwal);
-          });
-        } else {
-          Axios.post("http://localhost:3001/ubahJadwal", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            startDate: startDate,
-            endDate: endDate,
-          }).then((ubahJadwal) => {
-            console.log(ubahJadwal);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    closeModalUbah();
-    btnUbah();
-  };
-
-  const btnHapusExp = () => {
-    const data = new FormData();
-    data.append("file", file);
-
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/hapusRenaksi", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-          }).then((hapusRenaksi) => {
-            console.log(hapusRenaksi);
-          });
-        } else {
-          Axios.post("http://localhost:3001/hapusRenaksi", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-          }).then((hapusRenaksi) => {
-            console.log(hapusRenaksi);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    closeModalHapus();
-    btnHapus();
-  };
-
   return (
     <React.Fragment>
       <TableRow
-        className={`${styles.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                setRowClick(!rowClik))
-              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-          }
-        }}
+        className={`${styles.tableRow}`}
         sx={{ "& > *": { borderBottom: "" } }}
       >
         {/* //! DATA ROW */}
         <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.program}</p>
+          <p className={stylesS.styleTxtRow}>{row.nama}</p>
         </TableCell>
         <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+          <p className={stylesS.styleTxtRow}>{row.sub_bidang}</p>
         </TableCell>
         <TableCell>
           <p className={stylesS.styleTxtRow}>
             <div style={{ flexDirection: "row", display: "flex" }}>
-              <button className={styles.btnTerima}>
+              <button className={styles.btnTerima} onClick={btnTerima}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
               </button>
               <Gap width={40} height={0} />
-              <button className={styles.btnTolak}>
+              <button
+                className={styles.btnTolak}
+                onClick={() => console.log(renaksiPegawai)}
+              >
                 <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
               </button>
             </div>
@@ -383,152 +218,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 export default function ContentDaftarKegiatan() {
-  const dataPegawai = [
-    {
-      id: 1,
-      image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
-      nama: "June E. Silangen,  SE, Ak, ME",
-      jabatan: "Kepala Bidang  Pajak Daerah",
-      pegawai: "ASN",
-    },
-  ];
-
-  const filter = [
-    {
-      id: 1,
-      status: "Semua",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (
-              moment(item.end_date).format("YYYY") === moment().format("YYYY")
-            ) {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 2,
-      status: "Jadwal diubah",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
-      ),
-    },
-
-    {
-      id: 3,
-      status: "Sementara",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
-      ),
-    },
-
-    {
-      id: 5,
-      status: "Selesai",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
-      ),
-    },
-
-    {
-      id: 6,
-      status: "Hapus",
-      onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
-      ),
-    },
-
-    {
-      id: 7,
-      status: "Ditambah",
-      onclick: () => console.log(dataRenaksi),
-    },
-  ];
-
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
-  const [asn, setAsn] = useState("");
-  const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [pegawai, setPegawai] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        setAsn(response.data.user[0]);
-        setImage(response.data.user[0].foto);
-
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (
-              moment(item.end_date).format("YYYY") === moment().format("YYYY")
-            ) {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
-          });
-        });
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilPegawai").then(
+          (ambilPegawai) => {
+            ambilPegawai.data.map((pegawai) => {
+              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
+                setPegawai((nextData) => {
+                  return [...nextData, pegawai];
+                });
+              }
+            });
+          }
+        );
       });
     }
   }, []);
@@ -552,45 +263,6 @@ export default function ContentDaftarKegiatan() {
               <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
-            {/* {dataPegawai.map((item) => (
-              <div className={stylesS.wrapperDataPegawai} key={item.id}>
-                <div>
-                  {!image ? (
-                    <Image src="/SidebarProfile.svg" width={90} height={90} />
-                  ) : (
-                    <Image
-                      src={image}
-                      width={90}
-                      height={90}
-                      style={{ borderRadius: 90 }}
-                    />
-                  )}
-                </div>
-                <div className={stylesS.wrapperTxt}>
-                  <p className={stylesS.txtNama}>{asn.nama}</p>
-                  <p className={stylesS.txtJabatan}>
-                    {`${asn.jabatan}
-                    ${asn.sub_bidang}`}
-                  </p>
-                  <p className={stylesS.txtPegawai}>{item.pegawai}</p>
-                </div>
-              </div>
-            ))} */}
-            {/* <div className={stylesS.wrapperFilter}> */}
-            <div className={stylesS.wrapFilter}>
-              <button className={styles.btnTerimaAll}>
-                <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-              </button>
-              <Gap width={15} height={0} />
-              <button className={styles.btnTolakAll}>
-                <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-              </button>
-              <button className={stylesS.btnFilter} onClick={lihatSemua}>
-                <Image src={"/LihatSemuaFilter.svg"} width={23} height={23} />
-                <p>Lihat Semua</p>
-              </button>
-            </div>
-            {/* </div> */}
           </div>
           <Gap height={106} width={0} />
           <TableContainer
@@ -611,8 +283,8 @@ export default function ContentDaftarKegiatan() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataRenaksi.map((row) => (
-                  <Row key={row.id_renaksi} row={row} />
+                {pegawai.map((row) => (
+                  <Row key={row.nip} row={row} />
                 ))}
               </TableBody>
             </Table>
