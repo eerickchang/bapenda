@@ -9,29 +9,35 @@ import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import Axios from "axios";
 
-export default function CTinjauRenaksi() {
-  const rowsSubagian = [
-    {
-      id: 1,
-      sub: "Hukum",
-      keterangan: "tolong akang",
-    },
-    {
-      id: 2,
-      sub: "Hukum",
-      keterangan: "tolong akang",
-    },
-    {
-      id: 3,
-      sub: "Hukum",
-      keterangan: "tolong akang",
-    },
-  ];
+export default function CTinjauRenaksi(props: {
+  row: ReturnType<typeof createData>;
+}) {
+  const { row } = props;
+  const [pegawai, setPegawai] = useState([]);
 
+  const btnTerima = () => {
+    console.log(row.nama);
+  };
+
+  const shouldLog = useRef(true);
   useEffect(() => {
-    Axios.get("http://localhost:3001/kasubidAmbilPegawai").then((response) => {
-      console.log(response);
-    });
+    if (shouldLog.current) {
+      shouldLog.current = false;
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilPegawai").then(
+          (ambilPegawai) => {
+            ambilPegawai.data.map((pegawai) => {
+              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
+                setPegawai((nextData) => {
+                  return [...nextData, pegawai];
+                });
+              }
+            });
+          }
+        );
+      });
+    }
   }, []);
 
   return (
@@ -54,14 +60,14 @@ export default function CTinjauRenaksi() {
               </TableRow>
             </TableHead>
             <TableBody className={styles.hover}>
-              {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
+              {pegawai.map((row) => (
+                <TableRow className={styles.styleRow} key={row.nip}>
+                  <TableCell>{row.nama}</TableCell>
+                  <TableCell>{row.sub_bidang}</TableCell>
                   <TableCell>
                     <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                      <Button title="terima" onClick={btnTerima} />
+                      <Button title="tolak" />
                     </div>
                   </TableCell>
                 </TableRow>

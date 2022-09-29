@@ -367,7 +367,7 @@ app.post("/hapusRenaksi", (req, res) => {
 app.get("/kasubidAmbilPegawai", (req, res) => {
   const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan IN ("Staff", "THL")';
   db.query(sqlSelect, (err, result) => {
-    console.log(result);
+    res.send(result);
   });
 });
 
