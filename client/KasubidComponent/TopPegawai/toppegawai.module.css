@@ -1,0 +1,49 @@
+.container{
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 463px;
+    height: 560px;
+    margin-top: 51px;
+}
+
+.txtHeader{
+    color: rgba(0, 0, 0, 0.8);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    border-bottom: 2px solid #1BDDBB;
+    width: 432px;
+    margin-left: 17px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+}
+
+.profile{
+    display: flex;
+    margin-left: 17px;
+    margin-bottom: 30px;
+}
+
+.txtNama{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #4A4A4A;
+    margin: 0px;
+}
+
+.txtSubid{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4A4A4A;
+    margin: 0px;
+    width: 350px;
+}
+
+.txtWrapper{
+    margin-left: 15px;
+    margin-top: 5px;
+}

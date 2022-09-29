@@ -7,28 +7,9 @@ const mysql = require("mysql");
 const multer = require("multer");
 const path = require("path");
 
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public");
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      path.parse(file.originalname).name +
-        "_" +
-        Date.now() +
-        path.extname(file.originalname)
-    );
-  },
-});
-
-const storage2 = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/upload");
   },
   filename: function (req, file, cb) {
     cb(
@@ -50,7 +31,7 @@ const cookieParser = require("cookie-parser");
 
 // LIBRARY UNTUK HASH PASSWORD
 const bcrypt = require("bcrypt");
-// const { promisify } = require("util");
+const { promisify } = require("util");
 const saltRounds = 10;
 
 // CONNECT DATABASE
@@ -206,13 +187,24 @@ app.post("/inputRenaksi", (req, res) => {
   const nip = req.body.nip;
   const tupoksiTambahan = req.body.tupoksiTambahan;
   const thl = req.body.thl;
-  const rencana = req.body.rencana;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
 
   const sqlInsert =
-    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, status) VALUES (?,?,?,?,?,?,?, 'Menunggu')";
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, start_date, end_date, status) VALUES (?,?,?,?,?,?,?,?,?, 'Menunggu')";
   db.query(
     sqlInsert,
-    [program, kegiatan, tupoksiInti, subKegiatan, nip, tupoksiTambahan, thl],
+    [
+      program,
+      kegiatan,
+      tupoksiInti,
+      subKegiatan,
+      nip,
+      tupoksiTambahan,
+      thl,
+      startDate,
+      endDate,
+    ],
     (err, result) => {
       console.log(result);
     }
