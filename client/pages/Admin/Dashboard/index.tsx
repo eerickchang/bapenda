@@ -124,20 +124,22 @@ export default function Dashboard() {
     ],
   };
 
-
-  
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
 
   const filter = [
     {
-      id:1,
-      sub: 'Bidang',
+      id: 1,
+      sub: "Semua",
     },
     {
-      id:2,
-      sub: 'Sub Bidang',
+      id: 2,
+      sub: "Bidang",
     },
-  ]
+    {
+      id: 3,
+      sub: "Sub Bidang",
+    },
+  ];
   return (
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
@@ -167,9 +169,7 @@ export default function Dashboard() {
                 onClick={() => setActiveDropdownTahun(false)}
               >
                 {filter.map((item) => (
-                  <p key={item.id} >
-                    {item.sub}
-                  </p>
+                  <p key={item.id}>{item.sub}</p>
                 ))}
               </div>
             )}

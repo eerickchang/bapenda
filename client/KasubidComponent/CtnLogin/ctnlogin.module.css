@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.txtLupa {
+  color: rgba(255, 255, 255, 0.79);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.headerTxt {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.txtNormal {
+  color: rgba(165, 165, 165, 0.81);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  margin: 0px 34px;
+  margin-top: 32px;
+  margin-bottom: 83px;
+}
+
+.txtStyled {
+  font-family: "Inter", sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: white;
+  margin: 0px 30px;
+  margin-top: 25px;
+  border-bottom: 2px solid #1bddbb;
+  height: 50px;
+  width: 125px;
+  text-align: center;
+}

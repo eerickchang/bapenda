@@ -32,12 +32,6 @@ import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
 
-
-
-
-
-
-
 export {
   CtnUmum,
   TxtUmum,
@@ -69,6 +63,4 @@ export {
   HorBar,
   ProfileKananKonten,
   ContentDetailCaKin,
-
-
 };

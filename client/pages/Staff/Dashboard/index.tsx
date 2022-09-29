@@ -124,8 +124,6 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
-      {/* {console.log("Cakin: ", cakin)} */}
-      {/* {console.log(nama)} */}
       <SidebarStaff kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
