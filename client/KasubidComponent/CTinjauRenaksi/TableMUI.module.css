@@ -421,3 +421,35 @@
   align-items: center;
   padding-inline: 30px;
 }
+
+.btnTolakAll{
+  background-color: rgba(255, 1, 100, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 35px
+}
+
+.btnTerimaAll{
+  background-color: rgba(27, 221, 187, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 30px;
+}

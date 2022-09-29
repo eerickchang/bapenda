@@ -17,6 +17,7 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
+import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
@@ -252,14 +253,24 @@ export default function ContentDaftarKegiatan() {
     }
   }, []);
 
+  const router = useRouter();
+
+
+
+  const lihatSemua = () => {
+    // setActiveDropdown(!activeDropdown);
+    // console.log(dataRenaksi);
+    router.push("/Kasubid/TinjauRenaksiLihatRenaksi");
+  };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
           </div>
           <Gap height={106} width={0} />
