@@ -355,19 +355,31 @@ app.post("/hapusRenaksi", (req, res) => {
   });
 });
 
-//KASUBID AMBIL DATA RENAKSI STATUS = 'SEMUA'
-// app.get("/kasubidAmbilRenaksi", (req, res) => {
-//   const sqlSelect =
-//     "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
-//   db.query(sqlSelect, (err, result) => {
-//     res.send(result);
-//   });
-// });
-
-app.get("/kasubidAmbilPegawai", (req, res) => {
-  const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan IN ("Staff", "THL")';
+//KASUBID AMBIL RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
+app.get("/kasubidAmbilRenaksiMRD", (req, res) => {
+  const sqlSelect =
+    "SELECT * FROM data_renaksi WHERE status = 'Menunggu Renaksi Diterima'";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
+  });
+});
+
+//KASUBID AMBIL PEGAWAI DENGAN JABATAN STAFF
+app.get("/kasubidAmbilPegawai", (req, res) => {
+  const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan IN ("Staff")';
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//KASUBID MENERIMA RENAKSI
+app.post("/kasubidMenerimaRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Kabid" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
   });
 });
 

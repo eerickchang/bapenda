@@ -1,6 +1,7 @@
 .tableRow {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  /* height: 161px; */
 }
 
 .tableRowClick{
@@ -386,4 +387,37 @@
   font-weight: 400;
   font-size: 18px;
   color: rgba(148, 148, 148, 1);
+}
+
+
+.btnTolak{
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 35px
+}
+
+.btnTerima{
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 30px;
 }
