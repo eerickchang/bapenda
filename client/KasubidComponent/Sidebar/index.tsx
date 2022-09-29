@@ -29,38 +29,38 @@ export default function Sidebar({
   const [image, setImage] = useState(null);
   const router = useRouter();
   const clickHome = () => {
-    router.push("/Admin/Dashboard");
+    router.push("/Kasubid/Dashboard");
   };
 
   const clickDaftarKegiatan = () => {
-    router.push("/Admin/DaftarKegiatan");
+    router.push("/Kasubid/DaftarKegiatan");
   };
 
   const clickTinjauRenaksi = () => {
-    router.push("/Admin/TinjauRenaksi");
+    router.push("/Kasubid/TinjauRenaksi");
   };
 
   const clickUbahJadwal = () => {
-    router.push("/Admin/UbahJadwal");
+    router.push("/Kasubid/UbahJadwal");
   };
 
   const clickEvaluasiLampiran = () => {
-    router.push("/Admin/EvaluasiLampiran");
+    router.push("/Kasubid/EvaluasiLampiran");
   };
 
   const clickHapusRenaksi = () => {
-    router.push("/Admin/HapusRenaksi");
+    router.push("/Kasubid/HapusRenaksi");
   };
   const clickRiwayatKegiatan = () => {
-    router.push("/Admin/RiwayatKegiatan");
+    router.push("/Kasubid/RiwayatKegiatan");
   };
 
   const clickProfil = () => {
-    router.push("/Admin/Profil");
+    router.push("/Kasubid/Profil");
   };
 
   const clickNotif = () => {
-    router.push("/Admin/Notifikasi");
+    router.push("/Kasubid/Notifikasi");
   };
   // const clickLogOut = () => {
   //   router.push("/Staff/LogOut");

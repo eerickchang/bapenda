@@ -32,11 +32,15 @@ import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
 import Sidebar from "./Sidebar";
-
-// ! ADMIN
-import SidebarAdmin from "./Sidebar";
 import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
 import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
+import CTinjauRenaksi from "./CTinjauRenaksi";
+import CEvaluasiLampiran from "./CEvaluasiLampiran";
+import CHapusRenaksi from "./CHapusRenaksi";
+import CUbahJadwal from "./CUbahJadwal";
+import CProfilAdm from "./CProfilAdm";
+import CNotifAdm from "./CNotifAdm";
+import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
 
 export {
   CtnUmum,
@@ -70,9 +74,13 @@ export {
   ProfileKananKonten,
   ContentDetailCaKin,
   Sidebar,
-
-  // !   ADMIN
-  SidebarAdmin,
   CDaftarKegiatanAdm,
   CDaftarKegiatanSubid,
+  CProfilAdm,
+  CUbahJadwal,
+  CEvaluasiLampiran,
+  CHapusRenaksi,
+  CRiwayatKegiatanAdm,
+  CNotifAdm,
+  CTinjauRenaksi,
 };
