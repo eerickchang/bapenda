@@ -30,7 +30,7 @@ import CheckboxBulan from "./CheckboxBulan";
 import BarChart from "./BarChart";
 import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
-import ContentDetailCaKin from "./ContentDetailCaKin";
+import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 import Sidebar from "./Sidebar";
 import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
 import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
@@ -72,7 +72,7 @@ export {
   BarChart,
   HorBar,
   ProfileKananKonten,
-  ContentDetailCaKin,
+  CLihatSemuaRenaksi,
   Sidebar,
   CDaftarKegiatanAdm,
   CDaftarKegiatanSubid,

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./ContentDetailCakin.module.css";
+import styles from ".//lihatSemuaRenaksi.module.css";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -20,7 +20,7 @@ import "jspdf-autotable";
 
 Axios.defaults.withCredentials = true;
 
-export default function ContentDetailCaKin() {
+export default function CLihatSemuaRenaksi() {
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
@@ -207,40 +207,55 @@ export default function ContentDetailCaKin() {
   ];
 
   const columns = [
-    { id: "nama", label: "Nama", align: "center", minWidth: 100 },
-    { id: "jabatan", label: "Jabatan", align: "center", minWidth: 50 },
+    { id: "no", label: "No", align: "center" },
+    { id: "jabatan", label: "Jabatan", align: "center" },
     {
-      id: "bulan",
-      label: "Bulan",
-      minWidth: 100,
+      id: "asn",
+      label: "ASN",
+      minWidth: 50,
       align: "center",
       // format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "jumlahkegiatan",
-      label: "Jumlah Kegiatan",
-      minWidth: 100,
+      id: "thl",
+      label: "THL",
       align: "center",
       // format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "realisasikegiatan",
-      label: "Realisasi Kegiatan",
-      minWidth: 100,
+      id: "program",
+      label: "Program",
       align: "center",
       // format: (value) => value.toFixed(2),
     },
     {
-      id: "belumdilaksanakan",
-      label: "Belum Dilaksanakan",
-      minWidth: 100,
+      id: "kegiatan",
+      label: "Kegiatan",
+      minWidth: 50,
       align: "center",
       // format: (value) => value.toFixed(2),
     },
     {
-      id: "hasilkinerja",
-      label: "Hasil Kinerja",
-      minWidth: 100,
+      id: "subkegiatan",
+      label: "Sub Kegiatan",
+      align: "center",
+      // format: (value) => value.toFixed(2),
+    },
+    {
+      id: "tupoksiinti",
+      label: "Tupoksi Inti",
+      align: "center",
+      // format: (value) => value.toFixed(2),
+    },
+    {
+      id: "tupoksitambahan",
+      label: "Tupoksi Tambahan",
+      align: "center",
+      // format: (value) => value.toFixed(2),
+    },
+    {
+      id: "rencana",
+      label: "Rencana",
       align: "center",
       // format: (value) => value.toFixed(2),
     },
@@ -248,136 +263,149 @@ export default function ContentDetailCaKin() {
 
   const rows = [
     {
-      nama: "andre",
+      no: "1",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "2",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "3",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "4",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "5",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "6",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "7",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "8",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "9",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "10",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "11",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
     {
-      nama: "andre",
+      no: "12",
       jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      asn: "januari",
+      thl: 10,
+      program: 3,
+      kegiatan: 7,
+      subkegiatan: 30,
+      tupoksiinti: 3,
+      tupoksitambahan: 7,
+      rencana: 30,
     },
-
-    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
-    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
   ];
 
   const [page, setPage] = React.useState(0);
@@ -405,7 +433,7 @@ export default function ContentDetailCaKin() {
           />
           <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
           <p className={styles.txtTitle}>
-            DETAIL CAPAIAN KINERJA - GEORGE OLAF
+            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN 2023
           </p>
         </div>
 
@@ -479,9 +507,7 @@ export default function ContentDetailCaKin() {
         <Table
           stickyHeader
           aria-label="sticky table"
-          sx={{
-            tableLayout: "fixed",
-          }}
+          sx={{ tableLayout: "auto" }}
         >
           <TableHead sx={{ borderTopRightRadius: 20 }}>
             <TableRow>
@@ -505,7 +531,7 @@ export default function ContentDetailCaKin() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {dataCakin
+            {rows
               // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -518,9 +544,10 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 60,
                       }}
                     >
-                      {row.nama}
+                      {row.no}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -530,9 +557,11 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 60,
+                        // maxWidth: 160,
                       }}
                     >
-                      {row.jabatan}
+                      <p style={{ width: 50 }}>{row.jabatan}</p>
                     </TableCell>
                     <TableCell
                       align="center"
@@ -542,9 +571,11 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 160,
                       }}
                     >
-                      {moment(row.bulan).format("MMM")}
+                      {row.asn}
+                      {/* {moment(row.asn).format("MMM")} */}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -554,9 +585,10 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 160,
                       }}
                     >
-                      {row.jumlah_kegiatan}
+                      {row.thl}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -566,9 +598,10 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 160,
                       }}
                     >
-                      {row.lampiran_disubmit}
+                      {row.program}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -578,9 +611,10 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 160,
                       }}
                     >
-                      {row.lampiran_bsubmit}
+                      {row.kegiatan}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -590,9 +624,49 @@ export default function ContentDetailCaKin() {
                         fontFamily: "Poppins",
                         fontWeight: 400,
                         fontSize: 18,
+                        width: 160,
                       }}
                     >
-                      {row.hasil_kinerja}
+                      {row.subkegiatan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                        width: 160,
+                      }}
+                    >
+                      {row.tupoksiinti}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                        width: 160,
+                      }}
+                    >
+                      {row.tupoksitambahan}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        border: 1,
+                        borderColor: "#1BDDBB",
+                        fontFamily: "Poppins",
+                        fontWeight: 400,
+                        fontSize: 18,
+                        width: 160,
+                      }}
+                    >
+                      {row.rencana}
                     </TableCell>
 
                     {/* {columns.map((column) => {

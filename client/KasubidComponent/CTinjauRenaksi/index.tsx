@@ -17,6 +17,7 @@ import Gap from "../Gap";
 import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
+import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
@@ -532,9 +533,14 @@ export default function ContentDaftarKegiatan() {
     }
   }, []);
 
-  const btnFilter = () => {
-    setActiveDropdown(!activeDropdown);
+  const router = useRouter();
+
+
+
+  const lihatSemua = () => {
+    // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
+    router.push("/Kasubid/TinjauRenaksiLihatRenaksi");
   };
 
   return (
@@ -543,10 +549,10 @@ export default function ContentDaftarKegiatan() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
-            {dataPegawai.map((item) => (
+            {/* {dataPegawai.map((item) => (
               <div className={stylesS.wrapperDataPegawai} key={item.id}>
                 <div>
                   {!image ? (
@@ -569,25 +575,22 @@ export default function ContentDaftarKegiatan() {
                   <p className={stylesS.txtPegawai}>{item.pegawai}</p>
                 </div>
               </div>
-            ))}
-            <div className={stylesS.wrapperFilter}>
-              <div className={stylesS.btnFilter} onClick={btnFilter}>
-                <Image src={"/Filter.svg"} width={23} height={23} />
-                <p>Filter</p>
-              </div>
-              {activeDropdown && (
-                <div
-                  className={stylesS.wrapperSelectStatus}
-                  onClick={() => setActiveDropdown(false)}
-                >
-                  {filter.map((item) => (
-                    <p key={item.id} onClick={item.onclick}>
-                      {item.status}
-                    </p>
-                  ))}
-                </div>
-              )}
+            ))} */}
+            {/* <div className={stylesS.wrapperFilter}> */}
+            <div className={stylesS.wrapFilter}>
+              <button className={styles.btnTerimaAll}>
+                <Image src={"/Terima.svg"} width={20} height={20} /> Terima
+              </button>
+              <Gap width={15} height={0} />
+              <button className={styles.btnTolakAll}>
+                <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
+              </button>
+              <button className={stylesS.btnFilter} onClick={lihatSemua}>
+                <Image src={"/LihatSemuaFilter.svg"} width={23} height={23} />
+                <p>Lihat Semua</p>
+              </button>
             </div>
+            {/* </div> */}
           </div>
           <Gap height={106} width={0} />
           <TableContainer
