@@ -6,7 +6,10 @@ const app = express();
 const mysql = require("mysql");
 const multer = require("multer");
 const path = require("path");
-const fileUpload = require("express-fileupload");
+
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -23,7 +26,23 @@ const storage = multer.diskStorage({
   },
 });
 
+const storage2 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client/upload");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      path.parse(file.originalname).name +
+        "_" +
+        Date.now() +
+        path.extname(file.originalname)
+    );
+  },
+});
+
 const upload = multer({ storage });
+const upload_file = multer({ storage });
 
 // LIBRARY UNTUK SESSION & COOKIE
 const session = require("express-session");
@@ -31,6 +50,7 @@ const cookieParser = require("cookie-parser");
 
 // LIBRARY UNTUK HASH PASSWORD
 const bcrypt = require("bcrypt");
+// const { promisify } = require("util");
 const saltRounds = 10;
 
 // CONNECT DATABASE
@@ -68,33 +88,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client")));
-app.use(fileUpload());
-// serving static files
-app.use("/uploads", express.static("uploads"));
 
-//UPLOAD FILE
-app.post("/uploadFile", (req, res) => {
-  let sampleFile;
-  let uploadPath;
-
-  if (!req.files || Object.keys(req.files).length === 0) {
-    res.status(400).send("No files were uploaded.");
-    return;
+app.post("/uploadFile", upload_file.single("file"), (req, res) => {
+  if (req.file === undefined) {
+    res.send("File belum di upload");
+  } else {
+    let finalFileURL = req.file.filename;
+    res.send({ status: "success", file: finalFileURL });
   }
-
-  console.log("req.files >>>", req.files); // eslint-disable-line
-
-  sampleFile = req.files.sampleFile;
-
-  uploadPath = __dirname + "/uploads/" + sampleFile.name;
-
-  sampleFile.mv(uploadPath, function (err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
-
-    res.send("File uploaded to " + uploadPath);
-  });
 });
 
 // UPLOAD FOTO
@@ -319,11 +320,28 @@ app.get("/cakin", (req, res) => {
 app.post("/unggahLaporan", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
   const ketPegawai = req.body.ketPegawai;
-  const formData = req.body.formData;
+  const fileURL = req.body.fileURL;
 
   const sqlUpdate =
-    "UPDATE data_renaksi SET ket_pegawai = ?, files = ? WHERE id_renaksi = ?";
-  let data = [ketPegawai, formData, idRenaksi];
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Selesai' WHERE id_renaksi = ?";
+  let data = [ketPegawai, fileURL, idRenaksi];
+
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(err);
+  });
+});
+
+//UBAH JADWAL RENAKSI
+app.post("/ubahJadwal", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketPegawai = req.body.ketPegawai;
+  const fileURL = req.body.fileURL;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+
+  const sqlUpdate =
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, req_start_date = ?, req_end_date = ?, status = 'Menunggu Jadwal Diubah' WHERE id_renaksi = ?";
+  let data = [ketPegawai, fileURL, startDate, endDate, idRenaksi];
 
   db.query(sqlUpdate, data, (err, result) => {
     console.log(err);
@@ -333,12 +351,15 @@ app.post("/unggahLaporan", (req, res) => {
 //HAPUS RENAKSI
 app.post("/hapusRenaksi", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
+  const ketPegawai = req.body.ketPegawai;
+  const fileURL = req.body.fileURL;
 
-  const sqlDelete =
-    'UPDATE data_renaksi SET status = "Menunggu Renaksi Dihapus" WHERE id_renaksi = ?';
-  let data = idRenaksi;
-  db.query(sqlDelete, data, (err, result) => {
-    console.log(result);
+  const sqlUpdate =
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, status = 'Menunggu Renaksi Dihapus' WHERE id_renaksi = ?";
+  let data = [ketPegawai, fileURL, idRenaksi];
+
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(err);
   });
 });
 

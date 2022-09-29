@@ -163,9 +163,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [ketPegawai, setKetPegawai] = useState("");
   const [image, setImage] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -240,30 +242,100 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   }
 
   const btnUnggahExp = () => {
-    // console.log(row.nip);
-    // console.log(ketPegawai);
+    const data = new FormData();
+    data.append("file", file);
 
-    const formData = new FormData();
-
-    formData.append("MyFile", selectedFile, selectedFile.name);
-    console.log(selectedFile);
-
-    Axios.post("http://localhost:3001/unggahLaporan", {
-      idRenaksi: row.id_renaksi,
-      ketPegawai: ketPegawai,
-      formData,
-    }).then((response) => {
-      console.log(response);
-    });
+    Axios.post("http://localhost:3001/uploadFile", data)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          Axios.post("http://localhost:3001/unggahLaporan", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            fileURL: response.data.file,
+          }).then((unggahLaporan) => {
+            console.log(unggahLaporan);
+          });
+        } else {
+          Axios.post("http://localhost:3001/unggahLaporan", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+          }).then((unggahLaporan) => {
+            console.log(unggahLaporan);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     closeModal();
     btnUnggah();
   };
 
+  const btnUbahJadwalExp = () => {
+    const data = new FormData();
+    data.append("file", file);
+
+    Axios.post("http://localhost:3001/uploadFile", data)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          Axios.post("http://localhost:3001/ubahJadwal", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            fileURL: response.data.file,
+            startDate: startDate,
+            endDate: endDate,
+          }).then((ubahJadwal) => {
+            console.log(ubahJadwal);
+          });
+        } else {
+          Axios.post("http://localhost:3001/ubahJadwal", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            startDate: startDate,
+            endDate: endDate,
+          }).then((ubahJadwal) => {
+            console.log(ubahJadwal);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    closeModalUbah();
+    btnUbah();
+  };
+
   const btnHapusExp = () => {
-    Axios.post("http://localhost:3001/hapusRenaksi", {
-      idRenaksi: row.id_renaksi,
-    });
+    const data = new FormData();
+    data.append("file", file);
+
+    Axios.post("http://localhost:3001/uploadFile", data)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          Axios.post("http://localhost:3001/hapusRenaksi", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            fileURL: response.data.file,
+          }).then((hapusRenaksi) => {
+            console.log(hapusRenaksi);
+          });
+        } else {
+          Axios.post("http://localhost:3001/hapusRenaksi", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+          }).then((hapusRenaksi) => {
+            console.log(hapusRenaksi);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     closeModalHapus();
     btnHapus();
@@ -441,25 +513,17 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         />
         <Gap height={20} width={0} />
         <div className={styles.wrapperBtnModal}>
-          <form
-            id="uploadForm"
-            action="http://localhost:3001/uploadFile"
-            method="post"
-            encType="multipart/form-data"
-          >
+          <form action="#">
+            <label htmlFor="file">
+              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+            </label>
             <input
               type="file"
               style={{ display: "none" }}
-              id="pilihFile"
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              id="file"
+              onChange={(e) => setFile(e.target.files[0])}
               name="sampleFile"
             />
-            <label for="pilihFile">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-              {/* <Button
-              title="Pilih File"
-              className={`${btnStyles.btnPilihFile}`} */}
-            </label>
           </form>
           <Gap width={193} height={0} />
           <button onClick={btnUnggahExp} className={styles.btnKirim}>
@@ -496,29 +560,41 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <input
           className={styles.inputBuktiLap_Ubah}
           placeholder="Tambah keterangan untuk mengubah jadwal"
+          onChange={(e) => setKetPegawai(e.target.value)}
         />
         <div style={{ flexDirection: "row", display: "flex", marginTop: -10 }}>
           <div className={styles.wrapperPickMonth}>
             <div>
               <p>Dari tanggal*</p>
-              <input type="month" />
+              <input
+                type="month"
+                onChange={(e) => setStartDate(e.target.value + "-01")}
+              />
             </div>
-            <div style={{ marginRight: 88, marginLeft: 50}}>
+            <div style={{ marginRight: 88, marginLeft: 50 }}>
               <p>Sampai tanggal*</p>
-              <input type="month" />
+              <input
+                type="month"
+                onChange={(e) => setEndDate(e.target.value + "-01")}
+              />
             </div>
           </div>
-          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+          <form action="#">
+            <label htmlFor="file">
+              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+            </label>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              id="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              name="sampleFile"
+            />
+          </form>
         </div>
         {/* <div className={styles.wrapperBtnModal}> */}
         <Gap width={0} height={24} />
-        <button
-          onClick={() => {
-            closeModalUbah();
-            btnUbah();
-          }}
-          className={styles.btnKirim_Ubah}
-        >
+        <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
           <img src={"/Kirim.svg"} width={20} height={20} />
           <p className={styles.txt}>Kirim</p>
         </button>
@@ -561,7 +637,19 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         />
         <Gap height={20} width={0} />
         <div className={styles.wrapperBtnModal}>
-          <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} />
+          <form action="#">
+            <label htmlFor="file">
+              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+            </label>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              id="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              name="sampleFile"
+            />
+          </form>
+          {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
           <Gap width={193} height={0} />
           <button onClick={btnHapusExp} className={styles.btnKirim}>
             <img src={"/Kirim.svg"} width={20} height={20} />
