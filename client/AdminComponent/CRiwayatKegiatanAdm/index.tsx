@@ -13,17 +13,17 @@ export default function CTinjauRenaksi() {
   const rowsSubagian = [
     {
       id: 1,
-      sub: "Hukum",
+      sub: "nama",
       keterangan: "tolong akang",
     },
     {
       id: 2,
-      sub: "Hukum",
+      sub: "nama",
       keterangan: "tolong akang",
     },
     {
       id: 3,
-      sub: "Hukum",
+      sub: "nama",
       keterangan: "tolong akang",
     },
   ];
@@ -46,21 +46,27 @@ export default function CTinjauRenaksi() {
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Sub Bagian</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+                <TableCell className={styles.styleHeader}>
+                  Kepala Sub Bagian
+                </TableCell>
+                <TableCell className={styles.styleHeader}>Sub Bagian</TableCell>
+                <TableCell className={styles.styleHeader}>Bagian</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
-                  <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <div className={styles.styleProfileKasub}>
+                      <Image src={"/User1.svg"} width={45} height={45} />{" "}
+                      <p>{row.sub}</p>
                     </div>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
                   </TableCell>
                 </TableRow>
               ))}
@@ -79,21 +85,27 @@ export default function CTinjauRenaksi() {
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Sub Bidang</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+                <TableCell className={styles.styleHeader}>
+                  Kepala Sub Bidang
+                </TableCell>
+                <TableCell className={styles.styleHeader}>Sub Bidang</TableCell>
+                <TableCell className={styles.styleHeader}>Bidang</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
-                  <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <div className={styles.styleProfileKasub}>
+                      <Image src={"/User1.svg"} width={45} height={45} />{" "}
+                      <p>{row.sub}</p>
                     </div>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
                   </TableCell>
                 </TableRow>
               ))}

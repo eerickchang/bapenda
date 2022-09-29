@@ -6,7 +6,7 @@
 
 .wrapperTitleDaftarKegiatan {
   display: flex;
-  width: 299px;
+  width: 359px;
   height: 50px;
   text-align: center;
   align-items: center;
@@ -15,17 +15,17 @@
   margin-top: 34px;
   z-index: 999;
   margin-left: 40px;
+  padding-bottom: 5px;
 }
 
 .txtTitle {
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(221, 202, 27, 1);
   margin: 0;
   width: 300px;
   margin-top: 1px;
-  /* margin-left: 10px; */
 }
 
 .styleHeader{
@@ -48,10 +48,6 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.hover :active{
-  background-color: rgba(232, 232, 232, 1);
-
-}
 
 
 .styleProfileKasub{
@@ -63,4 +59,9 @@
 
 .styleProfileKasub p{
   margin-left: 10px;
+}
+
+.wrapFileLampiran{
+  display: flex;
+  flex-direction: column;
 }

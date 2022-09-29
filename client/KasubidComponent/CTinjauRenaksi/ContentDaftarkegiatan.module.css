@@ -101,6 +101,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .btnFilter p {

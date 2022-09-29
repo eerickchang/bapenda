@@ -421,14 +421,14 @@ export default function ContentInputRenaksi() {
       <p className={styles.titleTupoksi}>Rencana Pelaksana</p>
       <div className={styles.wrapperPickMonth}>
         <div>
-          <p>Dari tanggal*</p>
+          <p>Dari bulan*</p>
           <input
             type="month"
             onChange={(e) => setStartDate(e.target.value + "-01")}
           />
         </div>
         <div style={{ marginLeft: 133 }}>
-          <p>Sampai tanggal*</p>
+          <p>Sampai bulan*</p>
           <input
             type="month"
             onChange={(e) => setEndDate(e.target.value + "-01")}

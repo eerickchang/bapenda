@@ -46,7 +46,7 @@ export default function Sidebar({
   };
 
   const clickUbahJadwal = () => {
-    router.push("/Kasubid/UbahJadwal");
+    router.push("/Kasubid/UbahJadwalRenaksi");
   };
 
   const clickEvaluasiLampiran = () => {

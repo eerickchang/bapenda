@@ -186,6 +186,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   return (
     <React.Fragment>
       <TableRow
+        hover
         className={`${styles.tableRow}`}
         sx={{ "& > *": { borderBottom: "" } }}
       >
@@ -197,7 +198,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <p className={stylesS.styleTxtRow}>{row.sub_bidang}</p>
         </TableCell>
         <TableCell>
-          <p className={stylesS.styleTxtRow}>
+          <div className={stylesS.styleTxtRow}>
             <div style={{ flexDirection: "row", display: "flex" }}>
               <button className={styles.btnTerima} onClick={btnTerima}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
@@ -210,7 +211,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
               </button>
             </div>
-          </p>
+          </div>
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -263,6 +264,34 @@ export default function ContentDaftarKegiatan() {
     router.push("/Kasubid/TinjauRenaksiLihatSemua");
   };
 
+  const rowsSubagian = [
+    {
+      id: 1,
+      nama: "Jerry sumendap",
+      keterangan: "tolong akang",
+    },
+    {
+      id: 2,
+      nama: "Jerry sumendap",
+      keterangan: "tolong akang",
+    },
+    {
+      id: 3,
+      nama: "Jerry sumendap",
+      keterangan: "tolong akang",
+    },
+  ];
+
+  const [showModal, setShowModal] = useState(false);
+
+  const btnTerima = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+  };
+
+
   return (
     <>
       {domLoaded && (
@@ -276,12 +305,12 @@ export default function ContentDaftarKegiatan() {
           <div className={stylesS.wrapFilter}>
             <button className={styles.btnTerimaAll}>
               <Image src={"/Terima.svg"} width={25} height={25} />
-              Terima
+              Terima Semua
             </button>
             <Gap width={15} />
             <button className={styles.btnTerimaAll}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-              Tolak
+              <Image src={"/Tolak.svg"} width={25} height={25} />
+              Tolak Semua
             </button>
             <button onClick={lihatSemua} className={stylesS.btnFilter}>
               <Image src={"/LihatSemua.svg"} width={25} height={25} />
@@ -294,23 +323,64 @@ export default function ContentDaftarKegiatan() {
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
-                <TableRow>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Pegawai
+              <TableRow>
+                <TableCell className={styles.styleHeader}>Pegawai</TableCell>
+                <TableCell className={styles.styleHeader}>
+                  Sub Bidang
+                </TableCell>
+                <TableCell className={styles.styleHeader}>Aksi</TableCell>
+              </TableRow>
+            </TableHead>
+              <TableBody>
+              {rowsSubagian.map((row) => (
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.nama}</p>
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Sub Bidang
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Aksi
+                  <TableCell>
+                    <div className={styles.styleTxtRow}>
+                      <div style={{ flexDirection: "row", display: "flex" }}>
+                        <button
+                          className={styles.btnTerima}
+                          onClick={() => btnTerima()}
+                        >
+                          <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                          Terima
+                        </button>
+                        {showModal ? (
+                          <div
+                            className={styles.modal}
+                            onClick={() => setShowModal(false)}
+                          >
+                            <p>
+                              Input Renaksi Feren <b>Berhasil</b>
+                              <div className={styles.checkCircle}>
+                                <Image
+                                  src={"/Check-circle.svg"}
+                                  width={25}
+                                  height={25}
+                                />
+                              </div>
+                            </p>
+                          </div>
+                        ) : null}
+                        <Gap width={40} height={0} />
+                        <button
+                          className={styles.btnTolak}
+                          // onClick={() => console.log(renaksiPegawai)}
+                        >
+                          <Image src={"/Tolak.svg"} width={20} height={20} />{" "}
+                          Tolak
+                        </button>
+                      </div>
+                    </div>
                   </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} />
-                ))}
-              </TableBody>
+              ))}
+            </TableBody>>
             </Table>
           </TableContainer>
         </div>

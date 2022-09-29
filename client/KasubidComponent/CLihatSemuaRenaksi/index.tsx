@@ -45,7 +45,7 @@ export default function CLihatSemuaRenaksi() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Staff/Profil");
+    router.push("/Kasubid/TinjauRenaksi");
     // console.log(dataCakin);
   };
 

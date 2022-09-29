@@ -26,7 +26,7 @@ import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
 import CTinjauRenaksi from "./CTinjauRenaksi";
 import CEvaluasiLampiran from "./CEvaluasiLampiran";
 import CHapusRenaksi from "./CHapusRenaksi";
-import CUbahJadwal from "./CUbahJadwal";
+import CUbahJadwalRenaksi from "./CUbahJadwalRenaksi";
 import CProfilAdm from "./CProfilAdm";
 import CNotifAdm from "./CNotifAdm";
 import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
@@ -58,7 +58,7 @@ export {
   CDaftarKegiatanAdm,
   CDaftarKegiatanSubid,
   CProfilAdm,
-  CUbahJadwal,
+  CUbahJadwalRenaksi,
   CEvaluasiLampiran,
   CHapusRenaksi,
   CRiwayatKegiatanAdm,

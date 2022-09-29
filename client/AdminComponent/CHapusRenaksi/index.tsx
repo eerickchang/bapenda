@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./hapusRenasksi.module.css";
+import styles from "./hapusRenaksi.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -31,8 +31,8 @@ export default function CTinjauRenaksi() {
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleDaftarKegiatan}>
-        <Image src={"/HapusRenaksiTitle.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>Tinjau Renaksi</p>
+        <Image src={"/HapusRenaksiTitle.svg"} width={40} height={40} />
+        <p className={styles.txtTitle}>Permintaan Hapus Renaksi</p>
       </div>
       <div className={styles.wrapTable}>
         <TableContainer
@@ -45,21 +45,25 @@ export default function CTinjauRenaksi() {
         >
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
-              <TableRow>
-                <TableCell>Sub Bagian</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+              <TableRow className={styles.styleHeader}>
+                <TableCell className={styles.styleHeader}>Sub Bagian</TableCell>
+                <TableCell className={styles.styleHeader}>Program</TableCell>
+                <TableCell className={styles.styleHeader}>Aksi</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
+                  </TableCell>
                   <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                    <div className={styles.styleLihatDetail}>
+                      <Image src={"/LihatSemua.svg"} width={24} height={24} />{" "}
+                      <p>Lihat Detail</p>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -79,20 +83,24 @@ export default function CTinjauRenaksi() {
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Sub Bidang</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+                <TableCell className={styles.styleHeader}>Sub Bagian</TableCell>
+                <TableCell className={styles.styleHeader}>Program</TableCell>
+                <TableCell className={styles.styleHeader}>Aksi</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
+                  </TableCell>
                   <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                    <div className={styles.styleLihatDetail}>
+                      <Image src={"/LihatSemua.svg"} width={24} height={24} />{" "}
+                      <p>Lihat Detail</p>
                     </div>
                   </TableCell>
                 </TableRow>
