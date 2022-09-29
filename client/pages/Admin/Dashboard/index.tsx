@@ -12,6 +12,7 @@ import styles from "./dashboard.module.css";
 import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
 import Axios from "axios";
 import moment from "moment";
+import Image from "next/image";
 
 Axios.defaults.withCredentials = true;
 
@@ -123,6 +124,20 @@ export default function Dashboard() {
     ],
   };
 
+
+  
+  const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
+
+  const filter = [
+    {
+      id:1,
+      sub: 'Bidang',
+    },
+    {
+      id:2,
+      sub: 'Sub Bidang',
+    },
+  ]
   return (
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
@@ -138,6 +153,27 @@ export default function Dashboard() {
         />
         <div className={styles.chartWrapper}>
           <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
+          <div className={styles.wrapperFilterTahun}>
+            <div
+              className={styles.btnFilterTahun}
+              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+            >
+              <Image src={"/Filter.svg"} width={23} height={23} />
+              <p>Filter</p>
+            </div>
+            {activeDropdownTahun && (
+              <div
+                className={styles.wrapperSelectFilterTahun}
+                onClick={() => setActiveDropdownTahun(false)}
+              >
+                {filter.map((item) => (
+                  <p key={item.id} >
+                    {item.sub}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
           <BarChart chartData={userData} />
         </div>
       </div>
