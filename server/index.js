@@ -358,7 +358,7 @@ app.post("/hapusRenaksi", (req, res) => {
 //KASUBID AMBIL RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
 app.get("/kasubidAmbilRenaksiMRD", (req, res) => {
   const sqlSelect =
-    "SELECT * FROM data_renaksi WHERE status = 'Menunggu Renaksi Diterima'";
+    "SELECT * FROM data_renaksi WHERE status = 'Menunggu Renaksi Diterima' AND kirim_ke = 'Kasubid'";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
