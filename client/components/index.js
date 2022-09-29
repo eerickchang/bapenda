@@ -33,10 +33,7 @@ import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
 
 
-// ! ADMIN
-import SidebarAdmin from "./SidebarAdmin";
-import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
-import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
+
 
 
 
@@ -73,8 +70,5 @@ export {
   ProfileKananKonten,
   ContentDetailCaKin,
 
-  // !   ADMIN
-  SidebarAdmin,
-  CDaftarKegiatanAdm,
-  CDaftarKegiatanSubid,
+
 };

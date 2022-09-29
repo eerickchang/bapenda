@@ -1,7 +1,11 @@
 import React from 'react'
-import { CDaftarKegiatanSubid, Gap, SidebarAdmin } from '../../../components';
+import {
+  CDaftarKegiatanSubid,
+  Gap,
+  SidebarAdmin,
+} from "../../../AdminComponent";
 import styles from './daftarKegiatanSubid.module.css';
-import sidebarStyles from "../../../components/SidebarAdmin/sidebar.module.css";
+import sidebarStyles from "../../../AdminComponent/SidebarAdmin/sidebar.module.css";
 
 export default function DaftarKegiatanSubid() {
   return (
