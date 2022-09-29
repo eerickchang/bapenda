@@ -399,7 +399,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             </div>
           )}
 
-          {/* <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
             {!image ? (
               <Image
                 src={"/SidebarProfile.svg"}
@@ -421,7 +421,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               <p className={stylesS.rekanNama}>{row.nama_thl}</p>
               <p className={stylesS.rekanPegawai}>THL</p>
             </div>
-          </div> */}
+          </div>
         </TableCell>
         <TableCell>
           {/* ambil data rencana */}

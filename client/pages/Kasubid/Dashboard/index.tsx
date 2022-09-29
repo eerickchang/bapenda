@@ -4,7 +4,7 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  SidebarStaff,
+  Sidebar,
   TopPegawai,
 } from "../../../KasubidComponent";
 import styles from "./dashboard.module.css";
@@ -124,7 +124,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
-      <SidebarStaff kotakHome={sidebarStyles.kotakAktif} />
+      <Sidebar kotakHome={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <DashboardHeader

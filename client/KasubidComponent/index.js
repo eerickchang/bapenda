@@ -31,9 +31,10 @@ import BarChart from "./BarChart";
 import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
+import Sidebar from "./Sidebar";
 
 // ! ADMIN
-import SidebarAdmin from "./SidebarAdmin";
+import SidebarAdmin from "./Sidebar";
 import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
 import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
 
@@ -68,6 +69,7 @@ export {
   HorBar,
   ProfileKananKonten,
   ContentDetailCaKin,
+  Sidebar,
 
   // !   ADMIN
   SidebarAdmin,

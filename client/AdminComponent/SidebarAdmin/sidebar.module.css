@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .image {
@@ -30,8 +30,8 @@
 }
 
 .kotak {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +42,8 @@
 }
 
 .kotak:focus {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,8 +53,8 @@
 }
 
 .kotakLogOut {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,8 +65,8 @@
 }
 
 .kotakLogOut:focus {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,8 +106,8 @@
 
 .kotak:hover {
   background-color: #1bddbb;
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,8 +124,8 @@
 
 .kotakLogOut:hover {
   background-color: #1bddbb;
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,8 +135,8 @@
 }
 
 .kotakAktif {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,8 +147,8 @@
 }
 
 .kotakAktifLogOut {
-  width: 65px;
-  height: 65px;
+  width: 63px;
+  height: 63px;
   display: flex;
   justify-content: center;
   align-items: center;

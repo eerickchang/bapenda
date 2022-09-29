@@ -32,11 +32,6 @@ import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
 
-// ! ADMIN
-import SidebarAdmin from "./SidebarAdmin";
-import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
-import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
-
 export {
   CtnUmum,
   TxtUmum,
@@ -68,9 +63,4 @@ export {
   HorBar,
   ProfileKananKonten,
   ContentDetailCaKin,
-
-  // !   ADMIN
-  SidebarAdmin,
-  CDaftarKegiatanAdm,
-  CDaftarKegiatanSubid,
 };

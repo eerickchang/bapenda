@@ -4,15 +4,15 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  SidebarAdmin,
   SidebarStaff,
   TopPegawai,
 } from "../../../components";
 import styles from "./dashboard.module.css";
-import sidebarStyles from "../../../components/SidebarStaff/sidebar.module.css";
+import sidebarStyles from "../../../AdminComponent/SidebarAdmin/sidebar.module.css";
 import Axios from "axios";
 import moment from "moment";
 import Image from "next/image";
+import { SidebarAdmin } from "../../../AdminComponent";
 
 Axios.defaults.withCredentials = true;
 

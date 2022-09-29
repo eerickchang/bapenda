@@ -10,8 +10,11 @@ import Modal from "react-modal";
 
 export default function Sidebar({
   kotakHome = styles.kotak,
-  kotakInput = styles.kotak,
   kotakDaftarKegiatan = styles.kotak,
+  kotakTinjauRenaksi = styles.kotak,
+  kotakUbahJadwal = styles.kotak,
+  kotakEvaluasiLampiran = styles.kotak,
+  kotakHapusRenaksi = styles.kotak,
   kotakRiwayatKegiatan = styles.kotak,
   kotakProfil = styles.kotak,
   kotakNotif = styles.kotak,
@@ -33,23 +36,33 @@ export default function Sidebar({
     router.push("/Admin/DaftarKegiatan");
   };
 
-  const clickInput = () => {
-    router.push("/Admin/Dashboard");
+  const clickTinjauRenaksi = () => {
+    router.push("/Admin/TinjauRenaksi");
   };
 
 
+  const clickUbahJadwal = () => {
+    router.push("/Admin/UbahJadwal");
+  };
+
+  const clickEvaluasiLampiran = () => {
+    router.push("/Admin/EvaluasiLampiran");
+  };
+
+  const clickHapusRenaksi = () => {
+    router.push("/Admin/HapusRenaksi");
+  };
   const clickRiwayatKegiatan = () => {
-    router.push("/Admin/Dashboard");
+    router.push("/Admin/RiwayatKegiatan");
   };
 
   const clickProfil = () => {
-    router.push("/Admin/Dashboard");
+    router.push("/Admin/Profil");
   };
 
   const clickNotif = () => {
-    router.push("/Admin/Dashboard");
+    router.push("/Admin/Notifikasi");
   };
-
   // const clickLogOut = () => {
   //   router.push("/Staff/LogOut");
   // };
@@ -119,7 +132,7 @@ export default function Sidebar({
             <Image src="/Home.svg" width={30} height={30} />
             <div className={styles.hoverKeterangan}>Beranda</div>
           </button>
-          <Gap height={20} width={0} />
+          <Gap height={10} width={0} />
           <button className={kotakDaftarKegiatan} onClick={clickDaftarKegiatan}>
             <Image src="/DaftarKegiatan.svg" width={30} height={30} />
             <div
@@ -128,21 +141,51 @@ export default function Sidebar({
               Daftar Kegiatan
             </div>
           </button>
-          <button className={kotakInput} onClick={clickInput}>
-            <Image src="/Input.svg" width={40} height={40} />
+          <Gap height={10} width={0} />
+          <button className={kotakTinjauRenaksi} onClick={clickTinjauRenaksi}>
+            <Image src="/TinjauRenaksi.svg" width={30} height={30} />
             <div
               className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
             >
-              Input Kegiatan
+              Tinjau Renaksi
             </div>
           </button>
-          <Gap height={20} width={0} />
-          <Gap height={20} width={0} />
+          <Gap height={10} width={0} />
+          <button className={kotakUbahJadwal} onClick={clickUbahJadwal}>
+            <Image src="/UbahJadwal.svg" width={30} height={30} />
+            <div
+              className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
+            >
+              Ubah Jadwal
+            </div>
+          </button>
+          <Gap height={10} width={0} />
+          <button
+            className={kotakEvaluasiLampiran}
+            onClick={clickEvaluasiLampiran}
+          >
+            <Image src="/EvaluasiLampiran.svg" width={30} height={30} />
+            <div
+              className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
+            >
+              Evaluasi Lampiran
+            </div>
+          </button>
+          <Gap height={10} width={0} />
+          <button className={kotakHapusRenaksi} onClick={clickHapusRenaksi}>
+            <Image src="/HapusRenaksi.svg" width={30} height={30} />
+            <div
+              className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
+            >
+              Hapus Renaksi
+            </div>
+          </button>
+          <Gap height={10} width={0} />
           <button
             className={kotakRiwayatKegiatan}
             onClick={clickRiwayatKegiatan}
           >
-            <Image src="/RiwayatKegiatan.svg" width={40} height={40} />
+            <Image src="/RiwayatKegiatan.svg" width={30} height={30} />
             <div
               className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
             >
@@ -150,24 +193,25 @@ export default function Sidebar({
             </div>
           </button>
         </div>
+        <Gap height={30} width={0}/>
         <div className={styles.contentBawah}>
           <button className={kotakProfil} onClick={clickProfil}>
-            <Image src="/Profile.svg" width={25} height={30} />
+            <Image src="/Profile.svg" width={30} height={30} />
             <div className={`${styles.hoverKeterangan}`}>Profil</div>
           </button>
-          <Gap height={20} width={0} />
+          <Gap height={10} width={0} />
           <button className={kotakNotif} onClick={clickNotif}>
-            <Image src="/NotifPutih.svg" width={40} height={40} />
+            <Image src="/NotifPutih.svg" width={30} height={30} />
             <div className={`${styles.hoverKeterangan}`}>Notifikasi</div>
           </button>
-          <Gap height={20} width={0} />
+          <Gap height={10} width={0} />
           <button
             className={kotakLogOut}
             onClick={() => {
               openModal();
             }}
           >
-            <Image src="/LogOut.svg" width={40} height={40} />
+            <Image src="/LogOut.svg" width={30} height={30} />
             <div className={`${styles.hoverKeterangan}`}>Keluar</div>
           </button>
           <Modal
