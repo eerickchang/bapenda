@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
+import Image from "next/image";
 
 export default function CTinjauRenaksi() {
   const rowsSubagian = [
@@ -14,39 +15,25 @@ export default function CTinjauRenaksi() {
       id: 1,
       sub: "Hukum",
       keterangan: "tolong akang",
-      aksi: (
-        <div>
-          <Button title="terima" />
-          <Button title="terima" />
-        </div>
-      ),
     },
     {
       id: 2,
       sub: "Hukum",
       keterangan: "tolong akang",
-      aksi: (
-        <div>
-          <Button title="terima" />
-          <Button title="terima" />
-        </div>
-      ),
     },
     {
       id: 3,
       sub: "Hukum",
       keterangan: "tolong akang",
-      aksi: (
-        <div>
-          <Button title="terima" />
-          <Button title="terima" />
-        </div>
-      ),
     },
   ];
 
   return (
     <div className={styles.container}>
+      <div className={styles.wrapperTitleDaftarKegiatan}>
+        <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+        <p className={styles.txtTitle}>Tinjau Renaksi</p>
+      </div>
       <div className={styles.wrapTable}>
         <TableContainer
           style={{
@@ -69,7 +56,12 @@ export default function CTinjauRenaksi() {
                 <TableRow className={styles.styleRow} key={row.id}>
                   <TableCell>{row.sub}</TableCell>
                   <TableCell>{row.keterangan}</TableCell>
-                  <TableCell>{row.aksi}</TableCell>
+                  <TableCell>
+                    <div>
+                      <Button title="terima" />
+                      <Button title="terima" />
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -97,7 +89,12 @@ export default function CTinjauRenaksi() {
                 <TableRow className={styles.styleRow} key={row.id}>
                   <TableCell>{row.sub}</TableCell>
                   <TableCell>{row.keterangan}</TableCell>
-                  <TableCell>{row.aksi}</TableCell>
+                  <TableCell>
+                    <div>
+                      <Button title="terima" />
+                      <Button title="terima" />
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
