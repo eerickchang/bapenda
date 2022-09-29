@@ -230,13 +230,22 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         Axios.get("http://localhost:3001/kasubidAmbilPegawai").then(
           (ambilPegawai) => {
-            ambilPegawai.data.map((pegawai) => {
-              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
-                setPegawai((nextData) => {
-                  return [...nextData, pegawai];
+            Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+              (ambilRenaksi) => {
+                ambilPegawai.data.map((pegawai) => {
+                  ambilRenaksi.data.map((renaksi) => {
+                    if (
+                      masuk.data.user[0].sub_bidang === pegawai.sub_bidang &&
+                      pegawai.nip === renaksi.nip
+                    ) {
+                      setPegawai((nextData) => {
+                        return [...nextData, pegawai];
+                      });
+                    }
+                  });
                 });
               }
-            });
+            );
           }
         );
       });
