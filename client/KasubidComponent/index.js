@@ -1,36 +1,25 @@
 // !  STAFF
 
 import Button from "./Button";
-import ContentInputRenaksiP from "./ContentInputRenaksiP";
+import ContentInputRenaksi from "./ContentInputRenaksi";
 import CtnMasukRegister from "./CtnDaftar";
-import CtnLogin from "./CtnLogin";
-import CtnLupaSandi from "./CtnLupaSandi";
-import CtnLupaSandiOTP from "./CtnLupaSandiOTP";
-import CtnSandiBaru from "./CtnSandiBaru";
-import CtnSandiSukses from "./CtnSandiSukses";
-import CtnUmum from "./CtnUmum";
 import TxtInputDaftar from "./TxtInputDaftar";
 import BtnBulan from "./BtnBulan";
 import DashboardHeader from "./DashboardHeader";
 import Gap from "./Gap";
-import LayoutUmum from "./LayoutUmum";
 import SidebarStaff from "./SidebarStaff";
 import TxtInput from "./TxtInput";
-import txtInputDaftar from "./TxtInputDaftar";
 import TxtInputRenaksi from "./TxtInputRenaksi";
-import TxtUmum from "./TxtUmum";
 import TopPegawai from "./TopPegawai";
 import BoxNotification from "./BoxNotification";
 import ProfileKanan from "./ProfileKanan";
 import ContentDaftarKegiatan from "./ContentDaftarKegiatan";
-import CtnDaftarSukses from "./CtnDaftarSukses";
 import ButtonAnimasi from "./ButtonAnimasi";
 import ContentNotifikasi from "./ContentNotifikasi";
 import CheckboxBulan from "./CheckboxBulan";
 import BarChart from "./BarChart";
 import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
-import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 import Sidebar from "./Sidebar";
 import CDaftarKegiatanAdm from "./CDaftarKegiatanAdm";
 import CDaftarKegiatanSubid from "./CDaftarKegiatanSubid";
@@ -41,23 +30,17 @@ import CUbahJadwal from "./CUbahJadwal";
 import CProfilAdm from "./CProfilAdm";
 import CNotifAdm from "./CNotifAdm";
 import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
+import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
+import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 
 export {
-  CtnUmum,
-  TxtUmum,
   TxtInput,
   Gap,
   Button,
-  LayoutUmum,
   SidebarStaff,
-  ContentInputRenaksiP,
+  ContentInputRenaksi,
   TxtInputRenaksi,
-  CtnLogin,
-  CtnLupaSandi,
-  CtnLupaSandiOTP,
   CtnMasukRegister,
-  CtnSandiBaru,
-  CtnSandiSukses,
   TxtInputDaftar,
   BtnBulan,
   DashboardHeader,
@@ -65,14 +48,12 @@ export {
   BoxNotification,
   ProfileKanan,
   ContentDaftarKegiatan,
-  CtnDaftarSukses,
   ButtonAnimasi,
   ContentNotifikasi,
   CheckboxBulan,
   BarChart,
   HorBar,
   ProfileKananKonten,
-  CLihatSemuaRenaksi,
   Sidebar,
   CDaftarKegiatanAdm,
   CDaftarKegiatanSubid,
@@ -83,4 +64,6 @@ export {
   CRiwayatKegiatanAdm,
   CNotifAdm,
   CTinjauRenaksi,
+  TxtInputRenaksiProgram,
+  CLihatSemuaRenaksi,
 };

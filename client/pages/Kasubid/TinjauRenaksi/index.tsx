@@ -1,5 +1,5 @@
 import React from "react";
-import { CLihatSemuaRenaksi, CTinjauRenaksi, Gap, Sidebar } from "../../../KasubidComponent";
+import { CTinjauRenaksi, Gap, Sidebar } from "../../../KasubidComponent";
 import styles from "./tinjauRenaksi.module.css";
 import sidebarStyles from "../../../KasubidComponent/Sidebar/sidebar.module.css";
 export default function TinjauRenaksi() {
@@ -8,7 +8,6 @@ export default function TinjauRenaksi() {
       <Sidebar kotakTinjauRenaksi={sidebarStyles.kotakAktif} />
       <Gap width={140} height={80} />
       <CTinjauRenaksi />
-      {/* <CLihatSemuaRenaksi/> */}
     </div>
   );
 }

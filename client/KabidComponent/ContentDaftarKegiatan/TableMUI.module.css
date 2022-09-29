@@ -1,0 +1,390 @@
+.tableRow {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  height: 161px;
+}
+
+.tableRowClick{
+  background-color: #E8E8E8;
+  border-radius: 20px;
+  height: 161px;
+}
+
+.headerTable {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #959595;
+}
+
+.wrapperTitleInputRenaksi {
+  display: flex;
+  width: 299px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: 7px;
+  margin-top: 34px;
+}
+
+.txtTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  width: 300px;
+  /* margin-top: 1px; */
+  margin-left: 19px;
+}
+
+.backgroundRowExpand {
+  padding-bottom: 0px;
+  padding-top: 0;
+  background-color: 'red';
+}
+
+.wrapperContentModal {
+  display: inline-flex;
+  margin-top: 35px;
+  margin-left: 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  border-width: 2px red;
+  margin-top: 35px;
+  /* padding-top:5px; */
+  /* background-color: #112350; */
+}
+
+.btnUnggah {
+  background-color: rgba(27, 221, 187, 1);
+  width: 246px;
+  height: 71px;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btnUnggah p {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin-left: 12px;
+}
+
+.btnUbahJadwal {
+  background-color: rgba(221, 202, 27, 1);
+  width: 246px;
+  height: 71px;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnUbahJadwal p {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnHapus {
+  background-color: rgba(255, 1, 100, 1);
+  width: 246px;
+  height: 71px;
+  border: none;
+  border-radius: 12px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnHapus p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin-left: 12px;
+}
+
+.titleBtnUnggah {
+  color: black;
+}
+
+.p {
+  color: rgba(149, 149, 149, 1);
+  font-weight: 500;
+}
+
+.wrapperBtnModal {
+  display: inline-flex;
+}
+
+.inputBuktiLap_Ubah {
+  height: 120px;
+  width: 755px;
+  border: 1px solid black;
+  margin-bottom: 35px;
+  border-radius: 4px;
+}
+
+.inputBuktiLap_Ubah::placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inputBuktiLap_Ubah:focus {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  outline: none;
+}
+
+.inputBuktiLap {
+  height: 133px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.inputBuktiLap::placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inputBuktiLap:focus {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  outline: none;
+}
+
+.btnBatal_Ubah {
+  background-color: rgba(255, 1, 100, 1);
+  width: 754px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim_Ubah {
+  background-color: rgba(27, 221, 187, 1);
+  width: 754px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim_Ubah p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal_Ubah p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal {
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+/* MODAL BERHASIL LAMPIRKAN LAPORAN */
+.modal {
+  width: 540px;
+  height: 70px;
+  background-color: #ddfaf5;
+  padding-left: 56px;
+  padding-top: 20px;
+  border-radius: 20px;
+  position: Fixed;
+  top: 25px;
+  left: 678px;
+}
+
+.modal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #112350;
+  margin: 0;
+  cursor: default;
+}
+
+.checkCircle {
+  position: absolute;
+  top: 22px;
+  left: 455px;
+}
+
+/* MODAL BERHASIL UBAH JADWAL */
+.modal_Ubah {
+  width: 600px;
+  height: 70px;
+  background-color: #ddfaf5;
+  padding-left: 46px;
+  padding-top: 20px;
+  border-radius: 20px;
+  position: Fixed;
+  top: 25px;
+  left: 678px;
+}
+
+.modal_Ubah p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #112350;
+  margin: 0;
+  cursor: default;
+}
+
+.checkCircle_Ubah {
+  position: absolute;
+  top: 22px;
+  left: 535px;
+}
+
+/* MODAL BERHASIL HAPUS RENAKSI */
+.modal_Hapus {
+  width: 595px;
+  height: 70px;
+  background-color: #ddfaf5;
+  padding-left: 46px;
+  padding-top: 20px;
+  border-radius: 20px;
+  position: Fixed;
+  top: 25px;
+  left: 678px;
+}
+
+.modal_Hapus p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #112350;
+  margin: 0;
+  cursor: default;
+}
+
+.checkCircle_Hapus {
+  position: absolute;
+  top: 22px;
+  left: 515px;
+}
+
+
+
+
+
+.wrapperPickMonth {
+  display: flex;
+  /* margin-top: -10px; */
+}
+.wrapperPickMonth {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.wrapperPickMonth p{
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.wrapperPickMonth input {
+  padding: 10px;
+  background-color: rgba(223, 223, 223, 0.43);
+  border: 1px solid rgba(27, 221, 187, 1);
+  border-radius: 10px;
+  width: 210px;
+  height: 40px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(148, 148, 148, 1);
+}

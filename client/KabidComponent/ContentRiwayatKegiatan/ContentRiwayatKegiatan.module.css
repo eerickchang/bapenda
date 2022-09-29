@@ -1,0 +1,310 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.wrapperRiwayatKegiatan {
+  display: flex;
+  width: 470px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: 7px;
+  margin-top: 34px;
+  /* padding-bottom: 5px; */
+}
+
+.txtTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  margin-left: 19px;
+}
+
+.wrapperFilter{
+  display: flex;
+  justify-content: space-around;
+}
+
+.wrapperFilterTahun {
+  position:absolute ;
+  top: 115px;
+  left: 1500px;
+}
+
+.btnFilterTahun {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #112350;
+  border-radius: 5px;
+  width: 122px;
+  height: 43px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  background-color: #fff;
+}
+
+.btnFilterTahun p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin-left: 11px;
+}
+
+.wrapperSelectFilterTahun {
+  padding-top: 7px;
+  padding-bottom: 6px;
+  width: 122px;
+  height: 153px;
+  border: 1px solid #112350;
+  border-radius: 10px;
+  display: grid;
+  user-select: none;
+  position: absolute;
+  background-color: #fff;
+  top: 45px;
+  overflow: overlay;
+  justify-content: center;
+  z-index: 1002;
+}
+
+.wrapperSelectFilterTahun p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin: 0;
+  text-align: center;
+  width: 100px;
+  height: 46px;
+  padding-top: 5px;
+}
+
+.wrapperSelectFilterTahun p:hover {
+  background-color: #112350;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  align-self: center;
+  /* margin-left: 20px; */
+}
+
+.wrapperSelectFilterTahun::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapperFilterBulan {
+  position:absolute ;
+  top: 115px;
+  left: 1500px;
+}
+
+.btnFilterBulan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #112350;
+  border-radius: 5px;
+  width: 122px;
+  height: 43px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  background-color: #fff;
+}
+
+.btnFilterBulan p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin-left: 11px;
+}
+
+.wrapperSelectFilterBulan {
+  padding-top: 7px;
+  padding-bottom: 6px;
+  width: 122px;
+  height: 153px;
+  border: 1px solid #112350;
+  border-radius: 10px;
+  display: grid;
+  user-select: none;
+  position: absolute;
+  background: #fff;
+  top: 45px;
+  overflow: overlay;
+  justify-content: center;
+  z-index: 1002;
+}
+
+.wrapperSelectFilterBulan p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin: 0;
+  text-align: center;
+  width: 100px;
+  height: 46px;
+  padding-top: 5px;
+}
+
+.wrapperSelectFilterBulan p:hover {
+  background-color: #112350;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  align-self: center;
+  /* margin-left: 20px; */
+}
+
+.wrapperSelectFilterBulan::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapperUnduh {
+  position: absolute;
+  top: 115px;
+  left: 1638px;
+}
+
+.btnUnduh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #112350;
+  border-radius: 5px;
+  width: 122px;
+  height: 43px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  background-color: #112350;
+}
+
+.btnUnduh p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 11px;
+}
+
+.wrapperSelectUnduh {
+  padding-top: 7px;
+  padding-bottom: 6px;
+  width: 122px;
+  height: 120px;
+  border: 1px solid #112350;
+  border-radius: 10px;
+  display: grid;
+  user-select: none;
+  position: absolute;
+  background-color: #fff;
+  top: 45px;
+  overflow: overlay;
+  align-content: space-around;
+  justify-content: space-around;
+  z-index: 1002;
+}
+
+.wrapperSelectUnduh p {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #112350;
+  margin: 0;
+  text-align: center;
+  width: 100px;
+  height: 46px;
+  padding-top: 5px;
+}
+
+.wrapperSelectUnduh p:hover {
+  background-color: #112350;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  align-self: center;
+  /* margin-left: 20px; */
+}
+
+.wrapperSelectUnduh::-webkit-scrollbar {
+  display: none;
+}
+
+
+.rekanNama{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rekanPegawai{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+.rekanAsn{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+
+.styleTupoksi{
+  padding: 5px;
+  background-color: rgba(25, 182, 203);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  align-items: center
+}
+.styleTupoksiTambahan{
+  padding: 5px;
+  background-color: rgba(27, 221, 187, 1);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.styleTxtRow{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+}
+
+
+
+
+/* ? style from daftarkegiatan */
+.wrap {
+  display: block;
+  margin-left: 140px;
+}

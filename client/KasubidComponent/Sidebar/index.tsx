@@ -11,6 +11,7 @@ import Modal from "react-modal";
 export default function Sidebar({
   kotakHome = styles.kotak,
   kotakDaftarKegiatan = styles.kotak,
+  kotakInputRenaksi = styles.kotak,
   kotakTinjauRenaksi = styles.kotak,
   kotakUbahJadwal = styles.kotak,
   kotakEvaluasiLampiran = styles.kotak,
@@ -34,6 +35,10 @@ export default function Sidebar({
 
   const clickDaftarKegiatan = () => {
     router.push("/Kasubid/DaftarKegiatan");
+  };
+
+  const clickInputRenaksi = () => {
+    router.push("/Kasubid/InputRenaksi");
   };
 
   const clickTinjauRenaksi = () => {
@@ -141,6 +146,15 @@ export default function Sidebar({
             </div>
           </button>
           <Gap height={10} width={0} />
+          <button className={kotakInputRenaksi} onClick={clickInputRenaksi}>
+            <Image src="/Input.svg" width={30} height={30} />
+            <div
+              className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
+            >
+              Input Renaksi
+            </div>
+          </button>
+          <Gap height={10} width={0} />
           <button className={kotakTinjauRenaksi} onClick={clickTinjauRenaksi}>
             <Image src="/TinjauRenaksi.svg" width={30} height={30} />
             <div
@@ -192,7 +206,7 @@ export default function Sidebar({
             </div>
           </button>
         </div>
-        <Gap height={30} width={0} />
+        <Gap height={20} width={0} />
         <div className={styles.contentBawah}>
           <button className={kotakProfil} onClick={clickProfil}>
             <Image src="/Profile.svg" width={30} height={30} />

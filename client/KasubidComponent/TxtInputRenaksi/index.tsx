@@ -14,6 +14,7 @@ export default function TxtInputRenaksi(props: InputProps) {
     placeholder = "masukan program yang akan dilakukan",
     onChange,
     value,
+    className,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ export default function TxtInputRenaksi(props: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        className={className}
       />
     </div>
   );

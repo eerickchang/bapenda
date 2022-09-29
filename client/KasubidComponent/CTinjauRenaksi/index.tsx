@@ -251,7 +251,7 @@ export default function ContentDaftarKegiatan() {
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatRenaksi");
+    router.push("/Kasubid/TinjauRenaksiLihatSemua");
   };
 
   return (
@@ -263,6 +263,21 @@ export default function ContentDaftarKegiatan() {
               <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
+          </div>
+          <div className={stylesS.wrapFilter}>
+            <button className={styles.btnTerimaAll}>
+              <Image src={"/Terima.svg"} width={25} height={25} />
+              Terima
+            </button>
+            <Gap width={15} />
+            <button className={styles.btnTerimaAll}>
+              <Image src={"/Terima.svg"} width={25} height={25} />
+              Tolak
+            </button>
+            <button onClick={lihatSemua} className={stylesS.btnFilter}>
+              <Image src={"/LihatSemua.svg"} width={25} height={25} />
+              Lihat Semua
+            </button>
           </div>
           <Gap height={106} width={0} />
           <TableContainer
