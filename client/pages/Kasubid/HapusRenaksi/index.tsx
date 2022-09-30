@@ -1,14 +1,14 @@
 import React from "react";
 import {Gap, Sidebar } from "../../../KasubidComponent";
-import styles from "./evaluasiLampiran.module.css";
+import styles from "./hapusRenaksi.module.css";
 import sidebarStyles from "../../../KasubidComponent/Sidebar/sidebar.module.css";
-import { CEvaluasiLampiran } from "../../../KasubidComponent/CEvaluasiLampiran";
-export default function EvaluasiLampiran() {
+import { CHapusRenaksi } from "../../../KasubidComponent/CHapusRenaksi";
+export default function HapusRenaksi() {
   return (
     <div className={styles.container}>
-      <Sidebar kotakEvaluasiLampiran={sidebarStyles.kotakAktif} />
+      <Sidebar kotakHapusRenaksi={sidebarStyles.kotakAktif} />
       <Gap width={140} height={80} />
-      <CEvaluasiLampiran/>
+      <CHapusRenaksi/>
     </div>
   );
 }

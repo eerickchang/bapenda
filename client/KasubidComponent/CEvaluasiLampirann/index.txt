@@ -8,9 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import Image from "next/image";
-import Gap from "../Gap";
+import Gap from "../../KabidComponent/Gap";
 import { Collapse } from "@mui/material";
-export default function EvaluasiLampiran() {
+export default function CEvaluasiLampiran() {
   const rowsSubagian = [
     {
       id: 1,

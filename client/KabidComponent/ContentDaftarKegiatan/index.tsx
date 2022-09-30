@@ -14,8 +14,6 @@ import moment from "moment";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
-import Button from "../Button";
-import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
 
 Axios.defaults.withCredentials = true;

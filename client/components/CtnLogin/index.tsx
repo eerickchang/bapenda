@@ -58,6 +58,12 @@ export default function CtnLogin() {
     });
   }, []);
 
+  const handleKeyEnter = (event) => {
+       if (event.key === "Enter") {
+         console.log("do validate");
+       }
+     };
+
   return (
     <div className={styles.container}>
       <div className={styles.headerTxt}>
@@ -85,7 +91,8 @@ export default function CtnLogin() {
           type="password"
           width={25}
           height={30}
-          onChange={(e) => setSandi(e.target.value)}
+          onChange={(e) => (setSandi(e.target.value))}
+          
         />
         <Gap height={106} width={0} />
         <p className={styles.txtLupa} onClick={handleClick}>
