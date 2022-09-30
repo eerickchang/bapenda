@@ -19,14 +19,15 @@ export default function Sidebar({
   kotakProfil = styles.kotak,
   kotakNotif = styles.kotak,
   kotakLogOut = styles.kotakLogOut,
+  onClick,
 }) {
-  // useEffect(() => {
   //   Axios.get("http://localhost:3001/masuk").then((response) => {
   //     setImage(response.data.user[0].foto);
   //   });
   // }, []);
 
   const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
   const router = useRouter();
   const clickHome = () => {
     router.push("/Kasubid/Dashboard");
@@ -141,7 +142,10 @@ export default function Sidebar({
             </div>
           </button>
           <Gap height={10} width={0} />
-          <button className={kotakTinjauRenaksi} onClick={clickTinjauRenaksi}>
+          <button
+            className={kotakTinjauRenaksi}
+            onClick={() => clickTinjauRenaksi()}
+          >
             <Image src="/TinjauRenaksi.svg" width={30} height={30} />
             <div
               className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
