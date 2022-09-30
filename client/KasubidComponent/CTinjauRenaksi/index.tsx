@@ -22,14 +22,6 @@ import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
 Axios.defaults.withCredentials = true;
 
-//create your forceUpdate hook
-function useForceUpdate() {
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue((value) => value + 1); // update state to force render
-  // An function that increment 👆🏻 the previous state like here
-  // is better than directly setting `value + 1`
-}
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -145,14 +137,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       }
     );
 
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
+
+    window.location.reload();
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -197,9 +187,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
-  // call your hook here
-  const forceUpdate = useForceUpdate();
-
   return (
     <React.Fragment>
       <TableRow hover className={styles.styleRow}>
@@ -241,7 +228,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-export default function ContentDaftarKegiatan() {
+export default function ContentDaftarKegiatan(props: {
+  row: ReturnType<typeof createData>;
+}) {
+  const { row } = props;
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -252,18 +242,42 @@ export default function ContentDaftarKegiatan() {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/kasubidAmbilPegawaiPT").then(
-          (ambilPegawai) => {
-            ambilPegawai.data.map((pegawai) => {
-              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let userLoggedIn = masuk.data.user;
+              let pegawaiSubid = ambilPegawai.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Pegawai Subid: ", pegawaiSubid);
+              console.log("Renaksi: ", renaksi);
+
+              let subidUserSDPegawai = [];
+              let pegawaiYgAdaRenaksi = [];
+
+              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
                 setPegawai((nextData) => {
-                  return [...nextData, pegawai];
+                  return [item, ...nextData];
                 });
-              }
-            });
-          }
-        );
+              });
+
+              console.log("Subid Sama: ", subidUserSDPegawai);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
       });
     }
   }, []);
@@ -291,14 +305,26 @@ export default function ContentDaftarKegiatan() {
       }
     );
 
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
+  };
+
+  const btnTerimaSemua = () => {
+    // Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+    //   (ambilRenaksi) => {
+    //     ambilRenaksi.data.map((renaksiMRD) => {
+    //       if (row.sub_bidang === renaksiMRD.sub_bidang) {
+    //         console.log(renaksiMRD);
+    //         // Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+    //         //   idRenaksi: renaksiMRD.id_renaksi,
+    //         // });
+    //       }
+    //     });
+    //   }
+    // );
+    console.log(row);
   };
 
   return (
@@ -312,7 +338,7 @@ export default function ContentDaftarKegiatan() {
             </div>
           </div>
           <div className={stylesS.wrapFilter}>
-            <button className={styles.btnTerimaAll}>
+            <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
               <Image src={"/Terima.svg"} width={25} height={25} />
               Terima Semua
             </button>

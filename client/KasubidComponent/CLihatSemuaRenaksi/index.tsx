@@ -17,6 +17,7 @@ import moment from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import next from "next";
 
 Axios.defaults.withCredentials = true;
 
@@ -26,19 +27,32 @@ export default function CLihatSemuaRenaksi() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-        ambilCakin.data.map((cakin) => {
-          if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
-            setDataCakin((nextData) => {
-              return [...nextData, cakin];
-            });
-          }
+      // let semuaRenaksi = [];
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        setSubid(masuk.data.user[0].sub_bidang);
+        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+          // for (var key in ambilRenaksi.data) {
+          //   semuaRenaksi.push(ambilRenaksi.data[key]);
+          // }
+          // console.log(ambilRenaksi.data);
+          ambilRenaksi.data.map((renaksi) => {
+            if (
+              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+              moment(renaksi.end_date).format("YYYY") ===
+                moment().format("YYYY")
+            ) {
+              setSemuaRenaksi((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
         });
       });
 
-      Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
-        setNama(dataAsn.data.user[0].nama);
-      });
+      setTahunClick(moment().format("YYYY"));
+
+      // console.log(semuaRenaksi);
     }
   }, []);
 
@@ -55,6 +69,8 @@ export default function CLihatSemuaRenaksi() {
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
+  const [semuaRenaksi, setSemuaRenaksi] = useState([]);
+  const [subid, setSubid] = useState();
 
   const tahun = [
     {
@@ -62,18 +78,23 @@ export default function CLihatSemuaRenaksi() {
       tahun: "2020",
       onclick: () => (
         setTahunClick("2020"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2020").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
+        setSemuaRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksi").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (
+                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+                  moment(renaksi.end_date).format("YYYY") ===
+                    moment("2020").format("YYYY")
+                ) {
+                  setSemuaRenaksi((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -82,18 +103,23 @@ export default function CLihatSemuaRenaksi() {
       tahun: "2021",
       onclick: () => (
         setTahunClick("2021"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2021").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
+        setSemuaRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksi").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (
+                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+                  moment(renaksi.end_date).format("YYYY") ===
+                    moment("2021").format("YYYY")
+                ) {
+                  setSemuaRenaksi((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -102,18 +128,23 @@ export default function CLihatSemuaRenaksi() {
       tahun: "2022",
       onclick: () => (
         setTahunClick("2022"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2022").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
+        setSemuaRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksi").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (
+                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+                  moment(renaksi.end_date).format("YYYY") ===
+                    moment("2022").format("YYYY")
+                ) {
+                  setSemuaRenaksi((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -132,9 +163,9 @@ export default function CLihatSemuaRenaksi() {
   ];
 
   const btnDwExcel = () => {
-    const workSheet = XLSX.utils.json_to_sheet(dataCakin);
+    const workSheet = XLSX.utils.json_to_sheet(semuaRenaksi);
     const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "dataCakin");
+    XLSX.utils.book_append_sheet(workBook, workSheet, "Data Renaksi");
 
     //BUFFER
     let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
@@ -143,7 +174,7 @@ export default function CLihatSemuaRenaksi() {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Data Cakin ${nama}.xlsx`);
+    XLSX.writeFile(workBook, `Data Renaksi ${subid}.xlsx`);
   };
 
   const btnDwPDF = () => {
@@ -156,27 +187,35 @@ export default function CLihatSemuaRenaksi() {
 
     doc.setFontSize(15);
 
-    const title = `Data Cakin ${nama}`;
+    const title = `Data Renaksi ${subid}`;
     const headers = [
       [
-        "Nama",
+        "No",
         "Jabatan",
-        "Bulan",
-        "Jumlah Kegiatan",
-        "Realisasi Kegiatan",
-        "Belum Dilaksanakan",
-        "Hasil Kinerja",
+        "ASN",
+        "THL",
+        "Program",
+        "Kegiatan",
+        "Sub Kegiatan",
+        "Tupoksi Inti",
+        "Tupoksi Tambahan",
+        "Rencana",
       ],
     ];
 
-    const data = dataCakin.map((item) => [
-      item.nama,
+    const data = semuaRenaksi.map((item) => [
+      item.id_renaksi,
       item.jabatan,
-      moment(item.bulan).format("MMM"),
-      item.jumlah_kegiatan,
-      item.lampiran_disubmit,
-      item.lampiran_bsubmit,
-      item.hasil_kinerja,
+      item.nama,
+      item.nama_thl,
+      item.program,
+      item.kegiatan,
+      item.sub_kegiatan,
+      item.tupoksi_inti,
+      item.tupoksi_tambahan,
+      `${moment(item.start_date).format("MMM")} - ${moment(
+        item.end_date
+      ).format("MMM")}`,
     ]);
 
     let content = {
@@ -188,7 +227,7 @@ export default function CLihatSemuaRenaksi() {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Data Cakin ${nama}`);
+    doc.save(`Data Renaksi ${subid}`);
   };
 
   const unduh = [
@@ -433,7 +472,7 @@ export default function CLihatSemuaRenaksi() {
           />
           <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
           <p className={styles.txtTitle}>
-            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN 2023
+            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN {tahunClick}
           </p>
         </div>
 
@@ -531,7 +570,7 @@ export default function CLihatSemuaRenaksi() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {rows
+            {semuaRenaksi
               // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -547,7 +586,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 60,
                       }}
                     >
-                      {row.no}
+                      {moment(row.end_date).format("YYYY")}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -574,7 +613,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.asn}
+                      {row.nama}
                       {/* {moment(row.asn).format("MMM")} */}
                     </TableCell>
                     <TableCell
@@ -588,7 +627,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.thl}
+                      {row.nama_thl}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -627,7 +666,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.subkegiatan}
+                      {row.sub_kegiatan}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -640,7 +679,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.tupoksiinti}
+                      {row.tupoksi_inti}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -653,7 +692,7 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.tupoksitambahan}
+                      {row.tupoksi_tambahan}
                     </TableCell>
                     <TableCell
                       align="center"
@@ -666,7 +705,8 @@ export default function CLihatSemuaRenaksi() {
                         width: 160,
                       }}
                     >
-                      {row.rencana}
+                      {`${moment(row.start_date).format("MMM")} -
+                        ${moment(row.end_date).format("MMM")}`}
                     </TableCell>
 
                     {/* {columns.map((column) => {

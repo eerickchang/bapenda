@@ -66,6 +66,8 @@ export default function ProfileKanan(props: ProfileKananProps) {
         }
       });
 
+    window.location.reload();
+
     // if (!saveImage) {
     //   alert("Upload Gambar Dulu");
     // } else {

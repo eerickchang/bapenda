@@ -215,7 +215,7 @@ app.post("/inputRenaksi", (req, res) => {
 
 app.get("/ambilRenaksi", (req, res) => {
   const sqlSelect =
-    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -231,11 +231,11 @@ app.get("/ambilRenaksiJadwalDiubah", (req, res) => {
   });
 });
 
-//AMBIL DATA RENAKSI STATUS = 'MENUNGGU'
+//AMBIL DATA RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
 
 app.get("/ambilRenaksiMenunggu", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Diterima" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -355,19 +355,10 @@ app.post("/hapusRenaksi", (req, res) => {
   });
 });
 
-//KASUBID AMBIL RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
+//KASUBID AMBIL RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA' AND KIRIM_KE = 'KASUBID'
 app.get("/kasubidAmbilRenaksiMRD", (req, res) => {
   const sqlSelect =
-    "SELECT * FROM data_renaksi WHERE status = 'Menunggu Renaksi Diterima' AND kirim_ke = 'Kasubid'";
-  db.query(sqlSelect, (err, result) => {
-    res.send(result);
-  });
-});
-
-//KASUBID AMBIL PEGAWAI DENGAN JABATAN STAFF
-app.get("/kasubidAmbilPegawaiPT", (req, res) => {
-  const sqlSelect =
-    'SELECT * FROM pegawai WHERE jabatan IN ("Staff") AND perlu_tinjau IN ("Ya Kasubid")';
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.kirim_ke, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = 'Menunggu Renaksi Diterima' AND data_renaksi.kirim_ke = 'Kasubid' ";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -384,33 +375,11 @@ app.post("/kasubidMenerimaRenaksi", (req, res) => {
   });
 });
 
-//KASUBID UPDATE RENAKSI TIDAK PERLU TINJAU
-app.post("/kasubidUpdateRenaksiTPT", (req, res) => {
-  const nip = req.body.nip;
-
-  const sqlUpdate = 'UPDATE pegawai SET perlu_tinjau = "Tidak" WHERE nip = ?';
-  db.query(sqlUpdate, nip, (err, result) => {
-    console.log(result);
-  });
-});
-
-//KASUBID DASHBOARD - AMBIL DATA PEGAWAI PERLU DITINJAU
-app.get("/dbKasubidAmbilPegawai", (req, res) => {
-  const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, pegawai.nip, pegawai.nama FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip = pegawai.nip WHERE status = "Menunggu Renaksi Diterima" AND kirim_ke = "Kasubid"';
+//AMBIL SEMUA PEGAWAI DENGAN JABATAN STAFF
+app.get("/ambilPegawai", (req, res) => {
+  const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan = "Staff"';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
-  });
-});
-
-//KASUBID DASHBOARD - UPDATE DATA PEGAWAI PERLI DITINJAU
-app.post("/dbKasubidUpdatePegawaiPDT", (req, res) => {
-  const nip = req.body.nip;
-
-  const sqlUpdate =
-    'UPDATE pegawai SET perlu_tinjau = "Ya Kasubid" WHERE nip = ?';
-  db.query(sqlUpdate, nip, (err, result) => {
-    console.log(err);
   });
 });
 

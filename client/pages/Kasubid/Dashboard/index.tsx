@@ -93,16 +93,6 @@ export default function Dashboard() {
         });
       });
 
-      Axios.get("http://localhost:3001/dbKasubidAmbilPegawai").then(
-        (ambilPegawai) => {
-          ambilPegawai.data.map((pegawai) => {
-            Axios.post("http://localhost:3001/dbKasubidUpdatePegawaiPDT", {
-              nip: pegawai.nip,
-            });
-          });
-        }
-      );
-
       setBlnSkrg(moment().format("MMMM"));
       setThnSkrg(moment().format("YYYY"));
     }
