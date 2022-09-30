@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
-import styles from ".//lihatSemuaRenaksi.module.css";
+import styles from "./lihatSemuaRenaksi.module.css";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -45,7 +45,7 @@ export default function CLihatSemuaRenaksi() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Staff/Profil");
+    router.push("/Kasubid/TinjauRenaksi");
     // console.log(dataCakin);
   };
 

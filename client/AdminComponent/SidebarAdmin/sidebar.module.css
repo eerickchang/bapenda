@@ -4,7 +4,7 @@
   left: 0;
   width: 140px;
   height: 100%;
-  border-radius: 0px 40px 40px 0px;
+  border-radius: 0px 40px 40px 0px; 
 }
 
 .contentAtas {
@@ -39,6 +39,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotak:focus {
@@ -62,6 +63,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotakLogOut:focus {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./tinjauRenaksi.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import Image from "next/image";
+import Gap from "../Gap";
 
 export default function CTinjauRenaksi() {
   const rowsSubagian = [
@@ -28,6 +29,15 @@ export default function CTinjauRenaksi() {
     },
   ];
 
+  const [showModal, setShowModal] = useState(false);
+
+  const btnTerima = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleDaftarKegiatan}>
@@ -46,20 +56,41 @@ export default function CTinjauRenaksi() {
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Sub Bagian</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+                <TableCell className={styles.styleHeader}>Sub Bagian</TableCell>
+                <TableCell className={styles.styleHeader}>
+                  Keterangan Dari Kepala Badan
+                </TableCell>
+                <TableCell className={styles.styleHeader}>Aksi</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
+                  </TableCell>
                   <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                    <div className={styles.styleTxtRow}>
+                      <div style={{ flexDirection: "row", display: "flex" }}>
+                        <button
+                          className={styles.btnTerima}
+                          onClick={btnTerima}
+                        >
+                          <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                          Terima
+                        </button>
+                        <Gap width={40} height={0} />
+                        <button
+                          className={styles.btnTolak}
+                          // onClick={() => console.log(renaksiPegawai)}
+                        >
+                          <Image src={"/Tolak.svg"} width={20} height={20} />{" "}
+                          Tolak
+                        </button>
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -79,20 +110,58 @@ export default function CTinjauRenaksi() {
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Sub Bidang</TableCell>
-                <TableCell>Keterangan Dari Kepala Badan</TableCell>
-                <TableCell>Aksi</TableCell>
+                <TableCell className={styles.styleHeader}>Sub Bidang</TableCell>
+                <TableCell className={styles.styleHeader}>
+                  Keterangan Dari Kepala Badan
+                </TableCell>
+                <TableCell className={styles.styleHeader}>Aksi</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody className={styles.hover}>
+            <TableBody>
               {rowsSubagian.map((row) => (
-                <TableRow className={styles.styleRow} key={row.id}>
-                  <TableCell>{row.sub}</TableCell>
-                  <TableCell>{row.keterangan}</TableCell>
+                <TableRow hover className={styles.styleRow} key={row.id}>
+                  <TableCell className={styles.styleData}>
+                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  </TableCell>
+                  <TableCell className={styles.styleData}>
+                    {row.keterangan}
+                  </TableCell>
                   <TableCell>
-                    <div>
-                      <Button title="terima" />
-                      <Button title="terima" />
+                    <div className={styles.styleTxtRow}>
+                      <div style={{ flexDirection: "row", display: "flex" }}>
+                        <button
+                          className={styles.btnTerima}
+                          onClick={() => btnTerima()}
+                        >
+                          <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                          Terima
+                        </button>
+                        {showModal ? (
+                          <div
+                            className={styles.modal}
+                            onClick={() => setShowModal(false)}
+                          >
+                            <p>
+                              Input Renaksi Feren <b>Berhasil</b>
+                              <div className={styles.checkCircle}>
+                                <Image
+                                  src={"/Check-circle.svg"}
+                                  width={25}
+                                  height={25}
+                                />
+                              </div>
+                            </p>
+                          </div>
+                        ) : null}
+                        <Gap width={40} height={0} />
+                        <button
+                          className={styles.btnTolak}
+                          // onClick={() => console.log(renaksiPegawai)}
+                        >
+                          <Image src={"/Tolak.svg"} width={20} height={20} />{" "}
+                          Tolak
+                        </button>
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

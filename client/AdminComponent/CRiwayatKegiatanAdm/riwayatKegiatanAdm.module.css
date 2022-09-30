@@ -28,6 +28,18 @@
   /* margin-left: 10px; */
 }
 
+.styleHeader{
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(149, 149, 149, 1);
+}
+
+.styleData{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
 
 .styleRow {
   width: 1690px;
@@ -42,3 +54,13 @@
 }
 
 
+.styleProfileKasub{
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.styleProfileKasub p{
+  margin-left: 10px;
+}

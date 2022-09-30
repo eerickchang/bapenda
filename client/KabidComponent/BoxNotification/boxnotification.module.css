@@ -1,0 +1,58 @@
+.container{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 463px;
+    height: 257px;
+    margin-top: 20px;
+}
+
+.notifHeader{
+    display: flex;
+    margin-left: 300px;
+    margin-top: 15px;
+    margin-right: 10px;
+    border-bottom: 2px solid #1BDDBB;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.txtHeader{
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0px;
+    margin-right: 15px;
+}
+
+.isiNotif{
+    display: flex;
+    margin-left: 17px;
+    margin-top: 25px;
+}
+
+.txtTitleDiterima{
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #4A4A4A;
+}
+
+.txtMessage{
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4A4A4A;
+}
+
+.image{
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.txtTitleDitolak{
+    color: #FF0164;
+}
