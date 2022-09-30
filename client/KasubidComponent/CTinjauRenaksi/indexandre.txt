@@ -148,11 +148,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
       nip: row.nip,
     });
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -202,34 +197,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
   return (
     <React.Fragment>
-      <TableRow hover className={styles.styleRow}>
-        <TableCell className={styles.styleData}>
-          <p style={{ fontWeight: 600 }}>{row.nama}</p>
-        </TableCell>
-        <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+      <TableRow
+        hover
+        className={`${styles.tableRow}`}
+        sx={{ "& > *": { borderBottom: "" } }}
+      >
+        {/* //! DATA ROW */}
         <TableCell>
-          <div className={styles.styleTxtRow}>
+          <p className={stylesS.styleTxtRow}>{row.nama}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_bidang}</p>
+        </TableCell>
+        <TableCell>
+          <div className={stylesS.styleTxtRow}>
             <div style={{ flexDirection: "row", display: "flex" }}>
-              <button className={styles.btnTerima} onClick={() => btnTerima()}>
+              <button className={styles.btnTerima} onClick={btnTerima}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
               </button>
-              {showModal ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModal(false)}
-                >
-                  <p>
-                    Input Renaksi Feren <b>Berhasil</b>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </p>
-                </div>
-              ) : null}
               <Gap width={40} height={0} />
               <button
                 className={styles.btnTolak}
-                onClick={() => console.log(row.nama)}
+                onClick={() => console.log(renaksiPegawai)}
               >
                 <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
               </button>
@@ -241,7 +230,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-export default function ContentDaftarKegiatan() {
+export default function ContentDaftarKegiatan(props: {
+  row: ReturnType<typeof createData>;
+}) {
+  const { row } = props;
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -342,7 +334,52 @@ export default function ContentDaftarKegiatan() {
               </TableHead>
               <TableBody>
                 {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} />
+                  <TableRow hover className={styles.styleRow} key={row.nip}>
+                    <TableCell className={styles.styleData}>
+                      <p style={{ fontWeight: 600 }}>{row.nama}</p>
+                    </TableCell>
+                    <TableCell className={styles.styleData}>
+                      {row.sub_bidang}
+                    </TableCell>
+                    <TableCell>
+                      <div className={styles.styleTxtRow}>
+                        <div style={{ flexDirection: "row", display: "flex" }}>
+                          <button
+                            className={styles.btnTerima}
+                            onClick={() => btnTerima()}
+                          >
+                            <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                            Terima
+                          </button>
+                          {showModal ? (
+                            <div
+                              className={styles.modal}
+                              onClick={() => setShowModal(false)}
+                            >
+                              <p>
+                                Input Renaksi Feren <b>Berhasil</b>
+                                <div className={styles.checkCircle}>
+                                  <Image
+                                    src={"/Check-circle.svg"}
+                                    width={25}
+                                    height={25}
+                                  />
+                                </div>
+                              </p>
+                            </div>
+                          ) : null}
+                          <Gap width={40} height={0} />
+                          <button
+                            className={styles.btnTolak}
+                            onClick={() => console.log(row.nama)}
+                          >
+                            <Image src={"/Tolak.svg"} width={20} height={20} />{" "}
+                            Tolak
+                          </button>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 ))}
               </TableBody>
             </Table>
