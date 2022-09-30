@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./lihatSemuaRenaksi.module.css";
+import styles from ".//lihatSemuaRenaksi.module.css";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -45,91 +45,143 @@ export default function CLihatSemuaRenaksi() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Kabid/TinjauRenaksi");
+    router.push("/Kasubid/TinjauRenaksi");
     // console.log(dataCakin);
   };
 
-  const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
+  // const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
+  const [activeDropdownBulan, setActiveDropdownBulan] = useState(false);
 
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
 
-  const tahun = [
-    {
-      id: 6,
-      tahun: "2020",
-      onclick: () => (
-        setTahunClick("2020"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2020").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 7,
-      tahun: "2021",
-      onclick: () => (
-        setTahunClick("2021"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2021").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 8,
-      tahun: "2022",
-      onclick: () => (
-        setTahunClick("2022"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2022").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 9,
-      tahun: "2023",
-    },
-    {
-      id: 10,
-      tahun: "2024",
-    },
-    {
-      id: 11,
-      tahun: "2025",
-    },
-  ];
+const bulan = [
+  {
+    id: 1,
+    bulan: 'Jan',
+  },
+  {
+    id: 2,
+    bulan: 'Feb',
+  },
+  {
+    id: 3,
+    bulan: 'Mar',
+  },
+  {
+    id: 4,
+    bulan: 'Apr',
+  },
+  {
+    id: 5,
+    bulan: 'Mei',
+  },
+  {
+    id: 6,
+    bulan: 'Jun',
+  },
+  {
+    id: 7,
+    bulan: 'Jul',
+  },
+  {
+    id: 8,
+    bulan: 'Agu',
+  },
+  {
+    id: 9,
+    bulan: 'Sep',
+  },
+  {
+    id: 10,
+    bulan: 'Oct',
+  },
+  {
+    id: 11,
+    bulan: 'Nov',
+  },
+  {
+    id: 12,
+    bulan: 'Des',
+  },
+]
+
+  // const tahun = [
+  //   {
+  //     id: 6,
+  //     tahun: "2020",
+  //     onclick: () => (
+  //       setTahunClick("2020"),
+  //       setDataCakin([]),
+  //       Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+  //         ambilCakin.data.map((cakin) => {
+  //           if (
+  //             moment(cakin.bulan).format("YYYY") ===
+  //             moment("2020").format("YYYY")
+  //           ) {
+  //             setDataCakin((nextData) => {
+  //               return [...nextData, cakin];
+  //             });
+  //           }
+  //         });
+  //       })
+  //     ),
+  //   },
+  //   {
+  //     id: 7,
+  //     tahun: "2021",
+  //     onclick: () => (
+  //       setTahunClick("2021"),
+  //       setDataCakin([]),
+  //       Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+  //         ambilCakin.data.map((cakin) => {
+  //           if (
+  //             moment(cakin.bulan).format("YYYY") ===
+  //             moment("2021").format("YYYY")
+  //           ) {
+  //             setDataCakin((nextData) => {
+  //               return [...nextData, cakin];
+  //             });
+  //           }
+  //         });
+  //       })
+  //     ),
+  //   },
+  //   {
+  //     id: 8,
+  //     tahun: "2022",
+  //     onclick: () => (
+  //       setTahunClick("2022"),
+  //       setDataCakin([]),
+  //       Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+  //         ambilCakin.data.map((cakin) => {
+  //           if (
+  //             moment(cakin.bulan).format("YYYY") ===
+  //             moment("2022").format("YYYY")
+  //           ) {
+  //             setDataCakin((nextData) => {
+  //               return [...nextData, cakin];
+  //             });
+  //           }
+  //         });
+  //       })
+  //     ),
+  //   },
+  //   {
+  //     id: 9,
+  //     tahun: "2023",
+  //   },
+  //   {
+  //     id: 10,
+  //     tahun: "2024",
+  //   },
+  //   {
+  //     id: 11,
+  //     tahun: "2025",
+  //   },
+  // ];
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -441,19 +493,19 @@ export default function CLihatSemuaRenaksi() {
           <div className={styles.wrapperFilterTahun}>
             <div
               className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+              onClick={() => setActiveDropdownBulan(!activeDropdownBulan)}
             >
               <Image src={"/TahunIcon.svg"} width={23} height={23} />
-              <p>Tahun</p>
+              <p>Bulan</p>
             </div>
-            {activeDropdownTahun && (
+            {activeDropdownBulan && (
               <div
                 className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
+                onClick={() => setActiveDropdownBulan(false)}
               >
-                {tahun.map((item) => (
-                  <p key={item.id} onClick={item.onclick}>
-                    {item.tahun}
+                {bulan.map((item) => (
+                  <p key={item.id} >
+                    {item.bulan}
                   </p>
                 ))}
               </div>

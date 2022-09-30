@@ -15,8 +15,18 @@ interface TxtInputProps {
 }
 
 export default function TxtInput(props: TxtInputProps) {
-  const { onChange, image, alt, title, placeholder, width, height, type } =
-    props;
+  const {
+    onChange,
+    image,
+    alt,
+    title,
+    placeholder,
+    width,
+    height,
+    type,
+  } = props;
+
+     
   return (
     <div className={styles.container}>
       <div className={styles.logoTxt}>
@@ -32,7 +42,7 @@ export default function TxtInput(props: TxtInputProps) {
         <p>{title}</p>
       </div>
       <Gap height={20} width={0} />
-      <input type={type} placeholder={placeholder} onChange={onChange} />
+      <input type={type} placeholder={placeholder} onChange={onChange}/>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import styles from "./TxtInputRenaksi.module.css";
+import styles from "./TxtInputRenaksiProgram.module.css";
 
 interface InputProps {
   className: string;
@@ -8,7 +8,7 @@ interface InputProps {
   value: string;
 }
 
-export default function TxtInputRenaksi(props: InputProps) {
+export default function TxtInputRenaksiProgram(props: InputProps) {
   const {
     title = "Program",
     placeholder = "masukan program yang akan dilakukan",

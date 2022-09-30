@@ -22,14 +22,6 @@ import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
 Axios.defaults.withCredentials = true;
 
-//create your forceUpdate hook
-function useForceUpdate() {
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue((value) => value + 1); // update state to force render
-  // An function that increment 👆🏻 the previous state like here
-  // is better than directly setting `value + 1`
-}
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -140,19 +132,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
               idRenaksi: renaksiMRD.id_renaksi,
             });
+
+            setRenaksiPegawai((nextData) => {
+              return [...nextData, renaksiMRD];
+            });
           }
         });
       }
     );
-
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -197,44 +184,34 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpenMOdalHapusRenaksi(false);
   }
 
-  // call your hook here
-  const forceUpdate = useForceUpdate();
-
   return (
     <React.Fragment>
-      <TableRow hover className={styles.styleRow}>
-        <TableCell className={styles.styleData}>
-          <p style={{ fontWeight: 600 }}>{row.nama}</p>
-        </TableCell>
-        <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+      <TableRow
+        className={`${styles.tableRow}`}
+        sx={{ "& > *": { borderBottom: "" } }}
+      >
+        {/* //! DATA ROW */}
         <TableCell>
-          <div className={styles.styleTxtRow}>
+          <p className={stylesS.styleTxtRow}>{row.nama}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_bidang}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>
             <div style={{ flexDirection: "row", display: "flex" }}>
-              <button className={styles.btnTerima} onClick={() => btnTerima()}>
+              <button className={styles.btnTerima} onClick={btnTerima}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
               </button>
-              {showModal ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModal(false)}
-                >
-                  <p>
-                    Input Renaksi Feren <b>Berhasil</b>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </p>
-                </div>
-              ) : null}
               <Gap width={40} height={0} />
               <button
                 className={styles.btnTolak}
-                onClick={() => console.log(row.nama)}
+                onClick={() => console.log(renaksiPegawai)}
               >
                 <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
               </button>
             </div>
-          </div>
+          </p>
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -246,22 +223,34 @@ export default function ContentDaftarKegiatan() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
+  let coba = <AmbilDataRenaksi />;
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+      // let coba = <AmbilDataRenaksi />;
+      // console.log(coba._owner);
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/kasubidAmbilPegawaiPT").then(
+        Axios.get("http://localhost:3001/kasubidAmbilPegawai").then(
           (ambilPegawai) => {
-            ambilPegawai.data.map((pegawai) => {
-              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
-                setPegawai((nextData) => {
-                  return [...nextData, pegawai];
+            Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+              (ambilRenaksi) => {
+                ambilPegawai.data.map((pegawai) => {
+                  ambilRenaksi.data.map((renaksi) => {
+                    if (
+                      masuk.data.user[0].sub_bidang === pegawai.sub_bidang &&
+                      pegawai.nip === renaksi.nip
+                    ) {
+                      setPegawai((nextData) => {
+                        return [...nextData, pegawai];
+                      });
+                    }
+                  });
                 });
               }
-            });
+            );
           }
         );
       });
@@ -270,30 +259,10 @@ export default function ContentDaftarKegiatan() {
 
   const router = useRouter();
 
-
-  const [showModal, setShowModal] = useState(false);
-
-  const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-              idRenaksi: renaksiMRD.id_renaksi,
-            });
-          }
-        });
-      }
-    );
-
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+  const lihatSemua = () => {
+    // setActiveDropdown(!activeDropdown);
+    // console.log(dataRenaksi);
+    router.push("/Kasubid/TinjauRenaksiLihatRenaksi");
   };
 
   return (
@@ -306,36 +275,32 @@ export default function ContentDaftarKegiatan() {
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
           </div>
-          {/* <div className={stylesS.wrapFilter}>
-            <button className={styles.btnTerimaAll}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-              Terima Semua
-            </button>
-            <Gap width={15} />
-            <button className={styles.btnTerimaAll}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-              Tolak Semua
-            </button>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
-          </div> */}
-          <p className={stylesS.titleBidang}>Bidang Pajak Daerah</p>
-          <Gap height={37} width={0} />
+          <button
+            onClick={() =>
+              console.log(
+                coba._owner.memoizedState.next.next.next.memoizedState
+              )
+            }
+          >
+            Click
+          </button>
+
+          <Gap height={106} width={0} />
           <TableContainer
             style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>
+                  <TableCell className={styles.headerTable} width={0}>
+                    Pegawai
+                  </TableCell>
+                  <TableCell className={styles.headerTable} width={0}>
                     Sub Bidang
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Program
+                  <TableCell className={styles.headerTable} width={0}>
+                    Aksi
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

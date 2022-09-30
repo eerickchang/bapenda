@@ -11,6 +11,7 @@ import Modal from "react-modal";
 export default function Sidebar({
   kotakHome = styles.kotak,
   kotakDaftarKegiatan = styles.kotak,
+  kotakInputRenaksi = styles.kotak,
   kotakTinjauRenaksi = styles.kotak,
   kotakUbahJadwal = styles.kotak,
   kotakEvaluasiLampiran = styles.kotak,
@@ -19,48 +20,53 @@ export default function Sidebar({
   kotakProfil = styles.kotak,
   kotakNotif = styles.kotak,
   kotakLogOut = styles.kotakLogOut,
+  onClick,
 }) {
-  // useEffect(() => {
   //   Axios.get("http://localhost:3001/masuk").then((response) => {
   //     setImage(response.data.user[0].foto);
   //   });
   // }, []);
 
   const [image, setImage] = useState(null);
+  const [nama, setNama] = useState("");
   const router = useRouter();
   const clickHome = () => {
-    router.push("/Kasubid/Dashboard");
+    router.push("/Kabid/Dashboard");
   };
 
   const clickDaftarKegiatan = () => {
-    router.push("/Kasubid/DaftarKegiatan");
+    router.push("/Kabid/DaftarKegiatan");
+  };
+
+  const clickInputRenaksi = () => {
+    router.push("/Kabid/InputRenaksi");
   };
 
   const clickTinjauRenaksi = () => {
-    router.push("/Kasubid/TinjauRenaksi");
+    router.push("/Kabid/TinjauRenaksi");
   };
 
   const clickUbahJadwal = () => {
-    router.push("/Kasubid/UbahJadwal");
+    router.push("/Kabid/UbahJadwalRenaksi");
   };
 
   const clickEvaluasiLampiran = () => {
-    router.push("/Kasubid/EvaluasiLampiran");
+    router.push("/Kabid/EvaluasiLampiran");
   };
 
   const clickHapusRenaksi = () => {
-    router.push("/Kasubid/HapusRenaksi");
+    router.push("/Kabid/HapusRenaksi");
   };
   const clickRiwayatKegiatan = () => {
-    router.push("/Kasubid/RiwayatKegiatan");
+    router.push("/Kabid/RiwayatKegiatan");
   };
 
   const clickProfil = () => {
-    router.push("/Kasubid/Profil");
+    router.push("/Kabid/Profil");
   };
 
   const clickNotif = () => {
-    router.push("/Kasubid/Notifikasi");
+    router.push("/Kabid/Notifikasi");
   };
   // const clickLogOut = () => {
   //   router.push("/Staff/LogOut");
@@ -141,6 +147,15 @@ export default function Sidebar({
             </div>
           </button>
           <Gap height={10} width={0} />
+          <button className={kotakInputRenaksi} onClick={clickInputRenaksi}>
+            <Image src="/Input.svg" width={30} height={30} />
+            <div
+              className={`${styles.hoverKeterangan} ${styles.hoverKeteranganKegiatan}`}
+            >
+              Input Renaksi
+            </div>
+          </button>
+          <Gap height={10} width={0} />
           <button className={kotakTinjauRenaksi} onClick={clickTinjauRenaksi}>
             <Image src="/TinjauRenaksi.svg" width={30} height={30} />
             <div
@@ -192,7 +207,7 @@ export default function Sidebar({
             </div>
           </button>
         </div>
-        <Gap height={30} width={0} />
+        <Gap height={20} width={0} />
         <div className={styles.contentBawah}>
           <button className={kotakProfil} onClick={clickProfil}>
             <Image src="/Profile.svg" width={30} height={30} />

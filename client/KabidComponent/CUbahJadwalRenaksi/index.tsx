@@ -8,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
+import styles from "./cUbahJadwalRenaksi.module.css";
 import Image from "next/image";
 import moment from "moment";
 
@@ -270,7 +270,6 @@ export default function ContentDaftarKegiatan() {
 
   const router = useRouter();
 
-
   const [showModal, setShowModal] = useState(false);
 
   const btnTerima = () => {
@@ -301,9 +300,9 @@ export default function ContentDaftarKegiatan() {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
+            <div className={styles.wrapperTitleDaftarKegiatan}>
               <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
+              <p className={styles.txtTitle}>Ubah Jadwal Renaksi</p>
             </div>
           </div>
           {/* <div className={stylesS.wrapFilter}>
@@ -332,9 +331,7 @@ export default function ContentDaftarKegiatan() {
                   <TableCell className={styles.styleHeader}>
                     Sub Bidang
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Program
-                  </TableCell>
+                  <TableCell className={styles.styleHeader}>Program</TableCell>
                   <TableCell className={styles.styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
