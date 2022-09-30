@@ -188,43 +188,65 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   }
 
   return (
-    <React.Fragment>
-      <TableRow hover className={styles.styleRow}>
-        <TableCell className={styles.styleData}>
-          <p style={{ fontWeight: 600 }}>{row.nama}</p>
-        </TableCell>
-        <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
-        <TableCell>
-          <div className={styles.styleTxtRow}>
-            <div style={{ flexDirection: "row", display: "flex" }}>
-              <button className={styles.btnTerima} onClick={() => btnTerima()}>
-                <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-              </button>
-              {showModal ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModal(false)}
+    <>
+      <div className={stylesS.wrapFilter}>
+        <button className={styles.btnTerimaAll}>
+          {" "}
+          {/*onClick={btnTerimaSemua}*/}
+          <Image src={"/Terima.svg"} width={25} height={25} />
+          Terima Semua
+        </button>
+        <Gap width={15} />
+        <button className={styles.btnTerimaAll}>
+          <Image src={"/Tolak.svg"} width={25} height={25} />
+          Tolak Semua
+        </button>
+      </div>
+      <React.Fragment>
+        <TableRow hover className={styles.styleRow}>
+          <TableCell className={styles.styleData}>
+            <p style={{ fontWeight: 600 }}>{row.nama}</p>
+          </TableCell>
+          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell>
+            <div className={styles.styleTxtRow}>
+              <div style={{ flexDirection: "row", display: "flex" }}>
+                <button
+                  className={styles.btnTerima}
+                  onClick={() => btnTerima()}
                 >
-                  <p>
-                    Input Renaksi Feren <b>Berhasil</b>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </p>
-                </div>
-              ) : null}
-              <Gap width={40} height={0} />
-              <button
-                className={styles.btnTolak}
-                onClick={() => console.log(row.nama)}
-              >
-                <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-              </button>
+                  <Image src={"/Terima.svg"} width={20} height={20} /> Terima
+                </button>
+                {showModal ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModal(false)}
+                  >
+                    <p>
+                      Input Renaksi Feren <b>Berhasil</b>
+                      <div className={styles.checkCircle}>
+                        <Image
+                          src={"/Check-circle.svg"}
+                          width={25}
+                          height={25}
+                        />
+                      </div>
+                    </p>
+                  </div>
+                ) : null}
+                <Gap width={40} height={0} />
+                <button
+                  className={styles.btnTolak}
+                  onClick={() => console.log(row.nama)}
+                >
+                  <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
+                </button>
+              </div>
             </div>
-          </div>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    </>
   );
 }
 
@@ -337,16 +359,7 @@ export default function ContentDaftarKegiatan(props: {
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
           </div>
-          <div className={stylesS.wrapFilter}>
-            <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-              Terima Semua
-            </button>
-            <Gap width={15} />
-            <button className={styles.btnTerimaAll}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-              Tolak Semua
-            </button>
+          <div className={stylesS.wrapLihatSemua}>
             <button onClick={lihatSemua} className={stylesS.btnFilter}>
               <Image src={"/LihatSemua.svg"} width={25} height={25} />
               Lihat Semua

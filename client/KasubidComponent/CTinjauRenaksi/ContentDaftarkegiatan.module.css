@@ -78,6 +78,13 @@
   top: 85px;
   left: 1168px;
 }
+
+.wrapLihatSemua{
+  display: flex;
+  position: absolute;
+  top: 85px;
+  left: 1528px;
+}
 /* .wrapperFilter {
   position: absolute;
   top: 160px;
