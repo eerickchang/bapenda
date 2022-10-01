@@ -242,20 +242,63 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             >
               <TableRow>
                 <div className={styles.wrapperExpand}>
-                  <div className={styles.wrapperTanggapan}>
-                    <p>Tanggapan:</p>
-                    <p className={styles.txtTanggapan}>
+                  <div className={styles.wrapperKeterangan}>
+                    Keterangan:
+                    <div className={styles.contentKeterangan}>
                       Permintaan ubah jadwal tidak dapat dilakukan, karena
-                      alasan yang diberikan tidak dapat diterima
-                    </p>
+                      alasan yang diberikan tidak dapat diterimaPermintaan ubah
+                      jadwal tidak dapat dilakukan, karena alasan yang diberikan
+                      tidak dapat diterimaPermintaan ubah jadwal tidak
+                      dapatPermintaan ubah jadwal tidak dapat dilakukan, karena
+                      alasan yang diberikan tidak dapat diterima.
+                      <p
+                        style={{
+                          display: "flex",
+                          position: "absolute",
+                          top: 140,
+                          color: "rgba(149, 149, 149, 1)",
+                          // top: 10,
+                        }}
+                      >
+                        Pengajuan Ubah jadwal :
+                        <p
+                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
+                        >
+                          Mei - Juni
+                        </p>
+                      </p>
+                    </div>
                   </div>
                   <div className={styles.wrapperLampiran}>
-                    <p>Lampiran:</p>
-                    <p></p>
+                    Lampiran:
+                    <div className={styles.contentLampiran}>
+                      <div className={styles.fileLampiran}>
+                        <Image src={"/IconPNG.svg"} width={35} height={40} />
+                        <p style={{ marginLeft: 5 }}> Foto Laporan</p>
+                      </div>
+                      <div className={styles.fileLampiran}>
+                        <Image src={"/IconPDF.svg"} width={35} height={40} />
+                        <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.wrapperRencanaUbah}>
-                    <p>Rencana Ubah Jadwal:</p>
-                    <p></p>
+                  <div className={styles.wrapperBtnTerimaTolak}>
+                    <Gap width={0} height={50} />
+                    <button className={styles.styleBtn}>
+                      <Image src={"/Terima.svg"} width={30} height={30} />
+                      <p>Terima</p>
+                    </button>
+                    <Gap width={0} height={20} />
+                    <button
+                      style={{
+                        fontWeight: 700,
+                        background: "rgba(255, 1, 100, 1)",
+                      }}
+                      className={styles.styleBtn}
+                    >
+                      <Image src={"/Tolak.svg"} width={30} height={30} />
+                      <p>Tolak</p>
+                    </button>
                   </div>
                 </div>
               </TableRow>
