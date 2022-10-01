@@ -12,18 +12,15 @@
   /* width: 2100px; */
 }
 
-.wrapperTitleDaftarKegiatan {
+.wrapperTitle {
   display: flex;
-  width: 250px;
+  width: 260px;
   height: 50px;
   text-align: center;
   align-items: center;
   border-bottom: 2.5px solid #1bddbb;
-  padding-left: 7px;
+  padding-left: -5px;
   margin-top: 34px;
-  /* background-color: #fff;
-  position: fixed; */
-  z-index: 999;
 }
 
 .txtTitle {
@@ -32,10 +29,11 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   margin: 0;
-  width: 300px;
-  margin-top: 1px;
+  /* width: 300px; */
+  /* margin-top: 1px; */
   margin-left: 19px;
 }
+
 
 .wrapperDataPegawai {
   display: flex;
