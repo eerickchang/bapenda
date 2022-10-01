@@ -17,6 +17,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
+import Modal from "react-modal";
 
 Axios.defaults.withCredentials = true;
 
@@ -97,7 +98,6 @@ function Row(props) {
   const { row, stateChanger } = props;
   const [open, setOpen] = React.useState(false);
 
-  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
   // const custom = {
   //   content: {
   //     position: "absolute",
@@ -201,9 +201,13 @@ function Row(props) {
         }
       );
     });
+
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
   };
 
-  const btnTolak = () => {};
   const btnDw = () => {
     Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
       responseType: "blob",
@@ -213,6 +217,155 @@ function Row(props) {
     });
   };
 
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingLeft: 61,
+      height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showModalTolak, setShowModalTolak] = useState(false);
+  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
+  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModalTolakAll() {
+    setTolakAllIsOpen(true);
+  }
+
+  function afterOpenModalTolakAll() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalTolakAll() {
+    setTolakAllIsOpen(false);
+  }
+
+  const btnTolak = () => {
+    setShowModalTolak(true);
+    setTimeout(() => {
+      setShowModalTolak(false);
+    }, 3000);
+  };
+
+  const btnTolakAll = () => {
+    setShowModalTolakAll(true);
+    setTimeout(() => {
+      setShowModalTolakAll(false);
+    }, 3000);
+  };
+
+  const btnTerimaAll = () => {
+    setShowModalTerimaAll(true);
+    setTimeout(() => {
+      setShowModalTerimaAll(false);
+    }, 3000);
+  };
+
+  const btnTolakExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModal();
+    btnTolak();
+  };
+
+  const btnTolakAllExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModalTolakAll();
+    btnTolakAll();
+  };
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -220,11 +373,66 @@ function Row(props) {
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
         </button>
-        <Gap width={15} />
-        <button className={styles.btnTolakAll}>
+        {showModalTerimaAll ? (
+          <div
+            className={styles.modal}
+            onClick={() => setShowModalTolakAll(false)}
+          >
+            <p>
+              Semua Permintaan Ubah Jadwal <b>Diterima</b>
+            </p>
+            <div className={styles.checkCircle}>
+              <Image src={"/Terima.svg"} width={25} height={25} />
+            </div>
+          </div>
+        ) : null}
+        <Gap width={15} height={0} />
+        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
           <Image src={"/Tolak.svg"} width={25} height={25} />
           Tolak Semua
         </button>
+        <Modal
+          isOpen={modalTolakAllIsOpen}
+          onAfterOpen={afterOpenModalTolakAll}
+          onRequestClose={closeModal}
+          style={custom}
+          contentLabel="Example Modal"
+        >
+          <h2 className={styles.headerTxtModal}>
+            Tolak Semua Permintaan Ubah Jadwal
+          </h2>
+          <Gap height={20} width={0} />
+          <input
+            className={styles.inputBuktiLap}
+            placeholder="Tambah keterangan"
+            // onChange={(e) => setKetPegawai(e.target.value)}
+          />
+          <Gap height={20} width={0} />
+          <div className={styles.wrapBtnModal}>
+            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
+              <img src={"/BatalIcon.svg"} width={20} height={20} />
+              <p className={styles.txt}>Batal</p>
+            </button>
+            <Gap width={24} height={0} />
+            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
+              <img src={"/Tolak.svg"} width={20} height={20} />
+              <p>Tolak</p>
+            </button>
+          </div>
+        </Modal>
+        {showModalTolakAll ? (
+          <div
+            className={styles.modal}
+            onClick={() => setShowModalTolakAll(false)}
+          >
+            <p>
+              Semua Permintaan Ubah Jadwal <b>Ditolak</b>
+            </p>
+            <div className={styles.checkCircle}>
+              <Image src={"/Tolak.svg"} width={25} height={25} />
+            </div>
+          </div>
+        ) : null}
       </div>
       <React.Fragment>
         <TableRow
@@ -282,7 +490,6 @@ function Row(props) {
             marginTop: -20,
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
-            // paddingBottom: 35,
           }}
         >
           {/* <div className={styles.backgroundRowExpand}> */}
@@ -341,12 +548,30 @@ function Row(props) {
                   </div>
                   <div className={styles.wrapperBtnTerimaTolak}>
                     <Gap width={0} height={50} />
-                    <button className={styles.styleBtn} onClick={btnTerima}>
+                    <button onClick={btnTerima} className={styles.styleBtn}>
                       <Image src={"/Terima.svg"} width={30} height={30} />
                       <p>Terima</p>
                     </button>
+                    {showModal ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModal(false)}
+                      >
+                        <p>
+                          Ubah Jadwal Denny G. Lumy <b>Diterima</b>
+                        </p>
+                        <div className={styles.checkCircle}>
+                          <Image
+                            src={"/Check-circle.svg"}
+                            width={25}
+                            height={25}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
                     <Gap width={0} height={20} />
                     <button
+                      onClick={openModal}
                       style={{
                         fontWeight: 700,
                         background: "rgba(255, 1, 100, 1)",
@@ -357,6 +582,54 @@ function Row(props) {
                       <Image src={"/Tolak.svg"} width={30} height={30} />
                       <p>Tolak</p>
                     </button>
+                    <Modal
+                      isOpen={modalIsOpen}
+                      onAfterOpen={afterOpenModal}
+                      onRequestClose={closeModal}
+                      style={custom}
+                      contentLabel="Example Modal"
+                    >
+                      <h2 className={styles.headerTxtModal}>
+                        Tolak Permintaan Ubah Jadwal
+                      </h2>
+                      <Gap height={20} width={0} />
+                      <input
+                        className={styles.inputBuktiLap}
+                        placeholder="Tambah keterangan"
+                        // onChange={(e) => setKetPegawai(e.target.value)}
+                      />
+                      <Gap height={20} width={0} />
+                      <div className={styles.wrapBtnModal}>
+                        <button
+                          onClick={closeModal}
+                          className={styles.btnKirim}
+                        >
+                          <img src={"/BatalIcon.svg"} width={20} height={20} />
+                          <p className={styles.txt}>Batal</p>
+                        </button>
+                        <Gap width={24} height={0} />
+                        <button
+                          onClick={btnTolakExp}
+                          className={styles.btnBatal}
+                        >
+                          <img src={"/Tolak.svg"} width={20} height={20} />
+                          <p>Tolak</p>
+                        </button>
+                      </div>
+                    </Modal>
+                    {showModalTolak ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModalTolak(false)}
+                      >
+                        <p>
+                          Ubah Jadwal Denny G. Lumy <b>Ditolak</b>
+                        </p>
+                        <div className={styles.checkCircle}>
+                          <Image src={"/Tolak.svg"} width={25} height={25} />
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </TableRow>
@@ -412,9 +685,10 @@ export const CUbahJadwalRenaksi = () => {
               <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
               <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
             </div>
-            <Gap height={153} width={0} />
+            <p className={stylesS.titleBidang}>Bidang Pajak Daerah</p>
+            <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 0, paddingRight: 60, zIndex: 998 }}
             >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>

@@ -6,7 +6,7 @@
 
 .wrapperRiwayatKegiatan {
   display: flex;
-  width: 470px;
+  width: 370px;
   height: 50px;
   text-align: center;
   align-items: center;
@@ -20,9 +20,19 @@
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: black;
+  color: rgba(221, 202, 27, 1);
   margin: 0;
   margin-left: 19px;
+}
+
+.titleBidang {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  margin-left: 50px;
+  margin-top: 54px;
 }
 
 .wrapFilter{

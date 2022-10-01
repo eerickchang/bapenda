@@ -26,7 +26,55 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
-  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
+  //style row
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
+
+  const [renaksiPegawai, setRenaksiPegawai] = useState([]);
+
+  // const btnUnggah = () => {
+  //   setShowModal(true);
+  //   setTimeout(() => {
+  //     setShowModal(false);
+  //   }, 3000);
+  // };
+
+  // const btnUbah = () => {
+  //   setShowModal_Ubah(true);
+  //   setTimeout(() => {
+  //     setShowModal_Ubah(false);
+  //   }, 3000);
+  // };
+
+  // const btnHapus = () => {
+  //   setShowModal_Hapus(true);
+  //   setTimeout(() => {
+  //     setShowModal_Hapus(false);
+  //   }, 3000);
+  // };
+
+  const btnTerima = () => {
+    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksiMRD) => {
+          if (row.nip === renaksiMRD.nip) {
+            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+              idRenaksi: renaksiMRD.id_renaksi,
+            });
+          }
+        });
+      }
+    );
+
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
+
+    window.location.reload();
+  };
+
+  // ! MODAL TERIMA TOLAK SEMUA
   const custom = {
     content: {
       position: "absolute",
@@ -57,99 +105,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     },
   };
 
-  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
-  const customUbah = {
-    content: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: 878,
-      borderRadius: 20,
-      paddingLeft: 61,
-      height: 433,
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      overlay: "#112350",
-      backgroundColor: "white",
-      zIndex: 1001,
-      scroll: false,
-    },
-    overlay: {
-      position: "fixed",
-      marginTop: 0,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: "rgba(17, 35, 80, 0.5)",
-      zIndex: 1000,
-    },
-  };
-
-  //style row
-  const [rowClik, setRowClick] = useState(true);
-  const [styleRow, setStyleRow] = useState("");
-
-  const [renaksiPegawai, setRenaksiPegawai] = useState([]);
-
-  // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
-  const [modalHapusRenaksiIsOpen, setIsOpenMOdalHapusRenaksi] = useState(false);
-  //!modals
+  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
-  const [showModal_Ubah, setShowModal_Ubah] = useState(false);
-  const [showModal_Hapus, setShowModal_Hapus] = useState(false);
+  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
+  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
-  const btnUnggah = () => {
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
-  };
-
-  const btnUbah = () => {
-    setShowModal_Ubah(true);
-    setTimeout(() => {
-      setShowModal_Ubah(false);
-    }, 3000);
-  };
-
-  const btnHapus = () => {
-    setShowModal_Hapus(true);
-    setTimeout(() => {
-      setShowModal_Hapus(false);
-    }, 3000);
-  };
-
-  const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-              idRenaksi: renaksiMRD.id_renaksi,
-            });
-          }
-        });
-      }
-    );
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
-
-    window.location.reload();
-  };
-
-  const btnTerimaSemua = () => {
-    console.log("oke");
-  };
-
-  // ! MODAL UNGGAH LAPORAN
   function openModal() {
     setIsOpen(true);
   }
@@ -163,48 +125,169 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpen(false);
   }
 
-  // ! MODAL UBAH JADAWAL
-  function openModalUbah() {
-    setIsOpenModalUbahJadwal(true);
+  function openModalTolakAll() {
+    setTolakAllIsOpen(true);
   }
 
-  function afterOpenModalUbah() {
+  function afterOpenModalTolakAll() {
     // references are now sync'd and can be accessed.
     // subtitle.style.color = "#f00";
   }
 
-  function closeModalUbah() {
-    setIsOpenModalUbahJadwal(false);
+  function closeModalTolakAll() {
+    setTolakAllIsOpen(false);
   }
 
-  // ! MODAL HAPUS RENAKSI
-  function openModalHapus() {
-    setIsOpenMOdalHapusRenaksi(true);
-  }
+  const btnTolak = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+  };
 
-  function afterOpenModalHapus() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
+  const btnTolakAll = () => {
+    setShowModalTolakAll(true);
+    setTimeout(() => {
+      setShowModalTolakAll(false);
+    }, 3000);
+  };
 
-  function closeModalHapus() {
-    setIsOpenMOdalHapusRenaksi(false);
-  }
+  const btnTerimaSemua = () => {
+    setShowModalTerimaAll(true);
+    setTimeout(() => {
+      setShowModalTerimaAll(false);
+    }, 3000);
+  };
+
+  const btnTolakExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success"){
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModal();
+    btnTolak();
+  };
+
+  const btnTolakAllExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModalTolakAll();
+    btnTolakAll();
+  };
 
   return (
     <>
       <div className={stylesS.wrapFilter}>
         <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          {" "}
-          {/*onClick={btnTerimaSemua}*/}
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
         </button>
-        <Gap width={15} />
-        <button className={styles.btnTerimaAll}>
+        {showModalTerimaAll ? (
+          <div
+            className={styles.modal}
+            onClick={() => setShowModalTolakAll(false)}
+          >
+            <p>
+              Semua Renaksi <b>Diterima</b>
+            </p>
+            <div className={styles.checkCircle}>
+              <Image src={"/Terima.svg"} width={25} height={25} />
+            </div>
+          </div>
+        ) : null}
+        <Gap width={15} height={0} />
+        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
           <Image src={"/Tolak.svg"} width={25} height={25} />
           Tolak Semua
         </button>
+        {showModalTolakAll ? (
+          <div
+            className={styles.modal}
+            onClick={() => setShowModalTolakAll(false)}
+          >
+            <p>
+              Semua Renaksi <b>Ditolak</b>
+            </p>
+            <div className={styles.checkCircle}>
+              <Image src={"/Tolak.svg"} width={25} height={25} />
+            </div>
+          </div>
+        ) : null}
+        <Modal
+          isOpen={modalTolakAllIsOpen}
+          onAfterOpen={afterOpenModalTolakAll}
+          onRequestClose={closeModal}
+          style={custom}
+          contentLabel="Example Modal"
+        >
+          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
+          <Gap height={20} width={0} />
+          <input
+            className={styles.inputBuktiLap}
+            placeholder="Tambah keterangan"
+            // onChange={(e) => setKetPegawai(e.target.value)}
+          />
+          <Gap height={20} width={0} />
+          <div className={styles.wrapBtnModal}>
+            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
+              <img src={"/BatalIcon.svg"} width={20} height={20} />
+              <p className={styles.txt}>Batal</p>
+            </button>
+            <Gap width={24} height={0} />
+            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
+              <img src={"/Tolak.svg"} width={20} height={20} />
+              <p>Tolak</p>
+            </button>
+          </div>
+        </Modal>
       </div>
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
@@ -241,10 +324,50 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <Gap width={40} height={0} />
                 <button
                   className={styles.btnTolak}
-                  onClick={() => console.log(row.nama)}
+                  onClick={() => (openModal(), console.log(row.nama))}
                 >
                   <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
                 </button>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={custom}
+                  contentLabel="Example Modal"
+                >
+                  <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
+                  <Gap height={20} width={0} />
+                  <input
+                    className={styles.inputBuktiLap}
+                    placeholder="Tambah keterangan"
+                    // onChange={(e) => setKetPegawai(e.target.value)}
+                  />
+                  <Gap height={20} width={0} />
+                  <div className={styles.wrapBtnModal}>
+                    <button onClick={closeModal} className={styles.btnKirim}>
+                      <img src={"/BatalIcon.svg"} width={20} height={20} />
+                      <p className={styles.txt}>Batal</p>
+                    </button>
+                    <Gap width={24} height={0} />
+                    <button onClick={btnTolakExp} className={styles.btnBatal}>
+                      <img src={"/Tolak.svg"} width={20} height={20} />
+                      <p>Tolak</p>
+                    </button>
+                  </div>
+                </Modal>
+                {showModal ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModal(false)}
+                  >
+                    <p>
+                      Renaksi Richard F. Kasenda <b>Ditolak</b>
+                    </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </TableCell>
