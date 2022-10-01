@@ -145,6 +145,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     window.location.reload();
   };
 
+  const btnTerimaSemua = () => {
+    console.log("oke");
+  };
+
   // ! MODAL UNGGAH LAPORAN
   function openModal() {
     setIsOpen(true);
@@ -190,7 +194,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll}>
+        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
           {" "}
           {/*onClick={btnTerimaSemua}*/}
           <Image src={"/Terima.svg"} width={25} height={25} />
@@ -331,22 +335,6 @@ export default function ContentDaftarKegiatan(props: {
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
-  };
-
-  const btnTerimaSemua = () => {
-    // Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-    //   (ambilRenaksi) => {
-    //     ambilRenaksi.data.map((renaksiMRD) => {
-    //       if (row.sub_bidang === renaksiMRD.sub_bidang) {
-    //         console.log(renaksiMRD);
-    //         // Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-    //         //   idRenaksi: renaksiMRD.id_renaksi,
-    //         // });
-    //       }
-    //     });
-    //   }
-    // );
-    console.log(row);
   };
 
   return (

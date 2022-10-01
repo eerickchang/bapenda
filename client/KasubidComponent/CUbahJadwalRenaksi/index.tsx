@@ -162,59 +162,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const [domLoaded, setDomLoaded] = useState(false);
-  const [pegawai, setPegawai] = useState([]);
-  const shouldLog = useRef(true);
-  useEffect(() => {
-    if (shouldLog.current) {
-      shouldLog.current = false;
-      setDomLoaded(true);
-
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  setPegawai((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
+  const btnTerimaSemua = () => {
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+                idRenaksi: renaksi.id_renaksi,
               });
-              // let userLoggedIn = masuk.data.user;
-              // let pegawaiSubid = ambilPegawai.data;
-              // let renaksi = ambilRenaksi.data;
-              // console.log("User Logged In: ", userLoggedIn);
-              // console.log("Pegawai Subid: ", pegawaiSubid);
-              // console.log("Renaksi: ", renaksi);
-              // let subidUserSDPegawai = [];
-              // let pegawaiYgAdaRenaksi = [];
-              // subidUserSDPegawai = pegawaiSubid.filter((elA) => {
-              //   return userLoggedIn.some(
-              //     (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              //   );
-              // });
-              // pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-              //   return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              // });
-              // pegawaiYgAdaRenaksi.map((item) => {
-              //   setPegawai((nextData) => {
-              //     return [item, ...nextData];
-              //   });
-              // });
-              // console.log("Subid Sama: ", subidUserSDPegawai);
-              // console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
-          );
-        });
-      });
-    }
-  }, []);
+          });
+        }
+      );
+    });
+
+    window.top.location = window.top.location.pathname;
+  };
 
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll}>
+        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
         </button>
@@ -239,7 +208,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
-            <p className={stylesS.rekanNama}>{row.nama}</p>
+            <p
+              className={stylesS.rekanNama}
+              onClick={() => console.log(row.files)}
+            >
+              {row.nama}
+            </p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
@@ -249,21 +223,23 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>
-              <div className={styles.wrapFileLampiran}>
-                <div style={{ display: "flex" }}>
-                  <div style={{ marginRight: 10 }}>
-                    <Image src={"/IconPDF.svg"} width={25} height={28} />
+              {row.files === "" ? null : (
+                <div className={styles.wrapFileLampiran}>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: 10 }}>
+                      <Image src={"/IconPDF.svg"} width={25} height={28} />
+                    </div>
+                    1 files
                   </div>
-                  1 files
-                </div>
-                <Gap width={0} height={10} />
-                <div style={{ display: "flex" }}>
-                  <div style={{ marginRight: 10 }}>
-                    <Image src={"/IconPDF.svg"} width={25} height={28} />
+                  <Gap width={0} height={10} />
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: 10 }}>
+                      <Image src={"/IconPDF.svg"} width={25} height={28} />
+                    </div>
+                    2 files
                   </div>
-                  2 files
                 </div>
-              </div>
+              )}
             </p>
           </TableCell>
         </TableRow>
@@ -331,19 +307,17 @@ export const CUbahJadwalRenaksi = () => {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  setPegawai((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        });
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                setPegawai((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
       });
     }
   }, []);
@@ -363,17 +337,6 @@ export const CUbahJadwalRenaksi = () => {
               <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
             </div>
             <Gap height={153} width={0} />
-            <div className={stylesS.wrapFilter}>
-              <button className={styles.btnTerimaAll}>
-                <Image src={"/Terima.svg"} width={25} height={25} />
-                Terima Semua
-              </button>
-              <Gap width={15} />
-              <button className={styles.btnTolakAll}>
-                <Image src={"/Tolak.svg"} width={25} height={25} />
-                Tolak Semua
-              </button>
-            </div>
             <TableContainer
               style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
             >
