@@ -15,6 +15,69 @@ import moment from "moment";
 Axios.defaults.withCredentials = true;
 
 export default function Dashboard() {
+  const UserData = [
+    {
+      id: 1,
+      hasil_kinerja: 70,
+      bulan: "Januari",
+    },
+    {
+      id: 2,
+      hasil_kinerja: 80,
+      bulan: "Februari",
+    },
+    {
+      id: 3,
+      hasil_kinerja: 50,
+      bulan: "Maret",
+    },
+    {
+      id: 4,
+      hasil_kinerja: 40,
+      bulan: "April",
+    },
+    {
+      id: 5,
+      hasil_kinerja: 70,
+      bulan: "Mei",
+    },
+    {
+      id: 6,
+      hasil_kinerja: 90,
+      bulan: "Juni",
+    },
+    {
+      id: 7,
+      hasil_kinerja: 100,
+      bulan: "Juli",
+    },
+    {
+      id: 8,
+      hasil_kinerja: 70,
+      bulan: "Agustus",
+    },
+    {
+      id: 9,
+      hasil_kinerja: 80,
+      bulan: "September",
+    },
+    {
+      id: 10,
+      hasil_kinerja: 90,
+      bulan: "Oktober",
+    },
+    {
+      id: 11,
+      hasil_kinerja: 100,
+      bulan: "November",
+    },
+    {
+      id: 12,
+      hasil_kinerja: 70,
+      bulan: "Desember",
+    },
+  ];
+
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
@@ -39,57 +102,66 @@ export default function Dashboard() {
       });
 
       //AMBIL CAKIN JUMLAH KEGIATAN
-      Axios.get("http://localhost:3001/jumlahKegiatan").then(
-        (jumlahKegiatan) => {
-          jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setJlhKegiatan((nextData) => {
-                return [...nextData, jumlahKegiatanMAP];
-              });
-            }
-          });
-        }
-      );
-
-      //AMBIL CAKIN LAMPIRAN DISUBMIT
-      Axios.get("http://localhost:3001/lampiranDisubmit").then(
-        (lampiranDisubmit) => {
-          lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(lampiranDisubmitMAP.end_date).format("YYYY-MM")
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setLprSubmit((nextData) => {
-                return [...nextData, lampiranDisubmitMAP];
-              });
-            }
-          });
-        }
-      );
-
-      //AMBIL CAKIN BELUM DISUBMIT
-      Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
-        belumSubmit.data.map((belumSubmitMAP) => {
-          if (
-            moment().format("YYYY-MM") >=
-              moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
-            moment().format("YYYY-MM") ===
-              moment(belumSubmitMAP.end_date).format("YYYY-MM")
-          ) {
-            // console.log(ambilRenaksiMAP);
-            setBlmSubmit((nextData) => {
-              return [...nextData, belumSubmitMAP];
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/jumlahKegiatan").then(
+          (jumlahKegiatan) => {
+            jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
+              if (
+                moment().format("YYYY-MM") >=
+                  moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
+                moment().format("YYYY-MM") ===
+                  moment(jumlahKegiatanMAP.end_date).format("YYYY-MM") &&
+                masuk.data.user[0].sub_bidang === jumlahKegiatanMAP.sub_bidang
+              ) {
+                // console.log(ambilRenaksiMAP);
+                setJlhKegiatan((nextData) => {
+                  return [...nextData, jumlahKegiatanMAP];
+                });
+              }
             });
           }
+        );
+      });
+
+      //AMBIL CAKIN LAMPIRAN DISUBMIT
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/lampiranDisubmit").then(
+          (lampiranDisubmit) => {
+            lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
+              if (
+                moment().format("YYYY-MM") >=
+                  moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
+                moment().format("YYYY-MM") ===
+                  moment(lampiranDisubmitMAP.end_date).format("YYYY-MM") &&
+                masuk.data.user[0].sub_bidang === lampiranDisubmitMAP.sub_bidang
+              ) {
+                // console.log(ambilRenaksiMAP);
+                setLprSubmit((nextData) => {
+                  return [...nextData, lampiranDisubmitMAP];
+                });
+              }
+            });
+          }
+        );
+      });
+
+      //AMBIL CAKIN BELUM DISUBMIT
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
+          belumSubmit.data.map((belumSubmitMAP) => {
+            if (
+              moment().format("YYYY-MM") >=
+                moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
+              moment().format("YYYY-MM") ===
+                moment(belumSubmitMAP.end_date).format("YYYY-MM") &&
+              masuk.data.user[0].sub_bidang === belumSubmitMAP.sub_bidang
+            ) {
+              // console.log(ambilRenaksiMAP);
+              setBlmSubmit((nextData) => {
+                return [...nextData, belumSubmitMAP];
+              });
+            }
+          });
         });
       });
 
@@ -109,11 +181,11 @@ export default function Dashboard() {
   const [prevMonth, setPrevMonth] = useState("");
 
   const userData = {
-    labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
+    labels: UserData.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: grafik?.map((data) => data.hasil_kinerja),
+        data: UserData.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
 
