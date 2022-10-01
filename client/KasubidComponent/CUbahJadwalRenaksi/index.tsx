@@ -16,6 +16,7 @@ import moment from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import FileDownload from "js-file-download";
 
 Axios.defaults.withCredentials = true;
 
@@ -92,8 +93,8 @@ const rows = [
   },
 ];
 
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
+function Row(props) {
+  const { row, stateChanger } = props;
   const [open, setOpen] = React.useState(false);
 
   // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
@@ -177,7 +178,39 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       );
     });
 
-    window.top.location = window.top.location.pathname;
+    stateChanger([]);
+    // window.location.reload();
+  };
+
+  const btnTerima = () => {
+    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+      idRenaksi: row.id_renaksi,
+    });
+
+    stateChanger([]);
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              stateChanger((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    });
+  };
+
+  const btnTolak = () => {};
+  const btnDw = () => {
+    Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
+      responseType: "blob",
+    }).then((res) => {
+      console.log(res);
+      FileDownload(res.data, `${row.files}`);
+    });
   };
 
   return (
@@ -232,12 +265,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  <div style={{ display: "flex" }}>
+                  {/* <div style={{ display: "flex" }}>
                     <div style={{ marginRight: 10 }}>
                       <Image src={"/IconPDF.svg"} width={25} height={28} />
                     </div>
                     2 files
-                  </div>
+                  </div> */}
                 </div>
               )}
             </p>
@@ -267,20 +300,63 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             >
               <TableRow>
                 <div className={styles.wrapperExpand}>
-                  <div className={styles.wrapperTanggapan}>
-                    <p>Tanggapan:</p>
-                    <p className={styles.txtTanggapan}>
-                      Permintaan ubah jadwal tidak dapat dilakukan, karena
-                      alasan yang diberikan tidak dapat diterima
-                    </p>
+                  <div className={styles.wrapperKeterangan}>
+                    Keterangan:
+                    <div className={styles.contentKeterangan}>
+                      {row.ket_pegawai}
+                      <p
+                        style={{
+                          display: "flex",
+                          position: "absolute",
+                          top: 140,
+                          color: "rgba(149, 149, 149, 1)",
+                          // top: 10,
+                        }}
+                      >
+                        Pengajuan Ubah jadwal :
+                        <p
+                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
+                        >
+                          {`${moment(row.req_start_date).format(
+                            "MMM"
+                          )} - ${moment(row.req_end_date).format("MMM")}`}
+                        </p>
+                      </p>
+                    </div>
                   </div>
                   <div className={styles.wrapperLampiran}>
-                    <p>Lampiran:</p>
-                    <p></p>
+                    Lampiran:
+                    {row.files === "" ? null : (
+                      <div className={styles.contentLampiran} onClick={btnDw}>
+                        {/* <div className={styles.fileLampiran}>
+                          <Image src={"/IconPNG.svg"} width={35} height={40} />
+                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
+                        </div> */}
+                        <div className={styles.fileLampiran}>
+                          <Image src={"/IconPDF.svg"} width={35} height={40} />
+                          <p style={{ marginLeft: 5 }}> File Laporan</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div className={styles.wrapperRencanaUbah}>
-                    <p>Rencana Ubah Jadwal:</p>
-                    <p></p>
+                  <div className={styles.wrapperBtnTerimaTolak}>
+                    <Gap width={0} height={50} />
+                    <button className={styles.styleBtn} onClick={btnTerima}>
+                      <Image src={"/Terima.svg"} width={30} height={30} />
+                      <p>Terima</p>
+                    </button>
+                    <Gap width={0} height={20} />
+                    <button
+                      style={{
+                        fontWeight: 700,
+                        background: "rgba(255, 1, 100, 1)",
+                      }}
+                      className={styles.styleBtn}
+                      onClick={btnTolak}
+                    >
+                      <Image src={"/Tolak.svg"} width={30} height={30} />
+                      <p>Tolak</p>
+                    </button>
                   </div>
                 </div>
               </TableRow>
@@ -370,7 +446,11 @@ export const CUbahJadwalRenaksi = () => {
                 </TableHead>
                 <TableBody>
                   {pegawai.map((row) => (
-                    <Row key={row.id_renaksi} row={row} />
+                    <Row
+                      key={row.id_renaksi}
+                      row={row}
+                      stateChanger={setPegawai}
+                    />
                   ))}
                 </TableBody>
               </Table>
