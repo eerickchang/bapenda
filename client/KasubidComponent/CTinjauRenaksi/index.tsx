@@ -345,14 +345,14 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow
-          onClick={() => clickRowPegawai()}
+          // onClick={() => clickRowPegawai()}
           hover
           className={styles.styleRow}
         >
-          <TableCell className={styles.styleData}>
+          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
           </TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>{row.sub_bidang}</TableCell>
           <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>

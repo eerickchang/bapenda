@@ -535,12 +535,24 @@ export default function CLihatSemuaRenaksi() {
       <TableContainer
         sx={{
           maxHeight: 810,
-          width: 1660,
+          width: 1680,
           marginTop: 4,
           color: "rgba(27, 221, 187, 1)",
           border: 2,
           borderRadius: 6,
           boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
+          overflowX: "scroll",
+          "::-webkit-scrollbar": {
+            width: 15,
+            height: 0,
+          },
+          "::-webkit-scrollbar-thumb": {
+            background: "rgba(21, 221, 187)",
+            // height: 100
+            width: 0,
+            borderTopRightRadius: 50,
+            borderBottomRightRadius: 50,
+          },
         }}
       >
         <Table

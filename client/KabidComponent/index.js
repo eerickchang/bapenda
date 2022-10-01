@@ -33,6 +33,8 @@ import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
 import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
 import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 
+import CEvaluasiSubBidangPegawai from "./CEvaluasiSubBidangPegawai";
+
 export {
   TxtInput,
   Gap,
@@ -66,4 +68,5 @@ export {
   CTinjauRenaksi,
   TxtInputRenaksiProgram,
   CLihatSemuaRenaksi,
+  CEvaluasiSubBidangPegawai,
 };
