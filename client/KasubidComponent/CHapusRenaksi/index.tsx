@@ -163,94 +163,107 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [styleRow, setStyleRow] = useState("");
 
   return (
-    <React.Fragment>
-      <TableRow
-        className={`${styles.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                setRowClick(!rowClik))
-              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-          }
-        }}
-        sx={{ "& > *": { borderBottom: "" } }}
-      >
-        <TableCell>
-          <p className={stylesS.rekanNama}>{row.nama}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>
-            <div className={styles.wrapFileLampiran}>
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: 10 }}>
-                  <Image src={"/IconPDF.svg"} width={25} height={28} />
+    <>
+      <div className={stylesS.wrapFilter}>
+        <button className={styles.btnTerimaAll}>
+          <Image src={"/Terima.svg"} width={25} height={25} />
+          Terima Semua
+        </button>
+        <Gap width={15} height={0} />
+        <button className={styles.btnTolakAll}>
+          <Image src={"/Tolak.svg"} width={25} height={25} />
+          Tolak Semua
+        </button>
+      </div>
+      <React.Fragment>
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          <TableCell>
+            <p className={stylesS.rekanNama}>{row.nama}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>
+              <div className={styles.wrapFileLampiran}>
+                <div style={{ display: "flex" }}>
+                  <div style={{ marginRight: 10 }}>
+                    <Image src={"/IconPDF.svg"} width={25} height={28} />
+                  </div>
+                  1 files
                 </div>
-                1 files
-              </div>
-              <Gap width={0} height={10} />
-              <div style={{ display: "flex" }}>
-                <div style={{ marginRight: 10 }}>
-                  <Image src={"/IconPDF.svg"} width={25} height={28} />
-                </div>
-                2 files
-              </div>
-            </div>
-          </p>
-        </TableCell>
-      </TableRow>
-      <TableContainer
-        style={{
-          width: 1680,
-          marginTop: -20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-          // paddingBottom: 35,
-        }}
-      >
-        {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
-            <TableRow>
-              <div className={styles.wrapperExpand}>
-                <div className={styles.wrapperTanggapan}>
-                  <p>Tanggapan:</p>
-                  <p className={styles.txtTanggapan}>
-                    Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
-                    yang diberikan tidak dapat diterima
-                  </p>
-                </div>
-                <div className={styles.wrapperLampiran}>
-                  <p>Lampiran:</p>
-                  <p></p>
-                </div>
-                <div className={styles.wrapperRencanaUbah}>
-                  <p>Rencana Ubah Jadwal:</p>
-                  <p></p>
+                <Gap width={0} height={10} />
+                <div style={{ display: "flex" }}>
+                  <div style={{ marginRight: 10 }}>
+                    <Image src={"/IconPDF.svg"} width={25} height={28} />
+                  </div>
+                  2 files
                 </div>
               </div>
-            </TableRow>
-          </Collapse>
-        </TableCell>
-      </TableContainer>
-    </React.Fragment>
+            </p>
+          </TableCell>
+        </TableRow>
+        <TableContainer
+          style={{
+            width: 1680,
+            marginTop: -20,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+            // paddingBottom: 35,
+          }}
+        >
+          {/* <div className={styles.backgroundRowExpand}> */}
+          <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+            <Collapse
+              style={{
+                background: "rgba(232, 232, 232, 1)",
+                borderTopColor: "rgba(165, 165, 165, 0.5)",
+                borderTopWidth: 2,
+                borderTopStyle: "solid",
+                marginBottom: 35,
+              }}
+              in={open}
+              timeout="auto"
+            >
+              <TableRow>
+                <div className={styles.wrapperExpand}>
+                  <div className={styles.wrapperTanggapan}>
+                    <p>Tanggapan:</p>
+                    <p className={styles.txtTanggapan}>
+                      Permintaan ubah jadwal tidak dapat dilakukan, karena
+                      alasan yang diberikan tidak dapat diterima
+                    </p>
+                  </div>
+                  <div className={styles.wrapperLampiran}>
+                    <p>Lampiran:</p>
+                    <p></p>
+                  </div>
+                  <div className={styles.wrapperRencanaUbah}>
+                    <p>Rencana Ubah Jadwal:</p>
+                    <p></p>
+                  </div>
+                </div>
+              </TableRow>
+            </Collapse>
+          </TableCell>
+        </TableContainer>
+      </React.Fragment>
+    </>
   );
 }
 
@@ -360,25 +373,11 @@ export const CHapusRenaksi = () => {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image
-                src={"/HapusRenaksiTitle.svg"}
-                width={40}
-                height={40}
-              />
+              <Image src={"/HapusRenaksiTitle.svg"} width={40} height={40} />
               <p className={stylesS.txtTitle}>PERMINTAAN HAPUS RENAKSI</p>
             </div>
             <Gap height={153} width={0} />
-            <div className={stylesS.wrapFilter}>
-              <button className={styles.btnTerimaAll}>
-                <Image src={"/Terima.svg"} width={25} height={25} />
-                Terima Semua
-              </button>
-              <Gap width={15} height={0}/>
-              <button className={styles.btnTolakAll}>
-                <Image src={"/Tolak.svg"} width={25} height={25} />
-                Tolak Semua
-              </button>
-            </div>
+
             <TableContainer
               style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
             >

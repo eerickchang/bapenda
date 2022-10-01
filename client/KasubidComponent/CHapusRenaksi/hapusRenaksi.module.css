@@ -32,6 +32,13 @@
   left: 1468px;
 }
 
+.wrapLihatSemua{
+  display: flex;
+  position: absolute;
+  top: 85px;
+  left: 1468px;
+}
+
 
 .rekanPegawai{
   font-family: "Poppins", sans-serif;
