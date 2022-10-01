@@ -162,6 +162,55 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
+  const [domLoaded, setDomLoaded] = useState(false);
+  const [pegawai, setPegawai] = useState([]);
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      setDomLoaded(true);
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  setPegawai((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+              // let userLoggedIn = masuk.data.user;
+              // let pegawaiSubid = ambilPegawai.data;
+              // let renaksi = ambilRenaksi.data;
+              // console.log("User Logged In: ", userLoggedIn);
+              // console.log("Pegawai Subid: ", pegawaiSubid);
+              // console.log("Renaksi: ", renaksi);
+              // let subidUserSDPegawai = [];
+              // let pegawaiYgAdaRenaksi = [];
+              // subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+              //   return userLoggedIn.some(
+              //     (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              //   );
+              // });
+              // pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+              //   return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              // });
+              // pegawaiYgAdaRenaksi.map((item) => {
+              //   setPegawai((nextData) => {
+              //     return [item, ...nextData];
+              //   });
+              // });
+              // console.log("Subid Sama: ", subidUserSDPegawai);
+              // console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
+      });
+    }
+  }, []);
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -317,26 +366,27 @@ export const CUbahJadwalRenaksi = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
 
+  const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
-      setThnSkrg(moment().format("YYYY"));
-      Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-        result.data.map((item) => {
-          if (
-            moment(item.end_date).format("YYYY") === moment().format("YYYY")
-          ) {
-            setDataRenaksi((nextData) => {
-              return [...nextData, item];
-            });
-          }
-        });
-      });
 
-      Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
-        setAsn(dataPegawai.data.user[0]);
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  setPegawai((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        });
       });
     }
   }, []);
@@ -388,7 +438,7 @@ export const CUbahJadwalRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dataRenaksi.map((row) => (
+                  {pegawai.map((row) => (
                     <Row key={row.id_renaksi} row={row} />
                   ))}
                 </TableBody>
