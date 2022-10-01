@@ -307,6 +307,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     closeModalUbah();
     btnUbah();
+    window.location.reload();
   };
 
   const btnHapusExp = () => {

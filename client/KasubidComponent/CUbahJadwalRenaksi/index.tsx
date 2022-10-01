@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./cUbahJadwalRenaksi.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import Image from "next/image";
 import Gap from "../../KabidComponent/Gap";
+import Axios from "axios";
+import moment from "moment";
+
+Axios.defaults.withCredentials = true;
 
 export default function CUbahJadwalRenaksi() {
   const rowsSubagian = [
@@ -63,6 +67,55 @@ export default function CUbahJadwalRenaksi() {
     },
   ];
 
+  const [domLoaded, setDomLoaded] = useState(false);
+  const [pegawai, setPegawai] = useState([]);
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+      setDomLoaded(true);
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  setPegawai((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+              // let userLoggedIn = masuk.data.user;
+              // let pegawaiSubid = ambilPegawai.data;
+              // let renaksi = ambilRenaksi.data;
+              // console.log("User Logged In: ", userLoggedIn);
+              // console.log("Pegawai Subid: ", pegawaiSubid);
+              // console.log("Renaksi: ", renaksi);
+              // let subidUserSDPegawai = [];
+              // let pegawaiYgAdaRenaksi = [];
+              // subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+              //   return userLoggedIn.some(
+              //     (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              //   );
+              // });
+              // pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+              //   return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              // });
+              // pegawaiYgAdaRenaksi.map((item) => {
+              //   setPegawai((nextData) => {
+              //     return [item, ...nextData];
+              //   });
+              // });
+              // console.log("Subid Sama: ", subidUserSDPegawai);
+              // console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
+      });
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapperTitleDaftarKegiatan}>
@@ -88,16 +141,17 @@ export default function CUbahJadwalRenaksi() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rowsSubagian.map((row) => (
-              <TableRow hover className={styles.styleRow} key={row.id}>
+            {pegawai.map((row) => (
+              <TableRow hover className={styles.styleRow} key={row.id_renaksi}>
                 <TableCell className={styles.styleData}>
                   <p style={{ fontWeight: 600 }}>{row.nama}</p>
                 </TableCell>
                 <TableCell className={styles.styleData}>
-                  {row.keterangan}
+                  {row.tupoksi_inti}
                 </TableCell>
                 <TableCell className={styles.styleData}>
-                  {row.dari} - {row.sampai}
+                  {moment(row.start_date).format("MMM")} -{" "}
+                  {moment(row.end_date).format("MMM")}
                 </TableCell>
                 <TableCell className={styles.styleData}>
                   {/* {row.keterangan} */}
