@@ -647,6 +647,7 @@ export const CUbahJadwalRenaksi = () => {
   const [asn, setAsn] = useState("");
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [subid, setSubid] = useState("");
 
   const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
@@ -656,6 +657,7 @@ export const CUbahJadwalRenaksi = () => {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        setSubid(masuk.data.user[0].sub_bidang);
         Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
             ambilRenaksi.data.map((renaksi) => {
@@ -685,7 +687,7 @@ export const CUbahJadwalRenaksi = () => {
               <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
               <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
             </div>
-            <p className={stylesS.titleBidang}>Bidang Pajak Daerah</p>
+            <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
               style={{ paddingLeft: 0, paddingRight: 60, zIndex: 998 }}

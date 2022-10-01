@@ -271,6 +271,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     closeModal();
     btnUnggah();
+
+    window.location.reload();
   };
 
   const btnUbahJadwalExp = () => {
@@ -340,6 +342,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     closeModalHapus();
     btnHapus();
+
+    window.location.reload();
   };
 
   return (

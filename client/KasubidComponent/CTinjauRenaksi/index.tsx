@@ -22,8 +22,8 @@ import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
 Axios.defaults.withCredentials = true;
 
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
+function Row(props) {
+  const { row, stateChange } = props;
   const [open, setOpen] = React.useState(false);
 
   //style row
@@ -66,12 +66,45 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       }
     );
 
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+    // setShowModal(true);
+    // setTimeout(() => {
+    //   setShowModal(false);
+    // }, 2000);
 
-    window.location.reload();
+    setTimeout(() => {
+      stateChange([]);
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let userLoggedIn = masuk.data.user;
+              let pegawaiSubid = ambilPegawai.data;
+              let renaksi = ambilRenaksi.data;
+
+              let subidUserSDPegawai = [];
+              let pegawaiYgAdaRenaksi = [];
+
+              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+            }
+          );
+        });
+      });
+    }, 100);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA
@@ -153,10 +186,26 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
 
   const btnTerimaSemua = () => {
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+                idRenaksi: renaksi.id_renaksi,
+              });
+            }
+          });
+        }
+      );
+    });
+
     setShowModalTerimaAll(true);
     setTimeout(() => {
       setShowModalTerimaAll(false);
     }, 3000);
+
+    stateChange([]);
   };
 
   const btnTolakExp = () => {
@@ -377,10 +426,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-export default function ContentDaftarKegiatan(props: {
-  row: ReturnType<typeof createData>;
-}) {
-  const { row } = props;
+export default function ContentDaftarKegiatan() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -441,25 +487,6 @@ export default function ContentDaftarKegiatan(props: {
 
   const [showModal, setShowModal] = useState(false);
 
-  const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-              idRenaksi: renaksiMRD.id_renaksi,
-            });
-          }
-        });
-      }
-    );
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
-  };
-
   return (
     <>
       {domLoaded && (
@@ -492,7 +519,7 @@ export default function ContentDaftarKegiatan(props: {
               </TableHead>
               <TableBody>
                 {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} />
+                  <Row key={row.nip} row={row} stateChange={setPegawai} />
                 ))}
               </TableBody>
             </Table>
