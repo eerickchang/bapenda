@@ -32,6 +32,7 @@ import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
 import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
 import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 import CEvaluasiLampiran from "./CEvaluasiLampiran";
+import CTinjauRenaksiPegawai from "./CTinjauRenaksiPegawai";
 
 export {
   TxtInput,
@@ -66,4 +67,5 @@ export {
   TxtInputRenaksiProgram,
   CLihatSemuaRenaksi,
   CEvaluasiLampiran,
+  CTinjauRenaksiPegawai,
 };

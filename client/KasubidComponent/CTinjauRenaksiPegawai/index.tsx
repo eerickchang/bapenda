@@ -20,6 +20,9 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
+
+import Checkbox from "@mui/material/Checkbox";
+
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
@@ -272,11 +275,6 @@ function Row(props) {
     btnTolakAll();
   };
 
-  const router = useRouter();
-  const clickRowPegawai = () => {
-    router.push("/Kasubid/TinjauRenaksiPegawai");
-  }
-
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -344,12 +342,19 @@ function Row(props) {
         </Modal>
       </div>
       <React.Fragment>
-        <TableRow onClick={() => clickRowPegawai()} hover className={styles.styleRow}>
+        <TableRow hover className={styles.styleRow} >
           <TableCell className={styles.styleData}>
-            <p style={{ fontWeight: 600 }}>{row.nama}</p>
+            <p style={{ fontWeight: 600 }}>-</p>
           </TableCell>
+          <TableCell className={styles.styleData}>{row.nama}</TableCell>
           <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
-          <TableCell>
+          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell className={styles.styleData}>
+            {row.nama} - {row.nama}
+          </TableCell>
+          {/* <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
                 <button
@@ -424,14 +429,14 @@ function Row(props) {
                 ) : null}
               </div>
             </div>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       </React.Fragment>
     </>
   );
 }
 
-export default function ContentDaftarKegiatan() {
+export default function CTinjauRenaksiPegawai() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -515,11 +520,17 @@ export default function ContentDaftarKegiatan() {
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>Pegawai</TableCell>
+                  <TableCell className={styles.styleHeader}>Program</TableCell>
+                  <TableCell className={styles.styleHeader}>THL</TableCell>
+                  <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
                   <TableCell className={styles.styleHeader}>
-                    Sub Bidang
+                    Sub Kegiatan
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Tupoksi Inti
+                  </TableCell>
+                  <TableCell className={styles.styleHeader}>Tupoksi Tambahan</TableCell>
+                  <TableCell className={styles.styleHeader}>Rencana</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

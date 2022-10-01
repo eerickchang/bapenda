@@ -1,4 +1,4 @@
-import stylesS from "./ContentDaftarkegiatan.module.css";
+import stylesS from "./ContentDaftarKegiatan.module.css";
 
 import React, { useState, useEffect, useRef } from "react";
 import Collapse from "@mui/material/Collapse";
@@ -14,88 +14,102 @@ import moment from "moment";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
+import Button from "../Button";
+import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
+import { useRouter } from "next/router";
+import AmbilDataRenaksi from "../AmbilDataRenaksi";
+
+import Checkbox from "@mui/material/Checkbox";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
+function Row(props) {
+  const { row, stateChange } = props;
   const [open, setOpen] = React.useState(false);
 
-  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
+  //style row
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
+
+  const [renaksiPegawai, setRenaksiPegawai] = useState([]);
+
+  // const btnUnggah = () => {
+  //   setShowModal(true);
+  //   setTimeout(() => {
+  //     setShowModal(false);
+  //   }, 3000);
+  // };
+
+  // const btnUbah = () => {
+  //   setShowModal_Ubah(true);
+  //   setTimeout(() => {
+  //     setShowModal_Ubah(false);
+  //   }, 3000);
+  // };
+
+  // const btnHapus = () => {
+  //   setShowModal_Hapus(true);
+  //   setTimeout(() => {
+  //     setShowModal_Hapus(false);
+  //   }, 3000);
+  // };
+
+  const btnTerima = () => {
+    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksiMRD) => {
+          if (row.nip === renaksiMRD.nip) {
+            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+              idRenaksi: renaksiMRD.id_renaksi,
+            });
+          }
+        });
+      }
+    );
+
+    // setShowModal(true);
+    // setTimeout(() => {
+    //   setShowModal(false);
+    // }, 2000);
+
+    setTimeout(() => {
+      stateChange([]);
+
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let userLoggedIn = masuk.data.user;
+              let pegawaiSubid = ambilPegawai.data;
+              let renaksi = ambilRenaksi.data;
+
+              let subidUserSDPegawai = [];
+              let pegawaiYgAdaRenaksi = [];
+
+              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+            }
+          );
+        });
+      });
+    }, 100);
+  };
+
+  // ! MODAL TERIMA TOLAK SEMUA
   const custom = {
     content: {
       position: "absolute",
@@ -126,78 +140,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     },
   };
 
-  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
-  const customUbah = {
-    content: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: 878,
-      borderRadius: 20,
-      paddingLeft: 61,
-      height: 433,
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      overlay: "#112350",
-      backgroundColor: "white",
-      zIndex: 1001,
-      scroll: false,
-    },
-    overlay: {
-      position: "fixed",
-      marginTop: 0,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: "rgba(17, 35, 80, 0.5)",
-      zIndex: 1000,
-    },
-  };
-
-  //style row
-  const [rowClik, setRowClick] = useState(true);
-  const [styleRow, setStyleRow] = useState("");
-
-  const [file, setFile] = useState(null);
-  const [ketPegawai, setKetPegawai] = useState("");
-  const [image, setImage] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
-  // let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalUbahJadwalIsOpen, setIsOpenModalUbahJadwal] = useState(false);
-  const [modalHapusRenaksiIsOpen, setIsOpenMOdalHapusRenaksi] = useState(false);
-  //!modals
+  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
-  const [showModal_Ubah, setShowModal_Ubah] = useState(false);
-  const [showModal_Hapus, setShowModal_Hapus] = useState(false);
+  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
+  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
-  const btnUnggah = () => {
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
-  };
-
-  const btnUbah = () => {
-    setShowModal_Ubah(true);
-    setTimeout(() => {
-      setShowModal_Ubah(false);
-    }, 3000);
-  };
-
-  const btnHapus = () => {
-    setShowModal_Hapus(true);
-    setTimeout(() => {
-      setShowModal_Hapus(false);
-    }, 3000);
-  };
-
-  // ! MODAL UNGGAH LAPORAN
   function openModal() {
     setIsOpen(true);
   }
@@ -211,482 +160,119 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     setIsOpen(false);
   }
 
-  // ! MODAL UBAH JADAWAL
-  function openModalUbah() {
-    setIsOpenModalUbahJadwal(true);
+  function openModalTolakAll() {
+    setTolakAllIsOpen(true);
   }
 
-  function afterOpenModalUbah() {
+  function afterOpenModalTolakAll() {
     // references are now sync'd and can be accessed.
     // subtitle.style.color = "#f00";
   }
 
-  function closeModalUbah() {
-    setIsOpenModalUbahJadwal(false);
+  function closeModalTolakAll() {
+    setTolakAllIsOpen(false);
   }
 
-  // ! MODAL HAPUS RENAKSI
-  function openModalHapus() {
-    setIsOpenMOdalHapusRenaksi(true);
-  }
+  const btnTolak = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+  };
 
-  function afterOpenModalHapus() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
+  const btnTolakAll = () => {
+    setShowModalTolakAll(true);
+    setTimeout(() => {
+      setShowModalTolakAll(false);
+    }, 3000);
+  };
 
-  function closeModalHapus() {
-    setIsOpenMOdalHapusRenaksi(false);
-  }
-
-  const btnUnggahExp = () => {
-    const data = new FormData();
-    data.append("file", file);
-
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/unggahLaporan", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-          }).then((unggahLaporan) => {
-            console.log(unggahLaporan);
-          });
-        } else {
-          Axios.post("http://localhost:3001/unggahLaporan", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-          }).then((unggahLaporan) => {
-            console.log(unggahLaporan);
+  const btnTerimaSemua = () => {
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+                idRenaksi: renaksi.id_renaksi,
+              });
+            }
           });
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+    });
+
+    setShowModalTerimaAll(true);
+    setTimeout(() => {
+      setShowModalTerimaAll(false);
+    }, 3000);
+
+    stateChange([]);
+  };
+
+  const btnTolakExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success"){
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     closeModal();
-    btnUnggah();
+    btnTolak();
   };
 
-  const btnUbahJadwalExp = () => {
-    const data = new FormData();
-    data.append("file", file);
+  const btnTolakAllExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
 
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/ubahJadwal", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-            startDate: startDate,
-            endDate: endDate,
-          }).then((ubahJadwal) => {
-            console.log(ubahJadwal);
-          });
-        } else {
-          Axios.post("http://localhost:3001/ubahJadwal", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            startDate: startDate,
-            endDate: endDate,
-          }).then((ubahJadwal) => {
-            console.log(ubahJadwal);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    closeModalUbah();
-    btnUbah();
+    closeModalTolakAll();
+    btnTolakAll();
   };
-
-  const btnHapusExp = () => {
-    const data = new FormData();
-    data.append("file", file);
-
-    Axios.post("http://localhost:3001/uploadFile", data)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          Axios.post("http://localhost:3001/hapusRenaksi", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-            fileURL: response.data.file,
-          }).then((hapusRenaksi) => {
-            console.log(hapusRenaksi);
-          });
-        } else {
-          Axios.post("http://localhost:3001/hapusRenaksi", {
-            idRenaksi: row.id_renaksi,
-            ketPegawai: ketPegawai,
-          }).then((hapusRenaksi) => {
-            console.log(hapusRenaksi);
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    closeModalHapus();
-    btnHapus();
-  };
-
-  return (
-    <React.Fragment>
-      <TableRow
-        className={`${styles.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                setRowClick(!rowClik))
-              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-          }
-        }}
-        sx={{ "& > *": { borderBottom: "" } }}
-      >
-        {/* //! DATA ROW */}
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.program}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTupoksi}>Inti</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
-          <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
-        </TableCell>
-        <TableCell>
-          {row.thl === null ? null : (
-            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-              {!image ? (
-                <Image
-                  src={"/SidebarProfile.svg"}
-                  width={40}
-                  height={40}
-                  alt="User 2"
-                  style={{ borderRadius: 40 }}
-                />
-              ) : (
-                <Image
-                  src={image}
-                  width={40}
-                  height={40}
-                  alt="User 2"
-                  style={{ borderRadius: 40 }}
-                />
-              )}
-              <div style={{ marginLeft: 10 }}>
-                <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                <p className={stylesS.rekanPegawai}>THL</p>
-              </div>
-            </div>
-          )}
-
-          {/* <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {!image ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            ) : (
-              <Image
-                src={image}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            )}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-              <p className={stylesS.rekanPegawai}>THL</p>
-            </div>
-          </div> */}
-        </TableCell>
-        <TableCell>
-          {/* ambil data rencana */}
-          <p className={stylesS.styleTxtRowRencana}>
-            {moment(row.start_date).format("MMM")} -{" "}
-            {moment(row.end_date).format("MMM")}
-          </p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.status}</p>
-        </TableCell>
-      </TableRow>
-      <TableContainer
-        style={{
-          width: 1670,
-          marginTop: -20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-          // paddingBottom: 35,
-        }}
-      >
-        {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
-            <TableRow>
-              <div className={styles.wrapperContentModal}>
-                <div className={styles.wrapperTitleBtn}>
-                  <p className={styles.titleBtnUnggah}>Unggah Bukti Laporan</p>
-                  <button
-                    onClick={() => openModal()}
-                    className={styles.btnUnggah}
-                  >
-                    <img src={"/Kirim.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Unggah</p>
-                  </button>
-                </div>
-                <Gap width={87} height={0} />
-                <div>
-                  <p className={styles.p}>Ubah Jadwal Renaksi</p>
-                  <button
-                    onClick={() => openModalUbah()}
-                    className={styles.btnUbahJadwal}
-                  >
-                    <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Ubah Jadwal</p>
-                  </button>
-                </div>
-                <Gap width={750} height={0} />
-                <div>
-                  <p className={styles.p}>Hapus Renaksi</p>
-                  <button
-                    onClick={() => openModalHapus()}
-                    className={styles.btnHapus}
-                  >
-                    <img src={"/HapusIcon.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Hapus</p>
-                  </button>
-                </div>
-              </div>
-            </TableRow>
-          </Collapse>
-        </TableCell>
-      </TableContainer>
-
-      {/* //? MODAL UNGGAH LAPORAN */}
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={custom}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
-        <Gap height={20} width={0} />
-        <input
-          className={styles.inputBuktiLap}
-          placeholder="Tambah keterangan untuk lampiran bukti"
-          onChange={(e) => setKetPegawai(e.target.value)}
-        />
-        <Gap height={20} width={0} />
-        <div className={styles.wrapperBtnModal}>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
-            <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
-            />
-          </form>
-          <Gap width={193} height={0} />
-          <button onClick={btnUnggahExp} className={styles.btnKirim}>
-            <img src={"/Kirim.svg"} width={20} height={20} />
-            <p className={styles.txt}>Kirim</p>
-          </button>
-          <Gap width={24} height={0} />
-          <button onClick={closeModal} className={styles.btnBatal}>
-            <img src={"/Batal.svg"} width={20} height={20} />
-            <p>Batal</p>
-          </button>
-        </div>
-      </Modal>
-      {showModal ? (
-        <div className={styles.modal} onClick={() => setShowModal(false)}>
-          <p>
-            Lampiran Kegiatan Berhasil <b>Diunggah</b>
-            <div className={styles.checkCircle}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
-            </div>
-          </p>
-        </div>
-      ) : null}
-
-      {/* //?  MODAL UBAH JADWAL */}
-      <Modal
-        isOpen={modalUbahJadwalIsOpen}
-        onAfterOpen={afterOpenModalUbah}
-        onRequestClose={closeModalUbah}
-        style={customUbah}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>Pengajuan Ubah Jadwal</h2>
-        <input
-          className={styles.inputBuktiLap_Ubah}
-          placeholder="Tambah keterangan untuk mengubah jadwal"
-          onChange={(e) => setKetPegawai(e.target.value)}
-        />
-        <div style={{ flexDirection: "row", display: "flex", marginTop: -10 }}>
-          <div className={styles.wrapperPickMonth}>
-            <div>
-              <p>Dari tanggal*</p>
-              <input
-                type="month"
-                onChange={(e) => setStartDate(e.target.value + "-01")}
-              />
-            </div>
-            <div style={{ marginRight: 88, marginLeft: 50 }}>
-              <p>Sampai tanggal*</p>
-              <input
-                type="month"
-                onChange={(e) => setEndDate(e.target.value + "-01")}
-              />
-            </div>
-          </div>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
-            <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
-            />
-          </form>
-        </div>
-        {/* <div className={styles.wrapperBtnModal}> */}
-        <Gap width={0} height={24} />
-        <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
-          <img src={"/Kirim.svg"} width={20} height={20} />
-          <p className={styles.txt}>Kirim</p>
-        </button>
-        <Gap width={0} height={10} />
-        <button onClick={closeModalUbah} className={styles.btnBatal_Ubah}>
-          <img src={"/Batal.svg"} width={20} height={20} />
-          <p>Batal</p>
-        </button>
-        {/* </div> */}
-      </Modal>
-      {showModal_Ubah ? (
-        <div
-          className={styles.modal_Ubah}
-          onClick={() => setShowModal_Ubah(false)}
-        >
-          <p>
-            Pengajuan Penjadwalan Ulang berhasil <b>Diubah</b>
-            <div className={styles.checkCircle_Ubah}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
-            </div>
-          </p>
-        </div>
-      ) : null}
-
-      {/* //?  MODAL HAPUS RENAKSI */}
-      <Modal
-        isOpen={modalHapusRenaksiIsOpen}
-        onAfterOpen={afterOpenModalHapus}
-        onRequestClose={closeModalHapus}
-        style={custom}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>
-          Pengajuan Penghapusan Renaksi{" "}
-        </h2>
-        <Gap height={20} width={0} />
-        <input
-          className={styles.inputBuktiLap}
-          placeholder="Tambah keterangan untuk menghapus renaksi"
-        />
-        <Gap height={20} width={0} />
-        <div className={styles.wrapperBtnModal}>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
-            <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
-            />
-          </form>
-          {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
-          <Gap width={193} height={0} />
-          <button onClick={btnHapusExp} className={styles.btnKirim}>
-            <img src={"/Kirim.svg"} width={20} height={20} />
-            <p className={styles.txt}>Kirim</p>
-          </button>
-          <Gap width={24} height={0} />
-          <button onClick={closeModalHapus} className={styles.btnBatal}>
-            <img src={"/Batal.svg"} width={20} height={20} />
-            <p>Batal</p>
-          </button>
-        </div>
-      </Modal>
-      {showModal_Hapus ? (
-        <div
-          className={styles.modal_Hapus}
-          onClick={() => setShowModal_Hapus(false)}
-        >
-          <p>
-            Pengajuan Hapus Renaksi Berhasil <b>Diunggah</b>
-            <div className={styles.checkCircle_Hapus}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
-            </div>
-          </p>
-        </div>
-      ) : null}
-    </React.Fragment>
-  );
-}
-
-export default function ContentDaftarKegiatan() {
-  const dataPegawai = [
-    {
-      id: 1,
-      image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
-      nama: "June E. Silangen,  SE, Ak, ME",
-      jabatan: "Kepala Bidang  Pajak Daerah",
-      pegawai: "ASN",
-    },
-  ];
 
   const filter = [
     {
@@ -694,15 +280,22 @@ export default function ContentDaftarKegiatan() {
       status: "Semua",
       onclick: () => (
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (
-              moment(item.end_date).format("YYYY") === moment().format("YYYY")
-            ) {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") ===
+                  moment().format("YYYY") &&
+                item.nip === response.data.user[0].nip
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [item, ...nextData];
+                });
+              }
+            });
           });
         })
       ),
@@ -712,19 +305,26 @@ export default function ContentDaftarKegiatan() {
       status: "Jadwal diubah",
       onclick: () => (
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
       ),
     },
 
@@ -733,19 +333,26 @@ export default function ContentDaftarKegiatan() {
       status: "Sementara",
       onclick: () => (
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
       ),
     },
 
@@ -754,19 +361,26 @@ export default function ContentDaftarKegiatan() {
       status: "Selesai",
       onclick: () => (
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
       ),
     },
 
@@ -775,19 +389,26 @@ export default function ContentDaftarKegiatan() {
       status: "Hapus",
       onclick: () => (
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
-          (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") === moment().format("YYYY")
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
-          }
-        )
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
       ),
     },
 
@@ -799,39 +420,258 @@ export default function ContentDaftarKegiatan() {
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
+
+  const btnFilter = () => {
+    setActiveDropdown(!activeDropdown);
+    // console.log(dataRenaksi);
+  };
+
+  const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
+  const tahun = [
+    {
+      id: 1,
+      tahun: "2015",
+      onclick: () => console.log(dataRenaksi),
+    },
+    {
+      id: 2,
+      tahun: "2016",
+    },
+    {
+      id: 3,
+      tahun: "2017",
+    },
+    {
+      id: 4,
+      tahun: "2018",
+    },
+    {
+      id: 5,
+      tahun: "2019",
+    },
+    {
+      id: 6,
+      tahun: "2020",
+      onclick: () => (
+        setThnSkrg("2020"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2020") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
+    },
+    {
+      id: 7,
+      tahun: "2021",
+      onclick: () => (
+        setThnSkrg("2021"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2021") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
+    },
+    {
+      id: 8,
+      tahun: "2022",
+      onclick: () => (
+        setThnSkrg("2022"),
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
+          result.data.map((item) => {
+            if (moment(item.end_date).format("YYYY") === "2022") {
+              setDataRenaksi((nextData) => {
+                return [...nextData, item];
+              });
+            }
+          });
+        })
+      ),
+    },
+    {
+      id: 9,
+      tahun: "2023",
+    },
+    {
+      id: 10,
+      tahun: "2024",
+    },
+    {
+      id: 11,
+      tahun: "2025",
+    },
+  ];
+
+  return (
+    <>
+      <div className={stylesS.wrapperFilter}>
+        <div className={stylesS.wrapperFilterTahun}>
+          <div
+            className={stylesS.btnFilterTahun}
+            onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+          >
+            <Image src={"/TahunIcon.svg"} width={23} height={23} />
+            <p>Tahun</p>
+          </div>
+          {activeDropdownTahun && (
+            <div
+              className={stylesS.wrapperSelectFilterTahun}
+              onClick={() => setActiveDropdownTahun(false)}
+            >
+              {tahun.map((item) => (
+                <p key={item.id} onClick={item.onclick}>
+                  {item.tahun}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={stylesS.btnFilter} onClick={btnFilter}>
+          <Image src={"/Filter.svg"} width={23} height={23} />
+          <p>Filter</p>
+        </div>
+        {activeDropdown && (
+          <div
+            className={stylesS.wrapperSelectStatus}
+            onClick={() => setActiveDropdown(false)}
+          >
+            {filter.map((item) => (
+              <p key={item.id} onClick={item.onclick}>
+                {item.status}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+      <React.Fragment>
+        <TableRow hover className={styles.styleRow}>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            {row.foto === "" ? (
+              <Image
+                src={"/SidebarProfile.svg"}
+                width={70}
+                height={70}
+                alt="User 2"
+                style={{ borderRadius: 150 }}
+              />
+            ) : (
+              <Image
+                src={row.foto}
+                width={70}
+                height={70}
+                alt="User 2"
+                style={{ borderRadius: 150 }}
+              />
+            )}
+            {/* //!{ambil data} */}
+            <div style={{ marginLeft: 10 }}>
+              <p className={stylesS.rekanNama}>{row.nama}</p>
+              <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+              <p className={stylesS.rekanAsn}>ASN</p>
+            </div>
+          </div>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.program}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTupoksi}>Inti</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+            <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            {/* ambil data rencana */}
+            <p className={stylesS.styleTxtRowRencana}>
+              {moment(row.start_date).format("MMM")} -{" "}
+              {moment(row.end_date).format("MMM")}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.status}status</p>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    </>
+  );
+}
+
+export default function ContentDaftarKegiatan() {
   const [domLoaded, setDomLoaded] = useState(false);
-  const [asn, setAsn] = useState("");
-  const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [pegawai, setPegawai] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        setAsn(response.data.user[0]);
-        setImage(response.data.user[0].foto);
 
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (
-              moment(item.end_date).format("YYYY") === moment().format("YYYY")
-            ) {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let userLoggedIn = masuk.data.user;
+              let pegawaiSubid = ambilPegawai.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Pegawai Subid: ", pegawaiSubid);
+              console.log("Renaksi: ", renaksi);
+
+              let subidUserSDPegawai = [];
+              let pegawaiYgAdaRenaksi = [];
+
+              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
               });
+
+              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                setPegawai((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+
+              console.log("Subid Sama: ", subidUserSDPegawai);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
-          });
+          );
         });
       });
     }
   }, []);
 
-  const btnFilter = () => {
-    setActiveDropdown(!activeDropdown);
+  const router = useRouter();
+
+  const lihatSemua = () => {
+    // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
+    router.push("/Kasubid/TinjauRenaksiLihatSemua");
   };
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -842,48 +682,6 @@ export default function ContentDaftarKegiatan() {
               <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
             </div>
-            {dataPegawai.map((item) => (
-              <div className={stylesS.wrapperDataPegawai} key={item.id}>
-                <div>
-                  {!image ? (
-                    <Image src="/SidebarProfile.svg" width={90} height={90} />
-                  ) : (
-                    <Image
-                      src={image}
-                      width={90}
-                      height={90}
-                      style={{ borderRadius: 90 }}
-                    />
-                  )}
-                </div>
-                <div className={stylesS.wrapperTxt}>
-                  <p className={stylesS.txtNama}>{asn.nama}</p>
-                  <p className={stylesS.txtJabatan}>
-                    {`${asn.jabatan}
-                    ${asn.sub_bidang}`}
-                  </p>
-                  <p className={stylesS.txtPegawai}>{item.pegawai}</p>
-                </div>
-              </div>
-            ))}
-            <div className={stylesS.wrapperFilter}>
-              <div className={stylesS.btnFilter} onClick={btnFilter}>
-                <Image src={"/Filter.svg"} width={23} height={23} />
-                <p>Filter</p>
-              </div>
-              {activeDropdown && (
-                <div
-                  className={stylesS.wrapperSelectStatus}
-                  onClick={() => setActiveDropdown(false)}
-                >
-                  {filter.map((item) => (
-                    <p key={item.id} onClick={item.onclick}>
-                      {item.status}
-                    </p>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
           <Gap height={106} width={0} />
           <TableContainer
@@ -892,32 +690,20 @@ export default function ContentDaftarKegiatan() {
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Program
-                  </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Kegiatan
-                  </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell className={styles.styleHeader}>Profile</TableCell>
+                  <TableCell className={styles.styleHeader}>Program</TableCell>
+                  <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
+                  <TableCell className={styles.styleHeader}>
                     Sub Kegiatan
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Tupoksi
-                  </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Rekan
-                  </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Rencana
-                  </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
-                    Status
-                  </TableCell>
+                  <TableCell className={styles.styleHeader}>Tupoksi</TableCell>
+                  <TableCell className={styles.styleHeader}>Rencana</TableCell>
+                  <TableCell className={styles.styleHeader}>Status</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataRenaksi.map((row) => (
-                  <Row key={row.id_renaksi} row={row} />
+                {pegawai.map((row) => (
+                  <Row key={row.nip} row={row} stateChange={setPegawai} />
                 ))}
               </TableBody>
             </Table>
