@@ -276,70 +276,6 @@ function Row(props) {
 
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-      </div>
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
           <TableCell className={styles.styleData}>
@@ -510,18 +446,11 @@ export default function CTinjauRenaksiPegawai() {
                 style={{ cursor: "pointer" }}
                 onClick={clickBack}
                 src={"/Back.svg"}
-                width={50}
-                height={50}
+                width={35}
+                height={35}
               />
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
+              <p className={stylesS.txtTitle}>RENAKSI - Richard F. Kasenda</p>
             </div>
-          </div>
-          <div className={stylesS.wrapLihatSemua}>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
           </div>
           <Gap height={106} width={0} />
           <TableContainer
