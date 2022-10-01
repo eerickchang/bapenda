@@ -275,7 +275,7 @@ function Row(props) {
   const router = useRouter();
   const clickRowPegawai = () => {
     router.push("/Kasubid/TinjauRenaksiPegawai");
-  }
+  };
 
   return (
     <>
@@ -344,7 +344,11 @@ function Row(props) {
         </Modal>
       </div>
       <React.Fragment>
-        <TableRow onClick={() => clickRowPegawai()} hover className={styles.styleRow}>
+        <TableRow
+          onClick={() => clickRowPegawai()}
+          hover
+          className={styles.styleRow}
+        >
           <TableCell className={styles.styleData}>
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
           </TableCell>
@@ -497,8 +501,8 @@ export default function ContentDaftarKegiatan() {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+            <div className={stylesS.wrapperTitle}>
+                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
           </div>

@@ -20,7 +20,6 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
-
 import Checkbox from "@mui/material/Checkbox";
 
 Axios.defaults.withCredentials = true;
@@ -342,7 +341,7 @@ function Row(props) {
         </Modal>
       </div>
       <React.Fragment>
-        <TableRow hover className={styles.styleRow} >
+        <TableRow hover className={styles.styleRow}>
           <TableCell className={styles.styleData}>
             <p style={{ fontWeight: 600 }}>-</p>
           </TableCell>
@@ -495,6 +494,10 @@ export default function CTinjauRenaksiPegawai() {
     router.push("/Kasubid/TinjauRenaksiLihatSemua");
   };
 
+  const clickBack = () => {
+    router.push("/Kasubid/TinjauRenaksi");
+    // console.log(dataCakin);
+  };
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -502,7 +505,14 @@ export default function CTinjauRenaksiPegawai() {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
+            <div className={stylesS.wrapperTitle}>
+              <Image
+                style={{ cursor: "pointer" }}
+                onClick={clickBack}
+                src={"/Back.svg"}
+                width={50}
+                height={50}
+              />
               <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
@@ -529,7 +539,9 @@ export default function CTinjauRenaksiPegawai() {
                   <TableCell className={styles.styleHeader}>
                     Tupoksi Inti
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>Tupoksi Tambahan</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Tupoksi Tambahan
+                  </TableCell>
                   <TableCell className={styles.styleHeader}>Rencana</TableCell>
                 </TableRow>
               </TableHead>
