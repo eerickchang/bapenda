@@ -225,7 +225,7 @@ app.get("/ambilRenaksi", (req, res) => {
 
 app.get("/ambilRenaksiJadwalDiubah", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Jadwal Diubah" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Jadwal Diubah" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -235,7 +235,7 @@ app.get("/ambilRenaksiJadwalDiubah", (req, res) => {
 
 app.get("/ambilRenaksiMenunggu", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Diterima" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Diterima" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -245,7 +245,7 @@ app.get("/ambilRenaksiMenunggu", (req, res) => {
 
 app.get("/ambilRenaksiSementara", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Sementara" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Sementara" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -255,7 +255,7 @@ app.get("/ambilRenaksiSementara", (req, res) => {
 
 app.get("/ambilRenaksiSelesai", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Selesai" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Selesai" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -265,7 +265,7 @@ app.get("/ambilRenaksiSelesai", (req, res) => {
 
 app.get("/ambilRenaksiDihapus", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Dihapus" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Dihapus" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -352,6 +352,24 @@ app.post("/hapusRenaksi", (req, res) => {
 
   db.query(sqlUpdate, data, (err, result) => {
     console.log(err);
+  });
+});
+
+//KASUBID AMBIL SEMUA RENAKSI AND KIRIM_KE = 'KASUBID'
+app.get("/kasubidAmbilRenaksiSemua", (req, res) => {
+  const sqlSelect =
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.kirim_ke, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.files, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.ket_pegawai, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.kirim_ke = 'Kasubid' ";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//KASUBID AMBIL RENAKSI STATUS = 'SEMENTARA'
+app.get("/kasubidAmbilRenaksiSementara", (req, res) => {
+  const sqlSelect =
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.kirim_ke, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.files, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.ket_pegawai, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = 'Sementara' ";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
   });
 });
 
