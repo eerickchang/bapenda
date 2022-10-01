@@ -305,21 +305,6 @@ export default function ContentDaftarKegiatan() {
               <p className={styles.txtTitle}>Ubah Jadwal Renaksi</p>
             </div>
           </div>
-          {/* <div className={stylesS.wrapFilter}>
-            <button className={styles.btnTerimaAll}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-              Terima Semua
-            </button>
-            <Gap width={15} />
-            <button className={styles.btnTerimaAll}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-              Tolak Semua
-            </button>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
-          </div> */}
           <p className={stylesS.titleBidang}>Bidang Pajak Daerah</p>
           <Gap height={37} width={0} />
           <TableContainer

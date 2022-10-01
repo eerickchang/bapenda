@@ -93,10 +93,12 @@
   opacity: 0;
   transform: translateY(40%);
   pointer-events: none;
+  z-index: 2100;
 }
 
 .hoverKeteranganKegiatan {
   width: 265px;
+  z-index: 2100;
 }
 
 .kotak:hover .hoverKeterangan {

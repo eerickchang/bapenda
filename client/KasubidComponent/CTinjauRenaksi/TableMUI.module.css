@@ -265,98 +265,6 @@
   margin-left: 12px;
 }
 
-.headerTxtModal {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 26px;
-  margin: 0;
-  margin-bottom: 20px;
-}
-
-/* MODAL BERHASIL LAMPIRKAN LAPORAN */
-.modal {
-  width: 540px;
-  height: 70px;
-  background-color: #ddfaf5;
-  padding-left: 56px;
-  padding-top: 20px;
-  border-radius: 20px;
-  position: Fixed;
-  top: 25px;
-  left: 678px;
-}
-
-.modal p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  color: #112350;
-  margin: 0;
-  cursor: default;
-}
-
-.checkCircle {
-  position: absolute;
-  top: 22px;
-  left: 455px;
-}
-
-/* MODAL BERHASIL UBAH JADWAL */
-.modal_Ubah {
-  width: 600px;
-  height: 70px;
-  background-color: #ddfaf5;
-  padding-left: 46px;
-  padding-top: 20px;
-  border-radius: 20px;
-  position: Fixed;
-  top: 25px;
-  left: 678px;
-}
-
-.modal_Ubah p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  color: #112350;
-  margin: 0;
-  cursor: default;
-}
-
-.checkCircle_Ubah {
-  position: absolute;
-  top: 22px;
-  left: 535px;
-}
-
-/* MODAL BERHASIL HAPUS RENAKSI */
-.modal_Hapus {
-  width: 595px;
-  height: 70px;
-  background-color: #ddfaf5;
-  padding-left: 46px;
-  padding-top: 20px;
-  border-radius: 20px;
-  position: Fixed;
-  top: 25px;
-  left: 678px;
-}
-
-.modal_Hapus p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  color: #112350;
-  margin: 0;
-  cursor: default;
-}
-
-.checkCircle_Hapus {
-  position: absolute;
-  top: 22px;
-  left: 515px;
-}
-
 .wrapperPickMonth {
   display: flex;
   /* margin-top: -10px; */
@@ -452,6 +360,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
   /* padding-inline: 5px; */
 }
 
@@ -472,14 +381,37 @@
   cursor: pointer;
 }
 
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*  ! MODAL */
+
+
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* MODAL BERHASIL LAMPIRKAN LAPORAN */
 .modal {
-  width: 465px;
-  height: 60px;
+  /* width: 540px; */
+  display: flex;
+  flex-direction: row;
+  height: 70px;
   background-color: #ddfaf5;
-  padding-left: 76px;
-  padding-top: 15px;
+  padding: 20px 60px;
   border-radius: 20px;
-  position: absolute;
+  position: Fixed;
   top: 25px;
   left: 678px;
 }
@@ -494,7 +426,80 @@
 }
 
 .checkCircle {
-  position: absolute;
-  top: 17px;
-  left: 380px;
+  margin-left: 10px;
+  /* position: absolute; */
+  /* top: 22px;
+  right: 25px; */
+}
+
+
+.inputBuktiLap {
+  height: 133px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.inputBuktiLap::placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inputBuktiLap:focus {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  outline: none;
+}
+
+.btnBatal {
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.wrapBtnModal{
+  display: flex;
+  margin-left: 390px;
 }
