@@ -279,24 +279,19 @@ function Row(props) {
       id: 1,
       status: "Semua",
       onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((response) => {
-          setAsn(response.data.user[0]);
-          setImage(response.data.user[0].foto);
-
-          Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") ===
-                  moment().format("YYYY") &&
-                item.nip === response.data.user[0].nip
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [item, ...nextData];
-                });
-              }
-            });
-          });
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksi").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+            }
+          );
         })
       ),
     },
@@ -304,21 +299,14 @@ function Row(props) {
       id: 2,
       status: "Jadwal diubah",
       onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((response) => {
-          setAsn(response.data.user[0]);
-          setImage(response.data.user[0].foto);
-
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
           Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
-            (result) => {
-              result.data.map((item) => {
-                if (
-                  moment(item.end_date).format("YYYY") ===
-                    moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
-                ) {
-                  setDataRenaksi((nextData) => {
-                    return [item, ...nextData];
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
                   });
                 }
               });
@@ -332,21 +320,14 @@ function Row(props) {
       id: 3,
       status: "Sementara",
       onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((response) => {
-          setAsn(response.data.user[0]);
-          setImage(response.data.user[0].foto);
-
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
           Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-            (result) => {
-              result.data.map((item) => {
-                if (
-                  moment(item.end_date).format("YYYY") ===
-                    moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
-                ) {
-                  setDataRenaksi((nextData) => {
-                    return [item, ...nextData];
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
                   });
                 }
               });
@@ -360,21 +341,14 @@ function Row(props) {
       id: 5,
       status: "Selesai",
       onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((response) => {
-          setAsn(response.data.user[0]);
-          setImage(response.data.user[0].foto);
-
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
           Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
-            (result) => {
-              result.data.map((item) => {
-                if (
-                  moment(item.end_date).format("YYYY") ===
-                    moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
-                ) {
-                  setDataRenaksi((nextData) => {
-                    return [item, ...nextData];
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
                   });
                 }
               });
@@ -388,21 +362,14 @@ function Row(props) {
       id: 6,
       status: "Hapus",
       onclick: () => (
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((response) => {
-          setAsn(response.data.user[0]);
-          setImage(response.data.user[0].foto);
-
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
           Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
-            (result) => {
-              result.data.map((item) => {
-                if (
-                  moment(item.end_date).format("YYYY") ===
-                    moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
-                ) {
-                  setDataRenaksi((nextData) => {
-                    return [item, ...nextData];
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
                   });
                 }
               });
@@ -415,7 +382,22 @@ function Row(props) {
     {
       id: 7,
       status: "Ditambah",
-      onclick: () => console.log(dataRenaksi),
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
     },
   ];
 
@@ -427,117 +409,10 @@ function Row(props) {
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
-  const tahun = [
-    {
-      id: 1,
-      tahun: "2015",
-      onclick: () => console.log(dataRenaksi),
-    },
-    {
-      id: 2,
-      tahun: "2016",
-    },
-    {
-      id: 3,
-      tahun: "2017",
-    },
-    {
-      id: 4,
-      tahun: "2018",
-    },
-    {
-      id: 5,
-      tahun: "2019",
-    },
-    {
-      id: 6,
-      tahun: "2020",
-      onclick: () => (
-        setThnSkrg("2020"),
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2020") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 7,
-      tahun: "2021",
-      onclick: () => (
-        setThnSkrg("2021"),
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2021") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 8,
-      tahun: "2022",
-      onclick: () => (
-        setThnSkrg("2022"),
-        setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2022") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 9,
-      tahun: "2023",
-    },
-    {
-      id: 10,
-      tahun: "2024",
-    },
-    {
-      id: 11,
-      tahun: "2025",
-    },
-  ];
 
   return (
     <>
       <div className={stylesS.wrapperFilter}>
-        <div className={stylesS.wrapperFilterTahun}>
-          <div
-            className={stylesS.btnFilterTahun}
-            onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-          >
-            <Image src={"/TahunIcon.svg"} width={23} height={23} />
-            <p>Tahun</p>
-          </div>
-          {activeDropdownTahun && (
-            <div
-              className={stylesS.wrapperSelectFilterTahun}
-              onClick={() => setActiveDropdownTahun(false)}
-            >
-              {tahun.map((item) => (
-                <p key={item.id} onClick={item.onclick}>
-                  {item.tahun}
-                </p>
-              ))}
-            </div>
-          )}
-        </div>
         <div className={stylesS.btnFilter} onClick={btnFilter}>
           <Image src={"/Filter.svg"} width={23} height={23} />
           <p>Filter</p>
@@ -605,7 +480,7 @@ function Row(props) {
             </p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.status}status</p>
+            <p className={stylesS.styleTxtRow}>{row.status}</p>
           </TableCell>
         </TableRow>
       </React.Fragment>
@@ -625,39 +500,14 @@ export default function ContentDaftarKegiatan() {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-            (ambilRenaksi) => {
-              let userLoggedIn = masuk.data.user;
-              let pegawaiSubid = ambilPegawai.data;
-              let renaksi = ambilRenaksi.data;
-              console.log("User Logged In: ", userLoggedIn);
-              console.log("Pegawai Subid: ", pegawaiSubid);
-              console.log("Renaksi: ", renaksi);
-
-              let subidUserSDPegawai = [];
-              let pegawaiYgAdaRenaksi = [];
-
-              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
-                return userLoggedIn.some(
-                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-                );
+        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
               });
-
-              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              });
-
-              pegawaiYgAdaRenaksi.map((item) => {
-                setPegawai((nextData) => {
-                  return [item, ...nextData];
-                });
-              });
-
-              console.log("Subid Sama: ", subidUserSDPegawai);
-              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
-          );
+          });
         });
       });
     }
