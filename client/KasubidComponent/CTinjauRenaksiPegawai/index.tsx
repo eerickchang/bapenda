@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import moment from "moment";
+import { GetServerSideProps, NextPageContext } from "next";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
@@ -383,17 +384,12 @@ function Row(props) {
 }
 
 export default function CTinjauRenaksiPegawai() {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
   const [nama, setNama] = useState("");
-
-  async function getServerSideProps(context) {
-    return {
-      props: {}, // will be passed to the page component as props
-    };
-  }
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -401,16 +397,16 @@ export default function CTinjauRenaksiPegawai() {
       shouldLog.current = false;
       setDomLoaded(true);
       let userClicked = router.query.nip;
-      window.localStorage.setItem("userClicked", JSON.stringify("Coba Kwa"));
+      window.localStorage.setItem("userClicked", JSON.stringify(userClicked));
       let data = window.localStorage.getItem("userClicked");
       console.log("Local Storage: ", data);
-      // console.log(userClicked);
+      console.log(userClicked);
 
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           // console.log(userClicked);
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == userClicked) {
+            if (renaksi.nip == router.query.nip) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -421,8 +417,6 @@ export default function CTinjauRenaksiPegawai() {
       );
     }
   }, []);
-
-  const router = useRouter();
 
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
@@ -449,7 +443,7 @@ export default function CTinjauRenaksiPegawai() {
                 width={35}
                 height={35}
               />
-              <p className={stylesS.txtTitle}>RENAKSI - {nama}</p>
+              <p className={stylesS.txtTitle}>RENAKSI - {router.query.nip}</p>
             </div>
           </div>
           <Gap height={106} width={0} />

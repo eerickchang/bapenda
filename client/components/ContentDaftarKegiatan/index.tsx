@@ -639,6 +639,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <input
           className={styles.inputBuktiLap}
           placeholder="Tambah keterangan untuk menghapus renaksi"
+          onChange={(e) => setKetPegawai(e.target.value)}
         />
         <Gap height={20} width={0} />
         <div className={styles.wrapperBtnModal}>

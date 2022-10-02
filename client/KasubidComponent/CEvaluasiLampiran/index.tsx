@@ -187,6 +187,11 @@ function Row(props) {
       idRenaksi: row.id_renaksi,
     });
 
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+
     stateChanger([]);
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiSelesai").then(
@@ -201,11 +206,6 @@ function Row(props) {
         }
       );
     });
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
   };
 
   const btnDw = () => {
@@ -511,24 +511,6 @@ function Row(props) {
                     Keterangan:
                     <div className={styles.contentKeterangan}>
                       {row.ket_pegawai}
-                      <p
-                        style={{
-                          display: "flex",
-                          position: "absolute",
-                          top: 140,
-                          color: "rgba(149, 149, 149, 1)",
-                          // top: 10,
-                        }}
-                      >
-                        Pengajuan Ubah jadwal :
-                        <p
-                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
-                        >
-                          {`${moment(row.req_start_date).format(
-                            "MMM"
-                          )} - ${moment(row.req_end_date).format("MMM")}`}
-                        </p>
-                      </p>
                     </div>
                   </div>
                   <div className={styles.wrapperLampiran}>

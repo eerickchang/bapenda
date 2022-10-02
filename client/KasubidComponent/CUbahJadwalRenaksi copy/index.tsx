@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import stylesS from "./hapusRenaksi.module.css";
+import stylesS from "./cUbahJadwalRenaksi.module.css";
 
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -18,6 +18,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
+import { Checkbox } from "@mui/material";
 
 Axios.defaults.withCredentials = true;
 
@@ -165,7 +166,7 @@ function Row(props) {
 
   const btnTerimaSemua = () => {
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -189,7 +190,7 @@ function Row(props) {
 
     stateChanger([]);
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -511,6 +512,24 @@ function Row(props) {
                     Keterangan:
                     <div className={styles.contentKeterangan}>
                       {row.ket_pegawai}
+                      <p
+                        style={{
+                          display: "flex",
+                          position: "absolute",
+                          top: 140,
+                          color: "rgba(149, 149, 149, 1)",
+                          // top: 10,
+                        }}
+                      >
+                        Pengajuan Ubah jadwal :
+                        <p
+                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
+                        >
+                          {`${moment(row.req_start_date).format(
+                            "MMM"
+                          )} - ${moment(row.req_end_date).format("MMM")}`}
+                        </p>
+                      </p>
                     </div>
                   </div>
                   <div className={styles.wrapperLampiran}>
@@ -559,7 +578,7 @@ function Row(props) {
                         background: "rgba(255, 1, 100, 1)",
                       }}
                       className={styles.styleBtn}
-                      onClick={btnTolak}
+                      // onClick={btnTolak}
                     >
                       <Image src={"/Tolak.svg"} width={30} height={30} />
                       <p>Tolak</p>
@@ -623,7 +642,7 @@ function Row(props) {
   );
 }
 
-export const CHapusRenaksi = () => {
+export const CUbahJadwalRenaksi = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -640,7 +659,7 @@ export const CHapusRenaksi = () => {
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
             ambilRenaksi.data.map((renaksi) => {
               if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -666,8 +685,8 @@ export const CHapusRenaksi = () => {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/HapusRenaksiTitle.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>PERMINTAAN HAPUS RENAKSI</p>
+              <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
+              <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
