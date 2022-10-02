@@ -442,13 +442,23 @@ export default function CTinjauRenaksi() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-                <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
+              <Image
+                src={"/EvaluasiLampiranTitle.svg"}
+                width={50}
+                height={50}
+              />
               <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN</p>
             </div>
           </div>
+          <p className={stylesS.titleBidang}>Sub Bidang</p> 
           <Gap height={106} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998, paddingBottom: 20 }}
+            style={{
+              paddingLeft: 50,
+              paddingRight: 40,
+              zIndex: 998,
+              paddingBottom: 20,
+            }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
