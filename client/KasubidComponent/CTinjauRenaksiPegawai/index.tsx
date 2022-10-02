@@ -210,6 +210,8 @@ function Row(props) {
     stateChange([]);
   };
 
+  const [rowSelected, setRowSelected] = useState([]);
+
   const btnTolakExp = () => {
     // const data = new FormData();
     // data.append("file", file);
@@ -278,16 +280,25 @@ function Row(props) {
     <>
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
+          <TableCell>
+            <Checkbox
+              onChange={() => setRowSelected([rowSelected, row.id_renaksi])}
+            />
+            <button onClick={() => console.log(rowSelected)}>Click</button>
+          </TableCell>
           <TableCell className={styles.styleData}>
-            <p style={{ fontWeight: 600 }}>-</p>
+            <p style={{ fontWeight: 600 }}>{row.program}</p>
           </TableCell>
           <TableCell className={styles.styleData}>{row.nama}</TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell className={styles.styleData}>{row.kegiatan}</TableCell>
+          <TableCell className={styles.styleData}>{row.sub_kegiatan}</TableCell>
+          <TableCell className={styles.styleData}>{row.tupoksi_inti}</TableCell>
           <TableCell className={styles.styleData}>
-            {row.nama} - {row.nama}
+            {row.tupoksi_tambahan}
+          </TableCell>
+          <TableCell className={styles.styleData}>
+            {moment(row.start_date).format("MMM")} -{" "}
+            {moment(row.end_date).format("MMM")}
           </TableCell>
           {/* <TableCell>
             <div className={styles.styleTxtRow}>
@@ -376,49 +387,38 @@ export default function CTinjauRenaksiPegawai() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
+  const [nama, setNama] = useState("");
+
+  async function getServerSideProps(context) {
+    return {
+      props: {}, // will be passed to the page component as props
+    };
+  }
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+      let userClicked = router.query.nip;
+      window.localStorage.setItem("userClicked", JSON.stringify("Coba Kwa"));
+      let data = window.localStorage.getItem("userClicked");
+      console.log("Local Storage: ", data);
+      // console.log(userClicked);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-            (ambilRenaksi) => {
-              let userLoggedIn = masuk.data.user;
-              let pegawaiSubid = ambilPegawai.data;
-              let renaksi = ambilRenaksi.data;
-              console.log("User Logged In: ", userLoggedIn);
-              console.log("Pegawai Subid: ", pegawaiSubid);
-              console.log("Renaksi: ", renaksi);
-
-              let subidUserSDPegawai = [];
-              let pegawaiYgAdaRenaksi = [];
-
-              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
-                return userLoggedIn.some(
-                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-                );
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          // console.log(userClicked);
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.nip == userClicked) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
               });
-
-              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              });
-
-              pegawaiYgAdaRenaksi.map((item) => {
-                setPegawai((nextData) => {
-                  return [item, ...nextData];
-                });
-              });
-
-              console.log("Subid Sama: ", subidUserSDPegawai);
-              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+              setNama(renaksi.nama);
             }
-          );
-        });
-      });
+          });
+        }
+      );
     }
   }, []);
 
@@ -449,7 +449,7 @@ export default function CTinjauRenaksiPegawai() {
                 width={35}
                 height={35}
               />
-              <p className={stylesS.txtTitle}>RENAKSI - Richard F. Kasenda</p>
+              <p className={stylesS.txtTitle}>RENAKSI - {nama}</p>
             </div>
           </div>
           <Gap height={106} width={0} />
@@ -459,6 +459,9 @@ export default function CTinjauRenaksiPegawai() {
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
+                  <TableCell className={styles.styleHeader}>
+                    <Checkbox />
+                  </TableCell>
                   <TableCell className={styles.styleHeader}>Program</TableCell>
                   <TableCell className={styles.styleHeader}>THL</TableCell>
                   <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
@@ -476,7 +479,11 @@ export default function CTinjauRenaksiPegawai() {
               </TableHead>
               <TableBody>
                 {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
+                  <Row
+                    key={row.id_renaksi}
+                    row={row}
+                    stateChange={setPegawai}
+                  />
                 ))}
               </TableBody>
             </Table>

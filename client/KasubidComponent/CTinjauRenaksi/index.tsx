@@ -274,7 +274,10 @@ function Row(props) {
 
   const router = useRouter();
   const clickRowPegawai = () => {
-    router.push("/Kasubid/TinjauRenaksiPegawai");
+    router.push({
+      pathname: "/Kasubid/TinjauRenaksiPegawai",
+      query: { nip: row.nip },
+    });
   };
 
   return (
@@ -454,9 +457,9 @@ export default function ContentDaftarKegiatan() {
               let userLoggedIn = masuk.data.user;
               let pegawaiSubid = ambilPegawai.data;
               let renaksi = ambilRenaksi.data;
-              console.log("User Logged In: ", userLoggedIn);
-              console.log("Pegawai Subid: ", pegawaiSubid);
-              console.log("Renaksi: ", renaksi);
+              // console.log("User Logged In: ", userLoggedIn);
+              // console.log("Pegawai Subid: ", pegawaiSubid);
+              // console.log("Renaksi: ", renaksi);
 
               let subidUserSDPegawai = [];
               let pegawaiYgAdaRenaksi = [];
@@ -477,8 +480,8 @@ export default function ContentDaftarKegiatan() {
                 });
               });
 
-              console.log("Subid Sama: ", subidUserSDPegawai);
-              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+              // console.log("Subid Sama: ", subidUserSDPegawai);
+              // console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
           );
         });
@@ -502,7 +505,7 @@ export default function ContentDaftarKegiatan() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
               <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
             </div>
           </div>
