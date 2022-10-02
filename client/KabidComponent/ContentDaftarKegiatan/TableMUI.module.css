@@ -1,11 +1,11 @@
 .tableRow {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  height: 161px;
+  /* height: 161px; */
 }
 
-.tableRowClick{
-  background-color: #E8E8E8;
+.tableRowClick {
+  background-color: #e8e8e8;
   border-radius: 20px;
   height: 161px;
 }
@@ -42,7 +42,7 @@
 .backgroundRowExpand {
   padding-bottom: 0px;
   padding-top: 0;
-  background-color: 'red';
+  background-color: "red";
 }
 
 .wrapperContentModal {
@@ -265,21 +265,151 @@
   margin-left: 12px;
 }
 
+.wrapperPickMonth {
+  display: flex;
+  /* margin-top: -10px; */
+}
+.wrapperPickMonth {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.wrapperPickMonth p {
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.wrapperPickMonth input {
+  padding: 10px;
+  background-color: rgba(223, 223, 223, 0.43);
+  border: 1px solid rgba(27, 221, 187, 1);
+  border-radius: 10px;
+  width: 210px;
+  height: 40px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(148, 148, 148, 1);
+}
+
+.styleHeader{
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(149, 149, 149, 1);
+}
+
+.styleData{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.styleRow {
+  width: 1690px;
+  height: 70px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btnTolak {
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 35px;
+  cursor: pointer;
+}
+
+.btnTerima {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-inline: 30px;
+  cursor: pointer;
+}
+
+.btnTolakAll {
+  background-color: rgba(255, 1, 100, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  /* padding-inline: 5px; */
+}
+
+.btnTerimaAll {
+  background-color: rgba(27, 221, 187, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+  cursor: pointer;
+}
+
 .headerTxtModal {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 26px;
   margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*  ! MODAL */
+
+
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
 /* MODAL BERHASIL LAMPIRKAN LAPORAN */
 .modal {
-  width: 540px;
+  /* width: 540px; */
+  display: flex;
+  flex-direction: row;
   height: 70px;
   background-color: #ddfaf5;
-  padding-left: 56px;
-  padding-top: 20px;
+  padding: 20px 60px;
   border-radius: 20px;
   position: Fixed;
   top: 25px;
@@ -296,95 +426,80 @@
 }
 
 .checkCircle {
-  position: absolute;
-  top: 22px;
-  left: 455px;
+  margin-left: 10px;
+  /* position: absolute; */
+  /* top: 22px;
+  right: 25px; */
 }
 
-/* MODAL BERHASIL UBAH JADWAL */
-.modal_Ubah {
-  width: 600px;
-  height: 70px;
-  background-color: #ddfaf5;
-  padding-left: 46px;
-  padding-top: 20px;
-  border-radius: 20px;
-  position: Fixed;
-  top: 25px;
-  left: 678px;
+
+.inputBuktiLap {
+  height: 133px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 4px;
 }
 
-.modal_Ubah p {
+.inputBuktiLap::placeholder {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 20px;
-  color: #112350;
-  margin: 0;
-  cursor: default;
+  font-size: 18px;
 }
 
-.checkCircle_Ubah {
-  position: absolute;
-  top: 22px;
-  left: 535px;
-}
-
-/* MODAL BERHASIL HAPUS RENAKSI */
-.modal_Hapus {
-  width: 595px;
-  height: 70px;
-  background-color: #ddfaf5;
-  padding-left: 46px;
-  padding-top: 20px;
-  border-radius: 20px;
-  position: Fixed;
-  top: 25px;
-  left: 678px;
-}
-
-.modal_Hapus p {
+.inputBuktiLap:focus {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 20px;
-  color: #112350;
-  margin: 0;
-  cursor: default;
+  font-size: 18px;
+  outline: none;
 }
 
-.checkCircle_Hapus {
-  position: absolute;
-  top: 22px;
-  left: 515px;
-}
-
-
-
-
-
-.wrapperPickMonth {
+.btnBatal {
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
   display: flex;
-  /* margin-top: -10px; */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
-.wrapperPickMonth {
+
+.btnKirim {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
-.wrapperPickMonth p{
-  padding-bottom: 5px;
-  margin: 0;
-}
-
-.wrapperPickMonth input {
-  padding: 10px;
-  background-color: rgba(223, 223, 223, 0.43);
-  border: 1px solid rgba(27, 221, 187, 1);
-  border-radius: 10px;
-  width: 210px;
-  height: 40px;
+.btnKirim p {
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 18px;
-  color: rgba(148, 148, 148, 1);
+  margin-left: 12px;
+}
+
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.wrapBtnModal{
+  display: flex;
+  margin-left: 390px;
 }

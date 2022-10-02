@@ -34,6 +34,7 @@ import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
 import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 
 import CEvaluasiSubBidangPegawai from "./CEvaluasiSubBidangPegawai";
+import CTinjauRenaksiSubidang from "./CTinjauRenaksiSubidang";
 
 export {
   TxtInput,
@@ -69,4 +70,5 @@ export {
   TxtInputRenaksiProgram,
   CLihatSemuaRenaksi,
   CEvaluasiSubBidangPegawai,
+  CTinjauRenaksiSubidang,
 };

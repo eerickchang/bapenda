@@ -66,10 +66,10 @@ function Row(props) {
       }
     );
 
-    // setShowModal(true);
-    // setTimeout(() => {
-    //   setShowModal(false);
-    // }, 2000);
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
 
     setTimeout(() => {
       stateChange([]);
@@ -274,85 +274,25 @@ function Row(props) {
 
   const router = useRouter();
   const clickRowPegawai = () => {
-    router.push("/Kasubid/TinjauRenaksiPegawai");
+    router.push("/Kabid/TinjauRenaksiSubidang");
   };
 
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-      </div>
       <React.Fragment>
-        <TableRow
-          onClick={() => clickRowPegawai()}
-          hover
-          className={styles.styleRow}
-        >
-          <TableCell className={styles.styleData}>
+        <TableRow hover className={styles.styleRow}>
+          <TableCell
+            onClick={() => clickRowPegawai()}
+            className={styles.styleData}
+          >
+            {row.sub_bidang}
+          </TableCell>
+          <TableCell
+            onClick={() => clickRowPegawai()}
+            className={styles.styleData}
+          >
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
           </TableCell>
-          <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
           <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
@@ -368,7 +308,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Input Renaksi Feren <b>Berhasil</b>
+                      Renaksi Renbang <b>Diterima</b>
                       <div className={styles.checkCircle}>
                         <Image
                           src={"/Check-circle.svg"}
@@ -419,7 +359,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Renaksi Richard F. Kasenda <b>Ditolak</b>
+                      Renaksi Sub Bidang Renbang <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -435,7 +375,7 @@ function Row(props) {
   );
 }
 
-export default function CEvaluasiLampiran() {
+export default function CTinjauRenaksi() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -502,27 +442,31 @@ export default function CEvaluasiLampiran() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
+              <Image
+                src={"/EvaluasiLampiranTitle.svg"}
+                width={50}
+                height={50}
+              />
+              <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN</p>
             </div>
           </div>
-          <div className={stylesS.wrapLihatSemua}>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
-          </div>
+          <p className={stylesS.titleBidang}>Bidang ...</p>
           <Gap height={106} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
+            style={{
+              paddingLeft: 50,
+              paddingRight: 40,
+              zIndex: 998,
+              paddingBottom: 20,
+            }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>Pegawai</TableCell>
                   <TableCell className={styles.styleHeader}>
                     Sub Bidang
                   </TableCell>
+                  <TableCell className={styles.styleHeader}>Program</TableCell>
                   <TableCell className={styles.styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>

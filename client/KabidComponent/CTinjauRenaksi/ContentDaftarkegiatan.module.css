@@ -12,9 +12,18 @@
   /* width: 2100px; */
 }
 
+.titleBidang {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  margin-left: 50px;
+  margin-top: 54px;
+}
 .wrapperTitle {
   display: flex;
-  width: 260px;
+  width: 320px;
   height: 50px;
   text-align: center;
   align-items: center;
