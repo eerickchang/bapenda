@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import stylesS from "./cUbahJadwalRenaksi.module.css";
+import stylesS from "./cEvaluasiSubBidangPegawai.module.css";
 
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -19,6 +19,7 @@ import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
 import { Checkbox } from "@mui/material";
+import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
@@ -400,7 +401,7 @@ function Row(props) {
           contentLabel="Example Modal"
         >
           <h2 className={styles.headerTxtModal}>
-            Tolak Semua Permintaan Ubah Jadwal
+            Tolak Semua Laporan Bukti
           </h2>
           <Gap height={20} width={0} />
           <input
@@ -427,7 +428,7 @@ function Row(props) {
             onClick={() => setShowModalTolakAll(false)}
           >
             <p>
-              Semua Permintaan Ubah Jadwal <b>Ditolak</b>
+              Semua Lampiran Bukti <b>Ditolak</b>
             </p>
             <div className={styles.checkCircle}>
               <Image src={"/Tolak.svg"} width={25} height={25} />
@@ -512,24 +513,6 @@ function Row(props) {
                     Keterangan:
                     <div className={styles.contentKeterangan}>
                       {row.ket_pegawai}
-                      <p
-                        style={{
-                          display: "flex",
-                          position: "absolute",
-                          top: 140,
-                          color: "rgba(149, 149, 149, 1)",
-                          // top: 10,
-                        }}
-                      >
-                        Pengajuan Ubah jadwal :
-                        <p
-                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
-                        >
-                          {`${moment(row.req_start_date).format(
-                            "MMM"
-                          )} - ${moment(row.req_end_date).format("MMM")}`}
-                        </p>
-                      </p>
                     </div>
                   </div>
                   <div className={styles.wrapperLampiran}>
@@ -559,7 +542,7 @@ function Row(props) {
                         onClick={() => setShowModal(false)}
                       >
                         <p>
-                          Ubah Jadwal Denny G. Lumy <b>Diterima</b>
+                          Lapiran Bukti Bidang Renbang <b>Diterima</b>
                         </p>
                         <div className={styles.checkCircle}>
                           <Image
@@ -591,7 +574,7 @@ function Row(props) {
                       contentLabel="Example Modal"
                     >
                       <h2 className={styles.headerTxtModal}>
-                        Tolak Permintaan Ubah Jadwal
+                        Tolak Lampiran Bukti
                       </h2>
                       <Gap height={20} width={0} />
                       <input
@@ -624,7 +607,7 @@ function Row(props) {
                         onClick={() => setShowModalTolak(false)}
                       >
                         <p>
-                          Ubah Jadwal Denny G. Lumy <b>Ditolak</b>
+                          Lampiran Bukti Ferren Kalalo <b>Ditolak</b>
                         </p>
                         <div className={styles.checkCircle}>
                           <Image src={"/Tolak.svg"} width={25} height={25} />
@@ -642,7 +625,7 @@ function Row(props) {
   );
 }
 
-export const CUbahJadwalRenaksi = () => {
+export const CEvaluasiSubBidangPegawai = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -679,14 +662,31 @@ export const CUbahJadwalRenaksi = () => {
     console.log(dataRenaksi);
   };
 
+  const router = useRouter();
+  
+    const clickBack = () => {
+      router.push("/Kabid/EvaluasiLampiran");
+      // console.log(dataCakin);
+    };
+
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
+            <div className={styles.wrapperTitle}>
+              <Image
+                style={{ cursor: "pointer" }}
+                onClick={clickBack}
+                src={"/Back.svg"}
+                width={50}
+                height={50}
+              />
+              <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
+              <p className={styles.txtTitle}>
+                EVALUASI LAMPIRAN
+              </p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
