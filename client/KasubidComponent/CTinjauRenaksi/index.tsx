@@ -19,6 +19,7 @@ import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
 import { useRouter } from "next/router";
 import AmbilDataRenaksi from "../AmbilDataRenaksi";
+import Link from "next/link";
 
 Axios.defaults.withCredentials = true;
 
@@ -278,6 +279,7 @@ function Row(props) {
       pathname: "/Kasubid/TinjauRenaksiPegawai",
       query: { nip: row.nip },
     });
+    // <Link href={"/TinjauRenaksi/" + row.nip}></Link>;
   };
 
   return (
@@ -349,13 +351,31 @@ function Row(props) {
       <React.Fragment>
         <TableRow
           // onClick={() => clickRowPegawai()}
-          hover
+          // hover
           className={styles.styleRow}
         >
-          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>
+          <TableCell
+            onClick={() => clickRowPegawai()}
+            className={styles.styleData}
+          >
+            {/* <Link href={"/Kasubid/TinjauRenaksi/" + row.nip}>
+              <a>
+              </a>
+            </Link> */}
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
           </TableCell>
-          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell
+            onClick={() => clickRowPegawai()}
+            className={styles.styleData}
+            sx={{ height: 50 }}
+          >
+            {/* <Link href={"/Kasubid/TinjauRenaksi/" + row.nip}>
+              <a>
+              </a>
+            </Link> */}
+            <p>{row.sub_bidang}</p>
+          </TableCell>
+
           <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
