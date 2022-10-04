@@ -236,10 +236,19 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // call your hook here
   const forceUpdate = useForceUpdate();
 
+
+  
+  const router = useRouter();
+
+const clickRow = () => {
+  router.push('/Kabid/EvaluasiSubBidangPegawai')
+}
+
+
   return (
     <React.Fragment>
       <TableRow hover className={styles.styleRow}>
-        <TableCell className={styles.styleData}>
+        <TableCell onClick={() => clickRow()} className={styles.styleData}>
           <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
         </TableCell>
         <TableCell className={styles.styleData}>{row.nama}</TableCell>
@@ -332,7 +341,6 @@ export default function ContentDaftarKegiatan() {
     }
   }, []);
 
-  const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
 
