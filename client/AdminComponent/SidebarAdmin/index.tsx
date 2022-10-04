@@ -42,7 +42,7 @@ export default function Sidebar({
 
 
   const clickUbahJadwal = () => {
-    router.push("/Admin/UbahJadwal");
+    router.push("/Admin/UbahJadwalRenaksi");
   };
 
   const clickEvaluasiLampiran = () => {

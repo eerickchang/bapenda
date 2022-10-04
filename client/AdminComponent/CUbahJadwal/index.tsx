@@ -12,13 +12,14 @@ import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
+import moment, { duration } from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
 import { Checkbox } from "@mui/material";
+import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
@@ -367,74 +368,15 @@ function Row(props) {
     btnTolakAll();
   };
 
+    const style = {
+      fontFamily: "Poppins",
+      fontSize: 17,
+      fontWeight: 600,
+      color: "#959595",
+    };
+
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Permintaan Ubah Jadwal <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>
-            Tolak Semua Permintaan Ubah Jadwal
-          </h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Permintaan Ubah Jadwal <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-      </div>
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
@@ -447,11 +389,11 @@ function Row(props) {
                 : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
             }
           }}
-          sx={{ "& > *": { borderBottom: "" } }}
+          // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
             <p
-              className={stylesS.rekanNama}
+              className={stylesS.styleTxtRow}
               onClick={() => console.log(row.files)}
             >
               {row.nama}
@@ -485,164 +427,141 @@ function Row(props) {
             </p>
           </TableCell>
         </TableRow>
-        <TableContainer
-          style={{
-            width: 1680,
-            marginTop: -20,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
-          {/* <div className={styles.backgroundRowExpand}> */}
-          <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-            <Collapse
-              style={{
-                background: "rgba(232, 232, 232, 1)",
-                borderTopColor: "rgba(165, 165, 165, 0.5)",
-                borderTopWidth: 2,
-                borderTopStyle: "solid",
-                marginBottom: 35,
-              }}
-              in={open}
-              timeout="auto"
-            >
-              <TableRow>
-                <div className={styles.wrapperExpand}>
-                  <div className={styles.wrapperKeterangan}>
-                    Keterangan:
-                    <div className={styles.contentKeterangan}>
-                      {row.ket_pegawai}
-                      <p
-                        style={{
-                          display: "flex",
-                          position: "absolute",
-                          top: 140,
-                          color: "rgba(149, 149, 149, 1)",
-                          // top: 10,
-                        }}
-                      >
-                        Pengajuan Ubah jadwal :
-                        <p
-                          style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}
-                        >
-                          {`${moment(row.req_start_date).format(
-                            "MMM"
-                          )} - ${moment(row.req_end_date).format("MMM")}`}
-                        </p>
-                      </p>
-                    </div>
-                  </div>
-                  <div className={styles.wrapperLampiran}>
-                    Lampiran:
-                    {row.files === "" ? null : (
-                      <div className={styles.contentLampiran} onClick={btnDw}>
-                        {/* <div className={styles.fileLampiran}>
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0 }} colSpan={6}>
+          <Collapse
+            style={{
+              background: "rgba(232, 232, 232, 1)",
+              borderTopColor: "rgba(165, 165, 165, 0.5)",
+              borderTopWidth: 2,
+              borderTopStyle: "solid",
+              marginBottom: 20,
+            }}
+            in={open}
+            timeout='auto'
+          >
+            <div className={styles.wrapperExpand}>
+              <div className={styles.wrapperKeterangan}>
+                Keterangan:
+                <div className={styles.contentKeterangan}>
+                  {row.ket_pegawai}
+                  <p
+                    style={{
+                      display: "flex",
+                      position: "absolute",
+                      top: 140,
+                      color: "rgba(149, 149, 149, 1)",
+                      // top: 10,
+                    }}
+                  >
+                    Pengajuan Ubah jadwal :
+                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                        row.req_end_date
+                      ).format("MMM")}`}
+                    </p>
+                  </p>
+                </div>
+              </div>
+              <div className={styles.wrapperLampiran}>
+                Lampiran:
+                {row.files === "" ? null : (
+                  <div className={styles.contentLampiran} onClick={btnDw}>
+                    {/* <div className={styles.fileLampiran}>
                           <Image src={"/IconPNG.svg"} width={35} height={40} />
                           <p style={{ marginLeft: 5 }}> Foto Laporan</p>
                         </div> */}
-                        <div className={styles.fileLampiran}>
-                          <Image src={"/IconPDF.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> File Laporan</p>
-                        </div>
-                      </div>
-                    )}
+                    <div className={styles.fileLampiran}>
+                      <Image src={"/IconPDF.svg"} width={35} height={40} />
+                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                    </div>
                   </div>
-                  <div className={styles.wrapperBtnTerimaTolak}>
-                    <Gap width={0} height={50} />
-                    <button onClick={btnTerima} className={styles.styleBtn}>
-                      <Image src={"/Terima.svg"} width={30} height={30} />
-                      <p>Terima</p>
+                )}
+              </div>
+              <div className={styles.wrapperBtnTerimaTolak}>
+                <Gap width={0} height={50} />
+                <button onClick={btnTerima} className={styles.styleBtn}>
+                  <Image src={"/Terima.svg"} width={30} height={30} />
+                  <p>Terima</p>
+                </button>
+                {showModal ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModal(false)}
+                  >
+                    <p>
+                      Ubah Jadwal Denny G. Lumy <b>Diterima</b>
+                    </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                    </div>
+                  </div>
+                ) : null}
+                <Gap width={0} height={20} />
+                <button
+                  onClick={openModal}
+                  style={{
+                    fontWeight: 700,
+                    background: "rgba(255, 1, 100, 1)",
+                  }}
+                  className={styles.styleBtn}
+                  // onClick={btnTolak}
+                >
+                  <Image src={"/Tolak.svg"} width={30} height={30} />
+                  <p>Tolak</p>
+                </button>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={custom}
+                  contentLabel="Example Modal"
+                >
+                  <h2 className={styles.headerTxtModal}>
+                    Tolak Permintaan Ubah Jadwal
+                  </h2>
+                  <Gap height={20} width={0} />
+                  <input
+                    className={styles.inputBuktiLap}
+                    placeholder="Tambah keterangan"
+                    // onChange={(e) => setKetPegawai(e.target.value)}
+                  />
+                  <Gap height={20} width={0} />
+                  <div className={styles.wrapBtnModal}>
+                    <button onClick={closeModal} className={styles.btnKirim}>
+                      <img src={"/BatalIcon.svg"} width={20} height={20} />
+                      <p className={styles.txt}>Batal</p>
                     </button>
-                    {showModal ? (
-                      <div
-                        className={styles.modal}
-                        onClick={() => setShowModal(false)}
-                      >
-                        <p>
-                          Ubah Jadwal Denny G. Lumy <b>Diterima</b>
-                        </p>
-                        <div className={styles.checkCircle}>
-                          <Image
-                            src={"/Check-circle.svg"}
-                            width={25}
-                            height={25}
-                          />
-                        </div>
-                      </div>
-                    ) : null}
-                    <Gap width={0} height={20} />
-                    <button
-                      onClick={openModal}
-                      style={{
-                        fontWeight: 700,
-                        background: "rgba(255, 1, 100, 1)",
-                      }}
-                      className={styles.styleBtn}
-                      // onClick={btnTolak}
-                    >
-                      <Image src={"/Tolak.svg"} width={30} height={30} />
+                    <Gap width={24} height={0} />
+                    <button onClick={btnTolakExp} className={styles.btnBatal}>
+                      <img src={"/Tolak.svg"} width={20} height={20} />
                       <p>Tolak</p>
                     </button>
-                    <Modal
-                      isOpen={modalIsOpen}
-                      onAfterOpen={afterOpenModal}
-                      onRequestClose={closeModal}
-                      style={custom}
-                      contentLabel="Example Modal"
-                    >
-                      <h2 className={styles.headerTxtModal}>
-                        Tolak Permintaan Ubah Jadwal
-                      </h2>
-                      <Gap height={20} width={0} />
-                      <input
-                        className={styles.inputBuktiLap}
-                        placeholder="Tambah keterangan"
-                        // onChange={(e) => setKetPegawai(e.target.value)}
-                      />
-                      <Gap height={20} width={0} />
-                      <div className={styles.wrapBtnModal}>
-                        <button
-                          onClick={closeModal}
-                          className={styles.btnKirim}
-                        >
-                          <img src={"/BatalIcon.svg"} width={20} height={20} />
-                          <p className={styles.txt}>Batal</p>
-                        </button>
-                        <Gap width={24} height={0} />
-                        <button
-                          onClick={btnTolakExp}
-                          className={styles.btnBatal}
-                        >
-                          <img src={"/Tolak.svg"} width={20} height={20} />
-                          <p>Tolak</p>
-                        </button>
-                      </div>
-                    </Modal>
-                    {showModalTolak ? (
-                      <div
-                        className={styles.modal}
-                        onClick={() => setShowModalTolak(false)}
-                      >
-                        <p>
-                          Ubah Jadwal Denny G. Lumy <b>Ditolak</b>
-                        </p>
-                        <div className={styles.checkCircle}>
-                          <Image src={"/Tolak.svg"} width={25} height={25} />
-                        </div>
-                      </div>
-                    ) : null}
                   </div>
-                </div>
-              </TableRow>
-            </Collapse>
-          </TableCell>
-        </TableContainer>
+                </Modal>
+                {showModalTolak ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModalTolak(false)}
+                  >
+                    <p>
+                      Ubah Jadwal {row.nama} <b>Ditolak</b>
+                    </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Tolak.svg"} width={25} height={25} />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </Collapse>
+        </TableCell>
       </React.Fragment>
     </>
   );
 }
 
-export const CUbahJadwalRenaksi = () => {
+export const CUbahJadwal = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -679,44 +598,57 @@ export const CUbahJadwalRenaksi = () => {
     console.log(dataRenaksi);
   };
 
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 17,
+    fontWeight: 600,
+    color: "#959595",
+  };
+
+  
+    const router = useRouter();
+
+    const clickBack = () => {
+      router.push("/Admin/UbahJadwalRenaksi");
+      // console.log(dataCakin);
+    };
+
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
+            <div className={styles.wrapperTitle}>
+              <Image
+                style={{ cursor: "pointer" }}
+                onClick={clickBack}
+                src={"/Back.svg"}
+                width={50}
+                height={50}
+              />
+              <Image src={"/UbahJadwalTitle.svg"} width={50.38} height={50} />
+              <p style={{ color: "rgba(221, 202, 27, 1)", marginLeft: 10 }}>
+                UBAH JADWAL RENAKSI
+              </p>
             </div>
-            <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 60, zIndex: 998 }}
+              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
             >
-              <Table sx={{ tableLayout: "fixed" }}>
+              <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 17,
-                        fontWeight: 600,
-                        color: "#959595",
-                      }}
-                      width={0}
-                    >
+                    <TableCell style={style} width={500}>
                       Pegawai
                     </TableCell>
-                    {/* <TableCell className={styles.headerTable} width={0}>
-                      Pegawai
-                    </TableCell> */}
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell style={style} width={500}>
                       Tupoksi
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell style={style} width={500}>
                       Rencana
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell style={style} width={500}>
                       Lampiran
                     </TableCell>
                   </TableRow>

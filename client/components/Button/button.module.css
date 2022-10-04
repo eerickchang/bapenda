@@ -4,6 +4,7 @@
   height: 53px;
   border-radius: 90px;
   border: none;
+  cursor: pointer;
 }
 
 .container p {

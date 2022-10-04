@@ -280,6 +280,20 @@ function Row(props) {
     });
   };
 
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
+
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -352,10 +366,14 @@ function Row(props) {
           hover
           className={styles.styleRow}
         >
-          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>
-            <p style={{ fontWeight: 600 }}>{row.nama}</p>
+          <TableCell onClick={() => clickRowPegawai()}>
+            <p style={style1}>
+              {row.nama}
+            </p>
           </TableCell>
-          <TableCell onClick={() => clickRowPegawai()} className={styles.styleData}>{row.sub_bidang}</TableCell>
+          <TableCell onClick={() => clickRowPegawai()} style={style2}>
+            {row.sub_bidang}
+          </TableCell>
           <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
@@ -371,7 +389,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Input Renaksi Feren <b>Berhasil</b>
+                      Renaksi {row.nama} <b>Diterima</b>
                       <div className={styles.checkCircle}>
                         <Image
                           src={"/Check-circle.svg"}
@@ -422,7 +440,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Renaksi Richard F. Kasenda <b>Ditolak</b>
+                      Renaksi {row.nama} <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -499,6 +517,12 @@ export default function ContentDaftarKegiatan() {
 
   const [showModal, setShowModal] = useState(false);
 
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 22,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
   return (
     <>
       {domLoaded && (
@@ -517,16 +541,19 @@ export default function ContentDaftarKegiatan() {
           </div>
           <Gap height={106} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
+            style={{
+              paddingLeft: 50,
+              paddingRight: 40,
+              zIndex: 998,
+              paddingBottom: 20,
+            }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>Pegawai</TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
+                  <TableCell style={styleHeader}>Pegawai</TableCell>
+                  <TableCell style={styleHeader}>Sub Bidang</TableCell>
+                  <TableCell style={styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

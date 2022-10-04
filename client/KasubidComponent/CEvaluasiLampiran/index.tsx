@@ -14,7 +14,7 @@ import Gap from "../Gap";
 import Axios from "axios";
 import moment from "moment";
 import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
+import jsPDF from "jspdf";                         
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
@@ -366,10 +366,14 @@ function Row(props) {
     btnTolakAll();
   };
 
+  const ale = () => {
+    alert("sdfsdfasdf")
+  }
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
+        <button className={styles.btnTerimaAll} onClick={ale}>
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
         </button>
@@ -379,7 +383,7 @@ function Row(props) {
             onClick={() => setShowModalTolakAll(false)}
           >
             <p>
-              Semua Permintaan Ubah Jadwal <b>Diterima</b>
+              Semua Renaksi <b>Diterima</b>
             </p>
             <div className={styles.checkCircle}>
               <Image src={"/Terima.svg"} width={25} height={25} />
@@ -399,7 +403,7 @@ function Row(props) {
           contentLabel="Example Modal"
         >
           <h2 className={styles.headerTxtModal}>
-            Tolak Semua Permintaan Ubah Jadwal
+            Tolak Renaksi
           </h2>
           <Gap height={20} width={0} />
           <input
@@ -426,7 +430,7 @@ function Row(props) {
             onClick={() => setShowModalTolakAll(false)}
           >
             <p>
-              Semua Permintaan Ubah Jadwal <b>Ditolak</b>
+              Semua Renaksi <b>Ditolak</b>
             </p>
             <div className={styles.checkCircle}>
               <Image src={"/Tolak.svg"} width={25} height={25} />
@@ -484,14 +488,6 @@ function Row(props) {
             </p>
           </TableCell>
         </TableRow>
-        <TableContainer
-          style={{
-            width: 1680,
-            marginTop: -20,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
           {/* <div className={styles.backgroundRowExpand}> */}
           <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
             <Collapse
@@ -505,7 +501,6 @@ function Row(props) {
               in={open}
               timeout="auto"
             >
-              <TableRow>
                 <div className={styles.wrapperExpand}>
                   <div className={styles.wrapperKeterangan}>
                     Keterangan:
@@ -540,7 +535,7 @@ function Row(props) {
                         onClick={() => setShowModal(false)}
                       >
                         <p>
-                          Ubah Jadwal Denny G. Lumy <b>Diterima</b>
+                          Lampiran Bukti {row.nama} <b>Diterima</b>
                         </p>
                         <div className={styles.checkCircle}>
                           <Image
@@ -559,7 +554,7 @@ function Row(props) {
                         background: "rgba(255, 1, 100, 1)",
                       }}
                       className={styles.styleBtn}
-                      onClick={btnTolak}
+                      // onClick={btnTolak}
                     >
                       <Image src={"/Tolak.svg"} width={30} height={30} />
                       <p>Tolak</p>
@@ -572,7 +567,7 @@ function Row(props) {
                       contentLabel="Example Modal"
                     >
                       <h2 className={styles.headerTxtModal}>
-                        Tolak Permintaan Ubah Jadwal
+                        Tolak Lampiran Bukti
                       </h2>
                       <Gap height={20} width={0} />
                       <input
@@ -605,7 +600,7 @@ function Row(props) {
                         onClick={() => setShowModalTolak(false)}
                       >
                         <p>
-                          Ubah Jadwal Denny G. Lumy <b>Ditolak</b>
+                          Lampiran Bukti {row.nama} <b>Ditolak</b>
                         </p>
                         <div className={styles.checkCircle}>
                           <Image src={"/Tolak.svg"} width={25} height={25} />
@@ -614,10 +609,8 @@ function Row(props) {
                     ) : null}
                   </div>
                 </div>
-              </TableRow>
             </Collapse>
           </TableCell>
-        </TableContainer>
       </React.Fragment>
     </>
   );
@@ -677,9 +670,9 @@ export const CEvaluasiLampiran = () => {
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 60, zIndex: 998 }}
+              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
             >
-              <Table sx={{ tableLayout: "fixed" }}>
+              <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -689,20 +682,20 @@ export const CEvaluasiLampiran = () => {
                         fontWeight: 600,
                         color: "#959595",
                       }}
-                      width={0}
+                      width={500}
                     >
                       Pegawai
                     </TableCell>
                     {/* <TableCell className={styles.headerTable} width={0}>
                       Pegawai
                     </TableCell> */}
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell className={styles.headerTable} width={500}>
                       Tupoksi
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell className={styles.headerTable} width={500}>
                       Rencana
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
+                    <TableCell className={styles.headerTable} width={500}>
                       Lampiran
                     </TableCell>
                   </TableRow>

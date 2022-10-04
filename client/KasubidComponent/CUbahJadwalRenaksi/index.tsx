@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import stylesS from "./hapusRenaksi.module.css";
+import stylesS from "./cUbahJadwalRenaksi.module.css";
 
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -18,6 +18,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
+import { Checkbox } from "@mui/material";
 
 Axios.defaults.withCredentials = true;
 
@@ -165,7 +166,7 @@ function Row(props) {
 
   const btnTerimaSemua = () => {
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -189,7 +190,7 @@ function Row(props) {
 
     stateChanger([]);
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -366,6 +367,20 @@ function Row(props) {
     btnTolakAll();
   };
 
+    const style1 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 600,
+      color: "#000",
+    };
+
+    const style2 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 400,
+      color: "#000",
+    };
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -448,22 +463,17 @@ function Row(props) {
           }}
           sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell>
-            <p
-              className={stylesS.rekanNama}
-              onClick={() => console.log(row.files)}
-            >
-              {row.nama}
-            </p>
+          <TableCell style={style1}>
+            <p onClick={() => console.log(row.files)}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+            <p style={style2}>{row.tupoksi_tambahan}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+            <p style={style2}>{row.kegiatan}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>
+            <p style={style2}>
               {row.files === "" ? null : (
                 <div className={styles.wrapFileLampiran}>
                   <div style={{ display: "flex" }}>
@@ -502,6 +512,22 @@ function Row(props) {
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
+                  <p
+                    style={{
+                      display: "flex",
+                      position: "absolute",
+                      top: 140,
+                      color: "rgba(149, 149, 149, 1)",
+                      // top: 10,
+                    }}
+                  >
+                    Pengajuan Ubah jadwal :
+                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                        row.req_end_date
+                      ).format("MMM")}`}
+                    </p>
+                  </p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>
@@ -531,7 +557,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Ubah Jadwal {row.nama} <b>Diterima</b>
+                      Ubah Jadwal Denny G. Lumy <b>Diterima</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -546,7 +572,7 @@ function Row(props) {
                     background: "rgba(255, 1, 100, 1)",
                   }}
                   className={styles.styleBtn}
-                  // onClick={btnTolakExp}
+                  // onClick={btnTolak}
                 >
                   <Image src={"/Tolak.svg"} width={30} height={30} />
                   <p>Tolak</p>
@@ -602,7 +628,7 @@ function Row(props) {
   );
 }
 
-export const CHapusRenaksi = () => {
+export const CUbahJadwalRenaksi = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -619,7 +645,7 @@ export const CHapusRenaksi = () => {
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
             ambilRenaksi.data.map((renaksi) => {
               if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -639,14 +665,21 @@ export const CHapusRenaksi = () => {
     console.log(dataRenaksi);
   };
 
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 22,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/HapusRenaksiTitle.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>PERMINTAAN HAPUS RENAKSI</p>
+              <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
+              <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
@@ -656,27 +689,16 @@ export const CHapusRenaksi = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 17,
-                        fontWeight: 600,
-                        color: "#959595",
-                      }}
-                      width={500}
-                    >
+                    <TableCell style={styleHeader} width={500}>
                       Pegawai
                     </TableCell>
-                    {/* <TableCell className={styles.headerTable} width={0}>
-                      Pegawai
-                    </TableCell> */}
-                    <TableCell className={styles.headerTable} width={500}>
+                    <TableCell style={styleHeader} width={500}>
                       Tupoksi
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={500}>
+                    <TableCell style={styleHeader} width={500}>
                       Rencana
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={500}>
+                    <TableCell style={styleHeader} width={500}>
                       Lampiran
                     </TableCell>
                   </TableRow>

@@ -5,6 +5,7 @@
 }
 
 .tableRowClick {
+  margin: 0;
   background-color: #e8e8e8;
   border-radius: 20px;
   height: 161px;
@@ -13,123 +14,114 @@
 .headerTable {
   font-family: "Poppins", sans-serif;
   font-size: 17px;
-  .tableRow {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    height: 161px;
-  }
-
-  .tableRowClick {
-    background-color: #e8e8e8;
-    border-radius: 20px;
-    height: 161px;
-  }
-
-  .headerTable {
-    font-family: "Poppins", sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: #959595;
-  }
-
-  .wrapFileLampiran {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .wrapperTitleInputRenaksi {
-    display: flex;
-    width: 299px;
-    height: 50px;
-    text-align: center;
-    align-items: center;
-    border-bottom: 2.5px solid #1bddbb;
-    padding-left: 7px;
-    margin-top: 34px;
-  }
-
-  .txtTitle {
-    font-family: "Poppins", sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0;
-    width: 300px;
-    /* margin-top: 1px; */
-    margin-left: 19px;
-  }
-
-  .backgroundRowExpand {
-    padding-bottom: 0px;
-    padding-top: 0;
-    background-color: "red";
-  }
-
-  .wrapperExpand {
-    display: flex;
-    padding-left: 22px;
-  }
-
-  .wrapperLampiran {
-    font-family: "Poppins", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-
-  .wrapperTanggapan {
-    font-family: "Poppins", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    width: 450px;
-  }
-
-  .txtTanggapan {
-    font-size: 18px;
-    font-weight: 400;
-  }
-
-  .wrapperRencanaUbah {
-    font-family: "Poppins", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-left: 350px;
-  }
-
-  .btnTolakAll {
-    background-color: rgba(255, 1, 100, 1);
-    width: 172px;
-    height: 51px;
-    border: none;
-    border-radius: 5px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: black;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    /* padding-inline: 5px; */
-  }
-
-  .btnTerimaAll {
-    background-color: rgba(27, 221, 187, 1);
-    width: 172px;
-    height: 51px;
-    border: none;
-    border-radius: 5px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: black;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    /* padding-inline: 5px; */
-    cursor: pointer;
-  }
   font-weight: 600;
   color: #959595;
+}
+
+.tableRowClick {
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  height: 161px;
+}
+
+.headerTable {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #959595;
+}
+
+.wrapFileLampiran {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperTitle {
+  display: flex;
+  width: 420px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: -5px;
+  margin-top: 34px;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.txtTitle {
+  margin: 0;
+  margin-left: 19px;
+}
+.backgroundRowExpand {
+  padding-bottom: 0px;
+  padding-top: 0;
+  background-color: "red";
+}
+
+.wrapperExpand {
+  display: flex;
+  padding-left: 22px;
+}
+
+.wrapperLampiran {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 30px;
+}
+
+.wrapperTanggapan {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  width: 450px;
+}
+
+.txtTanggapan {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.wrapperRencanaUbah {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 350px;
+}
+
+.btnTolakAll {
+  background-color: rgba(255, 1, 100, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+}
+
+.btnTerimaAll {
+  background-color: rgba(27, 221, 187, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+  cursor: pointer;
 }
 
 .wrapperTitleInputRenaksi {
@@ -243,7 +235,7 @@
   cursor: pointer;
 }
 
-.styleBtn p{
+.styleBtn p {
   margin-left: 20px;
 }
 
@@ -281,10 +273,7 @@
   cursor: pointer;
 }
 
-
-
 /*! modal */
-
 
 .headerTxtModal {
   font-family: "Poppins", sans-serif;
@@ -324,7 +313,6 @@
   /* top: 22px;
   right: 25px; */
 }
-
 
 .inputBuktiLap {
   height: 133px;
@@ -392,7 +380,7 @@
   margin-left: 12px;
 }
 
-.wrapBtnModal{
+.wrapBtnModal {
   display: flex;
   margin-left: 390px;
 }
