@@ -7,31 +7,24 @@
   display: flex;
   flex-direction: column;
   padding-left: 40px;
-  /* background-color: #ffa; */
-  /* position: fixed; */
-  /* width: 2100px; */
 }
 
 .wrapperTitle {
-  display: flex;
-  width: 260px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
   border-bottom: 2.5px solid #1bddbb;
-  padding-left: -5px;
-  margin-top: 34px;
-}
-
-.txtTitle {
+  text-align: center; 
+  align-items: center;
+  display: flex;
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  /* top: 4px; */
+  left: 180px;
+}
+
+.wrapperTitle p{
   margin: 0;
-  /* width: 300px; */
-  /* margin-top: 1px; */
-  margin-left: 19px;
 }
 
 
@@ -43,10 +36,7 @@
 .wrapperDataPegawai p {
   margin: 0;
 }
-
-.wrapperTxt {
-  margin-left: 26px;
-}
+/*  */
 
 .txtNama {
   font-family: "Poppins", sans-serif;

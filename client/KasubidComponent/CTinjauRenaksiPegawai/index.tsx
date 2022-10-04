@@ -266,10 +266,10 @@ export default function CTinjauRenaksiPegawai() {
                 width={35}
                 height={35}
               />
-              <p className={stylesS.txtTitle}>RENAKSI - {nama}</p>
+                RENAKSI - {nama}
             </div>
           </div>
-          <Gap height={106} width={0} />
+          <Gap height={206} width={0} />
           <TableContainer
             style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >

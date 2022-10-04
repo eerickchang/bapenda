@@ -369,9 +369,7 @@ function Row(props) {
           className={styles.styleRow}
         >
           <TableCell onClick={() => clickRowPegawai()}>
-            <p style={style1}>
-              {row.nama}
-            </p>
+            <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell onClick={() => clickRowPegawai()} style={style2}>
             {row.sub_bidang}
@@ -531,8 +529,10 @@ export default function ContentDaftarKegiatan() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
+              <div>
+                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+              </div>
+              <p> Tinjau Renaksi </p>
             </div>
           </div>
           <div className={stylesS.wrapLihatSemua}>
