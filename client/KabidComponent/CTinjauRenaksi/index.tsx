@@ -270,8 +270,11 @@ function Row(props) {
   };
 
   const router = useRouter();
-  const clickRowPegawai = () => {
-    router.push("/Kabid/TinjauRenaksiSubidang");
+  const clickRowSubid = () => {
+    router.push({
+      pathname: "/Kabid/TinjauRenaksiSubidang",
+      query: { sub_bidang: row.sub_bidang },
+    });
   };
 
   return (
@@ -279,13 +282,13 @@ function Row(props) {
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
           <TableCell
-            onClick={() => clickRowPegawai()}
+            onClick={() => clickRowSubid()}
             className={styles.styleData}
           >
             {row.sub_bidang}
           </TableCell>
           <TableCell
-            onClick={() => clickRowPegawai()}
+            onClick={() => clickRowSubid()}
             className={styles.styleData}
           >
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
@@ -377,6 +380,7 @@ export default function CTinjauRenaksi() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subBidang, setSubBidang] = useState([]);
+  const [bidang, setBidang] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -385,6 +389,7 @@ export default function CTinjauRenaksi() {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        setBidang(masuk.data.user[0].bidang);
         Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
           Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
             (ambilRenaksi) => {
@@ -448,7 +453,7 @@ export default function CTinjauRenaksi() {
               <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN</p>
             </div>
           </div>
-          <p className={stylesS.titleBidang}>Bidang ...</p>
+          <p className={stylesS.titleBidang}>Bidang {bidang}</p>
           <Gap height={106} width={0} />
           <TableContainer
             style={{

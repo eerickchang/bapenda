@@ -22,23 +22,19 @@ import next from "next";
 Axios.defaults.withCredentials = true;
 
 export default function CTinjauRenaksiSubidang() {
+  const router = useRouter();
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
+      console.log(router.query.sub_bidang);
 
-      // let semuaRenaksi = [];
-
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
-          // for (var key in ambilRenaksi.data) {
-          //   semuaRenaksi.push(ambilRenaksi.data[key]);
-          // }
-          // console.log(ambilRenaksi.data);
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (
-              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+              renaksi.sub_bidang === router.query.sub_bidang &&
               moment(renaksi.end_date).format("YYYY") ===
                 moment().format("YYYY")
             ) {
@@ -47,16 +43,14 @@ export default function CTinjauRenaksiSubidang() {
               });
             }
           });
-        });
-      });
+        }
+      );
 
       setTahunClick(moment().format("YYYY"));
 
       // console.log(semuaRenaksi);
     }
-  }, []);
-
-  const router = useRouter();
+  }, [router.query, router.isReady]);
 
   const clickBack = () => {
     router.push("/Kabid/TinjauRenaksi");
@@ -472,7 +466,7 @@ export default function CTinjauRenaksiSubidang() {
           />
           <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
           <p className={styles.txtTitle}>
-            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN {tahunClick}
+            RENAKSI {router.query.sub_bidang} - TAHUN {tahunClick}
           </p>
         </div>
 

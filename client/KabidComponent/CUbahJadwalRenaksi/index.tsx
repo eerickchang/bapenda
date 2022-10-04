@@ -31,7 +31,7 @@ function useForceUpdate() {
 }
 
 function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
+  const { row, stateChange } = props;
   const [open, setOpen] = React.useState(false);
 
   // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
@@ -133,26 +133,62 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
 
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+    Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
       (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-              idRenaksi: renaksiMRD.id_renaksi,
+        ambilRenaksi.data.map((renaksiMJD) => {
+          if (row.sub_bidang === renaksiMJD.sub_bidang) {
+            Axios.post("http://localhost:3001/kabidMenerimaRenaksi", {
+              idRenaksi: renaksiMJD.id_renaksi,
             });
           }
         });
       }
     );
 
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
+
+    stateChange([]);
+
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            let bidangUserSDKabid = [];
+            let pegawaiYgAdaRenaksi = [];
+            let userLoggedIn = masuk.data.user;
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("User Logged In: ", userLoggedIn);
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            bidangUserSDKabid = kasubid.filter((elA) => {
+              return userLoggedIn.some(
+                (elB) => elA["bidang"] === elB["bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChange((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Bidang Sama: ", bidangUserSDKabid);
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    });
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -204,9 +240,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     <React.Fragment>
       <TableRow hover className={styles.styleRow}>
         <TableCell className={styles.styleData}>
-          <p style={{ fontWeight: 600 }}>{row.nama}</p>
+          <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
         </TableCell>
-        <TableCell className={styles.styleData}>{row.sub_bidang}</TableCell>
+        <TableCell className={styles.styleData}>{row.nama}</TableCell>
         <TableCell>
           <div className={styles.styleTxtRow}>
             <div style={{ flexDirection: "row", display: "flex" }}>
@@ -246,24 +282,52 @@ export default function ContentDaftarKegiatan() {
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
+  const [subBidang, setSubBidang] = useState([]);
+  const [bidang, setBidang] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/kasubidAmbilPegawaiPT").then(
-          (ambilPegawai) => {
-            ambilPegawai.data.map((pegawai) => {
-              if (masuk.data.user[0].sub_bidang === pegawai.sub_bidang) {
-                setPegawai((nextData) => {
-                  return [...nextData, pegawai];
+        setBidang(masuk.data.user[0].bidang);
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Kasubid: ", kasubid);
+              console.log("Renaksi: ", renaksi);
+
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                setSubBidang((nextData) => {
+                  return [item, ...nextData];
                 });
-              }
-            });
-          }
-        );
+              });
+
+              console.log("Bidang Sama: ", bidangUserSDKabid);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
       });
     }
   }, []);
@@ -316,13 +380,15 @@ export default function ContentDaftarKegiatan() {
                   <TableCell className={styles.styleHeader}>
                     Sub Bidang
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>Program</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Kepala Sub Bidang
+                  </TableCell>
                   <TableCell className={styles.styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} />
+                {subBidang.map((row) => (
+                  <Row key={row.nip} row={row} stateChange={setSubBidang} />
                 ))}
               </TableBody>
             </Table>

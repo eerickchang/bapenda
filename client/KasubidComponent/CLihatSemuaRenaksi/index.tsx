@@ -31,23 +31,25 @@ export default function CLihatSemuaRenaksi() {
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
-          // for (var key in ambilRenaksi.data) {
-          //   semuaRenaksi.push(ambilRenaksi.data[key]);
-          // }
-          // console.log(ambilRenaksi.data);
-          ambilRenaksi.data.map((renaksi) => {
-            if (
-              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-              moment(renaksi.end_date).format("YYYY") ===
-                moment().format("YYYY")
-            ) {
-              setSemuaRenaksi((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
-        });
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            // for (var key in ambilRenaksi.data) {
+            //   semuaRenaksi.push(ambilRenaksi.data[key]);
+            // }
+            // console.log(ambilRenaksi.data);
+            ambilRenaksi.data.map((renaksi) => {
+              if (
+                renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+                moment(renaksi.end_date).format("YYYY") ===
+                  moment().format("YYYY")
+              ) {
+                setSemuaRenaksi((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
       });
 
       setTahunClick(moment().format("YYYY"));
