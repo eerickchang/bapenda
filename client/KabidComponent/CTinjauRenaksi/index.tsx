@@ -54,57 +54,54 @@ function Row(props) {
   // };
 
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+    Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
       (ambilRenaksi) => {
         ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+          if (row.sub_bidang === renaksiMRD.sub_bidang) {
+            Axios.post("http://localhost:3001/kabidMenerimaRenaksi", {
               idRenaksi: renaksiMRD.id_renaksi,
             });
           }
         });
       }
     );
-
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 2000);
 
-    setTimeout(() => {
-      stateChange([]);
+    stateChange([]);
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            let bidangUserSDKabid = [];
+            let pegawaiYgAdaRenaksi = [];
+            let userLoggedIn = masuk.data.user;
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-            (ambilRenaksi) => {
-              let userLoggedIn = masuk.data.user;
-              let pegawaiSubid = ambilPegawai.data;
-              let renaksi = ambilRenaksi.data;
+            bidangUserSDKabid = kasubid.filter((elA) => {
+              return userLoggedIn.some(
+                (elB) => elA["bidang"] === elB["bidang"]
+              );
+            });
 
-              let subidUserSDPegawai = [];
-              let pegawaiYgAdaRenaksi = [];
+            pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
 
-              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
-                return userLoggedIn.some(
-                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-                );
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChange((nextData) => {
+                return [item, ...nextData];
               });
-
-              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              });
-
-              pegawaiYgAdaRenaksi.map((item) => {
-                stateChange((nextData) => {
-                  return [item, ...nextData];
-                });
-              });
-            }
-          );
-        });
+            });
+          }
+        );
       });
-    }, 100);
+    }, 200);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA
@@ -273,8 +270,11 @@ function Row(props) {
   };
 
   const router = useRouter();
-  const clickRowPegawai = () => {
-    router.push("/Kabid/TinjauRenaksiSubidang");
+  const clickRowSubid = () => {
+    router.push({
+      pathname: "/Kabid/TinjauRenaksiSubidang",
+      query: { sub_bidang: row.sub_bidang },
+    });
   };
 
   return (
@@ -282,13 +282,13 @@ function Row(props) {
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
           <TableCell
-            onClick={() => clickRowPegawai()}
+            onClick={() => clickRowSubid()}
             className={styles.styleData}
           >
             {row.sub_bidang}
           </TableCell>
           <TableCell
-            onClick={() => clickRowPegawai()}
+            onClick={() => clickRowSubid()}
             className={styles.styleData}
           >
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
@@ -379,7 +379,8 @@ export default function CTinjauRenaksi() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
-  const [pegawai, setPegawai] = useState([]);
+  const [subBidang, setSubBidang] = useState([]);
+  const [bidang, setBidang] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -388,36 +389,38 @@ export default function CTinjauRenaksi() {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        setBidang(masuk.data.user[0].bidang);
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
             (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
               let userLoggedIn = masuk.data.user;
-              let pegawaiSubid = ambilPegawai.data;
+              let kasubid = ambilKasubid.data;
               let renaksi = ambilRenaksi.data;
               console.log("User Logged In: ", userLoggedIn);
-              console.log("Pegawai Subid: ", pegawaiSubid);
+              console.log("Kasubid: ", kasubid);
               console.log("Renaksi: ", renaksi);
 
-              let subidUserSDPegawai = [];
-              let pegawaiYgAdaRenaksi = [];
-
-              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+              bidangUserSDKabid = kasubid.filter((elA) => {
                 return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
                   (elB) => elA["sub_bidang"] === elB["sub_bidang"]
                 );
               });
 
-              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              });
-
               pegawaiYgAdaRenaksi.map((item) => {
-                setPegawai((nextData) => {
+                setSubBidang((nextData) => {
                   return [item, ...nextData];
                 });
               });
 
-              console.log("Subid Sama: ", subidUserSDPegawai);
+              console.log("Bidang Sama: ", bidangUserSDKabid);
               console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
           );
@@ -450,7 +453,7 @@ export default function CTinjauRenaksi() {
               <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN</p>
             </div>
           </div>
-          <p className={stylesS.titleBidang}>Bidang ...</p>
+          <p className={stylesS.titleBidang}>Bidang {bidang}</p>
           <Gap height={106} width={0} />
           <TableContainer
             style={{
@@ -466,13 +469,15 @@ export default function CTinjauRenaksi() {
                   <TableCell className={styles.styleHeader}>
                     Sub Bidang
                   </TableCell>
-                  <TableCell className={styles.styleHeader}>Program</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Kepala Sub Bidang
+                  </TableCell>
                   <TableCell className={styles.styleHeader}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
+                {subBidang.map((row) => (
+                  <Row key={row.nip} row={row} stateChange={setSubBidang} />
                 ))}
               </TableBody>
             </Table>
