@@ -18,7 +18,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import Modal from "react-modal";
-import { Checkbox } from "@mui/material";
 
 Axios.defaults.withCredentials = true;
 

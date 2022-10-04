@@ -1,4 +1,4 @@
-import stylesS from "./ContentDaftarkegiatan.module.css";
+import stylesS from "../../../KasubidComponent/CTinjauRenaksiPegawai/ContentDaftarkegiatan.module.css";
 
 import React, { useState, useEffect, useRef } from "react";
 import Collapse from "@mui/material/Collapse";
@@ -8,18 +8,21 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
+import styles from "../../../KasubidComponent/CTinjauRenaksiPegawai/TableMUI.module.css";
 import Image from "next/image";
 import moment from "moment";
+import { GetServerSideProps, NextPageContext } from "next";
 
 import Modal from "react-modal";
-import Gap from "../Gap";
-import Button from "../Button";
-import btnStyles from "../Button/button.module.css";
+import Gap from "../../../KasubidComponent/Gap";
+import Button from "../../../KasubidComponent/Button";
+import btnStyles from "../../../KasubidComponent/Button/button.module.css";
 import Axios from "axios";
 import { useRouter } from "next/router";
-import AmbilDataRenaksi from "../AmbilDataRenaksi";
-import Link from "next/link";
+import AmbilDataRenaksi from "../../../KasubidComponent/AmbilDataRenaksi";
+
+import Checkbox from "@mui/material/Checkbox";
+import { config } from "process";
 
 Axios.defaults.withCredentials = true;
 
@@ -209,6 +212,8 @@ function Row(props) {
     stateChange([]);
   };
 
+  const [rowSelected, setRowSelected] = useState([]);
+
   const btnTolakExp = () => {
     // const data = new FormData();
     // data.append("file", file);
@@ -273,110 +278,31 @@ function Row(props) {
     btnTolakAll();
   };
 
-  const router = useRouter();
-  const clickRowPegawai = () => {
-    router.push({
-      pathname: "/Kasubid/TinjauRenaksiPegawai",
-      query: { nip: row.nip },
-    });
-    // <Link href={"/TinjauRenaksi/" + row.nip}></Link>;
-  };
-
-  const style1 = {
-    fontFamily: "Poppins",
-    fontSize: 18,
-    fontWeight: 600,
-    color: "#000",
-  };
-
-  const style2 = {
-    fontFamily: "Poppins",
-    fontSize: 18,
-    fontWeight: 400,
-    color: "#000",
-  };
-
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-      </div>
       <React.Fragment>
-        <TableRow
-          // onClick={() => clickRowPegawai()}
-          // hover
-          className={styles.styleRow}
-        >
-          <TableCell onClick={() => clickRowPegawai()}>
-            <p style={style1}>
-              {row.nama}
-            </p>
-          </TableCell>
-          <TableCell onClick={() => clickRowPegawai()} style={style2}>
-            {row.sub_bidang}
-          </TableCell>
+        <TableRow hover className={styles.styleRow}>
           <TableCell>
+            <Checkbox
+              onChange={() => setRowSelected([rowSelected, row.id_renaksi])}
+            />
+            <button onClick={() => console.log(rowSelected)}>Click</button>
+          </TableCell>
+          <TableCell className={styles.styleData}>
+            <p style={{ fontWeight: 600 }}>{row.program}</p>
+          </TableCell>
+          <TableCell className={styles.styleData}>{row.nama}</TableCell>
+          <TableCell className={styles.styleData}>{row.kegiatan}</TableCell>
+          <TableCell className={styles.styleData}>{row.sub_kegiatan}</TableCell>
+          <TableCell className={styles.styleData}>{row.tupoksi_inti}</TableCell>
+          <TableCell className={styles.styleData}>
+            {row.tupoksi_tambahan}
+          </TableCell>
+          <TableCell className={styles.styleData}>
+            {moment(row.start_date).format("MMM")} -{" "}
+            {moment(row.end_date).format("MMM")}
+          </TableCell>
+          {/* <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
                 <button
@@ -391,7 +317,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Renaksi {row.nama} <b>Diterima</b>
+                      Input Renaksi Feren <b>Berhasil</b>
                       <div className={styles.checkCircle}>
                         <Image
                           src={"/Check-circle.svg"}
@@ -442,7 +368,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Renaksi {row.nama} <b>Ditolak</b>
+                      Renaksi Richard F. Kasenda <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -451,65 +377,44 @@ function Row(props) {
                 ) : null}
               </div>
             </div>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       </React.Fragment>
     </>
   );
 }
 
-export default function ContentDaftarKegiatan() {
+export default function CTinjauRenaksiPegawai() {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
+  const [nama, setNama] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
-          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-            (ambilRenaksi) => {
-              let userLoggedIn = masuk.data.user;
-              let pegawaiSubid = ambilPegawai.data;
-              let renaksi = ambilRenaksi.data;
-              // console.log("User Logged In: ", userLoggedIn);
-              // console.log("Pegawai Subid: ", pegawaiSubid);
-              // console.log("Renaksi: ", renaksi);
-
-              let subidUserSDPegawai = [];
-              let pegawaiYgAdaRenaksi = [];
-
-              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
-                return userLoggedIn.some(
-                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-                );
+      console.log(router.query.nip);
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          // console.log(userClicked);
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.nip == router.query.nip) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
               });
-
-              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
-                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
-              });
-
-              pegawaiYgAdaRenaksi.map((item) => {
-                setPegawai((nextData) => {
-                  return [item, ...nextData];
-                });
-              });
-
-              // console.log("Subid Sama: ", subidUserSDPegawai);
-              // console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+              setNama(renaksi.nama);
             }
-          );
-        });
-      });
+          });
+        }
+      );
     }
-  }, []);
-
-  const router = useRouter();
+  }, [router.query, router.isReady]);
 
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
@@ -517,50 +422,60 @@ export default function ContentDaftarKegiatan() {
     router.push("/Kasubid/TinjauRenaksiLihatSemua");
   };
 
+  const clickBack = () => {
+    router.push("/Kasubid/TinjauRenaksi");
+    // console.log(dataCakin);
+  };
   const [showModal, setShowModal] = useState(false);
 
-  const styleHeader = {
-    fontFamily: "Poppins",
-    fontSize: 22,
-    fontWeight: 600,
-    color: "rgba(149, 149, 149, 1)",
-  };
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>Tinjau Renaksi</p>
+              <Image
+                style={{ cursor: "pointer" }}
+                onClick={clickBack}
+                src={"/Back.svg"}
+                width={35}
+                height={35}
+              />
+              <p className={stylesS.txtTitle}>RENAKSI - {router.query.nip}</p>
             </div>
-          </div>
-          <div className={stylesS.wrapLihatSemua}>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
           </div>
           <Gap height={106} width={0} />
           <TableContainer
-            style={{
-              paddingLeft: 50,
-              paddingRight: 40,
-              zIndex: 998,
-              paddingBottom: 20,
-            }}
+            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell style={styleHeader}>Pegawai</TableCell>
-                  <TableCell style={styleHeader}>Sub Bidang</TableCell>
-                  <TableCell style={styleHeader}>Aksi</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    <Checkbox />
+                  </TableCell>
+                  <TableCell className={styles.styleHeader}>Program</TableCell>
+                  <TableCell className={styles.styleHeader}>THL</TableCell>
+                  <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Sub Kegiatan
+                  </TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Tupoksi Inti
+                  </TableCell>
+                  <TableCell className={styles.styleHeader}>
+                    Tupoksi Tambahan
+                  </TableCell>
+                  <TableCell className={styles.styleHeader}>Rencana</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
+                  <Row
+                    key={row.id_renaksi}
+                    row={row}
+                    stateChange={setPegawai}
+                  />
                 ))}
               </TableBody>
             </Table>

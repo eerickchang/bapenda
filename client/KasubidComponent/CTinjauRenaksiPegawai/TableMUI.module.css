@@ -349,8 +349,8 @@
 
 .btnTolakAll {
   background-color: rgba(255, 1, 100, 1);
-  width: 172px;
-  height: 51px;
+  width: 149px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
@@ -366,8 +366,8 @@
 
 .btnTerimaAll {
   background-color: rgba(27, 221, 187, 1);
-  width: 172px;
-  height: 51px;
+  width: 149px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
