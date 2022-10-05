@@ -276,6 +276,20 @@ function Row(props) {
       query: { sub_bidang: row.sub_bidang },
     });
   };
+  
+    const style1 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 600,
+      color: "#000",
+    };
+    const style2 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 400,
+      color: "#000",
+    };
+
 
   return (
     <>
@@ -439,49 +453,51 @@ export default function CTinjauRenaksi() {
 
   const [showModal, setShowModal] = useState(false);
 
+
+    const style = {
+      fontFamily: "Poppins",
+      fontSize: 17,
+      fontWeight: 600,
+      color: "#959595",
+    };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-              <Image
-                src={"/EvaluasiLampiranTitle.svg"}
-                width={50}
-                height={50}
-              />
-              <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN</p>
+              <div>
+                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={40} />
+              </div>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}> TINJAU RENAKSI </p>
             </div>
+            <Gap height={88} width={0} />
+            <p className={stylesS.titleBidang}>Bidang {bidang}</p>
+            <Gap height={50} width={0} />
+            <TableContainer
+              style={{
+                paddingRight: 40,
+                zIndex: 998,
+                paddingBottom: 20,
+              }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={style}>Sub Bidang</TableCell>
+                    <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                    <TableCell style={style}>Aksi</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {subBidang.map((row) => (
+                    <Row key={row.nip} row={row} stateChange={setSubBidang} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
-          <p className={stylesS.titleBidang}>Bidang {bidang}</p>
-          <Gap height={106} width={0} />
-          <TableContainer
-            style={{
-              paddingLeft: 50,
-              paddingRight: 40,
-              zIndex: 998,
-              paddingBottom: 20,
-            }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Kepala Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {subBidang.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setSubBidang} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </div>
       )}
     </>

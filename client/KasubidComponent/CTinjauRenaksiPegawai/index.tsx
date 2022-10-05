@@ -259,14 +259,16 @@ export default function CTinjauRenaksiPegawai() {
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
-              <Image
-                style={{ cursor: "pointer" }}
-                onClick={clickBack}
-                src={"/Back.svg"}
-                width={35}
-                height={35}
-              />
-                RENAKSI - {nama}
+              <div>
+                <Image
+                  style={{ cursor: "pointer" }}
+                  onClick={clickBack}
+                  src={"/Back.svg"}
+                  width={45}
+                  height={45}
+                />
+              </div>
+              RENAKSI - {nama}
             </div>
           </div>
           <Gap height={206} width={0} />

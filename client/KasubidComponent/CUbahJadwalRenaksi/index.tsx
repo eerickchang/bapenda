@@ -676,9 +676,11 @@ export const CUbahJadwalRenaksi = () => {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/UbahJadwalTitle.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>UBAH JADWAL RENAKSI</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image src={"/UbahJadwalTitle.svg"} width={50} height={50} />
+              </div>
+              <p style={{ marginLeft: 5 }}>UBAH JADWAL RENAKSI</p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />

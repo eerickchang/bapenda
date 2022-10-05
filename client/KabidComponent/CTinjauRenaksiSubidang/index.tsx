@@ -453,21 +453,61 @@ export default function CTinjauRenaksiSubidang() {
     setPage(0);
   };
 
+  const styleHeader = {
+    background: "rgba(27, 221, 187, 1)",
+    fontFamily: "Poppins",
+    fontWeight: 600,
+    fontSize: 22,
+    color: "#fff",
+  };
+
+  const styleContainer = {
+    maxHeight: 810,
+    width: 1680,
+    marginTop: 16,
+    color: "rgba(27, 221, 187, 1)",
+    border: 2,
+    borderRadius: 6,
+    boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    overflowX: "scroll",
+    "::-webkit-scrollbar": {
+      width: 15,
+      height: 0,
+    },
+    "::-webkit-scrollbar-thumb": {
+      background: "rgba(21, 221, 187)",
+      // height: 100
+      width: 0,
+      borderTopRightRadius: 50,
+      borderBottomRightRadius: 50,
+    },
+  };
+  const styleRow = {
+    border: 1,
+    borderColor: "#1BDDBB",
+    fontFamily: "Poppins",
+    fontWeight: 400,
+    fontSize: 18,
+    width: 60,
+  };
+
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.wrapperTitle}>
-          <Image
-            style={{ cursor: "pointer" }}
-            onClick={clickBack}
-            src={"/Back.svg"}
-            width={50}
-            height={50}
-          />
-          <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
-          <p className={styles.txtTitle}>
-            RENAKSI {router.query.sub_bidang} - TAHUN {tahunClick}
-          </p>
+          <div>
+            <Image
+              style={{ cursor: "pointer" }}
+              onClick={clickBack}
+              src={"/Back.svg"}
+              width={50}
+              height={50}
+            />
+          </div>
+          <div>
+            <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={40} />
+          </div>
+          <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
         </div>
 
         <div className={styles.wrapperFilter}>
@@ -526,29 +566,7 @@ export default function CTinjauRenaksiSubidang() {
       </div>
 
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
-      <TableContainer
-        sx={{
-          maxHeight: 810,
-          width: 1680,
-          marginTop: 4,
-          color: "rgba(27, 221, 187, 1)",
-          border: 2,
-          borderRadius: 6,
-          boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
-          overflowX: "scroll",
-          "::-webkit-scrollbar": {
-            width: 15,
-            height: 0,
-          },
-          "::-webkit-scrollbar-thumb": {
-            background: "rgba(21, 221, 187)",
-            // height: 100
-            width: 0,
-            borderTopRightRadius: 50,
-            borderBottomRightRadius: 50,
-          },
-        }}
-      >
+      <TableContainer sx={styleContainer}>
         <Table
           stickyHeader
           aria-label="sticky table"
@@ -558,15 +576,9 @@ export default function CTinjauRenaksiSubidang() {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  sx={{
-                    background: "rgba(27, 221, 187, 1)",
-                    fontFamily: "Poppins",
-                    fontWeight: 600,
-                    fontSize: 22,
-                    color: "#fff",
-                  }}
+                  sx={styleHeader}
                   key={column.id}
-                  align={column.align}
+                  align="center"
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -581,136 +593,35 @@ export default function CTinjauRenaksiSubidang() {
               .map((row) => {
                 return (
                   <TableRow hover>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 60,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {moment(row.end_date).format("YYYY")}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 60,
-                        // maxWidth: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       <p style={{ width: 50 }}>{row.jabatan}</p>
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.nama}
                       {/* {moment(row.asn).format("MMM")} */}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.nama_thl}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.program}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.kegiatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.sub_kegiatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.tupoksi_inti}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.tupoksi_tambahan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {`${moment(row.start_date).format("MMM")} -
                         ${moment(row.end_date).format("MMM")}`}
                     </TableCell>
