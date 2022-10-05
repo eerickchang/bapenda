@@ -683,7 +683,7 @@ export const CUbahJadwalRenaksi = () => {
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
             >
               <Table>
                 <TableHead>

@@ -247,15 +247,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     });
   };
 
+    const style1 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 600,
+      color: "#000",
+    };
+    const style2 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 400,
+      color: "#000",
+    };
+
   return (
     <React.Fragment>
       <TableRow hover className={styles.styleRow}>
-        <TableCell onClick={() => clickRow()} className={styles.styleData}>
+        <TableCell onClick={() => clickRow()} style={style1}>
           <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
         </TableCell>
-        <TableCell className={styles.styleData}>{row.nama}</TableCell>
+        <TableCell style={style2}>{row.nama}</TableCell>
         <TableCell>
-          <div className={styles.styleTxtRow}>
+          <div style={style2}>
             <div style={{ flexDirection: "row", display: "flex" }}>
               <button className={styles.btnTerima} onClick={() => btnTerima()}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
@@ -368,31 +381,46 @@ export default function ContentDaftarKegiatan() {
     }, 2000);
   };
 
+    const style = {
+      fontFamily: "Poppins",
+      fontSize: 17,
+      fontWeight: 600,
+      color: "#959595",
+    };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={styles.wrapperTitleDaftarKegiatan}>
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={styles.txtTitle}>Evaluasi Lampiran Bukti</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image
+                  src={"/EvaluasiLampiranTitle.svg"}
+                  width={50}
+                  height={50}
+                />
+              </div>
+              <p> EVALUASI LAMPIRAN </p>
             </div>
           </div>
+          <Gap height={88} width={0} />
           <p className={stylesS.titleBidang}>Bidang {bidang}</p>
-          <Gap height={37} width={0} />
+          <Gap height={50} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
+            style={{
+              paddingLeft: 40,
+              paddingRight: 40,
+              zIndex: 998,
+              paddingBottom: 20,
+            }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Kepala Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
+                  <TableCell style={style}>Sub Bidang</TableCell>
+                  <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                  <TableCell style={style}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
