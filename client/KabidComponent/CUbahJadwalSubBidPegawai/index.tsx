@@ -191,7 +191,7 @@ function Row(props) {
 
     stateChanger([]);
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -383,19 +383,19 @@ function Row(props) {
     btnTolakAll();
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>
@@ -587,7 +587,7 @@ export const CUbahJadwalSubBidPegawai = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.sub_bidang) {
@@ -634,11 +634,7 @@ export const CUbahJadwalSubBidPegawai = () => {
                 />
               </div>
               <div>
-                <Image
-                  src={"/UbahJadwalTitle.svg"}
-                  width={50}
-                  height={50}
-                />
+                <Image src={"/UbahJadwalTitle.svg"} width={50} height={50} />
               </div>
               <p style={{ marginLeft: 5 }}>UBAH JADWAL RENAKSI</p>
             </div>

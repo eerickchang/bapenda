@@ -368,12 +368,12 @@ function Row(props) {
     btnTolakAll();
   };
 
-    const style = {
-      fontFamily: "Poppins",
-      fontSize: 17,
-      fontWeight: 600,
-      color: "#959595",
-    };
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 17,
+    fontWeight: 600,
+    color: "#959595",
+  };
 
   return (
     <>
@@ -438,7 +438,7 @@ function Row(props) {
               marginBottom: 20,
             }}
             in={open}
-            timeout='auto'
+            timeout="auto"
           >
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
@@ -605,14 +605,12 @@ export const CUbahJadwal = () => {
     color: "#959595",
   };
 
-  
-    const router = useRouter();
+  const router = useRouter();
 
-    const clickBack = () => {
-      router.push("/Admin/UbahJadwalRenaksi");
-      // console.log(dataCakin);
-    };
-
+  const clickBack = () => {
+    router.push("/Kaban/UbahJadwalRenaksi");
+    // console.log(dataCakin);
+  };
 
   return (
     <>

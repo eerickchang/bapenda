@@ -167,7 +167,7 @@ function Row(props) {
 
   const btnTerimaSemua = () => {
     Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -191,7 +191,7 @@ function Row(props) {
 
     stateChanger([]);
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiHapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -383,19 +383,19 @@ function Row(props) {
     btnTolakAll();
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>
@@ -419,7 +419,7 @@ function Row(props) {
             </p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.tupoksi_inti}</p>
+            <p style={style2}>{row.status}</p>
           </TableCell>
           <TableCell>
             <p style={style2}>
@@ -587,7 +587,7 @@ export const CHapusRenaksiSubidPegawai = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiHapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.sub_bidang) {

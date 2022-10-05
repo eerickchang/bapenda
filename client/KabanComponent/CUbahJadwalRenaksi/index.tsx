@@ -371,7 +371,12 @@ function Row(props) {
   const router = useRouter();
 
   const clickRow = () => {
-    router.push("/Admin/UbahJadwal");
+    router.push({
+      pathname: "/Kaban/UbahJadwal",
+      query: {
+        subid: row.sub_bidang,
+      },
+    });
   };
 
   return (
@@ -383,15 +388,10 @@ function Row(props) {
           // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
-            <p
-              className={stylesS.rekanNama}
-              onClick={() => console.log(row.files)}
-            >
-              {row.nama}
-            </p>
+            <p className={stylesS.rekanNama}>{row.sub_bidang}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+            <p className={stylesS.styleTxtRow}>{row.nama}</p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>
@@ -415,24 +415,36 @@ export const CUbahJadwalRenaksi = () => {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
 
-  const [pegawai, setPegawai] = useState([]);
+  const [pegawaiSubag, setPegawaiSubag] = useState([]);
+  const [pegawaiSubid, setPegawaiSubid] = useState([]);
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
-            ambilRenaksi.data.map((renaksi) => {
-              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                setPegawai((nextData) => {
-                  return [renaksi, ...nextData];
-                });
-              }
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
             });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              setPegawaiSubid((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
@@ -484,11 +496,11 @@ export const CUbahJadwalRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawai.map((row) => (
+                  {pegawaiSubag.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawai}
+                      stateChanger={setPegawaiSubag}
                     />
                   ))}
                 </TableBody>
@@ -507,10 +519,10 @@ export const CUbahJadwalRenaksi = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell style={style} width={700}>
-                      Sub Bagian
+                      Sub Bidang
                     </TableCell>
                     <TableCell style={style} width={700}>
-                      Program
+                      Kepala Sub Bidang
                     </TableCell>
                     <TableCell style={style} width={700}>
                       Aksi
@@ -518,11 +530,11 @@ export const CUbahJadwalRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawai.map((row) => (
+                  {pegawaiSubid.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawai}
+                      stateChanger={setPegawaiSubid}
                     />
                   ))}
                 </TableBody>
