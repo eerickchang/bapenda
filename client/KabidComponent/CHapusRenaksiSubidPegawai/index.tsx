@@ -569,7 +569,7 @@ function Row(props) {
   );
 }
 
-export const CEvaluasiSubBidangPegawai = () => {
+export const CHapusRenaksiSubidPegawai = () => {
   const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -607,7 +607,7 @@ export const CEvaluasiSubBidangPegawai = () => {
   };
 
   const clickBack = () => {
-    router.push("/Kabid/EvaluasiLampiran");
+    router.push("/Kabid/HapusRenaksi");
     // console.log(dataCakin);
   };
 
@@ -634,9 +634,9 @@ export const CEvaluasiSubBidangPegawai = () => {
                 />
               </div>
               <div>
-                <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
+                <Image src={"/HapusRenaksiTitle.svg"} width={50} height={50} />
               </div>
-              <p>EVALUASI LAMPIRAN</p>
+              <p style={{ marginLeft: 5 }}>EVALUASI LAMPIRAN</p>
             </div>
             <Gap height={88} width={0} />
             <p className={stylesS.titleBidang}>

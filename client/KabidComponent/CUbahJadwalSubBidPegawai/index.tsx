@@ -569,7 +569,7 @@ function Row(props) {
   );
 }
 
-export const CEvaluasiSubBidangPegawai = () => {
+export const CUbahJadwalSubBidPegawai = () => {
   const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -607,7 +607,7 @@ export const CEvaluasiSubBidangPegawai = () => {
   };
 
   const clickBack = () => {
-    router.push("/Kabid/EvaluasiLampiran");
+    router.push("/Kabid/UbahJadwalRenaksi");
     // console.log(dataCakin);
   };
 
@@ -634,9 +634,13 @@ export const CEvaluasiSubBidangPegawai = () => {
                 />
               </div>
               <div>
-                <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
+                <Image
+                  src={"/UbahJadwalTitle.svg"}
+                  width={50}
+                  height={50}
+                />
               </div>
-              <p>EVALUASI LAMPIRAN</p>
+              <p style={{ marginLeft: 5 }}>UBAH JADWAL RENAKSI</p>
             </div>
             <Gap height={88} width={0} />
             <p className={stylesS.titleBidang}>
@@ -644,7 +648,11 @@ export const CEvaluasiSubBidangPegawai = () => {
             </p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{
+                paddingLeft: 2,
+                paddingRight: 40,
+                zIndex: 998,
+              }}
             >
               <Table>
                 <TableHead>

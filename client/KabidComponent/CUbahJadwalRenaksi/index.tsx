@@ -8,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./cUbahJadwalRenaksi.module.css";
+import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import moment from "moment";
 
@@ -133,12 +133,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
 
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
+    Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
       (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMJD) => {
-          if (row.sub_bidang === renaksiMJD.sub_bidang) {
+        ambilRenaksi.data.map((renaksiSelesai) => {
+          if (row.sub_bidang === renaksiSelesai.sub_bidang) {
             Axios.post("http://localhost:3001/kabidMenerimaRenaksi", {
-              idRenaksi: renaksiMJD.id_renaksi,
+              idRenaksi: renaksiSelesai.id_renaksi,
             });
           }
         });
@@ -152,43 +152,45 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     stateChange([]);
 
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            let bidangUserSDKabid = [];
-            let pegawaiYgAdaRenaksi = [];
-            let userLoggedIn = masuk.data.user;
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("User Logged In: ", userLoggedIn);
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Kasubid: ", kasubid);
+              console.log("Renaksi: ", renaksi);
 
-            bidangUserSDKabid = kasubid.filter((elA) => {
-              return userLoggedIn.some(
-                (elB) => elA["bidang"] === elB["bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChange((nextData) => {
-                return [item, ...nextData];
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
               });
-            });
 
-            console.log("Bidang Sama: ", bidangUserSDKabid);
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+
+              console.log("Bidang Sama: ", bidangUserSDKabid);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
       });
-    });
+    }, 30);
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -236,15 +238,37 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // call your hook here
   const forceUpdate = useForceUpdate();
 
+  const router = useRouter();
+
+  const clickRow = () => {
+    router.push({
+      pathname: "/Kabid/UbahJadwalSubBidPegawai",
+      query: { sub_bidang: row.sub_bidang },
+    });
+  };
+
+    const style1 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 600,
+      color: "#000",
+    };
+    const style2 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 400,
+      color: "#000",
+    };
+
   return (
     <React.Fragment>
       <TableRow hover className={styles.styleRow}>
-        <TableCell className={styles.styleData}>
+        <TableCell onClick={() => clickRow()} style={style1}>
           <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
         </TableCell>
-        <TableCell className={styles.styleData}>{row.nama}</TableCell>
+        <TableCell style={style2}>{row.nama}</TableCell>
         <TableCell>
-          <div className={styles.styleTxtRow}>
+          <div style={style2}>
             <div style={{ flexDirection: "row", display: "flex" }}>
               <button className={styles.btnTerima} onClick={() => btnTerima()}>
                 <Image src={"/Terima.svg"} width={20} height={20} /> Terima
@@ -277,7 +301,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-export default function ContentDaftarKegiatan() {
+export default function CUbahJadwalRenaksi() {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
@@ -294,7 +318,7 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setBidang(masuk.data.user[0].bidang);
         Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-          Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
             (ambilRenaksi) => {
               let bidangUserSDKabid = [];
               let pegawaiYgAdaRenaksi = [];
@@ -332,8 +356,6 @@ export default function ContentDaftarKegiatan() {
     }
   }, []);
 
-  const router = useRouter();
-
   const [showModal, setShowModal] = useState(false);
 
   const btnTerima = () => {
@@ -359,31 +381,37 @@ export default function ContentDaftarKegiatan() {
     }, 2000);
   };
 
+    const style = {
+      fontFamily: "Poppins",
+      fontSize: 17,
+      fontWeight: 600,
+      color: "#959595",
+    };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={styles.wrapperTitleDaftarKegiatan}>
-              <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
-              <p className={styles.txtTitle}>Ubah Jadwal Renaksi</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image src={"/UbahJadwalTitle.svg"} width={50} height={50} />
+              </div>
+              <p style={{marginLeft: 5}}> UBAH JADWAL RENAKSI </p>
             </div>
           </div>
-          <p className={stylesS.titleBidang}>Bidang Pajak Daerah</p>
-          <Gap height={37} width={0} />
+          <Gap height={88} width={0} />
+          <p className={stylesS.titleBidang}>Bidang {bidang}</p>
+          <Gap height={50} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
+            style={{ paddingLeft: 40, paddingRight: 40, zIndex: 998, paddingBottom: 20 }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Kepala Sub Bidang
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Aksi</TableCell>
+                  <TableCell style={style}>Sub Bidang</TableCell>
+                  <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                  <TableCell style={style}>Aksi</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
