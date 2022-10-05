@@ -109,133 +109,417 @@ function Row(props) {
     }, 100);
   };
 
+  // ! MODAL TERIMA TOLAK SEMUA
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingLeft: 61,
+      height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
-    const filter = [
-      {
-        id: 1,
-        status: "Semua",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksi").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                    stateChange((nextData) => {
-                      return [renaksi, ...nextData];
-                    });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
-      {
-        id: 2,
-        status: "Jadwal diubah",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                    stateChange((nextData) => {
-                      return [renaksi, ...nextData];
-                    });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
 
-      {
-        id: 3,
-        status: "Sementara",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                    stateChange((nextData) => {
-                      return [renaksi, ...nextData];
-                    });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
+  const [showModal, setShowModal] = useState(false);
+  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
+  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
-      {
-        id: 5,
-        status: "Selesai",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                    stateChange((nextData) => {
-                      return [renaksi, ...nextData];
-                    });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
+  function openModal() {
+    setIsOpen(true);
+  }
 
-      {
-        id: 6,
-        status: "Hapus",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                    stateChange((nextData) => {
-                      return [renaksi, ...nextData];
-                    });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
 
-      {
-        id: 7,
-        status: "Ditambah",
-        onclick: () => (
-          stateChange([]),
-          Axios.get("http://localhost:3001/masuk").then((masuk) => {
-            Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
-              (ambilRenaksi) => {
-                ambilRenaksi.data.map((renaksi) => {
-                  if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModalTolakAll() {
+    setTolakAllIsOpen(true);
+  }
+
+  function afterOpenModalTolakAll() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalTolakAll() {
+    setTolakAllIsOpen(false);
+  }
+
+  const btnTolak = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+  };
+
+  const btnTolakAll = () => {
+    setShowModalTolakAll(true);
+    setTimeout(() => {
+      setShowModalTolakAll(false);
+    }, 3000);
+  };
+
+  const btnTerimaSemua = () => {
+    Axios.get("http://localhost:3001/masuk").then((masuk) => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+                idRenaksi: renaksi.id_renaksi,
+              });
+            }
+          });
+        }
+      );
+    });
+
+    setShowModalTerimaAll(true);
+    setTimeout(() => {
+      setShowModalTerimaAll(false);
+    }, 3000);
+
+    stateChange([]);
+  };
+
+  const btnTolakExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success"){
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModal();
+    btnTolak();
+  };
+
+  const btnTolakAllExp = () => {
+    // const data = new FormData();
+    // data.append("file", file);
+
+    // Axios.post("http://localhost:3001/uploadFile", data)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success") {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //         fileURL: response.data.file,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     } else {
+    //       Axios.post("http://localhost:3001/unggahLaporan", {
+    //         idRenaksi: row.id_renaksi,
+    //         ketPegawai: ketPegawai,
+    //       }).then((unggahLaporan) => {
+    //         console.log(unggahLaporan);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    closeModalTolakAll();
+    btnTolakAll();
+  };
+
+  const filter = [
+    {
+      id: 1,
+      status: "Semua",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksi").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
                     stateChange((nextData) => {
-                      return [renaksi, ...nextData];
+                      return [item, ...nextData];
                     });
-                  }
-                });
-              }
-            );
-          })
-        ),
-      },
-    ];
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+    {
+      id: 2,
+      status: "Jadwal diubah",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+
+    {
+      id: 3,
+      status: "Sementara",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+
+    {
+      id: 5,
+      status: "Selesai",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+
+    {
+      id: 6,
+      status: "Hapus",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+
+    {
+      id: 7,
+      status: "Ditambah",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
+  ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
 
@@ -336,19 +620,52 @@ export default function ContentDaftarKegiatan() {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              setPegawai((nextData) => {
-                return [renaksi, ...nextData];
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/ambilRenaksi").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Kasubid: ", kasubid);
+              console.log("Renaksi: ", renaksi);
+
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
               });
+
+              pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                return bidangUserSDKabid.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                setPegawai((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+
+              console.log("Bidang Sama: ", bidangUserSDKabid);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
             }
-          });
+          );
         });
       });
     }
   }, []);
 
+  const router = useRouter();
+
+  const lihatSemua = () => {
+    // setActiveDropdown(!activeDropdown);
+    // console.log(dataRenaksi);
+    router.push("/Kasubid/TinjauRenaksiLihatSemua");
+  };
 
   const [showModal, setShowModal] = useState(false);
 

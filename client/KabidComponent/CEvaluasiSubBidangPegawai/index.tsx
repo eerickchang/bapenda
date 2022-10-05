@@ -97,7 +97,7 @@ const rows = [
 ];
 
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
 
   // const custom = {
@@ -184,17 +184,17 @@ function Row(props) {
     // window.location.reload();
   };
 
-  const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+  const btnTerimaExp = () => {
+    Axios.post("http://localhost:3001/kabidMenerimaRenaksi", {
       idRenaksi: row.id_renaksi,
     });
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+            if (renaksi.sub_bidang === subid) {
               stateChanger((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -202,7 +202,22 @@ function Row(props) {
           });
         }
       );
-    });
+    }, 30);
+
+    // stateChanger([]);
+    // Axios.get("http://localhost:3001/masuk").then((masuk) => {
+    //   Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+    //     (ambilRenaksi) => {
+    //       ambilRenaksi.data.map((renaksi) => {
+    //         if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+    //           stateChanger((nextData) => {
+    //             return [renaksi, ...nextData];
+    //           });
+    //         }
+    //       });
+    //     }
+    //   );
+    // });
 
     setShowModal(true);
     setTimeout(() => {
@@ -370,72 +385,6 @@ function Row(props) {
 
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Permintaan Ubah Jadwal <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>
-            Tolak Semua Laporan Bukti
-          </h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Lampiran Bukti <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-      </div>
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
@@ -459,10 +408,14 @@ function Row(props) {
             </p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+            <p className={stylesS.styleTxtRow}>
+              {`${moment(row.start_date).format("MMM")} - ${moment(
+                row.end_date
+              ).format("MMM")}`}
+            </p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>
@@ -532,7 +485,7 @@ function Row(props) {
                   </div>
                   <div className={styles.wrapperBtnTerimaTolak}>
                     <Gap width={0} height={50} />
-                    <button onClick={btnTerima} className={styles.styleBtn}>
+                    <button onClick={btnTerimaExp} className={styles.styleBtn}>
                       <Image src={"/Terima.svg"} width={30} height={30} />
                       <p>Terima</p>
                     </button>
@@ -626,49 +579,46 @@ function Row(props) {
 }
 
 export const CEvaluasiSubBidangPegawai = () => {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
+  const [renaksiPegawai, setRenaksiPegawai] = useState([]);
 
   const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            ambilRenaksi.data.map((renaksi) => {
-              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                setPegawai((nextData) => {
-                  return [renaksi, ...nextData];
-                });
-              }
-            });
-          }
-        );
-      });
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === router.query.sub_bidang) {
+              setRenaksiPegawai((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
     console.log(dataRenaksi);
   };
 
-  const router = useRouter();
-  
-    const clickBack = () => {
-      router.push("/Kabid/EvaluasiLampiran");
-      // console.log(dataCakin);
-    };
-
+  const clickBack = () => {
+    router.push("/Kabid/EvaluasiLampiran");
+    // console.log(dataCakin);
+  };
 
   return (
     <>
@@ -683,12 +633,16 @@ export const CEvaluasiSubBidangPegawai = () => {
                 width={50}
                 height={50}
               />
-              <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
-              <p className={styles.txtTitle}>
-                EVALUASI LAMPIRAN
-              </p>
+              <Image
+                src={"/EvaluasiLampiranTitle.svg"}
+                width={50}
+                height={50}
+              />
+              <p className={styles.txtTitle}>EVALUASI LAMPIRAN</p>
             </div>
-            <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
+            <p className={stylesS.titleBidang}>
+              Sub Bidang {router.query.sub_bidang}
+            </p>
             <Gap height={50} width={0} />
             <TableContainer
               style={{ paddingLeft: 0, paddingRight: 60, zIndex: 998 }}
@@ -722,11 +676,12 @@ export const CEvaluasiSubBidangPegawai = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawai.map((row) => (
+                  {renaksiPegawai.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawai}
+                      stateChanger={setRenaksiPegawai}
+                      subid={router.query.sub_bidang}
                     />
                   ))}
                 </TableBody>

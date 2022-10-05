@@ -152,43 +152,45 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     stateChange([]);
 
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
-          (ambilRenaksi) => {
-            let bidangUserSDKabid = [];
-            let pegawaiYgAdaRenaksi = [];
-            let userLoggedIn = masuk.data.user;
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("User Logged In: ", userLoggedIn);
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiSelesai").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
+              console.log("User Logged In: ", userLoggedIn);
+              console.log("Kasubid: ", kasubid);
+              console.log("Renaksi: ", renaksi);
 
-            bidangUserSDKabid = kasubid.filter((elA) => {
-              return userLoggedIn.some(
-                (elB) => elA["bidang"] === elB["bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChange((nextData) => {
-                return [item, ...nextData];
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
               });
-            });
 
-            console.log("Bidang Sama: ", bidangUserSDKabid);
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+
+              console.log("Bidang Sama: ", bidangUserSDKabid);
+              console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+            }
+          );
+        });
       });
-    });
+    }, 30);
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -236,14 +238,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // call your hook here
   const forceUpdate = useForceUpdate();
 
-
-  
   const router = useRouter();
 
-const clickRow = () => {
-  router.push('/Kabid/EvaluasiSubBidangPegawai')
-}
-
+  const clickRow = () => {
+    router.push({
+      pathname: "/Kabid/EvaluasiSubBidangPegawai",
+      query: { sub_bidang: row.sub_bidang },
+    });
+  };
 
   return (
     <React.Fragment>
@@ -340,7 +342,6 @@ export default function ContentDaftarKegiatan() {
       });
     }
   }, []);
-
 
   const [showModal, setShowModal] = useState(false);
 
