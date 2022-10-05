@@ -11,7 +11,7 @@ export default function CDaftarKegiatanAdm() {
   const clickSubid = (subid) => {
     // router.push("/Admin/DaftarKegiatanSubid");
     router.push({
-      pathname: "/Admin/DaftarKegiatanSubid",
+      pathname: "/Kaban/DaftarKegiatanSubid",
       query: {
         subid: subid,
       },

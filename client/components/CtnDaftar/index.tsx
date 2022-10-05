@@ -166,9 +166,9 @@ export default function CtnDaftar() {
                       <div className={styles.dropdownListSubBidang}>
                         <p
                           onClick={() => {
-                            setSubBidangReg("Perencanaan & Keuangan");
+                            setSubBidangReg("Perencanaan dan Keuangan");
                             setBidangReg("Sekretaris");
-                            setValueTxt("Perencanaan & Keuangan");
+                            setValueTxt("Perencanaan dan Keuangan");
                           }}
                         >
                           Perencanaan & Keuangan
@@ -391,7 +391,7 @@ export default function CtnDaftar() {
                             );
                             setBidangReg("Pengendalian dan Evaluasi");
                             setValueTxt(
-                              "EPengendalian dan Pembinaan Administrasi"
+                              "Pengendalian dan Pembinaan Administrasi"
                             );
                           }}
                         >
