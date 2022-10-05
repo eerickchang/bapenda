@@ -379,7 +379,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell>
           {row.thl === null ? null : (
-            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+            <div style={{ display: "flex", padding: 0, alignItems: "center" }}>
               {!image ? (
                 <Image
                   src={"/SidebarProfile.svg"}
@@ -403,30 +403,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               </div>
             </div>
           )}
-
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {!image ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            ) : (
-              <Image
-                src={image}
-                width={40}
-                height={40}
-                alt="User 2"
-                style={{ borderRadius: 40 }}
-              />
-            )}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-              <p className={stylesS.rekanPegawai}>THL</p>
-            </div>
-          </div>
         </TableCell>
         <TableCell>
           {/* ambil data rencana */}
