@@ -279,7 +279,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   onClick={() => setShowModal(false)}
                 >
                   <p>
-                    Input Renaksi Feren <b>Berhasil</b>
+                    Input {row.nama} <b>Berhasil</b>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
                     </div>
@@ -403,6 +403,7 @@ export default function ContentDaftarKegiatan() {
               </div>
               <p> EVALUASI LAMPIRAN </p>
             </div>
+
             <Gap height={88} width={0} />
             <p className={stylesS.titleBidang}>Bidang {bidang}</p>
             <Gap height={50} width={0} />
