@@ -248,204 +248,40 @@ export default function CLihatSemuaRenaksi() {
   ];
 
   const columns = [
-    { id: "no", label: "No", align: "center" },
-    { id: "jabatan", label: "Jabatan", align: "center" },
+    { id: "no", label: "No" },
+    { id: "jabatan", label: "Jabatan"},
     {
       id: "asn",
       label: "ASN",
       minWidth: 50,
-      align: "center",
-      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "thl",
       label: "THL",
-      align: "center",
-      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "program",
       label: "Program",
-      align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "kegiatan",
       label: "Kegiatan",
-      minWidth: 50,
-      align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "subkegiatan",
       label: "Sub Kegiatan",
-      align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "tupoksiinti",
       label: "Tupoksi Inti",
-      align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "tupoksitambahan",
       label: "Tupoksi Tambahan",
-      align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "rencana",
       label: "Rencana",
-      align: "center",
-      // format: (value) => value.toFixed(2),
-    },
-  ];
-
-  const rows = [
-    {
-      no: "1",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "2",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "3",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "4",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "5",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "6",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "7",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "8",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "9",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "10",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "11",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "12",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
     },
   ];
 
@@ -461,102 +297,93 @@ export default function CLihatSemuaRenaksi() {
     setPage(0);
   };
 
+  const styleContainer = {
+    maxHeight: 810,
+    width: 1680,
+    marginTop: 4,
+    color: "rgba(27, 221, 187, 1)",
+    border: 2,
+    borderRadius: 6,
+    boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    overflowX: "scroll",
+    "::-webkit-scrollbar": {
+      width: 15,
+      height: 0,
+    },
+    "::-webkit-scrollbar-thumb": {
+      background: "rgba(21, 221, 187)",
+      // height: 100
+      width: 0,
+      borderTopRightRadius: 50,
+      borderBottomRightRadius: 50,
+    },
+  };
+
+  const style = {
+    border: 1,
+    borderColor: "#1BDDBB",
+    fontFamily: "Poppins",
+    fontWeight: 400,
+    fontSize: 18,
+    width: 60,
+  };
+
+  const styleHeader = {
+    background: "rgba(27, 221, 187, 1)",
+    fontFamily: "Poppins",
+    fontWeight: 600,
+    fontSize: 22,
+    color: "#fff",
+    textAlign: 'center'
+  };
+
   return (
     <div className={styles.container}>
-      <div>
-        <div className={styles.wrapperTitle}>
+      {/* <div> */}
+      <div className={styles.wrapperTitle}>
+        <div>
           <Image
             style={{ cursor: "pointer" }}
             onClick={clickBack}
             src={"/Back.svg"}
-            width={50}
-            height={50}
+            width={45}
+            height={45}
           />
-          <Image src={"/DetailCaKin.svg"} width={50.38} height={50} />
-          <p className={styles.txtTitle}>
-            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN {tahunClick}
-          </p>
         </div>
-
-        <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterTahun}>
-            <div
-              className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-            >
-              <Image src={"/TahunIcon.svg"} width={23} height={23} />
-              <p>Tahun</p>
-            </div>
-            {activeDropdownTahun && (
-              <div
-                className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
-              >
-                {tahun.map((item) => (
-                  <p key={item.id} onClick={item.onclick}>
-                    {item.tahun}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className={styles.wrapperUnduh}>
-            <div
-              className={styles.btnUnduh}
-              onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
-            >
-              <Image src={"/UnduhIcon.svg"} width={23} height={23} />
-              <p>Unduh</p>
-            </div>
-            {activeDropdownUnduh && (
-              <div
-                className={styles.wrapperSelectUnduh}
-                onClick={() => setActiveDropdownUnduh(false)}
-              >
-                {unduh.map((item) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      fontFamily: "Poppins",
-                      fontWeight: 700,
-                      fontSize: 22,
-                    }}
-                    key={item.id}
-                    onClick={item.onclick}
-                  >
-                    <p>{item.unduh}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+        <div>
+          <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={40} />
         </div>
+        <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
       </div>
 
+      <div className={styles.wrapperFilter}>
+        <div className={styles.wrapperFilterTahun}>
+          <div
+            className={styles.btnFilterTahun}
+            onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+          >
+            <Image src={"/TahunIcon.svg"} width={23} height={23} />
+            <p>Tahun</p>
+          </div>
+          {activeDropdownTahun && (
+            <div
+              className={styles.wrapperSelectFilterTahun}
+              onClick={() => setActiveDropdownTahun(false)}
+            >
+              {tahun.map((item) => (
+                <p key={item.id} onClick={item.onclick}>
+                  {item.tahun}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      {/* </div> */}
+      <Gap height={100} width={0} />
+
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
-      <TableContainer
-        sx={{
-          maxHeight: 810,
-          width: 1680,
-          marginTop: 4,
-          color: "rgba(27, 221, 187, 1)",
-          border: 2,
-          borderRadius: 6,
-          boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
-          overflowX: "scroll",
-          "::-webkit-scrollbar": {
-            width: 15,
-            height: 0,
-          },
-          "::-webkit-scrollbar-thumb": {
-            background: "rgba(21, 221, 187)",
-            // height: 100
-            width: 0,
-            borderTopRightRadius: 50,
-            borderBottomRightRadius: 50,
-          },
-        }}
-      >
+      <TableContainer sx={styleContainer}>
         <Table
           stickyHeader
           aria-label="sticky table"
@@ -566,15 +393,8 @@ export default function CLihatSemuaRenaksi() {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  sx={{
-                    background: "rgba(27, 221, 187, 1)",
-                    fontFamily: "Poppins",
-                    fontWeight: 600,
-                    fontSize: 22,
-                    color: "#fff",
-                  }}
+                  sx={styleHeader}
                   key={column.id}
-                  align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -585,181 +405,47 @@ export default function CLihatSemuaRenaksi() {
           <TableBody>
             {/* AMBIL DATA ROW */}
             {semuaRenaksi
-              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 60,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {moment(row.end_date).format("YYYY")}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 60,
-                        // maxWidth: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       <p style={{ width: 50 }}>{row.jabatan}</p>
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.nama}
                       {/* {moment(row.asn).format("MMM")} */}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.nama_thl}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.program}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.kegiatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.sub_kegiatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.tupoksi_inti}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {row.tupoksi_tambahan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        border: 1,
-                        borderColor: "#1BDDBB",
-                        fontFamily: "Poppins",
-                        fontWeight: 400,
-                        fontSize: 18,
-                        width: 160,
-                      }}
-                    >
+                    <TableCell align="center" sx={style}>
                       {`${moment(row.start_date).format("MMM")} -
                         ${moment(row.end_date).format("MMM")}`}
                     </TableCell>
-
-                    {/* {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          sx={{
-                            border: 1,
-                            borderColor: "#1BDDBB",
-                            fontFamily: "Poppins",
-                            fontWeight: 400,
-                            fontSize: 18,
-                          }}
-                          key={column.id}
-                          align={column.align}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })} */}
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
-      /> */}
-      {/* </Paper> */}
     </div>
   );
 }

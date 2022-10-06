@@ -370,6 +370,36 @@ function Row(props) {
     alert("sdfsdfasdf");
   };
 
+    const style1 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 600,
+      color: "#000",
+    };
+
+    const style2 = {
+      fontFamily: "Poppins",
+      fontSize: 18,
+      fontWeight: 400,
+      color: "#000",
+    };
+
+    const styleCollapse = {
+      background: "rgba(232, 232, 232, 1)",
+      borderTopColor: "rgba(165, 165, 165, 0.5)",
+      borderTopWidth: 2,
+      borderTopStyle: "solid",
+      marginBottom: 2,
+    };
+
+    const styleTxtKet = {
+      display: "flex",
+      position: "absolute",
+      top: 140,
+      color: "rgba(149, 149, 149, 1)",
+    };
+
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -451,21 +481,18 @@ function Row(props) {
           sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
-            <p
-              className={stylesS.rekanNama}
-              onClick={() => console.log(row.files)}
-            >
+            <p style={style1} onClick={() => console.log(row.files)}>
               {row.nama}
             </p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+            <p style={style2}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+            <p style={style2}>{row.kegiatan}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>
+            <p style={style2}>
               {row.files === "" ? null : (
                 <div className={styles.wrapFileLampiran}>
                   <div style={{ display: "flex" }}>
@@ -475,12 +502,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </p>
@@ -488,17 +509,7 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
+          <Collapse sx={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
@@ -510,10 +521,6 @@ function Row(props) {
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
                       <p style={{ marginLeft: 5 }}> File Laporan</p>
@@ -604,6 +611,7 @@ function Row(props) {
   );
 }
 
+
 export const CEvaluasiLampiran = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -641,6 +649,13 @@ export const CEvaluasiLampiran = () => {
     console.log(dataRenaksi);
   };
 
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 22,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
+
   return (
     <>
       {domLoaded && (
@@ -648,39 +663,32 @@ export const CEvaluasiLampiran = () => {
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
               <div>
-                <Image src={"/UbahJadwalTitle.svg"} width={50} height={50} />
+                <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
               </div>
               <p style={{ marginLeft: 5 }}>EVALUASI LAMPIRAN BUKTI</p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
             >
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell
-                      style={{
-                        fontFamily: "Poppins",
-                        fontSize: 17,
-                        fontWeight: 600,
-                        color: "#959595",
-                      }}
+                      style={style}
                       width={500}
                     >
                       Pegawai
                     </TableCell>
-                    {/* <TableCell className={styles.headerTable} width={0}>
-                      Pegawai
-                    </TableCell> */}
-                    <TableCell className={styles.headerTable} width={500}>
+                      
+                    <TableCell style={style} width={500}>
                       Tupoksi
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={500}>
+                    <TableCell style={style} width={500}>
                       Rencana
                     </TableCell>
-                    <TableCell className={styles.headerTable} width={500}>
+                    <TableCell style={style} width={500}>
                       Lampiran
                     </TableCell>
                   </TableRow>

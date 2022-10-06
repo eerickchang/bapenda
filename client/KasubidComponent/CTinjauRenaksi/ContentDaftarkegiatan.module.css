@@ -19,7 +19,7 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   position: absolute;
-  top: 43px;
+  top: 44px;
   left: 180px;
 }
 
@@ -64,20 +64,15 @@
   display: flex;
   position: absolute;
   top: 85px;
-  left: 1168px;
+  right: 235px;
 }
 
 .wrapLihatSemua{
   display: flex;
   position: absolute;
   top: 85px;
-  left: 1528px;
+  right: 50px;
 }
-/* .wrapperFilter {
-  position: absolute;
-  top: 160px;
-  left: 1500px;
-} */
 
 .btnFilter {
   display: flex;
