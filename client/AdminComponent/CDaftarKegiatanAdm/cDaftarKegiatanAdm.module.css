@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+.wrapperTitle {
+  border-bottom: 2.5px solid #1bddbb;
+  text-align: center; 
+  align-items: center;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 43px;
+  left: 180px;
+}
+
+.wrapperTitle p{
+  margin: 0;
+}
+
+.wrapperAllBtn {
+  display: flex;
+  margin-top: 80px;
+  margin-left: 40px;
+}
+
+.wrapBtnColumn {
+  display: flex;
+  flex-direction: column;
+  /* padding: 70px; */
+
+}
+
+.title {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 16px;
+  width: 250px;
+  height: 90px;
+  /* justify-content: center; */
+}
+.line {
+  width: 250px;
+  height: 2px;
+  background: rgba(0, 151, 136, 1);
+  margin-bottom: 54px;
+}

@@ -1,0 +1,384 @@
+.tableRow {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  height: 161px;
+}
+
+.tableRowClick {
+  margin: 0;
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  height: 161px;
+}
+
+.headerTable {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #959595;
+}
+
+.tableRowClick {
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  height: 161px;
+}
+
+.headerTable {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #959595;
+}
+
+.wrapFileLampiran {
+  display: flex;
+  flex-direction: column;
+}
+.wrapperTitle {
+  border-bottom: 2.5px solid #1bddbb;
+  text-align: center; 
+  align-items: center;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 38px;
+  left: 180px;
+}
+
+.wrapperTitle p{
+  margin: 0;
+}
+.backgroundRowExpand {
+  padding-bottom: 0px;
+  padding-top: 0;
+  background-color: "red";
+}
+
+.wrapperExpand {
+  display: flex;
+  padding-left: 22px;
+}
+
+.wrapperLampiran {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 30px;
+}
+
+.wrapperTanggapan {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  width: 450px;
+}
+
+.txtTanggapan {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.wrapperRencanaUbah {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 350px;
+}
+
+.btnTolakAll {
+  background-color: rgba(255, 1, 100, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+}
+
+.btnTerimaAll {
+  background-color: rgba(27, 221, 187, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+  cursor: pointer;
+}
+
+.wrapperTitleInputRenaksi {
+  display: flex;
+  width: 299px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 2.5px solid #1bddbb;
+  padding-left: 7px;
+  margin-top: 34px;
+}
+
+.txtTitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  width: 300px;
+  /* margin-top: 1px; */
+  margin-left: 19px;
+}
+
+.backgroundRowExpand {
+  padding-bottom: 0px;
+  padding-top: 0;
+  background-color: "red";
+}
+
+.wrapperExpand {
+  display: flex;
+  padding: 20px;
+}
+
+.wrapFileLampiran {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperLampiran {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 365px;
+}
+
+.wrapperKeterangan p {
+  margin: 0;
+}
+
+.contentLampiran {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 360px;
+  height: 176px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px;
+  cursor: pointer;
+}
+
+.fileLampiran {
+  display: flex;
+  border-bottom: 2px solid rgba(149, 149, 149, 0.3);
+  font-size: 20px;
+}
+.wrapperKeterangan {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  width: 950px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentKeterangan {
+  font-size: 18px;
+  font-weight: 400;
+  width: 950px;
+  height: 176px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.wrapperBtnTerimaTolak {
+  margin-left: 50px;
+}
+
+.styleBtn {
+  width: 208px;
+  height: 71px;
+  background: rgba(27, 221, 187, 1);
+  border-radius: 12px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.styleBtn p {
+  margin-left: 20px;
+}
+
+.btnTolakAll {
+  background-color: rgba(255, 1, 100, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  /* padding-inline: 5px; */
+}
+
+.btnTerimaAll {
+  background-color: rgba(27, 221, 187, 1);
+  width: 172px;
+  height: 51px;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding-inline: 5px; */
+  cursor: pointer;
+}
+
+/*! modal */
+
+.headerTxtModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* MODAL BERHASIL LAMPIRKAN LAPORAN */
+.modal {
+  /* width: 540px; */
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  background-color: #ddfaf5;
+  padding: 20px 60px;
+  border-radius: 20px;
+  position: Fixed;
+  top: 25px;
+  left: 678px;
+}
+
+.modal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #112350;
+  margin: 0;
+  cursor: default;
+}
+
+.checkCircle {
+  margin-left: 10px;
+  /* position: absolute; */
+  /* top: 22px;
+  right: 25px; */
+}
+
+.inputBuktiLap {
+  height: 133px;
+  width: 755px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.inputBuktiLap::placeholder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.inputBuktiLap:focus {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  outline: none;
+}
+
+.btnBatal {
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnBatal p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.wrapBtnModal {
+  display: flex;
+  margin-left: 390px;
+}

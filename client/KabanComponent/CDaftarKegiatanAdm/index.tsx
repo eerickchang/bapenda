@@ -18,10 +18,13 @@ export default function CDaftarKegiatanAdm() {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.wrapperTitleDaftarKegiatan}>
-        <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>DAFTAR KEGIATAN</p>
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image src={"/DaftarKegiatan2.svg"} width={40} height={40} />
+        </div>
+        <p style={{ marginLeft: 10, marginBottom: 10 }}>DAFTAR KEGIATAN</p>
       </div>
+      <Gap height={100} width={0} />
       <div className={styles.wrapperAllBtn}>
         <div className={styles.wrapBtnColumn}>
           <p className={styles.title}>Sekertaris</p>
