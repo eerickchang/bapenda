@@ -1,75 +1,109 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    margin-left: 140px;
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
 }
 
-.wrapperTitleDaftarKegiatan {
+.wrapperRiwayatKegiatan {
   display: flex;
-  width: 299px;
+  width: 370px;
   height: 50px;
   text-align: center;
   align-items: center;
   border-bottom: 2.5px solid #1bddbb;
   padding-left: 7px;
   margin-top: 34px;
-  /* background-color: #fff;
-  position: fixed; */
-  z-index: 999;
-  margin-left: 40px;
+  /* padding-bottom: 5px; */
 }
 
 .txtTitle {
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(221, 202, 27, 1);
   margin: 0;
-  width: 300px;
-  margin-top: 1px;
-  /* margin-left: 10px; */
+  margin-left: 19px;
 }
 
-.styleHeader{
+.titleBidang {
   font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: rgba(149, 149, 149, 1);
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  margin-left: 50px;
+  margin-top: 54px;
 }
 
-.styleRow {
-  width: 1690px;
-  height: 70px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.styleData{
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.hover :active{
-  background-color: rgba(232, 232, 232, 1);
-
-}
-
-
-
-.styleLihatDetail{
-  cursor: pointer;
+.wrapFilter{
   display: flex;
+  position: absolute;
+  top: 85px;
+  left: 1468px;
+}
+
+.wrapLihatSemua{
+  display: flex;
+  position: absolute;
+  top: 85px;
+  left: 1468px;
+}
+
+
+.rekanPegawai{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+.rekanAsn{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+
+.styleTupoksi{
+  padding: 5px;
+  background-color: rgba(25, 182, 203);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  align-items: center
+}
+.styleTupoksiTambahan{
+  padding: 5px;
+  background-color: rgba(27, 221, 187, 1);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.styleTxtRow{
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  width: 140px;
+  color: black;
 }
 
-.styleLihatDetail p{
-  margin-left: 10px;
-}
 
-.styleLihatDetail p:hover{
-  border-bottom: 1px solid black;
+
+
+/* ? style from daftarkegiatan */
+.wrap {
+  display: block;
+  margin-left: 17px;
+  padding-bottom: 20px;
 }

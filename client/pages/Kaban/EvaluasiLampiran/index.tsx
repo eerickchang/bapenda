@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  CEvaluasiLampiran,
-  CTinjauRenaksi,
-  Gap,
-  SidebarAdmin,
-} from "../../../KabanComponent";
+import { CTinjauRenaksi, Gap, SidebarAdmin } from "../../../KabanComponent";
 import styles from "./evaluasiLampiran.module.css";
 import sidebarStyles from "../../../KabanComponent/SidebarAdmin/sidebar.module.css";
+import { CEvaluasiLampiran } from "../../../KabanComponent/CEvaluasiLampiran";
 export default function EvaluasiLampiran() {
   return (
     <div className={styles.container}>

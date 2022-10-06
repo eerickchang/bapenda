@@ -97,7 +97,7 @@ const rows = [
 ];
 
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
 
   // const custom = {
@@ -185,16 +185,16 @@ function Row(props) {
   };
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+    Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
       idRenaksi: row.id_renaksi,
     });
-
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+            if (renaksi.sub_bidang === subid) {
               stateChanger((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -202,8 +202,7 @@ function Row(props) {
           });
         }
       );
-    });
-
+    }, 30);
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
@@ -392,15 +391,10 @@ function Row(props) {
           // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
-            <p
-              className={stylesS.styleTxtRow}
-              onClick={() => console.log(row.files)}
-            >
-              {row.nama}
-            </p>
+            <p className={stylesS.styleTxtRow}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+            <p className={stylesS.styleTxtRow}>{row.status}</p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
@@ -562,6 +556,7 @@ function Row(props) {
 }
 
 export const CUbahJadwal = () => {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -572,26 +567,24 @@ export const CUbahJadwal = () => {
   const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            ambilRenaksi.data.map((renaksi) => {
-              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                setPegawai((nextData) => {
-                  return [renaksi, ...nextData];
-                });
-              }
-            });
-          }
-        );
-      });
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === router.query.subid) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
@@ -604,8 +597,6 @@ export const CUbahJadwal = () => {
     fontWeight: 600,
     color: "#959595",
   };
-
-  const router = useRouter();
 
   const clickBack = () => {
     router.push("/Kaban/UbahJadwalRenaksi");
@@ -657,6 +648,7 @@ export const CUbahJadwal = () => {
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawai}
+                      subid={router.query.subid}
                     />
                   ))}
                 </TableBody>
