@@ -270,100 +270,108 @@ export default function CTinjauRenaksiPegawai() {
               </div>
               RENAKSI - {nama}
             </div>
-          </div>
-          <Gap height={206} width={0} />
-          <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell className={styles.styleHeader}></TableCell>
-                  <TableCell className={styles.styleHeader}>Program</TableCell>
-                  <TableCell className={styles.styleHeader}>THL</TableCell>
-                  <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Kegiatan
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Tupoksi Inti
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Tupoksi Tambahan
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Rencana</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {pegawai.map((row) => (
-                  <TableRow hover className={styles.styleRow}>
-                    <TableCell>
-                      <Checkbox onChange={handleChange} name={row.id_renaksi} />
-                      {row.id_renaksi}
+            <Gap height={206} width={0} />
+            <TableContainer
+              style={{ paddingRight: 40, zIndex: 998 }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={styles.styleHeader}></TableCell>
+                    <TableCell className={styles.styleHeader}>
+                      Program
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      <p style={{ fontWeight: 600 }}>{row.program}</p>
+                    <TableCell className={styles.styleHeader}>THL</TableCell>
+                    <TableCell className={styles.styleHeader}>
+                      Kegiatan
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {row.nama}
+                    <TableCell className={styles.styleHeader}>
+                      Sub Kegiatan
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {row.kegiatan}
+                    <TableCell className={styles.styleHeader}>
+                      Tupoksi Inti
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {row.sub_kegiatan}
+                    <TableCell className={styles.styleHeader}>
+                      Tupoksi Tambahan
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {row.tupoksi_inti}
+                    <TableCell className={styles.styleHeader}>
+                      Rencana
                     </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {row.tupoksi_tambahan}
-                    </TableCell>
-                    <TableCell className={styles.styleData}>
-                      {moment(row.start_date).format("MMM")} -{" "}
-                      {moment(row.end_date).format("MMM")}
-                    </TableCell>
-                    {/* <TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {pegawai.map((row) => (
+                    <TableRow hover className={styles.styleRow}>
+                      <TableCell>
+                        <Checkbox
+                          onChange={handleChange}
+                          name={row.id_renaksi}
+                        />
+                        {row.id_renaksi}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        <p style={{ fontWeight: 600 }}>{row.program}</p>
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {row.nama}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {row.kegiatan}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {row.sub_kegiatan}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {row.tupoksi_inti}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {row.tupoksi_tambahan}
+                      </TableCell>
+                      <TableCell className={styles.styleData}>
+                        {moment(row.start_date).format("MMM")} -{" "}
+                        {moment(row.end_date).format("MMM")}
+                      </TableCell>
+                      {/* <TableCell>
                     <div className={styles.styleTxtRow}>
                       <div style={{ flexDirection: "row", display: "flex" }}>
-                        <button
-                          className={styles.btnTerima}
+                      <button
+                      className={styles.btnTerima}
                           onClick={() => btnTerima()}
                         >
                           <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-                        </button>
+                          </button>
                         {showModal ? (
                           <div
                             className={styles.modal}
                             onClick={() => setShowModal(false)}
                           >
-                            <p>
+                          <p>
                               Input Renaksi Feren <b>Berhasil</b>
                               <div className={styles.checkCircle}>
                                 <Image
                                   src={"/Check-circle.svg"}
                                   width={25}
                                   height={25}
-                                />
+                                  />
                               </div>
-                            </p>
-                          </div>
-                        ) : null}
+                              </p>
+                              </div>
+                              ) : null}
                         <Gap width={40} height={0} />
                         <button
                           className={styles.btnTolak}
                           onClick={() => (openModal(), console.log(row.nama))}
                         >
                           <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-                        </button>
+                          </button>
                         <Modal
-                          isOpen={modalIsOpen}
+                        isOpen={modalIsOpen}
                           onAfterOpen={afterOpenModal}
                           onRequestClose={closeModal}
                           style={custom}
                           contentLabel="Example Modal"
                         >
-                          <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
+                        <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
                           <Gap height={20} width={0} />
                           <input
                             className={styles.inputBuktiLap}
@@ -372,7 +380,7 @@ export default function CTinjauRenaksiPegawai() {
                           />
                           <Gap height={20} width={0} />
                           <div className={styles.wrapBtnModal}>
-                            <button onClick={closeModal} className={styles.btnKirim}>
+                          <button onClick={closeModal} className={styles.btnKirim}>
                               <img src={"/BatalIcon.svg"} width={20} height={20} />
                               <p className={styles.txt}>Batal</p>
                             </button>
@@ -382,96 +390,100 @@ export default function CTinjauRenaksiPegawai() {
                               <p>Tolak</p>
                             </button>
                           </div>
-                        </Modal>
+                          </Modal>
                         {showModal ? (
                           <div
-                            className={styles.modal}
+                          className={styles.modal}
                             onClick={() => setShowModal(false)}
                           >
-                            <p>
+                          <p>
                               Renaksi Richard F. Kasenda <b>Ditolak</b>
                             </p>
                             <div className={styles.checkCircle}>
                               <Image src={"/Check-circle.svg"} width={25} height={25} />
-                            </div>
-                          </div>
-                        ) : null}
+                              </div>
+                              </div>
+                              ) : null}
                       </div>
-                    </div>
+                      </div>
                   </TableCell> */}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <div className={stylesS.wrapFilter}>
-            <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-              Terima
-            </button>
-            {showModalTerimaAll ? (
-              <div
-                className={styles.modal}
-                onClick={() => setShowModalTolakAll(false)}
-              >
-                <p>
-                  Semua Permintaan Ubah Jadwal <b>Diterima</b>
-                </p>
-                <div className={styles.checkCircle}>
-                  <Image src={"/Terima.svg"} width={25} height={25} />
-                </div>
-              </div>
-            ) : null}
-            <Gap width={15} height={0} />
-            <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-              Tolak
-            </button>
-            <Modal
-              isOpen={modalTolakAllIsOpen}
-              onAfterOpen={afterOpenModalTolakAll}
-              onRequestClose={closeModal}
-              style={custom}
-              contentLabel="Example Modal"
-            >
-              <h2 className={styles.headerTxtModal}>
-                Tolak Semua Permintaan Ubah Jadwal
-              </h2>
-              <Gap height={20} width={0} />
-              <input
-                className={styles.inputBuktiLap}
-                placeholder="Tambah keterangan"
-                // onChange={(e) => setKetPegawai(e.target.value)}
-              />
-              <Gap height={20} width={0} />
-              <div className={styles.wrapBtnModal}>
-                <button
-                  onClick={closeModalTolakAll}
-                  className={styles.btnKirim}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <div className={stylesS.wrapFilter}>
+              <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
+                <Image src={"/Terima.svg"} width={25} height={25} />
+                Terima
+              </button>
+              {showModalTerimaAll ? (
+                <div
+                  className={styles.modal}
+                  onClick={() => setShowModalTolakAll(false)}
                 >
-                  <img src={"/BatalIcon.svg"} width={20} height={20} />
-                  <p className={styles.txt}>Batal</p>
-                </button>
-                <Gap width={24} height={0} />
-                <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-                  <img src={"/Tolak.svg"} width={20} height={20} />
-                  <p>Tolak</p>
-                </button>
-              </div>
-            </Modal>
-            {showModalTolakAll ? (
-              <div
-                className={styles.modal}
-                onClick={() => setShowModalTolakAll(false)}
-              >
-                <p>
-                  Semua Permintaan Ubah Jadwal <b>Ditolak</b>
-                </p>
-                <div className={styles.checkCircle}>
-                  <Image src={"/Tolak.svg"} width={25} height={25} />
+                  <p>
+                    Semua Permintaan Ubah Jadwal <b>Diterima</b>
+                  </p>
+                  <div className={styles.checkCircle}>
+                    <Image src={"/Terima.svg"} width={25} height={25} />
+                  </div>
                 </div>
-              </div>
-            ) : null}
+              ) : null}
+              <Gap width={15} height={0} />
+              <button
+                onClick={openModalTolakAll}
+                className={styles.btnTolakAll}
+              >
+                <Image src={"/Tolak.svg"} width={25} height={25} />
+                Tolak
+              </button>
+              <Modal
+                isOpen={modalTolakAllIsOpen}
+                onAfterOpen={afterOpenModalTolakAll}
+                onRequestClose={closeModal}
+                style={custom}
+                contentLabel="Example Modal"
+              >
+                <h2 className={styles.headerTxtModal}>
+                  Tolak Semua Permintaan Ubah Jadwal
+                </h2>
+                <Gap height={20} width={0} />
+                <input
+                  className={styles.inputBuktiLap}
+                  placeholder="Tambah keterangan"
+                  // onChange={(e) => setKetPegawai(e.target.value)}
+                />
+                <Gap height={20} width={0} />
+                <div className={styles.wrapBtnModal}>
+                  <button
+                    onClick={closeModalTolakAll}
+                    className={styles.btnKirim}
+                  >
+                    <img src={"/BatalIcon.svg"} width={20} height={20} />
+                    <p className={styles.txt}>Batal</p>
+                  </button>
+                  <Gap width={24} height={0} />
+                  <button onClick={btnTolakAllExp} className={styles.btnBatal}>
+                    <img src={"/Tolak.svg"} width={20} height={20} />
+                    <p>Tolak</p>
+                  </button>
+                </div>
+              </Modal>
+              {showModalTolakAll ? (
+                <div
+                  className={styles.modal}
+                  onClick={() => setShowModalTolakAll(false)}
+                >
+                  <p>
+                    Semua Permintaan Ubah Jadwal <b>Ditolak</b>
+                  </p>
+                  <div className={styles.checkCircle}>
+                    <Image src={"/Tolak.svg"} width={25} height={25} />
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       )}

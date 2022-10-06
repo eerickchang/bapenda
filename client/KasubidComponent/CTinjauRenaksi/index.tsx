@@ -532,39 +532,41 @@ export default function ContentDaftarKegiatan() {
               <div>
                 <Image src={"/TinjauRenaksiTitle.svg"} width={40} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}> TINJAU RENAKSI </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+                {" "}
+                TINJAU RENAKSI{" "}
+              </p>
             </div>
+            <div className={stylesS.wrapLihatSemua}>
+              <button onClick={lihatSemua} className={stylesS.btnFilter}>
+                <Image src={"/LihatSemua.svg"} width={25} height={25} />
+                Lihat Semua
+              </button>
+            </div>
+            <Gap height={186} width={0} />
+            <TableContainer
+              style={{
+                paddingRight: 40,
+                zIndex: 998,
+                paddingBottom: 20,
+              }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={styleHeader}>Pegawai</TableCell>
+                    <TableCell style={styleHeader}>Sub Bidang</TableCell>
+                    <TableCell style={styleHeader}>Aksi</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {pegawai.map((row) => (
+                    <Row key={row.nip} row={row} stateChange={setPegawai} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
-          <div className={stylesS.wrapLihatSemua}>
-            <button onClick={lihatSemua} className={stylesS.btnFilter}>
-              <Image src={"/LihatSemua.svg"} width={25} height={25} />
-              Lihat Semua
-            </button>
-          </div>
-          <Gap height={186} width={0} />
-          <TableContainer
-            style={{
-              paddingLeft: 50,
-              paddingRight: 40,
-              zIndex: 998,
-              paddingBottom: 20,
-            }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell style={styleHeader}>Pegawai</TableCell>
-                  <TableCell style={styleHeader}>Sub Bidang</TableCell>
-                  <TableCell style={styleHeader}>Aksi</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </div>
       )}
     </>

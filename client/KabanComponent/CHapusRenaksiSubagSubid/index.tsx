@@ -12,7 +12,7 @@ import styles from "./TableMUI.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
+import moment, { duration } from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -97,7 +97,7 @@ const rows = [
 ];
 
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
 
   // const custom = {
@@ -185,16 +185,16 @@ function Row(props) {
   };
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+    Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
       idRenaksi: row.id_renaksi,
     });
-
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+            if (renaksi.sub_bidang === subid) {
               stateChanger((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -202,8 +202,7 @@ function Row(props) {
           });
         }
       );
-    });
-
+    }, 30);
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
@@ -368,116 +367,120 @@ function Row(props) {
     btnTolakAll();
   };
 
-  const router = useRouter();
-
-  const clickRow = () => {
-    router.push({
-      pathname: "/Kaban/EvaluasiSubagSubid",
-      query: {
-        subid: row.sub_bidang,
-      },
-    });
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
+
+    const styleCollapse = {
+      background: "rgba(232, 232, 232, 1)",
+      borderTopColor: "rgba(165, 165, 165, 0.5)",
+      borderTopWidth: 2,
+      borderTopStyle: "solid",
+      marginBottom: 20,
     };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
+    const styleTxtKet = {
+      display: "flex",
+      position: "absolute",
+      top: 140,
+      color: "rgba(149, 149, 149, 1)",
     };
 
   return (
     <>
-      <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
-        {showModalTerimaAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Diterima</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Terima.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        {/* <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal> */}
-      </div>
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
           // sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell onClick={clickRow}>
-            <p style={style1}>{row.sub_bidang}</p>
-          </TableCell>
-          <TableCell onClick={clickRow}>
-            <p style={style2}>{row.nama}</p>
+          <TableCell>
+            <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <div className={styles.styleTxtRow}>
-              <div style={{ flexDirection: "row", display: "flex" }}>
-                <button
-                  className={styles.btnTerima}
-                  onClick={() => btnTerima()}
-                >
-                  <Image src={"/Terima.svg"} width={20} height={20} /> Terima
+            <p style={style2}>{row.status}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>
+              {row.files === "" ? null : (
+                <div className={styles.wrapFileLampiran}>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: 10 }}>
+                      <Image src={"/IconPDF.svg"} width={25} height={28} />
+                    </div>
+                    1 files
+                  </div>
+                  <Gap width={0} height={10} />
+                  {/* <div style={{ display: "flex" }}>
+                    <div style={{ marginRight: 10 }}>
+                      <Image src={"/IconPDF.svg"} width={25} height={28} />
+                    </div>
+                    2 files
+                  </div> */}
+                </div>
+              )}
+            </p>
+          </TableCell>
+        </TableRow>
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0 }} colSpan={6}>
+          <Collapse
+            style={styleCollapse}
+            in={open}
+            timeout="auto"
+          >
+            <div className={styles.wrapperExpand}>
+              <div className={styles.wrapperKeterangan}>
+                Keterangan:
+                <div className={styles.contentKeterangan}>
+                  {row.ket_pegawai}
+                  <p
+                    style={styleTxtKet}
+                  >
+                  </p>
+                </div>
+              </div>
+              <div className={styles.wrapperLampiran}>
+                Lampiran:
+                {row.files === "" ? null : (
+                  <div className={styles.contentLampiran} onClick={btnDw}>
+                    {/* <div className={styles.fileLampiran}>
+                          <Image src={"/IconPNG.svg"} width={35} height={40} />
+                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
+                        </div> */}
+                    <div className={styles.fileLampiran}>
+                      <Image src={"/IconPDF.svg"} width={35} height={40} />
+                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className={styles.wrapperBtnTerimaTolak}>
+                <Gap width={0} height={50} />
+                <button onClick={btnTerima} className={styles.styleBtn}>
+                  <Image src={"/Terima.svg"} width={30} height={30} />
+                  <p>Terima</p>
                 </button>
                 {showModal ? (
                   <div
@@ -485,23 +488,25 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Renaksi {row.nama} <b>Diterima</b>
-                      <div className={styles.checkCircle}>
-                        <Image
-                          src={"/Check-circle.svg"}
-                          width={25}
-                          height={25}
-                        />
-                      </div>
+                      Ubah Jadwal Denny G. Lumy <b>Diterima</b>
                     </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                    </div>
                   </div>
                 ) : null}
-                <Gap width={40} height={0} />
+                <Gap width={0} height={20} />
                 <button
-                  className={styles.btnTolak}
-                  onClick={() => (openModal(), console.log(row.nama))}
+                  onClick={openModal}
+                  style={{
+                    fontWeight: 700,
+                    background: "rgba(255, 1, 100, 1)",
+                  }}
+                  className={styles.styleBtn}
+                  // onClick={btnTolak}
                 >
-                  <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
+                  <Image src={"/Tolak.svg"} width={30} height={30} />
+                  <p>Tolak</p>
                 </button>
                 <Modal
                   isOpen={modalIsOpen}
@@ -511,7 +516,7 @@ function Row(props) {
                   contentLabel="Example Modal"
                 >
                   <h2 className={styles.headerTxtModal}>
-                    Tolak Permintann Ubah Jadwal
+                    Tolak Permintaan Ubah Jadwal
                   </h2>
                   <Gap height={20} width={0} />
                   <input
@@ -532,29 +537,30 @@ function Row(props) {
                     </button>
                   </div>
                 </Modal>
-                {showModal ? (
+                {showModalTolak ? (
                   <div
                     className={styles.modal}
-                    onClick={() => setShowModal(false)}
+                    onClick={() => setShowModalTolak(false)}
                   >
                     <p>
                       Ubah Jadwal {row.nama} <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                      <Image src={"/Tolak.svg"} width={25} height={25} />
                     </div>
                   </div>
                 ) : null}
               </div>
             </div>
-          </TableCell>
-        </TableRow>
+          </Collapse>
+        </TableCell>
       </React.Fragment>
     </>
   );
 }
 
-export const CEvaluasiLampiran = () => {
+export const CHapusRenaksiSubagSubid = () => {
+  const router = useRouter();
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
   const [asn, setAsn] = useState("");
@@ -562,41 +568,27 @@ export const CEvaluasiLampiran = () => {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
 
-  const [pegawaiSubag, setPegawaiSubag] = useState([]);
-  const [pegawaiSubid, setPegawaiSubid] = useState([]);
+  const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            let pegawaiYgAdaRenaksi = [];
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
-
-            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              setPegawaiSubid((nextData) => {
-                return [item, ...nextData];
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === router.query.subid) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
               });
-            });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
-      });
+            }
+          });
+        }
+      );
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
@@ -610,27 +602,38 @@ export const CEvaluasiLampiran = () => {
     color: "#959595",
   };
 
-  const styleContainer = {
-    paddingLeft: 2,
-    paddingRight: 40,
-    zIndex: 998,
-    paddingBottom: 20,
+  const clickBack = () => {
+    router.push("/Kaban/HapusRenaksi");
+    // console.log(dataCakin);
   };
+
+    const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+    const styleTitle = {
+      marginLeft: 5,
+      marginBottom: 10,
+      color: "rgba(221, 202, 27, 1)",
+    };
+
 
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitle}>
+            <div className={styles.wrapperTitle}>
               <div>
                 <Image
-                  src={"/EvaluasiLampiranTitle.svg"}
-                  width={40}
-                  height={40}
+                  style={{ cursor: "pointer" }}
+                  onClick={clickBack}
+                  src={"/Back.svg"}
+                  width={45}
+                  height={45}
                 />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>EVALUASI LAMPIRAN</p>
+              <div>
+                <Image src={"/HapusRenaksiTitle.svg"} width={50} height={40} />
+              </div>
+              <p style={styleTitle}>HAPUS RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
             <TableContainer
@@ -639,52 +642,27 @@ export const CEvaluasiLampiran = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={style} width={700}>
-                      Sub Bagian
+                    <TableCell style={style} width={500}>
+                      Pegawai
                     </TableCell>
-                    <TableCell style={style} width={700}>
-                      Kepala Sub Bagian
+                    <TableCell style={style} width={500}>
+                      Tupoksi
                     </TableCell>
-                    <TableCell style={style} width={700}>
-                      Aksi
+                    <TableCell style={style} width={500}>
+                      Rencana
                     </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {pegawaiSubid.map((row) => (
-                    <Row
-                      key={row.id_renaksi}
-                      row={row}
-                      stateChanger={setPegawaiSubid}
-                    />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Gap height={50} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell style={style} width={700}>
-                      Sub Bidang
-                    </TableCell>
-                    <TableCell style={style} width={700}>
-                      Kepala Sub Bidang
-                    </TableCell>
-                    <TableCell style={style} width={700}>
-                      Aksi
+                    <TableCell style={style} width={500}>
+                      Lampiran
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawaiSubid.map((row) => (
+                  {pegawai.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawaiSubid}
+                      stateChanger={setPegawai}
+                      subid={router.query.subid}
                     />
                   ))}
                 </TableBody>
