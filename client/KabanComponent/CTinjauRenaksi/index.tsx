@@ -23,82 +23,10 @@ import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, arrSubid } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketKaban, setKetKaban] = useState("");
 
   // const custom = {
   //   content: {
@@ -166,43 +94,99 @@ function Row(props) {
   const [styleRow, setStyleRow] = useState("");
 
   const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        let renaksi = ambilRenaksi.data;
+        console.log("Renaksi: ", renaksi);
+        console.log("Subid: ", arrSubid);
+
+        let renaksiSDarrSubid = [];
+        renaksiSDarrSubid = renaksi.filter((elA) => {
+          return arrSubid.some((elB) => elA["sub_bidang"] == elB["sub_bidang"]);
+        });
+
+        renaksiSDarrSubid.map((item) => {
+          Axios.post("http://localhost:3001/kabanMenerimaRenaksiFinal", {
+            idRenaksi: item.id_renaksi,
           });
-        }
-      );
-    });
+        });
+
+        console.log("Renaksi Arr: ", renaksiSDarrSubid);
+      }
+    );
 
     stateChanger([]);
-    // window.location.reload();
+
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChanger((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-      idRenaksi: row.id_renaksi,
-    });
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (row.sub_bidang === renaksi.sub_bidang) {
+            Axios.post("http://localhost:3001/kabanMenerimaRenaksiFinal", {
+              idRenaksi: renaksi.id_renaksi,
+            });
+          }
+        });
+      }
+    );
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
               stateChanger((nextData) => {
-                return [renaksi, ...nextData];
+                return [item, ...nextData];
               });
-            }
-          });
-        }
-      );
-    });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
 
     setShowModal(true);
     setTimeout(() => {
@@ -305,32 +289,47 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (row.sub_bidang === renaksi.sub_bidang) {
+            Axios.post("http://localhost:3001/kabanMenolakRenaksiFinal", {
+              idRenaksi: renaksi.id_renaksi,
+              ketKaban: ketKaban,
+            });
+          }
+        });
+      }
+    );
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    stateChanger([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChanger((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
 
     closeModal();
     btnTolak();
@@ -379,19 +378,19 @@ function Row(props) {
     });
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>
@@ -517,6 +516,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
+                    onChange={(e) => setKetKaban(e.target.value)}
                     // onChange={(e) => setKetPegawai(e.target.value)}
                   />
                   <Gap height={20} width={0} />
@@ -571,7 +571,7 @@ export const CTinjauRenaksi = () => {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
           (ambilRenaksi) => {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
@@ -619,9 +619,7 @@ export const CTinjauRenaksi = () => {
               <div>
                 <Image src={"/TinjauRenaksiTitle.svg"} width={40} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>
-                TINJAU RENAKSI
-              </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
             <TableContainer
@@ -686,6 +684,7 @@ export const CTinjauRenaksi = () => {
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawaiSubid}
+                      arrSubid={pegawaiSubid}
                     />
                   ))}
                 </TableBody>

@@ -1,103 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import stylesS from "./cUbahJadwalRenaksi.module.css";
 
-import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
-import Image from "next/image";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import FileDownload from "js-file-download";
-import Modal from "react-modal";
-import { Checkbox } from "@mui/material";
+import "jspdf-autotable";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import Modal from "react-modal";
+import Gap from "../Gap";
+import styles from "./TableMUI.module.css";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, arrSubid } = props;
   const [open, setOpen] = React.useState(false);
 
   // const custom = {
@@ -166,43 +88,99 @@ function Row(props) {
   const [styleRow, setStyleRow] = useState("");
 
   const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+      (ambilRenaksi) => {
+        let renaksi = ambilRenaksi.data;
+        console.log("Renaksi: ", renaksi);
+        console.log("Subid: ", arrSubid);
+
+        let renaksiSDarrSubid = [];
+        renaksiSDarrSubid = renaksi.filter((elA) => {
+          return arrSubid.some((elB) => elA["sub_bidang"] == elB["sub_bidang"]);
+        });
+
+        renaksiSDarrSubid.map((item) => {
+          Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+            idRenaksi: item.id_renaksi,
           });
-        }
-      );
-    });
+        });
+
+        console.log("Renaksi Arr: ", renaksiSDarrSubid);
+      }
+    );
 
     stateChanger([]);
-    // window.location.reload();
+
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChanger((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-      idRenaksi: row.id_renaksi,
-    });
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (row.sub_bidang === renaksi.sub_bidang) {
+            Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+              idRenaksi: renaksi.id_renaksi,
+            });
+          }
+        });
+      }
+    );
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
               stateChanger((nextData) => {
-                return [renaksi, ...nextData];
+                return [item, ...nextData];
               });
-            }
-          });
-        }
-      );
-    });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
 
     setShowModal(true);
     setTimeout(() => {
@@ -379,19 +357,19 @@ function Row(props) {
     });
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>
@@ -571,7 +549,7 @@ export const CEvaluasiLampiran = () => {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
           (ambilRenaksi) => {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
@@ -630,12 +608,12 @@ export const CEvaluasiLampiran = () => {
                   height={40}
                 />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>EVALUASI LAMPIRAN</p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+                EVALUASI LAMPIRAN
+              </p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -662,9 +640,7 @@ export const CEvaluasiLampiran = () => {
               </Table>
             </TableContainer>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -685,6 +661,7 @@ export const CEvaluasiLampiran = () => {
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawaiSubid}
+                      arrSubid={pegawaiSubid}
                     />
                   ))}
                 </TableBody>

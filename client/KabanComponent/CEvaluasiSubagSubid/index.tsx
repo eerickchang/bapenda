@@ -191,7 +191,7 @@ function Row(props) {
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -444,19 +444,13 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse
-            style={styleCollapse}
-            in={open}
-            timeout="auto"
-          >
+          <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
-                  <p
-                    style={styleTxtKet}
-                  ></p>
+                  <p style={styleTxtKet}></p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>
@@ -574,7 +568,7 @@ export const CEvaluasiSubagSubid = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.subid) {
@@ -627,7 +621,9 @@ export const CEvaluasiSubagSubid = () => {
                   height={40}
                 />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>EVALUASI LAMPIRAN</p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+                EVALUASI LAMPIRAN
+              </p>
             </div>
             <Gap height={150} width={0} />
             <TableContainer

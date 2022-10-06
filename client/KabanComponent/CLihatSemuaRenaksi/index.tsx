@@ -22,41 +22,26 @@ import next from "next";
 Axios.defaults.withCredentials = true;
 
 export default function CLihatSemuaRenaksi() {
+  const router = useRouter();
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      // let semuaRenaksi = [];
-
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        setSubid(masuk.data.user[0].sub_bidang);
-        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
-          // for (var key in ambilRenaksi.data) {
-          //   semuaRenaksi.push(ambilRenaksi.data[key]);
-          // }
-          // console.log(ambilRenaksi.data);
+      Axios.get("http://localhost:3001/KabanAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (
-              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-              moment(renaksi.end_date).format("YYYY") ===
-                moment().format("YYYY")
-            ) {
+            if (renaksi.sub_bidang === router.query.subid) {
               setSemuaRenaksi((nextData) => {
                 return [renaksi, ...nextData];
               });
             }
           });
-        });
-      });
-
-      setTahunClick(moment().format("YYYY"));
-
-      // console.log(semuaRenaksi);
+        }
+      );
     }
-  }, []);
-
-  const router = useRouter();
+  }, [router.query, router.isReady]);
 
   const clickBack = () => {
     router.push("/Kaban/TinjauRenaksi");
@@ -71,179 +56,6 @@ export default function CLihatSemuaRenaksi() {
   const [nama, setNama] = useState("");
   const [semuaRenaksi, setSemuaRenaksi] = useState([]);
   const [subid, setSubid] = useState();
-
-  const tahun = [
-    {
-      id: 6,
-      tahun: "2020",
-      onclick: () => (
-        setTahunClick("2020"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2020").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 7,
-      tahun: "2021",
-      onclick: () => (
-        setTahunClick("2021"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2021").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 8,
-      tahun: "2022",
-      onclick: () => (
-        setTahunClick("2022"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2022").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 9,
-      tahun: "2023",
-    },
-    {
-      id: 10,
-      tahun: "2024",
-    },
-    {
-      id: 11,
-      tahun: "2025",
-    },
-  ];
-
-  const btnDwExcel = () => {
-    const workSheet = XLSX.utils.json_to_sheet(semuaRenaksi);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "Data Renaksi");
-
-    //BUFFER
-    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
-
-    //BINARY STRING
-    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
-
-    //DOWNLOAD
-    XLSX.writeFile(workBook, `Data Renaksi ${subid}.xlsx`);
-  };
-
-  const btnDwPDF = () => {
-    const unit = "pt";
-    const size = "A3";
-    const orientation = "portrait";
-
-    const marginLeft = 40;
-    const doc = new jsPDF(orientation, unit, size);
-
-    doc.setFontSize(15);
-
-    const title = `Data Renaksi ${subid}`;
-    const headers = [
-      [
-        "No",
-        "Jabatan",
-        "ASN",
-        "THL",
-        "Program",
-        "Kegiatan",
-        "Sub Kegiatan",
-        "Tupoksi Inti",
-        "Tupoksi Tambahan",
-        "Rencana",
-      ],
-    ];
-
-    const data = semuaRenaksi.map((item) => [
-      item.id_renaksi,
-      item.jabatan,
-      item.nama,
-      item.nama_thl,
-      item.program,
-      item.kegiatan,
-      item.sub_kegiatan,
-      item.tupoksi_inti,
-      item.tupoksi_tambahan,
-      `${moment(item.start_date).format("MMM")} - ${moment(
-        item.end_date
-      ).format("MMM")}`,
-    ]);
-
-    let content = {
-      startY: 50,
-      head: headers,
-      body: data,
-      theme: "grid",
-    };
-
-    doc.text(title, marginLeft, 40);
-    doc.autoTable(content);
-    doc.save(`Data Renaksi ${subid}`);
-  };
-
-  const unduh = [
-    {
-      id: 1,
-      unduh: "Excel",
-      // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
-      onclick: btnDwExcel,
-    },
-    {
-      id: 2,
-      unduh: "PDF",
-      // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
-      onclick: btnDwPDF,
-    },
-  ];
 
   const columns = [
     { id: "no", label: "No", align: "center" },
@@ -300,165 +112,6 @@ export default function CLihatSemuaRenaksi() {
     },
   ];
 
-  const rows = [
-    {
-      no: "1",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "2",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "3",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "4",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "5",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "6",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "7",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "8",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "9",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "10",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "11",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "12",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-  ];
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
   return (
     <div className={styles.container}>
       <div>
@@ -475,60 +128,9 @@ export default function CLihatSemuaRenaksi() {
           <div>
             <Image src={"/HapusRenaksiTitle.svg"} width={50} height={40} />
           </div>
-          <p style={{ marginLeft: 5, marginBottom: 10 }}>RENAKSI subidang . . . . .</p>
-        </div>
-        <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterTahun}>
-            <div
-              className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-            >
-              <Image src={"/TahunIcon.svg"} width={23} height={23} />
-              <p>Tahun</p>
-            </div>
-            {activeDropdownTahun && (
-              <div
-                className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
-              >
-                {tahun.map((item) => (
-                  <p key={item.id} onClick={item.onclick}>
-                    {item.tahun}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className={styles.wrapperUnduh}>
-            <div
-              className={styles.btnUnduh}
-              onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
-            >
-              <Image src={"/UnduhIcon.svg"} width={23} height={23} />
-              <p>Unduh</p>
-            </div>
-            {activeDropdownUnduh && (
-              <div
-                className={styles.wrapperSelectUnduh}
-                onClick={() => setActiveDropdownUnduh(false)}
-              >
-                {unduh.map((item) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      fontFamily: "Poppins",
-                      fontWeight: 700,
-                      fontSize: 22,
-                    }}
-                    key={item.id}
-                    onClick={item.onclick}
-                  >
-                    <p>{item.unduh}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <p style={{ marginLeft: 5, marginBottom: 10 }}>
+            Renaksi Sub Bidang {router.query.subid}
+          </p>
         </div>
       </div>
 

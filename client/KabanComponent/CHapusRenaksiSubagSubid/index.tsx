@@ -191,7 +191,7 @@ function Row(props) {
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiDihapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -381,20 +381,20 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleCollapse = {
-      background: "rgba(232, 232, 232, 1)",
-      borderTopColor: "rgba(165, 165, 165, 0.5)",
-      borderTopWidth: 2,
-      borderTopStyle: "solid",
-      marginBottom: 20,
-    };
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 20,
+  };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "absolute",
-      top: 140,
-      color: "rgba(149, 149, 149, 1)",
-    };
+  const styleTxtKet = {
+    display: "flex",
+    position: "absolute",
+    top: 140,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
@@ -445,20 +445,13 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse
-            style={styleCollapse}
-            in={open}
-            timeout="auto"
-          >
+          <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
-                  <p
-                    style={styleTxtKet}
-                  >
-                  </p>
+                  <p style={styleTxtKet}></p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>
@@ -576,7 +569,7 @@ export const CHapusRenaksiSubagSubid = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiDihapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.subid) {
@@ -607,13 +600,12 @@ export const CHapusRenaksiSubagSubid = () => {
     // console.log(dataCakin);
   };
 
-    const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
-    const styleTitle = {
-      marginLeft: 5,
-      marginBottom: 10,
-      color: "rgba(221, 202, 27, 1)",
-    };
-
+  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleTitle = {
+    marginLeft: 5,
+    marginBottom: 10,
+    color: "rgba(221, 202, 27, 1)",
+  };
 
   return (
     <>
@@ -636,9 +628,7 @@ export const CHapusRenaksiSubagSubid = () => {
               <p style={styleTitle}>HAPUS RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>

@@ -97,7 +97,7 @@ const rows = [
 ];
 
 function Row(props) {
-  const { row, stateChanger } = props;
+  const { row, stateChanger, arrSubid } = props;
   const [open, setOpen] = React.useState(false);
 
   // const custom = {
@@ -166,43 +166,99 @@ function Row(props) {
   const [styleRow, setStyleRow] = useState("");
 
   const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      (ambilRenaksi) => {
+        let renaksi = ambilRenaksi.data;
+        console.log("Renaksi: ", renaksi);
+        console.log("Subid: ", arrSubid);
+
+        let renaksiSDarrSubid = [];
+        renaksiSDarrSubid = renaksi.filter((elA) => {
+          return arrSubid.some((elB) => elA["sub_bidang"] == elB["sub_bidang"]);
+        });
+
+        renaksiSDarrSubid.map((item) => {
+          Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+            idRenaksi: item.id_renaksi,
           });
-        }
-      );
-    });
+        });
+
+        console.log("Renaksi Arr: ", renaksiSDarrSubid);
+      }
+    );
 
     stateChanger([]);
-    // window.location.reload();
+
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              stateChanger((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-      idRenaksi: row.id_renaksi,
-    });
+    Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (row.sub_bidang === renaksi.sub_bidang) {
+            Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+              idRenaksi: renaksi.id_renaksi,
+            });
+          }
+        });
+      }
+    );
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubid.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
               stateChanger((nextData) => {
-                return [renaksi, ...nextData];
+                return [item, ...nextData];
               });
-            }
-          });
-        }
-      );
-    });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+    }, 30);
 
     setShowModal(true);
     setTimeout(() => {
@@ -637,9 +693,7 @@ export const CUbahJadwalRenaksi = () => {
               </p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -666,9 +720,7 @@ export const CUbahJadwalRenaksi = () => {
               </Table>
             </TableContainer>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -689,6 +741,7 @@ export const CUbahJadwalRenaksi = () => {
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawaiSubid}
+                      arrSubid={pegawaiSubid}
                     />
                   ))}
                 </TableBody>

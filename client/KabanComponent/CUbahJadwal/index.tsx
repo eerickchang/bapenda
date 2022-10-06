@@ -381,20 +381,20 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleCollapse = {
-      background: "rgba(232, 232, 232, 1)",
-      borderTopColor: "rgba(165, 165, 165, 0.5)",
-      borderTopWidth: 2,
-      borderTopStyle: "solid",
-      marginBottom: 20,
-    };
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 20,
+  };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "absolute",
-      top: 140,
-      color: "rgba(149, 149, 149, 1)",
-    };
+  const styleTxtKet = {
+    display: "flex",
+    position: "absolute",
+    top: 140,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
@@ -416,10 +416,13 @@ function Row(props) {
             <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.status}</p>
+            <p style={style2}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.kegiatan}</p>
+            <p style={style2}>
+              {`${moment(row.start_date).format("MMM")} -
+                ${moment(row.end_date).format("MMM")}`}
+            </p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>
@@ -445,19 +448,13 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse
-            style={styleCollapse}
-            in={open}
-            timeout="auto"
-          >
+          <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
-                  <p
-                    style={styleTxtKet}
-                  >
+                  <p style={styleTxtKet}>
                     Pengajuan Ubah jadwal :
                     <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
                       {`${moment(row.req_start_date).format("MMM")} - ${moment(
@@ -638,16 +635,10 @@ export const CUbahJadwal = () => {
               <div>
                 <Image src={"/UbahJadwalTitle.svg"} width={50} height={40} />
               </div>
-              <p
-                style={styleTitle}
-              >
-                UBAH JADWAL
-              </p>
+              <p style={styleTitle}>UBAH JADWAL</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
