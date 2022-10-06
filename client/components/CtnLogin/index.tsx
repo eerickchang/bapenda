@@ -12,6 +12,7 @@ export default function CtnLogin() {
 
   const [nip, setNip] = useState("");
   const [sandi, setSandi] = useState("");
+  let [message, setMessage] = useState("");
 
   const handleClick = () => {
     router.push("/Umum/LupaSandi");
@@ -30,6 +31,7 @@ export default function CtnLogin() {
     }).then((response) => {
       if (response.data.message) {
         console.log(response.data.message);
+        setMessage(response.data.message);
       } else if (response.data[0].jabatan === "Kepala Badan") {
         router.push("/Kaban/Dashboard");
       } else if (response.data[0].jabatan === "Staff") {
@@ -111,6 +113,7 @@ export default function CtnLogin() {
           title="Daftar"
           onClick={btnDaftar}
         />
+        <p style={{ color: "white" }}>{message}</p>
       </div>
     </div>
   );

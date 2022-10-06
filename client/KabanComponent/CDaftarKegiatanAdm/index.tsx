@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 export default function CDaftarKegiatanAdm() {
   const router = useRouter();
   const clickSubid = (subid) => {
-    // router.push("/Admin/DaftarKegiatanSubid");
     router.push({
       pathname: "/Kaban/DaftarKegiatanSubid",
       query: {

@@ -103,6 +103,7 @@ export default function CtnDaftar() {
               setNamaReg(e.target.value);
             }}
             type="text"
+            id="user_name"
           />
           <Gap width={0} height={35} />
           <TxtInputDaftar
@@ -115,6 +116,7 @@ export default function CtnDaftar() {
               setNipReg(e.target.value);
             }}
             type="number"
+            id="user_nip"
           />
           <Gap width={0} height={35} />
           <TxtInputDaftar
@@ -141,7 +143,14 @@ export default function CtnDaftar() {
                   onClick={(e) => setActiveSubBidang1(!activeSubBidang1)}
                 >
                   <div>
-                    <p onClick={() => setValueTxt("Sekretaris")}>Sekretaris</p>
+                    <p
+                      onClick={() => {
+                        setValueTxt("Sekretaris");
+                        setBidangReg("Sekretaris");
+                      }}
+                    >
+                      Sekretaris
+                    </p>
                   </div>
                   {/* {jabatanReg === "Kabid"
                     ? activeSubBidang1 === false
@@ -193,7 +202,12 @@ export default function CtnDaftar() {
                   onClick={() => setActiveSubBidang2(!activeSubBidang2)}
                 >
                   <div>
-                    <p onClick={() => setValueTxt("Pajak Daerah")}>
+                    <p
+                      onClick={() => {
+                        setValueTxt("Pajak Daerah");
+                        setBidangReg("Pajak Daerah");
+                      }}
+                    >
                       Pajak Daerah
                     </p>
                   </div>
@@ -246,9 +260,10 @@ export default function CtnDaftar() {
                 >
                   <div>
                     <p
-                      onClick={() =>
-                        setValueTxt("Retribusi dan Lain-lain Pendapatan")
-                      }
+                      onClick={() => {
+                        setValueTxt("Retribusi dan Lain-lain Pendapatan");
+                        setBidangReg("Retribusi dan Lain-lain Pendapatan");
+                      }}
                     >
                       Retribusi & Lain-lain Pendapatan
                     </p>
@@ -306,9 +321,10 @@ export default function CtnDaftar() {
                 >
                   <div>
                     <p
-                      onClick={() =>
-                        setValueTxt("Perencanaan dan Pengembangan")
-                      }
+                      onClick={() => {
+                        setValueTxt("Perencanaan dan Pengembangan");
+                        setBidangReg("Perencanaan dan Pengembangan");
+                      }}
                     >
                       Perencanaan & Pengembangan
                     </p>
@@ -361,7 +377,12 @@ export default function CtnDaftar() {
                   onClick={() => setActiveSubBidang5(!activeSubBidang5)}
                 >
                   <div>
-                    <p onClick={() => setValueTxt("Pengendalian dan Evaluasi")}>
+                    <p
+                      onClick={() => {
+                        setValueTxt("Pengendalian dan Evaluasi");
+                        setBidangReg("Pengendalian dan Evaluasi");
+                      }}
+                    >
                       Pengendalian & Evaluasi
                     </p>
                   </div>
@@ -471,10 +492,10 @@ export default function CtnDaftar() {
             height={25}
             title="Password"
             placeholder="Masukkan Kata Sandi"
-            type="password"
             onChange={(e) => {
               setSandiReg(e.target.value);
             }}
+            id="user_password"
           />
         </div>
       </div>

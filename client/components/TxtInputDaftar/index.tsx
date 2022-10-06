@@ -12,6 +12,7 @@ interface TxtInputDaftarProps {
   type: string;
   value: string;
   className: string;
+  id: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -26,6 +27,7 @@ export default function TxtInputDaftar(props: TxtInputDaftarProps) {
     type = "text",
     value,
     className = styles.container,
+    id,
   } = props;
 
   return (
@@ -41,6 +43,7 @@ export default function TxtInputDaftar(props: TxtInputDaftarProps) {
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        id={id}
       ></input>
     </div>
   );

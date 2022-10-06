@@ -25,7 +25,7 @@ import Checkbox from "@mui/material/Checkbox";
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
-  const { row, stateChange } = props;
+  const { row, stateChange, subid } = props;
   const [open, setOpen] = React.useState(false);
 
   //style row
@@ -280,18 +280,14 @@ function Row(props) {
       status: "Semua",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
+        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === subid) {
+              stateChange((nextData) => {
+                return [renaksi, ...nextData];
               });
             }
-          );
+          });
         })
       ),
     },
@@ -300,19 +296,17 @@ function Row(props) {
       status: "Jadwal diubah",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
+        Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
       ),
     },
 
@@ -321,19 +315,17 @@ function Row(props) {
       status: "Sementara",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
+        Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
       ),
     },
 
@@ -342,19 +334,17 @@ function Row(props) {
       status: "Selesai",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
+        Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
       ),
     },
 
@@ -363,19 +353,17 @@ function Row(props) {
       status: "Hapus",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
+        Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
       ),
     },
 
@@ -384,19 +372,17 @@ function Row(props) {
       status: "Ditambah",
       onclick: () => (
         stateChange([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-                  stateChange((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
+        Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
       ),
     },
   ];
@@ -432,9 +418,7 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
-          <div
-            style={{ display: "flex", padding: 30, alignItems: "center" }}
-          >
+          <div style={{ display: "flex", padding: 30, alignItems: "center" }}>
             {row.foto === "" ? (
               <Image
                 src={"/SidebarProfile.svg"}
@@ -491,34 +475,32 @@ function Row(props) {
 }
 
 export default function CDaftarKegiatanSubid() {
+  const router = useRouter();
   const [domLoaded, setDomLoaded] = useState(false);
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              setPegawai((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
+      Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (renaksi.sub_bidang === router.query.subid) {
+            setPegawai((nextData) => {
+              return [renaksi, ...nextData];
+            });
+          }
         });
       });
     }
-  }, []);
-
-  const router = useRouter();
+  }, [router.query, router.isReady]);
 
   const clickBack = () => {
-    router.push("/Admin/DaftarKegiatan");
+    router.push("/Kaban/DaftarKegiatan");
     // console.log(dataCakin);
   };
 
@@ -544,7 +526,12 @@ export default function CDaftarKegiatanSubid() {
           </div>
           <Gap height={106} width={0} />
           <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 99, paddingBottom: 30 }}
+            style={{
+              paddingLeft: 50,
+              paddingRight: 40,
+              zIndex: 99,
+              paddingBottom: 30,
+            }}
           >
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
@@ -562,7 +549,12 @@ export default function CDaftarKegiatanSubid() {
               </TableHead>
               <TableBody>
                 {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
+                  <Row
+                    key={row.nip}
+                    row={row}
+                    stateChange={setPegawai}
+                    subid={router.query.subid}
+                  />
                 ))}
               </TableBody>
             </Table>
