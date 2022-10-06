@@ -59,7 +59,7 @@ export default function CLihatSemuaRenaksi() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Admin/TinjauRenaksi");
+    router.push("/Kaban/TinjauRenaksi");
     // console.log(dataCakin);
   };
 
@@ -463,18 +463,20 @@ export default function CLihatSemuaRenaksi() {
     <div className={styles.container}>
       <div>
         <div className={styles.wrapperTitle}>
-          <Image
-            style={{ cursor: "pointer" }}
-            onClick={clickBack}
-            src={"/Back.svg"}
-            width={50}
-            height={50}
-          />
-          <p className={styles.txtTitle}>
-            RENAKSI PENGEMBANGAN TEKNOLOGI - TAHUN {tahunClick}
-          </p>
+          <div>
+            <Image
+              style={{ cursor: "pointer" }}
+              onClick={clickBack}
+              src={"/Back.svg"}
+              width={45}
+              height={45}
+            />
+          </div>
+          <div>
+            <Image src={"/HapusRenaksiTitle.svg"} width={50} height={40} />
+          </div>
+          <p style={{ marginLeft: 5, marginBottom: 10 }}>RENAKSI subidang . . . . .</p>
         </div>
-
         <div className={styles.wrapperFilter}>
           <div className={styles.wrapperFilterTahun}>
             <div
@@ -530,6 +532,7 @@ export default function CLihatSemuaRenaksi() {
         </div>
       </div>
 
+      <Gap height={100} />
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
       <TableContainer
         sx={{

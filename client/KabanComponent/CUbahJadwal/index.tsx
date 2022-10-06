@@ -367,12 +367,34 @@ function Row(props) {
     btnTolakAll();
   };
 
-  const style = {
+  const style1 = {
     fontFamily: "Poppins",
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: 600,
-    color: "#959595",
+    color: "#000",
   };
+
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
+
+    const styleCollapse = {
+      background: "rgba(232, 232, 232, 1)",
+      borderTopColor: "rgba(165, 165, 165, 0.5)",
+      borderTopWidth: 2,
+      borderTopStyle: "solid",
+      marginBottom: 20,
+    };
+
+    const styleTxtKet = {
+      display: "flex",
+      position: "absolute",
+      top: 140,
+      color: "rgba(149, 149, 149, 1)",
+    };
 
   return (
     <>
@@ -391,13 +413,13 @@ function Row(props) {
           // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.nama}</p>
+            <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.status}</p>
+            <p style={style2}>{row.status}</p>
           </TableCell>
           <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+            <p style={style2}>{row.kegiatan}</p>
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>
@@ -424,13 +446,7 @@ function Row(props) {
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
           <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 20,
-            }}
+            style={styleCollapse}
             in={open}
             timeout="auto"
           >
@@ -440,13 +456,7 @@ function Row(props) {
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
                   <p
-                    style={{
-                      display: "flex",
-                      position: "absolute",
-                      top: 140,
-                      color: "rgba(149, 149, 149, 1)",
-                      // top: 10,
-                    }}
+                    style={styleTxtKet}
                   >
                     Pengajuan Ubah jadwal :
                     <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
@@ -603,27 +613,40 @@ export const CUbahJadwal = () => {
     // console.log(dataCakin);
   };
 
+  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleTitle = {
+    marginLeft: 5,
+    marginBottom: 10,
+    color: "rgba(221, 202, 27, 1)",
+  };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={styles.wrapperTitle}>
-              <Image
-                style={{ cursor: "pointer" }}
-                onClick={clickBack}
-                src={"/Back.svg"}
-                width={50}
-                height={50}
-              />
-              <Image src={"/UbahJadwalTitle.svg"} width={50.38} height={50} />
-              <p style={{ color: "rgba(221, 202, 27, 1)", marginLeft: 10 }}>
-                UBAH JADWAL RENAKSI
+              <div>
+                <Image
+                  style={{ cursor: "pointer" }}
+                  onClick={clickBack}
+                  src={"/Back.svg"}
+                  width={45}
+                  height={45}
+                />
+              </div>
+              <div>
+                <Image src={"/UbahJadwalTitle.svg"} width={50} height={40} />
+              </div>
+              <p
+                style={styleTitle}
+              >
+                UBAH JADWAL
               </p>
             </div>
-            <Gap height={50} width={0} />
+            <Gap height={150} width={0} />
             <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
+              style={styleContainer}
             >
               <Table>
                 <TableHead>
