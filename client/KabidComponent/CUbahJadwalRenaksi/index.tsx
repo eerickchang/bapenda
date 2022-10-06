@@ -376,33 +376,32 @@ export default function CUbahJadwalRenaksi() {
               </div>
               <p style={{ marginLeft: 5 }}> UBAH JADWAL RENAKSI </p>
             </div>
+            <Gap height={88} width={0} />
+            <p className={stylesS.titleBidang}>Bidang {bidang}</p>
+            <Gap height={50} width={0} />
+            <TableContainer
+              style={{
+                paddingRight: 40,
+                zIndex: 998,
+                paddingBottom: 20,
+              }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={style}>Sub Bidang</TableCell>
+                    <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                    <TableCell style={style}>Aksi</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {subBidang.map((row) => (
+                    <Row key={row.nip} row={row} stateChange={setSubBidang} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
-          <Gap height={88} width={0} />
-          <p className={stylesS.titleBidang}>Bidang {bidang}</p>
-          <Gap height={50} width={0} />
-          <TableContainer
-            style={{
-              paddingLeft: 40,
-              paddingRight: 40,
-              zIndex: 998,
-              paddingBottom: 20,
-            }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell style={style}>Sub Bidang</TableCell>
-                  <TableCell style={style}>Kepala Sub Bidang</TableCell>
-                  <TableCell style={style}>Aksi</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {subBidang.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setSubBidang} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </div>
       )}
     </>

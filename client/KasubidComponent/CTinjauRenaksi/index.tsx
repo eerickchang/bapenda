@@ -530,9 +530,9 @@ export default function ContentDaftarKegiatan() {
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
               <div>
-                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={50} />
+                <Image src={"/TinjauRenaksiTitle.svg"} width={40} height={40} />
               </div>
-              <p> Tinjau Renaksi </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}> TINJAU RENAKSI </p>
             </div>
           </div>
           <div className={stylesS.wrapLihatSemua}>
@@ -541,7 +541,7 @@ export default function ContentDaftarKegiatan() {
               Lihat Semua
             </button>
           </div>
-          <Gap height={106} width={0} />
+          <Gap height={186} width={0} />
           <TableContainer
             style={{
               paddingLeft: 50,

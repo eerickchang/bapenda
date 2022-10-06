@@ -646,19 +646,16 @@ export const CEvaluasiLampiran = () => {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image
-                src={"/EvaluasiLampiranTitle.svg"}
-                width={40}
-                height={40}
-                alt="Oke"
-              />
-              <p className={stylesS.txtTitle}>EVALUASI LAMPIRAN BUKTI</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image src={"/UbahJadwalTitle.svg"} width={50} height={50} />
+              </div>
+              <p style={{ marginLeft: 5 }}>EVALUASI LAMPIRAN BUKTI</p>
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 40, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingRight: 40, zIndex: 998 }}
             >
               <Table>
                 <TableHead>

@@ -674,12 +674,14 @@ export default function ContentDaftarKegiatan() {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
+              </div>
+              <p style={{ marginLeft: 5 }}>DAFTAR KEGIATAN</p>
             </div>
           </div>
-          <Gap height={106} width={0} />
+          <Gap height={146} width={0} />
           <TableContainer
             style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
           >
