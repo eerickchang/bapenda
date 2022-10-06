@@ -369,9 +369,11 @@ export default function ContentInputRenaksiP() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wrapperTitleInputRenaksi}>
-        <Image src={"/Input2.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image src={"/Input2.svg"} width={50} height={40} />
+        </div>
+        <p style={{ marginLeft: 5, marginBottom: 10 }}>MASUKAN RENAKSI</p>
       </div>
       <div
         className={styles.wrapperBtnExcel}
@@ -399,7 +401,7 @@ export default function ContentInputRenaksiP() {
           </div>
         )}
       </div>
-      <Gap height={46} width={0} />
+      <Gap height={146} width={0} />
       <div className={styles.wrapperInput}>
         <div>
           <TxtInputRenaksi
@@ -551,7 +553,7 @@ export default function ContentInputRenaksiP() {
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
-            Input Renaksi Feren <b>Berhasil</b>
+            Input Renaksi FEREN <b>Berhasil</b>
             <div className={styles.checkCircle}>
               <Image src={"/Check-circle.svg"} width={25} height={25} />
             </div>

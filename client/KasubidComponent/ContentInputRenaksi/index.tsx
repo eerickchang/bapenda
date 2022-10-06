@@ -329,9 +329,11 @@ export default function ContentInputRenaksi() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wrapperTitleInputRenaksi}>
-        <Image src={"/Input2.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>MASUKAN RENAKSI</p>
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image src={"/Input2.svg"} width={50} height={40} />
+        </div>
+        <p style={{ marginLeft: 5, marginBottom: 10 }}>HAPUS RENAKSI</p>
       </div>
       <div
         className={styles.wrapperBtnExcel}
@@ -359,7 +361,7 @@ export default function ContentInputRenaksi() {
           </div>
         )}
       </div>
-      <Gap height={46} width={0} />
+      <Gap height={150} width={0} />
       <TxtInputRenaksiProgram
         className={`${InputStyle.container} `}
         placeholder="masukan program yang akan dilakukan"

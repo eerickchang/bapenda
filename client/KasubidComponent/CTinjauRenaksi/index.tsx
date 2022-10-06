@@ -523,6 +523,13 @@ export default function ContentDaftarKegiatan() {
     fontWeight: 600,
     color: "rgba(149, 149, 149, 1)",
   };
+
+  const styleContainer = {
+    paddingLeft: 2,
+    paddingRight: 40,
+    zIndex: 998,
+    paddingBottom: 20,
+  };
   return (
     <>
       {domLoaded && (
@@ -533,8 +540,7 @@ export default function ContentDaftarKegiatan() {
                 <Image src={"/TinjauRenaksiTitle.svg"} width={40} height={40} />
               </div>
               <p style={{ marginLeft: 5, marginBottom: 10 }}>
-                {" "}
-                TINJAU RENAKSI{" "}
+                TINJAU RENAKSI
               </p>
             </div>
             <div className={stylesS.wrapLihatSemua}>
@@ -545,11 +551,7 @@ export default function ContentDaftarKegiatan() {
             </div>
             <Gap height={186} width={0} />
             <TableContainer
-              style={{
-                paddingRight: 40,
-                zIndex: 998,
-                paddingBottom: 20,
-              }}
+              style={styleContainer}
             >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>

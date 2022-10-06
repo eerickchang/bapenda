@@ -14,7 +14,7 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   position: absolute;
-  top: 37px;
+  top: 39px;
   left: 180px;
 }
 
@@ -67,7 +67,7 @@
   display: flex;
   position: absolute;
   top: 85px;
-  left: 1300px;
+  right: 48px;
 }
 
 .wrapLihatSemua{

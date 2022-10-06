@@ -253,6 +253,25 @@ export default function CTinjauRenaksiPegawai() {
     }
   };
 
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 21,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+    textAlign: "left",
+  };
+
+  const styleData = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "rgba(0, 0, 0, 1)",
+    textAlign: "left",
+  };
+  
+    const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998, paddingBottom: 20 };
+
+
   return (
     <>
       {domLoaded && (
@@ -270,33 +289,21 @@ export default function CTinjauRenaksiPegawai() {
               </div>
               RENAKSI - {nama}
             </div>
-            <Gap height={206} width={0} />
+            <Gap height={162} width={0} />
             <TableContainer
-              style={{ paddingRight: 40, zIndex: 998 }}
+              style={styleContainer}
             >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell className={styles.styleHeader}></TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Program
-                    </TableCell>
-                    <TableCell className={styles.styleHeader}>THL</TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Sub Kegiatan
-                    </TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Tupoksi Inti
-                    </TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Tupoksi Tambahan
-                    </TableCell>
-                    <TableCell className={styles.styleHeader}>
-                      Rencana
-                    </TableCell>
+                    <TableCell sx={styleHeader}></TableCell>
+                    <TableCell sx={styleHeader}>Program</TableCell>
+                    <TableCell sx={styleHeader}>THL</TableCell>
+                    <TableCell sx={styleHeader}>Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Sub Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Tupoksi Inti</TableCell>
+                    <TableCell sx={styleHeader}>Tupoksi Tambahan</TableCell>
+                    <TableCell sx={styleHeader}>Rencana</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -309,104 +316,25 @@ export default function CTinjauRenaksiPegawai() {
                         />
                         {row.id_renaksi}
                       </TableCell>
-                      <TableCell className={styles.styleData}>
+                      <TableCell sx={styleData}>
                         <p style={{ fontWeight: 600 }}>{row.program}</p>
                       </TableCell>
-                      <TableCell className={styles.styleData}>
+                      <TableCell
+                        sx={styleData}
+                        style={{ color: "rgba(218, 142, 72, 1)" }}
+                      >
                         {row.nama}
                       </TableCell>
-                      <TableCell className={styles.styleData}>
-                        {row.kegiatan}
-                      </TableCell>
-                      <TableCell className={styles.styleData}>
-                        {row.sub_kegiatan}
-                      </TableCell>
-                      <TableCell className={styles.styleData}>
-                        {row.tupoksi_inti}
-                      </TableCell>
-                      <TableCell className={styles.styleData}>
+                      <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                      <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
+                      <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
+                      <TableCell sx={styleData}>
                         {row.tupoksi_tambahan}
                       </TableCell>
-                      <TableCell className={styles.styleData}>
+                      <TableCell sx={styleData}>
                         {moment(row.start_date).format("MMM")} -{" "}
                         {moment(row.end_date).format("MMM")}
                       </TableCell>
-                      {/* <TableCell>
-                    <div className={styles.styleTxtRow}>
-                      <div style={{ flexDirection: "row", display: "flex" }}>
-                      <button
-                      className={styles.btnTerima}
-                          onClick={() => btnTerima()}
-                        >
-                          <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-                          </button>
-                        {showModal ? (
-                          <div
-                            className={styles.modal}
-                            onClick={() => setShowModal(false)}
-                          >
-                          <p>
-                              Input Renaksi Feren <b>Berhasil</b>
-                              <div className={styles.checkCircle}>
-                                <Image
-                                  src={"/Check-circle.svg"}
-                                  width={25}
-                                  height={25}
-                                  />
-                              </div>
-                              </p>
-                              </div>
-                              ) : null}
-                        <Gap width={40} height={0} />
-                        <button
-                          className={styles.btnTolak}
-                          onClick={() => (openModal(), console.log(row.nama))}
-                        >
-                          <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-                          </button>
-                        <Modal
-                        isOpen={modalIsOpen}
-                          onAfterOpen={afterOpenModal}
-                          onRequestClose={closeModal}
-                          style={custom}
-                          contentLabel="Example Modal"
-                        >
-                        <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
-                          <Gap height={20} width={0} />
-                          <input
-                            className={styles.inputBuktiLap}
-                            placeholder="Tambah keterangan"
-                            // onChange={(e) => setKetPegawai(e.target.value)}
-                          />
-                          <Gap height={20} width={0} />
-                          <div className={styles.wrapBtnModal}>
-                          <button onClick={closeModal} className={styles.btnKirim}>
-                              <img src={"/BatalIcon.svg"} width={20} height={20} />
-                              <p className={styles.txt}>Batal</p>
-                            </button>
-                            <Gap width={24} height={0} />
-                            <button onClick={btnTolakExp} className={styles.btnBatal}>
-                              <img src={"/Tolak.svg"} width={20} height={20} />
-                              <p>Tolak</p>
-                            </button>
-                          </div>
-                          </Modal>
-                        {showModal ? (
-                          <div
-                          className={styles.modal}
-                            onClick={() => setShowModal(false)}
-                          >
-                          <p>
-                              Renaksi Richard F. Kasenda <b>Ditolak</b>
-                            </p>
-                            <div className={styles.checkCircle}>
-                              <Image src={"/Check-circle.svg"} width={25} height={25} />
-                              </div>
-                              </div>
-                              ) : null}
-                      </div>
-                      </div>
-                  </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>

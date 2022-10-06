@@ -523,41 +523,60 @@ export default function ContentDaftarKegiatan() {
 
   const [showModal, setShowModal] = useState(false);
 
+
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 21,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+            <div className={stylesS.wrapperTitle}>
+              <div>
+                <Image src={"/DaftarKegiatan2.svg"} width={50} height={40} />
+              </div>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>DAFTAR KEGIATAN</p>
             </div>
+            <Gap height={150} width={0} />
+            <TableContainer
+              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+            >
+              <Table sx={{ tableLayout: "fixed" }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={styleHeader}>
+                      Profile
+                    </TableCell>
+                    <TableCell sx={styleHeader}>
+                      Program
+                    </TableCell>
+                    <TableCell sx={styleHeader}>
+                      Kegiatan
+                    </TableCell>
+                    <TableCell sx={styleHeader}>
+                      Sub Kegiatan
+                    </TableCell>
+                    <TableCell sx={styleHeader}>
+                      Tupoksi
+                    </TableCell>
+                    <TableCell sx={styleHeader}>
+                      Rencana
+                    </TableCell>
+                    <TableCell sx={styleHeader}>Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {pegawai.map((row) => (
+                    <Row key={row.nip} row={row} stateChange={setPegawai} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
-          <Gap height={106} width={0} />
-          <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell className={styles.styleHeader}>Profile</TableCell>
-                  <TableCell className={styles.styleHeader}>Program</TableCell>
-                  <TableCell className={styles.styleHeader}>Kegiatan</TableCell>
-                  <TableCell className={styles.styleHeader}>
-                    Sub Kegiatan
-                  </TableCell>
-                  <TableCell className={styles.styleHeader}>Tupoksi</TableCell>
-                  <TableCell className={styles.styleHeader}>Rencana</TableCell>
-                  <TableCell className={styles.styleHeader}>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {pegawai.map((row) => (
-                  <Row key={row.nip} row={row} stateChange={setPegawai} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </div>
       )}
     </>
