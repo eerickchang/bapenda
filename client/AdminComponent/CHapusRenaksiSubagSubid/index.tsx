@@ -191,7 +191,7 @@ function Row(props) {
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiDihapus").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiDihapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -416,7 +416,7 @@ function Row(props) {
             <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.status}</p>
+            <p style={style2}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
             <p style={style2}>{row.kegiatan}</p>
@@ -569,7 +569,7 @@ export const CHapusRenaksiSubagSubid = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiDihapus").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiDihapus").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.subid) {

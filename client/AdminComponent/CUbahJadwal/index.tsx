@@ -99,6 +99,7 @@ const rows = [
 function Row(props) {
   const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketAdmin, setKetAdmin] = useState("");
 
   // const custom = {
   //   content: {
@@ -165,33 +166,18 @@ function Row(props) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
-          });
-        }
-      );
-    });
-
-    stateChanger([]);
-    // window.location.reload();
-  };
-
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+    Axios.post("http://localhost:3001/adminMenerimaRenaksiMJD", {
       idRenaksi: row.id_renaksi,
+      reqStartDate: moment(row.req_start_date).format("YYYY-MM-DD"),
+      reqEndDate: moment(row.req_end_date).format("YYYY-MM-DD"),
+      ketAdmin: ketAdmin,
+      nip: row.nip,
     });
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === subid) {
@@ -207,6 +193,8 @@ function Row(props) {
     setTimeout(() => {
       setShowModal(false);
     }, 3000);
+    // console.log(moment(row.req_start_date).format("YYYY-MM-DD"));
+    // console.log(row.req_end_date);
   };
 
   const btnDw = () => {
@@ -525,7 +513,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
@@ -579,7 +567,7 @@ export const CUbahJadwal = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.subid) {

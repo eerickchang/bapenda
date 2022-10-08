@@ -165,61 +165,8 @@ function Row(props) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
-      (ambilRenaksi) => {
-        let renaksi = ambilRenaksi.data;
-        console.log("Renaksi: ", renaksi);
-        console.log("Subid: ", arrSubid);
-
-        let renaksiSDarrSubid = [];
-        renaksiSDarrSubid = renaksi.filter((elA) => {
-          return arrSubid.some((elB) => elA["sub_bidang"] == elB["sub_bidang"]);
-        });
-
-        renaksiSDarrSubid.map((item) => {
-          Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
-            idRenaksi: item.id_renaksi,
-          });
-        });
-
-        console.log("Renaksi Arr: ", renaksiSDarrSubid);
-      }
-    );
-
-    stateChanger([]);
-
-    setTimeout(() => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            let pegawaiYgAdaRenaksi = [];
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
-
-            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChanger((nextData) => {
-                return [item, ...nextData];
-              });
-            });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
-      });
-    }, 30);
-  };
-
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+    Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
       (ambilRenaksi) => {
         ambilRenaksi.data.map((renaksi) => {
           if (row.sub_bidang === renaksi.sub_bidang) {
@@ -234,7 +181,7 @@ function Row(props) {
     stateChanger([]);
     setTimeout(() => {
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
@@ -346,20 +293,6 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
-
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
   const btnTolakExp = () => {
     // const data = new FormData();
     // data.append("file", file);
@@ -452,10 +385,6 @@ function Row(props) {
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-          <Image src={"/Terima.svg"} width={25} height={25} />
-          Terima Semua
-        </button>
         {showModalTerimaAll ? (
           <div
             className={styles.modal}
@@ -627,7 +556,7 @@ export const CUbahJadwalRenaksi = () => {
       setDomLoaded(true);
 
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabanAmbilRenaksiMJD").then(
+        Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
           (ambilRenaksi) => {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;

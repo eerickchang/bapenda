@@ -29,7 +29,7 @@ export default function CLihatSemuaRenaksi() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/KabanAmbilRenaksiMRD").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.sub_bidang === router.query.subid) {
