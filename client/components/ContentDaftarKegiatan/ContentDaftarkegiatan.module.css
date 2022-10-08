@@ -1,40 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+.wrapperTitle {
+  border-bottom: 2.5px solid #1bddbb;
+  text-align: center; 
+  align-items: center;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 34px;
+  left: 180px;
+}
+
+.wrapperTitle p{
+  margin: 0;
+}
+
+.titleBidang {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  margin-top: 154px;
+}
+
+.wrapFilter{
+  display: flex;
+  position: absolute;
+  top: 85px;
+  right: 48px;
+}
+
+.wrapLihatSemua{
+  display: flex;
+  position: absolute;
+  top: 85px;
+  left: 1468px;
+}
+
+
+.rekanPegawai{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+.rekanAsn{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(104, 104, 104, 1);
+  margin: 0;
+}
+
+
+.styleTupoksi{
+  padding: 5px;
+  background-color: rgba(25, 182, 203);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  align-items: center
+}
+.styleTupoksiTambahan{
+  padding: 5px;
+  background-color: rgba(27, 221, 187, 1);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.styleTxtRow{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+}
+
+
+
+
+/* ? style from daftarkegiatan */
+.wrap {
+  display: block;
+  margin-left: 170px;
+  /* padding-right: 20px;
+  padding-left: 20px; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 .wrap {
   display: block;
   margin-left: 140px;
-}
+} */
 
 .container {
   display: flex;
   flex-direction: column;
   padding-left: 40px;
-  /* background-color: #ffa; */
-  /* position: fixed; */
-  /* width: 2100px; */
-}
-
-.wrapperTitleDaftarKegiatan {
-  display: flex;
-  width: 299px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  border-bottom: 2.5px solid #1bddbb;
-  padding-left: 7px;
-  margin-top: 34px;
-  /* background-color: #fff;
-  position: fixed; */
-  z-index: 999;
-}
-
-.txtTitle {
-  font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
-  margin: 0;
-  width: 300px;
-  margin-top: 1px;
-  margin-left: 19px;
 }
 
 .wrapperDataPegawai {
