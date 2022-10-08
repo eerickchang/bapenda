@@ -1,29 +1,175 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    /* margin-left: 140px; */
-}
-.wrapperTitleDaftarKegiatan {
+.container {
   display: flex;
-  width: 390px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  border-bottom: 2.5px solid #1bddbb;
-  padding-left: 7px;
-  margin-top: 34px;
-  /* background-color: #fff;
-  position: fixed; */
-  z-index: 999;
-  margin-left: 40px;
+  flex: 1;
 }
 
-.txtTitle {
-  font-family: "Poppins", sans-serif;
+.txtHeader {
+  font-family: 'Poppins', sans-serif;
+  color: #112350;
   font-size: 24px;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
-  margin: 0;
-  margin-top: 1px;
-  margin-left: 20px;
+  margin: 0px;
+  margin-left: 5px;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  height: 54px;
+  width: 440px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
+  margin-top: 60px;
+  border-bottom: 2px solid #1BDDBB;
+}
+
+.contentKiri{
+  width: 1311px;
+}
+
+.contentKanan{
+  display: flex;
+}
+
+.barContainer1{
+  position: absolute;
+  width: 1222px;
+  height: 300px;
+  left: 184px;
+  top: 167px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.barContainer2{
+  position: absolute;
+  width: 1222px;
+  height: 300px;
+  left: 184px;
+  top: 506px;
+
+  /* Primary White */
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.barContainer3{
+  position: absolute;
+  width: 1222px;
+  height: 300px;
+  left: 184px;
+  top: 845px;
+
+  /* Primary White */
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.barContainer4{
+  position: absolute;
+width: 1222px;
+height: 300px;
+left: 184px;
+top: 1184px;
+
+/* Primary White */
+
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+
+.barContainer5{
+  position: absolute;
+width: 1222px;
+height: 300px;
+left: 184px;
+top: 1523px;
+
+/* Primary White */
+
+background: #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+
+.mainBarWrapper1{
+  width: 1222px;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.barWrapper1{
+  width: 831px;
+  height: 260px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.txtBidang{
+  font-family: 'Poppins', sans-serif;
+  color: #112350;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0px;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.kotak{
+  background: rgba(27, 221, 187, 0.15);
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.kotak2{
+  background:  #1BDDBB;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.kotak3{
+  background:  #1BC6DD;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.ketWrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+.txtJumlah{
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #112350;
+  margin: 0px;
+}
+
+.txtJumlahKeg{
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(17, 35, 80, 0.8);
+  margin: 0px;
+}
+
+.txtRealisasi{
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(17, 35, 80, 0.8);
+  margin: 0px;
+  width: 77px;
 }

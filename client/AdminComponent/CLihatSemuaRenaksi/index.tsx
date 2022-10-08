@@ -40,8 +40,7 @@ export default function CLihatSemuaRenaksi() {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      console.log(router.query.nip);
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
             if (renaksi.nip == router.query.nip) {
@@ -268,9 +267,13 @@ export default function CLihatSemuaRenaksi() {
     color: "rgba(0, 0, 0, 1)",
     textAlign: "left",
   };
-  
-    const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998, paddingBottom: 20 };
 
+  const styleContainer = {
+    paddingLeft: 2,
+    paddingRight: 40,
+    zIndex: 998,
+    paddingBottom: 20,
+  };
 
   return (
     <>
@@ -290,9 +293,7 @@ export default function CLihatSemuaRenaksi() {
               RENAKSI - {nama}
             </div>
             <Gap height={162} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>

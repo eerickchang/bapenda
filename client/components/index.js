@@ -31,6 +31,7 @@ import BarChart from "./BarChart";
 import HorBar from "./HorBar";
 import ProfileKananKonten from "./ProfileKananKonten";
 import ContentDetailCaKin from "./ContentDetailCaKin";
+import DoughnutChart from "./DoughnutChart";
 
 export {
   CtnUmum,
@@ -63,4 +64,5 @@ export {
   HorBar,
   ProfileKananKonten,
   ContentDetailCaKin,
+  DoughnutChart,
 };
