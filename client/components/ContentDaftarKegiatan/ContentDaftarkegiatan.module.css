@@ -7,34 +7,6 @@
   display: flex;
   flex-direction: column;
   padding-left: 40px;
-  /* background-color: #ffa; */
-  /* position: fixed; */
-  /* width: 2100px; */
-}
-
-.wrapperTitleDaftarKegiatan {
-  display: flex;
-  width: 299px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  border-bottom: 2.5px solid #1bddbb;
-  padding-left: 7px;
-  margin-top: 34px;
-  /* background-color: #fff;
-  position: fixed; */
-  z-index: 999;
-}
-
-.txtTitle {
-  font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
-  margin: 0;
-  width: 300px;
-  margin-top: 1px;
-  margin-left: 19px;
 }
 
 .wrapperDataPegawai {

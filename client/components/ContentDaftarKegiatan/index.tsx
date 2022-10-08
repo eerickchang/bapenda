@@ -346,6 +346,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     window.location.reload();
   };
 
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 2,
+  };
   return (
     <React.Fragment>
       <TableRow
@@ -415,248 +422,234 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <p className={stylesS.styleTxtRow}>{row.status}</p>
         </TableCell>
       </TableRow>
-      <TableContainer
-        style={{
-          width: 1670,
-          marginTop: -20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-          // paddingBottom: 35,
-        }}
-      >
-        {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
-            <TableRow>
-              <div className={styles.wrapperContentModal}>
-                <div className={styles.wrapperTitleBtn}>
-                  <p className={styles.titleBtnUnggah}>Unggah Bukti Laporan</p>
-                  <button
-                    onClick={() => openModal()}
-                    className={styles.btnUnggah}
-                  >
-                    <img src={"/Kirim.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Unggah</p>
-                  </button>
-                </div>
-                <Gap width={87} height={0} />
-                <div>
-                  <p className={styles.p}>Ubah Jadwal Renaksi</p>
-                  <button
-                    onClick={() => openModalUbah()}
-                    className={styles.btnUbahJadwal}
-                  >
-                    <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Ubah Jadwal</p>
-                  </button>
-                </div>
-                <Gap width={750} height={0} />
-                <div>
-                  <p className={styles.p}>Hapus Renaksi</p>
-                  <button
-                    onClick={() => openModalHapus()}
-                    className={styles.btnHapus}
-                  >
-                    <img src={"/HapusIcon.svg"} width={20} height={20} />
-                    <p className={styles.txt}>Hapus</p>
-                  </button>
-                </div>
-              </div>
-            </TableRow>
-          </Collapse>
-        </TableCell>
-      </TableContainer>
-
-      {/* //? MODAL UNGGAH LAPORAN */}
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={custom}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
-        <Gap height={20} width={0} />
-        <input
-          className={styles.inputBuktiLap}
-          placeholder="Tambah keterangan untuk lampiran bukti"
-          onChange={(e) => setKetPegawai(e.target.value)}
-        />
-        <Gap height={20} width={0} />
-        <div className={styles.wrapperBtnModal}>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
-            <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
-            />
-          </form>
-          <Gap width={193} height={0} />
-          <button onClick={btnUnggahExp} className={styles.btnKirim}>
-            <img src={"/Kirim.svg"} width={20} height={20} />
-            <p className={styles.txt}>Kirim</p>
-          </button>
-          <Gap width={24} height={0} />
-          <button onClick={closeModal} className={styles.btnBatal}>
-            <img src={"/Batal.svg"} width={20} height={20} />
-            <p>Batal</p>
-          </button>
-        </div>
-      </Modal>
-      {showModal ? (
-        <div className={styles.modal} onClick={() => setShowModal(false)}>
-          <p>
-            Lampiran Kegiatan Berhasil <b>Diunggah</b>
-            <div className={styles.checkCircle}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
+      {/* <TableContainer
+        style={{ */}
+      {/* // width: 1670,
+          // marginTop: -20,
+          // borderBottomLeftRadius: 20,
+          // borderBottomRightRadius: 20, */}
+      {/* // paddingBottom: 35, */}
+      {/* }} */}
+      {/* > */}
+      {/* <div className={styles.backgroundRowExpand}> */}
+      <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+        <Collapse sx={styleCollapse} in={open} timeout="auto">
+          <div className={styles.wrapperContentModal}>
+            <div className={styles.wrapperTitleBtn}>
+              <p className={styles.titleBtnUnggah}>Unggah Bukti Laporan</p>
+              <button onClick={() => openModal()} className={styles.btnUnggah}>
+                <img src={"/Kirim.svg"} width={20} height={20} />
+                <p className={styles.txt}>Unggah</p>
+              </button>
             </div>
-          </p>
-        </div>
-      ) : null}
-
-      {/* //?  MODAL UBAH JADWAL */}
-      <Modal
-        isOpen={modalUbahJadwalIsOpen}
-        onAfterOpen={afterOpenModalUbah}
-        onRequestClose={closeModalUbah}
-        style={customUbah}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>Pengajuan Ubah Jadwal</h2>
-        <input
-          className={styles.inputBuktiLap_Ubah}
-          placeholder="Tambah keterangan untuk mengubah jadwal"
-          onChange={(e) => setKetPegawai(e.target.value)}
-        />
-        <div style={{ flexDirection: "row", display: "flex", marginTop: -10 }}>
-          <div className={styles.wrapperPickMonth}>
+            <Gap width={87} height={0} />
             <div>
-              <p>Dari tanggal*</p>
-              <input
-                type="month"
-                onChange={(e) => setStartDate(e.target.value + "-01")}
-              />
+              <p className={styles.p}>Ubah Jadwal Renaksi</p>
+              <button
+                onClick={() => openModalUbah()}
+                className={styles.btnUbahJadwal}
+              >
+                <img src={"/UbahJadwalIcon.svg"} width={20} height={20} />
+                <p className={styles.txt}>Ubah Jadwal</p>
+              </button>
             </div>
-            <div style={{ marginRight: 88, marginLeft: 50 }}>
-              <p>Sampai tanggal*</p>
-              <input
-                type="month"
-                onChange={(e) => setEndDate(e.target.value + "-01")}
-              />
+            <Gap width={750} height={0} />
+            <div>
+              <p className={styles.p}>Hapus Renaksi</p>
+              <button
+                onClick={() => openModalHapus()}
+                className={styles.btnHapus}
+              >
+                <img src={"/HapusIcon.svg"} width={20} height={20} />
+                <p className={styles.txt}>Hapus</p>
+              </button>
             </div>
           </div>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
+          {/* //? MODAL UNGGAH LAPORAN */}
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={custom}
+            contentLabel="Example Modal"
+          >
+            <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
+            <Gap height={20} width={0} />
             <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
+              className={styles.inputBuktiLap}
+              placeholder="Tambah keterangan untuk lampiran bukti"
+              onChange={(e) => setKetPegawai(e.target.value)}
             />
-          </form>
-        </div>
-        {/* <div className={styles.wrapperBtnModal}> */}
-        <Gap width={0} height={24} />
-        <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
-          <img src={"/Kirim.svg"} width={20} height={20} />
-          <p className={styles.txt}>Kirim</p>
-        </button>
-        <Gap width={0} height={10} />
-        <button onClick={closeModalUbah} className={styles.btnBatal_Ubah}>
-          <img src={"/Batal.svg"} width={20} height={20} />
-          <p>Batal</p>
-        </button>
-        {/* </div> */}
-      </Modal>
-      {showModal_Ubah ? (
-        <div
-          className={styles.modal_Ubah}
-          onClick={() => setShowModal_Ubah(false)}
-        >
-          <p>
-            Pengajuan Penjadwalan Ulang berhasil <b>Diubah</b>
-            <div className={styles.checkCircle_Ubah}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
+            <Gap height={20} width={0} />
+            <div className={styles.wrapperBtnModal}>
+              <form action="#">
+                <label htmlFor="file">
+                  <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+                </label>
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  name="sampleFile"
+                />
+              </form>
+              <Gap width={193} height={0} />
+              <button onClick={btnUnggahExp} className={styles.btnKirim}>
+                <img src={"/Kirim.svg"} width={20} height={20} />
+                <p className={styles.txt}>Kirim</p>
+              </button>
+              <Gap width={24} height={0} />
+              <button onClick={closeModal} className={styles.btnBatal}>
+                <img src={"/Batal.svg"} width={20} height={20} />
+                <p>Batal</p>
+              </button>
             </div>
-          </p>
-        </div>
-      ) : null}
+          </Modal>
+          {showModal ? (
+            <div className={styles.modal} onClick={() => setShowModal(false)}>
+              <p>
+                Lampiran Kegiatan Berhasil <b>Diunggah</b>
+                <div className={styles.checkCircle}>
+                  <Image src={"/Check-circle.svg"} width={25} height={25} />
+                </div>
+              </p>
+            </div>
+          ) : null}
 
-      {/* //?  MODAL HAPUS RENAKSI */}
-      <Modal
-        isOpen={modalHapusRenaksiIsOpen}
-        onAfterOpen={afterOpenModalHapus}
-        onRequestClose={closeModalHapus}
-        style={custom}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.headerTxtModal}>
-          Pengajuan Penghapusan Renaksi{" "}
-        </h2>
-        <Gap height={20} width={0} />
-        <input
-          className={styles.inputBuktiLap}
-          placeholder="Tambah keterangan untuk menghapus renaksi"
-          onChange={(e) => setKetPegawai(e.target.value)}
-        />
-        <Gap height={20} width={0} />
-        <div className={styles.wrapperBtnModal}>
-          <form action="#">
-            <label htmlFor="file">
-              <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
-            </label>
+          {/* //?  MODAL UBAH JADWAL */}
+          <Modal
+            isOpen={modalUbahJadwalIsOpen}
+            onAfterOpen={afterOpenModalUbah}
+            onRequestClose={closeModalUbah}
+            style={customUbah}
+            contentLabel="Example Modal"
+          >
+            <h2 className={styles.headerTxtModal}>Pengajuan Ubah Jadwal</h2>
             <input
-              type="file"
-              style={{ display: "none" }}
-              id="file"
-              onChange={(e) => setFile(e.target.files[0])}
-              name="sampleFile"
+              className={styles.inputBuktiLap_Ubah}
+              placeholder="Tambah keterangan untuk mengubah jadwal"
+              onChange={(e) => setKetPegawai(e.target.value)}
             />
-          </form>
-          {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
-          <Gap width={193} height={0} />
-          <button onClick={btnHapusExp} className={styles.btnKirim}>
-            <img src={"/Kirim.svg"} width={20} height={20} />
-            <p className={styles.txt}>Kirim</p>
-          </button>
-          <Gap width={24} height={0} />
-          <button onClick={closeModalHapus} className={styles.btnBatal}>
-            <img src={"/Batal.svg"} width={20} height={20} />
-            <p>Batal</p>
-          </button>
-        </div>
-      </Modal>
-      {showModal_Hapus ? (
-        <div
-          className={styles.modal_Hapus}
-          onClick={() => setShowModal_Hapus(false)}
-        >
-          <p>
-            Pengajuan Hapus Renaksi Berhasil <b>Diunggah</b>
-            <div className={styles.checkCircle_Hapus}>
-              <Image src={"/Check-circle.svg"} width={25} height={25} />
+            <div
+              style={{ flexDirection: "row", display: "flex", marginTop: -10 }}
+            >
+              <div className={styles.wrapperPickMonth}>
+                <div>
+                  <p>Dari tanggal*</p>
+                  <input
+                    type="month"
+                    onChange={(e) => setStartDate(e.target.value + "-01")}
+                  />
+                </div>
+                <div style={{ marginRight: 88, marginLeft: 50 }}>
+                  <p>Sampai tanggal*</p>
+                  <input
+                    type="month"
+                    onChange={(e) => setEndDate(e.target.value + "-01")}
+                  />
+                </div>
+              </div>
+              <form action="#">
+                <label htmlFor="file">
+                  <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+                </label>
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  name="sampleFile"
+                />
+              </form>
             </div>
-          </p>
-        </div>
-      ) : null}
+            {/* <div className={styles.wrapperBtnModal}> */}
+            <Gap width={0} height={24} />
+            <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
+              <img src={"/Kirim.svg"} width={20} height={20} />
+              <p className={styles.txt}>Kirim</p>
+            </button>
+            <Gap width={0} height={10} />
+            <button onClick={closeModalUbah} className={styles.btnBatal_Ubah}>
+              <img src={"/Batal.svg"} width={20} height={20} />
+              <p>Batal</p>
+            </button>
+            {/* </div> */}
+          </Modal>
+          {showModal_Ubah ? (
+            <div
+              className={styles.modal_Ubah}
+              onClick={() => setShowModal_Ubah(false)}
+            >
+              <p>
+                Pengajuan Penjadwalan Ulang berhasil <b>Diubah</b>
+                <div className={styles.checkCircle_Ubah}>
+                  <Image src={"/Check-circle.svg"} width={25} height={25} />
+                </div>
+              </p>
+            </div>
+          ) : null}
+
+          {/* //?  MODAL HAPUS RENAKSI */}
+          <Modal
+            isOpen={modalHapusRenaksiIsOpen}
+            onAfterOpen={afterOpenModalHapus}
+            onRequestClose={closeModalHapus}
+            style={custom}
+            contentLabel="Example Modal"
+          >
+            <h2 className={styles.headerTxtModal}>
+              Pengajuan Penghapusan Renaksi{" "}
+            </h2>
+            <Gap height={20} width={0} />
+            <input
+              className={styles.inputBuktiLap}
+              placeholder="Tambah keterangan untuk menghapus renaksi"
+              onChange={(e) => setKetPegawai(e.target.value)}
+            />
+            <Gap height={20} width={0} />
+            <div className={styles.wrapperBtnModal}>
+              <form action="#">
+                <label htmlFor="file">
+                  <div className={`${btnStyles.btnPilihFile}`}>Pilih File</div>
+                </label>
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  name="sampleFile"
+                />
+              </form>
+              {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
+              <Gap width={193} height={0} />
+              <button onClick={btnHapusExp} className={styles.btnKirim}>
+                <img src={"/Kirim.svg"} width={20} height={20} />
+                <p className={styles.txt}>Kirim</p>
+              </button>
+              <Gap width={24} height={0} />
+              <button onClick={closeModalHapus} className={styles.btnBatal}>
+                <img src={"/Batal.svg"} width={20} height={20} />
+                <p>Batal</p>
+              </button>
+            </div>
+          </Modal>
+          {showModal_Hapus ? (
+            <div
+              className={styles.modal_Hapus}
+              onClick={() => setShowModal_Hapus(false)}
+            >
+              <p>
+                Pengajuan Hapus Renaksi Berhasil <b>Diunggah</b>
+                <div className={styles.checkCircle_Hapus}>
+                  <Image src={"/Check-circle.svg"} width={25} height={25} />
+                </div>
+              </p>
+            </div>
+          ) : null}
+        </Collapse>
+      </TableCell>
+      {/* </TableContainer> */}
     </React.Fragment>
   );
 }
@@ -854,15 +847,33 @@ export default function ContentDaftarKegiatan() {
     // console.log(dataRenaksi);
   };
 
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 21,
+    fontWeight: 600,
+    color: "#959595",
+  };
+  const styleContainer = {
+    paddingLeft: 40,
+    paddingRight: 40,
+    zIndex: 998,
+    paddingBottom: 20,
+  };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperTitleDaftarKegiatan}>
-              <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
-              <p className={stylesS.txtTitle}>DAFTAR KEGIATAN</p>
+            <div className={styles.wrapperTitle}>
+              <div>
+                <Image src={"/DaftarKegiatan2.svg"} width={40} height={40} />
+              </div>
+              <p style={{ marginLeft: 10, marginBottom: 10 }}>
+                DAFTAR KEGIATAN
+              </p>
             </div>
+            <Gap height={80} width={0} />
             {dataPegawai.map((item) => (
               <div className={stylesS.wrapperDataPegawai} key={item.id}>
                 <div>
@@ -906,32 +917,30 @@ export default function ContentDaftarKegiatan() {
               )}
             </div>
           </div>
-          <Gap height={106} width={0} />
-          <TableContainer
-            style={{ paddingLeft: 50, paddingRight: 40, zIndex: 998 }}
-          >
-            <Table sx={{ tableLayout: "fixed" }}>
+          <Gap height={70} width={0} />
+          <TableContainer style={styleContainer}>
+            <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Program
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Kegiatan
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Sub Kegiatan
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Tupoksi
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Rekan
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Rencana
                   </TableCell>
-                  <TableCell className={styles.headerTable} width={0}>
+                  <TableCell style={styleHeader} width={200}>
                     Status
                   </TableCell>
                 </TableRow>

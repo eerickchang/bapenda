@@ -9,7 +9,7 @@ export default function DaftarKegiatan() {
     <div className={styles.container}>
 
       <SidebarStaff kotakDaftarKegiatan={sidebarStyles.kotakAktif} />
-      <Gap height={0} width={140} />
+      {/* <Gap height={0} width={100} /> */}
       <ContentDaftarKegiatan />
       {/* <TableMUI/> */}
     </div>

@@ -15,29 +15,23 @@
   font-weight: 600;
   color: #959595;
 }
-
-.wrapperTitleInputRenaksi {
-  display: flex;
-  width: 299px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
+.wrapperTitle {
   border-bottom: 2.5px solid #1bddbb;
-  padding-left: 7px;
-  margin-top: 34px;
-}
-
-.txtTitle {
+  text-align: center; 
+  align-items: center;
+  display: flex;
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
-  margin: 0;
-  width: 300px;
-  /* margin-top: 1px; */
-  margin-left: 19px;
+  position: absolute;
+  top: 43px;
+  left: 180px;
 }
 
+.wrapperTitle p{
+  margin: 0;
+}
 .backgroundRowExpand {
   padding-bottom: 0px;
   padding-top: 0;
@@ -45,16 +39,11 @@
 }
 
 .wrapperContentModal {
-  display: inline-flex;
-  margin-top: 35px;
-  margin-left: 50px;
+  display: flex;
   font-family: "Poppins", sans-serif;
+  padding: 40px;
   font-weight: 400;
   font-size: 20px;
-  border-width: 2px red;
-  margin-top: 35px;
-  /* padding-top:5px; */
-  /* background-color: #112350; */
 }
 
 .btnUnggah {
