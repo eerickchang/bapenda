@@ -597,8 +597,6 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   const reqStartDate = req.body.reqStartDate;
   const reqEndDate = req.body.reqEndDate;
   const nip = req.body.nip;
-  console.log(reqStartDate);
-  console.log(reqEndDate);
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "Admin", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
@@ -607,14 +605,74 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
     console.log(result);
   });
 
-  // INSERT INTO pegawai (nama, sandi, nip, no_hp, jabatan, bidang, sub_bidang) VALUES (?,?,?,?,?,?,?)
-
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Diterima') ";
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Ubah Jadwal', 'Diterima') ";
   db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
     console.log(err);
   });
 });
+
+//ADMIN MENOLAK RENAKSI UBAH JADWA;
+app.post("/adminMenolakRenaksiMJD", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+  const nip = req.body.nip;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "Admin", req_start_date = "", req_end_date = "", ket_admin = ?  WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlInsert =
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Ubah Jadwal', 'Ditolak') ";
+  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
+    console.log(err);
+  });
+});
+
+//ADMIN MENERIMA RENAKSI DIHAPUS
+app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+  const nip = req.body.nip;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Dihapus", kirim_ke = "Admin", ket_admin = ?  WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlInsert =
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Hapus Kegiatan', 'Diterima') ";
+  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
+    console.log(err);
+  });
+});
+
+//ADMIN MENOLAK RENAKSI DIHAPUS;
+app.post("/adminMenolakRenaksiDihapus", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+  const nip = req.body.nip;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "Admin", ket_admin = ?  WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlInsert =
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Hapus Kegiatan', 'Ditolak') ";
+  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
+    console.log(err);
+  });
+});
+
+//COOKIES DLL
 
 app.get("/cookies", (req, res) => {
   tampilkan = req.cookies;
