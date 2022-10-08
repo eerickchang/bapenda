@@ -443,7 +443,7 @@
 }
 
 .wrapperContentModal {
-  display: flex;
+  display: inline-flex;
   font-family: "Poppins", sans-serif;
   padding: 40px;
   font-weight: 400;

@@ -162,6 +162,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 35,
+  };
+
   return (
     <React.Fragment>
       <TableRow
@@ -226,50 +234,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <p className={stylesS.styleTxtRow}>{row.status}</p>
         </TableCell>
       </TableRow>
-      <TableContainer
-        style={{
-          width: 1680,
-          marginTop: -20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-          // paddingBottom: 35,
-        }}
-      >
-        {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
-            <TableRow>
-              <div className={styles.wrapperExpand}>
-                <div className={styles.wrapperTanggapan}>
-                  <p>Tanggapan:</p>
-                  <p className={styles.txtTanggapan}>
-                    Permintaan ubah jadwal tidak dapat dilakukan, karena alasan
-                    yang diberikan tidak dapat diterima
-                  </p>
-                </div>
-                <div className={styles.wrapperLampiran}>
-                  <p>Lampiran:</p>
-                  <p></p>
-                </div>
-                <div className={styles.wrapperRencanaUbah}>
-                  <p>Rencana Ubah Jadwal:</p>
-                  <p></p>
-                </div>
-              </div>
-            </TableRow>
-          </Collapse>
-        </TableCell>
-      </TableContainer>
+
+      <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+        <Collapse style={styleCollapse} in={open} timeout="auto">
+          <div className={styles.wrapperExpand}>
+            <div className={styles.wrapperTanggapan}>
+              <p>Tanggapan:</p>
+              <p className={styles.txtTanggapan}>
+                Permintaan ubah jadwal tidak dapat dilakukan, karena alasan yang
+                diberikan tidak dapat diterima
+              </p>
+            </div>
+            <div className={styles.wrapperLampiran}>
+              <p>Lampiran:</p>
+              <p></p>
+            </div>
+            <div className={styles.wrapperRencanaUbah}>
+              <p>Rencana Ubah Jadwal:</p>
+              <p></p>
+            </div>
+          </div>
+        </Collapse>
+      </TableCell>
     </React.Fragment>
   );
 }
@@ -526,15 +512,26 @@ export const ContentRiwayatKegiatan = () => {
     },
   ];
 
+  const styleHeader = {
+    fontFamily: "Poppins",
+    fontSize: 21,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
+
+  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
-            <div className={stylesS.wrapperRiwayatKegiatan}>
-              <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
-              <p className={stylesS.txtTitle}>
-                RIWAYAT KEGIATAN TAHUN {thnSkrg}{" "}
+            <div className={styles.wrapperTitle}>
+              <div>
+                <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
+              </div>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+                RIWAYAT KEGIATAN TAHUN {thnSkrg}
               </p>
             </div>
             <Gap height={153} width={0} />
@@ -611,33 +608,17 @@ export const ContentRiwayatKegiatan = () => {
               </div>
             </div>
 
-            <TableContainer
-              style={{ paddingLeft: 0, paddingRight: 40, zIndex: 998 }}
-            >
-              <Table sx={{ tableLayout: "fixed" }}>
+            <TableContainer style={styleContainer}>
+              <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Profil
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Tupoksi
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Rencana
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Status
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Keterangan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Diajukan
-                    </TableCell>
-                    <TableCell className={styles.headerTable} width={0}>
-                      Kondisi
-                    </TableCell>
+                    <TableCell style={styleHeader}>Profil</TableCell>
+                    <TableCell style={styleHeader}>Tupoksi</TableCell>
+                    <TableCell style={styleHeader}>Rencana</TableCell>
+                    <TableCell style={styleHeader}>Status</TableCell>
+                    <TableCell style={styleHeader}>Keterangan</TableCell>
+                    <TableCell style={styleHeader}>Diajukan</TableCell>
+                    <TableCell style={styleHeader}>Kondisi</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

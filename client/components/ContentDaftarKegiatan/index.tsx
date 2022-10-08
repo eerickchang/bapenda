@@ -352,6 +352,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 2,
+    // width: 2000
   };
   return (
     <React.Fragment>
@@ -372,9 +373,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.program}</p>
         </TableCell>
-        {/* <TableCell>
+        <TableCell>
           <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell> */}
+        </TableCell>
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
         </TableCell>
@@ -422,17 +423,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <p className={stylesS.styleTxtRow}>{row.status}</p>
         </TableCell>
       </TableRow>
-      {/* <TableContainer
-        style={{ */}
-      {/* // width: 1670,
-          // marginTop: -20,
-          // borderBottomLeftRadius: 20,
-          // borderBottomRightRadius: 20, */}
-      {/* // paddingBottom: 35, */}
-      {/* }} */}
-      {/* > */}
-      {/* <div className={styles.backgroundRowExpand}> */}
-      <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
+      <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
         <Collapse sx={styleCollapse} in={open} timeout="auto">
           <div className={styles.wrapperContentModal}>
             <div className={styles.wrapperTitleBtn}>
@@ -442,7 +433,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <p className={styles.txt}>Unggah</p>
               </button>
             </div>
-            <Gap width={87} height={0} />
+            <Gap width={137} height={0} />
             <div>
               <p className={styles.p}>Ubah Jadwal Renaksi</p>
               <button
@@ -453,7 +444,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <p className={styles.txt}>Ubah Jadwal</p>
               </button>
             </div>
-            <Gap width={750} height={0} />
+            <Gap width={700} height={0} />
             <div>
               <p className={styles.p}>Hapus Renaksi</p>
               <button
@@ -922,25 +913,25 @@ export default function ContentDaftarKegiatan() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Program
                   </TableCell>
-                  {/* <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Kegiatan
-                  </TableCell> */}
-                  <TableCell style={styleHeader} width={200}>
+                  </TableCell>
+                  <TableCell style={styleHeader} width={300}>
                     Sub Kegiatan
                   </TableCell>
-                  <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Tupoksi
                   </TableCell>
-                  <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Rekan
                   </TableCell>
-                  <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Rencana
                   </TableCell>
-                  <TableCell style={styleHeader} width={200}>
+                  <TableCell style={styleHeader} width={300}>
                     Status
                   </TableCell>
                 </TableRow>
