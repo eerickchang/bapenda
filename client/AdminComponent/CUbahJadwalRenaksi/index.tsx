@@ -164,53 +164,53 @@ function Row(props) {
   //style row
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
+  const [ketAdmin, setKetAdmin] = useState("");
 
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksi) => {
-          if (row.sub_bidang === renaksi.sub_bidang) {
-            Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
-              idRenaksi: renaksi.id_renaksi,
-            });
-          }
-        });
-      }
-    );
-
-    stateChanger([]);
-    setTimeout(() => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
-          (ambilRenaksi) => {
-            let pegawaiYgAdaRenaksi = [];
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
-
-            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChanger((nextData) => {
-                return [item, ...nextData];
-              });
-            });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
-      });
-    }, 30);
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
+    // Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
+    //   (ambilRenaksi) => {
+    //     ambilRenaksi.data.map((renaksi) => {
+    //       if (row.sub_bidang === renaksi.sub_bidang) {
+    //         Axios.post("http://localhost:3001/adminMenerimaRenaksiMJD", {
+    //           idRenaksi: row.id_renaksi,
+    //           reqStartDate: moment(row.req_start_date).format("YYYY-MM-DD"),
+    //           reqEndDate: moment(row.req_end_date).format("YYYY-MM-DD"),
+    //           ketAdmin: ketAdmin,
+    //           nip: row.nip,
+    //         });
+    //       }
+    //     });
+    //   }
+    // );
+    // stateChanger([]);
+    // setTimeout(() => {
+    //   Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+    //     Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
+    //       (ambilRenaksi) => {
+    //         let pegawaiYgAdaRenaksi = [];
+    //         let kasubid = ambilKasubid.data;
+    //         let renaksi = ambilRenaksi.data;
+    //         console.log("Kasubid: ", kasubid);
+    //         console.log("Renaksi: ", renaksi);
+    //         pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+    //           return renaksi.some(
+    //             (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+    //           );
+    //         });
+    //         pegawaiYgAdaRenaksi.map((item) => {
+    //           stateChanger((nextData) => {
+    //             return [item, ...nextData];
+    //           });
+    //         });
+    //         console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+    //       }
+    //     );
+    //   });
+    // }, 30);
+    // setShowModal(true);
+    // setTimeout(() => {
+    //   setShowModal(false);
+    // }, 3000);
   };
 
   const btnDw = () => {
@@ -455,7 +455,7 @@ function Row(props) {
           <TableCell onClick={clickRow}>
             <p style={style2}>{row.nama}</p>
           </TableCell>
-          <TableCell>
+          {/* <TableCell>
             <div className={styles.styleTxtRow}>
               <div style={{ flexDirection: "row", display: "flex" }}>
                 <button
@@ -502,7 +502,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
@@ -532,7 +532,7 @@ function Row(props) {
                 ) : null}
               </div>
             </div>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       </React.Fragment>
     </>

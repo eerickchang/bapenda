@@ -23,79 +23,6 @@ import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props) {
   const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
@@ -164,29 +91,13 @@ function Row(props) {
   //style row
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
-
-  const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
-          });
-        }
-      );
-    });
-
-    stateChanger([]);
-    // window.location.reload();
-  };
+  const [ketAdmin, setKetAdmin] = useState("");
 
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+    Axios.post("http://localhost:3001/adminMenerimaRenaksiDihapus", {
       idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+      nip: row.nip,
     });
     stateChanger([]);
 
@@ -515,7 +426,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>

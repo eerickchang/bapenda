@@ -271,10 +271,26 @@ function Row(props) {
   }
 
   const btnTolak = () => {
-    setShowModalTolak(true);
+    Axios.post("http://localhost:3001/adminMenolakRenaksiMJD", {
+      idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+      nip: row.nip,
+    });
+    stateChanger([]);
+
     setTimeout(() => {
-      setShowModalTolak(false);
-    }, 3000);
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === subid) {
+              stateChanger((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 30);
   };
 
   const btnTolakAll = () => {
@@ -517,7 +533,7 @@ function Row(props) {
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
-                    <button onClick={closeModal} className={styles.btnKirim}>
+                    <button onClick={btnTolak} className={styles.btnKirim}>
                       <img src={"/BatalIcon.svg"} width={20} height={20} />
                       <p className={styles.txt}>Batal</p>
                     </button>
