@@ -372,9 +372,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.program}</p>
         </TableCell>
-        <TableCell>
+        {/* <TableCell>
           <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
+        </TableCell> */}
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
         </TableCell>
@@ -925,9 +925,9 @@ export default function ContentDaftarKegiatan() {
                   <TableCell style={styleHeader} width={200}>
                     Program
                   </TableCell>
-                  <TableCell style={styleHeader} width={200}>
+                  {/* <TableCell style={styleHeader} width={200}>
                     Kegiatan
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell style={styleHeader} width={200}>
                     Sub Kegiatan
                   </TableCell>

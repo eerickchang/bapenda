@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Sidebar from "../SidebarAdmin";
 import { DoughnutChart } from "../../components/DoughnutChart";
 
-export default function Profil() {
+export default function CCakinBidang() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
@@ -261,22 +261,38 @@ export default function Profil() {
     console.log("Oke");
   };
 
-  const clickCakinBidang = () => {
-    router.push('/Admin/CakinBidang')
-  }
+  const clickCakinSubidang = () => {
+    router.push("/Admin/CakinSubidang");
+  };
+
+  const clickBack = () => {
+    router.push("/Admin/Profil");
+  };
 
   return (
     <div className={styles.container}>
       <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
-        <div className={styles.header}>
+        <div className={styles.wrapperTitle}>
           <div>
-            <Image src="/Capaian.svg" width={50} height={50} alt="Capaian" />
+            <Image
+              style={{ cursor: "pointer" }}
+              onClick={clickBack}
+              src={"/Back.svg"}
+              width={45}
+              height={45}
+            />
           </div>
-          <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
+          <div>
+            <Image src={"/Capaian.svg"} width={50} height={40} />
+          </div>
+          <p style={{ marginLeft: 5, marginBottom: 10 }}>
+            CAPAIAN KINERJA TAHUN {tahun}
+          </p>
         </div>
-        <div className={styles.barContainer1} onClick={clickCakinBidang}>
+        <Gap height={100} width={0} />
+        <div className={styles.barContainer1} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>SEKRETARIS</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -286,13 +302,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart1} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -300,7 +317,7 @@ export default function Profil() {
                   <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                 </div>
               </div>
-              <Gap height={20} />
+              <Gap height={20} width={0} />
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak2} />
                 <div style={{ marginLeft: 10 }}>
@@ -311,7 +328,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer2}>
+        <div className={styles.barContainer2} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -321,13 +338,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart2} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -335,7 +353,7 @@ export default function Profil() {
                   <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                 </div>
               </div>
-              <Gap height={20} />
+              <Gap height={20} width={0} />
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak3} />
                 <div style={{ marginLeft: 10 }}>
@@ -346,7 +364,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer3}>
+        <div className={styles.barContainer3} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>RETRIBUSI DAN LAIN LAIN PENDAPATAN</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -356,13 +374,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart3} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -381,7 +400,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer4}>
+        {/* <div className={styles.barContainer4} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>PAJAK DAERAH</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -416,7 +435,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer5}>
+        <div className={styles.barContainer5} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -450,9 +469,9 @@ export default function Profil() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className={styles.contentKanan}>
+      {/* <div className={styles.contentKanan}>
         <ProfileKanan
           nama={dataAsn.nama}
           bidang={dataAsn.bidang}
@@ -461,7 +480,7 @@ export default function Profil() {
           noHp={dataAsn.no_hp}
           fotoProfil={dataAsn.foto}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

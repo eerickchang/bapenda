@@ -65,7 +65,7 @@
 
 .wrapperExpand {
   display: flex;
-  padding-left: 22px;
+  padding: 20px;
 }
 
 .wrapperLampiran {
@@ -153,11 +153,6 @@
   padding-bottom: 0px;
   padding-top: 0;
   background-color: "red";
-}
-
-.wrapperExpand {
-  display: flex;
-  padding: 20px;
 }
 
 .wrapFileLampiran {

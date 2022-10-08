@@ -20,7 +20,7 @@ import "jspdf-autotable";
 
 Axios.defaults.withCredentials = true;
 
-export default function ContentDetailCaKin() {
+export default function CCaKinSubidang() {
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
@@ -45,7 +45,7 @@ export default function ContentDetailCaKin() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Staff/Profil");
+    router.push("/Admin/CakinBidang");
     // console.log(dataCakin);
   };
 
@@ -395,8 +395,9 @@ export default function ContentDetailCaKin() {
   const styleContainer = {
     maxHeight: 810,
     width: 1660,
-    height: 780,
     marginTop: 3,
+    height: 780,
+    // marginBottom: 8,
     color: "rgba(27, 221, 187, 1)",
     border: 2,
     borderRadius: 6,
@@ -520,7 +521,9 @@ export default function ContentDetailCaKin() {
 
       <Gap height={100} width={0} />
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
-      <TableContainer sx={styleContainer}>
+      <TableContainer
+        sx={styleContainer}
+      >
         <Table
           stickyHeader
           aria-label="sticky table"
@@ -549,26 +552,47 @@ export default function ContentDetailCaKin() {
               .map((row) => {
                 return (
                   <TableRow hover>
-                    <TableCell align="center" sx={styleRowNama}>
+                    <TableCell
+                      align="center"
+                      sx={styleRowNama}
+                    >
                       <Image src={"/User1.svg"} width={50} height={50} />
                       <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {row.jabatan}
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {moment(row.bulan).format("MMM")}
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {row.jumlah_kegiatan}
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {row.lampiran_disubmit}
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {row.lampiran_bsubmit}
                     </TableCell>
-                    <TableCell align="center" sx={styleRow}>
+                    <TableCell
+                      align="center"
+                      sx={styleRow}
+                    >
                       {row.hasil_kinerja}
                     </TableCell>
 
