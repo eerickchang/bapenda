@@ -21,10 +21,16 @@ import "jspdf-autotable";
 Axios.defaults.withCredentials = true;
 
 export default function CCaKinSubidang() {
+  const router = useRouter();
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
+
+      console.log(router.query.subid1);
+      console.log(router.query.subid2);
+      console.log(router.query.subid3);
 
       Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
         ambilCakin.data.map((cakin) => {
@@ -40,12 +46,18 @@ export default function CCaKinSubidang() {
         setNama(dataAsn.data.user[0].nama);
       });
     }
-  }, []);
-
-  const router = useRouter();
+  }, [router.query, router.isReady]);
 
   const clickBack = () => {
-    router.push("/Admin/CakinBidang");
+    router.push({
+      pathname: "/Admin/CakinBidang",
+      query: {
+        bidang: router.query.bidang,
+        subid1: router.query.subid1,
+        subid2: router.query.subid2,
+        subid3: router.query.subid3,
+      },
+    });
     // console.log(dataCakin);
   };
 
@@ -460,7 +472,7 @@ export default function CCaKinSubidang() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - Renbang
+            Detail Capaian Kinerja - {router.query.subidAsli}
           </p>
         </div>
 
@@ -521,9 +533,7 @@ export default function CCaKinSubidang() {
 
       <Gap height={100} width={0} />
       {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
-      <TableContainer
-        sx={styleContainer}
-      >
+      <TableContainer sx={styleContainer}>
         <Table
           stickyHeader
           aria-label="sticky table"
@@ -552,47 +562,26 @@ export default function CCaKinSubidang() {
               .map((row) => {
                 return (
                   <TableRow hover>
-                    <TableCell
-                      align="center"
-                      sx={styleRowNama}
-                    >
+                    <TableCell align="center" sx={styleRowNama}>
                       <Image src={"/User1.svg"} width={50} height={50} />
                       <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.jabatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {moment(row.bulan).format("MMM")}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.jumlah_kegiatan}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.lampiran_disubmit}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.lampiran_bsubmit}
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={styleRow}
-                    >
+                    <TableCell align="center" sx={styleRow}>
                       {row.hasil_kinerja}
                     </TableCell>
 

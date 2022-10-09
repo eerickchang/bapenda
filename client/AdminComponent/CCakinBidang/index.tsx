@@ -10,14 +10,17 @@ import Sidebar from "../SidebarAdmin";
 import { DoughnutChart } from "../../components/DoughnutChart";
 
 export default function CCakinBidang() {
+  const router = useRouter();
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
+      console.log(router.query.bidang);
 
       let thn = moment().format("YYYY");
       setTahun(thn);
@@ -27,7 +30,7 @@ export default function CCakinBidang() {
       });
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
+        // console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -42,7 +45,7 @@ export default function CCakinBidang() {
         });
       });
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const UserData = [
     {
@@ -155,38 +158,6 @@ export default function CCakinBidang() {
     ],
   };
 
-  const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BC6DD"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
-  const bidangChart5 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BDDBB"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
   const donatChart1 = {
     labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
@@ -226,33 +197,6 @@ export default function CCakinBidang() {
     ],
   };
 
-  const donatChart4 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
-  const donatChart5 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
-  const router = useRouter();
   const clickLihatDetail = () => {
     router.push("/Staff/DetailCaKin");
   };
@@ -261,8 +205,41 @@ export default function CCakinBidang() {
     console.log("Oke");
   };
 
-  const clickCakinSubidang = () => {
-    router.push("/Admin/CakinSubidang");
+  const clickCakinSubidang = (subidClick) => {
+    if (router.query.subid1 == subidClick) {
+      router.push({
+        pathname: "/Admin/CakinSubidang",
+        query: {
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
+        },
+      });
+    } else if (router.query.subid2 == subidClick) {
+      router.push({
+        pathname: "/Admin/CakinSubidang",
+        query: {
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
+        },
+      });
+    } else if (router.query.subid3 == subidClick) {
+      router.push({
+        pathname: "/Admin/CakinSubidang",
+        query: {
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
+        },
+      });
+    }
   };
 
   const clickBack = () => {
@@ -292,8 +269,13 @@ export default function CCakinBidang() {
           </p>
         </div>
         <Gap height={100} width={0} />
-        <div className={styles.barContainer1} onClick={clickCakinSubidang}>
-          <p className={styles.txtBidang}>SEKRETARIS</p>
+        <div
+          className={styles.barContainer1}
+          onClick={() => {
+            clickCakinSubidang(router.query.subid1);
+          }}
+        >
+          <p className={styles.txtBidang}>{router.query.subid1}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart1} />
@@ -328,8 +310,13 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer2} onClick={clickCakinSubidang}>
-          <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
+        <div
+          className={styles.barContainer2}
+          onClick={() => {
+            clickCakinSubidang(router.query.subid2);
+          }}
+        >
+          <p className={styles.txtBidang}>{router.query.subid2}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart2} />
@@ -364,8 +351,13 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer3} onClick={clickCakinSubidang}>
-          <p className={styles.txtBidang}>RETRIBUSI DAN LAIN LAIN PENDAPATAN</p>
+        <div
+          className={styles.barContainer3}
+          onClick={() => {
+            clickCakinSubidang(router.query.subid3);
+          }}
+        >
+          <p className={styles.txtBidang}>{router.query.subid3}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart3} />

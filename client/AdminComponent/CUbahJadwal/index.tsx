@@ -270,7 +270,23 @@ function Row(props) {
     setTolakAllIsOpen(false);
   }
 
-  const btnTolak = () => {
+  const btnTolak = () => {};
+
+  const btnTolakAll = () => {
+    setShowModalTolakAll(true);
+    setTimeout(() => {
+      setShowModalTolakAll(false);
+    }, 3000);
+  };
+
+  const btnTerimaAll = () => {
+    setShowModalTerimaAll(true);
+    setTimeout(() => {
+      setShowModalTerimaAll(false);
+    }, 3000);
+  };
+
+  const btnTolakExp = () => {
     Axios.post("http://localhost:3001/adminMenolakRenaksiMJD", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
@@ -291,49 +307,6 @@ function Row(props) {
         }
       );
     }, 30);
-  };
-
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
-
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
-  const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
     closeModal();
     btnTolak();
@@ -533,7 +506,7 @@ function Row(props) {
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
-                    <button onClick={btnTolak} className={styles.btnKirim}>
+                    <button onClick={closeModal} className={styles.btnKirim}>
                       <img src={"/BatalIcon.svg"} width={20} height={20} />
                       <p className={styles.txt}>Batal</p>
                     </button>

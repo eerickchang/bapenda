@@ -215,33 +215,26 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.post("http://localhost:3001/adminMenolakRenaksiDihapus", {
+      idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+      nip: row.nip,
+    });
+    stateChanger([]);
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/adminAmbilRenaksiDihapus").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === subid) {
+              stateChanger((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 30);
     closeModal();
     btnTolak();
   };

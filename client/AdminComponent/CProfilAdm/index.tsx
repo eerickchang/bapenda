@@ -261,9 +261,59 @@ export default function Profil() {
     console.log("Oke");
   };
 
-  const clickCakinBidang = () => {
-    router.push('/Admin/CakinBidang')
-  }
+  const clickCakinBidang = (bidang) => {
+    if (bidang == "Sekretaris") {
+      router.push({
+        pathname: "/Admin/CakinBidang",
+        query: {
+          bidang: "Sekretaris",
+          subid1: "Hukum dan Kepegawaian",
+          subid2: "Perencanaan dan Keuangan",
+          subid3: "Umum",
+        },
+      });
+    } else if (bidang == "Perencanaan dan Pengembangan") {
+      router.push({
+        pathname: "/Admin/CakinBidang",
+        query: {
+          bidang: "Perencanaan dan Pengembangan",
+          subid1: "Pengelolaan Pendapatan Daerah",
+          subid2: "Pengembangan Teknologi",
+          subid3: "Pelaporan Data Pendapatan",
+        },
+      });
+    } else if (bidang == "Retribusi dan Lain-lain Pendapatan") {
+      router.push({
+        pathname: "/Admin/CakinBidang",
+        query: {
+          bidang: "Retribusi dan Lain-lain Pendapatan",
+          subid1: "Retribusi",
+          subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
+          subid3: "Lain-lain Pendapatan",
+        },
+      });
+    } else if (bidang == "Pajak Daerah") {
+      router.push({
+        pathname: "/Admin/CakinBidang",
+        query: {
+          bidang: "Pajak Daerah",
+          subid1: "Administrasi dan Pelayanan Pajak",
+          subid2: "PKB dan BBN-KB",
+          subid3: "PBBKB, PAP dan Pajak Rokok",
+        },
+      });
+    } else if (bidang == "Pengendalian dan Evaluasi") {
+      router.push({
+        pathname: "/Admin/CakinBidang",
+        query: {
+          bidang: "Pengendalian dan Evaluasi",
+          subid1: "Evaluasi Kinerja",
+          subid2: "Pengendalian dan Pembinaan Administrasi",
+          subid3: "Pengendalian Pendapatan Daerah",
+        },
+      });
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -276,7 +326,12 @@ export default function Profil() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
-        <div className={styles.barContainer1} onClick={clickCakinBidang}>
+        <div
+          className={styles.barContainer1}
+          onClick={() => {
+            clickCakinBidang("Sekretaris");
+          }}
+        >
           <p className={styles.txtBidang}>SEKRETARIS</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -311,7 +366,12 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer2}>
+        <div
+          className={styles.barContainer2}
+          onClick={() => {
+            clickCakinBidang("Perencanaan dan Pengembangan");
+          }}
+        >
           <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -346,7 +406,12 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer3}>
+        <div
+          className={styles.barContainer3}
+          onClick={() => {
+            clickCakinBidang("Retribusi dan Lain-lain Pendapatan");
+          }}
+        >
           <p className={styles.txtBidang}>RETRIBUSI DAN LAIN LAIN PENDAPATAN</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -381,7 +446,12 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer4}>
+        <div
+          className={styles.barContainer4}
+          onClick={() => {
+            clickCakinBidang("Pajak Daerah");
+          }}
+        >
           <p className={styles.txtBidang}>PAJAK DAERAH</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -416,7 +486,12 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div className={styles.barContainer5}>
+        <div
+          className={styles.barContainer5}
+          onClick={() => {
+            clickCakinBidang("Pengendalian dan Evaluasi");
+          }}
+        >
           <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
