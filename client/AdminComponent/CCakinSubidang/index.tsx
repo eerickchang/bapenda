@@ -63,10 +63,49 @@ export default function CCaKinSubidang() {
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
+  const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
 
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
+
+  const pegawai = [
+    {
+      id: 1,
+      // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Semua Pegawai",
+    },
+    {
+      id: 2,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+    {
+      id: 3,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+    {
+      id: 4,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+    {
+      id: 5,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+    {
+      id: 6,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+    {
+      id: 7,
+      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+      nama: "Andre",
+    },
+  ];
 
   const tahun = [
     {
@@ -477,6 +516,31 @@ export default function CCaKinSubidang() {
         </div>
 
         <div className={styles.wrapperFilter}>
+          <div className={styles.wrapperFilterPegawai}>
+            <div
+              className={styles.btnFilterPegawai}
+              onClick={() => setActiveDropdownPegawai(!activeDropdownPegawai)}
+            >
+              <Image src={"/Pegawai.svg"} width={23} height={23} />
+              <p>Pegawai</p>
+            </div>
+            {activeDropdownPegawai && (
+              <div
+                className={styles.wrapperSelectFilterPegawai}
+                onClick={() => setActiveDropdownPegawai(false)}
+              >
+                {pegawai.map((item) => (
+                  <div className={styles.wrapNama} key={item.id}>
+                    <div className={styles.hoverNama}>
+                      {item.gambar}
+                      <div style={{ marginLeft: 20 }}>{item.nama}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div className={styles.wrapperFilterTahun}>
             <div
               className={styles.btnFilterTahun}
