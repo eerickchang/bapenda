@@ -9,15 +9,18 @@ import { useRouter } from "next/router";
 import Sidebar from "../SidebarAdmin";
 import { DoughnutChart } from "../../components/DoughnutChart";
 
-export default function Profil() {
+export default function CCakinBidang() {
+  const router = useRouter();
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
+      console.log(router.query.bidang);
 
       let thn = moment().format("YYYY");
       setTahun(thn);
@@ -27,7 +30,7 @@ export default function Profil() {
       });
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
+        // console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -42,7 +45,7 @@ export default function Profil() {
         });
       });
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const UserData = [
     {
@@ -155,38 +158,6 @@ export default function Profil() {
     ],
   };
 
-  const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BC6DD"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
-  const bidangChart5 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BDDBB"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
   const donatChart1 = {
     labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
@@ -226,33 +197,6 @@ export default function Profil() {
     ],
   };
 
-  const donatChart4 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
-  const donatChart5 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
-  const router = useRouter();
   const clickLihatDetail = () => {
     router.push("/Staff/DetailCaKin");
   };
@@ -261,58 +205,45 @@ export default function Profil() {
     console.log("Oke");
   };
 
-  const clickCakinBidang = (bidang) => {
-    if (bidang == "Sekretaris") {
+  const clickCakinSubidang = (subidClick) => {
+    if (router.query.subid1 == subidClick) {
       router.push({
-        pathname: "/Kaban/CakinBidang",
+        pathname: "/Kaban/CakinSubidang",
         query: {
-          bidang: "Sekretaris",
-          subid1: "Hukum dan Kepegawaian",
-          subid2: "Perencanaan dan Keuangan",
-          subid3: "Umum",
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
         },
       });
-    } else if (bidang == "Perencanaan dan Pengembangan") {
+    } else if (router.query.subid2 == subidClick) {
       router.push({
-        pathname: "/Kaban/CakinBidang",
+        pathname: "/Kaban/CakinSubidang",
         query: {
-          bidang: "Perencanaan dan Pengembangan",
-          subid1: "Pengelolaan Pendapatan Daerah",
-          subid2: "Pengembangan Teknologi",
-          subid3: "Pelaporan Data Pendapatan",
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
         },
       });
-    } else if (bidang == "Retribusi dan Lain-lain Pendapatan") {
+    } else if (router.query.subid3 == subidClick) {
       router.push({
-        pathname: "/Kaban/CakinBidang",
+        pathname: "/Kaban/CakinSubidang",
         query: {
-          bidang: "Retribusi dan Lain-lain Pendapatan",
-          subid1: "Retribusi",
-          subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-          subid3: "Lain-lain Pendapatan",
-        },
-      });
-    } else if (bidang == "Pajak Daerah") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Pajak Daerah",
-          subid1: "Administrasi dan Pelayanan Pajak",
-          subid2: "PKB dan BBN-KB",
-          subid3: "PBBKB, PAP dan Pajak Rokok",
-        },
-      });
-    } else if (bidang == "Pengendalian dan Evaluasi") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Pengendalian dan Evaluasi",
-          subid1: "Evaluasi Kinerja",
-          subid2: "Pengendalian dan Pembinaan Administrasi",
-          subid3: "Pengendalian Pendapatan Daerah",
+          bidang: router.query.bidang,
+          subid1: router.query.subid1,
+          subid2: router.query.subid2,
+          subid3: router.query.subid3,
+          subidAsli: subidClick,
         },
       });
     }
+  };
+
+  const clickBack = () => {
+    router.push("/Kaban/Profil");
   };
 
   return (
@@ -320,19 +251,31 @@ export default function Profil() {
       <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
-        <div className={styles.header}>
+        <div className={styles.wrapperTitle}>
           <div>
-            <Image src="/Capaian.svg" width={50} height={50} alt="Capaian" />
+            <Image
+              style={{ cursor: "pointer" }}
+              onClick={clickBack}
+              src={"/Back.svg"}
+              width={45}
+              height={45}
+            />
           </div>
-          <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
+          <div>
+            <Image src={"/Capaian.svg"} width={50} height={40} />
+          </div>
+          <p style={{ marginLeft: 5, marginBottom: 10 }}>
+            CAPAIAN KINERJA TAHUN {tahun}
+          </p>
         </div>
+        <Gap height={100} width={0} />
         <div
           className={styles.barContainer1}
           onClick={() => {
-            clickCakinBidang("Sekretaris");
+            clickCakinSubidang(router.query.subid1);
           }}
         >
-          <p className={styles.txtBidang}>SEKRETARIS</p>
+          <p className={styles.txtBidang}>{router.query.subid1}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart1} />
@@ -341,13 +284,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart1} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -355,7 +299,7 @@ export default function Profil() {
                   <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                 </div>
               </div>
-              <Gap height={20} />
+              <Gap height={20} width={0} />
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak2} />
                 <div style={{ marginLeft: 10 }}>
@@ -369,10 +313,10 @@ export default function Profil() {
         <div
           className={styles.barContainer2}
           onClick={() => {
-            clickCakinBidang("Perencanaan dan Pengembangan");
+            clickCakinSubidang(router.query.subid2);
           }}
         >
-          <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
+          <p className={styles.txtBidang}>{router.query.subid2}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart2} />
@@ -381,13 +325,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart2} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -395,7 +340,7 @@ export default function Profil() {
                   <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                 </div>
               </div>
-              <Gap height={20} />
+              <Gap height={20} width={0} />
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak3} />
                 <div style={{ marginLeft: 10 }}>
@@ -409,10 +354,10 @@ export default function Profil() {
         <div
           className={styles.barContainer3}
           onClick={() => {
-            clickCakinBidang("Retribusi dan Lain-lain Pendapatan");
+            clickCakinSubidang(router.query.subid3);
           }}
         >
-          <p className={styles.txtBidang}>RETRIBUSI DAN LAIN LAIN PENDAPATAN</p>
+          <p className={styles.txtBidang}>{router.query.subid3}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart3} />
@@ -421,13 +366,14 @@ export default function Profil() {
               style={{
                 height: 159,
                 width: 159,
+                flex: 0.2,
                 marginLeft: 25,
                 marginTop: 65,
               }}
             >
               <DoughnutChart data={donatChart3} />
             </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
+            <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak} />
                 <div style={{ marginLeft: 10 }}>
@@ -446,12 +392,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div
-          className={styles.barContainer4}
-          onClick={() => {
-            clickCakinBidang("Pajak Daerah");
-          }}
-        >
+        {/* <div className={styles.barContainer4} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>PAJAK DAERAH</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -486,12 +427,7 @@ export default function Profil() {
             </div>
           </div>
         </div>
-        <div
-          className={styles.barContainer5}
-          onClick={() => {
-            clickCakinBidang("Pengendalian dan Evaluasi");
-          }}
-        >
+        <div className={styles.barContainer5} onClick={clickCakinSubidang}>
           <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -525,9 +461,9 @@ export default function Profil() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className={styles.contentKanan}>
+      {/* <div className={styles.contentKanan}>
         <ProfileKanan
           nama={dataAsn.nama}
           bidang={dataAsn.bidang}
@@ -536,7 +472,7 @@ export default function Profil() {
           noHp={dataAsn.no_hp}
           fotoProfil={dataAsn.foto}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

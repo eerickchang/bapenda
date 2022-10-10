@@ -9,6 +9,8 @@ import Gap from "./Gap";
 import Button from "./Button";
 import CUbahJadwalRenaksi from "./CUbahJadwalRenaksi";
 import CHapusRenaksi from "./CHapusRenaksi";
+import CCakinBidang from "./CCakinBidang";
+import CCakinSubidang from "./CCakinSubidang";
 
 export {
   SidebarAdmin,
@@ -22,4 +24,6 @@ export {
   Button,
   CUbahJadwalRenaksi,
   CHapusRenaksi,
+  CCakinSubidang,
+  CCakinBidang,
 };

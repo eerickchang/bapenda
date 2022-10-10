@@ -50,7 +50,7 @@ export default function CCaKinSubidang() {
 
   const clickBack = () => {
     router.push({
-      pathname: "/Admin/CakinBidang",
+      pathname: "/Kaban/CakinBidang",
       query: {
         bidang: router.query.bidang,
         subid1: router.query.subid1,
