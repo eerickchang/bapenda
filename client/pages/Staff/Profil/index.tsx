@@ -51,7 +51,7 @@ export default function Profil() {
   const UserData = [
     {
       id: 1,
-      kinerja: 70,
+      kinerja: 90,
       bulan: "Januari",
     },
     {
@@ -61,7 +61,7 @@ export default function Profil() {
     },
     {
       id: 3,
-      kinerja: 70,
+      kinerja: 80,
       bulan: "Maret",
     },
     {
@@ -71,22 +71,22 @@ export default function Profil() {
     },
     {
       id: 5,
-      kinerja: 70,
+      kinerja: 60,
       bulan: "Mei",
     },
     {
       id: 6,
-      kinerja: 70,
+      kinerja: 90,
       bulan: "Juni",
     },
     {
       id: 7,
-      kinerja: 70,
+      kinerja: 100,
       bulan: "Juli",
     },
     {
       id: 8,
-      kinerja: 70,
+      kinerja: 80,
       bulan: "Agustus",
     },
     {
@@ -96,7 +96,7 @@ export default function Profil() {
     },
     {
       id: 10,
-      kinerja: 70,
+      kinerja: 80,
       bulan: "Oktober",
     },
     {
@@ -146,11 +146,11 @@ export default function Profil() {
   };
 
   const personalChart = {
-    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: grafikPersonal?.map((data) => data.hasil_kinerja),
+        data: UserData?.map((data) => data.kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         indexAxis: "y",
@@ -161,6 +161,23 @@ export default function Profil() {
       },
     ],
   };
+
+  // const personalChart = {
+  //   labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
+  //   datasets: [
+  //     {
+  //       label: "Kinerja Pegawai",
+  //       data: grafikPersonal?.map((data) => data.hasil_kinerja),
+  //       backgroundColor: ["#1BDDBB"],
+  //       borderRadius: 10,
+  //       indexAxis: "y",
+  //       barThickness: 20,
+  //       // barPercentage: 0.5,
+
+  //       // hoverBackgroundColor: ["#112350"],
+  //     },
+  //   ],
+  // };
 
   const router = useRouter();
   const clickLihatDetail = () => {

@@ -32,19 +32,19 @@ export default function CCaKinSubidang() {
       console.log(router.query.subid2);
       console.log(router.query.subid3);
 
-      Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-        ambilCakin.data.map((cakin) => {
-          if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
-            setDataCakin((nextData) => {
-              return [...nextData, cakin];
-            });
-          }
-        });
-      });
+      // Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+      //   ambilCakin.data.map((cakin) => {
+      //     if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
+      //       setDataCakin((nextData) => {
+      //         return [...nextData, cakin];
+      //       });
+      //     }
+      //   });
+      // });
 
-      Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
-        setNama(dataAsn.data.user[0].nama);
-      });
+      // Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
+      //   setNama(dataAsn.data.user[0].nama);
+      // });
     }
   }, [router.query, router.isReady]);
 
@@ -83,7 +83,7 @@ export default function CCaKinSubidang() {
     {
       id: 3,
       gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
+      nama: "George Olaf",
     },
     {
       id: 4,
@@ -299,140 +299,237 @@ export default function CCaKinSubidang() {
 
   const rows = [
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-01-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-02-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 5,
+      lampiran_bsubmit: 5,
+      hasil_kinerja: 50,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-03-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 9,
+      lampiran_bsubmit: 1,
+      hasil_kinerja: 90,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-04-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-05-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-06-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-07-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-08-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-09-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-10-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-11-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
     {
-      nama: "andre",
-      jabatan: "Kabid",
-      bulan: "januari",
-      jumlahkegiatan: 10,
-      realisasikegiatan: 3,
-      belumdilaksanakan: 7,
-      hasilkinerja: 30,
+      nama: "Andre",
+      jabatan: "Staff",
+      bulan: "2022-12-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
     },
+  ];
 
-    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
-    // createData("India", "IN", 1324171354, 1324171354, 123, 123, 123),
-    // createData("China", "CN", 1403500365, 9596961, 123, 123, 123),
-    // createData("Italy", "IT", 60483973, 301340, 123, 123, 123),
-    // createData("United States", "US", 327167434, 9833520, 123, 123, 123),
-    // createData("Canada", "CA", 37602103, 9984670, 123, 123, 123),
-    // createData("Australia", "AU", 25475400, 7692024, 123, 123, 123),
-    // createData("Germany", "DE", 83019200, 357578, 123, 123, 123),
-    // createData("Ireland", "IE", 4857000, 70273, 123, 123, 123),
-    // createData("Mexico", "MX", 126577691, 1972550, 123, 123, 123),
-    // createData("Japan", "JP", 126317000, 377973, 123, 123, 123),
-    // createData("France", "FR", 67022000, 640679, 123, 123, 123),
+  const rowsGeo = [
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-01-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-02-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 5,
+      lampiran_bsubmit: 5,
+      hasil_kinerja: 50,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-03-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 9,
+      lampiran_bsubmit: 1,
+      hasil_kinerja: 90,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-04-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-05-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-06-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-07-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-08-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-09-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-10-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-11-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
+    {
+      nama: "George Olaf",
+      jabatan: "Staff",
+      bulan: "2022-12-01",
+      jumlah_kegiatan: 10,
+      lampiran_disubmit: 3,
+      lampiran_bsubmit: 7,
+      hasil_kinerja: 30,
+    },
   ];
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [tampilkanCakin, setTampilkanCakin] = useState("Rows Andre");
+
+  const clickPegawai = (data) => {
+    if (data == "George Olaf") {
+      setTampilkanCakin("Rows Geo");
+    } else if (data == "Andre") {
+      setTampilkanCakin("Rows Andre");
+    }
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -530,7 +627,11 @@ export default function CCaKinSubidang() {
                 onClick={() => setActiveDropdownPegawai(false)}
               >
                 {pegawai.map((item) => (
-                  <div className={styles.wrapNama} key={item.id}>
+                  <div
+                    className={styles.wrapNama}
+                    key={item.id}
+                    onClick={() => clickPegawai(item.nama)}
+                  >
                     <div className={styles.hoverNama}>
                       {item.gambar}
                       <div style={{ marginLeft: 20 }}>{item.nama}</div>
@@ -621,35 +722,38 @@ export default function CCaKinSubidang() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {dataCakin
-              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover>
-                    <TableCell align="center" sx={styleRowNama}>
-                      <Image src={"/User1.svg"} width={50} height={50} />
-                      <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {row.jabatan}
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {moment(row.bulan).format("MMM")}
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {row.jumlah_kegiatan}
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {row.lampiran_disubmit}
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {row.lampiran_bsubmit}
-                    </TableCell>
-                    <TableCell align="center" sx={styleRow}>
-                      {row.hasil_kinerja}
-                    </TableCell>
+            {tampilkanCakin == "Rows Andre"
+              ? rows
+                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow hover>
+                        <TableCell align="center" sx={styleRowNama}>
+                          <Image src={"/User1.svg"} width={50} height={50} />
+                          <p style={{ margin: 0, marginLeft: 10 }}>
+                            {row.nama}
+                          </p>
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.jabatan}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {moment(row.bulan).format("MMM")}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.jumlah_kegiatan}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.lampiran_disubmit}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.lampiran_bsubmit}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.hasil_kinerja}
+                        </TableCell>
 
-                    {/* {columns.map((column) => {
+                        {/* {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell
@@ -669,9 +773,62 @@ export default function CCaKinSubidang() {
                         </TableCell>
                       );
                     })} */}
-                  </TableRow>
-                );
-              })}
+                      </TableRow>
+                    );
+                  })
+              : rowsGeo
+                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow hover>
+                        <TableCell align="center" sx={styleRowNama}>
+                          <Image src={"/User1.svg"} width={50} height={50} />
+                          <p style={{ margin: 0, marginLeft: 10 }}>
+                            {row.nama}
+                          </p>
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.jabatan}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {moment(row.bulan).format("MMM")}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.jumlah_kegiatan}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.lampiran_disubmit}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.lampiran_bsubmit}
+                        </TableCell>
+                        <TableCell align="center" sx={styleRow}>
+                          {row.hasil_kinerja}
+                        </TableCell>
+
+                        {/* {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          sx={{
+                            border: 1,
+                            borderColor: "#1BDDBB",
+                            fontFamily: "Poppins",
+                            fontWeight: 400,
+                            fontSize: 18,
+                          }}
+                          key={column.id}
+                          align={column.align}
+                        >
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })} */}
+                      </TableRow>
+                    );
+                  })}
           </TableBody>
         </Table>
       </TableContainer>
