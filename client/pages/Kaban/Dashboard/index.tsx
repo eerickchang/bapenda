@@ -110,12 +110,65 @@ export default function Dashboard() {
   const [blmSubmit, setBlmSubmit] = useState([]);
   const [prevMonth, setPrevMonth] = useState("");
 
+  const UserData = [
+    {
+      id: 1,
+      kinerja: 90,
+      bulan: "Jan",
+    },
+    {
+      id: 2,
+      kinerja: 70,
+      bulan: "Feb",
+    },
+    {
+      id: 3,
+      kinerja: 80,
+      bulan: "Mar",
+    },
+    {
+      id: 4,
+      kinerja: 60,
+      bulan: "Apr",
+    },
+    {
+      id: 5,
+      kinerja: 85,
+      bulan: "Mei",
+    },
+    {
+      id: 6,
+      kinerja: 100,
+      bulan: "Jun",
+    },
+    {
+      id: 7,
+      kinerja: 80,
+      bulan: "Jul",
+    },
+    {
+      id: 8,
+      kinerja: 90,
+      bulan: "Agu",
+    },
+    {
+      id: 9,
+      kinerja: 100,
+      bulan: "Sep",
+    },
+    {
+      id: 10,
+      kinerja: 80,
+      bulan: "Okt",
+    },
+  ];
+
   const userData = {
-    labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: grafik?.map((data) => data.hasil_kinerja),
+        data: UserData?.map((data) => data.kinerja),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
 
@@ -126,20 +179,6 @@ export default function Dashboard() {
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
 
-  const filter = [
-    {
-      id: 1,
-      sub: "Semua",
-    },
-    {
-      id: 2,
-      sub: "Bidang",
-    },
-    {
-      id: 3,
-      sub: "Sub Bidang",
-    },
-  ];
   return (
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
@@ -155,25 +194,6 @@ export default function Dashboard() {
         />
         <div className={styles.chartWrapper}>
           <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
-          <div className={styles.wrapperFilterTahun}>
-            <div
-              className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-            >
-              <Image src={"/Filter.svg"} width={23} height={23} />
-              <p>Filter</p>
-            </div>
-            {activeDropdownTahun && (
-              <div
-                className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
-              >
-                {filter.map((item) => (
-                  <p key={item.id}>{item.sub}</p>
-                ))}
-              </div>
-            )}
-          </div>
           <BarChart chartData={userData} />
         </div>
       </div>
