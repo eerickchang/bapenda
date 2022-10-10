@@ -18,8 +18,6 @@ import Button from "../Button";
 import btnStyles from "../../../KasubidComponent/Button/button.module.css";
 import Axios from "axios";
 import { useRouter } from "next/router";
-import AmbilDataRenaksi from "../AmbilDataRenaksi";
-
 import Checkbox from "@mui/material/Checkbox";
 
 Axios.defaults.withCredentials = true;
@@ -31,7 +29,9 @@ export default function CLihatSemuaRenaksi() {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
   const [nama, setNama] = useState("");
-  let arr = [];
+  const [ketAdmin, setKetAdmin] = useState("");
+  const [arr, setArr] = useState([]);
+  // let arr = [];
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function CLihatSemuaRenaksi() {
       Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
+            if (renaksi.sub_bidang == router.query.subid) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -55,15 +55,36 @@ export default function CLihatSemuaRenaksi() {
     }
   }, [router.query, router.isReady]);
 
-  const lihatSemua = () => {
-    // setActiveDropdown(!activeDropdown);
-    // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatSemua");
-  };
-
   const clickBack = () => {
     router.push("/Admin/TinjauRenaksi");
     // console.log(dataCakin);
+  };
+
+  const btnTerima = () => {
+    console.log(arr);
+    // arr.map((trimaRenaksi) => {
+    //   Axios.post("http://localhost:3001/adminMenerimaRenaksiMRD", {
+    //     idRenaksi: trimaRenaksi.value,
+    //   });
+    //   console.log(trimaRenaksi.value);
+    // });
+
+    // setPegawai([]);
+
+    // setTimeout(() => {
+    //   Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
+    //     (ambilRenaksi) => {
+    //       ambilRenaksi.data.map((renaksi) => {
+    //         if (renaksi.sub_bidang == router.query.subid) {
+    //           setPegawai((nextData) => {
+    //             return [renaksi, ...nextData];
+    //           });
+    //           setNama(renaksi.nama);
+    //         }
+    //       });
+    //     }
+    //   );
+    // }, 30);
   };
 
   const btnTerimaSemua = () => {
@@ -149,6 +170,7 @@ export default function CLihatSemuaRenaksi() {
 
   function openModalTolakAll() {
     setTolakAllIsOpen(true);
+    setArr(arr);
   }
 
   function afterOpenModalTolakAll() {
@@ -177,72 +199,36 @@ export default function CLihatSemuaRenaksi() {
   const [rowSelected, setRowSelected] = useState([]);
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    arr.map((tolakRenaksi) => {
+      console.log(tolakRenaksi);
+      Axios.post("http://localhost:3001/adminMenolakRenaksiMRD", {
+        idRenaksi: tolakRenaksi.value,
+        ketAdmin: ketAdmin,
+        nip: tolakRenaksi.nip,
+      });
+    });
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success"){
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModal();
-    btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
+    setPegawai([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang == router.query.subid) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 30);
     closeModalTolakAll();
-    btnTolakAll();
+    btnTolak();
   };
 
   const handleChange = ({ target }) => {
     if (target.checked === true) {
-      arr.push({ value: target.name });
+      arr.push({ value: target.name, nip: target.value });
     } else if (target.checked === false) {
       arr.findIndex((item) => {
         if (item.value === target.name) {
@@ -290,7 +276,7 @@ export default function CLihatSemuaRenaksi() {
                   height={45}
                 />
               </div>
-              RENAKSI - {nama}
+              RENAKSI - {router.query.subid}
             </div>
             <Gap height={162} width={0} />
             <TableContainer style={styleContainer}>
@@ -314,6 +300,7 @@ export default function CLihatSemuaRenaksi() {
                         <Checkbox
                           onChange={handleChange}
                           name={row.id_renaksi}
+                          value={row.nip}
                         />
                         {row.id_renaksi}
                       </TableCell>
@@ -342,26 +329,9 @@ export default function CLihatSemuaRenaksi() {
               </Table>
             </TableContainer>
             <div className={stylesS.wrapFilter}>
-              <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-                <Image src={"/Terima.svg"} width={25} height={25} />
-                Terima
-              </button>
-              {showModalTerimaAll ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModalTolakAll(false)}
-                >
-                  <p>
-                    Semua Permintaan Ubah Jadwal <b>Diterima</b>
-                  </p>
-                  <div className={styles.checkCircle}>
-                    <Image src={"/Terima.svg"} width={25} height={25} />
-                  </div>
-                </div>
-              ) : null}
               <Gap width={15} height={0} />
               <button
-                onClick={openModalTolakAll}
+                onClick={() => openModalTolakAll()}
                 className={styles.btnTolakAll}
               >
                 <Image src={"/Tolak.svg"} width={25} height={25} />
@@ -381,7 +351,7 @@ export default function CLihatSemuaRenaksi() {
                 <input
                   className={styles.inputBuktiLap}
                   placeholder="Tambah keterangan"
-                  // onChange={(e) => setKetPegawai(e.target.value)}
+                  onChange={(e) => setKetAdmin(e.target.value)}
                 />
                 <Gap height={20} width={0} />
                 <div className={styles.wrapBtnModal}>
@@ -393,7 +363,10 @@ export default function CLihatSemuaRenaksi() {
                     <p className={styles.txt}>Batal</p>
                   </button>
                   <Gap width={24} height={0} />
-                  <button onClick={btnTolakAllExp} className={styles.btnBatal}>
+                  <button
+                    onClick={() => btnTolakExp()}
+                    className={styles.btnBatal}
+                  >
                     <img src={"/Tolak.svg"} width={20} height={20} />
                     <p>Tolak</p>
                   </button>

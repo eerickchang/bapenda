@@ -672,6 +672,37 @@ app.post("/adminMenolakRenaksiDihapus", (req, res) => {
   });
 });
 
+//ADMIN MENERIMA RENAKSI MRD
+app.post("/adminMenerimaRenaksiMRD", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "Admin" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(err);
+  });
+});
+
+//ADMIN MENOLAK RENAKSI MRD
+app.post("/adminMenolakRenaksiMRD", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+  const nip = req.body.nip;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Renaksi Ditolak", kirim_ke = "Admin", ket_admin = ? WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlInsert =
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Mengirim Renaksi', 'Ditolak') ";
+  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
+    console.log(err);
+  });
+});
+
 //COOKIES DLL
 
 app.get("/cookies", (req, res) => {
