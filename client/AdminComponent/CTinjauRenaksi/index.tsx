@@ -438,56 +438,6 @@ function Row(props) {
                     </p>
                   </div>
                 ) : null}
-                <Gap width={40} height={0} />
-                <button
-                  className={styles.btnTolak}
-                  onClick={() => (openModal(), console.log(row.nama))}
-                >
-                  <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-                </button>
-                <Modal
-                  isOpen={modalIsOpen}
-                  onAfterOpen={afterOpenModal}
-                  onRequestClose={closeModal}
-                  style={custom}
-                  contentLabel="Example Modal"
-                >
-                  <h2 className={styles.headerTxtModal}>
-                    Tolak Permintann Ubah Jadwal
-                  </h2>
-                  <Gap height={20} width={0} />
-                  <input
-                    className={styles.inputBuktiLap}
-                    placeholder="Tambah keterangan"
-                    onChange={(e) => setKetKaban(e.target.value)}
-                    // onChange={(e) => setKetPegawai(e.target.value)}
-                  />
-                  <Gap height={20} width={0} />
-                  <div className={styles.wrapBtnModal}>
-                    <button onClick={closeModal} className={styles.btnKirim}>
-                      <img src={"/BatalIcon.svg"} width={20} height={20} />
-                      <p className={styles.txt}>Batal</p>
-                    </button>
-                    <Gap width={24} height={0} />
-                    <button onClick={btnTolakExp} className={styles.btnBatal}>
-                      <img src={"/Tolak.svg"} width={20} height={20} />
-                      <p>Tolak</p>
-                    </button>
-                  </div>
-                </Modal>
-                {showModal ? (
-                  <div
-                    className={styles.modal}
-                    onClick={() => setShowModal(false)}
-                  >
-                    <p>
-                      Ubah Jadwal {row.nama} <b>Ditolak</b>
-                    </p>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </div>
-                ) : null}
               </div>
             </div>
           </TableCell>

@@ -703,6 +703,17 @@ app.post("/adminMenolakRenaksiMRD", (req, res) => {
   });
 });
 
+//ADMIN MENERIMA RENAKSI FINAL
+app.post("/adminMenerimaRenaksiFinal", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET status = "Sementara" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
+  });
+});
+
 //COOKIES DLL
 
 app.get("/cookies", (req, res) => {
