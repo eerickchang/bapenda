@@ -32,8 +32,8 @@
 
 .wrapperFilterTahun {
 position:absolute ;
-top: 115px;
-left: 1500px;
+top: 70px;
+right: 300px;
 }
 
 .btnFilterTahun {
@@ -174,8 +174,8 @@ left: 1500px;
 
 .wrapperUnduh {
   position: absolute;
-  top: 115px;
-  left: 1638px;
+  top: 70px;
+  right: 165px;
 }
 
 .btnUnduh {

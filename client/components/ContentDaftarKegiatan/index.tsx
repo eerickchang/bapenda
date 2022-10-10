@@ -908,7 +908,7 @@ export default function ContentDaftarKegiatan() {
               )}
             </div>
           </div>
-          <Gap height={70} width={0} />
+          <Gap height={50} width={0} />
           <TableContainer style={styleContainer}>
             <Table>
               <TableHead>
