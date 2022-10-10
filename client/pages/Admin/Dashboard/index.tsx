@@ -110,14 +110,68 @@ export default function Dashboard() {
   const [blmSubmit, setBlmSubmit] = useState([]);
   const [prevMonth, setPrevMonth] = useState("");
 
-  const userData = {
-    labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
+  const UserData = [
+    {
+      id: 1,
+      kinerja: 90,
+      bulan: "Jan",
+    },
+    {
+      id: 2,
+      kinerja: 70,
+      bulan: "Feb",
+    },
+    {
+      id: 3,
+      kinerja: 80,
+      bulan: "Mar",
+    },
+    {
+      id: 4,
+      kinerja: 60,
+      bulan: "Apr",
+    },
+    {
+      id: 5,
+      kinerja: 85,
+      bulan: "Mei",
+    },
+    {
+      id: 6,
+      kinerja: 100,
+      bulan: "Jun",
+    },
+    {
+      id: 7,
+      kinerja: 80,
+      bulan: "Jul",
+    },
+    {
+      id: 8,
+      kinerja: 90,
+      bulan: "Agu",
+    },
+    {
+      id: 9,
+      kinerja: 100,
+      bulan: "Sep",
+    },
+    {
+      id: 10,
+      kinerja: 80,
+      bulan: "Okt",
+    },
+  ];
+
+  const grafikSemua = {
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: grafik?.map((data) => data.hasil_kinerja),
-        backgroundColor: ["#1bddbb"],
+        data: UserData?.map((data) => data.kinerja),
+        backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
+        // barPercentage: 0.5,
 
         // hoverBackgroundColor: ["#112350"],
       },
@@ -155,26 +209,7 @@ export default function Dashboard() {
         />
         <div className={styles.chartWrapper}>
           <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
-          <div className={styles.wrapperFilterTahun}>
-            <div
-              className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-            >
-              <Image src={"/Filter.svg"} width={23} height={23} />
-              <p>Filter</p>
-            </div>
-            {activeDropdownTahun && (
-              <div
-                className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
-              >
-                {filter.map((item) => (
-                  <p key={item.id}>{item.sub}</p>
-                ))}
-              </div>
-            )}
-          </div>
-          <BarChart chartData={userData} />
+          <BarChart chartData={UserData} />
         </div>
       </div>
       <div className={styles.contentKanan}>
