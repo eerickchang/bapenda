@@ -318,9 +318,20 @@ function Row(props) {
     color: "#000",
   };
 
+    const styleAksi = {
+      flexDirection: "row",
+      display: "flex",
+      fontFamily: "Poppins",
+      fontWeight: 400,
+      fontSize: 18,
+      width: 130,
+      justifyContent: "space-between",
+      cursor: "pointer",
+    };
+
   return (
     <>
-      <div className={stylesS.wrapFilter}>
+      {/* <div className={stylesS.wrapFilter}>
         {showModalTerimaAll ? (
           <div
             className={styles.modal}
@@ -334,7 +345,7 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        {/* <Gap width={15} height={0} />
+        <Gap width={15} height={0} />
         <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
           <Image src={"/Tolak.svg"} width={25} height={25} />
           Tolak Semua
@@ -378,95 +389,23 @@ function Row(props) {
               <p>Tolak</p>
             </button>
           </div>
-        </Modal> */}
-      </div>
+        </Modal>
+      </div> */}
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
           // sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell onClick={clickRow}>
+          <TableCell>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow}>
+          <TableCell>
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <div className={styles.styleTxtRow}>
-              <div style={{ flexDirection: "row", display: "flex" }}>
-                <button
-                  className={styles.btnTerima}
-                  onClick={() => btnTerima()}
-                >
-                  <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-                </button>
-                {showModal ? (
-                  <div
-                    className={styles.modal}
-                    onClick={() => setShowModal(false)}
-                  >
-                    <p>
-                      Renaksi {row.nama} <b>Diterima</b>
-                      <div className={styles.checkCircle}>
-                        <Image
-                          src={"/Check-circle.svg"}
-                          width={25}
-                          height={25}
-                        />
-                      </div>
-                    </p>
-                  </div>
-                ) : null}
-                <Gap width={40} height={0} />
-                <button
-                  className={styles.btnTolak}
-                  onClick={() => (openModal(), console.log(row.nama))}
-                >
-                  <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-                </button>
-                <Modal
-                  isOpen={modalIsOpen}
-                  onAfterOpen={afterOpenModal}
-                  onRequestClose={closeModal}
-                  style={custom}
-                  contentLabel="Example Modal"
-                >
-                  <h2 className={styles.headerTxtModal}>
-                    Tolak Permintann Ubah Jadwal
-                  </h2>
-                  <Gap height={20} width={0} />
-                  <input
-                    className={styles.inputBuktiLap}
-                    placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
-                  />
-                  <Gap height={20} width={0} />
-                  <div className={styles.wrapBtnModal}>
-                    <button onClick={closeModal} className={styles.btnKirim}>
-                      <img src={"/BatalIcon.svg"} width={20} height={20} />
-                      <p className={styles.txt}>Batal</p>
-                    </button>
-                    <Gap width={24} height={0} />
-                    <button onClick={btnTolakExp} className={styles.btnBatal}>
-                      <img src={"/Tolak.svg"} width={20} height={20} />
-                      <p>Tolak</p>
-                    </button>
-                  </div>
-                </Modal>
-                {showModal ? (
-                  <div
-                    className={styles.modal}
-                    onClick={() => setShowModal(false)}
-                  >
-                    <p>
-                      Ubah Jadwal {row.nama} <b>Ditolak</b>
-                    </p>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </div>
-                ) : null}
-              </div>
+            <div onClick={clickRow} style={styleAksi}>
+              <Image src={"/LihatDetail.svg"} width={25} height={25} />
+              Lihat detail
             </div>
           </TableCell>
         </TableRow>
