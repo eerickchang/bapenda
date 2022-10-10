@@ -163,7 +163,7 @@ export default function Dashboard() {
     },
   ];
 
-  const grafikSemua = {
+  const userData = {
     labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
@@ -209,7 +209,7 @@ export default function Dashboard() {
         />
         <div className={styles.chartWrapper}>
           <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
-          <BarChart chartData={UserData} />
+          <BarChart chartData={userData} />
         </div>
       </div>
       <div className={styles.contentKanan}>
