@@ -23,7 +23,7 @@ export default function Dashboard() {
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
+        setSubid(response.data.user[0].sub_bidang);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -112,6 +112,7 @@ export default function Dashboard() {
   const [nama, setNama] = useState();
   const [grafik, setGrafik] = useState([]);
   const [cakin, setCakin] = useState([]);
+  const [subid, setSubid] = useState("");
   const [jlhKegiatan, setJlhKegiatan] = useState([]);
   const [lprSubmit, setLprSubmit] = useState([]);
   const [blmSubmit, setBlmSubmit] = useState([]);
@@ -165,7 +166,7 @@ export default function Dashboard() {
     },
     {
       id: 10,
-      kinerja: 80,
+      kinerja: 100,
       bulan: "Okt",
     },
   ];
@@ -174,7 +175,7 @@ export default function Dashboard() {
     labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
-        label: "Kinerja Pegawai",
+        label: "Kinerja",
         data: UserData?.map((data) => data.kinerja),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,

@@ -15,31 +15,31 @@ export default function TopPegawai(props: TopPegawaiProps) {
       id: 1,
       image: <Image src="/User1.svg" width={65} height={65} />,
       nama: "George Olaf",
-      subBidang: "Pajak Daerah",
+      subBidang: "Pengembangan Teknologi",
     },
     {
       id: 2,
       image: <Image src="/User2.svg" width={65} height={65} />,
       nama: "Erick Chang",
-      subBidang: "Pajak Daerah",
+      subBidang: "Pengembangan Teknologi",
     },
     {
       id: 3,
       image: <Image src="/User3.svg" width={65} height={65} />,
       nama: "Andre Waani",
-      subBidang: "Retribusi dan lain-lain Pendapatan",
+      subBidang: "Pengembangan Teknologi",
     },
     {
       id: 4,
       image: <Image src="/User4.svg" width={65} height={65} />,
       nama: "Ryan Mamitoho",
-      subBidang: "Retribusi dan lain-lain Pendapatan",
+      subBidang: "Pengembangan Teknologi",
     },
     {
       id: 5,
       image: <Image src="/User5.svg" width={65} height={65} />,
       nama: "Ferren Kalalo",
-      subBidang: "Perencanaan & Pengembangan",
+      subBidang: "Pengembangan Teknologi",
     },
   ]);
 
