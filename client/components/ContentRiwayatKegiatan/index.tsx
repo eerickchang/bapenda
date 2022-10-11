@@ -440,7 +440,9 @@ export const ContentRiwayatKegiatan = () => {
       item.sub_kegiatan,
       item.tupoksi_tambahan,
       item.nama,
-      item.end_date,
+      `${moment(item.start_date).format("MMM")} - ${moment(
+        item.end_date
+      ).format("MMM")}`,
       item.status,
     ]);
 

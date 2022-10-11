@@ -803,19 +803,21 @@ export default function ContentDaftarKegiatan() {
           setAsn(response.data.user[0]);
           setImage(response.data.user[0].foto);
 
-          Axios.get("http://localhost:3001/ambilRenaksiMRD").then((result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") ===
-                  moment().format("YYYY") &&
-                item.nip === response.data.user[0].nip
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [item, ...nextData];
-                });
-              }
-            });
-          });
+          Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
         })
       ),
     },

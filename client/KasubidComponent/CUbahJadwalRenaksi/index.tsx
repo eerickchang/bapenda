@@ -482,10 +482,12 @@ function Row(props) {
             <p onClick={() => console.log(row.files)}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.tupoksi_tambahan}</p>
+            <p style={style2}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.kegiatan}</p>
+            <p style={style2}>{`${moment(row.start_date).format(
+              "MMM"
+            )} - ${moment(row.end_date).format("MMM")}`}</p>
           </TableCell>
           <TableCell>
             <p style={style2}>
