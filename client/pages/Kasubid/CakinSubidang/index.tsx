@@ -1,8 +1,21 @@
-import { CProfilAdm, Gap, Sidebar } from "../../../KasubidComponent";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  BarChart,
+  CProfilAdm,
+  Gap,
+  HorBar,
+  ProfileKanan,
+  Sidebar,
+} from "../../../KasubidComponent";
 import styles from "./profil.module.css";
 import sidebarStyles from "../../../KasubidComponent/Sidebar/sidebar.module.css";
+import Image from "next/image";
+import moment from "moment";
+import Axios from "axios";
+import { useRouter } from "next/router";
+import CCaKinSubidang from "../../../KasubidComponent/CCakinSubidang";
 
-export default function Profil() {
+export default function CakinSubidang() {
   // const [tahun, setTahun] = useState("");
   // const [dataAsn, setDataAsn] = useState("");
   // const [grafikPersonal, setGrafikPersonal] = useState([]);
@@ -168,11 +181,16 @@ export default function Profil() {
   // //   ],
   // // };
 
+  // const router = useRouter();
+  // const clickLihatDetail = () => {
+  //   // router.push("/Staff/DetailCaKin");
+  // };
+
   return (
     <div className={styles.container}>
       <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
       <Gap height={0} width={141} />
-      <CProfilAdm />
+      <CCaKinSubidang/>
     </div>
   );
 }
