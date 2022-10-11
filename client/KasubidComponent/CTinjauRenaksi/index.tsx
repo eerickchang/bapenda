@@ -72,9 +72,8 @@ function Row(props) {
     //   setShowModal(false);
     // }, 2000);
 
+    stateChange([]);
     setTimeout(() => {
-      stateChange([]);
-
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
           Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
@@ -105,7 +104,7 @@ function Row(props) {
           );
         });
       });
-    }, 100);
+    }, 30);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA
@@ -207,6 +206,38 @@ function Row(props) {
     }, 3000);
 
     stateChange([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilPegawai").then((ambilPegawai) => {
+          Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let userLoggedIn = masuk.data.user;
+              let pegawaiSubid = ambilPegawai.data;
+              let renaksi = ambilRenaksi.data;
+
+              let subidUserSDPegawai = [];
+              let pegawaiYgAdaRenaksi = [];
+
+              subidUserSDPegawai = pegawaiSubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = subidUserSDPegawai.filter((elA) => {
+                return renaksi.some((elB) => elA["nip"] === elB["nip"]);
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+            }
+          );
+        });
+      });
+    }, 30);
   };
 
   const btnTolakExp = () => {
@@ -539,9 +570,7 @@ export default function ContentDaftarKegiatan() {
               <div>
                 <Image src={"/TinjauRenaksiTitle.svg"} width={40} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>
-                TINJAU RENAKSI
-              </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <div className={stylesS.wrapLihatSemua}>
               <button onClick={lihatSemua} className={stylesS.btnFilter}>
@@ -550,9 +579,7 @@ export default function ContentDaftarKegiatan() {
               </button>
             </div>
             <Gap height={186} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>

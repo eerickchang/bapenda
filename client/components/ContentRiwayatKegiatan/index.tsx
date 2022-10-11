@@ -219,19 +219,21 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
         </TableCell>
         <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+          <p className={stylesS.styleTxtRow}>{`${moment(row.start_date).format(
+            "MMM"
+          )} - ${moment(row.end_date).format("MMM")}`}</p>
         </TableCell>
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.status}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+        </TableCell>
+        <TableCell>
+          <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
         </TableCell>
       </TableRow>
 
@@ -240,10 +242,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <div className={styles.wrapperExpand}>
             <div className={styles.wrapperTanggapan}>
               <p>Tanggapan:</p>
-              <p className={styles.txtTanggapan}>
-                Permintaan ubah jadwal tidak dapat dilakukan, karena alasan yang
-                diberikan tidak dapat diterima
-              </p>
+              <p className={styles.txtTanggapan}>{row.ket_admin}</p>
             </div>
             <div className={styles.wrapperLampiran}>
               <p>Lampiran:</p>
@@ -251,7 +250,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             </div>
             <div className={styles.wrapperRencanaUbah}>
               <p>Rencana Ubah Jadwal:</p>
-              <p></p>
+              {row.req_start_date == null ? (
+                <div></div>
+              ) : (
+                <p>{`${moment(row.req_start_date).format("MMM")} - ${moment(
+                  row.req_end_date
+                ).format("MMM")}`}</p>
+              )}
             </div>
           </div>
         </Collapse>
@@ -273,20 +278,24 @@ export const ContentRiwayatKegiatan = () => {
       shouldLog.current = false;
       setDomLoaded(true);
       setThnSkrg(moment().format("YYYY"));
-      Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-        result.data.map((item) => {
-          if (
-            moment(item.end_date).format("YYYY") === moment().format("YYYY")
-          ) {
-            setDataRenaksi((nextData) => {
-              return [...nextData, item];
-            });
-          }
-        });
-      });
 
       Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
         setAsn(dataPegawai.data.user[0]);
+        Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
+          (result) => {
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") ===
+                  moment().format("YYYY") &&
+                item.nip == dataPegawai.data.user[0].nip
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
+          }
+        );
       });
     }
   }, []);
@@ -302,40 +311,26 @@ export const ContentRiwayatKegiatan = () => {
 
   const tahun = [
     {
-      id: 1,
-      tahun: "2015",
-      onclick: () => console.log(dataRenaksi),
-    },
-    {
-      id: 2,
-      tahun: "2016",
-    },
-    {
-      id: 3,
-      tahun: "2017",
-    },
-    {
-      id: 4,
-      tahun: "2018",
-    },
-    {
-      id: 5,
-      tahun: "2019",
-    },
-    {
       id: 6,
       tahun: "2020",
       onclick: () => (
         setThnSkrg("2020"),
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2020") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
+        Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
+          Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") === "2020" &&
+                  item.nip == dataPegawai.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [...nextData, item];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -345,14 +340,21 @@ export const ContentRiwayatKegiatan = () => {
       onclick: () => (
         setThnSkrg("2021"),
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2021") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
+        Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
+          Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") === "2021" &&
+                  item.nip == dataPegawai.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [...nextData, item];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -362,14 +364,21 @@ export const ContentRiwayatKegiatan = () => {
       onclick: () => (
         setThnSkrg("2022"),
         setDataRenaksi([]),
-        Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
-          result.data.map((item) => {
-            if (moment(item.end_date).format("YYYY") === "2022") {
-              setDataRenaksi((nextData) => {
-                return [...nextData, item];
+        Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
+          Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") === "2022" &&
+                  item.nip == dataPegawai.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [...nextData, item];
+                  });
+                }
               });
             }
-          });
+          );
         })
       ),
     },
@@ -384,56 +393,6 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 11,
       tahun: "2025",
-    },
-  ];
-  const bulan = [
-    {
-      id: 1,
-      bulan: "Jan",
-    },
-    {
-      id: 2,
-      bulan: "Feb",
-    },
-    {
-      id: 3,
-      bulan: "Mar",
-    },
-    {
-      id: 4,
-      bulan: "Apr",
-    },
-    {
-      id: 5,
-      bulan: "Mei",
-    },
-    {
-      id: 6,
-      bulan: "Jun",
-    },
-    {
-      id: 7,
-      bulan: "Jul",
-    },
-    {
-      id: 8,
-      bulan: "Agu",
-    },
-    {
-      id: 9,
-      bulan: "Sep",
-    },
-    {
-      id: 10,
-      bulan: "Okt",
-    },
-    {
-      id: 11,
-      bulan: "Nov",
-    },
-    {
-      id: 12,
-      bulan: "Des",
     },
   ];
 

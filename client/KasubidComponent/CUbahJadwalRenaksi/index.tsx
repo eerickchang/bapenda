@@ -179,7 +179,21 @@ function Row(props) {
     });
 
     stateChanger([]);
-    // window.location.reload();
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
@@ -188,19 +202,21 @@ function Row(props) {
     });
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              stateChanger((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
-        }
-      );
-    });
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
 
     setShowModal(true);
     setTimeout(() => {
@@ -366,19 +382,19 @@ function Row(props) {
     btnTolakAll();
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>

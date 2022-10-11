@@ -27,7 +27,7 @@ export default function BoxNotification() {
 
   const router = useRouter();
   const handleClickNotif = () => {
-    router.push("/Notifikasi");
+    router.push("/Staff/Notifikasi");
   };
 
   return (

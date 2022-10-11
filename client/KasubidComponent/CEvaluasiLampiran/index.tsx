@@ -179,7 +179,21 @@ function Row(props) {
     });
 
     stateChanger([]);
-    // window.location.reload();
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
@@ -193,19 +207,21 @@ function Row(props) {
     }, 3000);
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiSelesai").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              stateChanger((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
-        }
-      );
-    });
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnDw = () => {
@@ -370,40 +386,39 @@ function Row(props) {
     alert("sdfsdfasdf");
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
 
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
-    const styleCollapse = {
-      background: "rgba(232, 232, 232, 1)",
-      borderTopColor: "rgba(165, 165, 165, 0.5)",
-      borderTopWidth: 2,
-      borderTopStyle: "solid",
-      marginBottom: 2,
-    };
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 2,
+  };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "absolute",
-      top: 140,
-      color: "rgba(149, 149, 149, 1)",
-    };
-
+  const styleTxtKet = {
+    display: "flex",
+    position: "absolute",
+    top: 140,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnTerimaAll} onClick={ale}>
+        <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
         </button>
@@ -611,7 +626,6 @@ function Row(props) {
   );
 }
 
-
 export const CEvaluasiLampiran = () => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [domLoaded, setDomLoaded] = useState(false);
@@ -663,7 +677,11 @@ export const CEvaluasiLampiran = () => {
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
               <div>
-                <Image src={"/EvaluasiLampiranTitle.svg"} width={50} height={50} />
+                <Image
+                  src={"/EvaluasiLampiranTitle.svg"}
+                  width={50}
+                  height={50}
+                />
               </div>
               <p style={{ marginLeft: 5 }}>EVALUASI LAMPIRAN BUKTI</p>
             </div>
@@ -675,13 +693,10 @@ export const CEvaluasiLampiran = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      style={style}
-                      width={500}
-                    >
+                    <TableCell style={style} width={500}>
                       Pegawai
                     </TableCell>
-                      
+
                     <TableCell style={style} width={500}>
                       Tupoksi
                     </TableCell>

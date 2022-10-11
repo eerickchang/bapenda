@@ -108,6 +108,7 @@ export default function ContentInputRenaksiP() {
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
   const [thl, setThl] = useState("");
   const [rencana, setRencana] = useState("");
+  const [nama, setNama] = useState("");
 
   const selectInputRef = useRef();
 
@@ -140,6 +141,7 @@ export default function ContentInputRenaksiP() {
     // setInTupoksiTambahan("");
     // console.log(rencana);
     // document.getElementById("inputFieldTupoksiTambahan")?.nodeValue = "";
+    window.location.reload();
   };
   // });
   // useEffect(() => {
@@ -156,7 +158,9 @@ export default function ContentInputRenaksiP() {
     if (shouldLog.current) {
       shouldLog.current = false;
       Axios.get("http://localhost:3001/masuk").then((response) => {
+        setNama(response.data.user[0].nama);
         // console.log("NIP: ", response.data.user[0].nip);
+        setNama(response.data.user[0].nama);
         setNip(response.data.user[0].nip);
         Axios.get("http://localhost:3001/THL").then((result) => {
           result.data.map((data) => {
@@ -526,14 +530,14 @@ export default function ContentInputRenaksiP() {
       <p className={styles.titleTupoksi}>Rencana Pelaksana</p>
       <div className={styles.wrapperPickMonth}>
         <div>
-          <p>Dari tanggal*</p>
+          <p>Dari Bulan*</p>
           <input
             type="month"
             onChange={(e) => setStartDate(e.target.value + "-01")}
           />
         </div>
         <div style={{ marginLeft: 133 }}>
-          <p>Sampai tanggal*</p>
+          <p>Sampai Bulan*</p>
           <input
             type="month"
             onChange={(e) => setEndDate(e.target.value + "-01")}
@@ -553,7 +557,8 @@ export default function ContentInputRenaksiP() {
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
-            Input Renaksi FEREN <b>Berhasil</b>
+            Input Renaksi {nama}
+            <b>Berhasil</b>
             <div className={styles.checkCircle}>
               <Image src={"/Check-circle.svg"} width={25} height={25} />
             </div>

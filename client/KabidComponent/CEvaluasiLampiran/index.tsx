@@ -247,18 +247,18 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     });
   };
 
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <React.Fragment>
@@ -358,35 +358,12 @@ export default function ContentDaftarKegiatan() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const btnTerima = () => {
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksiMRD) => {
-          if (row.nip === renaksiMRD.nip) {
-            Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-              idRenaksi: renaksiMRD.id_renaksi,
-            });
-          }
-        });
-      }
-    );
-
-    Axios.post("http://localhost:3001/kasubidUpdateRenaksiTPT", {
-      nip: row.nip,
-    });
-
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 17,
+    fontWeight: 600,
+    color: "#959595",
   };
-
-    const style = {
-      fontFamily: "Poppins",
-      fontSize: 17,
-      fontWeight: 600,
-      color: "#959595",
-    };
 
   return (
     <>

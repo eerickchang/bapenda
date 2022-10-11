@@ -85,17 +85,19 @@ export default function CTinjauRenaksiPegawai() {
 
     setPegawai([]);
 
-    Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksi) => {
-          if (renaksi.nip == router.query.nip) {
-            setPegawai((nextData) => {
-              return [renaksi, ...nextData];
-            });
-          }
-        });
-      }
-    );
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.nip == router.query.nip) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 30);
   };
 
   const custom = {
@@ -268,9 +270,13 @@ export default function CTinjauRenaksiPegawai() {
     color: "rgba(0, 0, 0, 1)",
     textAlign: "left",
   };
-  
-    const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998, paddingBottom: 20 };
 
+  const styleContainer = {
+    paddingLeft: 2,
+    paddingRight: 40,
+    zIndex: 998,
+    paddingBottom: 20,
+  };
 
   return (
     <>
@@ -290,9 +296,7 @@ export default function CTinjauRenaksiPegawai() {
               RENAKSI - {nama}
             </div>
             <Gap height={162} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>

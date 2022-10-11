@@ -74,96 +74,6 @@ export default function CLihatSemuaRenaksi() {
   const [semuaRenaksi, setSemuaRenaksi] = useState([]);
   const [subid, setSubid] = useState();
 
-  const tahun = [
-    {
-      id: 6,
-      tahun: "2020",
-      onclick: () => (
-        setTahunClick("2020"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2020").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 7,
-      tahun: "2021",
-      onclick: () => (
-        setTahunClick("2021"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2021").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 8,
-      tahun: "2022",
-      onclick: () => (
-        setTahunClick("2022"),
-        setSemuaRenaksi([]),
-        Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksi").then(
-            (ambilRenaksi) => {
-              ambilRenaksi.data.map((renaksi) => {
-                if (
-                  renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
-                  moment(renaksi.end_date).format("YYYY") ===
-                    moment("2022").format("YYYY")
-                ) {
-                  setSemuaRenaksi((nextData) => {
-                    return [renaksi, ...nextData];
-                  });
-                }
-              });
-            }
-          );
-        })
-      ),
-    },
-    {
-      id: 9,
-      tahun: "2023",
-    },
-    {
-      id: 10,
-      tahun: "2024",
-    },
-    {
-      id: 11,
-      tahun: "2025",
-    },
-  ];
-
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(semuaRenaksi);
     const workBook = XLSX.utils.book_new();
@@ -249,7 +159,7 @@ export default function CLihatSemuaRenaksi() {
 
   const columns = [
     { id: "no", label: "No" },
-    { id: "jabatan", label: "Jabatan"},
+    { id: "jabatan", label: "Jabatan" },
     {
       id: "asn",
       label: "ASN",
@@ -334,7 +244,7 @@ export default function CLihatSemuaRenaksi() {
     fontWeight: 600,
     fontSize: 22,
     color: "#fff",
-    textAlign: 'center'
+    textAlign: "center",
   };
 
   return (
@@ -356,29 +266,6 @@ export default function CLihatSemuaRenaksi() {
         <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
       </div>
 
-      <div className={styles.wrapperFilter}>
-        <div className={styles.wrapperFilterTahun}>
-          <div
-            className={styles.btnFilterTahun}
-            onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
-          >
-            <Image src={"/TahunIcon.svg"} width={23} height={23} />
-            <p>Tahun</p>
-          </div>
-          {activeDropdownTahun && (
-            <div
-              className={styles.wrapperSelectFilterTahun}
-              onClick={() => setActiveDropdownTahun(false)}
-            >
-              {tahun.map((item) => (
-                <p key={item.id} onClick={item.onclick}>
-                  {item.tahun}
-                </p>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
       {/* </div> */}
       <Gap height={100} width={0} />
 
@@ -404,45 +291,44 @@ export default function CLihatSemuaRenaksi() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {semuaRenaksi
-              .map((row) => {
-                return (
-                  <TableRow hover>
-                    <TableCell align="center" sx={style}>
-                      {moment(row.end_date).format("YYYY")}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      <p style={{ width: 50 }}>{row.jabatan}</p>
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.nama}
-                      {/* {moment(row.asn).format("MMM")} */}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.nama_thl}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.program}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.kegiatan}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.sub_kegiatan}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.tupoksi_inti}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {row.tupoksi_tambahan}
-                    </TableCell>
-                    <TableCell align="center" sx={style}>
-                      {`${moment(row.start_date).format("MMM")} -
+            {semuaRenaksi.map((row) => {
+              return (
+                <TableRow hover>
+                  <TableCell align="center" sx={style}>
+                    {moment(row.end_date).format("YYYY")}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    <p style={{ width: 50 }}>{row.jabatan}</p>
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.nama}
+                    {/* {moment(row.asn).format("MMM")} */}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.nama_thl}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.program}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.kegiatan}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.sub_kegiatan}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.tupoksi_inti}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {row.tupoksi_tambahan}
+                  </TableCell>
+                  <TableCell align="center" sx={style}>
+                    {`${moment(row.start_date).format("MMM")} -
                         ${moment(row.end_date).format("MMM")}`}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

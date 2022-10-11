@@ -179,7 +179,21 @@ function Row(props) {
     });
 
     stateChanger([]);
-    // window.location.reload();
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
   };
 
   const btnTerima = () => {
@@ -188,19 +202,21 @@ function Row(props) {
     });
 
     stateChanger([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              stateChanger((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
-        }
-      );
-    });
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiHapus").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 30);
 
     setShowModal(true);
     setTimeout(() => {
@@ -644,12 +660,12 @@ export const CHapusRenaksi = () => {
     console.log(dataRenaksi);
   };
 
-    const style = {
-      fontFamily: "Poppins",
-      fontSize: 22,
-      fontWeight: 600,
-      color: "rgba(149, 149, 149, 1)",
-    };
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 22,
+    fontWeight: 600,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
@@ -671,10 +687,7 @@ export const CHapusRenaksi = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      style={style}
-                      width={500}
-                    >
+                    <TableCell style={style} width={500}>
                       Pegawai
                     </TableCell>
                     {/* <TableCell className={styles.headerTable} width={0}>
