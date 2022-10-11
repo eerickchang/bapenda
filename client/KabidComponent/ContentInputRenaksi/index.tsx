@@ -68,6 +68,8 @@ export default function ContentInputRenaksi() {
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
   const [thl, setThl] = useState("");
   const [rencana, setRencana] = useState("");
+  
+  const [nama, setNama] = useState("");
 
   const selectInputRef = useRef();
 
@@ -116,6 +118,7 @@ export default function ContentInputRenaksi() {
     if (shouldLog.current) {
       shouldLog.current = false;
       Axios.get("http://localhost:3001/masuk").then((response) => {
+        setNama(response.data.user[0].nama);
         // console.log("NIP: ", response.data.user[0].nip);
         setNip(response.data.user[0].nip);
         Axios.get("http://localhost:3001/THL").then((result) => {
@@ -450,7 +453,7 @@ export default function ContentInputRenaksi() {
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>
-            Input Renaksi Feren <b>Berhasil</b>
+            Input Renaksi {nama} <b>Berhasil</b>
             <div className={styles.checkCircle}>
               <Image src={"/Check-circle.svg"} width={25} height={25} />
             </div>

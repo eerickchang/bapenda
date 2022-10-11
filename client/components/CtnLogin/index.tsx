@@ -14,9 +14,9 @@ export default function CtnLogin() {
   const [sandi, setSandi] = useState("");
   let [message, setMessage] = useState("");
 
-  const handleClick = () => {
-    router.push("/Umum/LupaSandi");
-  };
+  // const handleClick = () => {
+  //   router.push("/Umum/LupaSandi");
+  // };
 
   const btnDaftar = () => {
     router.push("/Umum/Daftar");
@@ -98,9 +98,7 @@ export default function CtnLogin() {
           onChange={(e) => setSandi(e.target.value)}
         />
         <Gap height={106} width={0} />
-        <p className={styles.txtLupa} onClick={handleClick}>
-          Lupa kata sandi?
-        </p>
+        <p className={styles.txtLupa}>Lupa kata sandi?</p>
         <Gap height={45} width={0} />
         <Button
           className={`${btnStyles.container}`}
@@ -114,6 +112,7 @@ export default function CtnLogin() {
           onClick={btnDaftar}
         />
         <p style={{ color: "white" }}>{message}</p>
+        {/* <div className={styles.modals}>{message}</div> */}
       </div>
     </div>
   );
