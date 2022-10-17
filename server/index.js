@@ -38,7 +38,7 @@ const saltRounds = 10;
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "12345",
+  password: "",
   database: "bapenda_kepatuhan",
 });
 
