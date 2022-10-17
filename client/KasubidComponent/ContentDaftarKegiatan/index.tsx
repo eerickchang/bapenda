@@ -502,7 +502,11 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+            if (
+              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+              moment(renaksi.end_date).format("YYYY") ===
+                moment().format("YYYY")
+            ) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -522,7 +526,6 @@ export default function ContentDaftarKegiatan() {
   };
 
   const [showModal, setShowModal] = useState(false);
-
 
   const styleHeader = {
     fontFamily: "Poppins",
@@ -548,24 +551,12 @@ export default function ContentDaftarKegiatan() {
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={styleHeader}>
-                      Profile
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Program
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Sub Kegiatan
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Tupoksi
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Rencana
-                    </TableCell>
+                    <TableCell sx={styleHeader}>Profile</TableCell>
+                    <TableCell sx={styleHeader}>Program</TableCell>
+                    <TableCell sx={styleHeader}>Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Sub Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Tupoksi</TableCell>
+                    <TableCell sx={styleHeader}>Rencana</TableCell>
                     <TableCell sx={styleHeader}>Status</TableCell>
                   </TableRow>
                 </TableHead>
