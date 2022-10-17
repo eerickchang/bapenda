@@ -432,31 +432,33 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow hover className={styles.styleRow}>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {row.foto === "" ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={70}
-                height={70}
-                alt="User 2"
-                style={{ borderRadius: 150 }}
-              />
-            ) : (
-              <Image
-                src={row.foto}
-                width={70}
-                height={70}
-                alt="User 2"
-                style={{ borderRadius: 150 }}
-              />
-            )}
-            {/* //!{ambil data} */}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama}</p>
-              <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
-              <p className={stylesS.rekanAsn}>ASN</p>
+          <TableCell>
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              {row.foto === "" ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              ) : (
+                <Image
+                  src={row.foto}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              )}
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama}</p>
+                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                <p className={stylesS.rekanAsn}>ASN</p>
+              </div>
             </div>
-          </div>
+          </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>{row.program}</p>
           </TableCell>
@@ -523,7 +525,6 @@ export default function ContentDaftarKegiatan() {
 
   const [showModal, setShowModal] = useState(false);
 
-
   const styleHeader = {
     fontFamily: "Poppins",
     fontSize: 21,
@@ -548,24 +549,12 @@ export default function ContentDaftarKegiatan() {
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={styleHeader}>
-                      Profile
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Program
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Kegiatan
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Sub Kegiatan
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Tupoksi
-                    </TableCell>
-                    <TableCell sx={styleHeader}>
-                      Rencana
-                    </TableCell>
+                    <TableCell sx={styleHeader}>Profile</TableCell>
+                    <TableCell sx={styleHeader}>Program</TableCell>
+                    <TableCell sx={styleHeader}>Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Sub Kegiatan</TableCell>
+                    <TableCell sx={styleHeader}>Tupoksi</TableCell>
+                    <TableCell sx={styleHeader}>Rencana</TableCell>
                     <TableCell sx={styleHeader}>Status</TableCell>
                   </TableRow>
                 </TableHead>
