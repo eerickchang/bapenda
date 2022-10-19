@@ -504,7 +504,11 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+            if (
+              renaksi.sub_bidang === masuk.data.user[0].sub_bidang &&
+              moment(renaksi.end_date).format("YYYY") ===
+                moment().format("YYYY")
+            ) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });

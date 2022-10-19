@@ -438,7 +438,9 @@ function Row(props) {
             )}
             {/* //!{ambil data} */}
             <div style={{ marginLeft: 20 }}>
-              <p className={stylesS.rekanNama}>{row.nama}</p>
+              <p className={stylesS.rekanNama}>
+                {moment(row.end_date).format("YYYY")}
+              </p>
               <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
               <p className={stylesS.rekanAsn}>ASN</p>
             </div>
@@ -489,7 +491,10 @@ export default function CDaftarKegiatanSubid() {
 
       Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
         ambilRenaksi.data.map((renaksi) => {
-          if (renaksi.sub_bidang === router.query.subid) {
+          if (
+            renaksi.sub_bidang === router.query.subid &&
+            moment(renaksi.end_date).format("YYYY") === moment().format("YYYY")
+          ) {
             setPegawai((nextData) => {
               return [renaksi, ...nextData];
             });
@@ -540,9 +545,7 @@ export default function CDaftarKegiatanSubid() {
             <Gap height={100} width={0} />
           </div>
           <Gap height={106} width={0} />
-          <TableContainer
-            style={styleContainer}
-          >
+          <TableContainer style={styleContainer}>
             <Table sx={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>

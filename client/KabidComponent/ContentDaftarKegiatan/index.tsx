@@ -645,9 +645,14 @@ export default function ContentDaftarKegiatan() {
               });
 
               pegawaiYgAdaRenaksi.map((item) => {
-                setPegawai((nextData) => {
-                  return [item, ...nextData];
-                });
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                  moment().format("YYYY")
+                ) {
+                  setPegawai((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
               });
 
               console.log("Bidang Sama: ", bidangUserSDKabid);
