@@ -43,12 +43,43 @@
 }
 
 
-.modals{
+.headerTxtModal {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dialog {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+
+.wrapperBtnModal {
+  display: inline-flex;
+  bottom: 1;
   position: absolute;
-  top: 100px;
-  margin-left: 100px;
-  background: '#fff111';
-  color: white;
-  width: 200px;
-  height: 50px;
+  bottom: 0;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+
+.message{
+  position: absolute;
+  top: 460px;
+  margin-left: 20px;
+  color: #fff;
 }
