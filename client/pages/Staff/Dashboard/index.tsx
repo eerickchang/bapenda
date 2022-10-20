@@ -20,9 +20,27 @@ export default function Dashboard() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
+      let infoBulan;
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
-      Axios.get("http://localhost:3001/createRowCakin").then((response) => {
-        console.log(response);
+      Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
+        cakin.data.map((ambilCakin) => {
+          // console.log(ambilCakin);
+          if (
+            moment(ambilCakin.bulan).format("YYYY-MM") ==
+            moment().format("YYYY-MM")
+          ) {
+            infoBulan = "Good";
+          }
+        });
+
+        if (infoBulan == "Good") {
+          console.log("Ada");
+        } else {
+          console.log("Nda ada");
+        }
+        // Axios.post("http://localhost:3001/addBulanCakin", {
+        //   bulan: moment().format("YYYY-MM-01"),
+        // });
       });
 
       Axios.get("http://localhost:3001/masuk").then((response) => {

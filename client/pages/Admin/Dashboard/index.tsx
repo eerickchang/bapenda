@@ -208,7 +208,9 @@ export default function Dashboard() {
           belumDisubmit={blmSubmit.length}
         />
         <div className={styles.chartWrapper}>
-          <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
+          <h1 className={styles.headerChart}>
+            Grafik Kiner ja Tahun {thnSkrg}
+          </h1>
           <BarChart chartData={userData} />
         </div>
       </div>

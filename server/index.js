@@ -770,10 +770,20 @@ app.post("/adminMenolakRenaksiSelesai", (req, res) => {
   });
 });
 
+//AMBIL DATA CAKIN
 app.get("/createRowCakin", (req, res) => {
   const sqlCekRowCakin = "SELECT * FROM cakin";
   db.query(sqlCekRowCakin, (err, result) => {
-    console.log(result);
+    res.send(result);
+  });
+});
+
+app.post("/addBulanCakin", (req, res) => {
+  const bulan = req.body.bulan;
+
+  const sqlInsert = "INSERT INTO cakin (bulan) VALUES (?)";
+  db.query(sqlInsert, bulan, (err, result) => {
+    console.log(err);
   });
 });
 
