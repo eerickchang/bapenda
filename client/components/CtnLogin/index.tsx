@@ -34,6 +34,7 @@ export default function CtnLogin() {
       if (response.data.message) {
         console.log(response.data.message);
         setMessage(response.data.message);
+        setIsOpenModal(true);
       } else if (response.data[0].jabatan === "Kepala Badan") {
         router.push("/Kaban/Dashboard");
       } else if (response.data[0].jabatan === "Staff") {
@@ -87,9 +88,7 @@ export default function CtnLogin() {
 
   const [modalIsOpen, setIsOpenModal] = useState(false);
 
-  function openModal() {
-    setIsOpenModal(true);
-  }
+  function openModal() {}
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -138,7 +137,6 @@ export default function CtnLogin() {
           height={30}
           onChange={(e) => setSandi(e.target.value)}
         />
-        <p className={styles.message}>{message}</p> 
         <Gap height={100} width={0} />
         <p onClick={openModal} className={styles.txtLupa}>
           Lupa kata sandi?

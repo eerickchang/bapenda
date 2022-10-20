@@ -298,9 +298,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       >
         {/* //! DATA ROW */}
         <TableCell>
-          <p className={stylesS.styleTxtRow}>
-            {moment(row.end_date).format("YYYY")}
-          </p>
+          <p className={stylesS.styleTxtRow}>{row.program}</p>
         </TableCell>
         <TableCell>
           <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
