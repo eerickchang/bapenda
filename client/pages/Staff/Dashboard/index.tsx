@@ -21,6 +21,9 @@ export default function Dashboard() {
       shouldLog.current = false;
 
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
+      Axios.get("http://localhost:3001/createRowCakin").then((response) => {
+        console.log(response);
+      });
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setSubid(response.data.user[0].sub_bidang);

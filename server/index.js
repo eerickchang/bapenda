@@ -737,6 +737,12 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
     console.log(result);
   });
 
+  const sqlUpdate2 =
+    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE id_cakin = 1";
+  db.query(sqlUpdate2, (err, result) => {
+    console.log(err);
+  });
+
   const sqlInsert =
     "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Diterima') ";
   db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
@@ -761,6 +767,13 @@ app.post("/adminMenolakRenaksiSelesai", (req, res) => {
     "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Ditolak') ";
   db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
     console.log(err);
+  });
+});
+
+app.get("/createRowCakin", (req, res) => {
+  const sqlCekRowCakin = "SELECT * FROM cakin";
+  db.query(sqlCekRowCakin, (err, result) => {
+    console.log(result);
   });
 });
 

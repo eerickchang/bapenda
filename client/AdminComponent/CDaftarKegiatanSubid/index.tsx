@@ -438,9 +438,7 @@ function Row(props) {
             )}
             {/* //!{ambil data} */}
             <div style={{ marginLeft: 20 }}>
-              <p className={stylesS.rekanNama}>
-                {moment(row.end_date).format("YYYY")}
-              </p>
+              <p className={stylesS.rekanNama}>{row.nama}</p>
               <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
               <p className={stylesS.rekanAsn}>ASN</p>
             </div>
