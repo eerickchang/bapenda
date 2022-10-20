@@ -780,3 +780,18 @@
   font-size: 18px;
   color: rgba(148, 148, 148, 1);
 }
+
+
+
+.iconPDF{
+  margin-left: 210px;
+  margin-top: 3px;
+  position: absolute;
+
+}
+.iconPDFUbah{
+  margin-left: 520px;
+  margin-top: 3px;
+  position: absolute;
+
+}

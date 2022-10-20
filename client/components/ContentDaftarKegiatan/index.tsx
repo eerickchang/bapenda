@@ -472,7 +472,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               placeholder="Tambah keterangan untuk lampiran bukti"
               onChange={(e) => setKetPegawai(e.target.value)}
             />
-            <Gap height={20} width={0} />
+            <Gap height={30} width={0} />
             <div className={styles.wrapperBtnModal}>
               <form action="#">
                 <label htmlFor="file">
@@ -486,6 +486,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
+              <div className={styles.iconPDF}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
               <Gap width={193} height={0} />
               <button onClick={btnUnggahExp} className={styles.btnKirim}>
                 <img src={"/Kirim.svg"} width={20} height={20} />
@@ -554,6 +557,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
+              <div className={styles.iconPDFUbah}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
             </div>
             {/* <div className={styles.wrapperBtnModal}> */}
             <Gap width={0} height={24} />
@@ -613,6 +619,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
+              <div className={styles.iconPDF}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
               {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
               <Gap width={193} height={0} />
               <button onClick={btnHapusExp} className={styles.btnKirim}>
