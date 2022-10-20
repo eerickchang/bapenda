@@ -530,6 +530,13 @@ function Row(props) {
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
 
+  const styleTxtRowBS = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "rgba(233, 0, 95, 1)",
+  };
+
   return (
     <>
       <div className={stylesS.wrapperFilter}>
@@ -551,58 +558,113 @@ function Row(props) {
         )}
       </div>
       <React.Fragment>
-        <TableRow hover className={styles.styleRow}>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {row.foto === "" ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={70}
-                height={70}
-                alt="User 2"
-                style={{ borderRadius: 150 }}
-              />
-            ) : (
-              <Image
-                src={row.foto}
-                width={70}
-                height={70}
-                alt="User 2"
-                style={{ borderRadius: 150 }}
-              />
-            )}
-            {/* //!{ambil data} */}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama}</p>
-              <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
-              <p className={stylesS.rekanAsn}>ASN</p>
+        {row.status != "Selesai" ? (
+          <TableRow hover className={styles.styleRow}>
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              {row.foto === "" ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              ) : (
+                <Image
+                  src={row.foto}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              )}
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama}</p>
+                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                <p className={stylesS.rekanAsn}>ASN</p>
+              </div>
             </div>
-          </div>
-          <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.program}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTupoksi}>Inti</p>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
-            <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
-          </TableCell>
-          <TableCell>
-            {/* ambil data rencana */}
-            <p className={stylesS.styleTxtRowRencana}>
-              {moment(row.start_date).format("MMM")} -{" "}
-              {moment(row.end_date).format("MMM")}
-            </p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRow}>{row.status}</p>
-          </TableCell>
-        </TableRow>
+            <TableCell>
+              <p style={styleTxtRowBS}>{row.program}</p>
+            </TableCell>
+            <TableCell>
+              <p style={styleTxtRowBS}>{row.kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p style={styleTxtRowBS}>{row.sub_kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTupoksiBS}>Inti</p>
+              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
+              <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
+              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
+            </TableCell>
+            <TableCell>
+              {/* ambil data rencana */}
+              <p className={stylesS.styleTxtRowRencanaBS}>
+                {moment(row.start_date).format("MMM")} -{" "}
+                {moment(row.end_date).format("MMM")}
+              </p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.status}</p>
+            </TableCell>
+          </TableRow>
+        ) : (
+          <TableRow hover className={styles.styleRow}>
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              {row.foto === "" ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              ) : (
+                <Image
+                  src={row.foto}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              )}
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama}</p>
+                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                <p className={stylesS.rekanAsn}>ASN</p>
+              </div>
+            </div>
+            <TableCell>
+              <p className={stylesS.styleTxtRow}>{row.program}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTupoksi}>Inti</p>
+              <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+              <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+              <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+            </TableCell>
+            <TableCell>
+              {/* ambil data rencana */}
+              <p className={stylesS.styleTxtRowRencana}>
+                {moment(row.start_date).format("MMM")} -{" "}
+                {moment(row.end_date).format("MMM")}
+              </p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRow}>{row.status}</p>
+            </TableCell>
+          </TableRow>
+        )}
       </React.Fragment>
     </>
   );
