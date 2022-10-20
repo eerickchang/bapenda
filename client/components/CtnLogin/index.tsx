@@ -138,9 +138,11 @@ export default function CtnLogin() {
           height={30}
           onChange={(e) => setSandi(e.target.value)}
         />
-          <p className={styles.message}>{message}</p>
+        <p className={styles.message}>{message}</p> 
         <Gap height={100} width={0} />
-        <p onClick={openModal} className={styles.txtLupa}>Lupa kata sandi?</p>
+        <p onClick={openModal} className={styles.txtLupa}>
+          Lupa kata sandi?
+        </p>
         <Gap height={45} width={0} />
         <Button
           className={`${btnStyles.container}`}
@@ -153,7 +155,6 @@ export default function CtnLogin() {
           title="Daftar"
           onClick={btnDaftar}
         />
-        {/* <p style={{ color: "white" }}>{message}</p> */}
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
