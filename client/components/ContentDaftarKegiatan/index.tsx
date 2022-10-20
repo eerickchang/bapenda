@@ -283,73 +283,147 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
   return (
     <React.Fragment>
-      <TableRow
-        className={`${styles.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                setRowClick(!rowClik))
-              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-          }
-        }}
-        sx={{ "& > *": { borderBottom: "" } }}
-      >
-        {/* //! DATA ROW */}
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.program}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTupoksi}>Inti</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
-          <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
-        </TableCell>
-        <TableCell>
-          {row.thl === null ? null : (
-            <div style={{ display: "flex", padding: 0, alignItems: "center" }}>
-              {!image ? (
-                <Image
-                  src={"/SidebarProfile.svg"}
-                  width={40}
-                  height={40}
-                  alt="User 2"
-                  style={{ borderRadius: 40 }}
-                />
-              ) : (
-                <Image
-                  src={image}
-                  width={40}
-                  height={40}
-                  alt="User 2"
-                  style={{ borderRadius: 40 }}
-                />
-              )}
-              <div style={{ marginLeft: 10 }}>
-                <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                <p className={stylesS.rekanPegawai}>THL</p>
+      {row.status != "Selesai" ? (
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          {/* //! DATA ROW */}
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.program}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTupoksiBS}>Inti</p>
+            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
+            <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
+            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            {row.thl === null ? null : (
+              <div
+                style={{ display: "flex", padding: 0, alignItems: "center" }}
+              >
+                {!image ? (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                ) : (
+                  <Image
+                    src={image}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                )}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                  <p className={stylesS.rekanPegawai}>THL</p>
+                </div>
               </div>
-            </div>
-          )}
-        </TableCell>
-        <TableCell>
-          {/* ambil data rencana */}
-          <p className={stylesS.styleTxtRowRencana}>
-            {moment(row.start_date).format("MMM")} -{" "}
-            {moment(row.end_date).format("MMM")}
-          </p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.status}</p>
-        </TableCell>
-      </TableRow>
+            )}
+          </TableCell>
+          <TableCell>
+            {/* ambil data rencana */}
+            <p className={stylesS.styleTxtRowRencanaBS}>
+              {moment(row.start_date).format("MMM")} -{" "}
+              {moment(row.end_date).format("MMM")}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.status}</p>
+          </TableCell>
+        </TableRow>
+      ) : (
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          {/* //! DATA ROW */}
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.program}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTupoksi}>Inti</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+            <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            {row.thl === null ? null : (
+              <div
+                style={{ display: "flex", padding: 0, alignItems: "center" }}
+              >
+                {!image ? (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                ) : (
+                  <Image
+                    src={image}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                )}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                  <p className={stylesS.rekanPegawai}>THL</p>
+                </div>
+              </div>
+            )}
+          </TableCell>
+          <TableCell>
+            {/* ambil data rencana */}
+            <p className={stylesS.styleTxtRowRencana}>
+              {moment(row.start_date).format("MMM")} -{" "}
+              {moment(row.end_date).format("MMM")}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.status}</p>
+          </TableCell>
+        </TableRow>
+      )}
       <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
         <Collapse sx={styleCollapse} in={open} timeout="auto">
           <div className={styles.wrapperContentModal}>
