@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BarChart, Gap, HorBar, ProfileKanan } from "../../components";
+import { BarChart, Gap } from "../../components";
 import styles from "./profilAdm.module.css";
 import sidebarStyles from "../../KabanComponent/SidebarAdmin/sidebar.module.css";
 import Image from "next/image";
@@ -392,87 +392,7 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
-        {/* <div className={styles.barContainer4} onClick={clickCakinSubidang}>
-          <p className={styles.txtBidang}>PAJAK DAERAH</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart4} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart4} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.barContainer5} onClick={clickCakinSubidang}>
-          <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart5} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart5} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
-      {/* <div className={styles.contentKanan}>
-        <ProfileKanan
-          nama={dataAsn.nama}
-          bidang={dataAsn.bidang}
-          subBidang={dataAsn.sub_bidang}
-          jabatan={dataAsn.jabatan}
-          noHp={dataAsn.no_hp}
-          fotoProfil={dataAsn.foto}
-        />
-      </div> */}
     </div>
   );
 }

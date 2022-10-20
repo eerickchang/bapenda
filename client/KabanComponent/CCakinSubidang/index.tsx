@@ -697,7 +697,6 @@ export default function CCaKinSubidang() {
       </div>
 
       <Gap height={100} width={0} />
-      {/* <Paper sx={{ width: "100%", overflow: "hidden" }}> */}
       <TableContainer sx={styleContainer}>
         <Table
           stickyHeader
@@ -832,17 +831,6 @@ export default function CCaKinSubidang() {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        style={{background: '#fff', fontFamily: 'Poppins', fontWeight: 600, fontSize: 18}}
-      /> */}
-      {/* </Paper> */}
     </div>
   );
 }
