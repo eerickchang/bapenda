@@ -14,7 +14,6 @@ import moment from "moment";
 
 import Modal from "react-modal";
 import Gap from "../Gap";
-import Button from "../Button";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
 
@@ -279,7 +278,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 2,
-    // width: 2000
   };
   return (
     <React.Fragment>
@@ -472,7 +470,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               placeholder="Tambah keterangan untuk lampiran bukti"
               onChange={(e) => setKetPegawai(e.target.value)}
             />
-            <Gap height={20} width={0} />
+            <Gap height={30} width={0} />
             <div className={styles.wrapperBtnModal}>
               <form action="#">
                 <label htmlFor="file">
@@ -486,10 +484,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
+              <div className={styles.iconPDF}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
               <Gap width={193} height={0} />
               <button onClick={btnUnggahExp} className={styles.btnKirim}>
                 <img src={"/Kirim.svg"} width={20} height={20} />
-                <p className={styles.txt}>Kirim</p>
+                <p>Kirim</p>
               </button>
               <Gap width={24} height={0} />
               <button onClick={closeModal} className={styles.btnBatal}>
@@ -554,19 +555,20 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
+              <div className={styles.iconPDFUbah}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
             </div>
-            {/* <div className={styles.wrapperBtnModal}> */}
             <Gap width={0} height={24} />
             <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
               <img src={"/Kirim.svg"} width={20} height={20} />
-              <p className={styles.txt}>Kirim</p>
+              <p>Kirim</p>
             </button>
             <Gap width={0} height={10} />
             <button onClick={closeModalUbah} className={styles.btnBatal_Ubah}>
               <img src={"/Batal.svg"} width={20} height={20} />
               <p>Batal</p>
             </button>
-            {/* </div> */}
           </Modal>
           {showModal_Ubah ? (
             <div
@@ -613,11 +615,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
-              {/* <Button title="Pilih File" className={`${btnStyles.btnPilihFile}`} /> */}
+              <div className={styles.iconPDF}>
+                <Image src={"/IconPDF.svg"} width={25} height={25} />
+              </div>
               <Gap width={193} height={0} />
               <button onClick={btnHapusExp} className={styles.btnKirim}>
                 <img src={"/Kirim.svg"} width={20} height={20} />
-                <p className={styles.txt}>Kirim</p>
+                <p>Kirim</p>
               </button>
               <Gap width={24} height={0} />
               <button onClick={closeModalHapus} className={styles.btnBatal}>
@@ -641,7 +645,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           ) : null}
         </Collapse>
       </TableCell>
-      {/* </TableContainer> */}
     </React.Fragment>
   );
 }
@@ -858,7 +861,6 @@ export default function ContentDaftarKegiatan() {
 
   const btnFilter = () => {
     setActiveDropdown(!activeDropdown);
-    // console.log(dataRenaksi);
   };
 
   const styleHeader = {

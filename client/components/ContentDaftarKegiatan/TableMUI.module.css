@@ -545,26 +545,6 @@
   outline: none;
 }
 
-.inputBuktiLap {
-  height: 133px;
-  width: 755px;
-  border: 1px solid black;
-  border-radius: 4px;
-}
-
-.inputBuktiLap::placeholder {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.inputBuktiLap:focus {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  outline: none;
-}
-
 .btnBatal_Ubah {
   background-color: rgba(255, 1, 100, 1);
   width: 754px;
@@ -779,4 +759,19 @@
   font-weight: 400;
   font-size: 18px;
   color: rgba(148, 148, 148, 1);
+}
+
+
+
+.iconPDF{
+  margin-left: 210px;
+  margin-top: 3px;
+  position: absolute;
+
+}
+.iconPDFUbah{
+  margin-left: 520px;
+  margin-top: 3px;
+  position: absolute;
+
 }
