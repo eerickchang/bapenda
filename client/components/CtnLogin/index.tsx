@@ -7,6 +7,8 @@ import TxtInput from "../TxtInput";
 import { useRouter } from "next/router";
 import Axios from "axios";
 
+import Modal from "react-modal";
+
 export default function CtnLogin() {
   const router = useRouter();
 
@@ -53,6 +55,51 @@ export default function CtnLogin() {
   //   router.push("/Staff/Dashboard");
   // }
 
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      height: 219,
+      borderRadius: 20,
+      paddingTop: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  const [modalIsOpen, setIsOpenModal] = useState(false);
+
+  function openModal() {
+    setIsOpenModal(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpenModal(false);
+  }
+
   useEffect(() => {
     Axios.get("http://localhost:3001/masuk").then((response) => {
       console.log(response.data);
@@ -61,12 +108,6 @@ export default function CtnLogin() {
       }
     });
   }, []);
-
-  const handleKeyEnter = (event) => {
-    if (event.key === "Enter") {
-      console.log("do validate");
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -97,8 +138,9 @@ export default function CtnLogin() {
           height={30}
           onChange={(e) => setSandi(e.target.value)}
         />
-        <Gap height={106} width={0} />
-        <p className={styles.txtLupa}>Lupa kata sandi?</p>
+          <p className={styles.message}>{message}</p>
+        <Gap height={100} width={0} />
+        <p onClick={openModal} className={styles.txtLupa}>Lupa kata sandi?</p>
         <Gap height={45} width={0} />
         <Button
           className={`${btnStyles.container}`}
@@ -111,8 +153,17 @@ export default function CtnLogin() {
           title="Daftar"
           onClick={btnDaftar}
         />
-        <p style={{ color: "white" }}>{message}</p>
-        {/* <div className={styles.modals}>{message}</div> */}
+        {/* <p style={{ color: "white" }}>{message}</p> */}
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={custom}
+          contentLabel="Example Modal"
+          className={styles.modal}
+        >
+          <h2 className={styles.dialog}>{message}</h2>
+        </Modal>
       </div>
     </div>
   );
