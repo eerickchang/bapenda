@@ -780,9 +780,10 @@ app.get("/createRowCakin", (req, res) => {
 
 app.post("/addBulanCakin", (req, res) => {
   const bulan = req.body.bulan;
+  const nip = req.body.nip;
 
-  const sqlInsert = "INSERT INTO cakin (bulan) VALUES (?)";
-  db.query(sqlInsert, bulan, (err, result) => {
+  const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
+  db.query(sqlInsert, [bulan, nip], (err, result) => {
     console.log(err);
   });
 });
