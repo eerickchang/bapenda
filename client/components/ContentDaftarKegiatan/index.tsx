@@ -128,6 +128,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // ! MODAL UNGGAH LAPORAN
   function openModal() {
     setIsOpen(true);
+    setFile(null);
   }
 
   function afterOpenModal() {
@@ -142,6 +143,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // ! MODAL UBAH JADAWAL
   function openModalUbah() {
     setIsOpenModalUbahJadwal(true);
+    setFile(null);
   }
 
   function afterOpenModalUbah() {
@@ -156,6 +158,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   // ! MODAL HAPUS RENAKSI
   function openModalHapus() {
     setIsOpenMOdalHapusRenaksi(true);
+    setFile(null);
   }
 
   function afterOpenModalHapus() {
@@ -484,9 +487,16 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
-              <div className={styles.iconPDF}>
-                <Image src={"/IconPDF.svg"} width={25} height={25} />
-              </div>
+              {file != null ? (
+                <div className={styles.iconPDF}>
+                  <Image
+                    src={"/IconPDF.svg"}
+                    width={25}
+                    height={25}
+                    alt="PDF"
+                  />
+                </div>
+              ) : null}
               <Gap width={193} height={0} />
               <button onClick={btnUnggahExp} className={styles.btnKirim}>
                 <img src={"/Kirim.svg"} width={20} height={20} />
@@ -555,9 +565,16 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
-              <div className={styles.iconPDFUbah}>
-                <Image src={"/IconPDF.svg"} width={25} height={25} />
-              </div>
+              {file != null ? (
+                <div className={styles.iconPDFUbah}>
+                  <Image
+                    src={"/IconPDF.svg"}
+                    width={25}
+                    height={25}
+                    alt="PDF"
+                  />
+                </div>
+              ) : null}
             </div>
             <Gap width={0} height={24} />
             <button onClick={btnUbahJadwalExp} className={styles.btnKirim_Ubah}>
@@ -615,9 +632,16 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   name="sampleFile"
                 />
               </form>
-              <div className={styles.iconPDF}>
-                <Image src={"/IconPDF.svg"} width={25} height={25} />
-              </div>
+              {file != null ? (
+                <div className={styles.iconPDF}>
+                  <Image
+                    src={"/IconPDF.svg"}
+                    width={25}
+                    height={25}
+                    alt="PDF"
+                  />
+                </div>
+              ) : null}
               <Gap width={193} height={0} />
               <button onClick={btnHapusExp} className={styles.btnKirim}>
                 <img src={"/Kirim.svg"} width={20} height={20} />
