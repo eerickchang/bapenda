@@ -16,6 +16,7 @@ import moment from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import FileDownload from "js-file-download";
 
 Axios.defaults.withCredentials = true;
 
@@ -96,67 +97,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
-  // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
-  // const custom = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 362,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
-
-  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
-  // const customUbah = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 433,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
+  const btnDw = () => {
+    Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
+      responseType: "blob",
+    }).then((res) => {
+      console.log(res);
+      FileDownload(res.data, `${row.files}`);
+    });
+  };
 
   //style row
   const [rowClik, setRowClick] = useState(true);
@@ -168,6 +116,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 35,
+    paddingBottom: 20,
   };
 
   return (
@@ -246,7 +195,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             </div>
             <div className={styles.wrapperLampiran}>
               <p>Lampiran:</p>
-              <p></p>
+              {row.files === "" ? null : (
+                <div onClick={btnDw}>
+                  <Image src={"/IconPDF.svg"} width={35} height={40} />
+                </div>
+              )}
             </div>
             <div className={styles.wrapperRencanaUbah}>
               <p>Rencana Ubah Jadwal:</p>

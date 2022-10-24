@@ -318,6 +318,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
+    cursor: 'pointer'
   };
 
   const style2 = {
@@ -325,6 +326,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
+    cursor: 'pointer'
   };
 
   return (
@@ -399,8 +401,8 @@ function Row(props) {
           // hover
           className={styles.styleRow}
         >
-          <TableCell onClick={() => clickRowPegawai()}>
-            <p style={style1}>{row.nama}</p>
+          <TableCell onClick={() => clickRowPegawai()} style={style1}>
+            <p>{row.nama}</p>
           </TableCell>
           <TableCell onClick={() => clickRowPegawai()} style={style2}>
             {row.sub_bidang}
