@@ -16,32 +16,13 @@ Axios.defaults.withCredentials = true;
 
 export default function Dashboard() {
   const shouldLog = useRef(true);
+  const [saveBulan, setSaveBulan] = useState();
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
 
       let infoBulan;
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
-      Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
-        cakin.data.map((ambilCakin) => {
-          // console.log(ambilCakin);
-          if (
-            moment(ambilCakin.bulan).format("YYYY-MM") ==
-            moment().format("YYYY-MM")
-          ) {
-            infoBulan = "Good";
-          }
-        });
-
-        if (infoBulan == "Good") {
-          console.log("Ada");
-        } else {
-          console.log("Nda ada");
-        }
-        // Axios.post("http://localhost:3001/addBulanCakin", {
-        //   bulan: moment().format("YYYY-MM-01"),
-        // });
-      });
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setSubid(response.data.user[0].sub_bidang);
@@ -56,6 +37,31 @@ export default function Dashboard() {
               });
             }
           });
+        });
+
+        Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
+          cakin.data.map((ambilCakin) => {
+            if (
+              moment(ambilCakin.bulan).format("YYYY") ==
+                moment().format(`YYYY`) &&
+              ambilCakin.nip == response.data.user[0].nip
+            ) {
+              infoBulan = "Yes";
+              console.log("Yes");
+            }
+          });
+
+          if (infoBulan == "Yes") {
+            console.log("Ada");
+          } else {
+            for (let i = 1; i <= 3; i++) {
+              console.log(i);
+              Axios.post("http://localhost:3001/addBulanCakin", {
+                bulan: moment().format(`YYYY-01-01`),
+                nip: response.data.user[0].nip,
+              });
+            }
+          }
         });
       });
 

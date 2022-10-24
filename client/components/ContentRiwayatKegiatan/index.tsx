@@ -122,7 +122,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             <div className={styles.wrapperLampiran}>
               <p>Lampiran:</p>
               {row.files === "" ? null : (
-                <div onClick={btnDw}>
+                <div onClick={btnDw} style={{ cursor: "pointer" }}>
                   <Image src={"/IconPDF.svg"} width={35} height={40} />
                 </div>
               )}

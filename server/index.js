@@ -225,7 +225,7 @@ app.get("/ambilRenaksi", (req, res) => {
 
 app.get("/ambilRiwayatKegiatan", (req, res) => {
   const sqlSelect =
-    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_pegawai, data_renaksi.req_start_date, data_renaksi.req_end_date, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.id_renaksi, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_pegawai, data_renaksi.ket_admin, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.id_renaksi, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -738,15 +738,15 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   });
 
   const sqlUpdate2 =
-    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE id_cakin = 1";
-  db.query(sqlUpdate2, (err, result) => {
+    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ?";
+  db.query(sqlUpdate2, [nip], (err, result) => {
     console.log(err);
   });
 
   const sqlInsert =
     "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Diterima') ";
   db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
+    console.log(result);
   });
 });
 
@@ -780,9 +780,10 @@ app.get("/createRowCakin", (req, res) => {
 
 app.post("/addBulanCakin", (req, res) => {
   const bulan = req.body.bulan;
+  const nip = req.body.nip;
 
-  const sqlInsert = "INSERT INTO cakin (bulan) VALUES (?)";
-  db.query(sqlInsert, bulan, (err, result) => {
+  const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
+  db.query(sqlInsert, [bulan, nip], (err, result) => {
     console.log(err);
   });
 });
