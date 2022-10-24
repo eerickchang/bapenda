@@ -16,6 +16,7 @@ Axios.defaults.withCredentials = true;
 
 export default function Dashboard() {
   const shouldLog = useRef(true);
+  const [saveBulan, setSaveBulan] = useState();
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
@@ -40,23 +41,26 @@ export default function Dashboard() {
 
         Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
           cakin.data.map((ambilCakin) => {
-            // console.log(ambilCakin);
             if (
-              moment(ambilCakin.bulan).format("YYYY-MM") ==
-              moment().format("YYYY-MM")
+              moment(ambilCakin.bulan).format("YYYY") ==
+                moment().format(`YYYY`) &&
+              ambilCakin.nip == response.data.user[0].nip
             ) {
-              infoBulan = "Good";
+              infoBulan = "Yes";
+              console.log("Yes");
             }
           });
 
-          if (infoBulan == "Good") {
+          if (infoBulan == "Yes") {
             console.log("Ada");
           } else {
-            // console.log("Nda ada");
-            Axios.post("http://localhost:3001/addBulanCakin", {
-              bulan: moment().format("YYYY-MM-01"),
-              nip: response.data.user[0].nip,
-            });
+            for (let i = 1; i <= 3; i++) {
+              console.log(i);
+              Axios.post("http://localhost:3001/addBulanCakin", {
+                bulan: moment().format(`YYYY-01-01`),
+                nip: response.data.user[0].nip,
+              });
+            }
           }
         });
       });

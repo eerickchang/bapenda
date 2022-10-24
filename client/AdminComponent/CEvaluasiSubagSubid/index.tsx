@@ -113,6 +113,30 @@ function Row(props) {
   };
 
   const btnTerima = () => {
+    Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
+      let infoBulan;
+      cakin.data.map((ambilCakin) => {
+        // console.log(ambilCakin);
+        if (
+          moment(ambilCakin.bulan).format("YYYY-MM") ==
+            moment(row.end_date).format("YYYY-MM") &&
+          ambilCakin.nip === row.nip
+        ) {
+          infoBulan = "Good";
+        }
+      });
+
+      if (infoBulan == "Good") {
+        console.log("Ada");
+      } else {
+        console.log("Sudah dibuat row cakin baru");
+        Axios.post("http://localhost:3001/addBulanCakin", {
+          bulan: moment().format("YYYY-MM-01"),
+          nip: row.nip,
+        });
+      }
+    });
+
     Axios.post("http://localhost:3001/adminMenerimaRenaksiSelesai", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
