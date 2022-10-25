@@ -6,6 +6,7 @@ const app = express();
 const mysql = require("mysql");
 const multer = require("multer");
 const path = require("path");
+const moment = require("moment");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -782,10 +783,16 @@ app.post("/addBulanCakin", (req, res) => {
   const bulan = req.body.bulan;
   const nip = req.body.nip;
 
-  const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
-  db.query(sqlInsert, [bulan, nip], (err, result) => {
-    console.log(err);
-  });
+  for (let i = 1; i <= 12; i++) {
+    const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
+    db.query(
+      sqlInsert,
+      [moment().format(`YYYY-${i}-01`), nip],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  }
 });
 
 // //ADMIN KALKULASI NILAI RENAKSI

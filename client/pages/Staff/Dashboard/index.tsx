@@ -17,6 +17,7 @@ Axios.defaults.withCredentials = true;
 export default function Dashboard() {
   const shouldLog = useRef(true);
   const [saveBulan, setSaveBulan] = useState();
+  const [nipUser, setNipUser] = useState();
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
@@ -26,6 +27,7 @@ export default function Dashboard() {
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setSubid(response.data.user[0].sub_bidang);
+        setNipUser(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -54,13 +56,9 @@ export default function Dashboard() {
           if (infoBulan == "Yes") {
             console.log("Ada");
           } else {
-            for (let i = 1; i <= 3; i++) {
-              console.log(i);
-              Axios.post("http://localhost:3001/addBulanCakin", {
-                bulan: moment().format(`YYYY-01-01`),
-                nip: response.data.user[0].nip,
-              });
-            }
+            Axios.post("http://localhost:3001/addBulanCakin", {
+              nip: response.data.user[0].nip,
+            });
           }
         });
       });

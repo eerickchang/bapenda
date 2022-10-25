@@ -137,6 +137,7 @@ export default function ContentInputRenaksiP() {
     setInTupoksiTambahan("");
     setStartDate("");
     setEndDate("");
+
     // selectInputRef.current.select.clearValue();
     // setInTupoksiTambahan("");
     // console.log(rencana);
