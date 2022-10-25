@@ -795,6 +795,30 @@ app.post("/addBulanCakin", (req, res) => {
   }
 });
 
+app.post("/addJumlahKegiatan", (req, res) => {
+  const jumlah = req.body.jumlah;
+  const nip = req.body.nip;
+  const bulan = req.body.bulan;
+
+  const sqlInsert =
+    "INSERT INTO cakin (jumlah_kegiatan, nip, bulan) VALUES (?,?,?)";
+  db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
+    console.log(err);
+  });
+});
+
+app.post("/addKegiatanBS", (req, res) => {
+  const jumlah = req.body.jumlah;
+  const nip = req.body.nip;
+  const bulan = req.body.bulan;
+
+  const sqlInsert =
+    "INSERT INTO cakin (lampiran_bsubmit, nip, bulan) VALUES (?,?,?)";
+  db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
+    console.log(err);
+  });
+});
+
 // //ADMIN KALKULASI NILAI RENAKSI
 // app.post("");
 

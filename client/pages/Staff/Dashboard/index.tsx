@@ -65,6 +65,7 @@ export default function Dashboard() {
 
       //AMBIL CAKIN JUMLAH KEGIATAN
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
         Axios.get("http://localhost:3001/jumlahKegiatan").then(
           (jumlahKegiatan) => {
             jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
@@ -79,7 +80,13 @@ export default function Dashboard() {
                 setJlhKegiatan((nextData) => {
                   return [...nextData, jumlahKegiatanMAP];
                 });
+                bil = [...bil, jumlahKegiatanMAP];
               }
+            });
+            Axios.post("http://localhost:3001/addJumlahKegiatan", {
+              nip: masuk.data.user[0].nip,
+              bulan: moment().format("YYYY-MM-01"),
+              jumlah: bil.length,
             });
           }
         );
