@@ -37,6 +37,7 @@
   border-radius: 20px;
   display: flex;
   padding-left: 50px;
+  /* z-index: 1000; */
 }
 
 .contentTengah {

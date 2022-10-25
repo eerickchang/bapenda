@@ -35,6 +35,9 @@ export default function CtnLogin() {
         console.log(response.data.message);
         setMessage(response.data.message);
         setIsOpenModal(true);
+        setTimeout(() => {
+          setIsOpenModal(false);
+        },3500);
       } else if (response.data[0].jabatan === "Kepala Badan") {
         router.push("/Kaban/Dashboard");
       } else if (response.data[0].jabatan === "Staff") {
@@ -123,7 +126,7 @@ export default function CtnLogin() {
           placeholder="Masukkan NIP / NPNP"
           width={25}
           height={30}
-          type="text"
+          type="number"
           onChange={(e) => setNip(e.target.value)}
         />
         <Gap height={40} width={0} />
@@ -162,6 +165,7 @@ export default function CtnLogin() {
           className={styles.modal}
         >
           <h2 className={styles.dialog}>{message}</h2>
+          <div onClick={() => (setIsOpenModal(false))} className={styles.coba}>Coba Lagi</div>
         </Modal>
       </div>
     </div>
