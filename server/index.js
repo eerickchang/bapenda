@@ -6,6 +6,7 @@ const app = express();
 const mysql = require("mysql");
 const multer = require("multer");
 const path = require("path");
+const moment = require("moment");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -782,8 +783,38 @@ app.post("/addBulanCakin", (req, res) => {
   const bulan = req.body.bulan;
   const nip = req.body.nip;
 
-  const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
-  db.query(sqlInsert, [bulan, nip], (err, result) => {
+  for (let i = 1; i <= 12; i++) {
+    const sqlInsert = "INSERT INTO cakin (bulan, nip) VALUES (?,?)";
+    db.query(
+      sqlInsert,
+      [moment().format(`YYYY-${i}-01`), nip],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  }
+});
+
+app.post("/addJumlahKegiatan", (req, res) => {
+  const jumlah = req.body.jumlah;
+  const nip = req.body.nip;
+  const bulan = req.body.bulan;
+
+  const sqlInsert =
+    "INSERT INTO cakin (jumlah_kegiatan, nip, bulan) VALUES (?,?,?)";
+  db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
+    console.log(err);
+  });
+});
+
+app.post("/addKegiatanBS", (req, res) => {
+  const jumlah = req.body.jumlah;
+  const nip = req.body.nip;
+  const bulan = req.body.bulan;
+
+  const sqlInsert =
+    "INSERT INTO cakin (lampiran_bsubmit, nip, bulan) VALUES (?,?,?)";
+  db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
     console.log(err);
   });
 });
