@@ -780,7 +780,6 @@ app.get("/createRowCakin", (req, res) => {
 });
 
 app.post("/addBulanCakin", (req, res) => {
-  const bulan = req.body.bulan;
   const nip = req.body.nip;
 
   for (let i = 1; i <= 12; i++) {
@@ -801,7 +800,7 @@ app.post("/addJumlahKegiatan", (req, res) => {
   const bulan = req.body.bulan;
 
   const sqlInsert =
-    "INSERT INTO cakin (jumlah_kegiatan, nip, bulan) VALUES (?,?,?)";
+    "UPDATE cakin SET jumlah_kegiatan = ? WHERE nip = ? AND bulan = ?";
   db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
     console.log(err);
   });
@@ -813,7 +812,7 @@ app.post("/addKegiatanBS", (req, res) => {
   const bulan = req.body.bulan;
 
   const sqlInsert =
-    "INSERT INTO cakin (lampiran_bsubmit, nip, bulan) VALUES (?,?,?)";
+    "UPDATE cakin SET lampiran_bsubmit = ? WHERE nip = ? AND bulan = ?";
   db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
     console.log(err);
   });
