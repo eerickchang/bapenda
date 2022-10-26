@@ -327,7 +327,7 @@ export default function CTinjauRenaksiPegawai() {
                         sx={styleData}
                         style={{ color: "rgba(218, 142, 72, 1)" }}
                       >
-                        {row.nama}
+                        {row.nama_thl}
                       </TableCell>
                       <TableCell sx={styleData}>{row.kegiatan}</TableCell>
                       <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
