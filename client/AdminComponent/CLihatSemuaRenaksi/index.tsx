@@ -307,15 +307,22 @@ export default function CLihatSemuaRenaksi() {
                       <TableCell width={350} sx={styleData}>
                         <p style={{ fontWeight: 600 }}>{row.program}</p>
                       </TableCell>
-                      <TableCell width={350}
+                      <TableCell
+                        width={350}
                         sx={styleData}
                         style={{ color: "rgba(218, 142, 72, 1)" }}
                       >
-                        {row.nama}
+                        {row.nama_thl}
                       </TableCell>
-                      <TableCell width={350} sx={styleData}>{row.kegiatan}</TableCell>
-                      <TableCell width={350} sx={styleData}>{row.sub_kegiatan}</TableCell>
-                      <TableCell width={350} sx={styleData}>{row.tupoksi_inti}</TableCell>
+                      <TableCell width={350} sx={styleData}>
+                        {row.kegiatan}
+                      </TableCell>
+                      <TableCell width={350} sx={styleData}>
+                        {row.sub_kegiatan}
+                      </TableCell>
+                      <TableCell width={350} sx={styleData}>
+                        {row.tupoksi_inti}
+                      </TableCell>
                       <TableCell width={350} sx={styleData}>
                         {row.tupoksi_tambahan}
                       </TableCell>
