@@ -20,79 +20,6 @@ import FileDownload from "js-file-download";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -115,8 +42,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderTopColor: "rgba(165, 165, 165, 0.5)",
     borderTopWidth: 2,
     borderTopStyle: "solid",
-    marginBottom: 35,
-    paddingBottom: 20,
+    marginBottom: 5,
   };
 
   return (
@@ -187,7 +113,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       </TableRow>
 
       <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
-        <Collapse style={styleCollapse} in={open} timeout="auto">
+        <Collapse sx={styleCollapse} in={open} timeout="auto">
           <div className={styles.wrapperExpand}>
             <div className={styles.wrapperTanggapan}>
               <p>Tanggapan:</p>
@@ -253,13 +179,8 @@ export const ContentRiwayatKegiatan = () => {
     }
   }, []);
 
-  const btnFilterBulan = () => {
-    // setActiveDropdownBulan(!activeDropdownBulan);
-    console.log(dataRenaksi);
-  };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
-  const [activeDropdownBulan, setActiveDropdownBulan] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
 
   const tahun = [
@@ -416,13 +337,11 @@ export const ContentRiwayatKegiatan = () => {
       id: 1,
       unduh: "Excel",
       onclick: btnDwExcel,
-      // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
     },
     {
       id: 2,
       unduh: "PDF",
       onclick: btnDwPDF,
-      // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
     },
   ];
 
@@ -471,25 +390,6 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
-              {/* <div className={stylesS.wrapperFilterBulan}>
-                <div
-                  className={stylesS.btnFilterBulan}
-                  onClick={btnFilterBulan}
-                >
-                  <Image src={"/TahunIcon.svg"} width={23} height={23} />
-                  <p>Bulan</p>
-                </div>
-                {activeDropdownBulan && (
-                  <div
-                    className={stylesS.wrapperSelectFilterBulan}
-                    onClick={() => setActiveDropdownBulan(false)}
-                  >
-                    {bulan.map((item) => (
-                      <p key={item.id}>{item.bulan}</p>
-                    ))}
-                  </div>
-                )}
-              </div> */}
               <div className={stylesS.wrapperUnduh}>
                 <div
                   className={stylesS.btnUnduh}
@@ -526,13 +426,27 @@ export const ContentRiwayatKegiatan = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={styleHeader}>Profil</TableCell>
-                    <TableCell style={styleHeader}>Tupoksi</TableCell>
-                    <TableCell style={styleHeader}>Rencana</TableCell>
-                    <TableCell style={styleHeader}>Status</TableCell>
-                    <TableCell style={styleHeader}>Keterangan</TableCell>
-                    <TableCell style={styleHeader}>Diajukan</TableCell>
-                    <TableCell style={styleHeader}>Kondisi</TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Profil
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Tupoksi
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Rencana
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Status
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Keterangan
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Diajukan
+                    </TableCell>
+                    <TableCell width={400} style={styleHeader}>
+                      Kondisi
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

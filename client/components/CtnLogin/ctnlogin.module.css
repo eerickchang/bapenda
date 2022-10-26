@@ -42,7 +42,6 @@
   text-align: center;
 }
 
-
 .headerTxtModal {
   color: rgba(17, 35, 80, 1);
   font-family: "Poppins", sans-serif;
@@ -56,14 +55,12 @@
 .dialog {
   color: rgba(17, 35, 80, 1);
   font-family: "Poppins", sans-serif;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 400;
   margin: 0;
-  margin-top: 20px;
+  margin-top: 73px;
   text-align: center;
 }
-
-
 
 .wrapperBtnModal {
   display: inline-flex;
@@ -76,10 +73,29 @@
   display: none;
 }
 
-
-.message{
+.message {
   position: absolute;
   top: 460px;
   margin-left: 20px;
   color: #fff;
+}
+
+.coba {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  border-top: 2px solid rgba(165, 165, 165, 0.8);
+  height: 55px;
+  margin-top: 40.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.coba:active{
+  background-color: rgba(17, 35, 80, 0.1);
 }
