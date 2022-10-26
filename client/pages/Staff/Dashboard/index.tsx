@@ -116,6 +116,7 @@ export default function Dashboard() {
 
       //AMBIL CAKIN BELUM DISUBMIT
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
         Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
           belumSubmit.data.map((belumSubmitMAP) => {
             if (
@@ -129,7 +130,13 @@ export default function Dashboard() {
               setBlmSubmit((nextData) => {
                 return [...nextData, belumSubmitMAP];
               });
+              bil = [...bil, belumSubmitMAP];
             }
+          });
+          Axios.post("http://localhost:3001/addKegiatanBS", {
+            nip: masuk.data.user[0].nip,
+            bulan: moment().format("YYYY-MM-01"),
+            jumlah: bil.length,
           });
         });
       });
