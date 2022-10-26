@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Axios from "axios";
 
 import Modal from "react-modal";
+import Image from "next/image";
 
 export default function CtnLogin() {
   const router = useRouter();
@@ -37,7 +38,7 @@ export default function CtnLogin() {
         setIsOpenModal(true);
         setTimeout(() => {
           setIsOpenModal(false);
-        },3500);
+        }, 3500);
       } else if (response.data[0].jabatan === "Kepala Badan") {
         router.push("/Kaban/Dashboard");
       } else if (response.data[0].jabatan === "Staff") {
@@ -51,13 +52,6 @@ export default function CtnLogin() {
       }
     });
   };
-
-  // console.log(response.data[0].jabatan);
-  // if ((response.data[0].jabatan = "Staff")) {
-  //   router.push("/Kaban/Dashboard");
-  // } else if ((response.data[0].jabatan = "Kaban")) {
-  //   router.push("/Staff/Dashboard");
-  // }
 
   const custom = {
     content: {
@@ -164,8 +158,13 @@ export default function CtnLogin() {
           contentLabel="Example Modal"
           className={styles.modal}
         >
-          <h2 className={styles.dialog}>{message}</h2>
-          <div onClick={() => (setIsOpenModal(false))} className={styles.coba}>Coba Lagi</div>
+          <div className={styles.dialog}>
+            <Image src={"/Warning.svg"} width={30} height={30} />
+            <p>{message}</p>
+          </div>
+          <div onClick={() => setIsOpenModal(false)} className={styles.coba}>
+            Coba Lagi
+          </div>
         </Modal>
       </div>
     </div>

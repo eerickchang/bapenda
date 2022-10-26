@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import stylesS from "./cUbahJadwalRenaksi.module.css";
 
 import Collapse from "@mui/material/Collapse";
@@ -8,18 +8,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
-import Image from "next/image";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment, { duration } from "moment";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import FileDownload from "js-file-download";
-import Modal from "react-modal";
-import { Checkbox } from "@mui/material";
+import "jspdf-autotable";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import Modal from "react-modal";
+import Gap from "../Gap";
+import styles from "./TableMUI.module.css";
 
 Axios.defaults.withCredentials = true;
 
@@ -363,7 +359,6 @@ function Row(props) {
             </p>
           </TableCell>
         </TableRow>
-        {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
           <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
@@ -378,10 +373,6 @@ function Row(props) {
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
                       <p style={{ marginLeft: 5 }}> File Laporan</p>

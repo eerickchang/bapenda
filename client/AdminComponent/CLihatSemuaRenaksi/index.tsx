@@ -280,7 +280,7 @@ export default function CLihatSemuaRenaksi() {
             </div>
             <Gap height={162} width={0} />
             <TableContainer style={styleContainer}>
-              <Table sx={{ tableLayout: "fixed" }}>
+              <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell sx={styleHeader}></TableCell>
@@ -296,30 +296,30 @@ export default function CLihatSemuaRenaksi() {
                 <TableBody>
                   {pegawai.map((row) => (
                     <TableRow hover className={styles.styleRow}>
-                      <TableCell>
+                      <TableCell width={10}>
                         <Checkbox
                           onChange={handleChange}
                           name={row.id_renaksi}
                           value={row.nip}
                         />
-                        {row.id_renaksi}
+                        {/* {row.id_renaksi} */}
                       </TableCell>
-                      <TableCell sx={styleData}>
+                      <TableCell width={350} sx={styleData}>
                         <p style={{ fontWeight: 600 }}>{row.program}</p>
                       </TableCell>
-                      <TableCell
+                      <TableCell width={350}
                         sx={styleData}
                         style={{ color: "rgba(218, 142, 72, 1)" }}
                       >
                         {row.nama}
                       </TableCell>
-                      <TableCell sx={styleData}>{row.kegiatan}</TableCell>
-                      <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
-                      <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
-                      <TableCell sx={styleData}>
+                      <TableCell width={350} sx={styleData}>{row.kegiatan}</TableCell>
+                      <TableCell width={350} sx={styleData}>{row.sub_kegiatan}</TableCell>
+                      <TableCell width={350} sx={styleData}>{row.tupoksi_inti}</TableCell>
+                      <TableCell width={350} sx={styleData}>
                         {row.tupoksi_tambahan}
                       </TableCell>
-                      <TableCell sx={styleData}>
+                      <TableCell width={350} sx={styleData}>
                         {moment(row.start_date).format("MMM")} -{" "}
                         {moment(row.end_date).format("MMM")}
                       </TableCell>
