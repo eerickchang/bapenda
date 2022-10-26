@@ -391,6 +391,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
+    
   };
 
   const style2 = {
@@ -398,6 +399,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
+    
   };
 
   const styleCollapse = {

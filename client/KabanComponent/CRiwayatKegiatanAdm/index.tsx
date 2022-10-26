@@ -1,13 +1,11 @@
-import React from "react";
-import styles from "./riwayatKegiatanAdm.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "../Button";
 import Image from "next/image";
+import styles from "./riwayatKegiatanAdm.module.css";
 
 export default function CTinjauRenaksi() {
   const rowsSubagian = [

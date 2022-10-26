@@ -58,7 +58,7 @@
   font-size: 20px;
   font-weight: 400;
   margin: 0;
-  margin-top: 73px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -88,12 +88,13 @@
   margin: 0;
   border-top: 2px solid rgba(165, 165, 165, 0.8);
   height: 55px;
-  margin-top: 40.5px;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  cursor: pointer;
 }
 
 .coba:active{

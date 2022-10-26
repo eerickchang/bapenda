@@ -1,6 +1,6 @@
 .wrap {
   display: block;
-  margin-left: 140px;
+  margin-left: 80px;
 }
 
 
@@ -25,7 +25,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-left: 40px;
 }
 
 .wrapperDataPegawai {

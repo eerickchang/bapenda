@@ -297,17 +297,17 @@ export default function CTinjauRenaksiPegawai() {
             </div>
             <Gap height={162} width={0} />
             <TableContainer style={styleContainer}>
-              <Table sx={{ tableLayout: "fixed" }}>
+              <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={styleHeader}></TableCell>
-                    <TableCell sx={styleHeader}>Program</TableCell>
-                    <TableCell sx={styleHeader}>THL</TableCell>
-                    <TableCell sx={styleHeader}>Kegiatan</TableCell>
-                    <TableCell sx={styleHeader}>Sub Kegiatan</TableCell>
-                    <TableCell sx={styleHeader}>Tupoksi Inti</TableCell>
-                    <TableCell sx={styleHeader}>Tupoksi Tambahan</TableCell>
-                    <TableCell sx={styleHeader}>Rencana</TableCell>
+                    <TableCell width={100} sx={styleHeader}></TableCell>
+                    <TableCell width={350} sx={styleHeader}>Program</TableCell>
+                    <TableCell width={350} sx={styleHeader}>THL</TableCell>
+                    <TableCell width={350} sx={styleHeader}>Kegiatan</TableCell>
+                    <TableCell width={350} sx={styleHeader}>Sub Kegiatan</TableCell>
+                    <TableCell width={350} sx={styleHeader}>Tupoksi Inti</TableCell>
+                    <TableCell width={350} sx={styleHeader}>Tupoksi Tambahan</TableCell>
+                    <TableCell width={350} sx={styleHeader}>Rencana</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -318,7 +318,7 @@ export default function CTinjauRenaksiPegawai() {
                           onChange={handleChange}
                           name={row.id_renaksi}
                         />
-                        {row.id_renaksi}
+                        {/* {row.id_renaksi} */}
                       </TableCell>
                       <TableCell sx={styleData}>
                         <p style={{ fontWeight: 600 }}>{row.program}</p>

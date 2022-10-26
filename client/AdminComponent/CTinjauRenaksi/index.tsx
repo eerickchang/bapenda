@@ -331,12 +331,15 @@ function Row(props) {
     fontWeight: 600,
     color: "#000",
   };
-
-  const style2 = {
+  const styleAksi = {
+    flexDirection: "row",
+    display: "flex",
     fontFamily: "Poppins",
-    fontSize: 18,
     fontWeight: 400,
-    color: "#000",
+    fontSize: 18,
+    width: 130,
+    justifyContent: "space-between",
+    cursor: "pointer",
   };
 
   return (
@@ -355,62 +358,20 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        {/* <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Renaksi <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>Tolak Semua Renaksi</h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal> */}
+        
       </div>
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
-          // sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell onClick={clickRow}>
+          <TableCell>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow}>
-            <p style={style2}>{row.ket_kaban}</p>
+          <TableCell>
+            <div onClick={clickRow} style={styleAksi}>
+              <Image src={"/LihatDetail.svg"} width={25} height={25} />
+              Lihat detail
+            </div>
           </TableCell>
           <TableCell>
             <div className={styles.styleTxtRow}>
@@ -491,10 +452,6 @@ export const CTinjauRenaksi = () => {
     }
   }, []);
 
-  const btnFilterBulan = () => {
-    // setActiveDropdownBulan(!activeDropdownBulan);
-    console.log(dataRenaksi);
-  };
 
   const style = {
     fontFamily: "Poppins",
@@ -551,7 +508,7 @@ export const CTinjauRenaksi = () => {
             <Gap height={50} width={0} />
             <TableContainer
               style={{
-                paddingLeft: 0,
+                paddingLeft: 2,
                 paddingRight: 40,
                 zIndex: 998,
                 paddingBottom: 20,
