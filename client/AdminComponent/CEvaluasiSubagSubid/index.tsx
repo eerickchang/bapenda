@@ -395,7 +395,7 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse style={styleCollapse} in={open} timeout="auto">
+          <Collapse style={styleCollapse} in={open} timeout={480}>
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
@@ -578,7 +578,7 @@ export const CEvaluasiSubagSubid = () => {
             </div>
             <Gap height={150} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40 }}
             >
               <Table>
                 <TableHead>

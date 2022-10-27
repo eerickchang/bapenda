@@ -4,7 +4,7 @@
 }
 
 .txtHeader {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #112350;
   font-size: 24px;
   font-weight: 700;
@@ -12,7 +12,7 @@
   margin-left: 5px;
 }
 
-.header{
+.header {
   display: flex;
   flex-direction: row;
   height: 54px;
@@ -21,100 +21,98 @@
   align-items: center;
   margin-left: 40px;
   margin-top: 60px;
-  border-bottom: 2px solid #1BDDBB;
+  border-bottom: 2px solid #1bddbb;
 }
 
-.contentKiri{
+.contentKiri {
   width: 1311px;
 }
 
-.contentKanan{
+.contentKanan {
   display: flex;
 }
 
-.barContainer1{
-  position: absolute;
+.barContainer1 {
+  position: static;
   width: 1222px;
   height: 300px;
-  left: 184px;
-  top: 167px;
-  background: #FFFFFF;
+  margin-left: 43px;
+  margin-top: 26px;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
-.barContainer2{
-  position: absolute;
+.barContainer2 {
+  position: static;
   width: 1222px;
   height: 300px;
-  left: 184px;
-  top: 506px;
+  margin-top: 40px;
+  margin-left: 43px;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.barContainer3 {
+  position: static;
+  width: 1222px;
+  height: 300px;
+  margin-top: 40px;
+  margin-left: 43px;
 
   /* Primary White */
 
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
-.barContainer3{
-  position: absolute;
+.barContainer4 {
+  position: static;
   width: 1222px;
   height: 300px;
-  left: 184px;
-  top: 845px;
+  margin-top: 40px;
+  margin-left: 43px;
 
   /* Primary White */
 
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
-.barContainer4{
-  position: absolute;
-width: 1222px;
-height: 300px;
-left: 184px;
-top: 1184px;
+.barContainer5 {
+  position: static;
+  width: 1222px;
+  height: 300px;
+  margin-top: 40px;
+  margin-left: 43px;
 
-/* Primary White */
+  /* Primary White */
 
-background: #FFFFFF;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
 
-.barContainer5{
-  position: absolute;
-width: 1222px;
-height: 300px;
-left: 184px;
-top: 1523px;
-
-/* Primary White */
-
-background: #FFFFFF;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 10px;
-}
-
-.mainBarWrapper1{
+.mainBarWrapper1 {
   width: 1222px;
   height: 300px;
   display: flex;
   flex-direction: row;
 }
 
-.barWrapper1{
+.barWrapper1 {
   width: 831px;
   height: 260px;
   margin-left: 10px;
   margin-top: 10px;
 }
 
-.txtBidang{
-  font-family: 'Poppins', sans-serif;
+.txtBidang {
+  font-family: "Poppins", sans-serif;
   color: #112350;
   font-size: 20px;
   font-weight: 700;
@@ -123,50 +121,50 @@ border-radius: 10px;
   text-align: center;
 }
 
-.kotak{
+.kotak {
   background: rgba(27, 221, 187, 0.15);
   width: 40px;
   height: 40px;
   margin-top: 5px;
 }
 
-.kotak2{
-  background:  #1BDDBB;
+.kotak2 {
+  background: #1bddbb;
   width: 40px;
   height: 40px;
   margin-top: 5px;
 }
 
-.kotak3{
-  background:  #1BC6DD;
+.kotak3 {
+  background: #1bc6dd;
   width: 40px;
   height: 40px;
   margin-top: 5px;
 }
 
-.ketWrapper{
+.ketWrapper {
   display: flex;
   flex-direction: row;
 }
 
-.txtJumlah{
-  font-family: 'Poppins', sans-serif;
+.txtJumlah {
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: #112350;
   margin: 0px;
 }
 
-.txtJumlahKeg{
-  font-family: 'Poppins', sans-serif;
+.txtJumlahKeg {
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: rgba(17, 35, 80, 0.8);
   margin: 0px;
 }
 
-.txtRealisasi{
-  font-family: 'Poppins', sans-serif;
+.txtRealisasi {
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: rgba(17, 35, 80, 0.8);

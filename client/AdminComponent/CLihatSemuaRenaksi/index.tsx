@@ -260,7 +260,6 @@ export default function CLihatSemuaRenaksi() {
     marginTop: 40,
     paddingLeft: 2,
     paddingRight: 40,
-    zIndex: 998,
     paddingBottom: 20,
   };
 

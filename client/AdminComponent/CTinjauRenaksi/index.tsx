@@ -460,6 +460,12 @@ export const CTinjauRenaksi = () => {
     color: "#959595",
   };
 
+  const styleContainer = {
+    paddingLeft: 2,
+    paddingRight: 40,
+    paddingBottom: 20,
+  };
+
   return (
     <>
       {domLoaded && (
@@ -473,12 +479,7 @@ export const CTinjauRenaksi = () => {
             </div>
             <Gap height={150} width={0} />
             <TableContainer
-              style={{
-                paddingLeft: 2,
-                paddingRight: 40,
-                zIndex: 998,
-                paddingBottom: 20,
-              }}
+              style={styleContainer}
             >
               <Table>
                 <TableHead>
@@ -507,12 +508,7 @@ export const CTinjauRenaksi = () => {
             </TableContainer>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{
-                paddingLeft: 2,
-                paddingRight: 40,
-                zIndex: 998,
-                paddingBottom: 20,
-              }}
+              style={styleContainer}
             >
               <Table>
                 <TableHead>
