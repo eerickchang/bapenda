@@ -49,12 +49,11 @@ export default function Dashboard() {
               ambilCakin.nip == response.data.user[0].nip
             ) {
               infoBulan = "Yes";
-              console.log("Yes");
             }
           });
 
           if (infoBulan == "Yes") {
-            console.log("Ada");
+            null;
           } else {
             Axios.post("http://localhost:3001/addBulanCakin", {
               nip: response.data.user[0].nip,
@@ -83,10 +82,25 @@ export default function Dashboard() {
                 bil = [...bil, jumlahKegiatanMAP];
               }
             });
-            Axios.post("http://localhost:3001/addJumlahKegiatan", {
-              nip: masuk.data.user[0].nip,
-              bulan: moment().format("YYYY-MM-01"),
-              jumlah: bil.length,
+
+            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+              ambilCakin.data.map((cakin) => {
+                if (
+                  moment(cakin.bulan).format("YYYY-MM") ==
+                    moment().format("YYYY-MM") &&
+                  cakin.nip == masuk.data.user[0].nip
+                ) {
+                  if (cakin.jumlah_kegiatan != bil.length) {
+                    Axios.post("http://localhost:3001/addJumlahKegiatan", {
+                      nip: masuk.data.user[0].nip,
+                      bulan: moment().format("YYYY-MM-01"),
+                      jumlah: bil.length,
+                    });
+                  } else {
+                    null;
+                  }
+                }
+              });
             });
           }
         );
@@ -94,6 +108,7 @@ export default function Dashboard() {
 
       //AMBIL CAKIN LAMPIRAN DISUBMIT
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
         Axios.get("http://localhost:3001/lampiranDisubmit").then(
           (lampiranDisubmit) => {
             lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
@@ -108,7 +123,28 @@ export default function Dashboard() {
                 setLprSubmit((nextData) => {
                   return [...nextData, lampiranDisubmitMAP];
                 });
+                bil = [...bil, lampiranDisubmitMAP];
               }
+            });
+
+            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+              ambilCakin.data.map((cakin) => {
+                if (
+                  moment(cakin.bulan).format("YYYY-MM") ==
+                    moment().format("YYYY-MM") &&
+                  cakin.nip == masuk.data.user[0].nip
+                ) {
+                  if (cakin.lampiran_disubmit != bil.length) {
+                    Axios.post("http://localhost:3001/addKegiatanS", {
+                      nip: masuk.data.user[0].nip,
+                      bulan: moment().format("YYYY-MM-01"),
+                      jumlah: bil.length,
+                    });
+                  } else {
+                    null;
+                  }
+                }
+              });
             });
           }
         );
@@ -133,10 +169,25 @@ export default function Dashboard() {
               bil = [...bil, belumSubmitMAP];
             }
           });
-          Axios.post("http://localhost:3001/addKegiatanBS", {
-            nip: masuk.data.user[0].nip,
-            bulan: moment().format("YYYY-MM-01"),
-            jumlah: bil.length,
+
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                moment(cakin.bulan).format("YYYY-MM") ==
+                  moment().format("YYYY-MM") &&
+                cakin.nip == masuk.data.user[0].nip
+              ) {
+                if (cakin.lampiran_bsubmit != bil.length) {
+                  Axios.post("http://localhost:3001/addKegiatanBS", {
+                    nip: masuk.data.user[0].nip,
+                    bulan: moment().format("YYYY-MM-01"),
+                    jumlah: bil.length,
+                  });
+                } else {
+                  null;
+                }
+              }
+            });
           });
         });
       });
