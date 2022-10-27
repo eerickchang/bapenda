@@ -818,6 +818,18 @@ app.post("/addKegiatanBS", (req, res) => {
   });
 });
 
+app.post("/addKegiatanS", (req, res) => {
+  const jumlah = req.body.jumlah;
+  const nip = req.body.nip;
+  const bulan = req.body.bulan;
+
+  const sqlInsert =
+    "UPDATE cakin SET lampiran_disubmit = ? WHERE nip = ? AND bulan = ?";
+  db.query(sqlInsert, [jumlah, nip, bulan], (err, result) => {
+    console.log(err);
+  });
+});
+
 // //ADMIN KALKULASI NILAI RENAKSI
 // app.post("");
 
