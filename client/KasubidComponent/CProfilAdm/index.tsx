@@ -12,7 +12,7 @@ import { DoughnutChart } from "../../components/DoughnutChart";
 export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
-  const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [grafikSubid, setGrafikSubid] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function CProfilAdm() {
               response.data.user[0].nip === item.nip &&
               moment(item.bulan).format("YYYY") === moment().format("YYYY")
             ) {
-              setGrafikPersonal((nextData) => {
+              setGrafikSubid((nextData) => {
                 return [...nextData, item];
               });
             }
@@ -123,61 +123,13 @@ export default function CProfilAdm() {
     ],
   };
 
-  const bidangChart2 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BC6DD"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
   const bidangChart3 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
-  const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BC6DD"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
-  const bidangChart5 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         barThickness: 40,
         // barPercentage: 0.5,
@@ -200,19 +152,6 @@ export default function CProfilAdm() {
     ],
   };
 
-  const donatChart2 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
   const donatChart3 = {
     labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
@@ -226,56 +165,18 @@ export default function CProfilAdm() {
     ],
   };
 
-  const donatChart4 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
-  const donatChart5 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
   const router = useRouter();
 
   const clickCakinBidang = (bidang) => {
-    if (bidang == "Perencanaan dan Pengembangan") {
-      router.push({
-        pathname: "/Kasubid/CakinSubidang",
-        // query: {
-        //   bidang: "Sekretaris",
-        //   subid1: "Hukum dan Kepegawaian",
-        //   subid2: "Perencanaan dan Keuangan",
-        //   subid3: "Umum",
-        // },
-      });
-    }  else if (bidang == "Pengembangan Teknologi") {
-      router.push({
-        pathname: "/Kasubid/CakinSubidang",
-        // query: {
-        //   bidang: "Retribusi dan Lain-lain Pendapatan",
-        //   subid1: "Retribusi",
-        //   subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-        //   subid3: "Lain-lain Pendapatan",
-        // },
-      });
-    }
+    router.push({
+      pathname: "/Kasubid/CakinSubidang",
+      // query: {
+      //   bidang: "Retribusi dan Lain-lain Pendapatan",
+      //   subid1: "Retribusi",
+      //   subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
+      //   subid3: "Lain-lain Pendapatan",
+      // },
+    });
   };
 
   return (
@@ -289,13 +190,8 @@ export default function CProfilAdm() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
-        <Gap height={20} width={0}/>
-        <div
-          className={styles.barContainer1}
-          onClick={() => {
-            clickCakinBidang("Perencanaan dan Pengembangan");
-          }}
-        >
+        <Gap height={20} width={0} />
+        <div className={styles.barContainer1}>
           <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
@@ -319,7 +215,7 @@ export default function CProfilAdm() {
                   <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                 </div>
               </div>
-              <Gap height={20} width={0}/>
+              <Gap height={20} width={0} />
               <div className={styles.ketWrapper}>
                 <div className={styles.kotak2} />
                 <div style={{ marginLeft: 10 }}>
@@ -332,9 +228,8 @@ export default function CProfilAdm() {
         </div>
         <div
           className={styles.barContainer3}
-          onClick={() => {
-            clickCakinBidang("Pengembangan Teknologi");
-          }}
+          onClick={clickCakinBidang}
+          style={{ cursor: "pointer" }}
         >
           <p className={styles.txtBidang}>PENGEMBANGAN TEKNOLOGI</p>
           <div className={styles.mainBarWrapper1}>
@@ -370,7 +265,6 @@ export default function CProfilAdm() {
             </div>
           </div>
         </div>
-    
       </div>
       <div className={styles.contentKanan}>
         <ProfileKanan
