@@ -17,6 +17,8 @@ export default function Profil() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [grafikSubid, setGrafikSubid] = useState([]);
+  const [grafikBid, setGrafikBid] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -39,6 +41,14 @@ export default function Profil() {
               moment(item.bulan).format("YYYY") === moment().format("YYYY")
             ) {
               setGrafikPersonal((nextData) => {
+                return [...nextData, item];
+              });
+            }
+            if (
+              item.sub_bidang == response.data.user[0].sub_bidang &&
+              item.jabatan == "Kasubid"
+            ) {
+              setGrafikSubid((nextData) => {
                 return [...nextData, item];
               });
             }
@@ -129,11 +139,11 @@ export default function Profil() {
   };
 
   const subBidangChart = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid?.map((data) => moment(data.bulan).format("MMMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#FF0164"],
         borderRadius: 10,
         indexAxis: "y",
