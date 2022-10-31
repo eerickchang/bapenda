@@ -730,6 +730,7 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
   const ketAdmin = req.body.ketAdmin;
   const nip = req.body.nip;
+  const bulan = req.body.bulan;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Selesai", kirim_ke = "", ket_admin = ?, nip = ? WHERE id_renaksi = ?';
@@ -739,8 +740,8 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   });
 
   const sqlUpdate2 =
-    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ?";
-  db.query(sqlUpdate2, [nip], (err, result) => {
+    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ? AND bulan = ?";
+  db.query(sqlUpdate2, [nip, bulan], (err, result) => {
     console.log(err);
   });
 

@@ -113,35 +113,31 @@ function Row(props) {
   };
 
   const btnTerima = () => {
-    Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
-      let infoBulan;
-      cakin.data.map((ambilCakin) => {
-        // console.log(ambilCakin);
-        if (
-          moment(ambilCakin.bulan).format("YYYY-MM") ==
-            moment(row.end_date).format("YYYY-MM") &&
-          ambilCakin.nip === row.nip
-        ) {
-          infoBulan = "Good";
-        }
-      });
-
-      if (infoBulan == "Good") {
-        console.log("Ada");
-      } else {
-        console.log("Sudah dibuat row cakin baru");
-        Axios.post("http://localhost:3001/addBulanCakin", {
-          bulan: moment().format("YYYY-MM-01"),
-          nip: row.nip,
-        });
-      }
-    });
-
     Axios.post("http://localhost:3001/adminMenerimaRenaksiSelesai", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
       nip: row.nip,
+      bulan: moment(row.end_date).format("YYYY-MM-01"),
     });
+
+    Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+      let jlhKegiatan;
+      let lampDiterima;
+      let hasil;
+      ambilCakin.data.map((cakin) => {
+        if (
+          cakin.nip == row.nip &&
+          moment(cakin.bulan).format("YYYY-MM") ==
+            moment(row.end_date).format("YYYY-MM")
+        ) {
+          jlhKegiatan = cakin.jumlah_kegiatan;
+          lampDiterima = cakin.lampiran_diterima;
+          console.log(jlhKegiatan);
+          console.log(lampDiterima);
+        }
+      });
+    });
+
     stateChanger([]);
 
     setTimeout(() => {
