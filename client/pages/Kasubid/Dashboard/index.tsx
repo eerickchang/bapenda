@@ -142,7 +142,7 @@ export default function Dashboard() {
                 bil = [...bil, jumlahKegiatanMAP];
               }
             });
-
+            //
             //INPUT JUMLAH KEGIATAN BULAN INI KE DB
             Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
               ambilCakin.data.map((cakin) => {
