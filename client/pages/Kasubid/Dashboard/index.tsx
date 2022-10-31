@@ -271,11 +271,11 @@ export default function Dashboard() {
   const [prevMonth, setPrevMonth] = useState("");
 
   const userData = {
-    labels: UserData.map((data) => data.bulan),
+    labels: grafik.map((data) => moment(data.bulan).format("MMMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData.map((data) => data.hasil_kinerja),
+        data: grafik.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
 
