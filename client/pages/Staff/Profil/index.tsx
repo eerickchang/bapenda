@@ -129,7 +129,7 @@ export default function Profil() {
   };
 
   const subBidangChart = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikPersonal?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
@@ -146,11 +146,11 @@ export default function Profil() {
   };
 
   const personalChart = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikPersonal?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         indexAxis: "y",
@@ -160,6 +160,18 @@ export default function Profil() {
         // hoverBackgroundColor: ["#112350"],
       },
     ],
+
+    // labels: ,
+    // datasets: [
+    //   {
+    //     label: "Kinerja Pegawai",
+    //     data: grafik?.map((data) => data.hasil_kinerja),
+    //     backgroundColor: ["#1bddbb"],
+    //     borderRadius: 10,
+
+    //     // hoverBackgroundColor: ["#112350"],
+    //   },
+    // ],
   };
 
   // const personalChart = {
