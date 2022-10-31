@@ -83,6 +83,7 @@ export default function Dashboard() {
               }
             });
 
+            //INPUT JUMLAH KEGIATAN BULAN INI KE DATABASE
             Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
               ambilCakin.data.map((cakin) => {
                 if (
@@ -127,6 +128,7 @@ export default function Dashboard() {
               }
             });
 
+            //INPUT LAMPIRAN DISUBMIT BULAN INI KE DATABASE
             Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
               ambilCakin.data.map((cakin) => {
                 if (
@@ -170,6 +172,7 @@ export default function Dashboard() {
             }
           });
 
+          //INPUT LAMPIRAN BELUM SUBMIT BULAN INI KE DATABASE
           Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
             ambilCakin.data.map((cakin) => {
               if (

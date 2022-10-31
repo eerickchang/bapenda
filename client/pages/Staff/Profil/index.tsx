@@ -129,7 +129,7 @@ export default function Profil() {
   };
 
   const subBidangChart = {
-    labels: grafikPersonal?.map((data) => data.bulan),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
@@ -146,7 +146,7 @@ export default function Profil() {
   };
 
   const personalChart = {
-    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
+    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
