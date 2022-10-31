@@ -261,26 +261,12 @@ export default function Dashboard() {
     },
   ];
 
-  const userData = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1bddbb"],
-        borderRadius: 10,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
   // const userData = {
-  //   labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
+  //   labels: UserData?.map((data) => data.bulan),
   //   datasets: [
   //     {
-  //       label: "Kinerja Pegawai",
-  //       data: grafik?.map((data) => data.hasil_kinerja),
+  //       label: "Kinerja",
+  //       data: UserData?.map((data) => data.kinerja),
   //       backgroundColor: ["#1bddbb"],
   //       borderRadius: 10,
 
@@ -288,6 +274,20 @@ export default function Dashboard() {
   //     },
   //   ],
   // };
+
+  const userData = {
+    labels: grafik?.map((data) => moment(data.bulan).format("MMMM")),
+    datasets: [
+      {
+        label: "Kinerja Pegawai",
+        data: grafik?.map((data) => data.hasil_kinerja),
+        backgroundColor: ["#1bddbb"],
+        borderRadius: 10,
+
+        // hoverBackgroundColor: ["#112350"],
+      },
+    ],
+  };
 
   return (
     <div className={styles.container}>
