@@ -28,7 +28,7 @@ export default function ContentDetailCaKin() {
 
       Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
         setNama(dataAsn.data.user[0].nama);
-
+        //
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
             if (
