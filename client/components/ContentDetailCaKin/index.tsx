@@ -26,18 +26,21 @@ export default function ContentDetailCaKin() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-        ambilCakin.data.map((cakin) => {
-          if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
-            setDataCakin((nextData) => {
-              return [...nextData, cakin];
-            });
-          }
-        });
-      });
-
       Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
         setNama(dataAsn.data.user[0].nama);
+
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY") === moment().format("YYYY") &&
+              cakin.nip == dataAsn.data.user[0].nip
+            ) {
+              setDataCakin((nextData) => {
+                return [...nextData, cakin];
+              });
+            }
+          });
+        });
       });
     }
   }, []);
@@ -436,7 +439,7 @@ export default function ContentDetailCaKin() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - Renbang
+            Detail Capaian Kinerja - {nama}
           </p>
         </div>
 
