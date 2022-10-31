@@ -34,27 +34,6 @@ function Row(props) {
 
   const [renaksiPegawai, setRenaksiPegawai] = useState([]);
 
-  // const btnUnggah = () => {
-  //   setShowModal(true);
-  //   setTimeout(() => {
-  //     setShowModal(false);
-  //   }, 3000);
-  // };
-
-  // const btnUbah = () => {
-  //   setShowModal_Ubah(true);
-  //   setTimeout(() => {
-  //     setShowModal_Ubah(false);
-  //   }, 3000);
-  // };
-
-  // const btnHapus = () => {
-  //   setShowModal_Hapus(true);
-  //   setTimeout(() => {
-  //     setShowModal_Hapus(false);
-  //   }, 3000);
-  // };
-
   const btnTerima = () => {
     Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
       (ambilRenaksi) => {
@@ -421,13 +400,13 @@ function Row(props) {
           <TableRow hover className={styles.styleRow}>
             <div style={{ display: "flex", padding: 30, alignItems: "center" }}>
               {row.foto === "" ? (
-                <Image
-                  src={"/SidebarProfile.svg"}
-                  width={70}
-                  height={70}
-                  alt="User 2"
-                  style={{ borderRadius: 150 }}
-                />
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={70}
+                    height={70}
+                    alt="User 2"
+                    style={{ borderRadius: 150}}
+                  />
               ) : (
                 <Image
                   src={row.foto}

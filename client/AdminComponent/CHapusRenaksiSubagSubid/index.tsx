@@ -349,7 +349,7 @@ function Row(props) {
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0 }} colSpan={6}>
-          <Collapse style={styleCollapse} in={open} timeout="auto">
+          <Collapse style={styleCollapse} in={open} timeout={480}>
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
@@ -504,7 +504,7 @@ export const CHapusRenaksiSubagSubid = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleContainer = { paddingLeft: 2, paddingRight: 40};
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,

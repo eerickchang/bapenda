@@ -496,3 +496,38 @@
   display: flex;
   margin-left: 390px;
 }
+
+
+.wrapperKetKaban{
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 140px;
+  background-color: rgba(27, 221, 187, 1);
+  padding: 15px 35px;
+  border-radius: 10px;
+}
+
+.arrow{
+  display: flex;
+  align-items: center;
+  margin-left: 235px;
+}
+
+.contentKet{
+  position: absolute;
+  top: 195px;
+  left: 180px;
+  min-width: 484px;
+  max-width: 584px;
+  padding: 5px 30px;
+  border-radius: 10px;
+  background-color: #DBDBDB;
+  z-index: 2000;
+  /* opacity: 0; */
+}

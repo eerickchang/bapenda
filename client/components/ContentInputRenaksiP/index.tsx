@@ -24,40 +24,13 @@ import moment from "moment";
 import React from "react";
 
 export default function ContentInputRenaksiP() {
-  // !MONTH PICKER
-  // const [selected, setSelected] = useState(null);
-  // const presets = [
-  //   {
-  //     title: "This month",
-  //     start: moment().startOf("month").toDate(),
-  //     end: moment().endOf("month").toDate(),
-  //   },
-  //   {
-  //     title: "Past 3 months",
-  //     start: moment().subtract(2, "month").startOf("month").toDate(),
-  //     end: moment().endOf("month").toDate(),
-  //   },
-  //   {
-  //     title: "Past 6 months",
-  //     start: moment().subtract(5, "month").startOf("month").toDate(),
-  //     end: moment().endOf("month").toDate(),
-  //   },
-  //   {
-  //     title: "This Year",
-  //     start: moment().startOf("year").toDate(),
-  //     end: moment().endOf("year").toDate(),
-  //   },
-  // ];
+ 
 
   // !CHECKBOX RENCANA BULAN
   const BpIcon = styled("span")(({ theme }) => ({
     borderRadius: 10,
     width: 70,
     height: 60,
-    // boxShadow:
-    //   theme.palette.mode === "dark"
-    //     ? "0 0 0 1px rgb(16 22 26 / 40%)"
-    //     : "inset 0 10 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
     backgroundColor:
       theme.palette.mode === "dark" ? "" : "rgba(17, 35, 80, 0.3)",
 
@@ -65,11 +38,6 @@ export default function ContentInputRenaksiP() {
       backgroundColor:
         theme.palette.mode === "dark" ? "#30404d" : "rgba(27, 221, 187, 1)",
     },
-    // "input:disabled ~ &": {
-    //   boxShadow: "none",
-    //   background:
-    //     theme.palette.mode === "dark" ? "yellow" : "rgba(206,217,224,.5)",
-    // },
   }));
 
   const BpCheckedIcon = styled(BpIcon)({

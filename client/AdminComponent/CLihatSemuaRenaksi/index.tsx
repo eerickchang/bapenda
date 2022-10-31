@@ -155,6 +155,8 @@ export default function CLihatSemuaRenaksi() {
   const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
   const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
+  const [showKet, setShowKet] = useState(false);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -255,10 +257,19 @@ export default function CLihatSemuaRenaksi() {
   };
 
   const styleContainer = {
+    marginTop: 40,
     paddingLeft: 2,
     paddingRight: 40,
-    zIndex: 998,
     paddingBottom: 20,
+  };
+
+  const styleKeterangan = {
+    left: 180,
+    width: 484,
+    paddingLeft: 2,
+    borderRadius: 2,
+    backgroundColor: "rgba(219, 219, 219, 1)",
+    zIndex: 2000
   };
 
   return (
@@ -279,6 +290,29 @@ export default function CLihatSemuaRenaksi() {
               RENAKSI - {router.query.subid}
             </div>
             <Gap height={162} width={0} />
+            <div
+              onClick={() => setShowKet(!showKet)}
+              className={styles.wrapperKetKaban}
+            >
+              <p style={{ margin: 0 }}>Keterangan Kaban</p>
+              <div className={styles.arrow}>
+                <Image src={"/Arrow.svg"} width={23} height={23} />
+              </div>
+            </div>
+            <Gap height={35}/>
+            <Collapse
+              in={showKet}
+              timeout={500}
+              unmountOnExit
+              sx={styleKeterangan}
+            >
+              <p>
+                Staff tidak boleh minum kopi Staff tidak boleh minum kopi Staff
+                tidak boleh minum kopi Staff tidak boleh minum kopi Staff tidak
+                boleh minum kopi Staff tidak boleh minum kopi Staff tidak boleh
+                minum kopi
+              </p>
+            </Collapse>
             <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
@@ -335,6 +369,7 @@ export default function CLihatSemuaRenaksi() {
                 </TableBody>
               </Table>
             </TableContainer>
+
             <div className={stylesS.wrapFilter}>
               <Gap width={15} height={0} />
               <button
