@@ -212,8 +212,15 @@ app.post("/inputRenaksi", (req, res) => {
   );
 });
 
-//AMBIL DATA RENAKSI STATUS = 'SEMUA'
+//AMBIL PEGAWAI
+app.get("/pegawai", (req, res) => {
+  const sqlSelect = "SELECT * FROM pegawai";
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
 
+//AMBIL DATA RENAKSI STATUS = 'SEMUA'
 app.get("/ambilRenaksi", (req, res) => {
   const sqlSelect =
     "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
@@ -223,7 +230,6 @@ app.get("/ambilRenaksi", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'SEMUA'
-
 app.get("/ambilRiwayatKegiatan", (req, res) => {
   const sqlSelect =
     "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_pegawai, data_renaksi.ket_admin, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.id_renaksi, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
@@ -233,7 +239,6 @@ app.get("/ambilRiwayatKegiatan", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'JADWAL DIUBAH'
-
 app.get("/ambilRenaksiJadwalDiubah", (req, res) => {
   const sqlSelect =
     'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Jadwal Diubah" ';
@@ -243,7 +248,6 @@ app.get("/ambilRenaksiJadwalDiubah", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'MENUNGGU RENAKSI DITERIMA'
-
 app.get("/ambilRenaksiMenunggu", (req, res) => {
   const sqlSelect =
     'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Diterima" ';
@@ -253,7 +257,6 @@ app.get("/ambilRenaksiMenunggu", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'SEMENTARA'
-
 app.get("/ambilRenaksiSementara", (req, res) => {
   const sqlSelect =
     'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Sementara" ';
@@ -263,7 +266,6 @@ app.get("/ambilRenaksiSementara", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'SELESAI'
-
 app.get("/ambilRenaksiSelesai", (req, res) => {
   const sqlSelect =
     'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Selesai" ';
@@ -273,7 +275,6 @@ app.get("/ambilRenaksiSelesai", (req, res) => {
 });
 
 //AMBIL DATA RENAKSI STATUS = 'DIHAPUS'
-
 app.get("/ambilRenaksiDihapus", (req, res) => {
   const sqlSelect =
     'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.status = "Menunggu Renaksi Dihapus" ';
@@ -312,7 +313,7 @@ app.get("/belumSubmit", (req, res) => {
 //AMBIL DATA CAKIN
 app.get("/cakin", (req, res) => {
   const sqlSelect =
-    "SELECT pegawai.nama, pegawai.jabatan, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip ORDER BY cakin.bulan ASC";
+    "SELECT pegawai.nama, pegawai.jabatan, pegawai.bidang, pegawai.sub_bidang, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip ORDER BY cakin.bulan ASC";
 
   db.query(sqlSelect, (err, result) => {
     res.send(result);
@@ -731,6 +732,7 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   const ketAdmin = req.body.ketAdmin;
   const nip = req.body.nip;
   const bulan = req.body.bulan;
+  const nip_kasubid = req.body.nip_kasubid;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Selesai", kirim_ke = "", ket_admin = ?, nip = ? WHERE id_renaksi = ?';
@@ -742,6 +744,12 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   const sqlUpdate2 =
     "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ? AND bulan = ?";
   db.query(sqlUpdate2, [nip, bulan], (err, result) => {
+    console.log(err);
+  });
+
+  const sqlUpdate3 =
+    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ? AND bulan = ?";
+  db.query(sqlUpdate3, [nip_kasubid, bulan], (err, result) => {
     console.log(err);
   });
 
@@ -780,6 +788,7 @@ app.get("/createRowCakin", (req, res) => {
   });
 });
 
+//ADD BULAN PADA CAKIN DI TAHUN YANG BARU
 app.post("/addBulanCakin", (req, res) => {
   const nip = req.body.nip;
 
@@ -795,6 +804,7 @@ app.post("/addBulanCakin", (req, res) => {
   }
 });
 
+//UPDATE JUMLAH KEGIATAN KE TABEL CAKIN
 app.post("/addJumlahKegiatan", (req, res) => {
   const jumlah = req.body.jumlah;
   const nip = req.body.nip;
@@ -807,6 +817,7 @@ app.post("/addJumlahKegiatan", (req, res) => {
   });
 });
 
+//UPDATE KEGIATAN BELUM SUBMIT KE TABEL CAKIN
 app.post("/addKegiatanBS", (req, res) => {
   const jumlah = req.body.jumlah;
   const nip = req.body.nip;
@@ -819,6 +830,7 @@ app.post("/addKegiatanBS", (req, res) => {
   });
 });
 
+//UPDATE KEGIATAN SUDAH SUBMIT KE TABEL CAKIN
 app.post("/addKegiatanS", (req, res) => {
   const jumlah = req.body.jumlah;
   const nip = req.body.nip;
@@ -830,9 +842,6 @@ app.post("/addKegiatanS", (req, res) => {
     console.log(err);
   });
 });
-
-// //ADMIN KALKULASI NILAI RENAKSI
-// app.post("");
 
 //COOKIES DLL
 

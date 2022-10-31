@@ -300,6 +300,7 @@ function Row(props) {
       pathname: "/Admin/EvaluasiSubagSubid",
       query: {
         subid: row.sub_bidang,
+        nip_kasubid: row.nip,
       },
     });
   };
@@ -318,16 +319,16 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleAksi = {
-      flexDirection: "row",
-      display: "flex",
-      fontFamily: "Poppins",
-      fontWeight: 400,
-      fontSize: 18,
-      width: 130,
-      justifyContent: "space-between",
-      cursor: "pointer",
-    };
+  const styleAksi = {
+    flexDirection: "row",
+    display: "flex",
+    fontFamily: "Poppins",
+    fontWeight: 400,
+    fontSize: 18,
+    width: 130,
+    justifyContent: "space-between",
+    cursor: "pointer",
+  };
 
   return (
     <>

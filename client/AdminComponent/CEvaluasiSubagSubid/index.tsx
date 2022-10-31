@@ -24,7 +24,7 @@ import { useRouter } from "next/router";
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
-  const { row, stateChanger, subid } = props;
+  const { row, stateChanger, subid, nip_kasubid } = props;
   const [open, setOpen] = React.useState(false);
   const [ketAdmin, setKetAdmin] = useState("");
 
@@ -93,53 +93,26 @@ function Row(props) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
-          });
-        }
-      );
-    });
-
-    stateChanger([]);
-    // window.location.reload();
-  };
-
   const btnTerima = () => {
+    // Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+    //   ambilPegawai.data.map((pegawai) => {
+    //     if (
+    //       pegawai.sub_bidang == row.sub_bidang &&
+    //       pegawai.jabatan == "Kasubid"
+    //     ) {
+    //       console.log(pegawai.nip);
+    //     }
+    //   });
+    // });
     Axios.post("http://localhost:3001/adminMenerimaRenaksiSelesai", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
       nip: row.nip,
       bulan: moment(row.end_date).format("YYYY-MM-01"),
-    });
-
-    Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-      let jlhKegiatan;
-      let lampDiterima;
-      let hasil;
-      ambilCakin.data.map((cakin) => {
-        if (
-          cakin.nip == row.nip &&
-          moment(cakin.bulan).format("YYYY-MM") ==
-            moment(row.end_date).format("YYYY-MM")
-        ) {
-          jlhKegiatan = cakin.jumlah_kegiatan;
-          lampDiterima = cakin.lampiran_diterima;
-          console.log(jlhKegiatan);
-          console.log(lampDiterima);
-        }
-      });
+      nip_kasubid: nip_kasubid,
     });
 
     stateChanger([]);
-
     setTimeout(() => {
       Axios.get("http://localhost:3001/adminAmbilRenaksiSelesai").then(
         (ambilRenaksi) => {
@@ -239,20 +212,6 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
-
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
   const btnTolakExp = () => {
     Axios.post("http://localhost:3001/adminMenolakRenaksiSelesai", {
       idRenaksi: row.id_renaksi,
@@ -277,38 +236,6 @@ function Row(props) {
 
     closeModal();
     btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
   };
 
   const style1 = {
@@ -506,6 +433,7 @@ export const CEvaluasiSubagSubid = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
+  const [nipKasubid, setNipKasubid] = useState("");
 
   const [pegawai, setPegawai] = useState([]);
   const shouldLog = useRef(true);
@@ -529,11 +457,6 @@ export const CEvaluasiSubagSubid = () => {
     }
   }, [router.query, router.isReady]);
 
-  const btnFilterBulan = () => {
-    // setActiveDropdownBulan(!activeDropdownBulan);
-    console.log(dataRenaksi);
-  };
-
   const style = {
     fontFamily: "Poppins",
     fontSize: 17,
@@ -543,7 +466,6 @@ export const CEvaluasiSubagSubid = () => {
 
   const clickBack = () => {
     router.push("/Admin/EvaluasiLampiran");
-    // console.log(dataCakin);
   };
 
   return (
@@ -573,9 +495,7 @@ export const CEvaluasiSubagSubid = () => {
               </p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40 }}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -600,6 +520,7 @@ export const CEvaluasiSubagSubid = () => {
                       row={row}
                       stateChanger={setPegawai}
                       subid={router.query.subid}
+                      nip_kasubid={router.query.nip_kasubid}
                     />
                   ))}
                 </TableBody>
