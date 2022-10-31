@@ -312,7 +312,7 @@ app.get("/belumSubmit", (req, res) => {
 //AMBIL DATA CAKIN
 app.get("/cakin", (req, res) => {
   const sqlSelect =
-    "SELECT pegawai.nama, pegawai.jabatan, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip";
+    "SELECT pegawai.nama, pegawai.jabatan, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip ORDER BY cakin.bulan ASC";
 
   db.query(sqlSelect, (err, result) => {
     res.send(result);
