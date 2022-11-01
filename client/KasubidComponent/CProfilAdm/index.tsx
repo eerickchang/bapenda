@@ -43,7 +43,7 @@ export default function CProfilAdm() {
               totRealisasi = totRealisasi + item.lampiran_diterima;
             }
           });
-
+          //
           let hasil = (totRealisasi / totJlhKegiatan) * 100;
           setPersen(Math.trunc(hasil));
           setBlmRealisasi(totJlhKegiatan - totRealisasi);
