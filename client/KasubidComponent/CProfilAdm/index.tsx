@@ -13,6 +13,11 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikSubid, setGrafikSubid] = useState([]);
+  const [realisasiKeg, setRealisasiKeg] = useState();
+  const [blmRealisasi, setBlmRealisasi] = useState();
+  const [persen, setPersen] = useState(0);
+  let totJlhKegiatan = 0;
+  let totRealisasi = 0;
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -24,10 +29,7 @@ export default function CProfilAdm() {
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setDataAsn(response.data.user[0]);
-      });
 
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -37,8 +39,15 @@ export default function CProfilAdm() {
               setGrafikSubid((nextData) => {
                 return [...nextData, item];
               });
+              totJlhKegiatan = totJlhKegiatan + item.jumlah_kegiatan;
+              totRealisasi = totRealisasi + item.lampiran_diterima;
             }
           });
+
+          let hasil = (totRealisasi / totJlhKegiatan) * 100;
+          setPersen(Math.trunc(hasil));
+          setBlmRealisasi(totJlhKegiatan - totRealisasi);
+          setRealisasiKeg(totRealisasi);
         });
       });
     }
@@ -157,7 +166,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKeg}`, `${blmRealisasi}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -167,7 +176,7 @@ export default function CProfilAdm() {
 
   const router = useRouter();
 
-  const clickCakinBidang = (bidang) => {
+  const clickCakinBidang = () => {
     router.push({
       pathname: "/Kasubid/CakinSubidang",
       // query: {
@@ -191,6 +200,8 @@ export default function CProfilAdm() {
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
         <Gap height={20} width={0} />
+
+        {/* BIDANG */}
         <div className={styles.barContainer1}>
           <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
           <div className={styles.mainBarWrapper1}>
@@ -205,7 +216,7 @@ export default function CProfilAdm() {
                 marginTop: 65,
               }}
             >
-              <DoughnutChart data={donatChart1} />
+              <DoughnutChart data={donatChart1} txtTitle="90" />
             </div>
             <div style={{ marginLeft: 22, marginTop: 50 }}>
               <div className={styles.ketWrapper}>
@@ -226,45 +237,49 @@ export default function CProfilAdm() {
             </div>
           </div>
         </div>
-        <div
-          className={styles.barContainer3}
-          onClick={clickCakinBidang}
-          style={{ cursor: "pointer" }}
-        >
-          <p className={styles.txtBidang}>PENGEMBANGAN TEKNOLOGI</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart3} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart3} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+
+        {/* SUB BIDANG */}
+        {persen != 0 ? (
+          <div
+            className={styles.barContainer3}
+            onClick={clickCakinBidang}
+            style={{ cursor: "pointer" }}
+          >
+            <p className={styles.txtBidang}>PENGEMBANGAN TEKNOLOGI</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart3} />
               </div>
-              <Gap height={20} width={0} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart3} txtTitle={persen} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{blmRealisasi}</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} width={0} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{realisasiKeg}</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
       <div className={styles.contentKanan}>
         <ProfileKanan

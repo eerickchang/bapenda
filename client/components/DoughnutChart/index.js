@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function DoughnutChart({ data }) {
+export function DoughnutChart({ data, txtTitle = "0" }) {
   const options = {
     plugins: {
       legend: {
@@ -32,7 +32,7 @@ export function DoughnutChart({ data }) {
         ctx.font = fontSize + "em Droid Sans";
         ctx.fontWeight = 700;
         ctx.textBaseline = "middle";
-        var text = "90%",
+        var text = `${txtTitle}%`,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillStyle = "rgba(17, 35, 80, 1)";
