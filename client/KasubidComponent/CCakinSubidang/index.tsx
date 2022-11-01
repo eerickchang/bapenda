@@ -29,6 +29,7 @@ export default function CCaKinSubidang() {
       shouldLog.current = false;
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        setImage(masuk.data.user[0].foto);
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
             if (
@@ -63,6 +64,7 @@ export default function CCaKinSubidang() {
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
+  const [image, setImage] = useState("");
 
   const pegawai = [
     {
@@ -621,7 +623,7 @@ export default function CCaKinSubidang() {
                 className={styles.wrapperSelectFilterPegawai}
                 onClick={() => setActiveDropdownPegawai(false)}
               >
-                {pegadwai.map((item) => (
+                {pegawai.map((item) => (
                   <div
                     className={styles.wrapNama}
                     key={item.id}
@@ -722,7 +724,23 @@ export default function CCaKinSubidang() {
               return (
                 <TableRow hover>
                   <TableCell align="center" sx={styleRowNama}>
-                    <Image src={"/User1.svg"} width={50} height={50} />
+                    {!image ? (
+                      <Image
+                        src={"/User1.svg"}
+                        width={50}
+                        height={50}
+                        alt="User 2"
+                        style={{ borderRadius: 150 }}
+                      />
+                    ) : (
+                      <Image
+                        src={image}
+                        width={50}
+                        height={50}
+                        alt="User 2"
+                        style={{ borderRadius: 150 }}
+                      />
+                    )}
                     <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
                   </TableCell>
                   <TableCell align="center" sx={styleRow}>
