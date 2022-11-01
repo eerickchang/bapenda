@@ -22,10 +22,11 @@ export default function Sidebar({
   kotakLogOut = styles.kotakLogOut,
   onClick,
 }) {
-  //   Axios.get("http://localhost:3001/masuk").then((response) => {
-  //     setImage(response.data.user[0].foto);
-  //   });
-  // }, []);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/masuk").then((response) => {
+      setImage(response.data.user[0].foto);
+    });
+  }, []);
 
   const [image, setImage] = useState(null);
   const [nama, setNama] = useState("");

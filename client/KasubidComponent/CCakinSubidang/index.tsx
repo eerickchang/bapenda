@@ -28,19 +28,21 @@ export default function CCaKinSubidang() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      console.log(router.query.subid1);
-      console.log(router.query.subid2);
-      console.log(router.query.subid3);
-
-      // Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-      //   ambilCakin.data.map((cakin) => {
-      //     if (moment(cakin.bulan).format("YYYY") === moment().format("YYYY")) {
-      //       setDataCakin((nextData) => {
-      //         return [...nextData, cakin];
-      //       });
-      //     }
-      //   });
-      // });
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        setImage(masuk.data.user[0].foto);
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY") === moment().format("YYYY") &&
+              cakin.nip == masuk.data.user[0].nip
+            ) {
+              setDataCakin((nextData) => {
+                return [...nextData, cakin];
+              });
+            }
+          });
+        });
+      });
 
       // Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
       //   setNama(dataAsn.data.user[0].nama);
@@ -51,12 +53,6 @@ export default function CCaKinSubidang() {
   const clickBack = () => {
     router.push({
       pathname: "/Kasubid/Profil",
-      query: {
-        bidang: router.query.bidang,
-        subid1: router.query.subid1,
-        subid2: router.query.subid2,
-        subid3: router.query.subid3,
-      },
     });
     // console.log(dataCakin);
   };
@@ -68,6 +64,7 @@ export default function CCaKinSubidang() {
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
+  const [image, setImage] = useState("");
 
   const pegawai = [
     {
@@ -608,7 +605,7 @@ export default function CCaKinSubidang() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - {router.query.subidAsli}
+            Detail Capaian Kinerja - {router.query.subid}
           </p>
         </div>
 
@@ -722,38 +719,50 @@ export default function CCaKinSubidang() {
           </TableHead>
           <TableBody>
             {/* AMBIL DATA ROW */}
-            {tampilkanCakin == "Rows Andre"
-              ? rows
-                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow hover>
-                        <TableCell align="center" sx={styleRowNama}>
-                          <Image src={"/User1.svg"} width={50} height={50} />
-                          <p style={{ margin: 0, marginLeft: 10 }}>
-                            {row.nama}
-                          </p>
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.jabatan}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {moment(row.bulan).format("MMM")}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.jumlah_kegiatan}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.lampiran_disubmit}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.lampiran_bsubmit}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.hasil_kinerja}
-                        </TableCell>
 
-                        {/* {columns.map((column) => {
+            {dataCakin.map((row) => {
+              return (
+                <TableRow hover>
+                  <TableCell align="center" sx={styleRowNama}>
+                    {!image ? (
+                      <Image
+                        src={"/User1.svg"}
+                        width={50}
+                        height={50}
+                        alt="User 2"
+                        style={{ borderRadius: 150 }}
+                      />
+                    ) : (
+                      <Image
+                        src={image}
+                        width={50}
+                        height={50}
+                        alt="User 2"
+                        style={{ borderRadius: 150 }}
+                      />
+                    )}
+                    <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {row.jabatan}
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {moment(row.bulan).format("MMM")}
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {row.jumlah_kegiatan}
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {row.lampiran_diterima}
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {row.lampiran_bsubmit}
+                  </TableCell>
+                  <TableCell align="center" sx={styleRow}>
+                    {row.hasil_kinerja}
+                  </TableCell>
+
+                  {/* {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell
@@ -773,62 +782,9 @@ export default function CCaKinSubidang() {
                         </TableCell>
                       );
                     })} */}
-                      </TableRow>
-                    );
-                  })
-              : rowsGeo
-                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow hover>
-                        <TableCell align="center" sx={styleRowNama}>
-                          <Image src={"/User1.svg"} width={50} height={50} />
-                          <p style={{ margin: 0, marginLeft: 10 }}>
-                            {row.nama}
-                          </p>
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.jabatan}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {moment(row.bulan).format("MMM")}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.jumlah_kegiatan}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.lampiran_disubmit}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.lampiran_bsubmit}
-                        </TableCell>
-                        <TableCell align="center" sx={styleRow}>
-                          {row.hasil_kinerja}
-                        </TableCell>
-
-                        {/* {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          sx={{
-                            border: 1,
-                            borderColor: "#1BDDBB",
-                            fontFamily: "Poppins",
-                            fontWeight: 400,
-                            fontSize: 18,
-                          }}
-                          key={column.id}
-                          align={column.align}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })} */}
-                      </TableRow>
-                    );
-                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
