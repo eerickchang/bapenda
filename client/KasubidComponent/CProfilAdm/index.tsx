@@ -16,6 +16,7 @@ export default function CProfilAdm() {
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
   const [persen, setPersen] = useState(0);
+  const [subid, setSubid] = useState("");
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
 
@@ -29,6 +30,7 @@ export default function CProfilAdm() {
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setDataAsn(response.data.user[0]);
+        setSubid(response.data.user[0].sub_bidang);
 
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
@@ -179,12 +181,9 @@ export default function CProfilAdm() {
   const clickCakinBidang = () => {
     router.push({
       pathname: "/Kasubid/CakinSubidang",
-      // query: {
-      //   bidang: "Retribusi dan Lain-lain Pendapatan",
-      //   subid1: "Retribusi",
-      //   subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-      //   subid3: "Lain-lain Pendapatan",
-      // },
+      query: {
+        subid: subid,
+      },
     });
   };
 
