@@ -157,6 +157,10 @@ export default function CLihatSemuaRenaksi() {
 
   const [showKet, setShowKet] = useState(false);
 
+  // icon arrow
+  const [iconArrow, setIconArrow] = useState("");
+  const [iconArrowClick, setIconArrowClick] = useState(true);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -269,7 +273,7 @@ export default function CLihatSemuaRenaksi() {
     paddingLeft: 2,
     borderRadius: 2,
     backgroundColor: "rgba(219, 219, 219, 1)",
-    zIndex: 2000
+    zIndex: 2000,
   };
 
   return (
@@ -290,16 +294,40 @@ export default function CLihatSemuaRenaksi() {
               RENAKSI - {router.query.subid}
             </div>
             <Gap height={162} width={0} />
+            {/* <TableRow
+              className={`${styles.tableRow} ${styleRow}`}
+              onClick={() => {
+                setOpen(!open);
+                {
+                  rowClik
+                    ? (setStyleRow(
+                        `${styles.tableRow} ${styles.tableRowClick}`
+                      ),
+                      setRowClick(!rowClik))
+                    : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+                }
+              }}
+              sx={{ "& > *": { borderBottom: "" } }}
+            ></TableRow> */}
             <div
-              onClick={() => setShowKet(!showKet)}
-              className={styles.wrapperKetKaban}
+              className={`${styles.arrow} ${iconArrow}`}
+              onClick={() => {
+                setShowKet(!showKet);
+                {
+                  iconArrowClick
+                    ? (setIconArrow(styles.arrowClick),
+                      setIconArrowClick(!iconArrowClick))
+                    : (setIconArrow(styles.iconArrowClick),
+                      setIconArrowClick(!iconArrowClick));
+                }
+              }}
             >
-              <p style={{ margin: 0 }}>Keterangan Kaban</p>
-              <div className={styles.arrow}>
-                <Image src={"/Arrow.svg"} width={23} height={23} />
-              </div>
+              <Image src={"/Arrow.svg"} width={23} height={23} />
             </div>
-            <Gap height={35}/>
+            <div className={styles.wrapperKetKaban}>
+              <p style={{ margin: 0 }}>Keterangan Kaban</p>
+            </div>
+            <Gap height={35} width={0} />
             <Collapse
               in={showKet}
               timeout={500}

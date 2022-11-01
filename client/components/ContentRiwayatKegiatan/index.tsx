@@ -352,7 +352,7 @@ export const ContentRiwayatKegiatan = () => {
     color: "rgba(149, 149, 149, 1)",
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleContainer = { paddingLeft: 2, paddingRight: 40};
 
   return (
     <>

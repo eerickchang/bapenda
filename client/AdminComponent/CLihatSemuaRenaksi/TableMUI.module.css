@@ -293,7 +293,7 @@
   color: rgba(148, 148, 148, 1);
 }
 
-.styleData{
+.styleData {
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -385,7 +385,6 @@
 
 /*  ! MODAL */
 
-
 .headerTxtModal {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -424,7 +423,6 @@
   /* top: 22px;
   right: 25px; */
 }
-
 
 .inputBuktiLap {
   height: 133px;
@@ -492,13 +490,12 @@
   margin-left: 12px;
 }
 
-.wrapBtnModal{
+.wrapBtnModal {
   display: flex;
   margin-left: 390px;
 }
 
-
-.wrapperKetKaban{
+.wrapperKetKaban {
   margin: 0;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -509,17 +506,28 @@
   align-items: center;
   top: 140px;
   background-color: rgba(27, 221, 187, 1);
-  padding: 15px 35px;
+  padding: 15px 164px;
   border-radius: 10px;
 }
 
-.arrow{
-  display: flex;
-  align-items: center;
-  margin-left: 235px;
+.wrapperKetKaban p{
+cursor: default;
 }
 
-.contentKet{
+.arrowClick{
+  transform: rotate(-180deg);
+}
+
+.arrow {
+  position: absolute;
+  top: 155px;
+  z-index: 200;
+  left: 530px;
+  transition: .5s;
+  cursor: pointer;
+}
+
+.contentKet {
   position: absolute;
   top: 195px;
   left: 180px;
@@ -527,7 +535,7 @@
   max-width: 584px;
   padding: 5px 30px;
   border-radius: 10px;
-  background-color: #DBDBDB;
+  background-color: #dbdbdb;
   z-index: 2000;
   /* opacity: 0; */
 }
