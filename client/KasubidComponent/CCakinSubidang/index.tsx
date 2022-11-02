@@ -52,6 +52,10 @@ export default function CCaKinSubidang() {
           });
         });
 
+        setPegawai((nextData) => {
+          return [...nextData, { nama: "Semua Pegawai", nip: 141 }];
+        });
+
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
           ambilPegawai.data.map((pegawai) => {
             if (
@@ -115,7 +119,7 @@ export default function CCaKinSubidang() {
   // const pegawai = [
   //   {
   //     id: 1,
-  //     // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
   //     nama: "Semua Pegawai",
   //   },
   //   {
@@ -572,8 +576,13 @@ export default function CCaKinSubidang() {
     Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
       ambilPegawai.data.map((pegawai_us) => {
         if (pegawai_us.nip == data) {
-          setImage(pegawai_us.foto);
-          setTitleUs(pegawai_us.nama);
+          if (pegawai_us.jabatan == "Kasubid") {
+            setImage(pegawai_us.foto);
+            setTitleUs(pegawai_us.sub_bidang);
+          } else {
+            setImage(pegawai_us.foto);
+            setTitleUs(pegawai_us.nama);
+          }
         }
       });
     });
