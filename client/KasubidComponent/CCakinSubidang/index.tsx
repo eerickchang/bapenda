@@ -29,14 +29,14 @@ export default function CCaKinSubidang() {
   const [nama, setNama] = useState("");
   const [image, setImage] = useState("");
   const [pegawai, setPegawai] = useState([]);
-  const [title, setTitle] = useState("");
+  const [titleUs, setTitleUs] = useState("");
 
   useEffect(() => {
     if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      setTitle(router.query.subid);
+      setTitleUs(router.query.subid);
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setImage(masuk.data.user[0].foto);
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
@@ -237,7 +237,7 @@ export default function CCaKinSubidang() {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Data Cakin ${nama}.xlsx`);
+    XLSX.writeFile(workBook, `Data Cakin ${titleUs}.xlsx`);
   };
 
   const btnDwPDF = () => {
@@ -250,7 +250,7 @@ export default function CCaKinSubidang() {
 
     doc.setFontSize(15);
 
-    const title = `Data Cakin ${nama}`;
+    const title = `Data Cakin ${titleUs}`;
     const headers = [
       [
         "Nama",
@@ -282,7 +282,7 @@ export default function CCaKinSubidang() {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Data Cakin ${nama}`);
+    doc.save(`Data Cakin ${titleUs}`);
   };
 
   const unduh = [
@@ -573,7 +573,7 @@ export default function CCaKinSubidang() {
       ambilPegawai.data.map((pegawai_us) => {
         if (pegawai_us.nip == data) {
           setImage(pegawai_us.foto);
-          setTitle(pegawai_us.nama);
+          setTitleUs(pegawai_us.nama);
         }
       });
     });
@@ -669,7 +669,7 @@ export default function CCaKinSubidang() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - {title}
+            Detail Capaian Kinerja - {titleUs}
           </p>
         </div>
 
