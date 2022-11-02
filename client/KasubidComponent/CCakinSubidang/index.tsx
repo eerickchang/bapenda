@@ -566,6 +566,14 @@ export default function CCaKinSubidang() {
 
   const clickPegawai = (data) => {
     setDataCakin([]);
+    Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+      ambilPegawai.data.map((pegawai_us) => {
+        if (pegawai_us.nip == data) {
+          setImage(pegawai_us.foto);
+        }
+      });
+    });
+
     Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
       ambilCakin.data.map((cakin) => {
         if (
