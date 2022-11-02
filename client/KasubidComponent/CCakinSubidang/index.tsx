@@ -23,6 +23,13 @@ Axios.defaults.withCredentials = true;
 export default function CCaKinSubidang() {
   const router = useRouter();
   const shouldLog = useRef(true);
+
+  const [dataCakin, setDataCakin] = useState([]);
+  const [tahunClick, setTahunClick] = useState("");
+  const [nama, setNama] = useState("");
+  const [image, setImage] = useState("");
+  const [pegawai, setPegawai] = useState([]);
+
   useEffect(() => {
     if (!router.isReady) return;
     if (shouldLog.current) {
@@ -42,6 +49,48 @@ export default function CCaKinSubidang() {
             }
           });
         });
+
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.sub_bidang == router.query.subid &&
+              pegawai.jabatan != "THL"
+            ) {
+              if (pegawai.foto != "") {
+                setPegawai((nextData) => {
+                  return [
+                    ...nextData,
+                    {
+                      nama: pegawai.nama,
+                      nip: pegawai.nip,
+                      foto: (
+                        <Image src={`${pegawai.foto}`} width={50} height={50} />
+                      ),
+                    },
+                  ];
+                });
+              } else {
+                setPegawai((nextData) => {
+                  return [
+                    ...nextData,
+                    {
+                      nama: pegawai.nama,
+                      nip: pegawai.nip,
+                      foto: <Image src={"/User1.svg"} width={50} height={50} />,
+                    },
+                  ];
+                });
+              }
+            }
+          });
+        });
+
+        // setPortate((nextData) => {
+        //   return [
+        //     ...nextData,
+        //     { value: data.nama, label: data.nama, id: data.nip },
+        //   ];
+        // });
       });
 
       // Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
@@ -61,48 +110,43 @@ export default function CCaKinSubidang() {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
 
-  const [dataCakin, setDataCakin] = useState([]);
-  const [tahunClick, setTahunClick] = useState("");
-  const [nama, setNama] = useState("");
-  const [image, setImage] = useState("");
-
-  const pegawai = [
-    {
-      id: 1,
-      // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Semua Pegawai",
-    },
-    {
-      id: 2,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
-    },
-    {
-      id: 3,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "George Olaf",
-    },
-    {
-      id: 4,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
-    },
-    {
-      id: 5,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
-    },
-    {
-      id: 6,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
-    },
-    {
-      id: 7,
-      gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-      nama: "Andre",
-    },
-  ];
+  // const pegawai = [
+  //   {
+  //     id: 1,
+  //     // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Semua Pegawai",
+  //   },
+  //   {
+  //     id: 2,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Andre",
+  //   },
+  //   {
+  //     id: 3,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "George Olaf",
+  //   },
+  //   {
+  //     id: 4,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Andre",
+  //   },
+  //   {
+  //     id: 5,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Andre",
+  //   },
+  //   {
+  //     id: 6,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Andre",
+  //   },
+  //   {
+  //     id: 7,
+  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
+  //     nama: "Andre",
+  //   },
+  // ];
 
   const tahun = [
     {
@@ -626,11 +670,11 @@ export default function CCaKinSubidang() {
                 {pegawai.map((item) => (
                   <div
                     className={styles.wrapNama}
-                    key={item.id}
+                    key={item.nip}
                     onClick={() => clickPegawai(item.nama)}
                   >
                     <div className={styles.hoverNama}>
-                      {item.gambar}
+                      {item.foto}
                       <div style={{ marginLeft: 20 }}>{item.nama}</div>
                     </div>
                   </div>

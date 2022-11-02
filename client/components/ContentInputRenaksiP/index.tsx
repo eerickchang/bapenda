@@ -24,8 +24,6 @@ import moment from "moment";
 import React from "react";
 
 export default function ContentInputRenaksiP() {
- 
-
   // !CHECKBOX RENCANA BULAN
   const BpIcon = styled("span")(({ theme }) => ({
     borderRadius: 10,
@@ -141,21 +139,10 @@ export default function ContentInputRenaksiP() {
                   { value: data.nama, label: data.nama, id: data.nip },
                 ];
               });
-              // setPortate(
-              //   result.data.map((item) => ({
-              //     ...setPortate,
-              //     value: item.nama,
-              //     label: item.nama,
-              //     id: item.nip,
-              //   }))
-              // );
             }
           });
         });
       });
-      // if (Response.length > 0) {
-      //   setShowModal(true);
-      // }
     }
   }, []);
 
