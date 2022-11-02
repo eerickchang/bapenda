@@ -29,12 +29,14 @@ export default function CCaKinSubidang() {
   const [nama, setNama] = useState("");
   const [image, setImage] = useState("");
   const [pegawai, setPegawai] = useState([]);
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
 
+      setTitle(router.query.subid);
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setImage(masuk.data.user[0].foto);
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
@@ -566,10 +568,12 @@ export default function CCaKinSubidang() {
 
   const clickPegawai = (data) => {
     setDataCakin([]);
+
     Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
       ambilPegawai.data.map((pegawai_us) => {
         if (pegawai_us.nip == data) {
           setImage(pegawai_us.foto);
+          setTitle(pegawai_us.nama);
         }
       });
     });
@@ -665,7 +669,7 @@ export default function CCaKinSubidang() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - {router.query.subid}
+            Detail Capaian Kinerja - {title}
           </p>
         </div>
 
