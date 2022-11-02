@@ -54,7 +54,7 @@ export default function CCaKinSubidang() {
           ambilPegawai.data.map((pegawai) => {
             if (
               pegawai.sub_bidang == router.query.subid &&
-              pegawai.jabatan != "THL"
+              pegawai.jabatan == "Staff"
             ) {
               if (pegawai.foto != "") {
                 setPegawai((nextData) => {
@@ -565,11 +565,19 @@ export default function CCaKinSubidang() {
   const [tampilkanCakin, setTampilkanCakin] = useState("Rows Andre");
 
   const clickPegawai = (data) => {
-    if (data == "George Olaf") {
-      setTampilkanCakin("Rows Geo");
-    } else if (data == "Andre") {
-      setTampilkanCakin("Rows Andre");
-    }
+    setDataCakin([]);
+    Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+      ambilCakin.data.map((cakin) => {
+        if (
+          moment(cakin.bulan).format("YYYY") === moment().format("YYYY") &&
+          cakin.nip == data
+        ) {
+          setDataCakin((nextData) => {
+            return [...nextData, cakin];
+          });
+        }
+      });
+    });
   };
 
   const handleChangePage = (event, newPage) => {
@@ -671,7 +679,7 @@ export default function CCaKinSubidang() {
                   <div
                     className={styles.wrapNama}
                     key={item.nip}
-                    onClick={() => clickPegawai(item.nama)}
+                    onClick={() => clickPegawai(item.nip)}
                   >
                     <div className={styles.hoverNama}>
                       {item.foto}
