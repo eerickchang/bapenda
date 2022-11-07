@@ -19,6 +19,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
+      let infoBulan: string;
 
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
 
@@ -35,6 +36,26 @@ export default function Dashboard() {
               });
             }
           });
+        });
+
+        Axios.get("http://localhost:3001/createRowCakin").then((cakin) => {
+          cakin.data.map((ambilCakin) => {
+            if (
+              moment(ambilCakin.bulan).format("YYYY") ==
+                moment().format(`YYYY`) &&
+              ambilCakin.nip == response.data.user[0].nip
+            ) {
+              infoBulan = "Yes";
+            }
+          });
+
+          if (infoBulan == "Yes") {
+            null;
+          } else {
+            Axios.post("http://localhost:3001/addBulanCakin", {
+              nip: response.data.user[0].nip,
+            });
+          }
         });
       });
 
