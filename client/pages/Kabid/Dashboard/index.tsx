@@ -127,6 +127,49 @@ export default function Dashboard() {
           }
         );
 
+        //INPUT LAMPIRAN DISUBMIT BULAN INI KE DB
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              moment(cakin.bulan).format("YYYY-MM") ==
+                moment().format("YYYY-MM") &&
+              cakin.nip == masuk.data.user[0].nip
+            ) {
+              if (cakin.lampiran_disubmit != bil.length) {
+                Axios.post("http://localhost:3001/addKegiatanS", {
+                  nip: masuk.data.user[0].nip,
+                  bulan: moment().format("YYYY-MM-01"),
+                  jumlah: bil.length,
+                });
+              } else {
+                null;
+              }
+            }
+          });
+        });
+      });
+
+      //AMBIL CAKIN BELUM DISUBMIT
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
+        Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
+          belumSubmit.data.map((belumSubmitMAP) => {
+            if (
+              moment().format("YYYY-MM") >=
+                moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
+              moment().format("YYYY-MM") ===
+                moment(belumSubmitMAP.end_date).format("YYYY-MM") &&
+              belumSubmitMAP.bidang === masuk.data.user[0].bidang
+            ) {
+              // console.log(ambilRenaksiMAP);
+              setBlmSubmit((nextData) => {
+                return [...nextData, belumSubmitMAP];
+              });
+              bil = [...bil, belumSubmitMAP];
+            }
+          });
+        });
+
         //INPUT LAMPIRAN BELUM SUBMIT BULAN INI KE DB
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
@@ -144,26 +187,6 @@ export default function Dashboard() {
               } else {
                 null;
               }
-            }
-          });
-        });
-      });
-
-      //AMBIL CAKIN BELUM DISUBMIT
-      Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
-          belumSubmit.data.map((belumSubmitMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(belumSubmitMAP.end_date).format("YYYY-MM") &&
-              belumSubmitMAP.bidang === masuk.data.user[0].bidang
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setBlmSubmit((nextData) => {
-                return [...nextData, belumSubmitMAP];
-              });
             }
           });
         });
