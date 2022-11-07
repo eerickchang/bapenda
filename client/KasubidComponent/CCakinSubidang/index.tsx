@@ -120,6 +120,7 @@ export default function CCaKinSubidang() {
     }
   }, [router.query, router.isReady]);
 
+  //
   const clickBack = () => {
     router.push({
       pathname: "/Kasubid/Profil",
