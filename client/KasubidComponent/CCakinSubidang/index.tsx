@@ -25,11 +25,12 @@ export default function CCaKinSubidang() {
   const shouldLog = useRef(true);
 
   const [dataCakin, setDataCakin] = useState([]);
-  const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
   const [image, setImage] = useState("");
   const [pegawai, setPegawai] = useState([]);
   const [titleUs, setTitleUs] = useState("");
+  const [selected, setSelected] = useState("");
+  const [year, setYear] = useState([]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -90,18 +91,32 @@ export default function CCaKinSubidang() {
             }
           });
         });
-
-        // setPortate((nextData) => {
-        //   return [
-        //     ...nextData,
-        //     { value: data.nama, label: data.nama, id: data.nip },
-        //   ];
-        // });
       });
-
-      // Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
-      //   setNama(dataAsn.data.user[0].nama);
-      // });
+      for (let i = 2020; i <= 2030; i++) {
+        setYear((nextData) => {
+          return [
+            ...nextData,
+            {
+              tahun: i,
+              onclick: () => (
+                setDataCakin([]),
+                Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+                  ambilCakin.data.map((cakin) => {
+                    if (
+                      moment(cakin.bulan).format("YYYY") ===
+                      moment(`${i}`).format("YYYY")
+                    ) {
+                      setDataCakin((nextData) => {
+                        return [...nextData, cakin];
+                      });
+                    }
+                  });
+                })
+              ),
+            },
+          ];
+        });
+      }
     }
   }, [router.query, router.isReady]);
 
@@ -109,125 +124,11 @@ export default function CCaKinSubidang() {
     router.push({
       pathname: "/Kasubid/Profil",
     });
-    // console.log(dataCakin);
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
-
-  // const pegawai = [
-  //   {
-  //     id: 1,
-  // gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Semua Pegawai",
-  //   },
-  //   {
-  //     id: 2,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Andre",
-  //   },
-  //   {
-  //     id: 3,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "George Olaf",
-  //   },
-  //   {
-  //     id: 4,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Andre",
-  //   },
-  //   {
-  //     id: 5,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Andre",
-  //   },
-  //   {
-  //     id: 6,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Andre",
-  //   },
-  //   {
-  //     id: 7,
-  //     gambar: <Image src={"/User1.svg"} width={50} height={50} />,
-  //     nama: "Andre",
-  //   },
-  // ];
-
-  const tahun = [
-    {
-      id: 6,
-      tahun: "2020",
-      onclick: () => (
-        setTahunClick("2020"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2020").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 7,
-      tahun: "2021",
-      onclick: () => (
-        setTahunClick("2021"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2021").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 8,
-      tahun: "2022",
-      onclick: () => (
-        setTahunClick("2022"),
-        setDataCakin([]),
-        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-          ambilCakin.data.map((cakin) => {
-            if (
-              moment(cakin.bulan).format("YYYY") ===
-              moment("2022").format("YYYY")
-            ) {
-              setDataCakin((nextData) => {
-                return [...nextData, cakin];
-              });
-            }
-          });
-        })
-      ),
-    },
-    {
-      id: 9,
-      tahun: "2023",
-    },
-    {
-      id: 10,
-      tahun: "2024",
-    },
-    {
-      id: 11,
-      tahun: "2025",
-    },
-  ];
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -344,234 +245,15 @@ export default function CCaKinSubidang() {
     },
   ];
 
-  const rows = [
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-01-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-02-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 5,
-      lampiran_bsubmit: 5,
-      hasil_kinerja: 50,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-03-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 9,
-      lampiran_bsubmit: 1,
-      hasil_kinerja: 90,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-04-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-05-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-06-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-07-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-08-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-09-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-10-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-11-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "Andre",
-      jabatan: "Staff",
-      bulan: "2022-12-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-  ];
-
-  const rowsGeo = [
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-01-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-02-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 5,
-      lampiran_bsubmit: 5,
-      hasil_kinerja: 50,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-03-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 9,
-      lampiran_bsubmit: 1,
-      hasil_kinerja: 90,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-04-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-05-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-06-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-07-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-08-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-09-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-10-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-11-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-    {
-      nama: "George Olaf",
-      jabatan: "Staff",
-      bulan: "2022-12-01",
-      jumlah_kegiatan: 10,
-      lampiran_disubmit: 3,
-      lampiran_bsubmit: 7,
-      hasil_kinerja: 30,
-    },
-  ];
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [tampilkanCakin, setTampilkanCakin] = useState("Rows Andre");
 
+  const tahun = () => {};
+
   const clickPegawai = (data) => {
     setDataCakin([]);
+    setSelected(data);
 
     Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
       ambilPegawai.data.map((pegawai_us) => {
@@ -713,6 +395,7 @@ export default function CCaKinSubidang() {
           </div>
 
           <div className={styles.wrapperFilterTahun}>
+            {selected != null ? console.log("Oke") : console.log("Mantap")}
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -723,10 +406,12 @@ export default function CCaKinSubidang() {
             {activeDropdownTahun && (
               <div
                 className={styles.wrapperSelectFilterTahun}
-                onClick={() => setActiveDropdownTahun(false)}
+                onClick={() => {
+                  setActiveDropdownTahun(false);
+                }}
               >
-                {tahun.map((item) => (
-                  <p key={item.id} onClick={item.onclick}>
+                {year.map((item) => (
+                  <p key={item.tahun} onClick={item.onclick}>
                     {item.tahun}
                   </p>
                 ))}
