@@ -92,35 +92,9 @@ export default function CCaKinSubidang() {
           });
         });
       });
-      for (let i = 2020; i <= 2030; i++) {
-        setYear((nextData) => {
-          return [
-            ...nextData,
-            {
-              tahun: i,
-              onclick: () => (
-                setDataCakin([]),
-                Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-                  ambilCakin.data.map((cakin) => {
-                    if (
-                      moment(cakin.bulan).format("YYYY") ===
-                      moment(`${i}`).format("YYYY")
-                    ) {
-                      setDataCakin((nextData) => {
-                        return [...nextData, cakin];
-                      });
-                    }
-                  });
-                })
-              ),
-            },
-          ];
-        });
-      }
     }
   }, [router.query, router.isReady]);
 
-  //
   const clickBack = () => {
     router.push({
       pathname: "/Kasubid/Profil",
@@ -377,13 +351,46 @@ export default function CCaKinSubidang() {
             {activeDropdownPegawai && (
               <div
                 className={styles.wrapperSelectFilterPegawai}
-                onClick={() => setActiveDropdownPegawai(false)}
+                onClick={() => {
+                  setActiveDropdownPegawai(false);
+                }}
               >
                 {pegawai.map((item) => (
                   <div
                     className={styles.wrapNama}
                     key={item.nip}
-                    onClick={() => clickPegawai(item.nip)}
+                    onClick={() => {
+                      setYear([]);
+                      clickPegawai(item.nip);
+                      for (let i = 2020; i <= 2030; i++) {
+                        setYear((nextData) => {
+                          return [
+                            ...nextData,
+                            {
+                              tahun: i,
+                              onclick: () => (
+                                setDataCakin([]),
+                                Axios.get("http://localhost:3001/cakin").then(
+                                  (ambilCakin) => {
+                                    ambilCakin.data.map((cakin) => {
+                                      if (
+                                        moment(cakin.bulan).format("YYYY") ===
+                                          moment(`${i}`).format("YYYY") &&
+                                        cakin.nip == item.nip
+                                      ) {
+                                        setDataCakin((nextData) => {
+                                          return [...nextData, cakin];
+                                        });
+                                      }
+                                    });
+                                  }
+                                )
+                              ),
+                            },
+                          ];
+                        });
+                      }
+                    }}
                   >
                     <div className={styles.hoverNama}>
                       {item.foto}
@@ -396,7 +403,6 @@ export default function CCaKinSubidang() {
           </div>
 
           <div className={styles.wrapperFilterTahun}>
-            {selected != null ? console.log("Oke") : console.log("Mantap")}
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
