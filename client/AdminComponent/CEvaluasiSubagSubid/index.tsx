@@ -20,11 +20,12 @@ import FileDownload from "js-file-download";
 import Modal from "react-modal";
 import { Checkbox } from "@mui/material";
 import { useRouter } from "next/router";
+import { CtnMasukRegister } from "../../KasubidComponent";
 
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
-  const { row, stateChanger, subid, nip_kasubid } = props;
+  const { row, stateChanger, subid, nip_kasubid, bidang } = props;
   const [open, setOpen] = React.useState(false);
   const [ketAdmin, setKetAdmin] = useState("");
 
@@ -104,12 +105,19 @@ function Row(props) {
     //     }
     //   });
     // });
-    Axios.post("http://localhost:3001/adminMenerimaRenaksiSelesai", {
-      idRenaksi: row.id_renaksi,
-      ketAdmin: ketAdmin,
-      nip: row.nip,
-      bulan: moment(row.end_date).format("YYYY-MM-01"),
-      nip_kasubid: nip_kasubid,
+    Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+      ambilPegawai.data.map((pegawai) => {
+        if (pegawai.bidang == bidang && pegawai.jabatan == "Kabid") {
+          Axios.post("http://localhost:3001/adminMenerimaRenaksiSelesai", {
+            idRenaksi: row.id_renaksi,
+            ketAdmin: ketAdmin,
+            nip: row.nip,
+            bulan: moment(row.end_date).format("YYYY-MM-01"),
+            nip_kasubid: nip_kasubid,
+            nip_kabid: pegawai.nip,
+          });
+        }
+      });
     });
 
     stateChanger([]);
@@ -521,6 +529,7 @@ export const CEvaluasiSubagSubid = () => {
                       stateChanger={setPegawai}
                       subid={router.query.subid}
                       nip_kasubid={router.query.nip_kasubid}
+                      bidang={router.query.bidang}
                     />
                   ))}
                 </TableBody>

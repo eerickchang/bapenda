@@ -301,6 +301,7 @@ function Row(props) {
       query: {
         subid: row.sub_bidang,
         nip_kasubid: row.nip,
+        bidang: row.bidang,
       },
     });
   };
