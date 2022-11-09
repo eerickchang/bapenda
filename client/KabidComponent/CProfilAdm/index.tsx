@@ -171,22 +171,6 @@ export default function CProfilAdm() {
     ],
   };
 
-  const bidangChart5 = {
-    labels: UserData?.map((data) => data.bulan),
-    datasets: [
-      {
-        label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BDDBB"],
-        borderRadius: 10,
-        barThickness: 40,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
-      },
-    ],
-  };
-
   const donatChart1 = {
     labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
@@ -239,27 +223,7 @@ export default function CProfilAdm() {
     ],
   };
 
-  const donatChart5 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
-    datasets: [
-      {
-        label: "GAS",
-        data: [90, 10],
-        backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
-        borderWidth: 1,
-        barThickness: 30,
-      },
-    ],
-  };
-
   const router = useRouter();
-  const clickLihatDetail = () => {
-    router.push("/Staff/DetailCaKin");
-  };
-
-  const clickSekretaris = () => {
-    console.log("Oke");
-  };
 
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {

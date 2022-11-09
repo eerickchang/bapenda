@@ -34,6 +34,7 @@
 }
 
 .barContainer1 {
+  cursor: pointer;
   position: static;
   width: 1222px;
   height: 300px;
@@ -48,6 +49,7 @@
 }
 
 .barContainer2 {
+  cursor: pointer;
   position: static;
   width: 1222px;
   height: 300px;
@@ -62,6 +64,7 @@
 }
 
 .barContainer3 {
+  cursor: pointer;
  position: static;
   width: 1222px;
   height: 300px;
@@ -77,6 +80,7 @@
 }
 
 .barContainer4 {
+  cursor: pointer;
  position: static;
   width: 1222px;
   height: 300px;
