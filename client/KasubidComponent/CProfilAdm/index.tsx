@@ -82,6 +82,7 @@ export default function CProfilAdm() {
                     totRealisasiBid = totRealisasiBid + cakin.lampiran_diterima;
                   }
                 });
+                //
 
                 let hasil = (totRealisasiBid / totJlhKegiatanBid) * 100;
                 console.log(hasil);
