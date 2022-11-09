@@ -21,6 +21,7 @@ export default function CProfilAdm() {
   const [persen, setPersen] = useState(0);
   const [persenBid, setPersenBid] = useState(0);
   const [subid, setSubid] = useState("");
+  const [bidang, setBidang] = useState("");
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
   let totJlhKegiatanBid = 0;
@@ -37,6 +38,7 @@ export default function CProfilAdm() {
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setDataAsn(response.data.user[0]);
         setSubid(response.data.user[0].sub_bidang);
+        setBidang(response.data.user[0].bidang);
 
         //AMBIL DATA CAKIN SUB BIDANG
         Axios.get("http://localhost:3001/cakin").then((result) => {
@@ -82,7 +84,6 @@ export default function CProfilAdm() {
                     totRealisasiBid = totRealisasiBid + cakin.lampiran_diterima;
                   }
                 });
-                //
 
                 let hasil = (totRealisasiBid / totJlhKegiatanBid) * 100;
                 console.log(hasil);
@@ -182,7 +183,7 @@ export default function CProfilAdm() {
         {/* BIDANG */}
         {persenBid != 0 ? (
           <div className={styles.barContainer1}>
-            <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
+            <p className={styles.txtBidang}>{bidang}</p>
             <div className={styles.mainBarWrapper1}>
               <div className={styles.barWrapper1}>
                 <BarChart chartData={bidangChart1} />
