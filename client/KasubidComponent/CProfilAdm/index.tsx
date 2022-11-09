@@ -13,6 +13,7 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikSubid, setGrafikSubid] = useState([]);
+  const [grafikBidang, setGrafikBidang] = useState([]);
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
   const [persen, setPersen] = useState(0);
@@ -32,6 +33,7 @@ export default function CProfilAdm() {
         setDataAsn(response.data.user[0]);
         setSubid(response.data.user[0].sub_bidang);
 
+        //AMBIL DATA CAKIN SUB BIDANG
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -51,79 +53,40 @@ export default function CProfilAdm() {
           setBlmRealisasi(totJlhKegiatan - totRealisasi);
           setRealisasiKeg(totRealisasi);
         });
+
+        //AMBIL DATA CAKIN BIDANG
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.bidang == response.data.user[0].bidang &&
+              pegawai.jabatan == "Kabid"
+            ) {
+              Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+                ambilCakin.data.map((cakin) => {
+                  if (
+                    moment(cakin.bulan).format("YYYY") ===
+                      moment().format("YYYY") &&
+                    cakin.nip == pegawai.nip
+                  ) {
+                    setGrafikBidang((nextData) => {
+                      return [...nextData, cakin];
+                    });
+                  }
+                });
+              });
+            }
+          });
+        });
       });
     }
   }, []);
 
-  const UserData = [
-    {
-      id: 1,
-      kinerja: 90,
-      bulan: "Jan",
-    },
-    {
-      id: 2,
-      kinerja: 100,
-      bulan: "Feb",
-    },
-    {
-      id: 3,
-      kinerja: 80,
-      bulan: "Mar",
-    },
-    {
-      id: 4,
-      kinerja: 80,
-      bulan: "Apr",
-    },
-    {
-      id: 5,
-      kinerja: 90,
-      bulan: "Mei",
-    },
-    {
-      id: 6,
-      kinerja: 100,
-      bulan: "Jun",
-    },
-    {
-      id: 7,
-      kinerja: 90,
-      bulan: "Jul",
-    },
-    {
-      id: 8,
-      kinerja: 90,
-      bulan: "Agu",
-    },
-    {
-      id: 9,
-      kinerja: 100,
-      bulan: "Sep",
-    },
-    {
-      id: 10,
-      kinerja: 80,
-      bulan: "Okt",
-    },
-    {
-      id: 11,
-      kinerja: 90,
-      bulan: "Nov",
-    },
-    {
-      id: 12,
-      kinerja: 100,
-      bulan: "Des",
-    },
-  ];
-
   const bidangChart1 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikBidang?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikBidang?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         barThickness: 40,
@@ -244,7 +207,7 @@ export default function CProfilAdm() {
             onClick={clickCakinBidang}
             style={{ cursor: "pointer" }}
           >
-            <p className={styles.txtBidang}>PENGEMBANGAN TEKNOLOGI</p>
+            <p className={styles.txtBidang}>{subid}</p>
             <div className={styles.mainBarWrapper1}>
               <div className={styles.barWrapper1}>
                 <BarChart chartData={bidangChart3} />

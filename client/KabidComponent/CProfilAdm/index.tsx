@@ -13,6 +13,7 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [subid, setSubid] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -36,6 +37,19 @@ export default function CProfilAdm() {
             ) {
               setGrafikPersonal((nextData) => {
                 return [...nextData, item];
+              });
+            }
+          });
+        });
+
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.bidang == response.data.user[0].bidang &&
+              pegawai.jabatan == "Kasubid"
+            ) {
+              setSubid((nextData) => {
+                return [...nextData, pegawai];
               });
             }
           });
@@ -227,15 +241,16 @@ export default function CProfilAdm() {
 
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {
-      router.push({
-        pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Sekretaris",
-        //   subid1: "Hukum dan Kepegawaian",
-        //   subid2: "Perencanaan dan Keuangan",
-        //   subid3: "Umum",
-        // },
-      });
+      console.log(subid);
+      // router.push({
+      //   pathname: "/Kabid/CakinSubidang",
+      //   // query: {
+      //   //   bidang: "Sekretaris",
+      //   //   subid1: "Hukum dan Kepegawaian",
+      //   //   subid2: "Perencanaan dan Keuangan",
+      //   //   subid3: "Umum",
+      //   // },
+      // });
     } else if (bidang == "Pengelolaan Pendapatan Daerah") {
       router.push({
         pathname: "/Kabid/CakinSubidang",
