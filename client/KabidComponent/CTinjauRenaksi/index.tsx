@@ -71,37 +71,39 @@ function Row(props) {
     }, 2000);
 
     stateChange([]);
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
-          (ambilRenaksi) => {
-            let bidangUserSDKabid = [];
-            let pegawaiYgAdaRenaksi = [];
-            let userLoggedIn = masuk.data.user;
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
 
-            bidangUserSDKabid = kasubid.filter((elA) => {
-              return userLoggedIn.some(
-                (elB) => elA["bidang"] === elB["bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChange((nextData) => {
-                return [item, ...nextData];
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
               });
-            });
-          }
-        );
+
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+            }
+          );
+        });
       });
-    }, 200);
+    }, 30);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA
@@ -276,20 +278,19 @@ function Row(props) {
       query: { sub_bidang: row.sub_bidang },
     });
   };
-  
-    const style1 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 600,
-      color: "#000",
-    };
-    const style2 = {
-      fontFamily: "Poppins",
-      fontSize: 18,
-      fontWeight: 400,
-      color: "#000",
-    };
 
+  const style1 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+  };
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+  };
 
   return (
     <>
@@ -453,13 +454,12 @@ export default function CTinjauRenaksi() {
 
   const [showModal, setShowModal] = useState(false);
 
-
-    const style = {
-      fontFamily: "Poppins",
-      fontSize: 17,
-      fontWeight: 600,
-      color: "#959595",
-    };
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 17,
+    fontWeight: 600,
+    color: "#959595",
+  };
 
   return (
     <>
@@ -470,7 +470,10 @@ export default function CTinjauRenaksi() {
               <div>
                 <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}> TINJAU RENAKSI </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+                {" "}
+                TINJAU RENAKSI{" "}
+              </p>
             </div>
             <Gap height={88} width={0} />
             <p className={stylesS.titleBidang}>Bidang {bidang}</p>
