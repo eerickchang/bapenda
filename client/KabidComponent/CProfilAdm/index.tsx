@@ -17,6 +17,7 @@ export default function CProfilAdm() {
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
   const [persen, setPersen] = useState(0);
+  const [bidang, setBidang] = useState("");
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
 
@@ -34,7 +35,7 @@ export default function CProfilAdm() {
 
       //AMBIL CAKIN KABID
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
+        setBidang(response.data.user[0].bidang);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -255,7 +256,7 @@ export default function CProfilAdm() {
 
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {
-      console.log(subid);
+      console.log(subid[0].sub_bidang);
       // router.push({
       //   pathname: "/Kabid/CakinSubidang",
       //   // query: {
@@ -316,7 +317,7 @@ export default function CProfilAdm() {
               clickCakinBidang("Perencanaan dan Pengembangan");
             }}
           >
-            <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
+            <p className={styles.txtBidang}>{bidang}</p>
             <div className={styles.mainBarWrapper1}>
               <div className={styles.barWrapper1}>
                 <BarChart chartData={bidangChart1} />
@@ -335,7 +336,7 @@ export default function CProfilAdm() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -343,7 +344,7 @@ export default function CProfilAdm() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -357,7 +358,7 @@ export default function CProfilAdm() {
             clickCakinBidang("Perencanaan dan Pengembangan");
           }}
         >
-          <p className={styles.txtBidang}>PENGELOLAAN PENDAPATAN DAERAH</p>
+          <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart2} />
@@ -397,7 +398,7 @@ export default function CProfilAdm() {
             clickCakinBidang("Pengembangan Teknologi");
           }}
         >
-          <p className={styles.txtBidang}>PENGEMBANGAN TEKNOLOGI</p>
+          <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart3} />
@@ -437,7 +438,7 @@ export default function CProfilAdm() {
             clickCakinBidang("Pelaporan Data Pendapatan");
           }}
         >
-          <p className={styles.txtBidang}>PELAPORAN DATA PENDAPATAN</p>
+          <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
           <div className={styles.mainBarWrapper1}>
             <div className={styles.barWrapper1}>
               <BarChart chartData={bidangChart4} />
