@@ -234,11 +234,11 @@ export default function CProfilAdm() {
   };
 
   const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid3?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid3?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
