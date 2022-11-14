@@ -13,11 +13,13 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [grafikSubid, setGrafikSubid] = useState([]);
   const [subid, setSubid] = useState([]);
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
   const [persen, setPersen] = useState(0);
   const [bidang, setBidang] = useState("");
+  let cakinKasubid = [];
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
 
@@ -65,6 +67,26 @@ export default function CProfilAdm() {
             ) {
               setSubid((nextData) => {
                 return [...nextData, pegawai];
+              });
+
+              //AMBIL CAKIN KASUBID
+              Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+                ambilCakin.data.map((cakin) => {
+                  if (
+                    pegawai.nip == cakin.nip &&
+                    moment(cakin.bulan).format("YYYY") ===
+                      moment().format("YYYY")
+                  ) {
+                    setGrafikSubid((nextData) => {
+                      return [...nextData, cakin];
+                    });
+                    cakinKasubid = [...cakinKasubid, cakin];
+                    totJlhKegiatan = totJlhKegiatan + cakin.jumlah_kegiatan;
+                    totRealisasi = totRealisasi + cakin.lampiran_diterima;
+                  }
+                });
+                console.log(totJlhKegiatan);
+                console.log(cakinKasubid);
               });
             }
           });
@@ -256,7 +278,8 @@ export default function CProfilAdm() {
 
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {
-      console.log(subid[0].sub_bidang);
+      // console.log(subid[0].sub_bidang);
+      console.log(grafikSubid);
       // router.push({
       //   pathname: "/Kabid/CakinSubidang",
       //   // query: {
@@ -310,6 +333,7 @@ export default function CProfilAdm() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
+
         {persen != 0 ? (
           <div
             className={styles.barContainer1}
@@ -352,166 +376,135 @@ export default function CProfilAdm() {
             </div>
           </div>
         ) : null}
-        <div
-          className={styles.barContainer2}
-          onClick={() => {
-            clickCakinBidang("Perencanaan dan Pengembangan");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart2} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart2} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+
+        {subid.length != 0 ? (
+          <div
+            className={styles.barContainer2}
+            onClick={() => {
+              clickCakinBidang("Perencanaan dan Pengembangan");
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart2} />
               </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart2} />
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className={styles.barContainer3}
-          onClick={() => {
-            clickCakinBidang("Pengembangan Teknologi");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart3} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart3} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} width={0} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className={styles.barContainer4}
-          onClick={() => {
-            clickCakinBidang("Pelaporan Data Pendapatan");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart4} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart4} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+        ) : null}
+
+        {subid.length != 0 ? (
+          <div
+            className={styles.barContainer3}
+            onClick={() => {
+              clickCakinBidang("Pengembangan Teknologi");
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart3} />
               </div>
-              <Gap height={20} width={0} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart3} />
               </div>
-            </div>
-          </div>
-        </div>
-        {/* <div
-          className={styles.barContainer5}
-          onClick={() => {
-            clickCakinBidang("Pengendalian dan Evaluasi");
-          }}
-        >
-          <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart5} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart5} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} width={0} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> */}
+        ) : null}
+
+        {subid.length != 0 ? (
+          <div
+            className={styles.barContainer4}
+            onClick={() => {
+              clickCakinBidang("Pelaporan Data Pendapatan");
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart4} />
+              </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart4} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} width={0} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
       <div className={styles.contentKanan}>
         <ProfileKanan

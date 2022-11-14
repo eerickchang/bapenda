@@ -301,13 +301,27 @@ export default function CTinjauRenaksiPegawai() {
                 <TableHead>
                   <TableRow>
                     <TableCell width={100} sx={styleHeader}></TableCell>
-                    <TableCell width={350} sx={styleHeader}>Program</TableCell>
-                    <TableCell width={350} sx={styleHeader}>THL</TableCell>
-                    <TableCell width={350} sx={styleHeader}>Kegiatan</TableCell>
-                    <TableCell width={350} sx={styleHeader}>Sub Kegiatan</TableCell>
-                    <TableCell width={350} sx={styleHeader}>Tupoksi Inti</TableCell>
-                    <TableCell width={350} sx={styleHeader}>Tupoksi Tambahan</TableCell>
-                    <TableCell width={350} sx={styleHeader}>Rencana</TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Program
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      THL
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Kegiatan
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Sub Kegiatan
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Tupoksi Inti
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Tupoksi Tambahan
+                    </TableCell>
+                    <TableCell width={350} sx={styleHeader}>
+                      Rencana
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
