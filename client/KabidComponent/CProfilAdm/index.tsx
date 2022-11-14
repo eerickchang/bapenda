@@ -13,7 +13,10 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
-  const [grafikSubid, setGrafikSubid] = useState([]);
+  const [grafikSubid1, setGrafikSubid1] = useState([]);
+  const [grafikSubid2, setGrafikSubid2] = useState([]);
+  const [grafikSubid3, setGrafikSubid3] = useState([]);
+
   const [subid, setSubid] = useState([]);
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
@@ -59,6 +62,7 @@ export default function CProfilAdm() {
         });
 
         //AMBIL KASUBID
+        let kasubidArr = [];
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
           ambilPegawai.data.map((pegawai) => {
             if (
@@ -68,27 +72,50 @@ export default function CProfilAdm() {
               setSubid((nextData) => {
                 return [...nextData, pegawai];
               });
-
-              //AMBIL CAKIN KASUBID
-              Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-                ambilCakin.data.map((cakin) => {
-                  if (
-                    pegawai.nip == cakin.nip &&
-                    moment(cakin.bulan).format("YYYY") ===
-                      moment().format("YYYY")
-                  ) {
-                    setGrafikSubid((nextData) => {
-                      return [...nextData, cakin];
-                    });
-                    cakinKasubid = [...cakinKasubid, cakin];
-                    totJlhKegiatan = totJlhKegiatan + cakin.jumlah_kegiatan;
-                    totRealisasi = totRealisasi + cakin.lampiran_diterima;
-                  }
-                });
-                console.log(totJlhKegiatan);
-                console.log(cakinKasubid);
-              });
+              kasubidArr = [...kasubidArr, pegawai];
             }
+          });
+
+          //AMBIL CAKIN KASUBID 1
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[0].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid1((nextData) => {
+                  return [...nextData, cakin];
+                });
+              }
+            });
+          });
+
+          //AMBIL CAKIN KASUBID 2
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[1].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid2((nextData) => {
+                  return [...nextData, cakin];
+                });
+              }
+            });
+          });
+
+          //AMBIL CAKIN KASUBID 3
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[2].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid3((nextData) => {
+                  return [...nextData, cakin];
+                });
+              }
+            });
           });
         });
       });
@@ -175,11 +202,11 @@ export default function CProfilAdm() {
   };
 
   const bidangChart2 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid1?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid1?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
@@ -279,7 +306,7 @@ export default function CProfilAdm() {
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {
       // console.log(subid[0].sub_bidang);
-      console.log(grafikSubid);
+      console.log(grafikSubid3);
       // router.push({
       //   pathname: "/Kabid/CakinSubidang",
       //   // query: {
