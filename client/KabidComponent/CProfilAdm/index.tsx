@@ -20,11 +20,18 @@ export default function CProfilAdm() {
   const [subid, setSubid] = useState([]);
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
+  const [realisasiKegSub, setRealisasiKegSub] = useState([]);
+  const [blmRealisasiSub, setBlmRealisasiSub] = useState([]);
+
   const [persen, setPersen] = useState(0);
+  const [persenSub, setPersenSub] = useState([]);
   const [bidang, setBidang] = useState("");
   let cakinKasubid = [];
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
+
+  let totRealisasiSub = [0, 0, 0];
+  let totJlhKegiatanSub = [0, 0, 0];
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -86,7 +93,29 @@ export default function CProfilAdm() {
                 setGrafikSubid1((nextData) => {
                   return [...nextData, cakin];
                 });
+
+                totJlhKegiatanSub[0] =
+                  totJlhKegiatanSub[0] + cakin.jumlah_kegiatan;
+                totRealisasiSub[0] =
+                  totRealisasiSub[0] + cakin.lampiran_diterima;
               }
+            });
+
+            let hasil = (totRealisasiSub[0] / totJlhKegiatanSub[0]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[0] - totRealisasiSub[0];
+            let realisasi = Math.trunc(totRealisasiSub[0]);
+            console.log(realisasi);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
             });
           });
 
@@ -121,69 +150,6 @@ export default function CProfilAdm() {
       });
     }
   }, []);
-
-  const UserData = [
-    {
-      id: 1,
-      kinerja: 90,
-      bulan: "Jan",
-    },
-    {
-      id: 2,
-      kinerja: 100,
-      bulan: "Feb",
-    },
-    {
-      id: 3,
-      kinerja: 80,
-      bulan: "Mar",
-    },
-    {
-      id: 4,
-      kinerja: 80,
-      bulan: "Apr",
-    },
-    {
-      id: 5,
-      kinerja: 90,
-      bulan: "Mei",
-    },
-    {
-      id: 6,
-      kinerja: 100,
-      bulan: "Jun",
-    },
-    {
-      id: 7,
-      kinerja: 90,
-      bulan: "Jul",
-    },
-    {
-      id: 8,
-      kinerja: 90,
-      bulan: "Agu",
-    },
-    {
-      id: 9,
-      kinerja: 100,
-      bulan: "Sep",
-    },
-    {
-      id: 10,
-      kinerja: 80,
-      bulan: "Okt",
-    },
-    {
-      id: 11,
-      kinerja: 90,
-      bulan: "Nov",
-    },
-    {
-      id: 12,
-      kinerja: 100,
-      bulan: "Des",
-    },
-  ];
 
   const bidangChart1 = {
     labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
@@ -267,7 +233,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[0]}`, `${blmRealisasiSub[0]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -306,7 +272,7 @@ export default function CProfilAdm() {
   const clickCakinBidang = (bidang) => {
     if (bidang == "Perencanaan dan Pengembangan") {
       // console.log(subid[0].sub_bidang);
-      console.log(grafikSubid3);
+      console.log(persenSub);
       // router.push({
       //   pathname: "/Kabid/CakinSubidang",
       //   // query: {
@@ -424,7 +390,7 @@ export default function CProfilAdm() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart2} />
+                <DoughnutChart data={donatChart2} txtTitle={persenSub[0]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
