@@ -164,7 +164,29 @@ export default function CProfilAdm() {
                 setGrafikSubid3((nextData) => {
                   return [...nextData, cakin];
                 });
+
+                totJlhKegiatanSub[2] =
+                  totJlhKegiatanSub[2] + cakin.jumlah_kegiatan;
+                totRealisasiSub[2] =
+                  totRealisasiSub[2] + cakin.lampiran_diterima;
               }
+            });
+
+            let hasil = (totRealisasiSub[2] / totJlhKegiatanSub[2]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[2] - totRealisasiSub[2];
+            let realisasi = Math.trunc(totRealisasiSub[2]);
+            console.log(hasil);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
             });
           });
         });
@@ -280,7 +302,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[2]}`, `${blmRealisasiSub[2]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -481,7 +503,7 @@ export default function CProfilAdm() {
         ) : null}
 
         {/* BAR CHART SUBID 3 */}
-        {subid.length != 0 ? (
+        {subid.length != 0 && persenSub[2] != null ? (
           <div
             className={styles.barContainer4}
             onClick={() => {
@@ -501,7 +523,7 @@ export default function CProfilAdm() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart4} />
+                <DoughnutChart data={donatChart4} txtTitle={persenSub[2]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
