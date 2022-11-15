@@ -104,7 +104,6 @@ export default function CProfilAdm() {
             let hasil = (totRealisasiSub[0] / totJlhKegiatanSub[0]) * 100;
             let blmRealisasi = totJlhKegiatanSub[0] - totRealisasiSub[0];
             let realisasi = Math.trunc(totRealisasiSub[0]);
-            console.log(realisasi);
 
             setPersenSub((nextData) => {
               return [...nextData, Math.trunc(hasil)];
@@ -129,7 +128,29 @@ export default function CProfilAdm() {
                 setGrafikSubid2((nextData) => {
                   return [...nextData, cakin];
                 });
+
+                totJlhKegiatanSub[1] =
+                  totJlhKegiatanSub[1] + cakin.jumlah_kegiatan;
+                totRealisasiSub[1] =
+                  totRealisasiSub[1] + cakin.lampiran_diterima;
               }
+            });
+
+            let hasil = (totRealisasiSub[1] / totJlhKegiatanSub[1]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[1] - totRealisasiSub[1];
+            let realisasi = Math.trunc(totRealisasiSub[1]);
+            console.log(hasil);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
             });
           });
 
@@ -246,7 +267,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[1]}`, `${blmRealisasiSub[1]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -327,6 +348,7 @@ export default function CProfilAdm() {
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
 
+        {/* BAR CHART BIDANG */}
         {persen != 0 ? (
           <div
             className={styles.barContainer1}
@@ -370,6 +392,7 @@ export default function CProfilAdm() {
           </div>
         ) : null}
 
+        {/* BAR CHART SUBID 1 */}
         {subid.length != 0 ? (
           <div
             className={styles.barContainer2}
@@ -413,7 +436,8 @@ export default function CProfilAdm() {
           </div>
         ) : null}
 
-        {subid.length != 0 ? (
+        {/* BAR CHART SUBID 2 */}
+        {subid.length != 0 && persenSub[1] != null ? (
           <div
             className={styles.barContainer3}
             onClick={() => {
@@ -433,7 +457,7 @@ export default function CProfilAdm() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart3} />
+                <DoughnutChart data={donatChart3} txtTitle={persenSub[1]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
@@ -456,6 +480,7 @@ export default function CProfilAdm() {
           </div>
         ) : null}
 
+        {/* BAR CHART SUBID 3 */}
         {subid.length != 0 ? (
           <div
             className={styles.barContainer4}
