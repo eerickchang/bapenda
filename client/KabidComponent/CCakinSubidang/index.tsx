@@ -53,8 +53,21 @@ export default function CCaKinSubidang() {
           });
         });
 
-        setPegawai((nextData) => {
-          return [...nextData, { nama: "Semua Pegawai", nip: 141 }];
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.sub_bidang == router.query.subid &&
+              pegawai.jabatan == "Kasubid"
+            ) {
+              console.log(pegawai);
+              setPegawai((nextData) => {
+                return [
+                  ...nextData,
+                  { nama: "Semua Pegawai", nip: pegawai.nip },
+                ];
+              });
+            }
+          });
         });
 
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
@@ -335,7 +348,7 @@ export default function CCaKinSubidang() {
             <Image src={"/DetailCakin.svg"} width={50} height={40} />
           </div>
           <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Detail Capaian Kinerja - {titleUs}
+            Detail Capaian Kinerja - {router.query.nama}
           </p>
         </div>
 
