@@ -139,7 +139,6 @@ export default function CProfilAdm() {
             let hasil = (totRealisasiSub[1] / totJlhKegiatanSub[1]) * 100;
             let blmRealisasi = totJlhKegiatanSub[1] - totRealisasiSub[1];
             let realisasi = Math.trunc(totRealisasiSub[1]);
-            console.log(hasil);
 
             setPersenSub((nextData) => {
               return [...nextData, Math.trunc(hasil)];
@@ -175,7 +174,6 @@ export default function CProfilAdm() {
             let hasil = (totRealisasiSub[2] / totJlhKegiatanSub[2]) * 100;
             let blmRealisasi = totJlhKegiatanSub[2] - totRealisasiSub[2];
             let realisasi = Math.trunc(totRealisasiSub[2]);
-            console.log(hasil);
 
             setPersenSub((nextData) => {
               return [...nextData, Math.trunc(hasil)];
@@ -312,48 +310,41 @@ export default function CProfilAdm() {
 
   const router = useRouter();
 
-  const clickCakinBidang = (bidang) => {
-    if (bidang == "Perencanaan dan Pengembangan") {
-      // console.log(subid[0].sub_bidang);
-      console.log(persenSub);
-      // router.push({
-      //   pathname: "/Kabid/CakinSubidang",
-      //   // query: {
-      //   //   bidang: "Sekretaris",
-      //   //   subid1: "Hukum dan Kepegawaian",
-      //   //   subid2: "Perencanaan dan Keuangan",
-      //   //   subid3: "Umum",
-      //   // },
-      // });
-    } else if (bidang == "Pengelolaan Pendapatan Daerah") {
+  const clickCakinBidang = (bidangParams) => {
+    if (bidangParams == bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Perencanaan dan Pengembangan",
-        //   subid1: "Pengelolaan Pendapatan Daerah",
-        //   subid2: "Pengembangan Teknologi",
-        //   subid3: "Pelaporan Data Pendapatan",
-        // },
+        query: {
+          bidang: bidang,
+          nama: bidang,
+        },
       });
-    } else if (bidang == "Pengembangan Teknologi") {
+    } else if (bidangParams == subid[0].sub_bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Retribusi dan Lain-lain Pendapatan",
-        //   subid1: "Retribusi",
-        //   subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-        //   subid3: "Lain-lain Pendapatan",
-        // },
+        query: {
+          bidang: bidang,
+          subid: subid[0].sub_bidang,
+          nama: subid[0].sub_bidang,
+        },
       });
-    } else if (bidang == "Pelaporan Data Pendapatan") {
+    } else if (bidangParams == subid[1].sub_bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Pajak Daerah",
-        //   subid1: "Administrasi dan Pelayanan Pajak",
-        //   subid2: "PKB dan BBN-KB",
-        //   subid3: "PBBKB, PAP dan Pajak Rokok",
-        // },
+        query: {
+          bidang: bidang,
+          subid: subid[1].sub_bidang,
+          nama: subid[1].sub_bidang,
+        },
+      });
+    } else if (bidangParams == subid[2].sub_bidang) {
+      router.push({
+        pathname: "/Kabid/CakinSubidang",
+        query: {
+          bidang: bidang,
+          subid: subid[2].sub_bidang,
+          nama: subid[2].sub_bidang,
+        },
       });
     }
   };
@@ -415,11 +406,11 @@ export default function CProfilAdm() {
         ) : null}
 
         {/* BAR CHART SUBID 1 */}
-        {subid.length != 0 ? (
+        {subid.length != 0 && persenSub[0] != null ? (
           <div
             className={styles.barContainer2}
             onClick={() => {
-              clickCakinBidang("Perencanaan dan Pengembangan");
+              clickCakinBidang(subid[0].sub_bidang);
             }}
           >
             <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
@@ -463,7 +454,7 @@ export default function CProfilAdm() {
           <div
             className={styles.barContainer3}
             onClick={() => {
-              clickCakinBidang("Pengembangan Teknologi");
+              clickCakinBidang(subid[1].sub_bidang);
             }}
           >
             <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
@@ -507,7 +498,7 @@ export default function CProfilAdm() {
           <div
             className={styles.barContainer4}
             onClick={() => {
-              clickCakinBidang("Pelaporan Data Pendapatan");
+              clickCakinBidang(subid[2].sub_bidang);
             }}
           >
             <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
