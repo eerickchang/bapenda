@@ -40,11 +40,12 @@ export default function CCaKinSubidang() {
       setTitleUs(router.query.subid);
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setImage(masuk.data.user[0].foto);
+
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
             if (
               moment(cakin.bulan).format("YYYY") === moment().format("YYYY") &&
-              cakin.nip == masuk.data.user[0].nip
+              cakin.nip == router.query.nipKasub
             ) {
               setDataCakin((nextData) => {
                 return [...nextData, cakin];
@@ -53,21 +54,11 @@ export default function CCaKinSubidang() {
           });
         });
 
-        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
-          ambilPegawai.data.map((pegawai) => {
-            if (
-              pegawai.sub_bidang == router.query.subid &&
-              pegawai.jabatan == "Kasubid"
-            ) {
-              console.log(pegawai);
-              setPegawai((nextData) => {
-                return [
-                  ...nextData,
-                  { nama: "Semua Pegawai", nip: pegawai.nip },
-                ];
-              });
-            }
-          });
+        setPegawai((nextData) => {
+          return [
+            ...nextData,
+            { nama: "Semua Pegawai", nip: router.query.nipKasub },
+          ];
         });
 
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {

@@ -317,6 +317,7 @@ export default function CProfilAdm() {
         query: {
           bidang: bidang,
           nama: bidang,
+          nipKasub: dataAsn.nip,
         },
       });
     } else if (bidangParams == subid[0].sub_bidang) {
@@ -326,6 +327,7 @@ export default function CProfilAdm() {
           bidang: bidang,
           subid: subid[0].sub_bidang,
           nama: subid[0].sub_bidang,
+          nipKasub: subid[0].nip,
         },
       });
     } else if (bidangParams == subid[1].sub_bidang) {
@@ -335,6 +337,7 @@ export default function CProfilAdm() {
           bidang: bidang,
           subid: subid[1].sub_bidang,
           nama: subid[1].sub_bidang,
+          nipKasub: subid[1].nip,
         },
       });
     } else if (bidangParams == subid[2].sub_bidang) {
@@ -344,6 +347,7 @@ export default function CProfilAdm() {
           bidang: bidang,
           subid: subid[2].sub_bidang,
           nama: subid[2].sub_bidang,
+          nipKasub: subid[2].nip,
         },
       });
     }
