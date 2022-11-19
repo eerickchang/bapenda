@@ -37,7 +37,7 @@ export default function CCaKinSubidang() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      setTitleUs(router.query.subid);
+      setTitleUs(router.query.nama);
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setImage(masuk.data.user[0].foto);
 
@@ -226,7 +226,6 @@ export default function CCaKinSubidang() {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [tampilkanCakin, setTampilkanCakin] = useState("Rows Andre");
 
   const tahun = () => {};
 
@@ -240,6 +239,9 @@ export default function CCaKinSubidang() {
           if (pegawai_us.jabatan == "Kasubid") {
             setImage(pegawai_us.foto);
             setTitleUs(pegawai_us.sub_bidang);
+          } else if (pegawai_us.jabatan == "Kabid") {
+            setImage(pegawai_us.foto);
+            setTitleUs(pegawai_us.bidang);
           } else {
             setImage(pegawai_us.foto);
             setTitleUs(pegawai_us.nama);
