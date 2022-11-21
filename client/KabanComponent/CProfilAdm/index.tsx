@@ -268,7 +268,7 @@ export default function Profil() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKeg[0]}`, `${blmRealisasi[0]}`],
         backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -331,7 +331,7 @@ export default function Profil() {
   const router = useRouter();
 
   const clickCakinBidang = () => {
-    console.log(realisasiKeg[1]);
+    console.log(persen[0]);
   };
 
   const clickCakinBidang2 = (bidang) => {
@@ -401,7 +401,7 @@ export default function Profil() {
         </div>
 
         {/* BAR CHART SEKRE */}
-        {ambilKabid.length != 0 ? (
+        {ambilKabid.length != 0 && persen[0] != null ? (
           <div
             className={styles.barContainer1}
             onClick={() => {
@@ -421,7 +421,7 @@ export default function Profil() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart1} />
+                <DoughnutChart data={donatChart1} txtTitle={persen[0]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
