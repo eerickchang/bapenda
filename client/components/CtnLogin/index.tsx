@@ -47,7 +47,10 @@ export default function CtnLogin() {
         router.push("/Admin/Dashboard");
       } else if (response.data[0].jabatan === "Kasubid") {
         router.push("Kasubid/Dashboard");
-      } else if (response.data[0].jabatan === "Kabid") {
+      } else if (
+        response.data[0].jabatan === "Kabid" ||
+        response.data[0].jabatan === "Sekretaris"
+      ) {
         router.push("Kabid/Dashboard");
       }
     });

@@ -20,6 +20,13 @@ export default function Profil() {
   const [grafik4, setGrafik4] = useState([]);
   const [grafik5, setGrafik5] = useState([]);
 
+  const [realisasiKeg, setRealisasiKeg] = useState([]);
+  const [blmRealisasi, setBlmRealisasi] = useState([]);
+  const [persen, setPersen] = useState([]);
+
+  let totRealisasi = [0, 0, 0, 0, 0];
+  let totJlhKegiatan = [0, 0, 0, 0, 0];
+
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
@@ -44,6 +51,39 @@ export default function Profil() {
           }
         });
 
+        //AMBIL CAKIN SEKRETARIS
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              cakin.nip == kabid[0].nip &&
+              moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+            ) {
+              setGrafik1((nextData) => {
+                return [...nextData, cakin];
+              });
+
+              totJlhKegiatan[0] = totJlhKegiatan[0] + cakin.jumlah_kegiatan;
+              totRealisasi[0] = totRealisasi[0] + cakin.lampiran_diterima;
+            }
+          });
+
+          let hasil = (totRealisasi[0] / totJlhKegiatan[0]) * 100;
+          let blmRealisasi = totJlhKegiatan[0] - totRealisasi[0];
+          let realisasi = Math.trunc(totRealisasi[0]);
+
+          setPersen((nextData) => {
+            return [...nextData, Math.trunc(hasil)];
+          });
+
+          setBlmRealisasi((nextData) => {
+            return [...nextData, blmRealisasi];
+          });
+
+          setRealisasiKeg((nextData) => {
+            return [...nextData, realisasi];
+          });
+        });
+
         //AMBIL CAKIN BIDANG 1
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
@@ -54,7 +94,26 @@ export default function Profil() {
               setGrafik2((nextData) => {
                 return [...nextData, cakin];
               });
+
+              totJlhKegiatan[1] = totJlhKegiatan[1] + cakin.jumlah_kegiatan;
+              totRealisasi[1] = totRealisasi[1] + cakin.lampiran_diterima;
             }
+          });
+
+          let hasil = (totRealisasi[1] / totJlhKegiatan[1]) * 100;
+          let blmRealisasi = totJlhKegiatan[1] - totRealisasi[1];
+          let realisasi = Math.trunc(totRealisasi[1]);
+
+          setPersen((nextData) => {
+            return [...nextData, Math.trunc(hasil)];
+          });
+
+          setBlmRealisasi((nextData) => {
+            return [...nextData, blmRealisasi];
+          });
+
+          setRealisasiKeg((nextData) => {
+            return [...nextData, realisasi];
           });
         });
       });
@@ -125,11 +184,11 @@ export default function Profil() {
   ];
 
   const bidangChart1 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafik1?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafik1?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         barThickness: 40,
@@ -222,7 +281,7 @@ export default function Profil() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKeg[1]}`, `${blmRealisasi[1]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -272,7 +331,7 @@ export default function Profil() {
   const router = useRouter();
 
   const clickCakinBidang = () => {
-    console.log(ambilKabid);
+    console.log(realisasiKeg[1]);
   };
 
   const clickCakinBidang2 = (bidang) => {
