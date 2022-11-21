@@ -39,6 +39,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotak:focus {
@@ -62,6 +63,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotakLogOut:focus {
@@ -92,6 +94,7 @@
   opacity: 0;
   transform: translateY(40%);
   pointer-events: none;
+  z-index: 1001;
 }
 
 .hoverKeteranganKegiatan {

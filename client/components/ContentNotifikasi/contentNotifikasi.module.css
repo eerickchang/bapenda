@@ -30,6 +30,11 @@
   margin-bottom: 16px;
 }
 
+.imageDP {
+  /* border-radius: 150px; */
+  margin-top: 30px;
+}
+
 .contentNotif {
   width: 1670px;
   height: 157px;

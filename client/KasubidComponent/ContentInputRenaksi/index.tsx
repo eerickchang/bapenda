@@ -438,17 +438,12 @@ export default function ContentInputRenaksi() {
             onChange={(e) => setEndDate(e.target.value + "-01")}
           />
         </div>
-      </div>
-
-      {/* <Gap height={30} width={0} /> */}
-      {/* <ButtonAnimasi/> */}
       <Button
         title="Unggah"
-        // onClick={btnUnggah}
         onClick={btnUnggah}
         className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
       />
-      {/* <button onClick={openModal}>Open Modal</button> */}
+      </div>
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <p>

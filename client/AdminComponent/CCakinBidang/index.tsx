@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { BarChart, Gap, HorBar, ProfileKanan } from "../../components";
 import styles from "./profilAdm.module.css";
 import sidebarStyles from "../../AdminComponent/SidebarAdmin/sidebar.module.css";
-import Image from "next/image";
+import Image from "next/future/image";
 import moment from "moment";
 import Axios from "axios";
 import { useRouter } from "next/router";
@@ -268,7 +268,7 @@ export default function CCakinBidang() {
             CAPAIAN KINERJA TAHUN {tahun}
           </p>
         </div>
-        <Gap height={100} width={0} />
+        <Gap height={140} width={0} />
         <div
           className={styles.barContainer1}
           onClick={() => {
@@ -310,6 +310,7 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
+        <Gap height={40} width={0} />
         <div
           className={styles.barContainer2}
           onClick={() => {
@@ -351,6 +352,7 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
+        <Gap height={40} width={0} />
         <div
           className={styles.barContainer3}
           onClick={() => {

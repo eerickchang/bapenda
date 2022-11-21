@@ -9,7 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "next/future/image";
 import Gap from "../Gap";
 import Axios from "axios";
 import moment from "moment";
@@ -61,14 +62,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         sx={{ "& > *": { borderBottom: "" } }}
       >
         <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+          <div style={{ display: "flex", padding: 10, alignItems: "center"}}>
             {row.foto === "" ? (
               <Image
                 src={"/SidebarProfile.svg"}
                 width={70}
                 height={70}
                 alt="User 2"
-                style={{ borderRadius: 150 }}
+                className={stylesS.imageDP}
               />
             ) : (
               <Image
@@ -76,7 +77,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 width={70}
                 height={70}
                 alt="User 2"
-                style={{ borderRadius: 150 }}
+                className={stylesS.imageDP}
               />
             )}
             {/* //!{ambil data} */}
@@ -178,7 +179,6 @@ export const ContentRiwayatKegiatan = () => {
       });
     }
   }, []);
-
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
@@ -352,7 +352,7 @@ export const ContentRiwayatKegiatan = () => {
     color: "rgba(149, 149, 149, 1)",
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40};
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
 
   return (
     <>

@@ -318,7 +318,7 @@ export default function Profil() {
   return (
     <div className={styles.container}>
       <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
-      <Gap height={0} width={141} />
+      <Gap height={0} width={38} />
       <div className={styles.contentKiri}>
         <div className={styles.header}>
           <div>

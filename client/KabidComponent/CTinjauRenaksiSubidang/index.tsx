@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./lihatSemuaRenaksi.module.css";

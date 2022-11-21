@@ -274,7 +274,6 @@ export default function CTinjauRenaksiPegawai() {
   const styleContainer = {
     paddingLeft: 2,
     paddingRight: 40,
-    zIndex: 998,
     paddingBottom: 20,
   };
 

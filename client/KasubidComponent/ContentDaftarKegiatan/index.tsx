@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
-import Image from "next/image";
+import Image from "next/future/image";
 import moment from "moment";
 
 import Modal from "react-modal";
@@ -500,7 +500,8 @@ function Row(props) {
                     width={70}
                     height={70}
                     alt="User 2"
-                    style={{ borderRadius: 150 }}
+                    className={stylesS.imageDP}
+                    
                   />
                 ) : (
                   <Image
@@ -508,7 +509,8 @@ function Row(props) {
                     width={70}
                     height={70}
                     alt="User 2"
-                    style={{ borderRadius: 150 }}
+                    className={stylesS.imageDP}
+                    
                   />
                 )}
                 {/* //!{ambil data} */}
@@ -609,7 +611,7 @@ export default function ContentDaftarKegiatan() {
             </div>
             <Gap height={150} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40 }}
             >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>

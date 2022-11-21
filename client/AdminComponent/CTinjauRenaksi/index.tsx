@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
-import Image from "next/image";
+import Image from "next/future/image";
 import Gap from "../Gap";
 import Axios from "axios";
 import moment from "moment";
