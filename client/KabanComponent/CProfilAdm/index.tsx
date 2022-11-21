@@ -13,11 +13,18 @@ export default function Profil() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [ambilKabid, setAmbilKabid] = useState([]);
+  const [grafik1, setGrafik1] = useState([]);
+  const [grafik2, setGrafik2] = useState([]);
+  const [grafik3, setGrafik3] = useState([]);
+  const [grafik4, setGrafik4] = useState([]);
+  const [grafik5, setGrafik5] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
+      let kabid = [];
 
       let thn = moment().format("YYYY");
       setTahun(thn);
@@ -26,16 +33,26 @@ export default function Profil() {
         setDataAsn(response.data.user[0]);
       });
 
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
-        Axios.get("http://localhost:3001/cakin").then((result) => {
-          result.data.map((item) => {
+      // AMBIL KABID DAN SEKRE
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kabid" || pegawai.jabatan == "Sekretaris") {
+            setAmbilKabid((nextData) => {
+              return [...nextData, pegawai];
+            });
+            kabid = [...kabid, pegawai];
+          }
+        });
+
+        //AMBIL CAKIN BIDANG 1
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
             if (
-              response.data.user[0].nip === item.nip &&
-              moment(item.bulan).format("YYYY") === moment().format("YYYY")
+              cakin.nip == kabid[1].nip &&
+              moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
             ) {
-              setGrafikPersonal((nextData) => {
-                return [...nextData, item];
+              setGrafik2((nextData) => {
+                return [...nextData, cakin];
               });
             }
           });
@@ -124,11 +141,11 @@ export default function Profil() {
   };
 
   const bidangChart2 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafik2?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafik2?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
@@ -253,15 +270,12 @@ export default function Profil() {
   };
 
   const router = useRouter();
-  const clickLihatDetail = () => {
-    router.push("/Staff/DetailCaKin");
+
+  const clickCakinBidang = () => {
+    console.log(ambilKabid);
   };
 
-  const clickSekretaris = () => {
-    console.log("Oke");
-  };
-
-  const clickCakinBidang = (bidang) => {
+  const clickCakinBidang2 = (bidang) => {
     if (bidang == "Sekretaris") {
       router.push({
         pathname: "/Kaban/CakinBidang",
@@ -326,206 +340,226 @@ export default function Profil() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
-        <div
-          className={styles.barContainer1}
-          onClick={() => {
-            clickCakinBidang("Sekretaris");
-          }}
-        >
-          <p className={styles.txtBidang}>SEKRETARIS</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart1} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart1} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+
+        {/* BAR CHART SEKRE */}
+        {ambilKabid.length != 0 ? (
+          <div
+            className={styles.barContainer1}
+            onClick={() => {
+              clickCakinBidang("Sekretaris");
+            }}
+          >
+            <p className={styles.txtBidang}>{ambilKabid[0].bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart1} />
               </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart1} />
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className={styles.barContainer2}
-          onClick={() => {
-            clickCakinBidang("Perencanaan dan Pengembangan");
-          }}
-        >
-          <p className={styles.txtBidang}>PERENCANAAN DAN PENGEMBANGAN</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart2} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart2} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak2} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className={styles.barContainer3}
-          onClick={() => {
-            clickCakinBidang("Retribusi dan Lain-lain Pendapatan");
-          }}
-        >
-          <p className={styles.txtBidang}>RETRIBUSI DAN LAIN LAIN PENDAPATAN</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart3} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart3} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+        ) : null}
+
+        {/* BAR CHART BIDANG 1 */}
+        {ambilKabid.length != 0 ? (
+          <div
+            className={styles.barContainer2}
+            onClick={() => {
+              clickCakinBidang("Perencanaan dan Pengembangan");
+            }}
+          >
+            <p className={styles.txtBidang}>{ambilKabid[1].bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart2} />
               </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart2} />
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className={styles.barContainer4}
-          onClick={() => {
-            clickCakinBidang("Pajak Daerah");
-          }}
-        >
-          <p className={styles.txtBidang}>PAJAK DAERAH</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart4} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart4} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className={styles.barContainer5}
-          onClick={() => {
-            clickCakinBidang("Pengendalian dan Evaluasi");
-          }}
-        >
-          <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart5} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart5} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+        ) : null}
+
+        {/* BAR CHART BIDANG 2 */}
+        {ambilKabid.length != 0 ? (
+          <div
+            className={styles.barContainer3}
+            onClick={() => {
+              clickCakinBidang("Retribusi dan Lain-lain Pendapatan");
+            }}
+          >
+            <p className={styles.txtBidang}>{ambilKabid[2].bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart3} />
               </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart3} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak2} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : null}
+
+        {/* BAR CHART BIDANG 3 */}
+        {ambilKabid.length != 0 ? (
+          <div
+            className={styles.barContainer4}
+            onClick={() => {
+              clickCakinBidang("Pajak Daerah");
+            }}
+          >
+            <p className={styles.txtBidang}>{ambilKabid[3].bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart4} />
+              </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart4} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {/* BAR CHART BIDANG 4 */}
+        {ambilKabid.length != 0 ? (
+          <div
+            className={styles.barContainer5}
+            onClick={() => {
+              clickCakinBidang("Pengendalian dan Evaluasi");
+            }}
+          >
+            <p className={styles.txtBidang}>{ambilKabid[4].bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart5} />
+              </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart5} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak2} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
       <div className={styles.contentKanan}>
         <ProfileKanan

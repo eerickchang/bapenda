@@ -212,8 +212,6 @@ export default function Dashboard() {
         data: grafik?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1bddbb"],
         borderRadius: 10,
-
-        // hoverBackgroundColor: ["#112350"],
       },
     ],
   };
