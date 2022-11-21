@@ -13,13 +13,25 @@ export default function CProfilAdm() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
   const [grafikPersonal, setGrafikPersonal] = useState([]);
+  const [grafikSubid1, setGrafikSubid1] = useState([]);
+  const [grafikSubid2, setGrafikSubid2] = useState([]);
+  const [grafikSubid3, setGrafikSubid3] = useState([]);
+
   const [subid, setSubid] = useState([]);
   const [realisasiKeg, setRealisasiKeg] = useState();
   const [blmRealisasi, setBlmRealisasi] = useState();
+  const [realisasiKegSub, setRealisasiKegSub] = useState([]);
+  const [blmRealisasiSub, setBlmRealisasiSub] = useState([]);
+
   const [persen, setPersen] = useState(0);
+  const [persenSub, setPersenSub] = useState([]);
   const [bidang, setBidang] = useState("");
+  let cakinKasubid = [];
   let totJlhKegiatan = 0;
   let totRealisasi = 0;
+
+  let totRealisasiSub = [0, 0, 0];
+  let totJlhKegiatanSub = [0, 0, 0];
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -57,6 +69,7 @@ export default function CProfilAdm() {
         });
 
         //AMBIL KASUBID
+        let kasubidArr = [];
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
           ambilPegawai.data.map((pegawai) => {
             if (
@@ -66,75 +79,118 @@ export default function CProfilAdm() {
               setSubid((nextData) => {
                 return [...nextData, pegawai];
               });
+              kasubidArr = [...kasubidArr, pegawai];
             }
+          });
+
+          //AMBIL CAKIN KASUBID 1
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[0].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid1((nextData) => {
+                  return [...nextData, cakin];
+                });
+
+                totJlhKegiatanSub[0] =
+                  totJlhKegiatanSub[0] + cakin.jumlah_kegiatan;
+                totRealisasiSub[0] =
+                  totRealisasiSub[0] + cakin.lampiran_diterima;
+              }
+            });
+
+            let hasil = (totRealisasiSub[0] / totJlhKegiatanSub[0]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[0] - totRealisasiSub[0];
+            let realisasi = Math.trunc(totRealisasiSub[0]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
+
+          //AMBIL CAKIN KASUBID 2
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[1].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid2((nextData) => {
+                  return [...nextData, cakin];
+                });
+
+                totJlhKegiatanSub[1] =
+                  totJlhKegiatanSub[1] + cakin.jumlah_kegiatan;
+                totRealisasiSub[1] =
+                  totRealisasiSub[1] + cakin.lampiran_diterima;
+              }
+            });
+
+            let hasil = (totRealisasiSub[1] / totJlhKegiatanSub[1]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[1] - totRealisasiSub[1];
+            let realisasi = Math.trunc(totRealisasiSub[1]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
+
+          //AMBIL CAKIN KASUBID 3
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[2].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid3((nextData) => {
+                  return [...nextData, cakin];
+                });
+
+                totJlhKegiatanSub[2] =
+                  totJlhKegiatanSub[2] + cakin.jumlah_kegiatan;
+                totRealisasiSub[2] =
+                  totRealisasiSub[2] + cakin.lampiran_diterima;
+              }
+            });
+
+            let hasil = (totRealisasiSub[2] / totJlhKegiatanSub[2]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[2] - totRealisasiSub[2];
+            let realisasi = Math.trunc(totRealisasiSub[2]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
           });
         });
       });
     }
   }, []);
-
-  const UserData = [
-    {
-      id: 1,
-      kinerja: 90,
-      bulan: "Jan",
-    },
-    {
-      id: 2,
-      kinerja: 100,
-      bulan: "Feb",
-    },
-    {
-      id: 3,
-      kinerja: 80,
-      bulan: "Mar",
-    },
-    {
-      id: 4,
-      kinerja: 80,
-      bulan: "Apr",
-    },
-    {
-      id: 5,
-      kinerja: 90,
-      bulan: "Mei",
-    },
-    {
-      id: 6,
-      kinerja: 100,
-      bulan: "Jun",
-    },
-    {
-      id: 7,
-      kinerja: 90,
-      bulan: "Jul",
-    },
-    {
-      id: 8,
-      kinerja: 90,
-      bulan: "Agu",
-    },
-    {
-      id: 9,
-      kinerja: 100,
-      bulan: "Sep",
-    },
-    {
-      id: 10,
-      kinerja: 80,
-      bulan: "Okt",
-    },
-    {
-      id: 11,
-      kinerja: 90,
-      bulan: "Nov",
-    },
-    {
-      id: 12,
-      kinerja: 100,
-      bulan: "Des",
-    },
-  ];
 
   const bidangChart1 = {
     labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
@@ -153,11 +209,11 @@ export default function CProfilAdm() {
   };
 
   const bidangChart2 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid1?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid1?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
@@ -169,11 +225,11 @@ export default function CProfilAdm() {
   };
 
   const bidangChart3 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid2?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid2?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
@@ -185,11 +241,11 @@ export default function CProfilAdm() {
   };
 
   const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafikSubid3?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikSubid3?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
@@ -218,7 +274,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[0]}`, `${blmRealisasiSub[0]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -231,7 +287,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[1]}`, `${blmRealisasiSub[1]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -244,7 +300,7 @@ export default function CProfilAdm() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[2]}`, `${blmRealisasiSub[2]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -254,47 +310,45 @@ export default function CProfilAdm() {
 
   const router = useRouter();
 
-  const clickCakinBidang = (bidang) => {
-    if (bidang == "Perencanaan dan Pengembangan") {
-      console.log(subid[0].sub_bidang);
-      // router.push({
-      //   pathname: "/Kabid/CakinSubidang",
-      //   // query: {
-      //   //   bidang: "Sekretaris",
-      //   //   subid1: "Hukum dan Kepegawaian",
-      //   //   subid2: "Perencanaan dan Keuangan",
-      //   //   subid3: "Umum",
-      //   // },
-      // });
-    } else if (bidang == "Pengelolaan Pendapatan Daerah") {
+  const clickCakinBidang = (bidangParams) => {
+    if (bidangParams == bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Perencanaan dan Pengembangan",
-        //   subid1: "Pengelolaan Pendapatan Daerah",
-        //   subid2: "Pengembangan Teknologi",
-        //   subid3: "Pelaporan Data Pendapatan",
-        // },
+        query: {
+          bidang: bidang,
+          nama: bidang,
+          nipKasub: dataAsn.nip,
+        },
       });
-    } else if (bidang == "Pengembangan Teknologi") {
+    } else if (bidangParams == subid[0].sub_bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Retribusi dan Lain-lain Pendapatan",
-        //   subid1: "Retribusi",
-        //   subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-        //   subid3: "Lain-lain Pendapatan",
-        // },
+        query: {
+          bidang: bidang,
+          subid: subid[0].sub_bidang,
+          nama: subid[0].sub_bidang,
+          nipKasub: subid[0].nip,
+        },
       });
-    } else if (bidang == "Pelaporan Data Pendapatan") {
+    } else if (bidangParams == subid[1].sub_bidang) {
       router.push({
         pathname: "/Kabid/CakinSubidang",
-        // query: {
-        //   bidang: "Pajak Daerah",
-        //   subid1: "Administrasi dan Pelayanan Pajak",
-        //   subid2: "PKB dan BBN-KB",
-        //   subid3: "PBBKB, PAP dan Pajak Rokok",
-        // },
+        query: {
+          bidang: bidang,
+          subid: subid[1].sub_bidang,
+          nama: subid[1].sub_bidang,
+          nipKasub: subid[1].nip,
+        },
+      });
+    } else if (bidangParams == subid[2].sub_bidang) {
+      router.push({
+        pathname: "/Kabid/CakinSubidang",
+        query: {
+          bidang: bidang,
+          subid: subid[2].sub_bidang,
+          nama: subid[2].sub_bidang,
+          nipKasub: subid[2].nip,
+        },
       });
     }
   };
@@ -310,6 +364,8 @@ export default function CProfilAdm() {
           </div>
           <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
         </div>
+
+        {/* BAR CHART BIDANG */}
         {persen != 0 ? (
           <div
             className={styles.barContainer1}
@@ -352,166 +408,138 @@ export default function CProfilAdm() {
             </div>
           </div>
         ) : null}
-        <div
-          className={styles.barContainer2}
-          onClick={() => {
-            clickCakinBidang("Perencanaan dan Pengembangan");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart2} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart2} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+
+        {/* BAR CHART SUBID 1 */}
+        {subid.length != 0 && persenSub[0] != null ? (
+          <div
+            className={styles.barContainer2}
+            onClick={() => {
+              clickCakinBidang(subid[0].sub_bidang);
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart2} />
               </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart2} txtTitle={persenSub[0]} />
               </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className={styles.barContainer3}
-          onClick={() => {
-            clickCakinBidang("Pengembangan Teknologi");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart3} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart3} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[0]}</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} width={0} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[0]}</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className={styles.barContainer4}
-          onClick={() => {
-            clickCakinBidang("Pelaporan Data Pendapatan");
-          }}
-        >
-          <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart4} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart4} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
-                </div>
+        ) : null}
+
+        {/* BAR CHART SUBID 2 */}
+        {subid.length != 0 && persenSub[1] != null ? (
+          <div
+            className={styles.barContainer3}
+            onClick={() => {
+              clickCakinBidang(subid[1].sub_bidang);
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart3} />
               </div>
-              <Gap height={20} width={0} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak3} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
-                </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart3} txtTitle={persenSub[1]} />
               </div>
-            </div>
-          </div>
-        </div>
-        {/* <div
-          className={styles.barContainer5}
-          onClick={() => {
-            clickCakinBidang("Pengendalian dan Evaluasi");
-          }}
-        >
-          <p className={styles.txtBidang}>PENGENDALIAN DAN EVALUASI</p>
-          <div className={styles.mainBarWrapper1}>
-            <div className={styles.barWrapper1}>
-              <BarChart chartData={bidangChart5} />
-            </div>
-            <div
-              style={{
-                height: 159,
-                width: 159,
-                marginLeft: 25,
-                marginTop: 65,
-              }}
-            >
-              <DoughnutChart data={donatChart5} />
-            </div>
-            <div style={{ marginLeft: 22, marginTop: 50 }}>
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>10</p>
-                  <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[1]}</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
                 </div>
-              </div>
-              <Gap height={20} />
-              <div className={styles.ketWrapper}>
-                <div className={styles.kotak2} />
-                <div style={{ marginLeft: 10 }}>
-                  <p className={styles.txtJumlah}>90</p>
-                  <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                <Gap height={20} width={0} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[1]}</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> */}
+        ) : null}
+
+        {/* BAR CHART SUBID 3 */}
+        {subid.length != 0 && persenSub[2] != null ? (
+          <div
+            className={styles.barContainer4}
+            onClick={() => {
+              clickCakinBidang(subid[2].sub_bidang);
+            }}
+          >
+            <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
+            <div className={styles.mainBarWrapper1}>
+              <div className={styles.barWrapper1}>
+                <BarChart chartData={bidangChart4} />
+              </div>
+              <div
+                style={{
+                  height: 159,
+                  width: 159,
+                  marginLeft: 25,
+                  marginTop: 65,
+                }}
+              >
+                <DoughnutChart data={donatChart4} txtTitle={persenSub[2]} />
+              </div>
+              <div style={{ marginLeft: 22, marginTop: 50 }}>
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[2]}</p>
+                    <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
+                  </div>
+                </div>
+                <Gap height={20} width={0} />
+                <div className={styles.ketWrapper}>
+                  <div className={styles.kotak3} />
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[2]}</p>
+                    <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
       <div className={styles.contentKanan}>
         <ProfileKanan

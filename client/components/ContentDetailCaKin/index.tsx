@@ -22,6 +22,8 @@ Axios.defaults.withCredentials = true;
 
 export default function ContentDetailCaKin() {
   const shouldLog = useRef(true);
+  const [year, setYear] = useState([]);
+
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
@@ -41,6 +43,35 @@ export default function ContentDetailCaKin() {
             }
           });
         });
+
+        for (let i = 2020; i <= 2030; i++) {
+          setYear((nextData) => {
+            return [
+              ...nextData,
+              {
+                tahun: i,
+                onclick: () => (
+                  setDataCakin([]),
+                  Axios.get("http://localhost:3001/cakin").then(
+                    (ambilCakin) => {
+                      ambilCakin.data.map((cakin) => {
+                        if (
+                          moment(cakin.bulan).format("YYYY") ===
+                            moment(`${i}`).format("YYYY") &&
+                          cakin.nip == dataAsn.data.user[0].nip
+                        ) {
+                          setDataCakin((nextData) => {
+                            return [...nextData, cakin];
+                          });
+                        }
+                      });
+                    }
+                  )
+                ),
+              },
+            ];
+          });
+        }
       });
     }
   }, []);
@@ -457,8 +488,8 @@ export default function ContentDetailCaKin() {
                 className={styles.wrapperSelectFilterTahun}
                 onClick={() => setActiveDropdownTahun(false)}
               >
-                {tahun.map((item) => (
-                  <p key={item.id} onClick={item.onclick}>
+                {year.map((item) => (
+                  <p key={item.nip} onClick={item.onclick}>
                     {item.tahun}
                   </p>
                 ))}

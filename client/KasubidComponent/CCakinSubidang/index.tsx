@@ -54,7 +54,10 @@ export default function CCaKinSubidang() {
         });
 
         setPegawai((nextData) => {
-          return [...nextData, { nama: "Semua Pegawai", nip: 141 }];
+          return [
+            ...nextData,
+            { nama: "Semua Pegawai", nip: masuk.data.user[0].nip },
+          ];
         });
 
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
