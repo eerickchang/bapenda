@@ -26,7 +26,6 @@ export default function Dashboard() {
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -62,23 +61,49 @@ export default function Dashboard() {
       });
 
       //AMBIL CAKIN JUMLAH KEGIATAN
-      Axios.get("http://localhost:3001/jumlahKegiatan").then(
-        (jumlahKegiatan) => {
-          jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setJlhKegiatan((nextData) => {
-                return [...nextData, jumlahKegiatanMAP];
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
+        Axios.get("http://localhost:3001/jumlahKegiatan").then(
+          (jumlahKegiatan) => {
+            jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
+              if (
+                moment().format("YYYY-MM") >=
+                  moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
+                moment().format("YYYY-MM") ===
+                  moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
+              ) {
+                setJlhKegiatan((nextData) => {
+                  return [...nextData, jumlahKegiatanMAP];
+                });
+                bil = [...bil, jumlahKegiatanMAP];
+              }
+            });
+
+            console.log(bil.length);
+
+            //INPUT JUMLAH KEGIATAN BULAN INI KE DB
+            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+              ambilCakin.data.map((cakin) => {
+                if (
+                  moment(cakin.bulan).format("YYYY-MM") ==
+                    moment().format("YYYY-MM") &&
+                  cakin.nip == masuk.data.user[0].nip
+                ) {
+                  if (cakin.jumlah_kegiatan != bil.length) {
+                    Axios.post("http://localhost:3001/addJumlahKegiatan", {
+                      nip: masuk.data.user[0].nip,
+                      bulan: moment().format("YYYY-MM-01"),
+                      jumlah: bil.length,
+                    });
+                  } else {
+                    null;
+                  }
+                }
               });
-            }
-          });
-        }
-      );
+            });
+          }
+        );
+      });
 
       //AMBIL CAKIN LAMPIRAN DISUBMIT
       Axios.get("http://localhost:3001/lampiranDisubmit").then(
