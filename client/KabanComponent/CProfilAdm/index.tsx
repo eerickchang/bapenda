@@ -445,7 +445,7 @@ export default function Profil() {
         ) : null}
 
         {/* BAR CHART BIDANG 1 */}
-        {ambilKabid.length != 0 ? (
+        {ambilKabid.length != 0 && persen[1] != null ? (
           <div
             className={styles.barContainer2}
             onClick={() => {
@@ -465,7 +465,7 @@ export default function Profil() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart2} />
+                <DoughnutChart data={donatChart2} txtTitle={persen[1]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
