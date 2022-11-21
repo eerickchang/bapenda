@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./TableMUI.module.css";
-import Image from "next/image";
+import Image from "next/future/image";
 import moment from "moment";
 
 import Modal from "react-modal";
@@ -560,31 +560,35 @@ function Row(props) {
       <React.Fragment>
         {row.status != "Selesai" ? (
           <TableRow hover className={styles.styleRow}>
-            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-              {row.foto === "" ? (
-                <Image
-                  src={"/SidebarProfile.svg"}
-                  width={70}
-                  height={70}
-                  alt="User 2"
-                  style={{ borderRadius: 150 }}
-                />
-              ) : (
-                <Image
-                  src={row.foto}
-                  width={70}
-                  height={70}
-                  alt="User 2"
-                  style={{ borderRadius: 150 }}
-                />
-              )}
-              {/* //!{ambil data} */}
-              <div style={{ marginLeft: 10 }}>
-                <p className={stylesS.rekanNama}>{row.nama}</p>
-                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
-                <p className={stylesS.rekanAsn}>ASN</p>
+            <TableCell>
+              <div
+                style={{ display: "flex", padding: 10, alignItems: "center" }}
+              >
+                {row.foto === "" ? (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={70}
+                    height={70}
+                    alt="User 2"
+                    style={{ borderRadius: 150 }}
+                  />
+                ) : (
+                  <Image
+                    src={row.foto}
+                    width={70}
+                    height={70}
+                    alt="User 2"
+                    style={{ borderRadius: 150 }}
+                  />
+                )}
+                {/* //!{ambil data} */}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama}</p>
+                  <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                  <p className={stylesS.rekanAsn}>ASN</p>
+                </div>
               </div>
-            </div>
+            </TableCell>
             <TableCell>
               <p style={styleTxtRowBS}>{row.program}</p>
             </TableCell>

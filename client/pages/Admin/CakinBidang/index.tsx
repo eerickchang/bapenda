@@ -6,7 +6,7 @@ export default function Profil() {
   return (
     <div className={styles.container}>
       <SidebarAdmin kotakProfil={sidebarStyles.kotakAktif} />
-      <Gap width={140} height={80} />
+      <Gap width={40} height={80} />
       <CCakinBidang/>
     </div>
   );

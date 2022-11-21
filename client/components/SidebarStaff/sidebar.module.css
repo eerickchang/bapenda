@@ -94,6 +94,7 @@
   opacity: 0;
   transform: translateY(40%);
   pointer-events: none;
+  z-index: 1001;
 }
 
 .hoverKeteranganKegiatan {

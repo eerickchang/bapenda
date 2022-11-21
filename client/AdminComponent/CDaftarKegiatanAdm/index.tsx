@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../Button";
 import styles from "./cDaftarKegiatanAdm.module.css";
 import btnStyles from "../Button/button.module.css";
-import Image from "next/image";
+import Image from "next/future/image";
 import Gap from "../Gap";
 import { useRouter } from "next/router";
 

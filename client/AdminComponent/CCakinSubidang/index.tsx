@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ContentDetailCakin.module.css";
@@ -50,7 +50,7 @@ export default function CCaKinSubidang() {
 
   const clickBack = () => {
     router.push({
-      pathname: "/Kaban/CakinBidang",
+      pathname: "/Admin/CakinBidang",
       query: {
         bidang: router.query.bidang,
         subid1: router.query.subid1,

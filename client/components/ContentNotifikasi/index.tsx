@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "next/future/image";
 import styles from "./contentNotifikasi.module.css";
 import Gap from "../Gap";
 
@@ -12,7 +12,7 @@ export default function ContentNotifikasi() {
       pesan: "Reschedule dapat diterima lanjutkan kegiatan dengan baik",
       ketWaktu: "08.00 Pagi, 12 Juli 2022",
       keterangan: "Diterima",
-      image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
+      image: <Image src="/SidebarProfile.svg" width={90} height={90} className={styles.imageDP}/>,
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export default function ContentNotifikasi() {
         " Kegiatan tidak bisa di hapus dan harus segera dilaksanakan karena jumlah anggaran....",
       ketWaktu: "09.00 Pagi, 14 Juli 2022",
       keterangan: "Ditolak",
-      image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
+      image: <Image src="/SidebarProfile.svg" width={90} height={90} className={styles.imageDP}/>,
     },
   ];
   return (

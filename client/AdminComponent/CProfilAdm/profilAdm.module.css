@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex: 1;
-  /* margin-left: 1px; */
 }
 
 .txtHeader {
@@ -20,8 +19,8 @@
   width: 440px;
   justify-content: center;
   align-items: center;
-  margin-left: 40px;
-  margin-top: 60px;
+  margin-left: 42px;
+  margin-top: 46px;
   border-bottom: 2px solid #1bddbb;
 }
 
@@ -42,6 +41,7 @@
   border-radius: 10px;
   margin-left: 43px;
   margin-top: 26px;
+  cursor: pointer
 }
 
 .barContainer2 {
@@ -53,6 +53,7 @@
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  cursor: pointer
 }
 
 .barContainer3 {
@@ -68,6 +69,7 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   z-index: 999;
+  cursor: pointer
 }
 
 .barContainer4 {
@@ -82,6 +84,7 @@
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  cursor: pointer
 }
 
 .barContainer5 {
@@ -96,11 +99,12 @@
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  cursor: pointer
 }
 
 .mainBarWrapper1 {
   width: 1222px;
-  height: 300px;
+  height: 280px;
   display: flex;
   flex-direction: row;
 }

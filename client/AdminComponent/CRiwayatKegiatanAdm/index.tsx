@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
-import Image from "next/image";
+import Image from "next/future/image";
 
 export default function CTinjauRenaksi() {
   const rowsSubagian = [

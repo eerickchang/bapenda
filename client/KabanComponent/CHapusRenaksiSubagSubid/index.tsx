@@ -11,7 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Axios from "axios";
 import FileDownload from "js-file-download";
 import "jspdf-autotable";
-import Image from "next/image";
+import Image from "next/future/image";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 import Gap from "../Gap";
