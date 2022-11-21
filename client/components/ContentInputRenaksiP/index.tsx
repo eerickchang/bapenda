@@ -387,48 +387,6 @@ export default function ContentInputRenaksiP() {
         </div>
         <Gap height={0} width={100} />
         <div>
-          {/* <TxtInputRenaksi
-            title="THL"
-            placeholder="Pilih THL yang akan bertugas"
-          />
-          <div className={styles.dropdownTHL}>
-            <div className={styles.dropdownIcon}>
-              <Image src={"/Dropdown-tupoksi.svg"} width={30} height={30} />
-            </div>
-            <div className={styles.wrapperSelectTHL}>
-              <div className={styles.wrapper}>
-                {namaTHL.map((item) => (
-                  <div className={styles.listNama}>
-                    {item.image}
-                    <p>{item.nama}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div> */}
-          {/* <Gap width={0} height={5}/>  */}
-          {/* <Select
-            downChevron
-            menuShouldBlockScroll={false}
-            // onChange={(e) => {
-              //   e.length === 0 ? console.log("Empty Array") : setThl(e.id);
-            // }}
-            // value={thl}
-            onChange={(e) => setThl(e.id)}
-            // menuShouldScrollIntoView={false}
-            formatOptionLabel={formatOptionTHL}
-            options={portate}
-            styles={customStylesTHL}
-            components={{
-              DropdownIndicator: null,
-              ClearIndicator: null,
-            }}
-            placeholder={
-              <div className={styles.placeholder}>
-              pilih THL yang akan bertugas
-              </div>
-            }
-          /> */}
           <TxtInputRenaksi
             title="Sub Kegiatan"
             placeholder="masukan sub kegiatan yang akan dilakukan"
@@ -474,11 +432,6 @@ export default function ContentInputRenaksiP() {
               </div>
             }
             onChange={(e) => setInTupoksiTambahan(e?.label)}
-            // inputValue={inTupoksiTambahan}
-            // value="Erick"
-            // onChange={(inTupoksiTambahan) =>
-            //   console.log(inTupoksiTambahan?.label)
-            // }
           />
         </div>
       </div>
@@ -499,16 +452,13 @@ export default function ContentInputRenaksiP() {
             onChange={(e) => setEndDate(e.target.value + "-01")}
           />
         </div>
+        <Button
+          title="Unggah"
+          // onClick={btnUnggah}
+          onClick={btnUnggah}
+          className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
+        />
       </div>
-
-      {/* <Gap height={30} width={0} /> */}
-      {/* <ButtonAnimasi/> */}
-      <Button
-        title="Unggah"
-        // onClick={btnUnggah}
-        onClick={btnUnggah}
-        className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
-      />
       {/* <button onClick={openModal}>Open Modal</button> */}
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>

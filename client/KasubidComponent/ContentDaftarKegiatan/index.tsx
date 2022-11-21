@@ -609,7 +609,7 @@ export default function ContentDaftarKegiatan() {
             </div>
             <Gap height={150} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40 }}
             >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>

@@ -108,6 +108,7 @@ export default function ProfileKanan(props: ProfileKananProps) {
               width={35}
               height={35}
               alt="Edit Profile"
+              style={{cursor: 'pointer'}}
             />
           </label>
         </div>
