@@ -327,7 +327,7 @@ export default function Profil() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKeg[2]}`, `${blmRealisasi[2]}`],
         backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -522,7 +522,7 @@ export default function Profil() {
         ) : null}
 
         {/* BAR CHART BIDANG 2 */}
-        {ambilKabid.length != 0 ? (
+        {ambilKabid.length != 0 && persen[2] != null ? (
           <div
             className={styles.barContainer3}
             onClick={() => {
@@ -542,7 +542,7 @@ export default function Profil() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart3} />
+                <DoughnutChart data={donatChart3} txtTitle={persen[2]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50 }}>
                 <div className={styles.ketWrapper}>
