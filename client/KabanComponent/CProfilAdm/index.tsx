@@ -149,6 +149,39 @@ export default function Profil() {
             return [...nextData, realisasi];
           });
         });
+
+        //AMBIL CAKIN BIDANG 3
+        Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+          ambilCakin.data.map((cakin) => {
+            if (
+              cakin.nip == kabid[3].nip &&
+              moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+            ) {
+              setGrafik4((nextData) => {
+                return [...nextData, cakin];
+              });
+
+              totJlhKegiatan[3] = totJlhKegiatan[3] + cakin.jumlah_kegiatan;
+              totRealisasi[3] = totRealisasi[3] + cakin.lampiran_diterima;
+            }
+          });
+
+          let hasil = (totRealisasi[3] / totJlhKegiatan[3]) * 100;
+          let blmRealisasi = totJlhKegiatan[3] - totRealisasi[3];
+          let realisasi = Math.trunc(totRealisasi[3]);
+
+          setPersen((nextData) => {
+            return [...nextData, Math.trunc(hasil)];
+          });
+
+          setBlmRealisasi((nextData) => {
+            return [...nextData, blmRealisasi];
+          });
+
+          setRealisasiKeg((nextData) => {
+            return [...nextData, realisasi];
+          });
+        });
       });
     }
   }, []);
@@ -265,11 +298,11 @@ export default function Profil() {
   };
 
   const bidangChart4 = {
-    labels: UserData?.map((data) => data.bulan),
+    labels: grafik4?.map((data) => moment(data.bulan).format("MMM")),
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafik4?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BC6DD"],
         borderRadius: 10,
         barThickness: 40,
