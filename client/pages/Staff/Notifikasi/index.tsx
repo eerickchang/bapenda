@@ -7,7 +7,7 @@ export default function Notifikasi() {
   return (
     <div className={styles.container}>
       <SidebarStaff kotakNotif={sidebarStyles.kotakAktif} />
-      <Gap width={195} height={0} />
+      <Gap width={180} height={0} />
       <ContentNotifikasi />
     </div>
   );

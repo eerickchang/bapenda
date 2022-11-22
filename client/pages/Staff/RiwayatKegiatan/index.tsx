@@ -10,7 +10,7 @@ export default function RiwayatKegiatan() {
   return (
     <div className={styles.container}>
       <SidebarStaff kotakRiwayatKegiatan={sidebarStyles.kotakAktif} />
-      <Gap width={140} height={0} />
+      <Gap width={180} height={0} />
       <ContentRiwayatKegiatan/>
       {/* <TableMUI /> */}
     </div>
