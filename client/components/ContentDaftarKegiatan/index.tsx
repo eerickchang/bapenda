@@ -319,9 +319,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               <div
                 style={{ display: "flex", padding: 0, alignItems: "center" }}
               >
-                {row.foto_thl != null ? (
+                {row.foto_thl != "" ? (
                   <Image
-                    src={row.foto}
+                    src={row.foto_thl}
                     width={40}
                     height={40}
                     alt="User 2"
@@ -389,9 +389,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               <div
                 style={{ display: "flex", padding: 0, alignItems: "center" }}
               >
-                {!image ? (
+                {row.foto_thl != "" ? (
                   <Image
-                    src={"/SidebarProfile.svg"}
+                    src={row.foto_thl}
                     width={40}
                     height={40}
                     alt="User 2"
@@ -399,7 +399,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   />
                 ) : (
                   <Image
-                    src={image}
+                    src={"/SidebarProfile.svg"}
                     width={40}
                     height={40}
                     alt="User 2"
