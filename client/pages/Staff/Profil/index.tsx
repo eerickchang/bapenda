@@ -52,6 +52,14 @@ export default function Profil() {
                 return [...nextData, item];
               });
             }
+            if (
+              item.bidang == response.data.user[0].bidang &&
+              item.jabatan == "Kabid"
+            ) {
+              setGrafikBid((nextData) => {
+                return [...nextData, item];
+              });
+            }
           });
         });
       });
@@ -126,7 +134,7 @@ export default function Profil() {
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafikBid?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#34B3F1"],
         borderRadius: 10,
         indexAxis: "y",
@@ -139,7 +147,7 @@ export default function Profil() {
   };
 
   const subBidangChart = {
-    labels: grafikSubid?.map((data) => moment(data.bulan).format("MMMM")),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
@@ -156,7 +164,7 @@ export default function Profil() {
   };
 
   const personalChart = {
-    labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMMM")),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",
@@ -183,13 +191,11 @@ export default function Profil() {
       {/* <Gap height={0} width={141} /> */}
       <div className={styles.wrapperTitle}>
         <div>
-          <Image src="/Capaian.svg" width={50} height={50} alt="Capaian"/>
+          <Image src="/Capaian.svg" width={50} height={50} alt="Capaian" />
         </div>
-        <p className={styles.txt}>
-          CAPAIAN KINERJA TAHUN {tahun}
-        </p>
+        <p className={styles.txt}>CAPAIAN KINERJA TAHUN {tahun}</p>
       </div>
-      
+
       <div className={styles.contentKiri}>
         <div className={styles.barWrapper1}>
           <p className={styles.txtJudul}>{dataAsn.bidang}</p>
