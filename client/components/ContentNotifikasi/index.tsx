@@ -27,7 +27,7 @@ export default function ContentNotifikasi() {
   ];
   return (
     <div className={styles.container}>
-      <Gap height={50} width={0} />
+      <Gap height={45} width={0} />
       <div className={styles.wrapperTitleInputRenaksi}>
         <Image src={"/IconNotif.svg"} width={50} height={50} />
         <p className={styles.txtTitle}>Notifikasi</p>

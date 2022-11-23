@@ -180,15 +180,17 @@ export default function Profil() {
   return (
     <div className={styles.container}>
       <SidebarStaff kotakProfil={sidebarStyles.kotakAktif} />
-      <Gap height={0} width={141} />
-      <div className={styles.contentKiri}>
-        <div className={styles.header}>
-          <div>
-            <Image src="/Capaian.svg" width={50} height={50} alt="Capaian" />
-          </div>
-          <p className={styles.txtHeader}>CAPAIAN KINERJA TAHUN {tahun}</p>
+      {/* <Gap height={0} width={141} /> */}
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image src="/Capaian.svg" width={50} height={50} alt="Capaian"/>
         </div>
-
+        <p className={styles.txt}>
+          CAPAIAN KINERJA TAHUN {tahun}
+        </p>
+      </div>
+      
+      <div className={styles.contentKiri}>
         <div className={styles.barWrapper1}>
           <p className={styles.txtJudul}>{dataAsn.bidang}</p>
           <div className={styles.barResize}>
