@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "KasubidComponent/compareObjectArr/index.js", "KasubidComponent/CTinjauRenaksiPegawai/[nip].js", "KasubidComponent/CTinjauRenaksi/[nip].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "KasubidComponent/compareObjectArr/index.js", "KasubidComponent/CTinjauRenaksiPegawai/[nip].js", "KasubidComponent/CTinjauRenaksi/[nip].js", "pages/Staff/cobaPromise/script.js"],
   "exclude": ["node_modules"],
 }

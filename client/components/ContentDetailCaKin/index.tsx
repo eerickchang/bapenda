@@ -23,6 +23,7 @@ Axios.defaults.withCredentials = true;
 export default function ContentDetailCaKin() {
   const shouldLog = useRef(true);
   const [year, setYear] = useState([]);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     if (shouldLog.current) {
@@ -30,6 +31,7 @@ export default function ContentDetailCaKin() {
 
       Axios.get("http://localhost:3001/masuk").then((dataAsn) => {
         setNama(dataAsn.data.user[0].nama);
+        setImage(dataAsn.data.user[0].foto);
         //
         Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
           ambilCakin.data.map((cakin) => {
@@ -561,7 +563,23 @@ export default function ContentDetailCaKin() {
                 return (
                   <TableRow hover>
                     <TableCell align="center" sx={styleRowNama}>
-                      <Image src={"/User1.svg"} width={50} height={50} />
+                      {!image ? (
+                        <Image
+                          src={"/User1.svg"}
+                          width={50}
+                          height={50}
+                          alt="User 2"
+                          style={{ borderRadius: 50 }}
+                        />
+                      ) : (
+                        <Image
+                          src={image}
+                          width={50}
+                          height={50}
+                          alt="User 2"
+                          style={{ borderRadius: 50 }}
+                        />
+                      )}
                       <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
                     </TableCell>
                     <TableCell align="center" sx={styleRow}>
