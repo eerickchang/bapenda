@@ -170,36 +170,7 @@ export default function Profil() {
         // hoverBackgroundColor: ["#112350"],
       },
     ],
-
-    // labels: ,
-    // datasets: [
-    //   {
-    //     label: "Kinerja Pegawai",
-    //     data: grafik?.map((data) => data.hasil_kinerja),
-    //     backgroundColor: ["#1bddbb"],
-    //     borderRadius: 10,
-
-    //     // hoverBackgroundColor: ["#112350"],
-    //   },
-    // ],
   };
-
-  // const personalChart = {
-  //   labels: grafikPersonal?.map((data) => moment(data.bulan).format("MMM")),
-  //   datasets: [
-  //     {
-  //       label: "Kinerja Pegawai",
-  //       data: grafikPersonal?.map((data) => data.hasil_kinerja),
-  //       backgroundColor: ["#1BDDBB"],
-  //       borderRadius: 10,
-  //       indexAxis: "y",
-  //       barThickness: 20,
-  //       // barPercentage: 0.5,
-
-  //       // hoverBackgroundColor: ["#112350"],
-  //     },
-  //   ],
-  // };
 
   const router = useRouter();
   const clickLihatDetail = () => {
