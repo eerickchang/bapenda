@@ -47,7 +47,6 @@ export default function CProfilAdm() {
       //AMBIL CAKIN KABID
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setBidang(response.data.user[0].bidang);
-
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -84,115 +83,109 @@ export default function CProfilAdm() {
           });
 
           //AMBIL CAKIN KASUBID 1
-          setTimeout(() => {
-            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-              ambilCakin.data.map((cakin) => {
-                if (
-                  kasubidArr[0].nip == cakin.nip &&
-                  moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
-                ) {
-                  setGrafikSubid1((nextData) => {
-                    return [...nextData, cakin];
-                  });
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[0].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid1((nextData) => {
+                  return [...nextData, cakin];
+                });
 
-                  totJlhKegiatanSub[0] =
-                    totJlhKegiatanSub[0] + cakin.jumlah_kegiatan;
-                  totRealisasiSub[0] =
-                    totRealisasiSub[0] + cakin.lampiran_diterima;
-                }
-              });
-
-              let hasil = (totRealisasiSub[0] / totJlhKegiatanSub[0]) * 100;
-              let blmRealisasi = totJlhKegiatanSub[0] - totRealisasiSub[0];
-              let realisasi = Math.trunc(totRealisasiSub[0]);
-
-              setPersenSub((nextData) => {
-                return [...nextData, Math.trunc(hasil)];
-              });
-
-              setBlmRealisasiSub((nextData) => {
-                return [...nextData, blmRealisasi];
-              });
-
-              setRealisasiKegSub((nextData) => {
-                return [...nextData, realisasi];
-              });
+                totJlhKegiatanSub[0] =
+                  totJlhKegiatanSub[0] + cakin.jumlah_kegiatan;
+                totRealisasiSub[0] =
+                  totRealisasiSub[0] + cakin.lampiran_diterima;
+              }
             });
-          }, 50);
+
+            let hasil = (totRealisasiSub[0] / totJlhKegiatanSub[0]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[0] - totRealisasiSub[0];
+            let realisasi = Math.trunc(totRealisasiSub[0]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
 
           //AMBIL CAKIN KASUBID 2
-          setTimeout(() => {
-            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-              ambilCakin.data.map((cakin) => {
-                if (
-                  kasubidArr[1].nip == cakin.nip &&
-                  moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
-                ) {
-                  setGrafikSubid2((nextData) => {
-                    return [...nextData, cakin];
-                  });
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[1].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid2((nextData) => {
+                  return [...nextData, cakin];
+                });
 
-                  totJlhKegiatanSub[1] =
-                    totJlhKegiatanSub[1] + cakin.jumlah_kegiatan;
-                  totRealisasiSub[1] =
-                    totRealisasiSub[1] + cakin.lampiran_diterima;
-                }
-              });
-
-              let hasil = (totRealisasiSub[1] / totJlhKegiatanSub[1]) * 100;
-              let blmRealisasi = totJlhKegiatanSub[1] - totRealisasiSub[1];
-              let realisasi = Math.trunc(totRealisasiSub[1]);
-
-              setPersenSub((nextData) => {
-                return [...nextData, Math.trunc(hasil)];
-              });
-
-              setBlmRealisasiSub((nextData) => {
-                return [...nextData, blmRealisasi];
-              });
-
-              setRealisasiKegSub((nextData) => {
-                return [...nextData, realisasi];
-              });
+                totJlhKegiatanSub[1] =
+                  totJlhKegiatanSub[1] + cakin.jumlah_kegiatan;
+                totRealisasiSub[1] =
+                  totRealisasiSub[1] + cakin.lampiran_diterima;
+              }
             });
-          }, 100);
+
+            let hasil = (totRealisasiSub[1] / totJlhKegiatanSub[1]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[1] - totRealisasiSub[1];
+            let realisasi = Math.trunc(totRealisasiSub[1]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
 
           //AMBIL CAKIN KASUBID 3
-          setTimeout(() => {
-            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-              ambilCakin.data.map((cakin) => {
-                if (
-                  kasubidArr[2].nip == cakin.nip &&
-                  moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
-                ) {
-                  setGrafikSubid3((nextData) => {
-                    return [...nextData, cakin];
-                  });
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                kasubidArr[2].nip == cakin.nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafikSubid3((nextData) => {
+                  return [...nextData, cakin];
+                });
 
-                  totJlhKegiatanSub[2] =
-                    totJlhKegiatanSub[2] + cakin.jumlah_kegiatan;
-                  totRealisasiSub[2] =
-                    totRealisasiSub[2] + cakin.lampiran_diterima;
-                }
-              });
-
-              let hasil = (totRealisasiSub[2] / totJlhKegiatanSub[2]) * 100;
-              let blmRealisasi = totJlhKegiatanSub[2] - totRealisasiSub[2];
-              let realisasi = Math.trunc(totRealisasiSub[2]);
-
-              setPersenSub((nextData) => {
-                return [...nextData, Math.trunc(hasil)];
-              });
-
-              setBlmRealisasiSub((nextData) => {
-                return [...nextData, blmRealisasi];
-              });
-
-              setRealisasiKegSub((nextData) => {
-                return [...nextData, realisasi];
-              });
+                totJlhKegiatanSub[2] =
+                  totJlhKegiatanSub[2] + cakin.jumlah_kegiatan;
+                totRealisasiSub[2] =
+                  totRealisasiSub[2] + cakin.lampiran_diterima;
+              }
             });
-          }, 150);
+
+            let hasil = (totRealisasiSub[2] / totJlhKegiatanSub[2]) * 100;
+            let blmRealisasi = totJlhKegiatanSub[2] - totRealisasiSub[2];
+            let realisasi = Math.trunc(totRealisasiSub[2]);
+
+            setPersenSub((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasiSub((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKegSub((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
         });
       });
     }

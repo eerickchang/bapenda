@@ -16,8 +16,6 @@ Axios.defaults.withCredentials = true;
 
 export default function Dashboard() {
   const shouldLog = useRef(true);
-  const [saveBulan, setSaveBulan] = useState();
-  const [nipUser, setNipUser] = useState();
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
@@ -27,7 +25,6 @@ export default function Dashboard() {
 
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setSubid(response.data.user[0].sub_bidang);
-        setNipUser(response.data.user[0].nip);
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
@@ -84,25 +81,27 @@ export default function Dashboard() {
             });
 
             //INPUT JUMLAH KEGIATAN BULAN INI KE DATABASE
-            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-              ambilCakin.data.map((cakin) => {
-                if (
-                  moment(cakin.bulan).format("YYYY-MM") ==
-                    moment().format("YYYY-MM") &&
-                  cakin.nip == masuk.data.user[0].nip
-                ) {
-                  if (cakin.jumlah_kegiatan != bil.length) {
-                    Axios.post("http://localhost:3001/addJumlahKegiatan", {
-                      nip: masuk.data.user[0].nip,
-                      bulan: moment().format("YYYY-MM-01"),
-                      jumlah: bil.length,
-                    });
-                  } else {
-                    null;
+            setTimeout(() => {
+              Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+                ambilCakin.data.map((cakin) => {
+                  if (
+                    moment(cakin.bulan).format("YYYY-MM") ==
+                      moment().format("YYYY-MM") &&
+                    cakin.nip == masuk.data.user[0].nip
+                  ) {
+                    if (cakin.jumlah_kegiatan != bil.length) {
+                      Axios.post("http://localhost:3001/addJumlahKegiatan", {
+                        nip: masuk.data.user[0].nip,
+                        bulan: moment().format("YYYY-MM-01"),
+                        jumlah: bil.length,
+                      });
+                    } else {
+                      null;
+                    }
                   }
-                }
+                });
               });
-            });
+            }, 100);
           }
         );
       });
@@ -129,25 +128,27 @@ export default function Dashboard() {
             });
 
             //INPUT LAMPIRAN DISUBMIT BULAN INI KE DATABASE
-            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-              ambilCakin.data.map((cakin) => {
-                if (
-                  moment(cakin.bulan).format("YYYY-MM") ==
-                    moment().format("YYYY-MM") &&
-                  cakin.nip == masuk.data.user[0].nip
-                ) {
-                  if (cakin.lampiran_disubmit != bil.length) {
-                    Axios.post("http://localhost:3001/addKegiatanS", {
-                      nip: masuk.data.user[0].nip,
-                      bulan: moment().format("YYYY-MM-01"),
-                      jumlah: bil.length,
-                    });
-                  } else {
-                    null;
+            setTimeout(() => {
+              Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+                ambilCakin.data.map((cakin) => {
+                  if (
+                    moment(cakin.bulan).format("YYYY-MM") ==
+                      moment().format("YYYY-MM") &&
+                    cakin.nip == masuk.data.user[0].nip
+                  ) {
+                    if (cakin.lampiran_disubmit != bil.length) {
+                      Axios.post("http://localhost:3001/addKegiatanS", {
+                        nip: masuk.data.user[0].nip,
+                        bulan: moment().format("YYYY-MM-01"),
+                        jumlah: bil.length,
+                      });
+                    } else {
+                      null;
+                    }
                   }
-                }
+                });
               });
-            });
+            }, 100);
           }
         );
       });
@@ -173,25 +174,27 @@ export default function Dashboard() {
           });
 
           //INPUT LAMPIRAN BELUM SUBMIT BULAN INI KE DATABASE
-          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
-            ambilCakin.data.map((cakin) => {
-              if (
-                moment(cakin.bulan).format("YYYY-MM") ==
-                  moment().format("YYYY-MM") &&
-                cakin.nip == masuk.data.user[0].nip
-              ) {
-                if (cakin.lampiran_bsubmit != bil.length) {
-                  Axios.post("http://localhost:3001/addKegiatanBS", {
-                    nip: masuk.data.user[0].nip,
-                    bulan: moment().format("YYYY-MM-01"),
-                    jumlah: bil.length,
-                  });
-                } else {
-                  null;
+          setTimeout(() => {
+            Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+              ambilCakin.data.map((cakin) => {
+                if (
+                  moment(cakin.bulan).format("YYYY-MM") ==
+                    moment().format("YYYY-MM") &&
+                  cakin.nip == masuk.data.user[0].nip
+                ) {
+                  if (cakin.lampiran_bsubmit != bil.length) {
+                    Axios.post("http://localhost:3001/addKegiatanBS", {
+                      nip: masuk.data.user[0].nip,
+                      bulan: moment().format("YYYY-MM-01"),
+                      jumlah: bil.length,
+                    });
+                  } else {
+                    null;
+                  }
                 }
-              }
+              });
             });
-          });
+          }, 100);
         });
       });
 
@@ -273,20 +276,6 @@ export default function Dashboard() {
       bulan: "Desember",
     },
   ];
-
-  // const userData = {
-  //   labels: UserData?.map((data) => data.bulan),
-  //   datasets: [
-  //     {
-  //       label: "Kinerja",
-  //       data: UserData?.map((data) => data.kinerja),
-  //       backgroundColor: ["#1bddbb"],
-  //       borderRadius: 10,
-
-  //       // hoverBackgroundColor: ["#112350"],
-  //     },
-  //   ],
-  // };
 
   const userData = {
     labels: UserData?.map((data) => data.bulan),

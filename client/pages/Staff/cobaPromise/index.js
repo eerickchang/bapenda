@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 export default function cobaPromise() {
-  const [arr, setArr] = useState([]);
-  // const coba = new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve("selesai");
-  //   }, 2000);
-  // });
-  // coba.then(() => console.log(coba));
-  function tesPromise() {
+  const [text1, setText1] = useState("");
+  const [text2, setText2] = useState("");
+
+  function function1() {
     return new Promise((resolve, reject) => {
-      resolve("oke");
+      resolve("ke 1");
     });
   }
 
-  // const coba = tesPromise();
-  // coba.then(() => console.log(coba)).catch(() => console.log(coba));
+  function function2() {
+    return new Promise((resolve, reject) => {
+      resolve("ke 2");
+    });
+  }
 
   async function cobaAsync() {
     try {
-      const coba = await tesPromise();
-      console.log(coba);
+      let result = await Promise.all([function2(), function1()]);
+      console.log(result);
     } catch (err) {
       console.log(err);
     }
