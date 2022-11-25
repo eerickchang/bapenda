@@ -538,7 +538,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi[0]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -546,7 +546,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg[0]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -582,7 +582,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi[1]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -590,7 +590,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak3} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg[1]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -626,7 +626,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi[2]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -634,7 +634,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg[2]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -670,7 +670,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi[3]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -678,7 +678,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak3} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg[3]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -714,7 +714,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasi[4]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -722,7 +722,7 @@ export default function Profil() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKeg[4]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
