@@ -12,7 +12,6 @@ import { DoughnutChart } from "../../components/DoughnutChart";
 export default function Profil() {
   const [tahun, setTahun] = useState("");
   const [dataAsn, setDataAsn] = useState("");
-  const [grafikPersonal, setGrafikPersonal] = useState([]);
   const [ambilKabid, setAmbilKabid] = useState([]);
   const [grafik1, setGrafik1] = useState([]);
   const [grafik2, setGrafik2] = useState([]);
@@ -192,6 +191,42 @@ export default function Profil() {
             });
           });
         }, 300);
+
+        //AMBIL CAKIN BIDANG 4
+        setTimeout(() => {
+          Axios.get("http://localhost:3001/cakin").then((ambilCakin) => {
+            ambilCakin.data.map((cakin) => {
+              if (
+                cakin.nip == kabid[4].nip &&
+                moment(cakin.bulan).format("YYYY") === moment().format("YYYY")
+              ) {
+                setGrafik5((nextData) => {
+                  return [...nextData, cakin];
+                });
+
+                totJlhKegiatan[4] = totJlhKegiatan[4] + cakin.jumlah_kegiatan;
+                totRealisasi[4] = totRealisasi[4] + cakin.lampiran_diterima;
+              }
+            });
+
+            let hasil = (totRealisasi[4] / totJlhKegiatan[4]) * 100;
+            console.log(hasil);
+            let blmRealisasi = totJlhKegiatan[4] - totRealisasi[4];
+            let realisasi = Math.trunc(totRealisasi[4]);
+
+            setPersen((nextData) => {
+              return [...nextData, Math.trunc(hasil)];
+            });
+
+            setBlmRealisasi((nextData) => {
+              return [...nextData, blmRealisasi];
+            });
+
+            setRealisasiKeg((nextData) => {
+              return [...nextData, realisasi];
+            });
+          });
+        }, 400);
       });
     }
   }, []);
@@ -328,7 +363,7 @@ export default function Profil() {
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
+        data: grafik5?.map((data) => data.hasil_kinerja),
         backgroundColor: ["#1BDDBB"],
         borderRadius: 10,
         barThickness: 40,

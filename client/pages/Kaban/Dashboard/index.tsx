@@ -4,14 +4,12 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  SidebarStaff,
   TopPegawai,
 } from "../../../components";
 import styles from "./dashboard.module.css";
 import sidebarStyles from "../../../KabanComponent/SidebarAdmin/sidebar.module.css";
 import Axios from "axios";
 import moment from "moment";
-import Image from "next/image";
 import { SidebarAdmin } from "../../../KabanComponent";
 
 Axios.defaults.withCredentials = true;
