@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+// import Image from "next/future/image";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ContentDetailCakin.module.css";
@@ -17,6 +17,7 @@ import moment from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import Image from "next/image";
 
 Axios.defaults.withCredentials = true;
 
@@ -75,7 +76,12 @@ export default function CCaKinSubidang() {
                       nama: pegawai.nama,
                       nip: pegawai.nip,
                       foto: (
-                        <Image src={`${pegawai.foto}`} width={50} height={50} />
+                        <Image
+                          src={`${pegawai.foto}`}
+                          width={50}
+                          height={50}
+                          style={{ borderRadius: 50 }}
+                        />
                       ),
                     },
                   ];
@@ -87,7 +93,7 @@ export default function CCaKinSubidang() {
                     {
                       nama: pegawai.nama,
                       nip: pegawai.nip,
-                      foto: <Image src={"/User1.svg"} width={50} height={50} />,
+                      foto: <Image src={"/User1.svg"} width={50} height={50} style={{borderRadius: 50}}/>,
                     },
                   ];
                 });

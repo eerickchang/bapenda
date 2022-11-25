@@ -40,6 +40,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotak:focus {
@@ -63,6 +64,7 @@
   border-radius: 10px;
   background-color: #112350;
   border: none;
+  cursor: pointer;
 }
 
 .kotakLogOut:focus {
