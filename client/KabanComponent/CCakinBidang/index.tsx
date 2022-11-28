@@ -232,6 +232,7 @@ export default function CCakinBidang() {
     },
   ];
 
+  //
   const bidangChart1 = {
     labels: UserData?.map((data) => data.bulan),
     datasets: [
