@@ -441,11 +441,11 @@ export default function Profil() {
 
   const router = useRouter();
 
-  const clickCakinBidang = () => {
-    console.log(persen);
-  };
+  // const clickCakinBidang = () => {
+  //   console.log(persen);
+  // };
 
-  const clickCakinBidang2 = (bidang) => {
+  const clickCakinBidang = (bidang) => {
     if (bidang == "Sekretaris") {
       router.push({
         pathname: "/Kaban/CakinBidang",

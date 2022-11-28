@@ -269,6 +269,7 @@ export default function CCakinBidang() {
           </p>
         </div>
         <Gap height={140} width={0} />
+        {/* BAR CONTAINER 1 */}
         <div
           className={styles.barContainer1}
           onClick={() => {
@@ -310,7 +311,9 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
-        <Gap height={40} width={0}/>
+        <Gap height={40} width={0} />
+
+        {/* BAR CONTAINER 2 */}
         <div
           className={styles.barContainer2}
           onClick={() => {
@@ -352,7 +355,9 @@ export default function CCakinBidang() {
             </div>
           </div>
         </div>
-        <Gap height={40} width={0}/>
+        <Gap height={40} width={0} />
+
+        {/* BAR CONTAINER 3 */}
         <div
           className={styles.barContainer3}
           onClick={() => {
