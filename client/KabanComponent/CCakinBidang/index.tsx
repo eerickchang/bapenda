@@ -465,7 +465,7 @@ export default function CCakinBidang() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[1]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -473,7 +473,7 @@ export default function CCakinBidang() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak3} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[1]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
