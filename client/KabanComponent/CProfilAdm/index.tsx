@@ -440,42 +440,12 @@ export default function Profil() {
   // };
 
   const clickCakinBidang = (bidang) => {
-    if (bidang == ambilKabid[0].bidang) {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: ambilKabid[0].bidang,
-        },
-      });
-    } else if (bidang == ambilKabid[1].bidang) {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: ambilKabid[1].bidang,
-        },
-      });
-    } else if (bidang == ambilKabid[2].bidang) {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: ambilKabid[2].bidang,
-        },
-      });
-    } else if (bidang == ambilKabid[3].bidang) {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: ambilKabid[3].bidang,
-        },
-      });
-    } else if (bidang == ambilKabid[4].bidang) {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: ambilKabid[4].bidang,
-        },
-      });
-    }
+    router.push({
+      pathname: "/Kaban/CakinBidang",
+      query: {
+        bidang: bidang,
+      },
+    });
   };
 
   return (

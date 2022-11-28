@@ -327,7 +327,18 @@ export default function CCakinBidang() {
     console.log("Oke");
   };
 
-  const clickCakinSubidang = (subidClick) => {
+  const clickCakinSubidang = (subidClick, nipKasub) => {
+    router.push({
+      pathname: "/Kaban/CakinSubidang",
+      query: {
+        subid: subidClick,
+        bidang: router.query.bidang,
+        nipKasub: nipKasub,
+      },
+    });
+  };
+
+  const clickCakinSubidang2 = (subidClick) => {
     if (router.query.subid1 == subidClick) {
       router.push({
         pathname: "/Kaban/CakinSubidang",
@@ -396,7 +407,7 @@ export default function CCakinBidang() {
           <div
             className={styles.barContainer1}
             onClick={() => {
-              clickCakinSubidang(subid[0].sub_bidang);
+              clickCakinSubidang(subid[0].sub_bidang, subid[0].nip);
             }}
           >
             <p className={styles.txtBidang}>{subid[0].sub_bidang}</p>
@@ -442,7 +453,7 @@ export default function CCakinBidang() {
           <div
             className={styles.barContainer2}
             onClick={() => {
-              clickCakinSubidang(subid[1].sub_bidang);
+              clickCakinSubidang(subid[1].sub_bidang, subid[1].nip);
             }}
           >
             <p className={styles.txtBidang}>{subid[1].sub_bidang}</p>
@@ -488,7 +499,7 @@ export default function CCakinBidang() {
           <div
             className={styles.barContainer3}
             onClick={() => {
-              clickCakinSubidang(subid[2].sub_bidang);
+              clickCakinSubidang(subid[2].sub_bidang, subid[2].nip);
             }}
           >
             <p className={styles.txtBidang}>{subid[2].sub_bidang}</p>
@@ -511,7 +522,7 @@ export default function CCakinBidang() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[2]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -519,7 +530,7 @@ export default function CCakinBidang() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[2]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
