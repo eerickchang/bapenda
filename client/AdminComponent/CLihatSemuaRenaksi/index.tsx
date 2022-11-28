@@ -31,7 +31,6 @@ export default function CLihatSemuaRenaksi() {
   const [nama, setNama] = useState("");
   const [ketAdmin, setKetAdmin] = useState("");
   const [arr, setArr] = useState([]);
-  // let arr = [];
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -334,12 +333,7 @@ export default function CLihatSemuaRenaksi() {
               unmountOnExit
               sx={styleKeterangan}
             >
-              <p>
-                Staff tidak boleh minum kopi Staff tidak boleh minum kopi Staff
-                tidak boleh minum kopi Staff tidak boleh minum kopi Staff tidak
-                boleh minum kopi Staff tidak boleh minum kopi Staff tidak boleh
-                minum kopi
-              </p>
+              <p>{pegawai[0].ket_kaban}</p>
             </Collapse>
             <TableContainer style={styleContainer}>
               <Table>
