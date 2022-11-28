@@ -62,7 +62,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         sx={{ "& > *": { borderBottom: "" } }}
       >
         <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center"}}>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
             {row.foto === "" ? (
               <Image
                 src={"/SidebarProfile.svg"}
@@ -182,6 +182,41 @@ export const ContentRiwayatKegiatan = () => {
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
+
+  const menuRefTahun = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefTahun.current.contains(e.target)) {
+        setActiveDropdownTahun(false);
+        console.log(menuRefTahun.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefUnduh = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefUnduh.current.contains(e.target)) {
+        setActiveDropdownUnduh(false);
+        console.log(menuRefUnduh.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
 
   const tahun = [
     {
@@ -369,7 +404,7 @@ export const ContentRiwayatKegiatan = () => {
             </div>
             <Gap height={153} width={0} />
             <div className={stylesS.wrapperFilter}>
-              <div className={stylesS.wrapperFilterTahun}>
+              <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
                   className={stylesS.btnFilterTahun}
                   onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -390,7 +425,7 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
-              <div className={stylesS.wrapperUnduh}>
+              <div className={stylesS.wrapperUnduh} ref={menuRefUnduh}>
                 <div
                   className={stylesS.btnUnduh}
                   onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}

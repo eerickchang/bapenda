@@ -106,29 +106,11 @@
   padding-left: 20px; */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-.wrap {
-  display: block;
-  margin-left: 140px;
-} */
-
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   padding-left: 40px;
-}
+} */
 
 .wrapperDataPegawai {
   display: flex;
@@ -169,6 +151,7 @@
   position: absolute;
   top: 160px;
   right: 215px;
+  /* overflow: auto; */
 }
 
 .btnFilter {
@@ -209,6 +192,11 @@
   position: absolute;
   background-color: #fff;
   top: 55px;
+  overflow: auto;
+}
+
+.wrapperSelectStatus::-webkit-scrollbar {
+    display: none;
 }
 
 .wrapperSelectStatus p {
@@ -286,7 +274,7 @@
 /* ! STYLE BELUM DISUBMIT */
 .styleTupoksiBS{
   padding: 5px;
-  background-color: rgba(233, 0, 95, 1);
+  background-color: rgb(233, 124, 0);
   border-radius: 4px;
   width: 171px;
   display: flex;
@@ -299,7 +287,7 @@
 
 .styleTupoksiTambahanBS{
   padding: 5px;
-  background-color: rgba(233, 0, 95, 1);
+  background-color: rgb(233, 124, 0);
   border-radius: 4px;
   width: 171px;
   display: flex;
@@ -315,118 +303,15 @@
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  color: rgba(233, 0, 95, 1);
+  /* color: rgba(233, 0, 95, 1); */
+  color: rgb(233, 124, 0);
 }
 
 .styleTxtRowRencanaBS{
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 500;
-  color: rgba(233, 0, 95, 1);
-}
-/* 
-.table td {
-  border-bottom: 2px solid red;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  height: 161px;
+  /* color: rgba(233, 0, 95, 1); */
+ color: rgb(233, 113, 0);
 }
 
-.table tr {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  width: 1000px;
-  border-bottom: 2px solid red;
-  margin-bottom: 20px;
-}
-
-.tablee {
-  width: 1690px;
-  height: 161px;
-}
-
-.headerTable {
-  font-family: "Poppins", sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  color: #959595;
-}
-
-.tableTr{
-  width: 1600px;
-}
-
-.wrapperExpandableRow{
-  display: flex;
-}
-
-
-Button Unggah Expand
-.btnUnggah{
-  background-color: rgba(27, 221, 187, 1);
-  width: 209px;
-  height: 71px;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btnUnggah p{
-  color: black;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  margin-left: 12px;
-}
-
-Button Ubah Jadwal Expand
-.btnUbahJadwal{
-  background-color: rgba(221, 202, 27, 1);
-  width: 246px;
-  height: 71px;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btnUbahJadwal p{
-  color: black;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  margin-left: 12px;
-}
-
-Button Hapus Expand
-.btnHapus{
-  background-color: rgba(255, 1, 100, 1);
-  width: 209px;
-  height: 71px;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 22px;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btnHapus p{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 22px;
-  margin-left: 12px;
-}
- */

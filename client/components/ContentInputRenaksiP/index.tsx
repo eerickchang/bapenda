@@ -153,6 +153,23 @@ export default function ContentInputRenaksiP() {
 
   const [activeFormat, setActiveFormat] = useState(false);
 
+    const menuRef = useRef();
+
+    useEffect(() => {
+      const handler = (e) => {
+        if (!menuRef.current.contains(e.target)) {
+          setActiveFormat(false);
+          console.log(menuRef.current);
+        }
+      };
+
+      document.addEventListener("mousedown", handler);
+
+      return () => {
+        document.removeEventListener("mousedown", handler);
+      };
+    });
+
   const optionsTupoksi = [
     {
       value: "see-samrat",
@@ -339,7 +356,7 @@ export default function ContentInputRenaksiP() {
         className={styles.wrapperBtnExcel}
         onClick={(e) => setActiveFormat(!activeFormat)}
       >
-        <div className={styles.btnExcel}>
+        <div ref={menuRef} className={styles.btnExcel}>
           <Image src={"/Excel.svg"} width={35} height={35} />
           <p>Format Excel</p>
         </div>

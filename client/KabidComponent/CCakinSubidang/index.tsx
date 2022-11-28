@@ -1,23 +1,21 @@
 // import Image from "next/future/image";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ContentDetailCakin.module.css";
 
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
-import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import Image from "next/image";
+import moment from "moment";
+import Image from "next/future/image";
+import * as XLSX from "xlsx";
+import Gap from "../Gap";
 
 Axios.defaults.withCredentials = true;
 
@@ -114,6 +112,59 @@ export default function CCaKinSubidang() {
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
+
+  const menuRefTahun = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefTahun.current.contains(e.target)) {
+        setActiveDropdownTahun(false);
+        console.log(menuRefTahun.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefUnduh = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefUnduh.current.contains(e.target)) {
+        setActiveDropdownUnduh(false);
+        console.log(menuRefUnduh.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefPegawai = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefPegawai.current.contains(e.target)) {
+        setActiveDropdownPegawai(false);
+        console.log(menuRefPegawai.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -352,7 +403,7 @@ export default function CCaKinSubidang() {
         </div>
 
         <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterPegawai}>
+          <div className={styles.wrapperFilterPegawai} ref={menuRefPegawai}>
             <div
               className={styles.btnFilterPegawai}
               onClick={() => setActiveDropdownPegawai(!activeDropdownPegawai)}
@@ -414,7 +465,7 @@ export default function CCaKinSubidang() {
             )}
           </div>
 
-          <div className={styles.wrapperFilterTahun}>
+          <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -437,7 +488,7 @@ export default function CCaKinSubidang() {
               </div>
             )}
           </div>
-          <div className={styles.wrapperUnduh}>
+          <div className={styles.wrapperUnduh} ref={menuRefUnduh}>
             <div
               className={styles.btnUnduh}
               onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
