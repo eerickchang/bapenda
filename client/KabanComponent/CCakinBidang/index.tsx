@@ -294,7 +294,7 @@ export default function CCakinBidang() {
   };
 
   const donatChart2 = {
-    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
+    labels: [`${realisasiKegSub[1]}`, `${blmRealisasiSub[1]}`],
     datasets: [
       {
         label: "GAS",
