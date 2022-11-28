@@ -319,17 +319,9 @@ export default function CCakinBidang() {
     ],
   };
 
-  const clickLihatDetail = () => {
-    router.push("/Staff/DetailCaKin");
-  };
-
-  const clickSekretaris = () => {
-    console.log("Oke");
-  };
-
   const clickCakinSubidang = (subidClick, nipKasub) => {
     router.push({
-      pathname: "/Kaban/CakinSubidang",
+      pathname: "/Admin/CakinSubidang",
       query: {
         subid: subidClick,
         bidang: router.query.bidang,
