@@ -118,7 +118,7 @@ export default function CProfilAdm() {
                 return [...nextData, realisasi];
               });
             });
-          }, 50);
+          }, 100);
 
           //AMBIL CAKIN KASUBID 2
           setTimeout(() => {
@@ -155,7 +155,7 @@ export default function CProfilAdm() {
                 return [...nextData, realisasi];
               });
             });
-          }, 100);
+          }, 200);
 
           //AMBIL CAKIN KASUBID 3
           setTimeout(() => {
@@ -192,7 +192,7 @@ export default function CProfilAdm() {
                 return [...nextData, realisasi];
               });
             });
-          }, 150);
+          }, 300);
         });
       });
     }
