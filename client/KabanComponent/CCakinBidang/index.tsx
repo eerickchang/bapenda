@@ -294,11 +294,11 @@ export default function CCakinBidang() {
   };
 
   const donatChart2 = {
-    labels: [`${realisasiKegSub[1]}`, `${blmRealisasiSub[1]}`],
+    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[1]}`, `${blmRealisasiSub[1]}`],
         backgroundColor: ["#1BC6DD", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -307,11 +307,11 @@ export default function CCakinBidang() {
   };
 
   const donatChart3 = {
-    labels: [`${realisasiKegSub[2]}`, `${blmRealisasiSub[2]}`],
+    labels: ["Realisasi Kegiatan", "Belum Direalisasikan"],
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[2]}`, `${blmRealisasiSub[2]}`],
         backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
@@ -392,7 +392,7 @@ export default function CCakinBidang() {
         </div>
         <Gap height={140} width={0} />
         {/* BAR CONTAINER 1 */}
-        {subid.length != 0 ? (
+        {subid.length != 0 && persenSub[0] != null ? (
           <div
             className={styles.barContainer1}
             onClick={() => {
@@ -413,13 +413,13 @@ export default function CCakinBidang() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart1} />
+                <DoughnutChart data={donatChart1} txtTitle={persenSub[0]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>10</p>
+                    <p className={styles.txtJumlah}>{blmRealisasiSub[0]}</p>
                     <p className={styles.txtJumlahKeg}>Belum Direalisasikan</p>
                   </div>
                 </div>
@@ -427,7 +427,7 @@ export default function CCakinBidang() {
                 <div className={styles.ketWrapper}>
                   <div className={styles.kotak2} />
                   <div style={{ marginLeft: 10 }}>
-                    <p className={styles.txtJumlah}>90</p>
+                    <p className={styles.txtJumlah}>{realisasiKegSub[0]}</p>
                     <p className={styles.txtRealisasi}>Realisasi Kegiatan</p>
                   </div>
                 </div>
@@ -438,7 +438,7 @@ export default function CCakinBidang() {
         <Gap height={40} width={0} />
 
         {/* BAR CONTAINER 2 */}
-        {subid.length != 0 ? (
+        {subid.length != 0 && persenSub[1] != null ? (
           <div
             className={styles.barContainer2}
             onClick={() => {
@@ -459,7 +459,7 @@ export default function CCakinBidang() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart2} />
+                <DoughnutChart data={donatChart2} txtTitle={persenSub[1]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
                 <div className={styles.ketWrapper}>
@@ -484,7 +484,7 @@ export default function CCakinBidang() {
         <Gap height={40} width={0} />
 
         {/* BAR CONTAINER 3 */}
-        {subid.length != 0 ? (
+        {subid.length != 0 && persenSub[2] != null ? (
           <div
             className={styles.barContainer3}
             onClick={() => {
@@ -505,7 +505,7 @@ export default function CCakinBidang() {
                   marginTop: 65,
                 }}
               >
-                <DoughnutChart data={donatChart3} />
+                <DoughnutChart data={donatChart3} txtTitle={persenSub[2]} />
               </div>
               <div style={{ marginLeft: 22, marginTop: 50, flex: 0.2 }}>
                 <div className={styles.ketWrapper}>
