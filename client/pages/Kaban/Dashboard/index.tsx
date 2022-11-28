@@ -208,8 +208,71 @@ export default function Dashboard() {
   const [blmSubmit, setBlmSubmit] = useState([]);
   const [prevMonth, setPrevMonth] = useState("");
 
+  const UserData = [
+    {
+      id: 1,
+      kinerja: 90,
+      bulan: "Januari",
+    },
+    {
+      id: 2,
+      kinerja: 70,
+      bulan: "Februari",
+    },
+    {
+      id: 3,
+      kinerja: 80,
+      bulan: "Maret",
+    },
+    {
+      id: 4,
+      kinerja: 70,
+      bulan: "April",
+    },
+    {
+      id: 5,
+      kinerja: 60,
+      bulan: "Mei",
+    },
+    {
+      id: 6,
+      kinerja: 90,
+      bulan: "Juni",
+    },
+    {
+      id: 7,
+      kinerja: 100,
+      bulan: "Juli",
+    },
+    {
+      id: 8,
+      kinerja: 80,
+      bulan: "Agustus",
+    },
+    {
+      id: 9,
+      kinerja: 70,
+      bulan: "September",
+    },
+    {
+      id: 10,
+      kinerja: 80,
+      bulan: "Oktober",
+    },
+    {
+      id: 11,
+      kinerja: 70,
+      bulan: "November",
+    },
+    {
+      id: 12,
+      kinerja: 100,
+      bulan: "Desember",
+    },
+  ];
+
   const userData = {
-    labels: grafik?.map((data) => moment(data.bulan).format("MMM")),
+    labels: UserData?.map((data) => data.bulan),
     datasets: [
       {
         label: "Kinerja Pegawai",

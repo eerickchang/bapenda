@@ -67,7 +67,6 @@ export default function Profil() {
           });
 
           let hasil = (totRealisasi[0] / totJlhKegiatan[0]) * 100;
-          console.log(hasil);
           let blmRealisasi = totJlhKegiatan[0] - totRealisasi[0];
           let realisasi = Math.trunc(totRealisasi[0]);
 
@@ -102,7 +101,6 @@ export default function Profil() {
             });
 
             let hasil = (totRealisasi[1] / totJlhKegiatan[1]) * 100;
-            console.log(hasil);
             let blmRealisasi = totJlhKegiatan[1] - totRealisasi[1];
             let realisasi = Math.trunc(totRealisasi[1]);
 
@@ -138,7 +136,6 @@ export default function Profil() {
             });
 
             let hasil = (totRealisasi[2] / totJlhKegiatan[2]) * 100;
-            console.log(hasil);
             let blmRealisasi = totJlhKegiatan[2] - totRealisasi[2];
             let realisasi = Math.trunc(totRealisasi[2]);
 
@@ -174,7 +171,6 @@ export default function Profil() {
             });
 
             let hasil = (totRealisasi[3] / totJlhKegiatan[3]) * 100;
-            console.log(hasil);
             let blmRealisasi = totJlhKegiatan[3] - totRealisasi[3];
             let realisasi = Math.trunc(totRealisasi[3]);
 
@@ -210,7 +206,6 @@ export default function Profil() {
             });
 
             let hasil = (totRealisasi[4] / totJlhKegiatan[4]) * 100;
-            console.log(hasil);
             let blmRealisasi = totJlhKegiatan[4] - totRealisasi[4];
             let realisasi = Math.trunc(totRealisasi[4]);
 
@@ -442,61 +437,15 @@ export default function Profil() {
   const router = useRouter();
 
   // const clickCakinBidang = () => {
-  //   console.log(persen);
   // };
 
   const clickCakinBidang = (bidang) => {
-    if (bidang == "Sekretaris") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Sekretaris",
-          subid1: "Hukum dan Kepegawaian",
-          subid2: "Perencanaan dan Keuangan",
-          subid3: "Umum",
-        },
-      });
-    } else if (bidang == "Perencanaan dan Pengembangan") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Perencanaan dan Pengembangan",
-          subid1: "Pengelolaan Pendapatan Daerah",
-          subid2: "Pengembangan Teknologi",
-          subid3: "Pelaporan Data Pendapatan",
-        },
-      });
-    } else if (bidang == "Retribusi dan Lain-lain Pendapatan") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Retribusi dan Lain-lain Pendapatan",
-          subid1: "Retribusi",
-          subid2: "Bagi Hasil Pajak dan Bagi Hasil Bukan Pajak",
-          subid3: "Lain-lain Pendapatan",
-        },
-      });
-    } else if (bidang == "Pajak Daerah") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Pajak Daerah",
-          subid1: "Administrasi dan Pelayanan Pajak",
-          subid2: "PKB dan BBN-KB",
-          subid3: "PBBKB, PAP dan Pajak Rokok",
-        },
-      });
-    } else if (bidang == "Pengendalian dan Evaluasi") {
-      router.push({
-        pathname: "/Kaban/CakinBidang",
-        query: {
-          bidang: "Pengendalian dan Evaluasi",
-          subid1: "Evaluasi Kinerja",
-          subid2: "Pengendalian dan Pembinaan Administrasi",
-          subid3: "Pengendalian Pendapatan Daerah",
-        },
-      });
-    }
+    router.push({
+      pathname: "/Kaban/CakinBidang",
+      query: {
+        bidang: bidang,
+      },
+    });
   };
 
   return (
@@ -516,7 +465,7 @@ export default function Profil() {
           <div
             className={styles.barContainer1}
             onClick={() => {
-              clickCakinBidang("Sekretaris");
+              clickCakinBidang(ambilKabid[0].bidang);
             }}
           >
             <p className={styles.txtBidang}>{ambilKabid[0].bidang}</p>
@@ -560,7 +509,7 @@ export default function Profil() {
           <div
             className={styles.barContainer2}
             onClick={() => {
-              clickCakinBidang("Perencanaan dan Pengembangan");
+              clickCakinBidang(ambilKabid[1].bidang);
             }}
           >
             <p className={styles.txtBidang}>{ambilKabid[1].bidang}</p>
@@ -604,7 +553,7 @@ export default function Profil() {
           <div
             className={styles.barContainer3}
             onClick={() => {
-              clickCakinBidang("Retribusi dan Lain-lain Pendapatan");
+              clickCakinBidang(ambilKabid[2].bidang);
             }}
           >
             <p className={styles.txtBidang}>{ambilKabid[2].bidang}</p>
@@ -648,7 +597,7 @@ export default function Profil() {
           <div
             className={styles.barContainer4}
             onClick={() => {
-              clickCakinBidang("Pajak Daerah");
+              clickCakinBidang(ambilKabid[3].bidang);
             }}
           >
             <p className={styles.txtBidang}>{ambilKabid[3].bidang}</p>
@@ -692,7 +641,7 @@ export default function Profil() {
           <div
             className={styles.barContainer5}
             onClick={() => {
-              clickCakinBidang("Pengendalian dan Evaluasi");
+              clickCakinBidang(ambilKabid[4].bidang);
             }}
           >
             <p className={styles.txtBidang}>{ambilKabid[4].bidang}</p>
