@@ -232,7 +232,6 @@ export default function CCakinBidang() {
     },
   ];
 
-  //
   const bidangChart1 = {
     labels: UserData?.map((data) => data.bulan),
     datasets: [
@@ -286,7 +285,7 @@ export default function CCakinBidang() {
     datasets: [
       {
         label: "GAS",
-        data: [90, 10],
+        data: [`${realisasiKegSub[0]}`, `${blmRealisasiSub[0]}`],
         backgroundColor: ["#1BDDBB", "rgba(54, 162, 235, 0.2)"],
         borderWidth: 1,
         barThickness: 30,
