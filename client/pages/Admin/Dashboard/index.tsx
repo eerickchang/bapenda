@@ -4,14 +4,12 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  SidebarStaff,
   TopPegawai,
 } from "../../../components";
 import styles from "./dashboard.module.css";
 import sidebarStyles from "../../../AdminComponent/SidebarAdmin/sidebar.module.css";
 import Axios from "axios";
 import moment from "moment";
-import Image from "next/image";
 import { SidebarAdmin } from "../../../AdminComponent";
 
 Axios.defaults.withCredentials = true;
@@ -21,15 +19,23 @@ export default function Dashboard() {
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
+      let infoBulan: string;
 
       setPrevMonth(moment().subtract(1, "month").format("MMMM YYYY"));
 
-      Axios.get("http://localhost:3001/masuk").then((response) => {
-        console.log(response.data.user[0].nip);
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        let kaban;
+
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kepala Badan") {
+            kaban = pegawai;
+          }
+        });
+
         Axios.get("http://localhost:3001/cakin").then((result) => {
           result.data.map((item) => {
             if (
-              response.data.user[0].nip === item.nip &&
+              kaban.nip === item.nip &&
               moment(item.bulan).format("YYYY") === moment().format("YYYY")
             ) {
               setGrafik((nextData) => {
@@ -41,57 +47,68 @@ export default function Dashboard() {
       });
 
       //AMBIL CAKIN JUMLAH KEGIATAN
-      Axios.get("http://localhost:3001/jumlahKegiatan").then(
-        (jumlahKegiatan) => {
-          jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setJlhKegiatan((nextData) => {
-                return [...nextData, jumlahKegiatanMAP];
-              });
-            }
-          });
-        }
-      );
-
-      //AMBIL CAKIN LAMPIRAN DISUBMIT
-      Axios.get("http://localhost:3001/lampiranDisubmit").then(
-        (lampiranDisubmit) => {
-          lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
-            if (
-              moment().format("YYYY-MM") >=
-                moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
-              moment().format("YYYY-MM") ===
-                moment(lampiranDisubmitMAP.end_date).format("YYYY-MM")
-            ) {
-              // console.log(ambilRenaksiMAP);
-              setLprSubmit((nextData) => {
-                return [...nextData, lampiranDisubmitMAP];
-              });
-            }
-          });
-        }
-      );
-
-      //AMBIL CAKIN BELUM DISUBMIT
-      Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
-        belumSubmit.data.map((belumSubmitMAP) => {
-          if (
-            moment().format("YYYY-MM") >=
-              moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
-            moment().format("YYYY-MM") ===
-              moment(belumSubmitMAP.end_date).format("YYYY-MM")
-          ) {
-            // console.log(ambilRenaksiMAP);
-            setBlmSubmit((nextData) => {
-              return [...nextData, belumSubmitMAP];
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
+        Axios.get("http://localhost:3001/jumlahKegiatan").then(
+          (jumlahKegiatan) => {
+            jumlahKegiatan.data.map((jumlahKegiatanMAP) => {
+              if (
+                moment().format("YYYY-MM") >=
+                  moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
+                moment().format("YYYY-MM") ===
+                  moment(jumlahKegiatanMAP.end_date).format("YYYY-MM")
+              ) {
+                setJlhKegiatan((nextData) => {
+                  return [...nextData, jumlahKegiatanMAP];
+                });
+                bil = [...bil, jumlahKegiatanMAP];
+              }
             });
           }
+        );
+      });
+
+      //AMBIL CAKIN LAMPIRAN DISUBMIT
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
+        Axios.get("http://localhost:3001/lampiranDisubmit").then(
+          (lampiranDisubmit) => {
+            lampiranDisubmit.data.map((lampiranDisubmitMAP) => {
+              if (
+                moment().format("YYYY-MM") >=
+                  moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
+                moment().format("YYYY-MM") ===
+                  moment(lampiranDisubmitMAP.end_date).format("YYYY-MM")
+              ) {
+                // console.log(ambilRenaksiMAP);
+                setLprSubmit((nextData) => {
+                  return [...nextData, lampiranDisubmitMAP];
+                });
+                bil = [...bil, lampiranDisubmitMAP];
+              }
+            });
+          }
+        );
+      });
+
+      //AMBIL CAKIN BELUM DISUBMIT
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        let bil = [];
+        Axios.get("http://localhost:3001/belumSubmit").then((belumSubmit) => {
+          belumSubmit.data.map((belumSubmitMAP) => {
+            if (
+              moment().format("YYYY-MM") >=
+                moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
+              moment().format("YYYY-MM") ===
+                moment(belumSubmitMAP.end_date).format("YYYY-MM")
+            ) {
+              // console.log(ambilRenaksiMAP);
+              setBlmSubmit((nextData) => {
+                return [...nextData, belumSubmitMAP];
+              });
+              bil = [...bil, belumSubmitMAP];
+            }
+          });
         });
       });
 
@@ -114,52 +131,62 @@ export default function Dashboard() {
     {
       id: 1,
       kinerja: 90,
-      bulan: "Jan",
+      bulan: "Januari",
     },
     {
       id: 2,
       kinerja: 70,
-      bulan: "Feb",
+      bulan: "Februari",
     },
     {
       id: 3,
       kinerja: 80,
-      bulan: "Mar",
+      bulan: "Maret",
     },
     {
       id: 4,
-      kinerja: 60,
-      bulan: "Apr",
+      kinerja: 70,
+      bulan: "April",
     },
     {
       id: 5,
-      kinerja: 85,
+      kinerja: 60,
       bulan: "Mei",
     },
     {
       id: 6,
-      kinerja: 100,
-      bulan: "Jun",
+      kinerja: 90,
+      bulan: "Juni",
     },
     {
       id: 7,
-      kinerja: 80,
-      bulan: "Jul",
+      kinerja: 100,
+      bulan: "Juli",
     },
     {
       id: 8,
-      kinerja: 90,
-      bulan: "Agu",
+      kinerja: 80,
+      bulan: "Agustus",
     },
     {
       id: 9,
-      kinerja: 100,
-      bulan: "Sep",
+      kinerja: 70,
+      bulan: "September",
     },
     {
       id: 10,
       kinerja: 80,
-      bulan: "Okt",
+      bulan: "Oktober",
+    },
+    {
+      id: 11,
+      kinerja: 70,
+      bulan: "November",
+    },
+    {
+      id: 12,
+      kinerja: 100,
+      bulan: "Desember",
     },
   ];
 
@@ -168,32 +195,15 @@ export default function Dashboard() {
     datasets: [
       {
         label: "Kinerja Pegawai",
-        data: UserData?.map((data) => data.kinerja),
-        backgroundColor: ["#1BDDBB"],
+        data: grafik?.map((data) => data.hasil_kinerja),
+        backgroundColor: ["#1bddbb"],
         borderRadius: 10,
-        // barPercentage: 0.5,
-
-        // hoverBackgroundColor: ["#112350"],
       },
     ],
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
 
-  const filter = [
-    {
-      id: 1,
-      sub: "Semua",
-    },
-    {
-      id: 2,
-      sub: "Bidang",
-    },
-    {
-      id: 3,
-      sub: "Sub Bidang",
-    },
-  ];
   return (
     <div className={styles.container}>
       {/* {console.log("Cakin: ", cakin)} */}
@@ -208,9 +218,7 @@ export default function Dashboard() {
           belumDisubmit={blmSubmit.length}
         />
         <div className={styles.chartWrapper}>
-          <h1 className={styles.headerChart}>
-            Grafik Kiner ja Tahun {thnSkrg}
-          </h1>
+          <h1 className={styles.headerChart}>Grafik Kinerja Tahun {thnSkrg}</h1>
           <BarChart chartData={userData} />
         </div>
       </div>
