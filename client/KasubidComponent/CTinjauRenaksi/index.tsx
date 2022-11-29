@@ -33,27 +33,6 @@ function Row(props) {
 
   const [renaksiPegawai, setRenaksiPegawai] = useState([]);
 
-  // const btnUnggah = () => {
-  //   setShowModal(true);
-  //   setTimeout(() => {
-  //     setShowModal(false);
-  //   }, 3000);
-  // };
-
-  // const btnUbah = () => {
-  //   setShowModal_Ubah(true);
-  //   setTimeout(() => {
-  //     setShowModal_Ubah(false);
-  //   }, 3000);
-  // };
-
-  // const btnHapus = () => {
-  //   setShowModal_Hapus(true);
-  //   setTimeout(() => {
-  //     setShowModal_Hapus(false);
-  //   }, 3000);
-  // };
-
   const btnTerima = () => {
     Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
       (ambilRenaksi) => {
@@ -66,11 +45,6 @@ function Row(props) {
         });
       }
     );
-
-    // setShowModal(true);
-    // setTimeout(() => {
-    //   setShowModal(false);
-    // }, 2000);
 
     stateChange([]);
     setTimeout(() => {
@@ -104,7 +78,7 @@ function Row(props) {
           );
         });
       });
-    }, 30);
+    }, 100);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA
@@ -237,69 +211,15 @@ function Row(props) {
           );
         });
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success"){
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModal();
     btnTolak();
   };
 
   const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModalTolakAll();
     btnTolakAll();
   };
@@ -310,7 +230,6 @@ function Row(props) {
       pathname: "/Kasubid/TinjauRenaksiPegawai",
       query: { nip: row.nip },
     });
-    // <Link href={"/TinjauRenaksi/" + row.nip}></Link>;
   };
 
   const style1 = {
@@ -318,7 +237,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   const style2 = {
@@ -326,7 +245,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   return (
