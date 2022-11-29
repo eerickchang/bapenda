@@ -298,7 +298,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           }}
           sx={{ "& > *": { borderBottom: "" } }}
         >
-          {/* //! DATA ROW */}
+          {/* DATA ROW */}
           <TableCell>
             <p className={stylesS.styleTxtRowBS}>{row.program}</p>
           </TableCell>
@@ -353,6 +353,77 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRowBS}>{row.status}</p>
+          </TableCell>
+        </TableRow>
+      ) : row.status == "Sementara" ? (
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          {/* //! DATA ROW */}
+          <TableCell>
+            {/* <p className={stylesS.styleTxtRow}>{row.program}</p> */}
+          </TableCell>
+          <TableCell>
+            {/* <p className={stylesS.styleTxtRow}>{row.kegiatan}</p> */}
+          </TableCell>
+          <TableCell>
+            {/* <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p> */}
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTupoksi}>Inti</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+            <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+            <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            {row.thl === null ? null : (
+              <div
+                style={{ display: "flex", padding: 0, alignItems: "center" }}
+              >
+                {row.foto_thl != "" ? (
+                  <Image
+                    src={row.foto_thl}
+                    // src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                ) : (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                )}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                  <p className={stylesS.rekanPegawai}>THL</p>
+                </div>
+              </div>
+            )}
+          </TableCell>
+          <TableCell>
+            {/* ambil data rencana */}
+            <p className={stylesS.styleTxtRowRencana}>
+              {moment(row.start_date).format("MMM")} -{" "}
+              {moment(row.end_date).format("MMM")}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRow}>{row.status}</p>
           </TableCell>
         </TableRow>
       ) : (
@@ -854,8 +925,31 @@ export default function ContentDaftarKegiatan() {
 
     {
       id: 8,
-      status: 'Ditolak'
-    }
+      status: "Ditolak",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
+    },
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);

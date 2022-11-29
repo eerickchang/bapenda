@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TernaryOp() {
-  let coba = "Oke";
+  let coba = "hebat";
 
   return (
     <div>
