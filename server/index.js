@@ -212,6 +212,39 @@ app.post("/inputRenaksi", (req, res) => {
   );
 });
 
+// INPUT RENAKSI
+app.post("/inputRenaksiKasubid", (req, res) => {
+  const program = req.body.program;
+  const kegiatan = req.body.kegiatan;
+  const tupoksiInti = req.body.tupoksiInti;
+  const subKegiatan = req.body.subKegiatan;
+  const nip = req.body.nip;
+  const tupoksiTambahan = req.body.tupoksiTambahan;
+  const thl = req.body.thl;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+
+  const sqlInsert =
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, start_date, end_date, status, kirim_ke) VALUES (?,?,?,?,?,?,?,?,?, 'Menunggu Renaksi Diterima', 'Kabid')";
+  db.query(
+    sqlInsert,
+    [
+      program,
+      kegiatan,
+      tupoksiInti,
+      subKegiatan,
+      nip,
+      tupoksiTambahan,
+      thl,
+      startDate,
+      endDate,
+    ],
+    (err, result) => {
+      console.log(result);
+    }
+  );
+});
+
 //AMBIL PEGAWAI
 app.get("/pegawai", (req, res) => {
   const sqlSelect = "SELECT * FROM pegawai";

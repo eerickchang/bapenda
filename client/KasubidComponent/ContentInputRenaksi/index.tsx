@@ -73,7 +73,7 @@ export default function ContentInputRenaksi() {
   const selectInputRef = useRef();
 
   const btnUnggah = () => {
-    Axios.post("http://localhost:3001/inputRenaksi", {
+    Axios.post("http://localhost:3001/inputRenaksiKasubid", {
       program: inProgram,
       kegiatan: inKegiatan,
       tupoksiInti: inTupoksiInti,
@@ -101,7 +101,9 @@ export default function ContentInputRenaksi() {
     // setInTupoksiTambahan("");
     // console.log(rencana);
     // document.getElementById("inputFieldTupoksiTambahan")?.nodeValue = "";
+    window.location.reload();
   };
+
   // });
   // useEffect(() => {
   // setShowModal(true);
@@ -155,22 +157,22 @@ export default function ContentInputRenaksi() {
 
   const [activeFormat, setActiveFormat] = useState(false);
 
-    const menuRef = useRef();
+  const menuRef = useRef();
 
-    useEffect(() => {
-      const handler = (e) => {
-        if (!menuRef.current.contains(e.target)) {
-          setActiveFormat(false);
-          console.log(menuRef.current);
-        }
-      };
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setActiveFormat(false);
+        console.log(menuRef.current);
+      }
+    };
 
-      document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler);
 
-      return () => {
-        document.removeEventListener("mousedown", handler);
-      };
-    });
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const optionsTupoksi = [
     {
@@ -456,11 +458,11 @@ export default function ContentInputRenaksi() {
             onChange={(e) => setEndDate(e.target.value + "-01")}
           />
         </div>
-      <Button
-        title="Unggah"
-        onClick={btnUnggah}
-        className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
-      />
+        <Button
+          title="Unggah"
+          onClick={btnUnggah}
+          className={`${btnStyles.btnType1} ${btnStyles.btnType3}`}
+        />
       </div>
       {showModal ? (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
