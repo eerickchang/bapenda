@@ -443,12 +443,103 @@
   background-color: 'red';
 }
 
+.profilePengirim p{
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(1, 1, 1, 1);
+}
+
+.feedback{
+  margin-left: 48px;
+  height: 100%;
+}
+
+.feedback p{
+  margin: 0;
+  max-width: 526px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(1, 1, 1, 1);
+}
+
+.inputBalasan::placeholder{
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(149, 149, 149, 1);
+}
+
 .wrapperContentModal {
   display: inline-flex;
   font-family: "Poppins", sans-serif;
   padding: 40px;
   font-weight: 400;
   font-size: 20px;
+}
+
+.inputBalasan{
+  width: 526px;
+  height: 43px;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.wrapInput{
+  margin-top: 10px;
+  display: flex;
+}
+
+.wrapperFeedback{
+  width: 945px;
+  height: 174px;
+  background-color: #F4F4F4;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentFeedback{
+  height: 100%;
+}
+
+.profilePengirim{
+  display: flex;
+  align-items: center;
+}
+.profilePengirim p{
+ margin: 0;
+ margin-left: 8px;
+}
+
+.wrapperTitleBtnDT{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.btnUnggahDT {
+  background-color: rgba(27, 221, 187, 1);
+  width: 209px;
+  height: 71px;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btnUnggahDT p {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin-left: 12px;
 }
 
 .btnUnggah {
