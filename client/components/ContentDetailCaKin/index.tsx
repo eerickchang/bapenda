@@ -88,6 +88,40 @@ export default function ContentDetailCaKin() {
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
 
+  const menuRefTahun = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefTahun.current.contains(e.target)) {
+        setActiveDropdownTahun(false);
+        console.log(menuRefTahun.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefUnduh = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefUnduh.current.contains(e.target)) {
+        setActiveDropdownUnduh(false);
+        console.log(menuRefUnduh.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
   const [nama, setNama] = useState("");
@@ -477,7 +511,7 @@ export default function ContentDetailCaKin() {
         </div>
 
         <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterTahun}>
+          <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -498,7 +532,7 @@ export default function ContentDetailCaKin() {
               </div>
             )}
           </div>
-          <div className={styles.wrapperUnduh}>
+          <div className={styles.wrapperUnduh} ref={menuRefUnduh}>
             <div
               className={styles.btnUnduh}
               onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}

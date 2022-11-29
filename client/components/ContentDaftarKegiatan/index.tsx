@@ -322,6 +322,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 {row.foto_thl != "" ? (
                   <Image
                     src={row.foto_thl}
+                    // src={"/SidebarProfile.svg"}
                     width={40}
                     height={40}
                     alt="User 2"
@@ -392,6 +393,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 {row.foto_thl != "" ? (
                   <Image
                     src={row.foto_thl}
+                    // src={"/SidebarProfile.svg"}
                     width={40}
                     height={40}
                     alt="User 2"
@@ -849,6 +851,11 @@ export default function ContentDaftarKegiatan() {
         })
       ),
     },
+
+    {
+      id: 8,
+      status: 'Ditolak'
+    }
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
@@ -856,6 +863,24 @@ export default function ContentDaftarKegiatan() {
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
+
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if(!menuRef.current.contains(e.target)){
+        setActiveDropdown(false)
+        console.log(menuRef.current)
+      }
+    };
+
+    document.addEventListener("mousedown", handler)
+
+    return()=>{
+      document.removeEventListener("mousedown", handler)
+    }
+  })
+
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -938,7 +963,7 @@ export default function ContentDaftarKegiatan() {
                 </div>
               </div>
             ))}
-            <div className={stylesS.wrapperFilter}>
+            <div className={stylesS.wrapperFilter} ref={menuRef}>
               <div className={stylesS.btnFilter} onClick={btnFilter}>
                 <Image src={"/Filter.svg"} width={23} height={23} />
                 <p>Filter</p>

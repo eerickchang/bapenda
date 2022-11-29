@@ -397,6 +397,24 @@ function Row(props) {
 
   const [activeDropdown, setActiveDropdown] = useState(false);
 
+    const menuRef = useRef();
+
+    useEffect(() => {
+      const handler = (e) => {
+        if (!menuRef.current.contains(e.target)) {
+          setActiveDropdown(false);
+          console.log(menuRef.current);
+        }
+      };
+
+      document.addEventListener("mousedown", handler);
+
+      return () => {
+        document.removeEventListener("mousedown", handler);
+      };
+    });
+
+
   const btnFilter = () => {
     setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
@@ -406,7 +424,7 @@ function Row(props) {
 
   return (
     <>
-      <div className={stylesS.wrapperFilter}>
+      <div className={stylesS.wrapperFilter} ref={menuRef}>
         <div className={stylesS.btnFilter} onClick={btnFilter}>
           <Image src={"/Filter.svg"} width={23} height={23} />
           <p>Filter</p>

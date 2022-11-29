@@ -374,7 +374,7 @@ export default function CHapusRenaksi() {
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
               <div>
-                <Image src={"/HapusRenaksiTitle.svg"} width={50} height={50} />
+                <Image src={"/HapusRenaksiTitle.svg"} width={45} height={45} />
               </div>
               <p style={{ marginLeft: 5 }}> HAPUS RENAKSI </p>
             </div>

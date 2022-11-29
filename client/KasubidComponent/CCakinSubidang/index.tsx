@@ -74,7 +74,7 @@ export default function CCaKinSubidang() {
                       nama: pegawai.nama,
                       nip: pegawai.nip,
                       foto: (
-                        <Image src={`${pegawai.foto}`} width={50} height={50} />
+                        <Image src={`${pegawai.foto}`} width={50} height={50} style={{borderRadius: 50}}/>
                       ),
                     },
                   ];
@@ -86,7 +86,14 @@ export default function CCaKinSubidang() {
                     {
                       nama: pegawai.nama,
                       nip: pegawai.nip,
-                      foto: <Image src={"/User1.svg"} width={50} height={50} />,
+                      foto: (
+                        <Image
+                          src={"/User1.svg"}
+                          width={50}
+                          height={50}
+                          style={{ borderRadius: 50 }}
+                        />
+                      ),
                     },
                   ];
                 });
@@ -107,6 +114,58 @@ export default function CCaKinSubidang() {
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
+
+  const menuRefTahun = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefTahun.current.contains(e.target)) {
+        setActiveDropdownTahun(false);
+        console.log(menuRefTahun.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefUnduh = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefUnduh.current.contains(e.target)) {
+        setActiveDropdownUnduh(false);
+        console.log(menuRefUnduh.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefPegawai = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefPegawai.current.contains(e.target)) {
+        setActiveDropdownPegawai(false);
+        console.log(menuRefPegawai.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -343,7 +402,7 @@ export default function CCaKinSubidang() {
         </div>
 
         <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterPegawai}>
+          <div className={styles.wrapperFilterPegawai} ref={menuRefPegawai}>
             <div
               className={styles.btnFilterPegawai}
               onClick={() => setActiveDropdownPegawai(!activeDropdownPegawai)}
@@ -405,7 +464,7 @@ export default function CCaKinSubidang() {
             )}
           </div>
 
-          <div className={styles.wrapperFilterTahun}>
+          <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -428,7 +487,7 @@ export default function CCaKinSubidang() {
               </div>
             )}
           </div>
-          <div className={styles.wrapperUnduh}>
+          <div className={styles.wrapperUnduh} ref={menuRefUnduh}>
             <div
               className={styles.btnUnduh}
               onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
