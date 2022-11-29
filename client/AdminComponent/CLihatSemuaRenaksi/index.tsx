@@ -333,7 +333,9 @@ export default function CLihatSemuaRenaksi() {
               unmountOnExit
               sx={styleKeterangan}
             >
-              <p>{pegawai[0].ket_kaban}</p>
+              {pegawai[0].ket_kaban != null ? (
+                <p>{pegawai[0].ket_kaban}</p>
+              ) : null}
             </Collapse>
             <TableContainer style={styleContainer}>
               <Table>

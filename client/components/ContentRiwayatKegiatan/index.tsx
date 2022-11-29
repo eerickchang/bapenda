@@ -62,7 +62,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         sx={{ "& > *": { borderBottom: "" } }}
       >
         <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center"}}>
+          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
             {row.foto === "" ? (
               <Image
                 src={"/SidebarProfile.svg"}
@@ -151,6 +151,7 @@ export const ContentRiwayatKegiatan = () => {
   const [asn, setAsn] = useState("");
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [year, setYear] = useState([]);
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -176,6 +177,36 @@ export const ContentRiwayatKegiatan = () => {
             });
           }
         );
+
+        for (let i = 2020; i <= 2030; i++) {
+          setYear((nextData) => {
+            return [
+              ...nextData,
+              {
+                tahun: i,
+                onclick: () => (
+                  setDataRenaksi([]),
+                  setThnSkrg(i),
+                  Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
+                    (result) => {
+                      result.data.map((item) => {
+                        if (
+                          moment(item.end_date).format("YYYY") ===
+                            moment(`${i}`).format("YYYY") &&
+                          item.nip == dataPegawai.data.user[0].nip
+                        ) {
+                          setDataRenaksi((nextData) => {
+                            return [...nextData, item];
+                          });
+                        }
+                      });
+                    }
+                  )
+                ),
+              },
+            ];
+          });
+        }
       });
     }
   }, []);
@@ -382,8 +413,8 @@ export const ContentRiwayatKegiatan = () => {
                     className={stylesS.wrapperSelectFilterTahun}
                     onClick={() => setActiveDropdownTahun(false)}
                   >
-                    {tahun.map((item) => (
-                      <p key={item.id} onClick={item.onclick}>
+                    {year.map((item) => (
+                      <p key={item.nip} onClick={item.onclick}>
                         {item.tahun}
                       </p>
                     ))}
