@@ -284,78 +284,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
   return (
     <React.Fragment>
-      {row.status != "Selesai" ? (
-        <TableRow
-          className={`${styles.tableRow} ${styleRow}`}
-          onClick={() => {
-            setOpen(!open);
-            {
-              rowClik
-                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                  setRowClick(!rowClik))
-                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-            }
-          }}
-          sx={{ "& > *": { borderBottom: "" } }}
-        >
-          {/* DATA ROW */}
-          <TableCell>
-            <p className={stylesS.styleTxtRowBS}>{row.program}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRowBS}>{row.kegiatan}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRowBS}>{row.sub_kegiatan}</p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTupoksiBS}>Inti</p>
-            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
-            <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
-            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
-          </TableCell>
-          <TableCell>
-            {row.thl === null ? null : (
-              <div
-                style={{ display: "flex", padding: 0, alignItems: "center" }}
-              >
-                {row.foto_thl != "" ? (
-                  <Image
-                    src={row.foto_thl}
-                    // src={"/SidebarProfile.svg"}
-                    width={40}
-                    height={40}
-                    alt="User 2"
-                    style={{ borderRadius: 40 }}
-                  />
-                ) : (
-                  <Image
-                    src={"/SidebarProfile.svg"}
-                    width={40}
-                    height={40}
-                    alt="User 2"
-                    style={{ borderRadius: 40 }}
-                  />
-                )}
-                <div style={{ marginLeft: 10 }}>
-                  <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                  <p className={stylesS.rekanPegawai}>THL</p>
-                </div>
-              </div>
-            )}
-          </TableCell>
-          <TableCell>
-            {/* ambil data rencana */}
-            <p className={stylesS.styleTxtRowRencanaBS}>
-              {moment(row.start_date).format("MMM")} -{" "}
-              {moment(row.end_date).format("MMM")}
-            </p>
-          </TableCell>
-          <TableCell>
-            <p className={stylesS.styleTxtRowBS}>{row.status}</p>
-          </TableCell>
-        </TableRow>
-      ) : row.status == "Sementara" ? (
+      {row.status == "Sementara" ? (
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
           onClick={() => {
@@ -424,6 +353,77 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </TableCell>
           <TableCell>
             <p className={stylesS.styleTxtRow}>{row.status}</p>
+          </TableCell>
+        </TableRow>
+      ) : row.status != "Selesai" ? (
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          sx={{ "& > *": { borderBottom: "" } }}
+        >
+          {/* DATA ROW */}
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.program}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTupoksiBS}>Inti</p>
+            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
+            <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
+            <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            {row.thl === null ? null : (
+              <div
+                style={{ display: "flex", padding: 0, alignItems: "center" }}
+              >
+                {row.foto_thl != "" ? (
+                  <Image
+                    src={row.foto_thl}
+                    // src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                ) : (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={40}
+                    height={40}
+                    alt="User 2"
+                    style={{ borderRadius: 40 }}
+                  />
+                )}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                  <p className={stylesS.rekanPegawai}>THL</p>
+                </div>
+              </div>
+            )}
+          </TableCell>
+          <TableCell>
+            {/* ambil data rencana */}
+            <p className={stylesS.styleTxtRowRencanaBS}>
+              {moment(row.start_date).format("MMM")} -{" "}
+              {moment(row.end_date).format("MMM")}
+            </p>
+          </TableCell>
+          <TableCell>
+            <p className={stylesS.styleTxtRowBS}>{row.status}</p>
           </TableCell>
         </TableRow>
       ) : (
@@ -962,19 +962,18 @@ export default function ContentDaftarKegiatan() {
 
   useEffect(() => {
     const handler = (e) => {
-      if(!menuRef.current.contains(e.target)){
-        setActiveDropdown(false)
-        console.log(menuRef.current)
+      if (!menuRef.current.contains(e.target)) {
+        setActiveDropdown(false);
+        console.log(menuRef.current);
       }
     };
 
-    document.addEventListener("mousedown", handler)
+    document.addEventListener("mousedown", handler);
 
-    return()=>{
-      document.removeEventListener("mousedown", handler)
-    }
-  })
-
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const shouldLog = useRef(true);
   useEffect(() => {

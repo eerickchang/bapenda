@@ -31,6 +31,8 @@ export default function CTinjauRenaksiPegawai() {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [pegawai, setPegawai] = useState([]);
   const [nama, setNama] = useState("");
+  const [ketAdmin, setKetAdmin] = useState("");
+  const [arrTolak, setArrTolak] = useState([]);
   let arr = [];
 
   const shouldLog = useRef(true);
@@ -68,36 +70,32 @@ export default function CTinjauRenaksiPegawai() {
   };
 
   const btnTerimaSemua = () => {
-    // Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-    //   (ambilRenaksi) => {}
-    // );
+    console.log(arr);
+    // let moTrima = [];
+    // moTrima = arr.filter((elA) => {
+    //   return pegawai.some((elB) => elA["value"] == elB["id_renaksi"]);
+    // });
+    // moTrima.map((item) => {
+    //   Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
+    //     idRenaksi: item.value,
+    //   });
+    // });
 
-    // let renaksi = ambilRenaksi.data;
-    let moTrima = [];
-    moTrima = arr.filter((elA) => {
-      return pegawai.some((elB) => elA["value"] == elB["id_renaksi"]);
-    });
-    moTrima.map((item) => {
-      Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-        idRenaksi: item.value,
-      });
-    });
+    // setPegawai([]);
 
-    setPegawai([]);
-
-    setTimeout(() => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
-              setPegawai((nextData) => {
-                return [renaksi, ...nextData];
-              });
-            }
-          });
-        }
-      );
-    }, 30);
+    // setTimeout(() => {
+    //   Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+    //     (ambilRenaksi) => {
+    //       ambilRenaksi.data.map((renaksi) => {
+    //         if (renaksi.nip == router.query.nip) {
+    //           setPegawai((nextData) => {
+    //             return [renaksi, ...nextData];
+    //           });
+    //         }
+    //       });
+    //     }
+    //   );
+    // }, 100);
   };
 
   const custom = {
@@ -150,10 +148,6 @@ export default function CTinjauRenaksiPegawai() {
     setIsOpen(false);
   }
 
-  function openModalTolakAll() {
-    setTolakAllIsOpen(true);
-  }
-
   function afterOpenModalTolakAll() {
     // references are now sync'd and can be accessed.
     // subtitle.style.color = "#f00";
@@ -162,13 +156,6 @@ export default function CTinjauRenaksiPegawai() {
   function closeModalTolakAll() {
     setTolakAllIsOpen(false);
   }
-
-  const btnTolak = () => {
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
-  };
 
   const btnTolakAll = () => {
     setShowModalTolakAll(true);
@@ -179,66 +166,36 @@ export default function CTinjauRenaksiPegawai() {
 
   const [rowSelected, setRowSelected] = useState([]);
 
-  const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+  function openModalTolakAll() {
+    setArrTolak(arr);
+    setTolakAllIsOpen(true);
+  }
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success"){
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModal();
-    btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
+  const btnTolak = () => {
+    let moTrima = [];
+    moTrima = arrTolak.filter((elA) => {
+      return pegawai.some((elB) => elA["value"] == elB["id_renaksi"]);
+    });
+    moTrima.map((item) => {
+      Axios.post("http://localhost:3001/kasubidMenolakRenaksi", {
+        idRenaksi: item.value,
+        ketAdmin: ketAdmin,
+      });
+    });
+    setPegawai([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.nip == router.query.nip) {
+              setPegawai((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 100);
     closeModalTolakAll();
     btnTolakAll();
   };
@@ -397,7 +354,7 @@ export default function CTinjauRenaksiPegawai() {
                 <input
                   className={styles.inputBuktiLap}
                   placeholder="Tambah keterangan"
-                  // onChange={(e) => setKetPegawai(e.target.value)}
+                  onChange={(e) => setKetAdmin(e.target.value)}
                 />
                 <Gap height={20} width={0} />
                 <div className={styles.wrapBtnModal}>
@@ -409,7 +366,7 @@ export default function CTinjauRenaksiPegawai() {
                     <p className={styles.txt}>Batal</p>
                   </button>
                   <Gap width={24} height={0} />
-                  <button onClick={btnTolakAllExp} className={styles.btnBatal}>
+                  <button onClick={btnTolak} className={styles.btnBatal}>
                     <img src={"/Tolak.svg"} width={20} height={20} />
                     <p>Tolak</p>
                   </button>

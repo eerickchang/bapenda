@@ -465,6 +465,19 @@ app.post("/kasubidMenerimaRenaksi", (req, res) => {
   });
 });
 
+//KASUBID MENOLAK RENAKSI
+app.post("/kasubidMenolakRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ? WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+});
+
 //AMBIL SEMUA PEGAWAI DENGAN JABATAN STAFF
 app.get("/ambilPegawai", (req, res) => {
   const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan = "Staff"';
