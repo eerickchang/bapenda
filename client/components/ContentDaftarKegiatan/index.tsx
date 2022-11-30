@@ -357,6 +357,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             </TableCell>
             <TableCell>
               <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+              <p className={styles.descDT}>Perubahan pengajuan jadwal ditolak</p>
             </TableCell>
           </TableRow>
           <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
@@ -377,7 +378,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     <div className={styles.feedback}>
                       <p>
                         “Perubahan jadwal ditolak karena sudah diperlukan untuk
-                        menunjang kegiatan mendatang di bulan yang akan datang”
+                        menunjang kegiatan mendatang di bulan yang akan dfrr”
+                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
+                        menunjang kegiatan mendatang di bulan yang akan dfrr”
+                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
+                        menunjang kegiatan mendatang di bulan yang akan dfrr”
+                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
+                        menunjang kegiatan mendatang di bulan yang akan dfrr”
+                        
                       </p>
                     <div className={styles.wrapInput}>
                       <input
