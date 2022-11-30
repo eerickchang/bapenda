@@ -1,26 +1,20 @@
 import stylesS from "./ContentDaftarKegiatan.module.css";
 
-import React, { useState, useEffect, useRef } from "react";
-import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
-import Image from "next/future/image";
 import moment from "moment";
+import Image from "next/future/image";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./TableMUI.module.css";
 
-import Modal from "react-modal";
-import Gap from "../Gap";
-import Button from "../Button";
-import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
 import { useRouter } from "next/router";
-import AmbilDataRenaksi from "../AmbilDataRenaksi";
+import Gap from "../Gap";
 
-import Checkbox from "@mui/material/Checkbox";
 
 Axios.defaults.withCredentials = true;
 
@@ -142,12 +136,29 @@ function Row(props) {
 
   const [activeDropdown, setActiveDropdown] = useState(false);
 
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setActiveDropdown(false);
+        console.log(menuRef.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const btnFilter = () => {
     setActiveDropdown(!activeDropdown);
   };
   return (
     <>
-      <div className={stylesS.wrapperFilter}>
+      <div className={stylesS.wrapperFilter} ref={menuRef}>
         <div className={stylesS.btnFilter} onClick={btnFilter}>
           <Image src={"/Filter.svg"} width={23} height={23} />
           <p>Filter</p>

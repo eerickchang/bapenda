@@ -368,8 +368,8 @@ function Row(props) {
 
   const styleTxtKet = {
     display: "flex",
-    position: "absolute",
-    top: 140,
+    position: "relative",
+    top: 105,
     color: "rgba(149, 149, 149, 1)",
   };
 
@@ -412,12 +412,7 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
+                  
                 </div>
               )}
             </p>
@@ -445,13 +440,9 @@ function Row(props) {
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
-                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
                     </div>
                   </div>
                 )}

@@ -125,6 +125,57 @@ export default function CCaKinSubidang() {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownPegawai, setActiveDropdownPegawai] = useState(false);
 
+  const menuRefPegawai = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefPegawai.current.contains(e.target)) {
+        setActiveDropdownPegawai(false);
+        console.log(menuRefPegawai.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefTahun = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefTahun.current.contains(e.target)) {
+        setActiveDropdownTahun(false);
+        console.log(menuRefTahun.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const menuRefUnduh = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefUnduh.current.contains(e.target)) {
+        setActiveDropdownUnduh(false);
+        console.log(menuRefUnduh.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
     const workBook = XLSX.utils.book_new();
@@ -362,7 +413,7 @@ export default function CCaKinSubidang() {
         </div>
 
         <div className={styles.wrapperFilter}>
-          <div className={styles.wrapperFilterPegawai}>
+          <div className={styles.wrapperFilterPegawai} ref={menuRefPegawai}>
             <div
               className={styles.btnFilterPegawai}
               onClick={() => setActiveDropdownPegawai(!activeDropdownPegawai)}
@@ -424,7 +475,7 @@ export default function CCaKinSubidang() {
             )}
           </div>
 
-          <div className={styles.wrapperFilterTahun}>
+          <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
               onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
@@ -447,7 +498,7 @@ export default function CCaKinSubidang() {
               </div>
             )}
           </div>
-          <div className={styles.wrapperUnduh}>
+          <div className={styles.wrapperUnduh} ref={menuRefUnduh}>
             <div
               className={styles.btnUnduh}
               onClick={() => setActiveDropdownUnduh(!activeDropdownUnduh)}
