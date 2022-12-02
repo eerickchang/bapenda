@@ -62,7 +62,6 @@ export default function CLihatSemuaRenaksi() {
 
   const clickBack = () => {
     router.push("/Kasubid/TinjauRenaksi");
-    // console.log(dataCakin);
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
@@ -141,21 +140,6 @@ export default function CLihatSemuaRenaksi() {
     doc.autoTable(content);
     doc.save(`Data Renaksi ${subid}`);
   };
-
-  const unduh = [
-    {
-      id: 1,
-      unduh: "Excel",
-      // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
-      onclick: btnDwExcel,
-    },
-    {
-      id: 2,
-      unduh: "PDF",
-      // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
-      onclick: btnDwPDF,
-    },
-  ];
 
   const columns = [
     { id: "no", label: "No" },

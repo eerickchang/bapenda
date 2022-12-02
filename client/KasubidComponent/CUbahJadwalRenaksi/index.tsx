@@ -258,65 +258,11 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModal();
     btnTolak();
   };
 
   const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModalTolakAll();
     btnTolakAll();
   };
@@ -637,9 +583,7 @@ export const CUbahJadwalRenaksi = () => {
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40}}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>
