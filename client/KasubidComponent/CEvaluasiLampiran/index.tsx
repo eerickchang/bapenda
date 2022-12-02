@@ -21,82 +21,10 @@ import Modal from "react-modal";
 
 Axios.defaults.withCredentials = true;
 
-const rows = [
-  {
-    id: 1,
-    name: "anggursss",
-    calories: 20,
-    fat: 42,
-    carbs: 69,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 80,
-    protein2: 80,
-  },
-  {
-    id: 2,
-    name: "anggur",
-    calories: 90,
-    fat: 82,
-    carbs: 79,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 60,
-    protein2: 60,
-  },
-  {
-    id: 3,
-    name: "urusss",
-    calories: 50,
-    fat: 42,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 20,
-    protein2: 20,
-  },
-  {
-    id: 4,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 5,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 6,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-  {
-    id: 7,
-    name: "angurs",
-    calories: 10,
-    fat: 22,
-    carbs: 39,
-    protein: <Image src={"/User1.svg"} width={50} height={50} />,
-    protein1: 40,
-    protein2: 40,
-  },
-];
-
 function Row(props) {
   const { row, stateChanger } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketAdmin, setKetAdmin] = useState("");
 
   // const custom = {
   //   content: {
@@ -193,7 +121,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTerima = () => {
@@ -221,7 +149,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnDw = () => {
@@ -319,65 +247,38 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.post("http://localhost:3001/kasubidMenolakRenaksi", {
+      idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+    });
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+
+    stateChanger([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/kasubidAmbilRenaksiSelesai").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                stateChanger((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        );
+      });
+    }, 100);
 
     closeModal();
     btnTolak();
   };
 
   const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModalTolakAll();
     btnTolakAll();
   };
@@ -391,7 +292,6 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
-    
   };
 
   const style2 = {
@@ -399,7 +299,6 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
-    
   };
 
   const styleCollapse = {
@@ -593,7 +492,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
@@ -691,9 +590,7 @@ export const CEvaluasiLampiran = () => {
             </div>
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40 }}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>

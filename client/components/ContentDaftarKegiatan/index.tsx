@@ -285,7 +285,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   };
   return (
     <React.Fragment>
-      {row.status == "Sementara" ? ( //DITOLAK
+      {row.kirim_ke == "Staff" ? ( //DITOLAK
         <>
           <TableRow
             className={`${styles.tableRow} ${styleRow}`}
@@ -356,8 +356,18 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               </p>
             </TableCell>
             <TableCell>
-              <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
-              <p className={styles.descDT}>Perubahan pengajuan jadwal ditolak</p>
+              <p className={stylesS.styleTxtRowDitolak}>Ditolak</p>
+              {row.status == "Menunggu Renaksi Diterima" ? (
+                <p className={styles.descDT}>Renaksi Ditolak</p>
+              ) : row.status == "Menunggu Jadwal Diubah" ? (
+                <p className={styles.descDT}>Pengajuan Ubah Jadwal Ditolak</p>
+              ) : row.status == "Menunggu Renaksi Dihapus" ? (
+                <p className={styles.descDT}>
+                  Pengajuan Penghapusan Renaksi Ditolak
+                </p>
+              ) : row.status == "Selesai" ? (
+                <p className={styles.descDT}>Lampiran Bukti Ditolak</p>
+              ) : null}
             </TableCell>
           </TableRow>
           <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
@@ -385,31 +395,28 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         menunjang kegiatan mendatang di bulan yang akan dfrr”
                         “Perubahan jadwal ditolak karena sudah diperlukan untuk
                         menunjang kegiatan mendatang di bulan yang akan dfrr”
-                        
                       </p>
-                    <div className={styles.wrapInput}>
-                      <input
-                        className={styles.inputBalasan}
-                        placeholder="Balas"
-                      />
-                      <Image
-                        src={"/KirimFeedback.svg"}
-                        width={24}
-                        height={24}
-                        style={{
-                          position: "relative",
-                          top: 8,
-                          left: -39,
-                          cursor: "pointer",
-                        }}
-                      />
-                    </div>
+                      <div className={styles.wrapInput}>
+                        <input
+                          className={styles.inputBalasan}
+                          placeholder="Balas"
+                        />
+                        <Image
+                          src={"/KirimFeedback.svg"}
+                          width={24}
+                          height={24}
+                          style={{
+                            position: "relative",
+                            top: 8,
+                            left: -39,
+                            cursor: "pointer",
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className={styles.wrapperTitleBtnDT}>
-                    <p className={styles.titleBtnUnggah}>
-                      Unggah File Laporan
-                    </p>
+                    <p className={styles.titleBtnUnggah}>Unggah File Laporan</p>
                     <button
                       onClick={() => openModal()}
                       className={styles.btnUnggahDT}
@@ -1360,7 +1367,7 @@ export default function ContentDaftarKegiatan() {
           setAsn(response.data.user[0]);
           setImage(response.data.user[0].foto);
 
-          Axios.get("http://localhost:3001/ambilRenaksiSementara").then(
+          Axios.get("http://localhost:3001/ambilRenaksiDitolak").then(
             (result) => {
               result.data.map((item) => {
                 if (

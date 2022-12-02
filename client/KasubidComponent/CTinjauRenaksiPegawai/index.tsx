@@ -347,9 +347,7 @@ export default function CTinjauRenaksiPegawai() {
                 style={custom}
                 contentLabel="Example Modal"
               >
-                <h2 className={styles.headerTxtModal}>
-                  Tolak Semua Permintaan Ubah Jadwal
-                </h2>
+                <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
                 <Gap height={20} width={0} />
                 <input
                   className={styles.inputBuktiLap}
@@ -378,7 +376,7 @@ export default function CTinjauRenaksiPegawai() {
                   onClick={() => setShowModalTolakAll(false)}
                 >
                   <p>
-                    Semua Permintaan Ubah Jadwal <b>Ditolak</b>
+                    Renaksi {nama} <b>Ditolak</b>
                   </p>
                   <div className={styles.checkCircle}>
                     <Image src={"/Tolak.svg"} width={25} height={25} />
