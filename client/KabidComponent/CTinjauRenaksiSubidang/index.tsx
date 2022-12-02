@@ -1,23 +1,17 @@
 import Image from "next/future/image";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./lihatSemuaRenaksi.module.css";
 
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
-import next from "next";
+import moment from "moment";
 
 Axios.defaults.withCredentials = true;
 
@@ -57,97 +51,10 @@ export default function CTinjauRenaksiSubidang() {
     // console.log(dataCakin);
   };
 
-  const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
-  const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
-
-  const [dataCakin, setDataCakin] = useState([]);
   const [tahunClick, setTahunClick] = useState("");
-  const [nama, setNama] = useState("");
   const [semuaRenaksi, setSemuaRenaksi] = useState([]);
-  const [subid, setSubid] = useState();
 
-  const btnDwExcel = () => {
-    const workSheet = XLSX.utils.json_to_sheet(semuaRenaksi);
-    const workBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workBook, workSheet, "Data Renaksi");
 
-    //BUFFER
-    let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
-
-    //BINARY STRING
-    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
-
-    //DOWNLOAD
-    XLSX.writeFile(workBook, `Data Renaksi ${subid}.xlsx`);
-  };
-
-  const btnDwPDF = () => {
-    const unit = "pt";
-    const size = "A3";
-    const orientation = "portrait";
-
-    const marginLeft = 40;
-    const doc = new jsPDF(orientation, unit, size);
-
-    doc.setFontSize(15);
-
-    const title = `Data Renaksi ${subid}`;
-    const headers = [
-      [
-        "No",
-        "Jabatan",
-        "ASN",
-        "THL",
-        "Program",
-        "Kegiatan",
-        "Sub Kegiatan",
-        "Tupoksi Inti",
-        "Tupoksi Tambahan",
-        "Rencana",
-      ],
-    ];
-
-    const data = semuaRenaksi.map((item) => [
-      item.id_renaksi,
-      item.jabatan,
-      item.nama,
-      item.nama_thl,
-      item.program,
-      item.kegiatan,
-      item.sub_kegiatan,
-      item.tupoksi_inti,
-      item.tupoksi_tambahan,
-      `${moment(item.start_date).format("MMM")} - ${moment(
-        item.end_date
-      ).format("MMM")}`,
-    ]);
-
-    let content = {
-      startY: 50,
-      head: headers,
-      body: data,
-      theme: "grid",
-    };
-
-    doc.text(title, marginLeft, 40);
-    doc.autoTable(content);
-    doc.save(`Data Renaksi ${subid}`);
-  };
-
-  const unduh = [
-    {
-      id: 1,
-      unduh: "Excel",
-      // image: <Image src={"/Pdf.svg"} width={38} height={35} />,
-      onclick: btnDwExcel,
-    },
-    {
-      id: 2,
-      unduh: "PDF",
-      // image: <Image src={"/Pdf.svg"} width={35} height={35} />,
-      onclick: btnDwPDF,
-    },
-  ];
 
   const columns = [
     { id: "no", label: "No", align: "center" },
@@ -157,199 +64,46 @@ export default function CTinjauRenaksiSubidang() {
       label: "ASN",
       minWidth: 50,
       align: "center",
-      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "thl",
       label: "THL",
       align: "center",
-      // format: (value) => value.toLocaleString("en-US"),
     },
     {
       id: "program",
       label: "Program",
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "kegiatan",
       label: "Kegiatan",
       minWidth: 50,
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "subkegiatan",
       label: "Sub Kegiatan",
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "tupoksiinti",
       label: "Tupoksi Inti",
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "tupoksitambahan",
       label: "Tupoksi Tambahan",
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
     {
       id: "rencana",
       label: "Rencana",
       align: "center",
-      // format: (value) => value.toFixed(2),
     },
   ];
 
-  const rows = [
-    {
-      no: "1",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "2",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "3",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "4",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "5",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "6",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "7",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "8",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "9",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "10",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "11",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-    {
-      no: "12",
-      jabatan: "Kabid",
-      asn: "januari",
-      thl: 10,
-      program: 3,
-      kegiatan: 7,
-      subkegiatan: 30,
-      tupoksiinti: 3,
-      tupoksitambahan: 7,
-      rencana: 30,
-    },
-  ];
+
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -432,10 +186,10 @@ export default function CTinjauRenaksiSubidang() {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  sx={styleHeader}
+                  style={styleHeader}
                   key={column.id}
                   align="center"
-                  style={{ minWidth: column.minWidth }}
+                  // style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>

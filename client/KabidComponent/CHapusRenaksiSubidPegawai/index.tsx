@@ -462,7 +462,7 @@ function Row(props) {
                         </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
-                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
                     </div>
                   </div>
                 )}
@@ -615,9 +615,9 @@ export const CHapusRenaksiSubidPegawai = () => {
                 />
               </div>
               <div>
-                <Image src={"/HapusRenaksiTitle.svg"} width={50} height={50} />
+                <Image src={"/HapusRenaksiTitle.svg"} width={45} height={45} />
               </div>
-              <p style={{ marginLeft: 5 }}>EVALUASI LAMPIRAN</p>
+              <p style={{ marginLeft: 5 }}>HAPUS RENAKSI</p>
             </div>
             <Gap height={88} width={0} />
             <p className={stylesS.titleBidang}>
@@ -625,7 +625,7 @@ export const CHapusRenaksiSubidPegawai = () => {
             </p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40 }}
             >
               <Table>
                 <TableHead>

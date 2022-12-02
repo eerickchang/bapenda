@@ -268,7 +268,7 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        <Gap width={15} height={0} />
+        {/* <Gap width={15} height={0} />
         <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
           <Image src={"/Tolak.svg"} width={25} height={25} />
           Tolak Semua
@@ -285,7 +285,7 @@ function Row(props) {
               <Image src={"/Tolak.svg"} width={25} height={25} />
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         <Modal
           isOpen={modalTolakAllIsOpen}
           onAfterOpen={afterOpenModalTolakAll}
@@ -316,8 +316,7 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow
-          // onClick={() => clickRowPegawai()}
-          // hover
+          hover
           className={styles.styleRow}
         >
           <TableCell onClick={() => clickRowPegawai()} style={style1}>
@@ -352,7 +351,7 @@ function Row(props) {
                     </p>
                   </div>
                 ) : null}
-                <Gap width={40} height={0} />
+                {/* <Gap width={40} height={0} />
                 <button
                   className={styles.btnTolak}
                   onClick={() => (openModal(), console.log(row.nama))}
@@ -398,7 +397,7 @@ function Row(props) {
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
                     </div>
                   </div>
-                ) : null}
+                ) : null} */}
               </div>
             </div>
           </TableCell>

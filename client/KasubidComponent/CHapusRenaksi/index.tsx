@@ -341,6 +341,9 @@ function Row(props) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "1px 2px 9px #F4AAB9",
   };
 
   return (
@@ -474,7 +477,7 @@ function Row(props) {
                   <div className={styles.contentLampiran} onClick={btnDw}>
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
-                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
                     </div>
                   </div>
                 )}

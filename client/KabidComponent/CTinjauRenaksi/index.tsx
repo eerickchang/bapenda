@@ -299,12 +299,14 @@ function Row(props) {
           <TableCell
             onClick={() => clickRowSubid()}
             className={styles.styleData}
+            style={style2}
           >
             {row.sub_bidang}
           </TableCell>
           <TableCell
             onClick={() => clickRowSubid()}
             className={styles.styleData}
+            style={style1}
           >
             <p style={{ fontWeight: 600 }}>{row.nama}</p>
           </TableCell>
@@ -481,7 +483,6 @@ export default function CTinjauRenaksi() {
             <TableContainer
               style={{
                 paddingRight: 40,
-                zIndex: 998,
                 paddingBottom: 20,
               }}
             >

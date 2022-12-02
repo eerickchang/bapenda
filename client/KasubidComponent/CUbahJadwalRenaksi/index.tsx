@@ -335,6 +335,13 @@ function Row(props) {
     color: "#000",
   };
 
+    const styleTxtKet = {
+      display: "flex",
+      position: "relative",
+      top: 105,
+      color: "rgba(149, 149, 149, 1)",
+    };
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -416,6 +423,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell style={style1}>
             <p onClick={() => console.log(row.files)}>{row.nama}</p>
@@ -469,13 +477,7 @@ function Row(props) {
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
                   <p
-                    style={{
-                      display: "flex",
-                      position: "absolute",
-                      top: 140,
-                      color: "rgba(149, 149, 149, 1)",
-                      // top: 10,
-                    }}
+                    style={styleTxtKet}
                   >
                     Pengajuan Ubah jadwal :
                     <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>

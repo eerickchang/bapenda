@@ -315,7 +315,7 @@ export default function CTinjauRenaksiPegawai() {
               </Table>
             </TableContainer>
             <div className={stylesS.wrapFilter}>
-              <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
+              {/* <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
                 <Image src={"/Terima.svg"} width={25} height={25} />
                 Terima
               </button>
@@ -332,7 +332,7 @@ export default function CTinjauRenaksiPegawai() {
                   </div>
                 </div>
               ) : null}
-              <Gap width={15} height={0} />
+              <Gap width={15} height={0} /> */}
               <button
                 onClick={openModalTolakAll}
                 className={styles.btnTolakAll}

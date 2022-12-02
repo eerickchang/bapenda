@@ -288,13 +288,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   </p>
                 </div>
               ) : null}
-              <Gap width={40} height={0} />
-              <button
-                className={styles.btnTolak}
-                onClick={() => console.log(row.nama)}
-              >
-                <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-              </button>
             </div>
           </div>
         </TableCell>
@@ -384,7 +377,6 @@ export default function CHapusRenaksi() {
             <TableContainer
               style={{
                 paddingRight: 40,
-                zIndex: 998,
                 paddingBottom: 20,
               }}
             >

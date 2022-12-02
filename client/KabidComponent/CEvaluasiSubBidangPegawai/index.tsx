@@ -420,12 +420,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </div>
@@ -456,13 +450,9 @@ function Row(props) {
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
-                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
                     </div>
                   </div>
                 )}
@@ -629,7 +619,7 @@ export const CEvaluasiSubBidangPegawai = () => {
             </p>
             <Gap height={50} width={0} />
             <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40, zIndex: 998 }}
+              style={{ paddingLeft: 2, paddingRight: 40}}
             >
               <Table>
                 <TableHead>
