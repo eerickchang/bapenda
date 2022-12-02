@@ -376,7 +376,7 @@ export default function CTinjauRenaksiPegawai() {
                   onClick={() => setShowModalTolakAll(false)}
                 >
                   <p>
-                    Renaksi <b>Ditolak</b>
+                    Renaksi {nama} <b>Ditolak</b>
                   </p>
                   <div className={styles.checkCircle}>
                     <Image src={"/Tolak.svg"} width={25} height={25} />
