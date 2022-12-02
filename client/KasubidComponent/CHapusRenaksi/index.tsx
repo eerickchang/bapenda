@@ -132,7 +132,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTerima = () => {
@@ -155,7 +155,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     setShowModal(true);
     setTimeout(() => {
@@ -258,65 +258,11 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModal();
     btnTolak();
   };
 
   const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModalTolakAll();
     btnTolakAll();
   };
@@ -504,7 +450,7 @@ function Row(props) {
                   style={{
                     fontWeight: 700,
                     background: "rgba(255, 1, 100, 1)",
-                    cursor: 'pointer'
+                    cursor: "pointer",
                   }}
                   className={styles.styleBtn}
                   // onClick={btnTolakExp}
@@ -621,9 +567,7 @@ export const CHapusRenaksi = () => {
             <Gap height={100} width={0} />
             <p className={stylesS.titleBidang}>Sub Bidang {subid}</p>
             <Gap height={24} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40}}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>
