@@ -183,7 +183,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
 
     // stateChanger([]);
     // Axios.get("http://localhost:3001/masuk").then((masuk) => {
@@ -378,13 +378,13 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "relative",
-      top: 105,
-      color: "rgba(149, 149, 149, 1)",
-      zIndex: 10
-    };
+  const styleTxtKet = {
+    display: "flex",
+    position: "relative",
+    top: 105,
+    color: "rgba(149, 149, 149, 1)",
+    zIndex: 10,
+  };
 
   return (
     <>
@@ -458,9 +458,7 @@ function Row(props) {
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
-                  <p
-                    style={styleTxtKet}
-                  >
+                  <p style={styleTxtKet}>
                     Pengajuan Ubah jadwal :
                     <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
                       {`${moment(row.req_start_date).format("MMM")} - ${moment(

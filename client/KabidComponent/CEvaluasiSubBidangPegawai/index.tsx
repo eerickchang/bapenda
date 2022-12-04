@@ -183,7 +183,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
 
     // stateChanger([]);
     // Axios.get("http://localhost:3001/masuk").then((masuk) => {
@@ -618,9 +618,7 @@ export const CEvaluasiSubBidangPegawai = () => {
               Sub Bidang {router.query.sub_bidang}
             </p>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40}}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>

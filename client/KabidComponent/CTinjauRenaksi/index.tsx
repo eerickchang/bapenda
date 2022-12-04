@@ -103,7 +103,7 @@ function Row(props) {
           );
         });
       });
-    }, 30);
+    }, 100);
   };
 
   // ! MODAL TERIMA TOLAK SEMUA

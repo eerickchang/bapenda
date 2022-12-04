@@ -68,13 +68,13 @@ export default function ContentInputRenaksi() {
   const [inTupoksiTambahan, setInTupoksiTambahan] = useState("");
   const [thl, setThl] = useState("");
   const [rencana, setRencana] = useState("");
-  
+
   const [nama, setNama] = useState("");
 
   const selectInputRef = useRef();
 
   const btnUnggah = () => {
-    Axios.post("http://localhost:3001/inputRenaksi", {
+    Axios.post("http://localhost:3001/inputRenaksiKabid", {
       program: inProgram,
       kegiatan: inKegiatan,
       tupoksiInti: inTupoksiInti,
@@ -98,6 +98,7 @@ export default function ContentInputRenaksi() {
     setInTupoksiTambahan("");
     setStartDate("");
     setEndDate("");
+    window.location.reload();
     // selectInputRef.current.select.clearValue();
     // setInTupoksiTambahan("");
     // console.log(rencana);
@@ -156,22 +157,22 @@ export default function ContentInputRenaksi() {
 
   const [activeFormat, setActiveFormat] = useState(false);
 
-    const menuRef = useRef();
+  const menuRef = useRef();
 
-    useEffect(() => {
-      const handler = (e) => {
-        if (!menuRef.current.contains(e.target)) {
-          setActiveFormat(false);
-          console.log(menuRef.current);
-        }
-      };
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setActiveFormat(false);
+        console.log(menuRef.current);
+      }
+    };
 
-      document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler);
 
-      return () => {
-        document.removeEventListener("mousedown", handler);
-      };
-    });
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const optionsTupoksi = [
     {

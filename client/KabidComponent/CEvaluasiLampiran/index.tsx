@@ -190,7 +190,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           );
         });
       });
-    }, 30);
+    }, 100);
   };
 
   // ! MODAL UNGGAH LAPORAN
@@ -252,14 +252,14 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
-    cursor : 'pointer'
+    cursor: "pointer",
   };
   const style2 = {
     fontFamily: "Poppins",
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
-    cursor : 'pointer'
+    cursor: "pointer",
   };
 
   return (
