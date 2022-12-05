@@ -20,7 +20,7 @@ Axios.defaults.withCredentials = true;
 
 function Row(props) {
   const { row, stateChanger, arrSubid } = props;
- 
+
   const [styleRow, setStyleRow] = useState("");
 
   const btnTerimaSemua = () => {
@@ -73,7 +73,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTerima = () => {
@@ -116,7 +116,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     setShowModal(true);
     setTimeout(() => {
@@ -327,12 +327,9 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        
       </div>
       <React.Fragment>
-        <TableRow
-          className={`${styles.tableRow} ${styleRow}`}
-        >
+        <TableRow className={`${styles.tableRow} ${styleRow}`}>
           <TableCell onClick={clickRow}>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>

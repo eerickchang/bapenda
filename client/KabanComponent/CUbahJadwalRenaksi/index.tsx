@@ -215,7 +215,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTerima = () => {
@@ -258,7 +258,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     setShowModal(true);
     setTimeout(() => {

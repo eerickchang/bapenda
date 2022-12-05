@@ -82,7 +82,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
   };
 
   const btnTerima = () => {
@@ -125,7 +125,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     setShowModal(true);
     setTimeout(() => {
@@ -268,7 +268,7 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     closeModal();
     btnTolak();
@@ -322,7 +322,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 600,
     color: "#000",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   const style2 = {
@@ -330,7 +330,7 @@ function Row(props) {
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   return (
@@ -521,9 +521,7 @@ export const CTinjauRenaksi = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -550,9 +548,7 @@ export const CTinjauRenaksi = () => {
               </Table>
             </TableContainer>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
