@@ -25,6 +25,7 @@ Axios.defaults.withCredentials = true;
 function Row(props) {
   const { row, stateChange } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketAdmin, setKetAdmin] = useState("");
 
   //style row
   const [rowClik, setRowClick] = useState(true);
@@ -208,32 +209,53 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
+      (ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksiMRD) => {
+          if (row.sub_bidang === renaksiMRD.sub_bidang) {
+            Axios.post("http://localhost:3001/kabidMenolakRenaksi", {
+              idRenaksi: renaksiMRD.id_renaksi,
+              ketAdmin: ketAdmin,
+            });
+          }
+        });
+      }
+    );
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success"){
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    stateChange([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+          Axios.get("http://localhost:3001/kabidAmbilRenaksiMRD").then(
+            (ambilRenaksi) => {
+              let bidangUserSDKabid = [];
+              let pegawaiYgAdaRenaksi = [];
+              let userLoggedIn = masuk.data.user;
+              let kasubid = ambilKasubid.data;
+              let renaksi = ambilRenaksi.data;
+
+              bidangUserSDKabid = kasubid.filter((elA) => {
+                return userLoggedIn.some(
+                  (elB) => elA["bidang"] === elB["bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi = bidangUserSDKabid.filter((elA) => {
+                return renaksi.some(
+                  (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                );
+              });
+
+              pegawaiYgAdaRenaksi.map((item) => {
+                stateChange((nextData) => {
+                  return [item, ...nextData];
+                });
+              });
+            }
+          );
+        });
+      });
+    }, 100);
 
     closeModal();
     btnTolak();
@@ -355,7 +377,7 @@ function Row(props) {
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>

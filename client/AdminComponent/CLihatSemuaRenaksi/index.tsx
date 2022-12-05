@@ -31,6 +31,7 @@ export default function CLihatSemuaRenaksi() {
   const [nama, setNama] = useState("");
   const [ketAdmin, setKetAdmin] = useState("");
   const [arr, setArr] = useState([]);
+  const [stat, setStat] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -47,12 +48,13 @@ export default function CLihatSemuaRenaksi() {
                 return [renaksi, ...nextData];
               });
               setNama(renaksi.nama);
+              setStat(renaksi.ket_kaban);
             }
           });
         }
       );
     }
-  }, [router.query, router.isReady]);
+  }, [router.query, router.isReady, pegawai]);
 
   const clickBack = () => {
     router.push("/Admin/TinjauRenaksi");
@@ -333,9 +335,7 @@ export default function CLihatSemuaRenaksi() {
               unmountOnExit
               sx={styleKeterangan}
             >
-              {pegawai[0].ket_kaban != null ? (
-                <p>{pegawai[0].ket_kaban}</p>
-              ) : null}
+              <p>{stat}</p>
             </Collapse>
             <TableContainer style={styleContainer}>
               <Table>
