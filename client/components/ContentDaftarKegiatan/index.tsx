@@ -424,10 +424,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         />
                         <div
                           style={{
-                            position: "inherit",
+                            position: "relative",
                             marginTop: 8,
-                            marginLeft: 445,
-                            zIndex: 20
+                            marginLeft: -80,
+                            zIndex: 20,
                           }}
                         >
                           <Image
@@ -444,6 +444,31 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                           />
                         </div>
                       </div>
+                      {row.tupoksi_tambahan == "Labelling" ? ( //!CUMAN ADA TES. 
+                        <Image
+                          src={"/IconPDF.svg"}
+                          width={34}
+                          height={34}
+                          style={{
+                            cursor: "pointer",
+                            position: "relative",
+                            marginLeft: 540,
+                            top: -38,
+                          }}
+                        />
+                      ) : (
+                        <Image
+                          src={"/PDF.svg"}
+                          width={34}
+                          height={34}
+                          style={{
+                            cursor: "pointer",
+                            position: "relative",
+                            marginLeft: 540,
+                            top: -38,
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className={styles.wrapperTitleBtnDT}>
