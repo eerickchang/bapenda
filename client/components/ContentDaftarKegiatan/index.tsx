@@ -444,21 +444,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                           />
                         </div>
                       </div>
-                      {row.tupoksi_tambahan == "Labelling" ? ( //!CUMAN ADA TES. 
+                      {row.tupoksi_tambahan == "" ? null : (
                         <Image
                           src={"/IconPDF.svg"}
-                          width={34}
-                          height={34}
-                          style={{
-                            cursor: "pointer",
-                            position: "relative",
-                            marginLeft: 540,
-                            top: -38,
-                          }}
-                        />
-                      ) : (
-                        <Image
-                          src={"/PDF.svg"}
                           width={34}
                           height={34}
                           style={{
