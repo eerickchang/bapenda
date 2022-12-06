@@ -55,6 +55,36 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     },
   };
 
+    const customModalTutup = {
+      content: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        width: 550,
+        height: 250,
+        borderRadius: 20,
+        paddingTop: 20,
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+        overlay: "#112350",
+        backgroundColor: "white",
+        zIndex: 1001,
+        scroll: false,
+      },
+      overlay: {
+        position: "fixed",
+        marginTop: 0,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "rgba(17, 35, 80, 0.5)",
+        zIndex: 1000,
+      },
+    };
+
   // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
   const customUbah = {
     content: {
@@ -393,13 +423,24 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                           placeholder="Balas"
                         />
                         <Image
+                          src={"/Lampiran.svg"}
+                          width={21}
+                          height={23}
+                          style={{
+                            position: "relative",
+                            top: 8,
+                            left: -85,
+                            cursor: "pointer",
+                          }}
+                        />
+                        <Image
                           src={"/KirimFeedback.svg"}
                           width={24}
                           height={24}
                           style={{
                             position: "relative",
                             top: 8,
-                            left: -39,
+                            left: -59,
                             cursor: "pointer",
                           }}
                         />
@@ -407,13 +448,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     </div>
                   </div>
                   <div className={styles.wrapperTitleBtnDT}>
-                    <p className={styles.titleBtnUnggah}>Unggah File Laporan</p>
+                    <p className={styles.titleBtnTutup}>Tutup Laporan</p>
                     <button
                       onClick={() => openModal()}
                       className={styles.btnUnggahDT}
                     >
-                      <img src={"/Kirim.svg"} width={20} height={20} />
-                      <p className={styles.txt}>Unggah</p>
+                      <p className={styles.txt}>Tutup</p>
                     </button>
                   </div>
                 </div>
@@ -424,67 +464,31 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
-                style={custom}
+                style={customModalTutup}
                 contentLabel="Example Modal"
               >
-                <h2 className={styles.headerTxtModal}>Unggah Laporan Bukti</h2>
+                <h2 className={styles.headerTxtModal}>Tutup Renaksi</h2>
+                <h2 className={styles.dialog}>
+                  Apakah anda yakin ingin tutup renaksi?
+                </h2>
                 <Gap height={20} width={0} />
-                <input
-                  className={styles.inputBuktiLap}
-                  placeholder="Tambah keterangan untuk lampiran bukti"
-                  onChange={(e) => setKetPegawai(e.target.value)}
-                />
-                <Gap height={30} width={0} />
                 <div className={styles.wrapperBtnModal}>
-                  <form action="#">
-                    <label htmlFor="file">
-                      <div className={`${btnStyles.btnPilihFile}`}>
-                        Pilih File
-                      </div>
-                    </label>
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      id="file"
-                      onChange={(e) => setFile(e.target.files[0])}
-                      name="sampleFile"
-                    />
-                  </form>
-                  {file != null ? (
-                    <div className={styles.iconPDF}>
-                      <Image
-                        src={"/IconPDF.svg"}
-                        width={25}
-                        height={25}
-                        alt="PDF"
-                      />
-                    </div>
-                  ) : null}
-                  <Gap width={193} height={0} />
-                  <button onClick={btnUnggahExp} className={styles.btnKirim}>
-                    <img src={"/Kirim.svg"} width={20} height={20} />
-                    <p>Kirim</p>
+                  {/* <Gap width={193} height={0} /> */}
+                  <button
+                    onClick={() => {
+                      closeModal();
+                      // router.push("/");
+                    }}
+                    className={styles.btnYa}
+                  >
+                    <p className={styles.txt}>Ya</p>
                   </button>
-                  <Gap width={24} height={0} />
-                  <button onClick={closeModal} className={styles.btnBatal}>
-                    <img src={"/Batal.svg"} width={20} height={20} />
-                    <p>Batal</p>
+                  {/* <Gap width={24} height={0} /> */}
+                  <button onClick={closeModal} className={styles.btnTidak}>
+                    <p>Tidak</p>
                   </button>
                 </div>
               </Modal>
-              {showModal ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModal(false)}
-                >
-                  <p>
-                    Lampiran Kegiatan Berhasil <b>Diunggah</b>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
-                    </div>
-                  </p>
-                </div>
-              ) : null}
             </Collapse>
           </TableCell>
         </>

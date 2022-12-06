@@ -128,6 +128,88 @@
   cursor: pointer;
 }
 
+
+/* !MODAL BARU */
+
+
+.headerTxtModal {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dialog {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+
+.wrapperBtnModal {
+  display: inline-flex;
+  bottom: 1;
+  position: absolute;
+  bottom: 0;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.btnYa {
+  width: 260.5px;
+  height: 62px;
+  border: none;
+  margin: 0;
+  border-bottom-left-radius: 20px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255, 1, 100, 1);
+  border-top: 1px solid rgba(17, 35, 80, 0.5);
+  border-right: 1px solid rgba(17, 35, 80, 0.5);
+  cursor: pointer;
+  margin-left: -17px;
+}
+
+.btnTidak {
+  width: 280.5px;
+  height: 62px;
+  border: none;
+  margin: 0;
+  border-bottom-right-radius: 20px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  border-top: 1px solid rgba(17, 35, 80, 0.5);
+  border-left: 1px solid rgba(17, 35, 80, 0.5);
+  cursor: pointer
+}
+
+.btnYa p {
+  margin: 0;
+}
+
+.btnTidak p {
+  margin: 0;
+}
+
+
+/* !MODAL BARU */
+
+
+
 .wrapperTitleInputRenaksi {
   display: flex;
   width: 299px;
@@ -617,6 +699,11 @@
 
 .titleBtnUnggah {
   color: black;
+}
+
+.titleBtnTutup{
+  color: black;
+  align-self: center;
 }
 
 .p {

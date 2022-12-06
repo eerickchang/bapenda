@@ -61,6 +61,7 @@ export default function CLihatSemuaRenaksi() {
     {
       id: "kegiatan",
       label: "Kegiatan",
+      // maxWidth: 10
     },
     {
       id: "subkegiatan",
@@ -87,6 +88,7 @@ export default function CLihatSemuaRenaksi() {
     fontWeight: 400,
     fontSize: 18,
     width: 60,
+    overflow: 'hidden'
   };
 
   const styleHeaders = {
@@ -95,6 +97,7 @@ export default function CLihatSemuaRenaksi() {
     fontWeight: 600,
     fontSize: 22,
     color: "#fff",
+    maxWidth: 50
   };
 
   const styleContainer = {
@@ -106,6 +109,7 @@ export default function CLihatSemuaRenaksi() {
     borderRadius: 6,
     boxShadow: " 0px 4px 4px rgba(0, 0, 0, 0.25)",
     overflowX: "scroll",
+
     "::-webkit-scrollbar": {
       width: 15,
       height: 0,
@@ -144,8 +148,8 @@ export default function CLihatSemuaRenaksi() {
       >
         <Table
           stickyHeader
-          aria-label="sticky table"
-          sx={{ tableLayout: "auto" }}
+          // aria-label="sticky table"
+          sx={{ tableLayout: "fixed" }}
         >
           <TableHead sx={{ borderTopRightRadius: 20 }}>
             <TableRow>
@@ -154,7 +158,7 @@ export default function CLihatSemuaRenaksi() {
                   sx={styleHeaders}
                   key={column.id}
                   align="center"
-                  style={{ minWidth: column.minWidth }}
+                  style={{ maxWidth: column.maxWidth }}
                 >
                   {column.label}
                 </TableCell>
