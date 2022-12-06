@@ -279,13 +279,6 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
   const btnTolakExp = () => {
     Axios.post("http://localhost:3001/adminMenolakRenaksiMJD", {
       idRenaksi: row.id_renaksi,
@@ -306,42 +299,10 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
 
     closeModal();
     btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
   };
 
   const style1 = {
@@ -412,7 +373,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  
                 </div>
               )}
             </p>
@@ -578,7 +538,7 @@ export const CUbahJadwal = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40};
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,
