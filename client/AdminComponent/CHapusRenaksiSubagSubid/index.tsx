@@ -293,11 +293,12 @@ function Row(props) {
     marginBottom: 20,
   };
 
-  const styleTxtKet = {
-    display: "flex",
-    position: "absolute",
-    top: 140,
-    color: "rgba(149, 149, 149, 1)",
+  const styleContentKet = {
+    maxWidth: 930,
+    height: 140,
+    overflow: "auto",
+    paddingRight: 10,
+    marginTop: 8,
   };
 
   return (
@@ -314,6 +315,7 @@ function Row(props) {
                 : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
             }
           }}
+          hover
           // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
@@ -335,13 +337,6 @@ function Row(props) {
                     </div>
                     1 files
                   </div>
-                  <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </p>
@@ -354,9 +349,13 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
-                  <p style={styleTxtKet}></p>
+                  <p
+                    style={styleContentKet}
+                  >
+                    {row.ket_pegawai}
+                  </p>
                 </div>
+                
               </div>
               <div className={styles.wrapperLampiran}>
                 Lampiran:

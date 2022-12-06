@@ -1,25 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import stylesS from "./cUbahJadwalRenaksi.module.css";
 
-import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
-import Image from "next/future/image";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
-import FileDownload from "js-file-download";
-import Modal from "react-modal";
-import { Checkbox } from "@mui/material";
+import Image from "next/future/image";
 import { useRouter } from "next/router";
+import Gap from "../Gap";
+import styles from "./TableMUI.module.css";
 
 Axios.defaults.withCredentials = true;
 
@@ -265,7 +258,7 @@ function Row(props) {
         ) : null}
       </div>
       <React.Fragment>
-        <TableRow className={`${styles.tableRow} ${styleRow}`}>
+        <TableRow className={`${styles.tableRow} ${styleRow}`}hover>
           <TableCell>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>

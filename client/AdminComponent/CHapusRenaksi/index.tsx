@@ -346,7 +346,7 @@ function Row(props) {
         ) : null}
       </div> */}
       <React.Fragment>
-        <TableRow className={`${styles.tableRow} ${styleRow}`}>
+        <TableRow hover className={`${styles.tableRow} ${styleRow}`}>
           <TableCell>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
