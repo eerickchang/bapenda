@@ -166,7 +166,7 @@
 }
 
 .btnYa {
-  width: 260.5px;
+  width: 270.5px;
   height: 62px;
   border: none;
   margin: 0;
@@ -183,7 +183,7 @@
 }
 
 .btnTidak {
-  width: 280.5px;
+  width: 270.5px;
   height: 62px;
   border: none;
   margin: 0;
@@ -549,7 +549,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  padding-right: 50px;
+  padding-right: 100px;
 }
 
 .wrapperContentModal {

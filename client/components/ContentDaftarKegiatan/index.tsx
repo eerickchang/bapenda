@@ -55,35 +55,35 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     },
   };
 
-    const customModalTutup = {
-      content: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        width: 550,
-        height: 250,
-        borderRadius: 20,
-        paddingTop: 20,
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-        overlay: "#112350",
-        backgroundColor: "white",
-        zIndex: 1001,
-        scroll: false,
-      },
-      overlay: {
-        position: "fixed",
-        marginTop: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "rgba(17, 35, 80, 0.5)",
-        zIndex: 1000,
-      },
-    };
+  const customModalTutup = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 550,
+      height: 250,
+      borderRadius: 20,
+      paddingTop: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
   // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
   const customUbah = {
@@ -421,29 +421,29 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         <input
                           className={styles.inputBalasan}
                           placeholder="Balas"
+                          style={{position: "relative", top: 8}}
                         />
-                        <Image
-                          src={"/Lampiran.svg"}
-                          width={21}
-                          height={23}
+                        <div
                           style={{
-                            position: "relative",
-                            top: 8,
-                            left: -85,
-                            cursor: "pointer",
+                            position: "inherit",
+                            marginTop: 17,
+                            marginLeft: -82,
+                            zIndex: 20
                           }}
-                        />
-                        <Image
-                          src={"/KirimFeedback.svg"}
-                          width={24}
-                          height={24}
-                          style={{
-                            position: "relative",
-                            top: 8,
-                            left: -59,
-                            cursor: "pointer",
-                          }}
-                        />
+                        >
+                          <Image
+                            src={"/Lampiran.svg"}
+                            width={21}
+                            height={23}
+                            style={{ marginRight: 20, cursor: "pointer" }}
+                          />
+                          <Image
+                            src={"/KirimFeedback.svg"}
+                            width={24}
+                            height={24}
+                            style={{ cursor: "pointer" }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
