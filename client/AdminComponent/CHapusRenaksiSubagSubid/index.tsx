@@ -113,7 +113,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
@@ -234,7 +234,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
     closeModal();
     btnTolak();
   };
@@ -504,7 +504,7 @@ export const CHapusRenaksiSubagSubid = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40};
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,

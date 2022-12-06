@@ -20,8 +20,16 @@ import { positions } from "@mui/system";
 
 Axios.defaults.withCredentials = true;
 
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
+interface rowProps {
+  row: ReturnType<typeof createData>;
+  kasubid: string;
+  kabid: string;
+  kaban: string;
+  admin: string;
+}
+
+function Row(props: rowProps) {
+  const { row, kasubid, kabid, kaban, admin } = props;
   const [open, setOpen] = React.useState(false);
 
   // ? CUSTOM STYLE MODAL UNGGAH N HAPUS RENAKSI
@@ -411,9 +419,23 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         width={40}
                         height={40}
                       />
-                      <p>
-                        <b>Kasubid</b> - Andre Waani
-                      </p>
+                      {row.ditolak == "Kasubid" ? (
+                        <p>
+                          <b>Kasubid</b> - {kasubid.nama}
+                        </p>
+                      ) : row.ditolak == "Kabid" ? (
+                        <p>
+                          <b>Kabid</b> - {kabid.nama}
+                        </p>
+                      ) : row.ditolak == "Kaban" ? (
+                        <p>
+                          <b>Kaban</b> - {kaban.nama}
+                        </p>
+                      ) : row.ditolak == "Admin" ? (
+                        <p>
+                          <b>Admin</b> - {admin.nama}
+                        </p>
+                      ) : null}
                     </div>
                     <div className={styles.feedback}>
                       <p>{row.ket_admin}</p>
@@ -430,12 +452,20 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                             zIndex: 20,
                           }}
                         >
-                          <Image
-                            src={"/Lampiran.svg"}
-                            width={21}
-                            height={23}
-                            style={{ marginRight: 20, cursor: "pointer" }}
+                          <input
+                            type="file"
+                            style={{ display: "none" }}
+                            id="firstimg"
+                            onChange={(e) => setFile(e.target.files[0])}
                           />
+                          <label for="firstimg">
+                            <Image
+                              src={"/Lampiran.svg"}
+                              width={21}
+                              height={23}
+                              style={{ marginRight: 20, cursor: "pointer" }}
+                            />
+                          </label>
                           <Image
                             src={"/KirimFeedback.svg"}
                             width={24}
@@ -444,7 +474,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                           />
                         </div>
                       </div>
-                      {row.tupoksi_tambahan == "" ? null : (
+                      {file != null ? (
                         <Image
                           src={"/IconPDF.svg"}
                           width={34}
@@ -456,7 +486,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                             top: -38,
                           }}
                         />
-                      )}
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.wrapperTitleBtnDT}>
@@ -1399,6 +1429,10 @@ export default function ContentDaftarKegiatan() {
   const [asn, setAsn] = useState("");
   const [image, setImage] = useState(null);
   const [dataRenaksi, setDataRenaksi] = useState([]);
+  const [kasubid, setKasubid] = useState("");
+  const [kabid, setKabid] = useState("");
+  const [kaban, setKaban] = useState("");
+  const [admin, setAdmin] = useState("");
 
   const menuRef = useRef();
 
@@ -1425,6 +1459,29 @@ export default function ContentDaftarKegiatan() {
       Axios.get("http://localhost:3001/masuk").then((response) => {
         setAsn(response.data.user[0]);
         setImage(response.data.user[0].foto);
+
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              response.data.user[0].sub_bidang == pegawai.sub_bidang &&
+              pegawai.jabatan == "Kasubid"
+            ) {
+              setKasubid(pegawai);
+            }
+            if (
+              response.data.user[0].bidang == pegawai.bidang &&
+              pegawai.jabatan == "Kabid"
+            ) {
+              setKabid(pegawai);
+            }
+            if (pegawai.jabatan == "Kepala Badan") {
+              setKaban(pegawai);
+            }
+            if (pegawai.jabatan == "Admin") {
+              setAdmin(pegawai);
+            }
+          });
+        });
 
         Axios.get("http://localhost:3001/ambilRenaksi").then((result) => {
           result.data.map((item) => {
@@ -1547,7 +1604,14 @@ export default function ContentDaftarKegiatan() {
               </TableHead>
               <TableBody>
                 {dataRenaksi.map((row) => (
-                  <Row key={row.id_renaksi} row={row} />
+                  <Row
+                    key={row.id_renaksi}
+                    row={row}
+                    kasubid={kasubid}
+                    kabid={kabid}
+                    kaban={kaban}
+                    admin={admin}
+                  />
                 ))}
               </TableBody>
             </Table>

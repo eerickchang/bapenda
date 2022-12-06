@@ -289,7 +289,7 @@ app.get("/pegawai", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'SEMUA'
 app.get("/ambilRenaksi", (req, res) => {
   const sqlSelect =
-    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_admin, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_admin, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -334,7 +334,7 @@ app.get("/ambilRenaksiSementara", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'DITOLAK'
 app.get("/ambilRenaksiDitolak", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ket_admin, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.kirim_ke = "Staff" ';
+    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.ket_admin, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.kirim_ke = "Staff" ';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -513,7 +513,7 @@ app.post("/kasubidMenolakRenaksi", (req, res) => {
   const ketAdmin = req.body.ketAdmin;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ? WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ditolak = "Kasubid", ket_admin = ? WHERE id_renaksi = ?';
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
