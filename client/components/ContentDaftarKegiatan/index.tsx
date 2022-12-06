@@ -421,13 +421,12 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                         <input
                           className={styles.inputBalasan}
                           placeholder="Balas"
-                          style={{position: "relative", top: 8}}
                         />
                         <div
                           style={{
                             position: "inherit",
-                            marginTop: 17,
-                            marginLeft: -82,
+                            marginTop: 8,
+                            marginLeft: 445,
                             zIndex: 20
                           }}
                         >
