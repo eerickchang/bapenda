@@ -231,12 +231,12 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "relative",
-      top: 105,
-      color: "rgba(149, 149, 149, 1)",
-    };
+  const styleTxtKet = {
+    display: "flex",
+    position: "relative",
+    top: 105,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
@@ -372,9 +372,7 @@ function Row(props) {
                 Keterangan:
                 <div className={styles.contentKeterangan}>
                   {row.ket_pegawai}
-                  <p
-                    style={styleTxtKet}
-                  >
+                  <p style={styleTxtKet}>
                     Pengajuan Ubah jadwal :
                     <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
                       {`${moment(row.req_start_date).format("MMM")} - ${moment(

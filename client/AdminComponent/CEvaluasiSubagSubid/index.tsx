@@ -133,7 +133,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
@@ -240,7 +240,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
 
     closeModal();
     btnTolak();
