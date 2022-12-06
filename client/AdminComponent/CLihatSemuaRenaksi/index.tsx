@@ -228,7 +228,7 @@ export default function CLihatSemuaRenaksi() {
           });
         }
       );
-    }, 30);
+    }, 100);
     closeModalTolakAll();
     btnTolak();
   };
@@ -411,7 +411,7 @@ export default function CLihatSemuaRenaksi() {
                 contentLabel="Example Modal"
               >
                 <h2 className={styles.headerTxtModal}>
-                  Tolak Semua Permintaan Ubah Jadwal
+                  Tolak Permintaan Ubah Jadwal
                 </h2>
                 <Gap height={20} width={0} />
                 <input
