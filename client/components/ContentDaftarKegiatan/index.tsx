@@ -386,16 +386,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                       </p>
                     </div>
                     <div className={styles.feedback}>
-                      <p>
-                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
-                        menunjang kegiatan mendatang di bulan yang akan dfrr”
-                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
-                        menunjang kegiatan mendatang di bulan yang akan dfrr”
-                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
-                        menunjang kegiatan mendatang di bulan yang akan dfrr”
-                        “Perubahan jadwal ditolak karena sudah diperlukan untuk
-                        menunjang kegiatan mendatang di bulan yang akan dfrr”
-                      </p>
+                      <p>{row.ket_admin}</p>
                       <div className={styles.wrapInput}>
                         <input
                           className={styles.inputBalasan}
