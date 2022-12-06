@@ -133,21 +133,12 @@ function Row(props) {
           }
         );
       });
-    }, 30);
+    }, 100);
 
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);
     }, 3000);
-  };
-
-  const btnDw = () => {
-    Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
-      responseType: "blob",
-    }).then((res) => {
-      console.log(res);
-      FileDownload(res.data, `${row.files}`);
-    });
   };
 
   const custom = {
@@ -228,92 +219,6 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
-  const btnTolakExp = () => {
-    Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
-      (ambilRenaksi) => {
-        ambilRenaksi.data.map((renaksi) => {
-          if (row.sub_bidang === renaksi.sub_bidang) {
-            Axios.post("http://localhost:3001/adminMenolakRenaksiFinal", {
-              idRenaksi: renaksi.id_renaksi,
-              ketKaban: ketKaban,
-            });
-          }
-        });
-      }
-    );
-
-    stateChanger([]);
-    setTimeout(() => {
-      Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
-        Axios.get("http://localhost:3001/adminAmbilRenaksiMRD").then(
-          (ambilRenaksi) => {
-            let pegawaiYgAdaRenaksi = [];
-            let kasubid = ambilKasubid.data;
-            let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
-
-            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
-              return renaksi.some(
-                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
-              );
-            });
-
-            pegawaiYgAdaRenaksi.map((item) => {
-              stateChanger((nextData) => {
-                return [item, ...nextData];
-              });
-            });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
-          }
-        );
-      });
-    }, 30);
-
-    closeModal();
-    btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
-  };
-
   const router = useRouter();
 
   const clickRow = () => {
@@ -358,12 +263,9 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        
       </div>
       <React.Fragment>
-        <TableRow
-          className={`${styles.tableRow} ${styleRow}`}
-        >
+        <TableRow className={`${styles.tableRow} ${styleRow}`}>
           <TableCell>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
@@ -452,7 +354,6 @@ export const CTinjauRenaksi = () => {
     }
   }, []);
 
-
   const style = {
     fontFamily: "Poppins",
     fontSize: 17,
@@ -478,9 +379,7 @@ export const CTinjauRenaksi = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -507,9 +406,7 @@ export const CTinjauRenaksi = () => {
               </Table>
             </TableContainer>
             <Gap height={50} width={0} />
-            <TableContainer
-              style={styleContainer}
-            >
+            <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
                   <TableRow>
