@@ -405,10 +405,10 @@ function Row(props) {
           className={`${styles.tableRow} ${styleRow}`}
           // sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell onClick={clickRow}>
+          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow}>
+          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>

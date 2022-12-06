@@ -393,6 +393,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell>
             <p style={style1} onClick={() => console.log(row.files)}>
