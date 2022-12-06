@@ -452,12 +452,20 @@ function Row(props: rowProps) {
                             zIndex: 20,
                           }}
                         >
-                          <Image
-                            src={"/Lampiran.svg"}
-                            width={21}
-                            height={23}
-                            style={{ marginRight: 20, cursor: "pointer" }}
+                          <input
+                            type="file"
+                            style={{ display: "none" }}
+                            id="firstimg"
+                            onChange={(e) => setFile(e.target.files[0])}
                           />
+                          <label for="firstimg">
+                            <Image
+                              src={"/Lampiran.svg"}
+                              width={21}
+                              height={23}
+                              style={{ marginRight: 20, cursor: "pointer" }}
+                            />
+                          </label>
                           <Image
                             src={"/KirimFeedback.svg"}
                             width={24}
@@ -466,7 +474,7 @@ function Row(props: rowProps) {
                           />
                         </div>
                       </div>
-                      {row.tupoksi_tambahan == "" ? null : (
+                      {file != null ? (
                         <Image
                           src={"/IconPDF.svg"}
                           width={34}
@@ -478,7 +486,7 @@ function Row(props: rowProps) {
                             top: -38,
                           }}
                         />
-                      )}
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.wrapperTitleBtnDT}>
