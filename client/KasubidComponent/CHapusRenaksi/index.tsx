@@ -242,6 +242,13 @@ function Row(props) {
     boxShadow: "1px 2px 9px #F4AAB9",
   };
 
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -276,6 +283,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell>
             <p style={style1} onClick={() => console.log(row.files)}>
@@ -299,12 +307,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </p>
@@ -317,7 +319,7 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>

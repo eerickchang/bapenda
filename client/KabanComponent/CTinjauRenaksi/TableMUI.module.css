@@ -93,7 +93,6 @@
   margin-left: 350px;
 }
 
-
 .btnTolak {
   background-color: rgba(255, 1, 100, 1);
   width: 170px;
@@ -127,7 +126,6 @@
   padding-inline: 30px;
   cursor: pointer;
 }
-
 
 .btnTolakAll {
   background-color: rgba(255, 1, 100, 1);
@@ -423,7 +421,7 @@
   margin-left: 390px;
 }
 
-.styleLihatDetail{
+.styleLihatDetail {
   cursor: pointer;
   display: flex;
   font-family: "Poppins", sans-serif;
@@ -432,12 +430,12 @@
   width: 140px;
 }
 
-.styleLihatDetail p{
+.styleLihatDetail p {
   margin: 0;
   margin-left: 10px;
 }
 
-.styleLihatDetail p:hover{
+.styleLihatDetail p:hover {
   border-bottom: 1px solid black;
 }
 

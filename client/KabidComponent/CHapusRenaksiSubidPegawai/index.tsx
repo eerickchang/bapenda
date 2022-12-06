@@ -378,6 +378,14 @@ function Row(props) {
     color: "#000",
   };
 
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
+
   return (
     <>
       <React.Fragment>
@@ -450,17 +458,14 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
+              
               <div className={styles.wrapperLampiran}>
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
                       <p style={{ marginLeft: 10 }}> File Laporan</p>

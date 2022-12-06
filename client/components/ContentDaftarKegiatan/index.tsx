@@ -321,6 +321,7 @@ function Row(props: rowProps) {
     borderTopStyle: "solid",
     marginBottom: 2,
   };
+  
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK
@@ -438,7 +439,7 @@ function Row(props: rowProps) {
                       ) : null}
                     </div>
                     <div className={styles.feedback}>
-                      <p>{row.ket_admin}</p>
+                      <p>"{row.ket_admin}"</p>
                       <div className={styles.wrapInput}>
                         <input
                           className={styles.inputBalasan}

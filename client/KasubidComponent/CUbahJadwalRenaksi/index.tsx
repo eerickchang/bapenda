@@ -232,10 +232,22 @@ function Row(props) {
   };
 
   const styleTxtKet = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 500,
     display: "flex",
     position: "relative",
-    top: 105,
+    top: -40,
+    left: 10,
     color: "rgba(149, 149, 149, 1)",
+  };
+
+  const styleContentKet = {
+    maxWidth: 930,
+    height: 113,
+    overflow: "auto",
+    paddingRight: 10,
+    marginTop: 8,
   };
 
   return (
@@ -324,16 +336,16 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
-                  <p style={styleTxtKet}>
-                    Pengajuan Ubah jadwal :
-                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
-                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
-                        row.req_end_date
-                      ).format("MMM")}`}
-                    </p>
-                  </p>
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
+                <p style={styleTxtKet}>
+                  Pengajuan Ubah jadwal :
+                  <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                    {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                      row.req_end_date
+                    ).format("MMM")}`}
+                  </p>
+                </p>
               </div>
               <div className={styles.wrapperLampiran}>
                 Lampiran:

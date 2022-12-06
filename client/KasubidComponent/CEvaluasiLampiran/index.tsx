@@ -309,12 +309,13 @@ function Row(props) {
     marginBottom: 2,
   };
 
-  const styleTxtKet = {
-    display: "flex",
-    position: "absolute",
-    top: 140,
-    color: "rgba(149, 149, 149, 1)",
-  };
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
 
   return (
     <>
@@ -387,7 +388,7 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>

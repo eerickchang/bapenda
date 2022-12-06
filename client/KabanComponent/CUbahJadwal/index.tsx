@@ -307,6 +307,13 @@ function Row(props) {
     left: 10,
     color: "rgba(149, 149, 149, 1)",
   };
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 113,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
 
   return (
     <>
@@ -365,16 +372,16 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  <p style={{ maxWidth: 930, height: 113, overflow: 'auto', paddingRight: 10,marginTop: 8}}>{row.ket_pegawai}</p>
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
-                  <p style={styleTxtKet}>
-                    Pengajuan Ubah jadwal :
-                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
-                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
-                        row.req_end_date
-                      ).format("MMM")}`}
-                    </p>
+                <p style={styleTxtKet}>
+                  Pengajuan Ubah jadwal :
+                  <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                    {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                      row.req_end_date
+                    ).format("MMM")}`}
                   </p>
+                </p>
               </div>
               <div className={styles.wrapperLampiran}>
                 Lampiran:
@@ -518,7 +525,7 @@ export const CUbahJadwal = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40};
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,
