@@ -242,6 +242,13 @@ function Row(props) {
     boxShadow: "1px 2px 9px #F4AAB9",
   };
 
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
   return (
     <>
       <div className={stylesS.wrapFilter}>
@@ -262,53 +269,6 @@ function Row(props) {
             </div>
           </div>
         ) : null}
-        <Gap width={15} height={0} />
-        <button onClick={openModalTolakAll} className={styles.btnTolakAll}>
-          <Image src={"/Tolak.svg"} width={25} height={25} />
-          Tolak Semua
-        </button>
-        <Modal
-          isOpen={modalTolakAllIsOpen}
-          onAfterOpen={afterOpenModalTolakAll}
-          onRequestClose={closeModal}
-          style={custom}
-          contentLabel="Example Modal"
-        >
-          <h2 className={styles.headerTxtModal}>
-            Tolak Permintaan Hapus Renaksi
-          </h2>
-          <Gap height={20} width={0} />
-          <input
-            className={styles.inputBuktiLap}
-            placeholder="Tambah keterangan"
-            // onChange={(e) => setKetPegawai(e.target.value)}
-          />
-          <Gap height={20} width={0} />
-          <div className={styles.wrapBtnModal}>
-            <button onClick={closeModalTolakAll} className={styles.btnKirim}>
-              <img src={"/BatalIcon.svg"} width={20} height={20} />
-              <p className={styles.txt}>Batal</p>
-            </button>
-            <Gap width={24} height={0} />
-            <button onClick={btnTolakAllExp} className={styles.btnBatal}>
-              <img src={"/Tolak.svg"} width={20} height={20} />
-              <p>Tolak</p>
-            </button>
-          </div>
-        </Modal>
-        {showModalTolakAll ? (
-          <div
-            className={styles.modal}
-            onClick={() => setShowModalTolakAll(false)}
-          >
-            <p>
-              Semua Permintaan Ubah Jadwal <b>Ditolak</b>
-            </p>
-            <div className={styles.checkCircle}>
-              <Image src={"/Tolak.svg"} width={25} height={25} />
-            </div>
-          </div>
-        ) : null}
       </div>
       <React.Fragment>
         <TableRow
@@ -323,6 +283,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell>
             <p style={style1} onClick={() => console.log(row.files)}>
@@ -346,12 +307,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </p>
@@ -364,7 +319,7 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>

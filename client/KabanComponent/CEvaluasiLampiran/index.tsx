@@ -330,10 +330,10 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow className={`${styles.tableRow} ${styleRow}`}>
-          <TableCell onClick={clickRow}>
+          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow}>
+          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>

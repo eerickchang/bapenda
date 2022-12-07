@@ -92,6 +92,7 @@
   display: flex;
   border-bottom: 2px solid rgba(149, 149, 149, 0.3);
   font-size: 20px;
+  cursor: pointer;
 }
 .wrapperKeterangan {
   font-family: "Poppins", sans-serif;
@@ -131,6 +132,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .styleBtn p{

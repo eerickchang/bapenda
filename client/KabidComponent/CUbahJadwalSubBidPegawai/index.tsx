@@ -378,13 +378,32 @@ function Row(props) {
     color: "#000",
   };
 
-  const styleTxtKet = {
-    display: "flex",
-    position: "relative",
-    top: 105,
-    color: "rgba(149, 149, 149, 1)",
-    zIndex: 10,
+   const styleTxtKet = {
+     fontFamily: "Poppins",
+     fontSize: 18,
+     fontWeight: 500,
+     display: "flex",
+     position: "relative",
+     top: -40,
+     left: 10,
+     color: "rgba(149, 149, 149, 1)",
+   };
+
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 35,
   };
+
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 113,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
 
   return (
     <>
@@ -401,6 +420,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell>
             <p style={style1} onClick={() => console.log(row.files)}>
@@ -428,12 +448,6 @@ function Row(props) {
                     1 files
                   </div>
                   <Gap width={0} height={10} />
-                  {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                 </div>
               )}
             </div>
@@ -442,40 +456,26 @@ function Row(props) {
 
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
-          <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
-            in={open}
-            timeout="auto"
-          >
+          <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
-                  <p style={styleTxtKet}>
-                    Pengajuan Ubah jadwal :
-                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
-                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
-                        row.req_end_date
-                      ).format("MMM")}`}
-                    </p>
-                  </p>
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
+                <p style={styleTxtKet}>
+                  Pengajuan Ubah jadwal :
+                  <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                    {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                      row.req_end_date
+                    ).format("MMM")}`}
+                  </p>
+                </p>
               </div>
               <div className={styles.wrapperLampiran}>
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
                       <p style={{ marginLeft: 10 }}> File Laporan</p>

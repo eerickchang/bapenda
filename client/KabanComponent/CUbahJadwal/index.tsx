@@ -298,11 +298,22 @@ function Row(props) {
   };
 
   const styleTxtKet = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 500,
     display: "flex",
-    position: "absolute",
-    top: 140,
+    position: "relative",
+    top: -40,
+    left: 10,
     color: "rgba(149, 149, 149, 1)",
   };
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 113,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
 
   return (
     <>
@@ -361,28 +372,24 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
-                  <p style={styleTxtKet}>
-                    Pengajuan Ubah jadwal :
-                    <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
-                      {`${moment(row.req_start_date).format("MMM")} - ${moment(
-                        row.req_end_date
-                      ).format("MMM")}`}
-                    </p>
-                  </p>
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
+                <p style={styleTxtKet}>
+                  Pengajuan Ubah jadwal :
+                  <p style={{ fontWeight: 600, margin: 0, marginLeft: 10 }}>
+                    {`${moment(row.req_start_date).format("MMM")} - ${moment(
+                      row.req_end_date
+                    ).format("MMM")}`}
+                  </p>
+                </p>
               </div>
               <div className={styles.wrapperLampiran}>
                 Lampiran:
                 {row.files === "" ? null : (
                   <div className={styles.contentLampiran} onClick={btnDw}>
-                    {/* <div className={styles.fileLampiran}>
-                          <Image src={"/IconPNG.svg"} width={35} height={40} />
-                          <p style={{ marginLeft: 5 }}> Foto Laporan</p>
-                        </div> */}
                     <div className={styles.fileLampiran}>
                       <Image src={"/IconPDF.svg"} width={35} height={40} />
-                      <p style={{ marginLeft: 5 }}> File Laporan</p>
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
                     </div>
                   </div>
                 )}
@@ -518,7 +525,7 @@ export const CUbahJadwal = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,

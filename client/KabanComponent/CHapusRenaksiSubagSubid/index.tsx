@@ -239,6 +239,14 @@ function Row(props) {
     color: "rgba(149, 149, 149, 1)",
   };
 
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
+
   return (
     <>
       <React.Fragment>
@@ -292,8 +300,7 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
-                  <p style={styleTxtKet}></p>
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>
@@ -438,7 +445,7 @@ export const CHapusRenaksiSubagSubid = () => {
     // console.log(dataCakin);
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40, zIndex: 998 };
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
   const styleTitle = {
     marginLeft: 5,
     marginBottom: 10,

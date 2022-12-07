@@ -378,6 +378,22 @@ function Row(props) {
     color: "#000",
   };
 
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 35,
+  };
+
+    const styleContentKet = {
+      maxWidth: 930,
+      height: 140,
+      overflow: "auto",
+      paddingRight: 10,
+      marginTop: 8,
+    };
+
   return (
     <>
       <React.Fragment>
@@ -393,6 +409,7 @@ function Row(props) {
             }
           }}
           sx={{ "& > *": { borderBottom: "" } }}
+          hover
         >
           <TableCell>
             <p style={style1} onClick={() => console.log(row.files)}>
@@ -429,13 +446,7 @@ function Row(props) {
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
           <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
+            style={styleCollapse}
             in={open}
             timeout="auto"
           >
@@ -443,7 +454,7 @@ function Row(props) {
               <div className={styles.wrapperKeterangan}>
                 Keterangan:
                 <div className={styles.contentKeterangan}>
-                  {row.ket_pegawai}
+                  <p style={styleContentKet}>{row.ket_pegawai}</p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>
