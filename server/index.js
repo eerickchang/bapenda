@@ -289,9 +289,10 @@ app.get("/pegawai", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'SEMUA'
 app.get("/ambilRenaksi", (req, res) => {
   const sqlSelect =
-    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_admin, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.nip, data_renaksi.ket_admin, data_renaksi.ket_pegawai, data_renaksi.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
+    console.log(err);
   });
 });
 
@@ -334,7 +335,7 @@ app.get("/ambilRenaksiSementara", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'DITOLAK'
 app.get("/ambilRenaksiDitolak", (req, res) => {
   const sqlSelect =
-    'SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.ket_admin, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.kirim_ke = "Staff" ';
+    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.ditolak, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.kirim_ke, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.nip, data_renaksi.ket_admin, data_renaksi.ket_pegawai, data_renaksi.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, thl.nama_thl, thl.thl, thl.foto_thl FROM data_renaksi INNER JOIN pegawai ON data_renaksi.nip=pegawai.nip LEFT OUTER JOIN thl ON data_renaksi.thl=thl.thl WHERE data_renaksi.kirim_ke = 'Staff'";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -408,6 +409,144 @@ app.post("/unggahLaporan", (req, res) => {
   db.query(sqlUpdate, data, (err, result) => {
     console.log(err);
   });
+});
+
+//FEEDBACK DARI STAFF
+app.post("/feedbackStaff", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketPegawai = req.body.ketPegawai;
+  const fileURL = req.body.fileURL;
+  const ditolak = req.body.ditolak;
+
+  const sqlUpdate =
+    "UPDATE data_renaksi SET ket_pegawai = ?, files = ?, kirim_ke = ? WHERE id_renaksi = ?";
+  let data = [ketPegawai, fileURL, ditolak, idRenaksi];
+
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(err);
+  });
+});
+
+//STAFF - TUTUP RENAKSI
+app.post("/tutupRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const nip = req.body.nip;
+  const status = req.body.status;
+  const req_start_date = req.body.req_start_date;
+  const req_end_date = req.body.req_end_date;
+  const files = req.body.files;
+  const ket_pegawai = req.body.ket_pegawai;
+  const ket_admin = req.body.ket_admin;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
+
+  if (status != "Selesai" || status != "Menunggu Renaksi Diterima") {
+    const sqlUpdate =
+      "UPDATE data_renaksi SET status = 'Sementara', ket_pegawai = '', ket_kaban = '', ket_admin = '', req_start_date = '', req_end_date = '', kirim_ke = '', ditolak = '' WHERE id_renaksi = ?";
+    let data = [idRenaksi];
+
+    db.query(sqlUpdate, data, (err, result) => {
+      console.log(err);
+    });
+  } else if (status == "Selesai") {
+    const sqlUpdate =
+      "UPDATE data_renaksi SET status = 'Bukti Ditolak', kirim_ke = '', ditolak = '' WHERE id_renaksi = ?";
+    let data = [idRenaksi];
+
+    db.query(sqlUpdate, data, (err, result) => {
+      console.log(err);
+    });
+  } else if (status == "Menunggu Renaksi Diterima") {
+    const sqlUpdate =
+      "UPDATE data_renaksi SET status = 'Renaksi Ditolak', kirim_ke = '', ditolak = '' WHERE id_renaksi = ?";
+    let data = [idRenaksi];
+
+    db.query(sqlUpdate, data, (err, result) => {
+      console.log(err);
+    });
+  }
+
+  if (status == "Menunggu Renaksi Diterima") {
+    const sqlInsert =
+      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Mengirim Renaksi', 'Ditolak') ";
+    db.query(
+      sqlInsert,
+      [
+        idRenaksi,
+        nip,
+        req_start_date,
+        req_end_date,
+        files,
+        ket_pegawai,
+        ket_admin,
+        start_date,
+        end_date,
+      ],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  } else if (status == "Menunggu Jadwal Diubah") {
+    const sqlInsert =
+      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Ditolak') ";
+    db.query(
+      sqlInsert,
+      [
+        idRenaksi,
+        nip,
+        req_start_date,
+        req_end_date,
+        files,
+        ket_pegawai,
+        ket_admin,
+        start_date,
+        end_date,
+      ],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  } else if (status == "Menunggu Renaksi Dihapus") {
+    const sqlInsert =
+      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Ditolak') ";
+    db.query(
+      sqlInsert,
+      [
+        idRenaksi,
+        nip,
+        req_start_date,
+        req_end_date,
+        files,
+        ket_pegawai,
+        ket_admin,
+        start_date,
+        end_date,
+      ],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  } else if (status == "Selesai") {
+    const sqlInsert =
+      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Unggah Lampiran', 'Ditolak') ";
+    db.query(
+      sqlInsert,
+      [
+        idRenaksi,
+        nip,
+        req_start_date,
+        req_end_date,
+        files,
+        ket_pegawai,
+        ket_admin,
+        start_date,
+        end_date,
+      ],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  }
 });
 
 //UBAH JADWAL RENAKSI
@@ -725,7 +864,7 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   });
 });
 
-//ADMIN MENOLAK RENAKSI UBAH JADWA;
+//ADMIN MENOLAK RENAKSI UBAH JADWAL;
 app.post("/adminMenolakRenaksiMJD", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
   const ketAdmin = req.body.ketAdmin;
