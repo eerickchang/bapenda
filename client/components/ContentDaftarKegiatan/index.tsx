@@ -343,6 +343,8 @@ function Row(props: rowProps) {
         console.log(err);
       });
     setFile(null);
+
+    window.location.reload();
   };
 
   const btnTutupRenaksi = () => {
@@ -372,7 +374,7 @@ function Row(props: rowProps) {
     borderTopStyle: "solid",
     marginBottom: 2,
   };
-  
+
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK
@@ -505,7 +507,7 @@ function Row(props: rowProps) {
                             zIndex: 20,
                           }}
                         >
-                          <input
+                          {/* <input
                             type="file"
                             style={{ display: "none" }}
                             id="firstimg"
@@ -518,7 +520,22 @@ function Row(props: rowProps) {
                               height={23}
                               style={{ marginRight: 20, cursor: "pointer" }}
                             />
-                          </label>
+                          </label> */}
+
+                          <input
+                            type="file"
+                            // style={{ display: "none" }}
+                            id="firstimg"
+                            onChange={(e) => setFile(e.target.files[0])}
+                          />
+                          {/* <label htmlFor="firstimg">
+                            <Image
+                              src={"/Lampiran.svg"}
+                              width={21}
+                              height={23}
+                              style={{ marginRight: 20, cursor: "pointer" }}
+                            />
+                          </label> */}
                           <Image
                             src={"/KirimFeedback.svg"}
                             width={24}
