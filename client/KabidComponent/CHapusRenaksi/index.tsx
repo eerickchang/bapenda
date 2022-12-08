@@ -268,7 +268,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell onClick={() => clickRow()} style={style1}>
           <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
         </TableCell>
-        <TableCell style={style2}>{row.nama}</TableCell>
+        <TableCell onClick={() => clickRow()} style={style2}>
+          {row.nama}
+        </TableCell>
         <TableCell>
           <div style={style2}>
             <div style={{ flexDirection: "row", display: "flex" }}>
