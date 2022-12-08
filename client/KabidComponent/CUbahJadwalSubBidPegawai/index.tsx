@@ -99,6 +99,7 @@ const rows = [
 function Row(props) {
   const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketAdmin, setKetAdmin] = useState("");
 
   // const custom = {
   //   content: {
@@ -301,32 +302,25 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.post("http://localhost:3001/kabidMenolakRenaksi", {
+      idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+    });
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    stateChanger([]);
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === subid) {
+              stateChanger((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 100);
 
     closeModal();
     btnTolak();
@@ -378,16 +372,16 @@ function Row(props) {
     color: "#000",
   };
 
-   const styleTxtKet = {
-     fontFamily: "Poppins",
-     fontSize: 18,
-     fontWeight: 500,
-     display: "flex",
-     position: "relative",
-     top: -40,
-     left: 10,
-     color: "rgba(149, 149, 149, 1)",
-   };
+  const styleTxtKet = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 500,
+    display: "flex",
+    position: "relative",
+    top: -40,
+    left: 10,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   const styleCollapse = {
     background: "rgba(232, 232, 232, 1)",
@@ -397,13 +391,13 @@ function Row(props) {
     marginBottom: 35,
   };
 
-    const styleContentKet = {
-      maxWidth: 930,
-      height: 113,
-      overflow: "auto",
-      paddingRight: 10,
-      marginTop: 8,
-    };
+  const styleContentKet = {
+    maxWidth: 930,
+    height: 113,
+    overflow: "auto",
+    paddingRight: 10,
+    marginTop: 8,
+  };
 
   return (
     <>
@@ -523,13 +517,13 @@ function Row(props) {
                   contentLabel="Example Modal"
                 >
                   <h2 className={styles.headerTxtModal}>
-                    Tolak Lampiran Bukti
+                    Tolak Permintaan Ubah Jadwal
                   </h2>
                   <Gap height={20} width={0} />
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
