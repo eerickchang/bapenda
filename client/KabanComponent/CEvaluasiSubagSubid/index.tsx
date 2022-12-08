@@ -26,6 +26,7 @@ Axios.defaults.withCredentials = true;
 function Row(props) {
   const { row, stateChanger, subid } = props;
   const [open, setOpen] = React.useState(false);
+  const [ketAdmin, setKetAdmin] = useState("");
 
   // const custom = {
   //   content: {
@@ -231,32 +232,25 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
+    Axios.post("http://localhost:3001/kabanMenolakRenaksiRow", {
+      idRenaksi: row.id_renaksi,
+      ketAdmin: ketAdmin,
+    });
+    stateChanger([]);
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    setTimeout(() => {
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.sub_bidang === subid) {
+              stateChanger((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+    }, 100);
 
     closeModal();
     btnTolak();
@@ -445,13 +439,13 @@ function Row(props) {
                   contentLabel="Example Modal"
                 >
                   <h2 className={styles.headerTxtModal}>
-                    Tolak Permintaan Ubah Jadwal
+                    Tolak Lampiran Bukti
                   </h2>
                   <Gap height={20} width={0} />
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
-                    // onChange={(e) => setKetPegawai(e.target.value)}
+                    onChange={(e) => setKetAdmin(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>
