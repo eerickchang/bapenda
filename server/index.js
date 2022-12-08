@@ -735,6 +735,19 @@ app.post("/kabidMenolakRenaksi", (req, res) => {
   });
 });
 
+//KABID MENOLAK RENAKSI PER ROW
+app.post("/kabidMenolakRenaksiRow", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ditolak = "Kabid", ket_admin = ? WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+});
+
 //KABAN MENERIMA RENAKSI
 app.post("/kabanMenerimaRenaksi", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
