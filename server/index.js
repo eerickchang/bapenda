@@ -728,7 +728,7 @@ app.post("/kabidMenolakRenaksi", (req, res) => {
   const ketAdmin = req.body.ketAdmin;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Admin", ket_kaban = ? WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Admin", ditolak = "Kabid", ket_kaban = ? WHERE id_renaksi = ?';
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
