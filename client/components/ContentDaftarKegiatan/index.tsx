@@ -314,6 +314,59 @@ function Row(props: rowProps) {
     window.location.reload();
   };
 
+  const btnKirimTanggapan = () => {
+    const data = new FormData();
+    data.append("file", file);
+    Axios.post("http://localhost:3001/uploadFile", data)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          Axios.post("http://localhost:3001/feedbackStaff", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            fileURL: response.data.file,
+            ditolak: row.ditolak,
+          }).then((feedbackStaff) => {
+            console.log(feedbackStaff);
+          });
+        } else {
+          Axios.post("http://localhost:3001/feedbackStaff", {
+            idRenaksi: row.id_renaksi,
+            ketPegawai: ketPegawai,
+            ditolak: row.ditolak,
+          }).then((feedbackStaff) => {
+            console.log(feedbackStaff);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setFile(null);
+
+    window.location.reload();
+  };
+
+  const btnTutupRenaksi = () => {
+    Axios.post("http://localhost:3001/tutupRenaksi", {
+      idRenaksi: row.id_renaksi,
+      nip: row.nip,
+      status: row.status,
+      files: row.files,
+      req_start_date: row.req_start_date,
+      req_end_date: row.req_end_date,
+      ket_pegawai: row.ket_pegawai,
+      ket_admin: row.ket_admin,
+      start_date: row.start_date,
+      end_date: row.end_date,
+    }).then((tutupRenaksi) => {
+      console.log(tutupRenaksi);
+    });
+    closeModal();
+    window.location.reload();
+    // console.log(row.status);
+  };
+
   const styleCollapse = {
     background: "rgba(232, 232, 232, 1)",
     borderTopColor: "rgba(165, 165, 165, 0.5)",
@@ -321,7 +374,7 @@ function Row(props: rowProps) {
     borderTopStyle: "solid",
     marginBottom: 2,
   };
-  
+
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK
@@ -444,6 +497,7 @@ function Row(props: rowProps) {
                         <input
                           className={styles.inputBalasan}
                           placeholder="Balas"
+                          onChange={(e) => setKetPegawai(e.target.value)}
                         />
                         <div
                           style={{
@@ -453,7 +507,7 @@ function Row(props: rowProps) {
                             zIndex: 20,
                           }}
                         >
-                          <input
+                          {/* <input
                             type="file"
                             style={{ display: "none" }}
                             id="firstimg"
@@ -466,12 +520,28 @@ function Row(props: rowProps) {
                               height={23}
                               style={{ marginRight: 20, cursor: "pointer" }}
                             />
-                          </label>
+                          </label> */}
+
+                          <input
+                            type="file"
+                            // style={{ display: "none" }}
+                            id="firstimg"
+                            onChange={(e) => setFile(e.target.files[0])}
+                          />
+                          {/* <label htmlFor="firstimg">
+                            <Image
+                              src={"/Lampiran.svg"}
+                              width={21}
+                              height={23}
+                              style={{ marginRight: 20, cursor: "pointer" }}
+                            />
+                          </label> */}
                           <Image
                             src={"/KirimFeedback.svg"}
                             width={24}
                             height={24}
                             style={{ cursor: "pointer" }}
+                            onClick={btnKirimTanggapan}
                           />
                         </div>
                       </div>
@@ -517,13 +587,7 @@ function Row(props: rowProps) {
                 <Gap height={20} width={0} />
                 <div className={styles.wrapperBtnModal}>
                   {/* <Gap width={193} height={0} /> */}
-                  <button
-                    onClick={() => {
-                      closeModal();
-                      // router.push("/");
-                    }}
-                    className={styles.btnYa}
-                  >
+                  <button onClick={btnTutupRenaksi} className={styles.btnYa}>
                     <p className={styles.txt}>Ya</p>
                   </button>
                   {/* <Gap width={24} height={0} /> */}
