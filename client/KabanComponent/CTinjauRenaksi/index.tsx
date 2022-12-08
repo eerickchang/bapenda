@@ -402,15 +402,12 @@ function Row(props) {
                   style={custom}
                   contentLabel="Example Modal"
                 >
-                  <h2 className={styles.headerTxtModal}>
-                    Tolak Permintann Ubah Jadwal
-                  </h2>
+                  <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
                   <Gap height={20} width={0} />
                   <input
                     className={styles.inputBuktiLap}
                     placeholder="Tambah keterangan"
                     onChange={(e) => setKetKaban(e.target.value)}
-                    // onChange={(e) => setKetPegawai(e.target.value)}
                   />
                   <Gap height={20} width={0} />
                   <div className={styles.wrapBtnModal}>

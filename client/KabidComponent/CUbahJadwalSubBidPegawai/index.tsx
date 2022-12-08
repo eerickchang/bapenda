@@ -302,7 +302,7 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    Axios.post("http://localhost:3001/kabidMenolakRenaksi", {
+    Axios.post("http://localhost:3001/kabidMenolakRenaksiRow", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
     });

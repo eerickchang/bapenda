@@ -27,7 +27,7 @@ export default function Dashboard() {
         let kaban;
 
         ambilPegawai.data.map((pegawai) => {
-          if (pegawai.jabatan == "Kepala Badan") {
+          if (pegawai.jabatan == "Kaban") {
             kaban = pegawai;
           }
         });

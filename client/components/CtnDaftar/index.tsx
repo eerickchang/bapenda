@@ -60,7 +60,7 @@ export default function CtnDaftar() {
 
   const jabatan = [
     {
-      namaJabatan: "Kepala Badan",
+      namaJabatan: "Kaban",
     },
     {
       namaJabatan: "Sekretaris",
