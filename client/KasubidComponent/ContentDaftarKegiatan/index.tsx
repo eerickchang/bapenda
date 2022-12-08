@@ -15,7 +15,6 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import Gap from "../Gap";
 
-
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
@@ -393,27 +392,46 @@ function Row(props) {
         })
       ),
     },
+    {
+      id: 8,
+      status: "Ditolak",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+            (ambilRenaksi) => {
+              ambilRenaksi.data.map((renaksi) => {
+                if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
+                  stateChange((nextData) => {
+                    return [renaksi, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
+    },
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
 
-    const menuRef = useRef();
+  const menuRef = useRef();
 
-    useEffect(() => {
-      const handler = (e) => {
-        if (!menuRef.current.contains(e.target)) {
-          setActiveDropdown(false);
-          console.log(menuRef.current);
-        }
-      };
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setActiveDropdown(false);
+        console.log(menuRef.current);
+      }
+    };
 
-      document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler);
 
-      return () => {
-        document.removeEventListener("mousedown", handler);
-      };
-    });
-
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const btnFilter = () => {
     setActiveDropdown(!activeDropdown);
@@ -443,7 +461,7 @@ function Row(props) {
         )}
       </div>
       <React.Fragment>
-        {row.status != "Selesai" ? (
+        {row.status == "Ditambah" ? ( //!DITOLAK
           <TableRow hover className={styles.styleRow}>
             <TableCell>
               <div
@@ -475,6 +493,66 @@ function Row(props) {
               </div>
             </TableCell>
             <TableCell>
+              <p className={stylesS.styleTxtRowDitolak}>{row.program}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowDitolak}>{row.kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowDitolak}>{row.sub_kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTupoksiDitolak}>Inti</p>
+              <p className={stylesS.styleTxtRowDitolak}>{row.tupoksi_inti}</p>
+              <p className={stylesS.styleTupoksiTambahanDitolak}>Tambahan</p>
+              <p className={stylesS.styleTxtRowDitolak}>
+                {row.tupoksi_tambahanDitolak}
+              </p>
+            </TableCell>
+            <TableCell>
+              {/* ambil data rencana */}
+              <p className={stylesS.styleTxtRowRencanaDitolak}>
+                {moment(row.start_date).format("MMM")} -{" "}
+                {moment(row.end_date).format("MMM")}
+              </p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+            </TableCell>
+          </TableRow>
+        ) : row.status != "Selesai" &&
+          row.status != "Menunggu Renaksi Diterima" ? (
+          <TableRow hover className={styles.styleRow}>
+            <TableCell>
+              <div
+                style={{ display: "flex", padding: 10, alignItems: "center" }}
+              >
+                {row.foto === "" ? (
+                  <Image
+                    src={"/SidebarProfile.svg"}
+                    width={70}
+                    height={70}
+                    alt="User 2"
+                    className={stylesS.imageDP}
+                  />
+                ) : (
+                  <Image
+                    src={row.foto}
+                    width={70}
+                    height={70}
+                    alt="User 2"
+                    className={stylesS.imageDP}
+                  />
+                )}
+                {/* //!{ambil data} */}
+                <div style={{ marginLeft: 10 }}>
+                  <p className={stylesS.rekanNama}>{row.nama}</p>
+                  <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                  <p className={stylesS.rekanAsn}>ASN</p>
+                </div>
+              </div>
+            </TableCell>
+            <TableCell>
               <p className={stylesS.styleTxtRowBS}>{row.program}</p>
             </TableCell>
             <TableCell>
@@ -487,7 +565,7 @@ function Row(props) {
               <p className={stylesS.styleTupoksiBS}>Inti</p>
               <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
               <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
-              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahanBS}</p>
+              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
             </TableCell>
             <TableCell>
               {/* ambil data rencana */}
@@ -513,7 +591,6 @@ function Row(props) {
                     height={70}
                     alt="User 2"
                     className={stylesS.imageDP}
-                    
                   />
                 ) : (
                   <Image
@@ -522,7 +599,6 @@ function Row(props) {
                     height={70}
                     alt="User 2"
                     className={stylesS.imageDP}
-                    
                   />
                 )}
                 {/* //!{ambil data} */}
@@ -622,9 +698,7 @@ export default function ContentDaftarKegiatan() {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>DAFTAR KEGIATAN</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer
-              style={{ paddingLeft: 2, paddingRight: 40 }}
-            >
+            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>

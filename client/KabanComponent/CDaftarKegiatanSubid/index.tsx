@@ -132,6 +132,24 @@ function Row(props) {
         )
       ),
     },
+    {
+      id: 8,
+      status: "Ditolak",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+          (ambilRenaksi) => {
+            ambilRenaksi.data.map((renaksi) => {
+              if (renaksi.sub_bidang === subid) {
+                stateChange((nextData) => {
+                  return [renaksi, ...nextData];
+                });
+              }
+            });
+          }
+        )
+      ),
+    },
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);

@@ -485,7 +485,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Lapiran Bukti Bidang Renbang <b>Diterima</b>
+                      Permintaan Hapus Renaksi {row.nama} <b>Diterima</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -513,7 +513,7 @@ function Row(props) {
                   contentLabel="Example Modal"
                 >
                   <h2 className={styles.headerTxtModal}>
-                    Tolak Lampiran Bukti
+                    Tolak Permintaan Hapus Renaksi
                   </h2>
                   <Gap height={20} width={0} />
                   <input
@@ -540,7 +540,7 @@ function Row(props) {
                     onClick={() => setShowModalTolak(false)}
                   >
                     <p>
-                      Lampiran Bukti Ferren Kalalo <b>Ditolak</b>
+                      Permintaan Hapus Renaksi {row.nama} <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Tolak.svg"} width={25} height={25} />

@@ -544,7 +544,7 @@ function Row(props) {
                     onClick={() => setShowModalTolak(false)}
                   >
                     <p>
-                      Lampiran Bukti Ferren Kalalo <b>Ditolak</b>
+                      Perminaan Ubah Jadwal {row.nama} <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Tolak.svg"} width={25} height={25} />

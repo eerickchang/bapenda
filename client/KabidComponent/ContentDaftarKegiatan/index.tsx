@@ -265,6 +265,46 @@ function Row(props) {
         })
       ),
     },
+    {
+      id: 8,
+      status: "Ditolak",
+      onclick: () => (
+        stateChange([]),
+        Axios.get("http://localhost:3001/masuk").then((masuk) => {
+          Axios.get("http://localhost:3001/ambilKasubid").then(
+            (ambilKasubid) => {
+              Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+                (ambilRenaksi) => {
+                  let bidangUserSDKabid = [];
+                  let pegawaiYgAdaRenaksi = [];
+                  let userLoggedIn = masuk.data.user;
+                  let kasubid = ambilKasubid.data;
+                  let renaksi = ambilRenaksi.data;
+
+                  bidangUserSDKabid = kasubid.filter((elA) => {
+                    return userLoggedIn.some(
+                      (elB) => elA["bidang"] === elB["bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi = renaksi.filter((elA) => {
+                    return bidangUserSDKabid.some(
+                      (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+                    );
+                  });
+
+                  pegawaiYgAdaRenaksi.map((item) => {
+                    stateChange((nextData) => {
+                      return [item, ...nextData];
+                    });
+                  });
+                }
+              );
+            }
+          );
+        })
+      ),
+    },
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(false);
