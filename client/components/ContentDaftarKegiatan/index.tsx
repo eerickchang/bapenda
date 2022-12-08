@@ -459,7 +459,7 @@ function Row(props: rowProps) {
                             id="firstimg"
                             onChange={(e) => setFile(e.target.files[0])}
                           />
-                          <label for="firstimg">
+                          <label htmlFor="firstimg">
                             <Image
                               src={"/Lampiran.svg"}
                               width={21}
