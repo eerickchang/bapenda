@@ -188,7 +188,7 @@ function Row(props) {
           });
         }
       );
-    }, 30);
+    }, 100);
     setShowModal(true);
     setTimeout(() => {
       setShowModal(false);

@@ -889,12 +889,6 @@ app.post("/adminMenolakRenaksiMJD", (req, res) => {
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
   });
-
-  const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Ubah Jadwal', 'Ditolak') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
-  });
 });
 
 //ADMIN MENERIMA RENAKSI DIHAPUS
@@ -929,12 +923,6 @@ app.post("/adminMenolakRenaksiDihapus", (req, res) => {
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
   });
-
-  const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Hapus Kegiatan', 'Ditolak') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
-  });
 });
 
 //ADMIN MENERIMA RENAKSI MRD
@@ -959,12 +947,6 @@ app.post("/adminMenolakRenaksiMRD", (req, res) => {
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
-  });
-
-  const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Mengirim Renaksi', 'Ditolak') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
   });
 });
 
@@ -1031,12 +1013,6 @@ app.post("/adminMenolakRenaksiSelesai", (req, res) => {
   let data = [ketAdmin, nip, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
-  });
-
-  const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Ditolak') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
   });
 });
 
