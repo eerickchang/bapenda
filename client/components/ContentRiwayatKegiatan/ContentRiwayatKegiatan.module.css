@@ -307,3 +307,49 @@
   display: block;
   /* margin-left: 17px; */
 }
+
+
+
+/* ! STYLE DITOLAK */
+.styleTupoksiDitolak{
+  padding: 5px;
+  background-color: rgba(233, 0, 95, 1);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.styleTupoksiTambahanDitolak{
+  padding: 5px;
+  background-color: rgba(233, 0, 95, 1);
+  border-radius: 4px;
+  width: 171px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+
+.styleTxtRowDitolak{
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(233, 0, 95, 1);
+}
+
+.styleTxtRowRencanaDitolak{
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  /* color: rgba(233, 0, 95, 1); */
+ color: rgba(233, 0, 95, 1);
+}

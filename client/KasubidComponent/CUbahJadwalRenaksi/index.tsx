@@ -370,7 +370,7 @@ function Row(props) {
                     onClick={() => setShowModal(false)}
                   >
                     <p>
-                      Ubah Jadwal {row.nama} <b>Diterima</b>
+                      Permintaan Ubah Jadwal {row.nama} <b>Diterima</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Check-circle.svg"} width={25} height={25} />
@@ -425,7 +425,7 @@ function Row(props) {
                     onClick={() => setShowModalTolak(false)}
                   >
                     <p>
-                      Ubah Jadwal {row.nama} <b>Ditolak</b>
+                      Permintaan Ubah Jadwal {row.nama} <b>Ditolak</b>
                     </p>
                     <div className={styles.checkCircle}>
                       <Image src={"/Tolak.svg"} width={25} height={25} />

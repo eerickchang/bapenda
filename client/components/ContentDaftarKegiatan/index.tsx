@@ -367,12 +367,21 @@ function Row(props: rowProps) {
     // console.log(row.status);
   };
 
+  const btnDw = () => {
+    Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
+      responseType: "blob",
+    }).then((res) => {
+      console.log(res);
+      FileDownload(res.data, `${row.files}`);
+    });
+  };
+
   const styleCollapse = {
     background: "rgba(232, 232, 232, 1)",
     borderTopColor: "rgba(165, 165, 165, 0.5)",
     borderTopWidth: 2,
     borderTopStyle: "solid",
-    marginBottom: 2,
+    marginBottom: 3,
   };
 
   return (
@@ -602,7 +611,100 @@ function Row(props: rowProps) {
       ) : // </TableRow>
       row.status != "Selesai" && row.status != "Menunggu Renaksi Diterima" ? (
         <>
-          <TableRow
+          {row.status != "Sementara" ? (
+            <>
+            <TableRow
+            className={`${styles.tableRow} ${styleRow}`}
+            onClick={() => {
+              setOpen(!open);
+              {
+                rowClik
+                  ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                    setRowClick(!rowClik))
+                  : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+              }
+            }}
+            sx={{ "& > *": { borderBottom: "" } }}
+          >
+            {/* //! DATA ROW */}
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.program}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.sub_kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTupoksiBS}>Inti</p>
+              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_inti}</p>
+              <p className={stylesS.styleTupoksiTambahanBS}>Tambahan</p>
+              <p className={stylesS.styleTxtRowBS}>{row.tupoksi_tambahan}</p>
+            </TableCell>
+            <TableCell>
+              {row.thl === null ? null : (
+                <div
+                  style={{ display: "flex", padding: 0, alignItems: "center" }}
+                >
+                  {row.foto_thl != "" ? (
+                    <Image
+                      src={row.foto_thl}
+                      // src={"/SidebarProfile.svg"}
+                      width={40}
+                      height={40}
+                      alt="User 2"
+                      style={{ borderRadius: 40 }}
+                    />
+                  ) : (
+                    <Image
+                      src={"/SidebarProfile.svg"}
+                      width={40}
+                      height={40}
+                      alt="User 2"
+                      style={{ borderRadius: 40 }}
+                    />
+                  )}
+                  <div style={{ marginLeft: 10 }}>
+                    <p className={stylesS.rekanNama}>{row.nama_thl}</p>
+                    <p className={stylesS.rekanPegawai}>THL</p>
+                  </div>
+                </div>
+              )}
+            </TableCell>
+            <TableCell>
+              {/* ambil data rencana */}
+              <p className={stylesS.styleTxtRowRencanaBS}>
+                {moment(row.start_date).format("MMM")} -{" "}
+                {moment(row.end_date).format("MMM")}
+              </p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.status}</p>
+            </TableCell>
+          </TableRow>
+          <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+            <Collapse sx={styleCollapse} in={open} timeout="auto">
+              <div className={styles.wrapperExpand}>
+                <div className={styles.wrapperTanggapan}>
+                  <p>Tanggapan:</p>
+                  <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                </div>
+                <div className={styles.wrapperLampiran}>
+                  <p>Lampiran:</p>
+                  {row.files === "" ? null : (
+                    <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                      <Image src={"/IconPDF.svg"} width={35} height={40} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Collapse>
+          </TableCell>
+          </>
+          ) : (
+            <>
+            <TableRow
             className={`${styles.tableRow} ${styleRow}`}
             onClick={() => {
               setOpen(!open);
@@ -938,21 +1040,24 @@ function Row(props: rowProps) {
               ) : null}
             </Collapse>
           </TableCell>
+            </>
+          )}
         </>
       ) : (
+        //?SELESAI DAN MENUNGGU RENAKSI DITERIMA
         <>
           <TableRow
             className={`${styles.tableRow} ${styleRow}`}
-            // onClick={() => {
-            //   setOpen(!open);
-            //   {
-            //     rowClik
-            //       ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-            //         setRowClick(!rowClik))
-            //       : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-            //   }
-            // }}
-            sx={{ "& > *": { borderBottom: "", } }}
+            onClick={() => {
+              setOpen(!open);
+              {
+                rowClik
+                  ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                    setRowClick(!rowClik))
+                  : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+              }
+            }}
+            sx={{ "& > *": { borderBottom: "" } }}
           >
             {/* //! DATA ROW */}
             <TableCell>
@@ -1011,7 +1116,24 @@ function Row(props: rowProps) {
               <p className={stylesS.styleTxtRow}>{row.status}</p>
             </TableCell>
           </TableRow>
-          
+          <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+            <Collapse sx={styleCollapse} in={open} timeout="auto">
+              <div className={styles.wrapperExpand}>
+                <div className={styles.wrapperTanggapan}>
+                  <p>Tanggapan:</p>
+                  <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                </div>
+                <div className={styles.wrapperLampiran}>
+                  <p>Lampiran:</p>
+                  {row.files === "" ? null : (
+                    <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                      <Image src={"/IconPDF.svg"} width={35} height={40} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Collapse>
+          </TableCell>
         </>
       )}
     </React.Fragment>

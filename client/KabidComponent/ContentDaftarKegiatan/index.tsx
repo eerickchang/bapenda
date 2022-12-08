@@ -331,7 +331,7 @@ function Row(props) {
     // console.log(dataRenaksi);
   };
 
-  const styleTxtRowBS = {
+  const styleTxtRowDitolak = {
     fontFamily: "Poppins",
     fontSize: 18,
     fontWeight: 400,
@@ -359,12 +359,12 @@ function Row(props) {
         )}
       </div>
       <React.Fragment>
-        {row.status != "Selesai" ? (
+        {row.status == "Ditambah" ? (
           <TableRow hover className={styles.styleRow}>
             <TableCell>
-              <div
+              {/* <div
                 style={{ display: "flex", padding: 10, alignItems: "center" }}
-              >
+              > */}
                 {row.foto === "" ? (
                   <Image
                     src={"/SidebarProfile.svg"}
@@ -388,16 +388,70 @@ function Row(props) {
                   <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
                   <p className={stylesS.rekanAsn}>ASN</p>
                 </div>
+              {/* </div> */}
+            </TableCell>
+            <TableCell>
+              <p style={styleTxtRowDitolak}>{row.program}</p>
+            </TableCell>
+            <TableCell>
+              <p style={styleTxtRowDitolak}>{row.kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p style={styleTxtRowDitolak}>{row.sub_kegiatan}</p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTupoksiDitolak}>Inti</p>
+              <p className={stylesS.styleTxtRowDitolak}>{row.tupoksi_inti}</p>
+              <p className={stylesS.styleTupoksiTambahanDitolak}>Tambahan</p>
+              <p className={stylesS.styleTxtRowDitolak}>{row.tupoksi_tambahan}</p>
+            </TableCell>
+            <TableCell>
+              {/* ambil data rencana */}
+              <p className={stylesS.styleTxtRowRencanaDitolak}>
+                {moment(row.start_date).format("MMM")} -{" "}
+                {moment(row.end_date).format("MMM")}
+              </p>
+            </TableCell>
+            <TableCell>
+              <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+            </TableCell>
+          </TableRow>
+        ) : row.status != "Selesai" &&
+          row.status != "Menunggu Renaksi Diterima" ? (
+          <TableRow hover className={styles.styleRow}>
+            <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
+              {row.foto === "" ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              ) : (
+                <Image
+                  src={row.foto}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              )}
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama}</p>
+                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                <p className={stylesS.rekanAsn}>ASN</p>
               </div>
+            </div>
+            <TableCell>
+              <p className={stylesS.styleTxtRowBS}>{row.program}</p>
             </TableCell>
             <TableCell>
-              <p style={styleTxtRowBS}>{row.program}</p>
+              <p className={stylesS.styleTxtRowBS}>{row.kegiatan}</p>
             </TableCell>
             <TableCell>
-              <p style={styleTxtRowBS}>{row.kegiatan}</p>
-            </TableCell>
-            <TableCell>
-              <p style={styleTxtRowBS}>{row.sub_kegiatan}</p>
+              <p className={stylesS.styleTxtRowBS}>{row.sub_kegiatan}</p>
             </TableCell>
             <TableCell>
               <p className={stylesS.styleTupoksiBS}>Inti</p>

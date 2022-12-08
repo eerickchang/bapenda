@@ -131,8 +131,6 @@ export default function CTinjauRenaksiPegawai() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
-  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
   const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
   function openModal() {

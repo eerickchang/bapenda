@@ -18,6 +18,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
+import { red } from "@mui/material/colors";
 
 Axios.defaults.withCredentials = true;
 
@@ -48,99 +49,447 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
   return (
     <React.Fragment>
-      <TableRow
-        className={`${styles.tableRow} ${styleRow}`}
-        onClick={() => {
-          setOpen(!open);
-          {
-            rowClik
-              ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                setRowClick(!rowClik))
-              : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-          }
-        }}
-        sx={{ "& > *": { borderBottom: "" } }}
-      >
-        <TableCell>
-          <div style={{ display: "flex", padding: 10, alignItems: "center" }}>
-            {row.foto === "" ? (
-              <Image
-                src={"/SidebarProfile.svg"}
-                width={70}
-                height={70}
-                alt="User 2"
-                className={stylesS.imageDP}
-              />
-            ) : (
-              <Image
-                src={row.foto}
-                width={70}
-                height={70}
-                alt="User 2"
-                className={stylesS.imageDP}
-              />
-            )}
-            {/* //!{ambil data} */}
-            <div style={{ marginLeft: 10 }}>
-              <p className={stylesS.rekanNama}>{row.nama}</p>
-              <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
-              <p className={stylesS.rekanAsn}>ASN</p>
-            </div>
-          </div>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTupoksi}>Inti</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
-          <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
-          <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{`${moment(row.start_date).format(
-            "MMM"
-          )} - ${moment(row.end_date).format("MMM")}`}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.status}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-        </TableCell>
-        <TableCell>
-          <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
-        </TableCell>
-      </TableRow>
+      {row.status != "Ubah Jadwal" ? (
+        <>
+          {row.kondisi != "Ditolak" ? (
+            <>
+              <TableRow
+                className={`${styles.tableRow} ${styleRow}`}
+                onClick={() => {
+                  setOpen(!open);
+                  {
+                    rowClik
+                      ? (setStyleRow(
+                          `${styles.tableRow} ${styles.tableRowClick}`
+                        ),
+                        setRowClick(!rowClik))
+                      : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+                  }
+                }}
+                sx={{
+                  "& > *": {
+                    borderBottom: "",
+                  },
+                }}
+              >
+                <TableCell>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: 10,
+                      alignItems: "center",
+                    }}
+                  >
+                    {row.foto === "" ? (
+                      <Image
+                        src={"/SidebarProfile.svg"}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    ) : (
+                      <Image
+                        src={row.foto}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    )}
+                    {/* //!{ambil data} */}
+                    <div style={{ marginLeft: 10 }}>
+                      <p className={stylesS.rekanNama}>{row.nama}</p>
+                      <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                      <p className={stylesS.rekanAsn}>ASN</p>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTupoksi}>Inti</p>
+                  <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+                  <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+                  <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{`${moment(
+                    row.start_date
+                  ).format("MMM")} - ${moment(row.end_date).format("MMM")}`}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.status}</p>
+                </TableCell>
+                <TableCell sx={{ height: 100, color: "rgb(233, 124, 0)" }}>
+                  <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
+                </TableCell>
+              </TableRow>
 
-      <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
-        <Collapse sx={styleCollapse} in={open} timeout="auto">
-          <div className={styles.wrapperExpand}>
-            <div className={styles.wrapperTanggapan}>
-              <p>Tanggapan:</p>
-              <p className={styles.txtTanggapan}>{row.ket_admin}</p>
-            </div>
-            <div className={styles.wrapperLampiran}>
-              <p>Lampiran:</p>
-              {row.files === "" ? null : (
-                <div onClick={btnDw} style={{ cursor: "pointer" }}>
-                  <Image src={"/IconPDF.svg"} width={35} height={40} />
-                </div>
-              )}
-            </div>
-            <div className={styles.wrapperRencanaUbah}>
-              <p>Rencana Ubah Jadwal:</p>
-              {row.req_start_date == null ? (
-                <div></div>
-              ) : (
-                <p>{`${moment(row.req_start_date).format("MMM")} - ${moment(
-                  row.req_end_date
-                ).format("MMM")}`}</p>
-              )}
-            </div>
-          </div>
-        </Collapse>
-      </TableCell>
+              <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+                <Collapse sx={styleCollapse} in={open} timeout="auto">
+                  <div className={styles.wrapperExpand}>
+                    <div className={styles.wrapperTanggapan}>
+                      <p>Tanggapan:</p>
+                      <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                    </div>
+                    <div className={styles.wrapperLampiran}>
+                      <p>Lampiran:</p>
+                      {row.files === "" ? null : (
+                        <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                          <Image src={"/IconPDF.svg"} width={35} height={40} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Collapse>
+              </TableCell>
+            </>
+          ) : (
+            <>
+              <TableRow
+                className={`${styles.tableRow} ${styleRow}`}
+                onClick={() => {
+                  setOpen(!open);
+                  {
+                    rowClik
+                      ? (setStyleRow(
+                          `${styles.tableRow} ${styles.tableRowClick}`
+                        ),
+                        setRowClick(!rowClik))
+                      : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+                  }
+                }}
+                sx={{
+                  "& > *": {
+                    borderBottom: "",
+                  },
+                }}
+              >
+                <TableCell>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: 10,
+                      alignItems: "center",
+                    }}
+                  >
+                    {row.foto === "" ? (
+                      <Image
+                        src={"/SidebarProfile.svg"}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    ) : (
+                      <Image
+                        src={row.foto}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    )}
+                    {/* //!{ambil data} */}
+                    <div style={{ marginLeft: 10 }}>
+                      <p className={stylesS.rekanNama}>{row.nama}</p>
+                      <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                      <p className={stylesS.rekanAsn}>ASN</p>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTupoksiDitolak}>Inti</p>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.tupoksi_inti}
+                  </p>
+                  <p className={stylesS.styleTupoksiTambahanDitolak}>
+                    Tambahan
+                  </p>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.tupoksi_tambahan}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{`${moment(
+                    row.start_date
+                  ).format("MMM")} - ${moment(row.end_date).format("MMM")}`}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.ket_pegawai}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.sub_kegiatan}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{row.kondisi}</p>
+                </TableCell>
+              </TableRow>
+
+              <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+                <Collapse sx={styleCollapse} in={open} timeout="auto">
+                  <div className={styles.wrapperExpand}>
+                    <div className={styles.wrapperTanggapan}>
+                      <p>Tanggapan:</p>
+                      <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                    </div>
+                    <div className={styles.wrapperLampiran}>
+                      <p>Lampiran:</p>
+                      {row.files === "" ? null : (
+                        <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                          <Image src={"/IconPDF.svg"} width={35} height={40} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Collapse>
+              </TableCell>
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          {row.kondisi != "Ditolak" ? (
+            <>
+              <TableRow
+                className={`${styles.tableRow} ${styleRow}`}
+                onClick={() => {
+                  setOpen(!open);
+                  {
+                    rowClik
+                      ? (setStyleRow(
+                          `${styles.tableRow} ${styles.tableRowClick}`
+                        ),
+                        setRowClick(!rowClik))
+                      : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+                  }
+                }}
+                sx={{
+                  "& > *": {
+                    borderBottom: "",
+                  },
+                }}
+              >
+                <TableCell>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: 10,
+                      alignItems: "center",
+                    }}
+                  >
+                    {row.foto === "" ? (
+                      <Image
+                        src={"/SidebarProfile.svg"}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    ) : (
+                      <Image
+                        src={row.foto}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    )}
+                    {/* //!{ambil data} */}
+                    <div style={{ marginLeft: 10 }}>
+                      <p className={stylesS.rekanNama}>{row.nama}</p>
+                      <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                      <p className={stylesS.rekanAsn}>ASN</p>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTupoksi}>Inti</p>
+                  <p className={stylesS.styleTxtRow}>{row.tupoksi_inti}</p>
+                  <p className={stylesS.styleTupoksiTambahan}>Tambahan</p>
+                  <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{`${moment(
+                    row.start_date
+                  ).format("MMM")} - ${moment(row.end_date).format("MMM")}`}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.status}</p>
+                </TableCell>
+                <TableCell sx={{ height: 100, color: "rgb(233, 124, 0)" }}>
+                  <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
+                </TableCell>
+              </TableRow>
+
+              <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+                <Collapse sx={styleCollapse} in={open} timeout="auto">
+                  <div className={styles.wrapperExpand}>
+                    <div className={styles.wrapperTanggapan}>
+                      <p>Tanggapan:</p>
+                      <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                    </div>
+                    <div className={styles.wrapperLampiran}>
+                      <p>Lampiran:</p>
+                      {row.files === "" ? null : (
+                        <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                          <Image src={"/IconPDF.svg"} width={35} height={40} />
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles.wrapperRencanaUbah}>
+                      <p>Rencana Ubah Jadwal:</p>
+                      {row.req_start_date == null ? (
+                        <div></div>
+                      ) : (
+                        <p>{`${moment(row.req_start_date).format(
+                          "MMM"
+                        )} - ${moment(row.req_end_date).format("MMM")}`}</p>
+                      )}
+                    </div>
+                  </div>
+                </Collapse>
+              </TableCell>
+            </>
+          ) : (
+            <>
+              <TableRow
+                className={`${styles.tableRow} ${styleRow}`}
+                onClick={() => {
+                  setOpen(!open);
+                  {
+                    rowClik
+                      ? (setStyleRow(
+                          `${styles.tableRow} ${styles.tableRowClick}`
+                        ),
+                        setRowClick(!rowClik))
+                      : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+                  }
+                }}
+                sx={{
+                  "& > *": {
+                    borderBottom: "",
+                  },
+                }}
+              >
+                <TableCell>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: 10,
+                      alignItems: "center",
+                    }}
+                  >
+                    {row.foto === "" ? (
+                      <Image
+                        src={"/SidebarProfile.svg"}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    ) : (
+                      <Image
+                        src={row.foto}
+                        width={70}
+                        height={70}
+                        alt="User 2"
+                        className={stylesS.imageDP}
+                      />
+                    )}
+                    {/* //!{ambil data} */}
+                    <div style={{ marginLeft: 10 }}>
+                      <p className={stylesS.rekanNama}>{row.nama}</p>
+                      <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                      <p className={stylesS.rekanAsn}>ASN</p>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTupoksiDitolak}>Inti</p>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.tupoksi_inti}
+                  </p>
+                  <p className={stylesS.styleTupoksiTambahanDitolak}>
+                    Tambahan
+                  </p>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.tupoksi_tambahan}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{`${moment(
+                    row.start_date
+                  ).format("MMM")} - ${moment(row.end_date).format("MMM")}`}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.ket_pegawai}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>
+                    {row.sub_kegiatan}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={stylesS.styleTxtRowDitolak}>{row.kondisi}</p>
+                </TableCell>
+              </TableRow>
+
+              <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+                <Collapse sx={styleCollapse} in={open} timeout="auto">
+                  <div className={styles.wrapperExpand}>
+                    <div className={styles.wrapperTanggapan}>
+                      <p>Tanggapan:</p>
+                      <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                    </div>
+                    <div className={styles.wrapperLampiran}>
+                      <p>Lampiran:</p>
+                      {row.files === "" ? null : (
+                        <div onClick={btnDw} style={{ cursor: "pointer" }}>
+                          <Image src={"/IconPDF.svg"} width={35} height={40} />
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles.wrapperRencanaUbah}>
+                      <p>Rencana Ubah Jadwal:</p>
+                      {row.req_start_date == null ? (
+                        <div></div>
+                      ) : (
+                        <p>{`${moment(row.req_start_date).format(
+                          "MMM"
+                        )} - ${moment(row.req_end_date).format("MMM")}`}</p>
+                      )}
+                    </div>
+                  </div>
+                </Collapse>
+              </TableCell>
+            </>
+          )}
+        </>
+      )}
     </React.Fragment>
   );
 }
@@ -247,7 +596,6 @@ export const ContentRiwayatKegiatan = () => {
       document.removeEventListener("mousedown", handler);
     };
   });
-
 
   const tahun = [
     {
