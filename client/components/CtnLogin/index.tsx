@@ -39,7 +39,7 @@ export default function CtnLogin() {
         setTimeout(() => {
           setIsOpenModal(false);
         }, 3500);
-      } else if (response.data[0].jabatan === "Kepala Badan") {
+      } else if (response.data[0].jabatan === "Kaban") {
         router.push("/Kaban/Dashboard");
       } else if (response.data[0].jabatan === "Staff") {
         router.push("/Staff/Dashboard");
