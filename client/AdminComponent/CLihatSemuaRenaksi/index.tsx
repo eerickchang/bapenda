@@ -410,9 +410,7 @@ export default function CLihatSemuaRenaksi() {
                 style={custom}
                 contentLabel="Example Modal"
               >
-                <h2 className={styles.headerTxtModal}>
-                  Tolak Permintaan Ubah Jadwal
-                </h2>
+                <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
                 <Gap height={20} width={0} />
                 <input
                   className={styles.inputBuktiLap}
