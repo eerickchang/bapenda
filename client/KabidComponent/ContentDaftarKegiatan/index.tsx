@@ -273,7 +273,7 @@ function Row(props) {
         Axios.get("http://localhost:3001/masuk").then((masuk) => {
           Axios.get("http://localhost:3001/ambilKasubid").then(
             (ambilKasubid) => {
-              Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+              Axios.get("http://localhost:3001/ambilRenaksiDitolak").then(
                 (ambilRenaksi) => {
                   let bidangUserSDKabid = [];
                   let pegawaiYgAdaRenaksi = [];
@@ -359,7 +359,7 @@ function Row(props) {
         )}
       </div>
       <React.Fragment>
-        {row.status == "Ditambah" ? (
+        {row.kirim_ke == "Staff" ? (
           <TableRow hover className={styles.styleRow}>
             <TableCell>
               {/* <div

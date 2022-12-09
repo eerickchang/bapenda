@@ -398,7 +398,7 @@ function Row(props) {
       onclick: () => (
         stateChange([]),
         Axios.get("http://localhost:3001/masuk").then((masuk) => {
-          Axios.get("http://localhost:3001/ambilRenaksiMenunggu").then(
+          Axios.get("http://localhost:3001/ambilRenaksiDitolak").then(
             (ambilRenaksi) => {
               ambilRenaksi.data.map((renaksi) => {
                 if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
@@ -461,7 +461,7 @@ function Row(props) {
         )}
       </div>
       <React.Fragment>
-        {row.status == "Ditambah" ? ( //!DITOLAK
+        {row.kirim_ke == "Staff" ? ( //!DITOLAK
           <TableRow hover className={styles.styleRow}>
             <TableCell>
               <div
