@@ -381,7 +381,7 @@ function Row(props) {
                   contentLabel="Example Modal"
                 >
                   <h2 className={styles.headerTxtModal}>
-                    Tolak Permintaan Ubah Jadwal
+                    Tolak Lampiran Bukti
                   </h2>
                   <Gap height={20} width={0} />
                   <input
