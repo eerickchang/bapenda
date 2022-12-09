@@ -897,7 +897,7 @@ app.post("/adminMenolakRenaksiMJD", (req, res) => {
   const nip = req.body.nip;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ?  WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ?, ditolak = "Admin"  WHERE id_renaksi = ?';
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
