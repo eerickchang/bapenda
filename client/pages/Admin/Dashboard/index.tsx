@@ -4,13 +4,12 @@ import {
   BoxNotification,
   DashboardHeader,
   Gap,
-  TopPegawai,
 } from "../../../components";
 import styles from "./dashboard.module.css";
 import sidebarStyles from "../../../AdminComponent/SidebarAdmin/sidebar.module.css";
 import Axios from "axios";
 import moment from "moment";
-import { SidebarAdmin } from "../../../AdminComponent";
+import { SidebarAdmin, TopPegawai } from "../../../AdminComponent";
 
 Axios.defaults.withCredentials = true;
 

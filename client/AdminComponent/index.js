@@ -11,6 +11,7 @@ import CUbahJadwalRenaksi from "./CUbahJadwalRenaksi";
 import CHapusRenaksi from "./CHapusRenaksi";
 import CCakinBidang from "./CCakinBidang";
 import CCakinSubidang from "./CCakinSubidang";
+import TopPegawai from "./TopPegawai";
 
 export {
   SidebarAdmin,
@@ -25,5 +26,6 @@ export {
   CUbahJadwalRenaksi,
   CHapusRenaksi,
   CCakinSubidang,
-  CCakinBidang
+  CCakinBidang,
+  TopPegawai,
 };
