@@ -396,6 +396,17 @@ app.get("/cakin", (req, res) => {
   });
 });
 
+//AMBIL TOP PEGAWAI
+app.get("/topPegawai", (req, res) => {
+  let data = req.query;
+  console.log(data);
+  const sqlSelect = `SELECT pegawai.nama, pegawai.jabatan, pegawai.bidang, pegawai.foto, pegawai.sub_bidang, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.lampiran_diterima, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip WHERE bulan = "${data.bulan}" AND sub_bidang = "${data.subid}" AND jabatan NOT IN ('Kasubid', 'Kabid') ORDER BY hasil_kinerja DESC LIMIT 5`;
+
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
 //UNGGAH BUKTI LAPORAN RENAKSI
 app.post("/unggahLaporan", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
