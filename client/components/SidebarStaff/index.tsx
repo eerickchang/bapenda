@@ -154,11 +154,11 @@ export default function Sidebar({
             <Image src="/Profile.svg" width={25} height={30} />
             <div className={`${styles.hoverKeterangan}`}>Profil</div>
           </button>
-          <Gap height={20} width={0} />
+          {/* <Gap height={20} width={0} />
           <button className={kotakNotif} onClick={clickNotif}>
             <Image src="/NotifPutih.svg" width={40} height={40} />
             <div className={`${styles.hoverKeterangan}`}>Notifikasi</div>
-          </button>
+          </button> */}
           <Gap height={20} width={0} />
           <button
             className={kotakLogOut}
