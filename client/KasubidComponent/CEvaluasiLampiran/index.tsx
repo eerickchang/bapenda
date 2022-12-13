@@ -307,6 +307,10 @@ function Row(props) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 2,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    marginTop: -1.8,
   };
 
     const styleContentKet = {

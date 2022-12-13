@@ -29,6 +29,34 @@
   color: #959595;
 }
 
+.wrapTutupFilter{
+  /* display: flex;
+  align-content: center; */
+}
+
+.btnTutupForum{
+  position: absolute;
+  top: 84px;
+  right: 45px;
+  display: flex;
+  align-items: center;
+  background:  #FF0164 ;
+  width: 172px;
+  height: 51px;
+  border-radius: 5px;
+  border: none;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btnTutupForum p{
+  margin-left: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
 .wrapFileLampiran {
   display: flex;
   flex-direction: column;
