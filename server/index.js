@@ -400,7 +400,18 @@ app.get("/cakin", (req, res) => {
 app.get("/topPegawai", (req, res) => {
   let data = req.query;
   console.log(data);
-  const sqlSelect = `SELECT pegawai.nama, pegawai.jabatan, pegawai.bidang, pegawai.foto, pegawai.sub_bidang, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.lampiran_diterima, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip WHERE bulan = "${data.bulan}" AND sub_bidang = "${data.subid}" AND jabatan NOT IN ('Kasubid', 'Kabid') ORDER BY hasil_kinerja DESC LIMIT 5`;
+  const sqlSelect = `SELECT pegawai.nama, pegawai.jabatan, pegawai.bidang, pegawai.foto, pegawai.sub_bidang, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.lampiran_diterima, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip WHERE bulan = "${data.bulan}" AND sub_bidang = "${data.subid}" AND jabatan NOT IN ('Kasubid', 'Kabid', 'Admin', 'Kaban', 'Sekretaris', 'Kasubag') ORDER BY hasil_kinerja DESC LIMIT 5`;
+
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//AMBIL TOP SUB BIDANG
+app.get("/topSubid", (req, res) => {
+  let data = req.query;
+  console.log(data);
+  const sqlSelect = `SELECT pegawai.nama, pegawai.jabatan, pegawai.bidang, pegawai.foto, pegawai.sub_bidang, cakin.bulan, cakin.jumlah_kegiatan, cakin.lampiran_disubmit, cakin.lampiran_bsubmit, cakin.hasil_kinerja, cakin.lampiran_diterima, cakin.id_cakin, cakin.nip, pegawai.nip FROM cakin INNER JOIN pegawai ON cakin.nip=pegawai.nip WHERE bulan = "${data.bulan}" AND jabatan NOT IN ('Staff', 'Kabid', 'Admin', 'Kaban', 'Sekretaris', 'Kasubag') ORDER BY hasil_kinerja DESC LIMIT 5`;
 
   db.query(sqlSelect, (err, result) => {
     res.send(result);
