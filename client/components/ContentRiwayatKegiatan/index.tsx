@@ -18,7 +18,6 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
-import { red } from "@mui/material/colors";
 
 Axios.defaults.withCredentials = true;
 
@@ -562,6 +561,11 @@ export const ContentRiwayatKegiatan = () => {
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
+  const [activeDropdownFilter, setActiveDropdownFilter] = useState(false);
+
+    const btnFilter = () => {
+      setActiveDropdownFilter(!activeDropdownFilter);
+    };
 
   const menuRefTahun = useRef();
 
@@ -569,7 +573,7 @@ export const ContentRiwayatKegiatan = () => {
     const handler = (e) => {
       if (!menuRefTahun.current.contains(e.target)) {
         setActiveDropdownTahun(false);
-        console.log(menuRefTahun.current);
+        // console.log(menuRefTahun.current);
       }
     };
 
@@ -586,7 +590,7 @@ export const ContentRiwayatKegiatan = () => {
     const handler = (e) => {
       if (!menuRefUnduh.current.contains(e.target)) {
         setActiveDropdownUnduh(false);
-        console.log(menuRefUnduh.current);
+        // console.log(menuRefUnduh.current);
       }
     };
 
@@ -596,6 +600,24 @@ export const ContentRiwayatKegiatan = () => {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+    const menuRefFilter = useRef();
+
+    useEffect(() => {
+      const handler = (e) => {
+        if (!menuRefFilter.current.contains(e.target)) {
+          setActiveDropdownFilter(false);
+          // console.log(menuRef.current);
+        }
+      };
+
+      document.addEventListener("mousedown", handler);
+
+      return () => {
+        document.removeEventListener("mousedown", handler);
+      };
+    });
+
 
   const tahun = [
     {
@@ -681,6 +703,90 @@ export const ContentRiwayatKegiatan = () => {
     {
       id: 11,
       tahun: "2025",
+    },
+  ];
+
+  const filter = [
+    {
+      id: 1,
+      status: "Selesai",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiSelesai").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
+    },
+    {
+      id: 2,
+      status: "Renaksi Dihapus",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiDihapus").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
+    },
+    {
+      id: 3,
+      status: "Jadwal Diubah",
+      onclick: () => (
+        setDataRenaksi([]),
+        Axios.get("http://localhost:3001/masuk").then((response) => {
+          setAsn(response.data.user[0]);
+          setImage(response.data.user[0].foto);
+
+          Axios.get("http://localhost:3001/ambilRenaksiJadwalDiubah").then(
+            (result) => {
+              result.data.map((item) => {
+                if (
+                  moment(item.end_date).format("YYYY") ===
+                    moment().format("YYYY") &&
+                  item.nip === response.data.user[0].nip
+                ) {
+                  setDataRenaksi((nextData) => {
+                    return [item, ...nextData];
+                  });
+                }
+              });
+            }
+          );
+        })
+      ),
     },
   ];
 
@@ -782,7 +888,26 @@ export const ContentRiwayatKegiatan = () => {
               </p>
             </div>
             <Gap height={153} width={0} />
-            <div className={stylesS.wrapperFilter}>
+            <div className={stylesS.wrapFilter}>
+              <div className={stylesS.wrapperFilter} ref={menuRefFilter}>
+                <div className={stylesS.btnFilter} onClick={btnFilter}>
+                  <Image src={"/Filter.svg"} width={23} height={23} />
+                  <p>Filter</p>
+                </div>
+                {activeDropdownFilter && (
+                  <div
+                    className={stylesS.wrapperSelectStatus}
+                    onClick={() => setActiveDropdownFilter(false)}
+                  >
+                    {filter.map((item) => (
+                      <p key={item.id} onClick={item.onclick}>
+                        {item.status}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
                   className={stylesS.btnFilterTahun}
