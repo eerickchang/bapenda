@@ -24,7 +24,7 @@ export default function TopPegawai(props: TopPegawaiProps) {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         Axios.get("http://localhost:3001/topPegawai", {
           params: {
-            bulan: moment().format("YYYY-11-01"),
+            bulan: moment().subtract(1, "month").format("YYYY-MM-01"),
             subid: masuk.data.user[0].sub_bidang,
           },
         }).then((ambilPegawai) => {
