@@ -385,6 +385,13 @@ function Row(props: rowProps) {
     marginBottom: 3,
   };
 
+  const styleBtnKirim = {
+    display: "flex",
+    position: "relative",
+    marginTop: 8,
+    marginLeft: -38,
+    zIndex: 20,
+  };
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK
@@ -509,43 +516,7 @@ function Row(props: rowProps) {
                           placeholder="Balas"
                           onChange={(e) => setKetPegawai(e.target.value)}
                         />
-                        <div
-                          style={{
-                            position: "relative",
-                            marginTop: 8,
-                            marginLeft: -80,
-                            zIndex: 20,
-                          }}
-                        >
-                          {/* <input
-                            type="file"
-                            style={{ display: "none" }}
-                            id="firstimg"
-                            onChange={(e) => setFile(e.target.files[0])}
-                          />
-                          <label htmlFor="firstimg">
-                            <Image
-                              src={"/Lampiran.svg"}
-                              width={21}
-                              height={23}
-                              style={{ marginRight: 20, cursor: "pointer" }}
-                            />
-                          </label> */}
-
-                          <input
-                            type="file"
-                            // style={{ display: "none" }}
-                            id="firstimg"
-                            onChange={(e) => setFile(e.target.files[0])}
-                          />
-                          {/* <label htmlFor="firstimg">
-                            <Image
-                              src={"/Lampiran.svg"}
-                              width={21}
-                              height={23}
-                              style={{ marginRight: 20, cursor: "pointer" }}
-                            />
-                          </label> */}
+                        <div style={styleBtnKirim}>
                           <Image
                             src={"/KirimFeedback.svg"}
                             width={24}
@@ -553,18 +524,27 @@ function Row(props: rowProps) {
                             style={{ cursor: "pointer" }}
                             onClick={btnKirimTanggapan}
                           />
+                          <input
+                            type="file"
+                            style={{
+                              width: 90,
+                              marginLeft: 20,
+                              marginTop: 1,
+                              cursor: "pointer",
+                            }}
+                            onChange={(e) => setFile(e.target.files[0])}
+                          />
                         </div>
                       </div>
                       {file != null ? (
                         <Image
                           src={"/IconPDF.svg"}
-                          width={34}
-                          height={34}
+                          width={26}
+                          height={26}
                           style={{
-                            cursor: "pointer",
                             position: "relative",
-                            marginLeft: 540,
-                            top: -38,
+                            marginLeft: 450,
+                            top: -35,
                           }}
                         />
                       ) : null}
