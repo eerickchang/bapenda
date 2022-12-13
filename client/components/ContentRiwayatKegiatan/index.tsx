@@ -44,6 +44,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 5,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "0px 4px 4px #F4AAB9",
+    marginTop: -1.8
   };
 
   return (

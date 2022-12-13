@@ -239,7 +239,8 @@ function Row(props) {
     marginBottom: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    boxShadow: "1px 2px 9px #F4AAB9",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    marginTop: -10.8,
   };
 
     const styleContentKet = {

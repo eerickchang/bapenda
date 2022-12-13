@@ -307,6 +307,18 @@ function Row(props) {
     marginTop: 8,
   };
 
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 35,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    marginTop: -10.8,
+  };
+
   return (
     <>
       <React.Fragment>
@@ -365,13 +377,7 @@ function Row(props) {
         {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
           <Collapse
-            style={{
-              background: "rgba(232, 232, 232, 1)",
-              borderTopColor: "rgba(165, 165, 165, 0.5)",
-              borderTopWidth: 2,
-              borderTopStyle: "solid",
-              marginBottom: 35,
-            }}
+            style={styleCollapse}
             in={open}
             timeout="auto"
           >

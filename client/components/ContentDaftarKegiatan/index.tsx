@@ -383,6 +383,10 @@ function Row(props: rowProps) {
     borderTopWidth: 2,
     borderTopStyle: "solid",
     marginBottom: 3,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    marginTop: -1.8
   };
 
   const styleBtnKirim = {
@@ -479,7 +483,7 @@ function Row(props: rowProps) {
               ) : null}
             </TableCell>
           </TableRow>
-          <TableCell style={{ padding: 0, width: 2000 }} colSpan={7}>
+          <TableCell style={{ padding: 0, width: 2000}} colSpan={7}>
             <Collapse sx={styleCollapse} in={open} timeout="auto">
               <div className={styles.wrapperContentModal}>
                 <div className={styles.wrapperFeedback}>

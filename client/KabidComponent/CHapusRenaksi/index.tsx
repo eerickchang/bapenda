@@ -378,6 +378,7 @@ export default function CHapusRenaksi() {
             <Gap height={50} width={0} />
             <TableContainer
               style={{
+                paddingLeft: 3,
                 paddingRight: 40,
                 paddingBottom: 20,
               }}
