@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./toppegawai.module.css";
 import Image from "next/image";
 import Gap from "../Gap";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
 
 interface TopPegawaiProps {
   bulan: string;
   title: string;
 }
 
+// const shouldLog = useRef(true);
+// useEffect(() => {
+//   if (shouldLog.current) {
+//     shouldLog.current = false;
+
 export default function TopPegawai(props: TopPegawaiProps) {
   const { bulan, title } = props;
+
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+    }
+  });
+
   const [dataPegawai, setDataPegawai] = useState([
     {
       id: 1,
