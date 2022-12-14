@@ -47,7 +47,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     boxShadow: "0px 4px 4px #F4AAB9",
-    marginTop: -1.8
+    marginTop: -1.8,
   };
 
   return (
@@ -102,7 +102,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     )}
                     {/* //!{ambil data} */}
                     <div style={{ marginLeft: 10 }}>
-                      <p className={stylesS.rekanNama}>{row.nama}</p>
+                      <p className={stylesS.rekanNama}>{row.id_renaksi}</p>
                       <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
                       <p className={stylesS.rekanAsn}>ASN</p>
                     </div>
@@ -516,17 +516,19 @@ export const ContentRiwayatKegiatan = () => {
         setAsn(dataPegawai.data.user[0]);
         Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
           (result) => {
-            result.data.map((item) => {
-              if (
-                moment(item.end_date).format("YYYY") ===
-                  moment().format("YYYY") &&
-                item.nip == dataPegawai.data.user[0].nip
-              ) {
-                setDataRenaksi((nextData) => {
-                  return [...nextData, item];
-                });
-              }
-            });
+            console.log(result);
+            // result.data.map((item) => {
+            //   if (
+            //     moment(item.end_date).format("YYYY") ===
+            //       moment().format("YYYY") &&
+            //     item.nip == dataPegawai.data.user[0].nip &&
+            //     item.status == "Unggah Lampiran"
+            //   ) {
+            //     setDataRenaksi((nextData) => {
+            //       return [...nextData, item];
+            //     });
+            //   }
+            // });
           }
         );
 
@@ -567,9 +569,9 @@ export const ContentRiwayatKegiatan = () => {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownFilter, setActiveDropdownFilter] = useState(false);
 
-    const btnFilter = () => {
-      setActiveDropdownFilter(!activeDropdownFilter);
-    };
+  const btnFilter = () => {
+    setActiveDropdownFilter(!activeDropdownFilter);
+  };
 
   const menuRefTahun = useRef();
 
@@ -605,23 +607,22 @@ export const ContentRiwayatKegiatan = () => {
     };
   });
 
-    const menuRefFilter = useRef();
+  const menuRefFilter = useRef();
 
-    useEffect(() => {
-      const handler = (e) => {
-        if (!menuRefFilter.current.contains(e.target)) {
-          setActiveDropdownFilter(false);
-          // console.log(menuRef.current);
-        }
-      };
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRefFilter.current.contains(e.target)) {
+        setActiveDropdownFilter(false);
+        // console.log(menuRef.current);
+      }
+    };
 
-      document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler);
 
-      return () => {
-        document.removeEventListener("mousedown", handler);
-      };
-    });
-
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const tahun = [
     {

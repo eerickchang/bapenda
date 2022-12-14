@@ -115,6 +115,11 @@ function Row(props) {
             bulan: moment(row.end_date).format("YYYY-MM-01"),
             nip_kasubid: nip_kasubid,
             nip_kabid: pegawai.nip,
+            req_start_date: row.req_start_date,
+            req_end_date: row.req_end_date,
+            files: row.files,
+            start_date: row.start_date,
+            end_date: row.end_date,
           });
         }
       });

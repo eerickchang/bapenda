@@ -299,7 +299,7 @@ app.get("/ambilRenaksi", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'SEMUA'
 app.get("/ambilRiwayatKegiatan", (req, res) => {
   const sqlSelect =
-    "SELECT data_renaksi.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.status, data_renaksi.program, data_renaksi.end_date, data_renaksi.start_date, data_renaksi.nip, data_renaksi.ket_pegawai, data_renaksi.ket_admin, data_renaksi.req_start_date, data_renaksi.req_end_date, data_renaksi.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.id_renaksi, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
+    "SELECT riwayat_kegiatan.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.program, riwayat_kegiatan.end_date, riwayat_kegiatan.start_date, data_renaksi.nip, riwayat_kegiatan.ket_pegawai, riwayat_kegiatan.ket_admin, riwayat_kegiatan.req_start_date, riwayat_kegiatan.req_end_date, riwayat_kegiatan.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
@@ -1004,6 +1004,11 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   const bulan = req.body.bulan;
   const nip_kasubid = req.body.nip_kasubid;
   const nip_kabid = req.body.nip_kabid;
+  const req_start_date = req.body.req_start_date;
+  const req_end_date = req.body.req_end_date;
+  const files = req.body.files;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Selesai", kirim_ke = "", ket_admin = ?, nip = ? WHERE id_renaksi = ?';
@@ -1031,10 +1036,23 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   });
 
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Unggah Lampiran', 'Diterima') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(result);
-  });
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,'Unggah Lampiran', 'Diterima') ";
+  db.query(
+    sqlInsert,
+    [
+      idRenaksi,
+      nip,
+      req_start_date,
+      req_end_date,
+      files,
+      ketAdmin,
+      start_date,
+      end_date,
+    ],
+    (err, result) => {
+      console.log(err);
+    }
+  );
 });
 
 //ADMIN MENOLAK EVALUASI LAMPIRAN
