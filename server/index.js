@@ -897,6 +897,9 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   const reqStartDate = req.body.reqStartDate;
   const reqEndDate = req.body.reqEndDate;
   const nip = req.body.nip;
+  const files = req.body.files;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
@@ -906,10 +909,23 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   });
 
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Ubah Jadwal', 'Diterima') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
-  });
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Diterima') ";
+  db.query(
+    sqlInsert,
+    [
+      idRenaksi,
+      nip,
+      reqStartDate,
+      reqEndDate,
+      files,
+      ketAdmin,
+      start_date,
+      end_date,
+    ],
+    (err, result) => {
+      console.log(err);
+    }
+  );
 });
 
 //ADMIN MENOLAK RENAKSI UBAH JADWAL;
@@ -931,6 +947,11 @@ app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
   const ketAdmin = req.body.ketAdmin;
   const nip = req.body.nip;
+  const req_start_date = req.body.req_start_date;
+  const req_end_date = req.body.req_end_date;
+  const files = req.body.files;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Dihapus", kirim_ke = "", ket_admin = ?  WHERE id_renaksi = ?';
@@ -940,10 +961,23 @@ app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
   });
 
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, status, kondisi) VALUES (?,?,'Hapus Kegiatan', 'Diterima') ";
-  db.query(sqlInsert, [idRenaksi, nip], (err, result) => {
-    console.log(err);
-  });
+    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Diterima') ";
+  db.query(
+    sqlInsert,
+    [
+      idRenaksi,
+      nip,
+      req_start_date,
+      req_end_date,
+      files,
+      ketAdmin,
+      start_date,
+      end_date,
+    ],
+    (err, result) => {
+      console.log(err);
+    }
+  );
 });
 
 //ADMIN MENOLAK RENAKSI DIHAPUS;

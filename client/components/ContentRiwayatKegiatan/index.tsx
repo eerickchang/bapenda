@@ -102,7 +102,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     )}
                     {/* //!{ambil data} */}
                     <div style={{ marginLeft: 10 }}>
-                      <p className={stylesS.rekanNama}>{row.id_renaksi}</p>
+                      <p className={stylesS.rekanNama}>{row.nama}</p>
                       <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
                       <p className={stylesS.rekanAsn}>ASN</p>
                     </div>
@@ -516,19 +516,19 @@ export const ContentRiwayatKegiatan = () => {
         setAsn(dataPegawai.data.user[0]);
         Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
           (result) => {
-            console.log(result);
-            // result.data.map((item) => {
-            //   if (
-            //     moment(item.end_date).format("YYYY") ===
-            //       moment().format("YYYY") &&
-            //     item.nip == dataPegawai.data.user[0].nip &&
-            //     item.status == "Unggah Lampiran"
-            //   ) {
-            //     setDataRenaksi((nextData) => {
-            //       return [...nextData, item];
-            //     });
-            //   }
-            // });
+            // console.log(result);
+            result.data.map((item) => {
+              if (
+                moment(item.end_date).format("YYYY") ===
+                  moment().format("YYYY") &&
+                item.nip == dataPegawai.data.user[0].nip &&
+                item.status == "Unggah Lampiran"
+              ) {
+                setDataRenaksi((nextData) => {
+                  return [...nextData, item];
+                });
+              }
+            });
           }
         );
 

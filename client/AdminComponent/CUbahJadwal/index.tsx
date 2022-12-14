@@ -173,6 +173,9 @@ function Row(props) {
       reqEndDate: moment(row.req_end_date).format("YYYY-MM-DD"),
       ketAdmin: ketAdmin,
       nip: row.nip,
+      files: row.files,
+      start_date: row.start_date,
+      end_date: row.end_date,
     });
     stateChanger([]);
 

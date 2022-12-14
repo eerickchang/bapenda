@@ -98,6 +98,11 @@ function Row(props) {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
       nip: row.nip,
+      req_start_date: row.req_start_date,
+      req_end_date: row.req_end_date,
+      files: row.files,
+      start_date: row.start_date,
+      end_date: row.end_date,
     });
     stateChanger([]);
 
