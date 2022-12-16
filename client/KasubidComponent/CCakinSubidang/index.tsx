@@ -17,6 +17,7 @@ import moment from "moment";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import Modal from "react-modal";
 
 Axios.defaults.withCredentials = true;
 
@@ -126,7 +127,7 @@ export default function CCaKinSubidang() {
     const handler = (e) => {
       if (!menuRefTahun.current.contains(e.target)) {
         setActiveDropdownTahun(false);
-        console.log(menuRefTahun.current);
+        // console.log(menuRefTahun.current);
       }
     };
 
@@ -143,7 +144,7 @@ export default function CCaKinSubidang() {
     const handler = (e) => {
       if (!menuRefUnduh.current.contains(e.target)) {
         setActiveDropdownUnduh(false);
-        console.log(menuRefUnduh.current);
+        // console.log(menuRefUnduh.current);
       }
     };
 
@@ -160,7 +161,7 @@ export default function CCaKinSubidang() {
     const handler = (e) => {
       if (!menuRefPegawai.current.contains(e.target)) {
         setActiveDropdownPegawai(false);
-        console.log(menuRefPegawai.current);
+        // console.log(menuRefPegawai.current);
       }
     };
 
@@ -333,6 +334,54 @@ export default function CCaKinSubidang() {
     setPage(0);
   };
 
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      // height: 210,
+      borderRadius: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  const [modalIsOpen, setIsOpenModal] = useState(false);
+
+  setTimeout(() => {}, 3000);
+  function openModal() {
+    setIsOpenModal(true);
+    setTimeout(() => {
+      setIsOpenModal(false);
+    }, 4000);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpenModal(false);
+  }
+
   const styleContainer = {
     maxHeight: 810,
     width: 1660,
@@ -473,13 +522,26 @@ export default function CCaKinSubidang() {
               className={styles.btnFilterTahun}
               onClick={() => {
                 year.length == 0
-                  ? console.log("Year Kosong")
+                  ? openModal()
                   : setActiveDropdownTahun(!activeDropdownTahun);
               }}
             >
               <Image src={"/TahunIcon.svg"} width={23} height={23} />
               <p>Tahun</p>
             </div>
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={custom}
+              contentLabel="Example Modal"
+              className={styles.modal}
+            >
+              <h2 className={styles.headerPesan}>Pesan</h2>
+              <h2 className={styles.dialogPesan}>
+                Silahkan pilih Pegawai terlebih dahulu
+              </h2>
+            </Modal>
             {activeDropdownTahun && (
               <div
                 className={styles.wrapperSelectFilterTahun}
