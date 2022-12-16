@@ -74,7 +74,12 @@ export default function CCaKinSubidang() {
                       nama: pegawai.nama,
                       nip: pegawai.nip,
                       foto: (
-                        <Image src={`${pegawai.foto}`} width={50} height={50} style={{borderRadius: 50}}/>
+                        <Image
+                          src={`${pegawai.foto}`}
+                          width={50}
+                          height={50}
+                          style={{ borderRadius: 50 }}
+                        />
                       ),
                     },
                   ];
@@ -165,7 +170,6 @@ export default function CCaKinSubidang() {
       document.removeEventListener("mousedown", handler);
     };
   });
-
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -467,7 +471,11 @@ export default function CCaKinSubidang() {
           <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+              onClick={() => {
+                year.length == 0
+                  ? console.log("Year Kosong")
+                  : setActiveDropdownTahun(!activeDropdownTahun);
+              }}
             >
               <Image src={"/TahunIcon.svg"} width={23} height={23} />
               <p>Tahun</p>
