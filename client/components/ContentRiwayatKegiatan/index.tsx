@@ -531,36 +531,6 @@ export const ContentRiwayatKegiatan = () => {
             });
           }
         );
-
-        for (let i = 2020; i <= 2030; i++) {
-          setYear((nextData) => {
-            return [
-              ...nextData,
-              {
-                tahun: i,
-                onclick: () => (
-                  setDataRenaksi([]),
-                  setThnSkrg(i),
-                  Axios.get("http://localhost:3001/ambilRiwayatKegiatan").then(
-                    (result) => {
-                      result.data.map((item) => {
-                        if (
-                          moment(item.end_date).format("YYYY") ===
-                            moment(`${i}`).format("YYYY") &&
-                          item.nip == dataPegawai.data.user[0].nip
-                        ) {
-                          setDataRenaksi((nextData) => {
-                            return [...nextData, item];
-                          });
-                        }
-                      });
-                    }
-                  )
-                ),
-              },
-            ];
-          });
-        }
       });
     }
   }, []);
@@ -651,6 +621,38 @@ export const ContentRiwayatKegiatan = () => {
               });
             }
           );
+
+          setYear([]);
+          for (let i = 2020; i <= 2030; i++) {
+            setYear((nextData) => {
+              return [
+                ...nextData,
+                {
+                  tahun: i,
+                  onclick: () => (
+                    setDataRenaksi([]),
+                    setThnSkrg(i),
+                    Axios.get(
+                      "http://localhost:3001/ambilRiwayatKegiatan"
+                    ).then((result) => {
+                      result.data.map((item) => {
+                        if (
+                          moment(item.end_date).format("YYYY") ===
+                            moment(`${i}`).format("YYYY") &&
+                          item.nip == response.data.user[0].nip &&
+                          item.status == "Unggah Lampiran"
+                        ) {
+                          setDataRenaksi((nextData) => {
+                            return [...nextData, item];
+                          });
+                        }
+                      });
+                    })
+                  ),
+                },
+              ];
+            });
+          }
         })
       ),
     },
@@ -680,6 +682,38 @@ export const ContentRiwayatKegiatan = () => {
               });
             }
           );
+
+          setYear([]);
+          for (let i = 2020; i <= 2030; i++) {
+            setYear((nextData) => {
+              return [
+                ...nextData,
+                {
+                  tahun: i,
+                  onclick: () => (
+                    setDataRenaksi([]),
+                    setThnSkrg(i),
+                    Axios.get(
+                      "http://localhost:3001/ambilRiwayatKegiatan"
+                    ).then((result) => {
+                      result.data.map((item) => {
+                        if (
+                          moment(item.end_date).format("YYYY") ===
+                            moment(`${i}`).format("YYYY") &&
+                          item.nip == response.data.user[0].nip &&
+                          item.status == "Hapus Kegiatan"
+                        ) {
+                          setDataRenaksi((nextData) => {
+                            return [...nextData, item];
+                          });
+                        }
+                      });
+                    })
+                  ),
+                },
+              ];
+            });
+          }
         })
       ),
     },
@@ -709,6 +743,38 @@ export const ContentRiwayatKegiatan = () => {
               });
             }
           );
+
+          setYear([]);
+          for (let i = 2020; i <= 2030; i++) {
+            setYear((nextData) => {
+              return [
+                ...nextData,
+                {
+                  tahun: i,
+                  onclick: () => (
+                    setDataRenaksi([]),
+                    setThnSkrg(i),
+                    Axios.get(
+                      "http://localhost:3001/ambilRiwayatKegiatan"
+                    ).then((result) => {
+                      result.data.map((item) => {
+                        if (
+                          moment(item.end_date).format("YYYY") ===
+                            moment(`${i}`).format("YYYY") &&
+                          item.nip == response.data.user[0].nip &&
+                          item.status == "Ubah Jadwal"
+                        ) {
+                          setDataRenaksi((nextData) => {
+                            return [...nextData, item];
+                          });
+                        }
+                      });
+                    })
+                  ),
+                },
+              ];
+            });
+          }
         })
       ),
     },
