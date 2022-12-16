@@ -19,6 +19,9 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 
+
+import Modal from "react-modal";
+
 Axios.defaults.withCredentials = true;
 
 function Row(props: { row: ReturnType<typeof createData> }) {
@@ -539,6 +542,55 @@ export const ContentRiwayatKegiatan = () => {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownFilter, setActiveDropdownFilter] = useState(false);
 
+   const custom = {
+     content: {
+       position: "absolute",
+       top: "50%",
+       left: "50%",
+       right: "auto",
+       bottom: "auto",
+       width: 491,
+       // height: 210,
+       borderRadius: 20,
+       marginRight: "-50%",
+       transform: "translate(-50%, -50%)",
+       overlay: "#112350",
+       backgroundColor: "white",
+       zIndex: 1001,
+       scroll: false,
+     },
+     overlay: {
+       position: "fixed",
+       marginTop: 0,
+       top: 0,
+       bottom: 0,
+       left: 0,
+       right: 0,
+       backgroundColor: "rgba(17, 35, 80, 0.5)",
+       zIndex: 1000,
+     },
+   };
+
+   const [modalIsOpen, setIsOpenModal] = useState(false);
+
+   setTimeout(() => {}, 3000);
+   function openModal() {
+     setIsOpenModal(true);
+     setTimeout(() => {
+       setIsOpenModal(false);
+     }, 4000);
+   }
+
+   function afterOpenModal() {
+     // references are now sync'd and can be accessed.
+     // subtitle.style.color = "#f00";
+   }
+
+   function closeModal() {
+     setIsOpenModal(false);
+   }
+
+
   const btnFilter = () => {
     setActiveDropdownFilter(!activeDropdownFilter);
   };
@@ -898,10 +950,16 @@ export const ContentRiwayatKegiatan = () => {
                 )}
               </div>
 
+            
+
               <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
                   className={stylesS.btnFilterTahun}
-                  onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+                  onClick={() => {
+                    year.length == 0
+                      ? openModal()
+                      : setActiveDropdownTahun(!activeDropdownTahun);
+                  }}
                 >
                   <Image src={"/TahunIcon.svg"} width={23} height={23} />
                   <p>Tahun</p>
@@ -919,6 +977,19 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
+              <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={custom}
+                contentLabel="Example Modal"
+                className={styles.modal}
+              >
+                <h2 className={styles.headerPesan}>Pesan</h2>
+                <h2 className={styles.dialogPesan}>
+                  Silahkan pilih Filter terlebih dahulu
+                </h2>
+              </Modal>
               <div className={stylesS.wrapperUnduh} ref={menuRefUnduh}>
                 <div
                   className={stylesS.btnUnduh}
