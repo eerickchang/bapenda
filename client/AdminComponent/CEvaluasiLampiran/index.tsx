@@ -144,155 +144,8 @@ function Row(props) {
     });
   };
 
-  const custom = {
-    content: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: 878,
-      borderRadius: 20,
-      paddingLeft: 61,
-      height: 362,
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      overlay: "#112350",
-      backgroundColor: "white",
-      zIndex: 1001,
-      scroll: false,
-    },
-    overlay: {
-      position: "fixed",
-      marginTop: 0,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: "rgba(17, 35, 80, 0.5)",
-      zIndex: 1000,
-    },
-  };
 
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
-
-  const [showModal, setShowModal] = useState(false);
-  const [showModalTolak, setShowModalTolak] = useState(false);
-  const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
-  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModalTolakAll() {
-    setTolakAllIsOpen(true);
-  }
-
-  function afterOpenModalTolakAll() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
-
-  function closeModalTolakAll() {
-    setTolakAllIsOpen(false);
-  }
-
-  const btnTolak = () => {
-    setShowModalTolak(true);
-    setTimeout(() => {
-      setShowModalTolak(false);
-    }, 3000);
-  };
-
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
-
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
-  const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModal();
-    btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
-  };
-
+ 
   const router = useRouter();
 
   const clickRow = () => {
@@ -365,7 +218,7 @@ export const CEvaluasiLampiran = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
-
+  
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
   const shouldLog = useRef(true);
@@ -373,7 +226,7 @@ export const CEvaluasiLampiran = () => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
-
+      
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
         Axios.get("http://localhost:3001/adminAmbilRenaksiSelesai").then(
           (ambilRenaksi) => {
@@ -388,24 +241,30 @@ export const CEvaluasiLampiran = () => {
                 (elB) => elA["sub_bidang"] === elB["sub_bidang"]
               );
             });
-
+            
             pegawaiYgAdaRenaksi.map((item) => {
               setPegawaiSubid((nextData) => {
                 return [item, ...nextData];
               });
             });
-
+            
             console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
     }
   }, []);
-
+  
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
     console.log(dataRenaksi);
   };
+  
+  const [modalTutup, setModalTutup] = useState(false);
+
+  const btnTutup = () => {
+    setModalTutup(true);
+  }
 
   const style = {
     fontFamily: "Poppins",
@@ -419,6 +278,52 @@ export const CEvaluasiLampiran = () => {
     paddingRight: 40,
     paddingBottom: 20,
   };
+
+   const custom = {
+     content: {
+       position: "absolute",
+       top: "50%",
+       left: "50%",
+       right: "auto",
+       bottom: "auto",
+       width: 491,
+       height: 219,
+       borderRadius: 20,
+       paddingTop: 20,
+       marginRight: "-50%",
+       transform: "translate(-50%, -50%)",
+       overlay: "#112350",
+       backgroundColor: "white",
+       zIndex: 1001,
+       scroll: false,
+     },
+     overlay: {
+       position: "fixed",
+       marginTop: 0,
+       top: 0,
+       bottom: 0,
+       left: 0,
+       right: 0,
+       backgroundColor: "rgba(17, 35, 80, 0.5)",
+       zIndex: 1000,
+     },
+   };
+
+   const [modalIsOpen, setIsOpenModal] = useState(false);
+
+   function openModal() {
+     setIsOpenModal(true);
+   }
+
+   function afterOpenModal() {
+     // references are now sync'd and can be accessed.
+     // subtitle.style.color = "#f00";
+   }
+
+   function closeModal() {
+     setIsOpenModal(false);
+   }
+
 
   return (
     <>
@@ -438,11 +343,37 @@ export const CEvaluasiLampiran = () => {
               </p>
             </div>
             <div className={styles.wrapTutupFilter}>
-              <button className={styles.btnTutupForum}>
+              <button className={styles.btnTutupForum} onClick={openModal}>
                 <Image src={"/TutupForum.svg"} width={25} height={25} />
-                <p>Tutup Forum</p>
+                <p>Tutup Form</p>
               </button>
             </div>
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={custom}
+              contentLabel="Example Modal"
+              className={styles.modal}
+            >
+              <h2 className={styles.headerTxtModal}>Tutup Form</h2>
+              <h2 className={styles.dialog}>Apakah anda yakin ingin menutup Form?</h2>
+              <Gap height={20} width={0} />
+              <div className={styles.wrapperBtnModal}>
+                <button
+                  onClick={() => {
+                    closeModal();
+                    // router.push("/");
+                  }}
+                  className={styles.btnYa}
+                >
+                  <p className={styles.txt}>Ya</p>
+                </button>
+                <button onClick={closeModal} className={styles.btnTidak}>
+                  <p>Tidak</p>
+                </button>
+              </div>
+            </Modal>
             <Gap height={150} width={0} />
             <TableContainer style={styleContainer}>
               <Table>
