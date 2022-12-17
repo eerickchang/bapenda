@@ -31,14 +31,36 @@ export default function CTinjauRenaksi() {
 
   const router = useRouter();
 
-    const clickRow = () => {
-      router.push({
-        pathname: "/Kaban/RiwayatKegiatanSubid",
-        // query: {
-        //   subid: row.sub_bidang,
-        // },
-      });
-    };
+  const clickRow = () => {
+    router.push({
+      pathname: "/Kaban/RiwayatKegiatanSubid",
+      // query: {
+      //   subid: row.sub_bidang,
+      // },
+    });
+  };
+
+  const style = {
+    fontFamily: "Poppins",
+    fontSize: 19,
+    fontWeight: 600,
+    color: "#959595",
+  };
+
+
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+    cursor: 'pointer'
+  };
+
+  const styleContainer = {
+    paddingLeft: 40,
+    paddingRight: 40,
+    paddingBottom: 40,
+  };
 
   return (
     <div className={styles.container}>
@@ -46,43 +68,34 @@ export default function CTinjauRenaksi() {
         <div>
           <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
         </div>
-        <p style={{ marginLeft: 8, marginBottom: 10 }}>
-          RIWAYAT KEGIATAN
-        </p>
+        <p style={{ marginLeft: 8, marginBottom: 10 }}>RIWAYAT KEGIATAN</p>
       </div>
       <Gap height={153} width={0} />
       <div className={styles.wrapTable}>
         <TableContainer
-          style={{
-            paddingLeft: 40,
-            paddingRight: 40,
-            zIndex: 998,
-            paddingBottom: 40,
-          }}
+          style={styleContainer}
         >
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={styles.styleHeader}>
-                  Kepala Sub Bagian
-                </TableCell>
-                <TableCell className={styles.styleHeader}>Sub Bagian</TableCell>
-                <TableCell className={styles.styleHeader}>Bagian</TableCell>
+                <TableCell style={style}>Kepala Sub Bagian</TableCell>
+                <TableCell style={style}>Sub Bagian</TableCell>
+                <TableCell style={style}>Bagian</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rowsSubagian.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     <div className={styles.styleProfileKasub}>
                       <Image src={"/User1.svg"} width={45} height={45} />
                       <p>{row.sub}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     <p style={{ fontWeight: 600 }}>{row.sub}</p>
                   </TableCell>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     {row.keterangan}
                   </TableCell>
                 </TableRow>
@@ -92,36 +105,29 @@ export default function CTinjauRenaksi() {
         </TableContainer>
 
         <TableContainer
-          style={{
-            paddingLeft: 40,
-            paddingRight: 40,
-            zIndex: 998,
-            paddingBottom: 40,
-          }}
+          style={styleContainer}
         >
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={styles.styleHeader}>
-                  Kepala Sub Bidang
-                </TableCell>
-                <TableCell className={styles.styleHeader}>Sub Bidang</TableCell>
-                <TableCell className={styles.styleHeader}>Bidang</TableCell>
+                <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                <TableCell style={style}>Sub Bidang</TableCell>
+                <TableCell style={style}>Bidang</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rowsSubagian.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     <div className={styles.styleProfileKasub}>
                       <Image src={"/User1.svg"} width={45} height={45} />{" "}
                       <p>{row.sub}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     <p style={{ fontWeight: 600 }}>{row.sub}</p>
                   </TableCell>
-                  <TableCell onClick={clickRow} className={styles.styleData}>
+                  <TableCell onClick={clickRow} style={style2}>
                     {row.keterangan}
                   </TableCell>
                 </TableRow>
