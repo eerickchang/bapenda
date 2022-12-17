@@ -170,7 +170,6 @@ export default function CProfilAdm() {
   return (
     <div className={styles.container}>
       <Sidebar kotakProfil={sidebarStyles.kotakAktif} />
-      <Gap height={0} width={141} />
       <div className={styles.contentKiri}>
         <div className={styles.header}>
           <div>

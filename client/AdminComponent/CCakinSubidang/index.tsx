@@ -19,6 +19,8 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import Image from "next/future/image";
 
+import Modal from "react-modal";
+
 Axios.defaults.withCredentials = true;
 
 export default function CCaKinSubidang() {
@@ -175,6 +177,54 @@ export default function CCaKinSubidang() {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      // height: 210,
+      borderRadius: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  const [modalIsOpen, setIsOpenModal] = useState(false);
+
+  setTimeout(() => {}, 3000);
+  function openModal() {
+    setIsOpenModal(true);
+    setTimeout(() => {
+      setIsOpenModal(false);
+    }, 4000);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpenModal(false);
+  }
 
   const btnDwExcel = () => {
     const workSheet = XLSX.utils.json_to_sheet(dataCakin);
@@ -478,11 +528,28 @@ export default function CCaKinSubidang() {
           <div className={styles.wrapperFilterTahun} ref={menuRefTahun}>
             <div
               className={styles.btnFilterTahun}
-              onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+              onClick={() => {
+                year.length == 0
+                  ? openModal()
+                  : setActiveDropdownTahun(!activeDropdownTahun);
+              }}
             >
               <Image src={"/TahunIcon.svg"} width={23} height={23} />
               <p>Tahun</p>
             </div>
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={custom}
+              contentLabel="Example Modal"
+              className={styles.modal}
+            >
+              <h2 className={styles.headerPesan}>Pesan</h2>
+              <h2 className={styles.dialogPesan}>
+                Silahkan pilih Pegawai terlebih dahulu
+              </h2>
+            </Modal>
             {activeDropdownTahun && (
               <div
                 className={styles.wrapperSelectFilterTahun}
