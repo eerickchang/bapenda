@@ -19,7 +19,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 
-
 import Modal from "react-modal";
 
 Axios.defaults.withCredentials = true;
@@ -524,7 +523,7 @@ export const ContentRiwayatKegiatan = () => {
               if (
                 moment(item.end_date).format("YYYY") ===
                   moment().format("YYYY") &&
-                item.nip == dataPegawai.data.user[0].nip &&
+                item.sub_bidang == dataPegawai.data.user[0].sub_bidang &&
                 item.status == "Unggah Lampiran"
               ) {
                 setDataRenaksi((nextData) => {
@@ -542,54 +541,53 @@ export const ContentRiwayatKegiatan = () => {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownFilter, setActiveDropdownFilter] = useState(false);
 
-   const custom = {
-     content: {
-       position: "absolute",
-       top: "50%",
-       left: "50%",
-       right: "auto",
-       bottom: "auto",
-       width: 491,
-       // height: 210,
-       borderRadius: 20,
-       marginRight: "-50%",
-       transform: "translate(-50%, -50%)",
-       overlay: "#112350",
-       backgroundColor: "white",
-       zIndex: 1001,
-       scroll: false,
-     },
-     overlay: {
-       position: "fixed",
-       marginTop: 0,
-       top: 0,
-       bottom: 0,
-       left: 0,
-       right: 0,
-       backgroundColor: "rgba(17, 35, 80, 0.5)",
-       zIndex: 1000,
-     },
-   };
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      // height: 210,
+      borderRadius: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
-   const [modalIsOpen, setIsOpenModal] = useState(false);
+  const [modalIsOpen, setIsOpenModal] = useState(false);
 
-   setTimeout(() => {}, 3000);
-   function openModal() {
-     setIsOpenModal(true);
-     setTimeout(() => {
-       setIsOpenModal(false);
-     }, 4000);
-   }
+  setTimeout(() => {}, 3000);
+  function openModal() {
+    setIsOpenModal(true);
+    setTimeout(() => {
+      setIsOpenModal(false);
+    }, 4000);
+  }
 
-   function afterOpenModal() {
-     // references are now sync'd and can be accessed.
-     // subtitle.style.color = "#f00";
-   }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
 
-   function closeModal() {
-     setIsOpenModal(false);
-   }
-
+  function closeModal() {
+    setIsOpenModal(false);
+  }
 
   const btnFilter = () => {
     setActiveDropdownFilter(!activeDropdownFilter);
@@ -663,7 +661,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.sub_bidang == response.data.user[0].sub_bidang &&
                   item.status == "Unggah Lampiran"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -691,7 +689,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.sub_bidang == response.data.user[0].sub_bidang &&
                           item.status == "Unggah Lampiran"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -724,7 +722,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.sub_bidang == response.data.user[0].sub_bidang &&
                   item.status == "Hapus Kegiatan"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -752,7 +750,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.sub_bidang == response.data.user[0].sub_bidang &&
                           item.status == "Hapus Kegiatan"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -785,7 +783,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.sub_bidang == response.data.user[0].sub_bidang &&
                   item.status == "Ubah Jadwal"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -813,7 +811,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.sub_bidang == response.data.user[0].sub_bidang &&
                           item.status == "Ubah Jadwal"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -844,7 +842,7 @@ export const ContentRiwayatKegiatan = () => {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Data Renaksi ${asn.nama}.xlsx`);
+    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${asn.sub_bidang}.xlsx`);
   };
 
   const btnDwPDF = () => {
@@ -857,7 +855,7 @@ export const ContentRiwayatKegiatan = () => {
 
     doc.setFontSize(15);
 
-    const title = `Data Renaksi ${asn.nama}`;
+    const title = `Riwayat Kegiatan Renaksi ${asn.sub_bidang}`;
     const headers = [
       [
         "Program",
@@ -891,7 +889,7 @@ export const ContentRiwayatKegiatan = () => {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Data Renaksi ${asn.nama}`);
+    doc.save(`Riwayat Kegiatan Renaksi ${asn.sub_bidang}`);
   };
 
   const unduh = [
@@ -949,8 +947,6 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
-
-            
 
               <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
