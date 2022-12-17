@@ -901,7 +901,11 @@ export const ContentRiwayatKegiatan = () => {
               <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
                   className={stylesS.btnFilterTahun}
-                  onClick={() => setActiveDropdownTahun(!activeDropdownTahun)}
+                  onClick={() => {
+                    year.length == 0
+                      ? console.log("Year Kosong")
+                      : setActiveDropdownTahun(!activeDropdownTahun);
+                  }}
                 >
                   <Image src={"/TahunIcon.svg"} width={23} height={23} />
                   <p>Tahun</p>
