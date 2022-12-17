@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "../Button";
 import Image from "next/future/image";
+import {useRouter} from "next/router";
+import Gap from "../Gap";
 
 export default function CTinjauRenaksi() {
   const rowsSubagian = [
@@ -28,12 +30,28 @@ export default function CTinjauRenaksi() {
     },
   ];
 
+  const router = useRouter();
+
+    const clickRow = () => {
+      router.push({
+        pathname: "/Admin/RiwayatKegiatanSubid",
+        // query: {
+        //   subid: row.sub_bidang,
+        // },
+      });
+    };
+
   return (
     <div className={styles.container}>
-      <div className={styles.wrapperTitleDaftarKegiatan}>
-        <Image src={"/RiwayatIcon.svg"} width={50} height={50} />
-        <p className={styles.txtTitle}>Riwayat Kegiatan</p>
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
+        </div>
+        <p style={{ marginLeft: 8, marginBottom: 10 }}>
+          RIWAYAT KEGIATAN
+        </p>
       </div>
+      <Gap height={153} width={0} />
       <div className={styles.wrapTable}>
         <TableContainer
           style={{
@@ -56,16 +74,16 @@ export default function CTinjauRenaksi() {
             <TableBody>
               {rowsSubagian.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     <div className={styles.styleProfileKasub}>
                       <Image src={"/User1.svg"} width={45} height={45} />{" "}
                       <p>{row.sub}</p>
                     </div>
                   </TableCell>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     <p style={{ fontWeight: 600 }}>{row.sub}</p>
                   </TableCell>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     {row.keterangan}
                   </TableCell>
                 </TableRow>
@@ -95,16 +113,16 @@ export default function CTinjauRenaksi() {
             <TableBody>
               {rowsSubagian.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     <div className={styles.styleProfileKasub}>
                       <Image src={"/User1.svg"} width={45} height={45} />{" "}
                       <p>{row.sub}</p>
                     </div>
                   </TableCell>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     <p style={{ fontWeight: 600 }}>{row.sub}</p>
                   </TableCell>
-                  <TableCell className={styles.styleData}>
+                  <TableCell onClick={clickRow} className={styles.styleData}>
                     {row.keterangan}
                   </TableCell>
                 </TableRow>

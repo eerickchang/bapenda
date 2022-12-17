@@ -295,21 +295,6 @@ export default function CLihatSemuaRenaksi() {
               RENAKSI - {router.query.subid}
             </div>
             <Gap height={162} width={0} />
-            {/* <TableRow
-              className={`${styles.tableRow} ${styleRow}`}
-              onClick={() => {
-                setOpen(!open);
-                {
-                  rowClik
-                    ? (setStyleRow(
-                        `${styles.tableRow} ${styles.tableRowClick}`
-                      ),
-                      setRowClick(!rowClik))
-                    : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-                }
-              }}
-              sx={{ "& > *": { borderBottom: "" } }}
-            ></TableRow> */}
             <div
               className={`${styles.arrow} ${iconArrow}`}
               onClick={() => {
@@ -323,9 +308,26 @@ export default function CLihatSemuaRenaksi() {
                 }
               }}
             >
-              <Image src={"/Arrow.svg"} width={23} height={23} />
+              <Image
+                src={"/Arrow.svg"}
+                width={23}
+                height={23}
+                style={{ rotate: "-90deg" }}
+              />
             </div>
-            <div className={styles.wrapperKetKaban}>
+            <div
+              className={styles.wrapperKetKaban}
+              onClick={() => {
+                setShowKet(!showKet);
+                {
+                  iconArrowClick
+                    ? (setIconArrow(styles.arrowClick),
+                      setIconArrowClick(!iconArrowClick))
+                    : (setIconArrow(styles.iconArrowClick),
+                      setIconArrowClick(!iconArrowClick));
+                }
+              }}
+            >
               <p style={{ margin: 0 }}>Keterangan Kaban</p>
             </div>
             <Gap height={35} width={0} />

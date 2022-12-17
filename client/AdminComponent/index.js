@@ -12,6 +12,7 @@ import CHapusRenaksi from "./CHapusRenaksi";
 import CCakinBidang from "./CCakinBidang";
 import CCakinSubidang from "./CCakinSubidang";
 import TopPegawai from "./TopPegawai";
+import CRiwayatKegiatanSubid from "./CRiwayatKegiatanSubid";
 
 export {
   SidebarAdmin,
@@ -28,4 +29,5 @@ export {
   CCakinSubidang,
   CCakinBidang,
   TopPegawai,
+  CRiwayatKegiatanSubid,
 };

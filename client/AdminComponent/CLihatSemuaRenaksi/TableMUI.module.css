@@ -508,23 +508,24 @@
   background-color: rgba(27, 221, 187, 1);
   padding: 15px 164px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .wrapperKetKaban p{
-cursor: default;
+  cursor: default;
 }
 
 .arrowClick{
-  transform: rotate(-180deg);
+  transform: rotate(90deg);
 }
 
 .arrow {
+  cursor: pointer;
   position: absolute;
   top: 155px;
   z-index: 200;
-  left: 530px;
+  left: 230px;
   transition: .5s;
-  cursor: pointer;
 }
 
 .contentKet {

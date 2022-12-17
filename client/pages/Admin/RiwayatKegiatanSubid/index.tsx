@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  CRiwayatKegiatanAdm,
   Gap,
   SidebarAdmin,
-} from "../../../KabanComponent";
+} from "../../../AdminComponent";
 import styles from "./riwayatKegiatan.module.css";
-import sidebarStyles from "../../../KabanComponent/SidebarAdmin/sidebar.module.css";
-export default function RiwayatKegiatan() {
+import sidebarStyles from "../../../AdminComponent/SidebarAdmin/sidebar.module.css";
+import { CRiwayatKegiatanSubid } from "../../../AdminComponent/CRiwayatKegiatanSubid";
+export default function RiwayatKegiatanSubid() {
   return (
     <div className={styles.container}>
       <SidebarAdmin kotakRiwayatKegiatan={sidebarStyles.kotakAktif} />
       <Gap width={140} height={80} />
-      <CRiwayatKegiatanAdm />
+      <CRiwayatKegiatanSubid/>
     </div>
   );
 }
