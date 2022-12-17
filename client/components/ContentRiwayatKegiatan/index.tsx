@@ -19,7 +19,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FileDownload from "js-file-download";
 
-
 import Modal from "react-modal";
 
 Axios.defaults.withCredentials = true;
@@ -542,54 +541,53 @@ export const ContentRiwayatKegiatan = () => {
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
   const [activeDropdownFilter, setActiveDropdownFilter] = useState(false);
 
-   const custom = {
-     content: {
-       position: "absolute",
-       top: "50%",
-       left: "50%",
-       right: "auto",
-       bottom: "auto",
-       width: 491,
-       // height: 210,
-       borderRadius: 20,
-       marginRight: "-50%",
-       transform: "translate(-50%, -50%)",
-       overlay: "#112350",
-       backgroundColor: "white",
-       zIndex: 1001,
-       scroll: false,
-     },
-     overlay: {
-       position: "fixed",
-       marginTop: 0,
-       top: 0,
-       bottom: 0,
-       left: 0,
-       right: 0,
-       backgroundColor: "rgba(17, 35, 80, 0.5)",
-       zIndex: 1000,
-     },
-   };
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      // height: 210,
+      borderRadius: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
-   const [modalIsOpen, setIsOpenModal] = useState(false);
+  const [modalIsOpen, setIsOpenModal] = useState(false);
 
-   setTimeout(() => {}, 3000);
-   function openModal() {
-     setIsOpenModal(true);
-     setTimeout(() => {
-       setIsOpenModal(false);
-     }, 4000);
-   }
+  setTimeout(() => {}, 3000);
+  function openModal() {
+    setIsOpenModal(true);
+    setTimeout(() => {
+      setIsOpenModal(false);
+    }, 4000);
+  }
 
-   function afterOpenModal() {
-     // references are now sync'd and can be accessed.
-     // subtitle.style.color = "#f00";
-   }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
 
-   function closeModal() {
-     setIsOpenModal(false);
-   }
-
+  function closeModal() {
+    setIsOpenModal(false);
+  }
 
   const btnFilter = () => {
     setActiveDropdownFilter(!activeDropdownFilter);
@@ -949,8 +947,6 @@ export const ContentRiwayatKegiatan = () => {
                   </div>
                 )}
               </div>
-
-            
 
               <div className={stylesS.wrapperFilterTahun} ref={menuRefTahun}>
                 <div
