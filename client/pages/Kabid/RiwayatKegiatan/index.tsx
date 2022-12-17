@@ -1,8 +1,8 @@
 import React from "react";
-import { Gap, Sidebar } from "../../../KasubidComponent";
+import { Gap, Sidebar } from "../../../KabidComponent";
 import styles from "./riwayatKegiatan.module.css";
-import sidebarStyles from "../../../KasubidComponent/Sidebar/sidebar.module.css";
-import { ContentRiwayatKegiatan } from "../../../KasubidComponent/ContentRiwayatKegiatan";
+import sidebarStyles from "../../../KabidComponent/Sidebar/sidebar.module.css";
+import { ContentRiwayatKegiatan } from "../../../KabidComponent/ContentRiwayatKegiatan";
 export default function RiwayatKegiatan() {
   return (
     <div className={styles.container}>
