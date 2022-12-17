@@ -81,9 +81,14 @@ export default function TopPegawai(props: TopPegawaiProps) {
       {topPegawai.map((item) => (
         <div className={styles.profile} key={item.nip}>
           {item.foto != "" ? (
-            <Image src={item.foto} width={65} height={65} />
+            <Image
+              src={item.foto}
+              width={65}
+              height={65}
+              style={{ borderRadius: 65 }}
+            />
           ) : (
-            <Image src="/User5.svg" width={65} height={65} />
+            <Image src="/User4.svg" width={65} height={65} />
           )}
 
           <div className={styles.txtWrapper}>

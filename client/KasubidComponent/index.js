@@ -33,6 +33,7 @@ import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
 import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 import CEvaluasiLampiran from "./CEvaluasiLampiran";
 import CTinjauRenaksiPegawai from "./CTinjauRenaksiPegawai";
+import ContentRiwayatKegiatan from "./ContentRiwayatKegiatan";
 
 export {
   TxtInput,
@@ -68,4 +69,5 @@ export {
   CLihatSemuaRenaksi,
   CEvaluasiLampiran,
   CTinjauRenaksiPegawai,
+  ContentRiwayatKegiatan,
 };
