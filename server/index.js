@@ -1103,6 +1103,15 @@ app.post("/adminMenolakRenaksiSelesai", (req, res) => {
   });
 });
 
+app.post("/deadline", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate = 'UPDATE data_renaksi SET kunci = "Ya" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
+  });
+});
+
 //AMBIL DATA CAKIN
 app.get("/createRowCakin", (req, res) => {
   const sqlCekRowCakin = "SELECT * FROM cakin";

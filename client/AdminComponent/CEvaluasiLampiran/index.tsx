@@ -219,11 +219,15 @@ export const CEvaluasiLampiran = () => {
 
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
+  const [deadline, setDeadline] = useState("");
+  const [prevMonth, setPrevMonth] = useState("");
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+      setDeadline(moment().format("YYYY-MM-05"));
+      setPrevMonth(moment().subtract(1, "month").format("YYYY-MM-01"));
 
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
         Axios.get("http://localhost:3001/adminAmbilRenaksiSelesai").then(
@@ -264,9 +268,44 @@ export const CEvaluasiLampiran = () => {
     setModalTutup(true);
   };
 
+  const btnDeadline = () => {
+    if (
+      moment().format("YYYY-MM-DD") == moment(deadline).format("YYYY-MM-DD")
+    ) {
+      Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (
+            moment(renaksi.end_date).format("YYYY-MM-DD") ==
+            moment(prevMonth).format("YYYY-MM-DD")
+          ) {
+            Axios.post("http://localhost:3001/deadline", {
+              idRenaksi: renaksi.id_renaksi,
+            }).then((result) => console.log(result));
+          }
+        });
+      });
+
+      closeModal();
+    } else {
+      null;
+    }
+  };
+
   const btnTutupForm = () => {
+    Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+      ambilRenaksi.data.map((renaksi) => {
+        if (
+          moment(renaksi.end_date).format("YYYY-MM-DD") ==
+          moment(prevMonth).format("YYYY-MM-DD")
+        ) {
+          Axios.post("http://localhost:3001/deadline", {
+            idRenaksi: renaksi.id_renaksi,
+          }).then((result) => console.log(result));
+        }
+      });
+    });
+
     closeModal();
-    console.log(moment().format("YYYY-MM-DD"));
   };
 
   const style = {
