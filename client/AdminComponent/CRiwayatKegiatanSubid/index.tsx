@@ -507,6 +507,7 @@ export const CRiwayatKegiatanSubid = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [year, setYear] = useState([]);
+  const [subid, setSubid] = useState("");
 
   const shouldLog = useRef(true);
   useEffect(() => {
@@ -514,6 +515,9 @@ export const CRiwayatKegiatanSubid = () => {
       shouldLog.current = false;
       setDomLoaded(true);
       setThnSkrg(moment().format("YYYY"));
+
+      // console.log(router.query.subid);
+      setSubid(router.query.subid);
 
       Axios.get("http://localhost:3001/masuk").then((dataPegawai) => {
         setAsn(dataPegawai.data.user[0]);
@@ -524,7 +528,7 @@ export const CRiwayatKegiatanSubid = () => {
               if (
                 moment(item.end_date).format("YYYY") ===
                   moment().format("YYYY") &&
-                item.bidang == dataPegawai.data.user[0].bidang &&
+                item.sub_bidang == router.query.subid &&
                 item.status == "Unggah Lampiran"
               ) {
                 setDataRenaksi((nextData) => {
@@ -662,7 +666,7 @@ export const CRiwayatKegiatanSubid = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == subid &&
                   item.status == "Unggah Lampiran"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -690,7 +694,7 @@ export const CRiwayatKegiatanSubid = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == subid &&
                           item.status == "Unggah Lampiran"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -723,7 +727,7 @@ export const CRiwayatKegiatanSubid = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == subid &&
                   item.status == "Hapus Kegiatan"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -751,7 +755,7 @@ export const CRiwayatKegiatanSubid = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == subid &&
                           item.status == "Hapus Kegiatan"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -784,7 +788,7 @@ export const CRiwayatKegiatanSubid = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == subid &&
                   item.status == "Ubah Jadwal"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -812,7 +816,7 @@ export const CRiwayatKegiatanSubid = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == subid &&
                           item.status == "Ubah Jadwal"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -843,7 +847,7 @@ export const CRiwayatKegiatanSubid = () => {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${asn.bidang}.xlsx`);
+    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${subid}.xlsx`);
   };
 
   const btnDwPDF = () => {
@@ -856,7 +860,7 @@ export const CRiwayatKegiatanSubid = () => {
 
     doc.setFontSize(15);
 
-    const title = `Riwayat Kegiatan Renaksi ${asn.bidang}`;
+    const title = `Riwayat Kegiatan Renaksi ${subid}`;
     const headers = [
       [
         "Program",
@@ -890,7 +894,7 @@ export const CRiwayatKegiatanSubid = () => {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Riwayat Kegiatan Renaksi ${asn.bidang}`);
+    doc.save(`Riwayat Kegiatan Renaksi ${subid}`);
   };
 
   const unduh = [
@@ -913,14 +917,15 @@ export const CRiwayatKegiatanSubid = () => {
     color: "rgba(149, 149, 149, 1)",
   };
 
-  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
-
   const router = useRouter();
 
-    const clickBack = () => {
-      router.push("/Admin/RiwayatKegiatan");
-      // console.log(dataCakin);
-    };
+  const clickBack = () => {
+    router.push("/Kaban/RiwayatKegiatan");
+    // console.log(dataCakin);
+  };
+
+  const styleContainer = { paddingLeft: 2, paddingRight: 40 };
+
   return (
     <>
       {domLoaded && (
@@ -941,7 +946,6 @@ export const CRiwayatKegiatanSubid = () => {
                 RIWAYAT KEGIATAN TAHUN {thnSkrg}
               </p>
             </div>
-            <Gap height={153} width={0} />
             <Gap height={153} width={0} />
             <div className={stylesS.wrapFilter}>
               <div className={stylesS.wrapperFilter} ref={menuRefFilter}>

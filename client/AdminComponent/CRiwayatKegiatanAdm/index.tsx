@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./riwayatKegiatanAdm.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,8 +10,12 @@ import Button from "../Button";
 import Image from "next/future/image";
 import { useRouter } from "next/router";
 import Gap from "../Gap";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
 
 export default function CTinjauRenaksi() {
+  const [kasubid, setKasubid] = useState([]);
   const rowsSubagian = [
     {
       id: 1,
@@ -30,14 +34,32 @@ export default function CTinjauRenaksi() {
     },
   ];
 
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kasubid") {
+            setKasubid((nextData) => {
+              return [...nextData, pegawai];
+            });
+          }
+        });
+      });
+    }
+  }, []);
+
   const router = useRouter();
 
-  const clickRow = () => {
+  const clickRow = (data) => {
+    // console.log(data);
     router.push({
       pathname: "/Admin/RiwayatKegiatanSubid",
-      // query: {
-      //   subid: row.sub_bidang,
-      // },
+      query: {
+        subid: data,
+      },
     });
   };
 
@@ -72,9 +94,7 @@ export default function CTinjauRenaksi() {
       </div>
       <Gap height={153} width={0} />
       <div className={styles.wrapTable}>
-        <TableContainer
-          style={styleContainer}
-        >
+        <TableContainer style={styleContainer}>
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -104,9 +124,7 @@ export default function CTinjauRenaksi() {
           </Table>
         </TableContainer>
 
-        <TableContainer
-          style={styleContainer}
-        >
+        <TableContainer style={styleContainer}>
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -116,19 +134,33 @@ export default function CTinjauRenaksi() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowsSubagian.map((row) => (
-                <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell onClick={clickRow} style={style2}>
+              {kasubid.map((row) => (
+                <TableRow hover className={styles.styleRow} key={row.nip}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <div className={styles.styleProfileKasub}>
-                      <Image src={"/User1.svg"} width={45} height={45} />{" "}
-                      <p>{row.sub}</p>
+                      {row.foto != "" ? (
+                        <Image src={row.foto} width={45} height={45} />
+                      ) : (
+                        <Image src={"/User1.svg"} width={45} height={45} />
+                      )}
+
+                      <p>{row.nama}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
                   </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    {row.keterangan}
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    {row.bidang}
                   </TableCell>
                 </TableRow>
               ))}

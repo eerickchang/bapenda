@@ -847,7 +847,7 @@ export const CRiwayatKegiatanSubid = () => {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${asn.bidang}.xlsx`);
+    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${subid}.xlsx`);
   };
 
   const btnDwPDF = () => {
@@ -860,7 +860,7 @@ export const CRiwayatKegiatanSubid = () => {
 
     doc.setFontSize(15);
 
-    const title = `Riwayat Kegiatan Renaksi ${asn.bidang}`;
+    const title = `Riwayat Kegiatan Renaksi ${subid}`;
     const headers = [
       [
         "Program",
@@ -894,7 +894,7 @@ export const CRiwayatKegiatanSubid = () => {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Riwayat Kegiatan Renaksi ${asn.bidang}`);
+    doc.save(`Riwayat Kegiatan Renaksi ${subid}`);
   };
 
   const unduh = [
