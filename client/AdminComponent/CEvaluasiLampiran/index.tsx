@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 import Gap from "../Gap";
 import styles from "./TableMUI.module.css";
+import moment from "moment";
 
 Axios.defaults.withCredentials = true;
 
@@ -144,8 +145,6 @@ function Row(props) {
     });
   };
 
-
- 
   const router = useRouter();
 
   const clickRow = () => {
@@ -186,7 +185,6 @@ function Row(props) {
 
   return (
     <>
-    
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
@@ -218,7 +216,7 @@ export const CEvaluasiLampiran = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
-  
+
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
   const shouldLog = useRef(true);
@@ -226,7 +224,7 @@ export const CEvaluasiLampiran = () => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
-      
+
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
         Axios.get("http://localhost:3001/adminAmbilRenaksiSelesai").then(
           (ambilRenaksi) => {
@@ -241,30 +239,35 @@ export const CEvaluasiLampiran = () => {
                 (elB) => elA["sub_bidang"] === elB["sub_bidang"]
               );
             });
-            
+
             pegawaiYgAdaRenaksi.map((item) => {
               setPegawaiSubid((nextData) => {
                 return [item, ...nextData];
               });
             });
-            
+
             console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
     }
   }, []);
-  
+
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
     console.log(dataRenaksi);
   };
-  
+
   const [modalTutup, setModalTutup] = useState(false);
 
   const btnTutup = () => {
     setModalTutup(true);
-  }
+  };
+
+  const btnTutupForm = () => {
+    closeModal();
+    console.log(moment().format("YYYY-MM-DD"));
+  };
 
   const style = {
     fontFamily: "Poppins",
@@ -279,51 +282,50 @@ export const CEvaluasiLampiran = () => {
     paddingBottom: 20,
   };
 
-   const custom = {
-     content: {
-       position: "absolute",
-       top: "50%",
-       left: "50%",
-       right: "auto",
-       bottom: "auto",
-       width: 491,
-       height: 219,
-       borderRadius: 20,
-       paddingTop: 20,
-       marginRight: "-50%",
-       transform: "translate(-50%, -50%)",
-       overlay: "#112350",
-       backgroundColor: "white",
-       zIndex: 1001,
-       scroll: false,
-     },
-     overlay: {
-       position: "fixed",
-       marginTop: 0,
-       top: 0,
-       bottom: 0,
-       left: 0,
-       right: 0,
-       backgroundColor: "rgba(17, 35, 80, 0.5)",
-       zIndex: 1000,
-     },
-   };
+  const custom = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 491,
+      height: 219,
+      borderRadius: 20,
+      paddingTop: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
-   const [modalIsOpen, setIsOpenModal] = useState(false);
+  const [modalIsOpen, setIsOpenModal] = useState(false);
 
-   function openModal() {
-     setIsOpenModal(true);
-   }
+  function openModal() {
+    setIsOpenModal(true);
+  }
 
-   function afterOpenModal() {
-     // references are now sync'd and can be accessed.
-     // subtitle.style.color = "#f00";
-   }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
 
-   function closeModal() {
-     setIsOpenModal(false);
-   }
-
+  function closeModal() {
+    setIsOpenModal(false);
+  }
 
   return (
     <>
@@ -357,16 +359,12 @@ export const CEvaluasiLampiran = () => {
               className={styles.modal}
             >
               <h2 className={styles.headerTxtModal}>Tutup Form</h2>
-              <h2 className={styles.dialog}>Apakah anda yakin ingin menutup Form?</h2>
+              <h2 className={styles.dialog}>
+                Apakah anda yakin ingin menutup Form?
+              </h2>
               <Gap height={20} width={0} />
               <div className={styles.wrapperBtnModal}>
-                <button
-                  onClick={() => {
-                    closeModal();
-                    // router.push("/");
-                  }}
-                  className={styles.btnYa}
-                >
+                <button onClick={btnTutupForm} className={styles.btnYa}>
                   <p className={styles.txt}>Ya</p>
                 </button>
                 <button onClick={closeModal} className={styles.btnTidak}>
