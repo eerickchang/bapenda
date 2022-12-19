@@ -783,7 +783,11 @@ function Row(props: rowProps) {
                         Unggah Bukti Laporan
                       </p>
                       <button
-                        onClick={() => openModal()}
+                        onClick={
+                          row.kunci == "Ya"
+                            ? () => console.log("Dikunci")
+                            : () => openModal()
+                        }
                         className={styles.btnUnggah}
                       >
                         <img src={"/Kirim.svg"} width={20} height={20} />
@@ -862,11 +866,7 @@ function Row(props: rowProps) {
                       ) : null}
                       <Gap width={193} height={0} />
                       <button
-                        onClick={
-                          row.kunci == "Ya"
-                            ? () => console.log("Dikunci")
-                            : btnUnggahExp
-                        }
+                        onClick={btnUnggahExp}
                         className={styles.btnKirim}
                       >
                         <img src={"/Kirim.svg"} width={20} height={20} />
