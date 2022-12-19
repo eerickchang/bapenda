@@ -1,16 +1,21 @@
+import React, { useEffect, useState, useRef } from "react";
+import styles from "./riwayatKegiatanAdm.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Button from "../Button";
 import Image from "next/future/image";
-import styles from "./riwayatKegiatanAdm.module.css";
-
 import { useRouter } from "next/router";
 import Gap from "../Gap";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
 
 export default function CTinjauRenaksi() {
+  const [kasubid, setKasubid] = useState([]);
   const rowsSubagian = [
     {
       id: 1,
@@ -29,31 +34,48 @@ export default function CTinjauRenaksi() {
     },
   ];
 
+  const shouldLog = useRef(true);
+  useEffect(() => {
+    if (shouldLog.current) {
+      shouldLog.current = false;
+
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kasubid") {
+            setKasubid((nextData) => {
+              return [...nextData, pegawai];
+            });
+          }
+        });
+      });
+    }
+  }, []);
+
   const router = useRouter();
 
-  const clickRow = () => {
+  const clickRow = (data) => {
+    // console.log(data);
     router.push({
       pathname: "/Kaban/RiwayatKegiatanSubid",
-      // query: {
-      //   subid: row.sub_bidang,
-      // },
+      query: {
+        subid: data,
+      },
     });
   };
 
   const style = {
     fontFamily: "Poppins",
-    fontSize: 19,
+    fontSize: 17,
     fontWeight: 600,
     color: "#959595",
   };
-
 
   const style2 = {
     fontFamily: "Poppins",
     fontSize: 18,
     fontWeight: 400,
     color: "#000",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   const styleContainer = {
@@ -72,47 +94,13 @@ export default function CTinjauRenaksi() {
       </div>
       <Gap height={153} width={0} />
       <div className={styles.wrapTable}>
-        <TableContainer
-          style={styleContainer}
-        >
+        <TableContainer style={styleContainer}>
           <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell style={style}>Kepala Sub Bagian</TableCell>
                 <TableCell style={style}>Sub Bagian</TableCell>
                 <TableCell style={style}>Bagian</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rowsSubagian.map((row) => (
-                <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell onClick={clickRow} style={style2}>
-                    <div className={styles.styleProfileKasub}>
-                      <Image src={"/User1.svg"} width={45} height={45} />
-                      <p>{row.sub}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
-                  </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    {row.keterangan}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <TableContainer
-          style={styleContainer}
-        >
-          <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell style={style}>Kepala Sub Bidang</TableCell>
-                <TableCell style={style}>Sub Bidang</TableCell>
-                <TableCell style={style}>Bidang</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -129,6 +117,50 @@ export default function CTinjauRenaksi() {
                   </TableCell>
                   <TableCell onClick={clickRow} style={style2}>
                     {row.keterangan}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TableContainer style={styleContainer}>
+          <Table sx={{ tableLayout: "fixed" }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell style={style}>Kepala Sub Bidang</TableCell>
+                <TableCell style={style}>Sub Bidang</TableCell>
+                <TableCell style={style}>Bidang</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {kasubid.map((row) => (
+                <TableRow hover className={styles.styleRow} key={row.nip}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    <div className={styles.styleProfileKasub}>
+                      {row.foto != "" ? (
+                        <Image src={row.foto} width={45} height={45} />
+                      ) : (
+                        <Image src={"/User1.svg"} width={45} height={45} />
+                      )}
+
+                      <p>{row.nama}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
+                  </TableCell>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    {row.bidang}
                   </TableCell>
                 </TableRow>
               ))}

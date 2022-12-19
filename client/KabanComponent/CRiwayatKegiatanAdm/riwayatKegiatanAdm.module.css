@@ -1,62 +1,61 @@
 .container{
-    display: flex;
-    flex-direction: column;
-    margin-left: 140px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 140px;
 }
 
 .wrapperTitle {
-  border-bottom: 2.5px solid #1bddbb;
-  text-align: center; 
-  align-items: center;
-  display: flex;
-  font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
-  position: absolute;
-  top: 43px;
-  left: 180px;
+border-bottom: 2.5px solid #1bddbb;
+text-align: center; 
+align-items: center;
+display: flex;
+font-family: "Poppins", sans-serif;
+font-size: 24px;
+font-weight: 700;
+color: rgba(0, 0, 0, 0.8);
+position: absolute;
+top: 43px;
+left: 180px;
 }
 
 .wrapperTitle p{
-  margin: 0;
+margin: 0;
 }
-
 .styleHeader{
-  font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: rgba(149, 149, 149, 1);
+font-family: "Poppins", sans-serif;
+font-size: 24px;
+font-weight: 600;
+color: rgba(149, 149, 149, 1);
 }
 
 .styleData{
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-size: 18px;
+font-weight: 400;
+cursor: pointer;
 }
 
 .styleRow {
-  width: 1690px;
-  height: 70px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+width: 1690px;
+height: 70px;
+border-radius: 20px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .hover :active{
-  background-color: rgba(232, 232, 232, 1);
+background-color: rgba(232, 232, 232, 1);
 
 }
 
 
 .styleProfileKasub{
-  display: flex;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
+display: flex;
+align-items: center;
+font-family: "Poppins", sans-serif;
+font-size: 18px;
+font-weight: 400;
 }
 
 .styleProfileKasub p{
-  margin-left: 10px;
+margin-left: 10px;
 }
