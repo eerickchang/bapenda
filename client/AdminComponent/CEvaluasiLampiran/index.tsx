@@ -217,6 +217,7 @@ export const CEvaluasiLampiran = () => {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
   const [ketAdmin, setKetAdmin] = useState("");
+  const [dikunci, setDikunci] = useState("Tidak");
 
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
@@ -254,6 +255,18 @@ export const CEvaluasiLampiran = () => {
             console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
+      });
+
+      Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+        ambilRenaksi.data.map((renaksi) => {
+          if (
+            renaksi.kunci == "Ya" &&
+            moment(renaksi.end_date).format("YYYY-MM-01") ==
+              moment().subtract(1, "month").format("YYYY-MM-01")
+          ) {
+            setDikunci("Ya");
+          }
+        });
       });
     }
   }, []);
@@ -437,13 +450,16 @@ export const CEvaluasiLampiran = () => {
             </div>
 
             <div className={styles.wrapTutupFilter}>
-              <button className={styles.btnTutupForum} onClick={openModal}>
-                <Image src={"/TutupForum.svg"} width={25} height={25} />
-                <p>Tutup Form</p>
-              </button>
-              <button className={styles.btnBukaForum} onClick={openModalBuka}>
-                <p>Buka Form</p>
-              </button>
+              {dikunci == "Ya" ? (
+                <button className={styles.btnBukaForum} onClick={openModalBuka}>
+                  <p>Buka Form</p>
+                </button>
+              ) : (
+                <button className={styles.btnTutupForum} onClick={openModal}>
+                  <Image src={"/TutupForum.svg"} width={25} height={25} />
+                  <p>Tutup Form</p>
+                </button>
+              )}
             </div>
             <Modal
               isOpen={modalIsTutup}
