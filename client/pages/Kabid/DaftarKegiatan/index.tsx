@@ -7,7 +7,7 @@ export default function DaftarKegiatan() {
   return (
     <div className={styles.container}>
       <Sidebar kotakDaftarKegiatan={sidebarStyles.kotakAktif} />
-      <Gap width={140} height={80} />
+      <Gap width={120} height={0} />
       <ContentDaftarKegiatan/>
     </div>
   );
