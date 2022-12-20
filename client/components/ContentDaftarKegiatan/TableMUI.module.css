@@ -128,9 +128,7 @@
   cursor: pointer;
 }
 
-
 /* !MODAL BARU */
-
 
 .headerTxtModal {
   color: rgba(17, 35, 80, 1);
@@ -151,8 +149,6 @@
   margin-top: 20px;
   text-align: center;
 }
-
-
 
 .wrapperBtnModal {
   display: inline-flex;
@@ -194,7 +190,7 @@
   font-weight: 700;
   border-top: 1px solid rgba(17, 35, 80, 0.5);
   border-left: 1px solid rgba(17, 35, 80, 0.5);
-  cursor: pointer
+  cursor: pointer;
 }
 
 .btnYa p {
@@ -205,10 +201,7 @@
   margin: 0;
 }
 
-
 /* !MODAL BARU */
-
-
 
 .wrapperTitleInputRenaksi {
   display: flex;
@@ -708,7 +701,7 @@
   color: black;
 }
 
-.titleBtnTutup{
+.titleBtnTutup {
   color: black;
   align-self: center;
 }
@@ -718,7 +711,7 @@
   font-weight: 500;
 }
 
-.wrapperBtnModal {
+.wrapperBtnModalAksi {
   display: inline-flex;
 }
 
@@ -964,4 +957,22 @@
   margin-left: 520px;
   margin-top: 3px;
   position: absolute;
+}
+
+
+/* !pesan */
+
+.headerPesan {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #112350;
+  text-align: center;
+}
+.dialogPesan {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #112350;
+  text-align: center;
 }

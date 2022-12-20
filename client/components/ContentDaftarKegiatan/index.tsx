@@ -396,6 +396,53 @@ function Row(props: rowProps) {
     marginLeft: -38,
     zIndex: 20,
   };
+
+    const customPesan = {
+      content: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        borderRadius: 20,
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+        overlay: "#112350",
+        backgroundColor: "white",
+        zIndex: 1001,
+        scroll: false,
+        padding: "20px 50px"
+      },
+      overlay: {
+        position: "fixed",
+        marginTop: 0,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "rgba(17, 35, 80, 0.5)",
+        zIndex: 1000,
+      },
+    };
+  
+  const [modalPesanIsOpen, setIsOpenPesanModal] = useState(false);
+
+    setTimeout(() => {}, 3000);
+    function openModalPesan() {
+      setIsOpenPesanModal(true);
+      setTimeout(() => {
+        setIsOpenPesanModal(false);
+      }, 4000);
+    }
+
+    function afterOpenModalPesan() {
+      // references are now sync'd and can be accessed.
+      // subtitle.style.color = "#f00";
+    }
+
+    function closeModalPesan() {
+      setIsOpenPesanModal(false);
+    }
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK
@@ -785,7 +832,7 @@ function Row(props: rowProps) {
                       <button
                         onClick={
                           row.kunci == "Ya"
-                            ? () => console.log("Dikunci")
+                            ? () => (console.log("Dikunci"), openModalPesan())
                             : () => openModal()
                         }
                         className={styles.btnUnggah}
@@ -793,6 +840,18 @@ function Row(props: rowProps) {
                         <img src={"/Kirim.svg"} width={20} height={20} />
                         <p className={styles.txt}>Unggah</p>
                       </button>
+                      <Modal
+                        isOpen={modalPesanIsOpen}
+                        onAfterOpen={afterOpenModalPesan}
+                        onRequestClose={closeModalPesan}
+                        style={customPesan}
+                        contentLabel="Example Modal"
+                      >
+                        <h2 className={styles.headerPesan}>Pesan</h2>
+                        <h2 className={styles.dialogPesan}>
+                          Form Evaluasi Sudah Ditutup!
+                        </h2>
+                      </Modal>
                     </div>
                     <Gap width={137} height={0} />
                     <div>
@@ -839,7 +898,7 @@ function Row(props: rowProps) {
                       onChange={(e) => setKetPegawai(e.target.value)}
                     />
                     <Gap height={30} width={0} />
-                    <div className={styles.wrapperBtnModal}>
+                    <div className={styles.wrapperBtnModalAksi}>
                       <form action="#">
                         <label htmlFor="file">
                           <div className={`${btnStyles.btnPilihFile}`}>
@@ -1016,7 +1075,7 @@ function Row(props: rowProps) {
                       onChange={(e) => setKetPegawai(e.target.value)}
                     />
                     <Gap height={20} width={0} />
-                    <div className={styles.wrapperBtnModal}>
+                    <div className={styles.wrapperBtnModalAksi}>
                       <form action="#">
                         <label htmlFor="file">
                           <div className={`${btnStyles.btnPilihFile}`}>

@@ -548,8 +548,7 @@ export const ContentRiwayatKegiatan = () => {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      width: 491,
-      // height: 210,
+      padding: "20px 50px",
       borderRadius: 20,
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
@@ -979,7 +978,7 @@ export const ContentRiwayatKegiatan = () => {
                 onRequestClose={closeModal}
                 style={custom}
                 contentLabel="Example Modal"
-                className={styles.modal}
+                // className={styles.modal}
               >
                 <h2 className={styles.headerPesan}>Pesan</h2>
                 <h2 className={styles.dialogPesan}>
