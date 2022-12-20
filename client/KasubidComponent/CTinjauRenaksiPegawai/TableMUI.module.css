@@ -1,15 +1,16 @@
 .tableRow {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  /* height: 161px; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  /* height: 160px; */
+  cursor: pointer;
 }
 
 .tableRowClick {
   background-color: #e8e8e8;
   border-radius: 20px;
-  height: 161px;
+  /* height: 161px; */
 }
-
 .headerTable {
   font-family: "Poppins", sans-serif;
   font-size: 17px;
@@ -43,19 +44,6 @@
   padding-bottom: 0px;
   padding-top: 0;
   background-color: "red";
-}
-
-.wrapperContentModal {
-  display: inline-flex;
-  margin-top: 35px;
-  margin-left: 50px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  border-width: 2px red;
-  margin-top: 35px;
-  /* padding-top:5px; */
-  /* background-color: #112350; */
 }
 
 .btnUnggah {
@@ -249,6 +237,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  /* margin-left: 585px; */
 }
 
 .btnKirim p {
@@ -293,7 +282,7 @@
   color: rgba(148, 148, 148, 1);
 }
 
-.styleData{
+.styleData {
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -386,7 +375,6 @@
 
 /*  ! MODAL */
 
-
 .headerTxtModal {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -425,7 +413,6 @@
   /* top: 22px;
   right: 25px; */
 }
-
 
 .inputBuktiLap {
   height: 133px;
@@ -493,7 +480,95 @@
   margin-left: 12px;
 }
 
-.wrapBtnModal{
+.wrapBtnModal {
   display: flex;
   margin-left: 390px;
+}
+
+.wrapperContentModal {
+  display: inline-flex;
+  margin-top: 35px;
+  margin-left: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  border-width: 2px red;
+  margin-top: 35px;
+  padding-bottom: 8px;
+  /* background-color: #112350; */
+}
+
+.feedback {
+  margin: 0;
+  height: 80px;
+  max-width: 572px;
+  max-height: 85px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: auto;
+  color: rgba(1, 1, 1, 1);
+  margin-bottom: 10px;
+  margin-left: 44px;
+  scroll-behavior: smooth;
+}
+
+.contentFeedback {
+  height: 100%;
+}
+
+.profilePengirim {
+  display: flex;
+  align-items: center;
+}
+.profilePengirim p {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(1, 1, 1, 1);
+  margin: 0;
+  margin-left: 8px;
+}
+
+.btnFeedback {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(1, 1, 1, 1);
+  width: 214.46px;
+  height: 71px;
+  background-color: rgba(27, 221, 187, 1);
+  border: none;
+  border-radius: 12px;
+  margin-left: 96px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.btnFeedback p {
+  margin: 0;
+}
+
+.btnKirimFeedback {
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 585px;
+}
+
+.btnKirimFeedback p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
 }

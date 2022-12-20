@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import AmbilDataRenaksi from "../AmbilDataRenaksi";
 
 import Checkbox from "@mui/material/Checkbox";
+import { color } from "@mui/system";
 
 Axios.defaults.withCredentials = true;
 
@@ -33,6 +34,7 @@ export default function CTinjauRenaksiPegawai() {
   const [nama, setNama] = useState("");
   const [ketAdmin, setKetAdmin] = useState("");
   const [arrTolak, setArrTolak] = useState([]);
+
   let arr = [];
 
   const shouldLog = useRef(true);
@@ -128,6 +130,34 @@ export default function CTinjauRenaksiPegawai() {
     },
   };
 
+  const customFeedback = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      borderRadius: 20,
+      padding: "24px 60px",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
 
@@ -161,6 +191,10 @@ export default function CTinjauRenaksiPegawai() {
       setShowModalTolakAll(false);
     }, 3000);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const [rowClik, setRowClick] = useState(true);
+  const [styleRow, setStyleRow] = useState("");
 
   const [rowSelected, setRowSelected] = useState([]);
 
@@ -232,6 +266,28 @@ export default function CTinjauRenaksiPegawai() {
     paddingBottom: 20,
   };
 
+  const styleCollapse = {
+    background: "rgba(232, 232, 232, 1)",
+    borderTopColor: "rgba(165, 165, 165, 0.5)",
+    borderTopWidth: 2,
+    borderTopStyle: "solid",
+    marginBottom: 3,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    marginTop: -1.8,
+  };
+
+  const fungsi = () => {
+    setOpen(!open);
+    {
+      rowClik
+        ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+          setRowClick(!rowClik))
+        : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+    }
+  };
+
   return (
     <>
       {domLoaded && (
@@ -280,57 +336,123 @@ export default function CTinjauRenaksiPegawai() {
                 </TableHead>
                 <TableBody>
                   {pegawai.map((row) => (
-                    <TableRow hover className={styles.styleRow}>
-                      <TableCell>
-                        <Checkbox
-                          onChange={handleChange}
-                          name={row.id_renaksi}
-                        />
-                        {/* {row.id_renaksi} */}
-                      </TableCell>
-                      <TableCell sx={styleData}>
-                        <p style={{ fontWeight: 600 }}>{row.program}</p>
-                      </TableCell>
-                      <TableCell
-                        sx={styleData}
-                        style={{ color: "rgba(218, 142, 72, 1)" }}
+                    <>
+                      <TableRow
+                        hover
+                        className={`${styles.tableRow} ${styleRow}`}
                       >
-                        {row.nama_thl}
+                        <TableCell>
+                          <Checkbox
+                            onChange={handleChange}
+                            name={row.id_renaksi}
+                          />
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          <p style={{ fontWeight: 600 }}>{row.program}</p>
+                        </TableCell>
+                        <TableCell
+                          sx={styleData}
+                          style={{ color: "rgba(218, 142, 72, 1)" }}
+                          onClick={() => fungsi()}
+                        >
+                          {row.nama_thl}
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          {row.kegiatan}
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          {row.sub_kegiatan}
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          {row.tupoksi_inti}
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          {row.tupoksi_tambahan}
+                        </TableCell>
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
+                          {moment(row.start_date).format("MMM")} -{" "}
+                          {moment(row.end_date).format("MMM")}
+                        </TableCell>
+                      </TableRow>
+                      <TableCell
+                        style={{ padding: 0, width: 2000 }}
+                        colSpan={8}
+                      >
+                        <Collapse sx={styleCollapse} in={open} timeout="auto">
+                          <div className={styles.wrapperContentModal}>
+                            <div className={styles.contentFeedback}>
+                              <div className={styles.profilePengirim}>
+                                <Image
+                                  src={"/SidebarProfile.svg"}
+                                  width={40}
+                                  height={40}
+                                />
+                                <p>
+                                  <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
+                                </p>
+                                {/* {row.ditolak == "Kasubid" ? (
+                                ) : row.ditolak == "Kabid" ? (
+                                  <p>
+                                    <b>Kabid</b> - {kabid.nama}
+                                  </p>
+                                ) : row.ditolak == "Kaban" ? (
+                                  <p>
+                                    <b>Kaban</b> - {kaban.nama}
+                                  </p>
+                                ) : row.ditolak == "Admin" ? (
+                                  <p>
+                                    <b>Admin</b> - {admin.nama}
+                                  </p>
+                                ) : null} */}
+                              </div>
+                              <div>
+                                {/* <p>"{row.ket_admin}"</p> */}
+                                <p className={styles.feedback}>
+                                  “Perubahan jadwal ditolak karena sudah
+                                  diperlukan untuk menunjang kegiatan mendatang
+                                  di bulan yang akan datang ”
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              className={styles.btnFeedback}
+                              onClick={openModal}
+                            >
+                              <p>Feedback</p>
+                            </button>
+                            <Modal
+                              isOpen={modalIsOpen}
+                              onAfterOpen={afterOpenModal}
+                              onRequestClose={closeModal}
+                              style={customFeedback}
+                              contentLabel="Example Modal"
+                            >
+                              <h2 className={styles.headerTxtModal}>
+                                Feedback
+                              </h2>
+                              <Gap height={20} width={0} />
+                              <input
+                                className={styles.inputBuktiLap}
+                                placeholder="Tambah keterangan"
+                                // onChange={(e) => setKetAdmin(e.target.value)}
+                              />
+                              <Gap height={20} width={0} />
+                                <button
+                                  onClick={() => (closeModal())}
+                                  className={styles.btnKirimFeedback}
+                                >
+                                  <p className={styles.txt}>Kirim</p>
+                                </button>
+                            </Modal>
+                          </div>
+                        </Collapse>
                       </TableCell>
-                      <TableCell sx={styleData}>{row.kegiatan}</TableCell>
-                      <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
-                      <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
-                      <TableCell sx={styleData}>
-                        {row.tupoksi_tambahan}
-                      </TableCell>
-                      <TableCell sx={styleData}>
-                        {moment(row.start_date).format("MMM")} -{" "}
-                        {moment(row.end_date).format("MMM")}
-                      </TableCell>
-                    </TableRow>
+                    </>
                   ))}
                 </TableBody>
               </Table>
             </TableContainer>
             <div className={stylesS.wrapFilter}>
-              {/* <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
-                <Image src={"/Terima.svg"} width={25} height={25} />
-                Terima
-              </button>
-              {showModalTerimaAll ? (
-                <div
-                  className={styles.modal}
-                  onClick={() => setShowModalTolakAll(false)}
-                >
-                  <p>
-                    Semua Permintaan Ubah Jadwal <b>Diterima</b>
-                  </p>
-                  <div className={styles.checkCircle}>
-                    <Image src={"/Terima.svg"} width={25} height={25} />
-                  </div>
-                </div>
-              ) : null}
-              <Gap width={15} height={0} /> */}
               <button
                 onClick={openModalTolakAll}
                 className={styles.btnTolakAll}
@@ -341,7 +463,7 @@ export default function CTinjauRenaksiPegawai() {
               <Modal
                 isOpen={modalTolakAllIsOpen}
                 onAfterOpen={afterOpenModalTolakAll}
-                onRequestClose={closeModal}
+                onRequestClose={closeModalTolakAll}
                 style={custom}
                 contentLabel="Example Modal"
               >

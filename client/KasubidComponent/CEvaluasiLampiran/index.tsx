@@ -385,7 +385,6 @@ function Row(props) {
             </p>
           </TableCell>
         </TableRow>
-        {/* <div className={styles.backgroundRowExpand}> */}
         <TableCell style={{ padding: 0, width: 2000 }} colSpan={6}>
           <Collapse sx={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
