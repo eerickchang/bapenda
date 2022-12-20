@@ -282,6 +282,51 @@ function Row(props) {
     btnTolakAll();
   };
 
+  const [modalTerima, setIsModalTerima] = useState(false);
+
+  function openModalBuka() {
+    setIsModalTerima(true);
+  }
+
+  function afterOpenModalBuka() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalBuka() {
+    setIsModalTerima(false);
+  }
+
+  const customBuka = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      // width: 1000,
+      borderRadius: 20,
+      padding: 50,
+      // height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
   const router = useRouter();
 
   const clickRow = () => {
@@ -307,9 +352,59 @@ function Row(props) {
     color: "#000",
   };
 
+    const styleTxtKet = {
+      display: "flex",
+      position: "absolute",
+      top: 140,
+      color: "rgba(149, 149, 149, 1)",
+    };
+
   return (
     <>
       <div className={stylesS.wrapFilter}>
+        <button className={styles.btnPermintaan} onClick={openModalBuka}>
+          {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
+          Permintaan
+        </button>
+        <Modal
+          isOpen={modalTerima}
+          onAfterOpen={afterOpenModalBuka}
+          onRequestClose={closeModalBuka}
+          style={customBuka}
+          contentLabel="Example Modal"
+        >
+          <div className={styles.wrapperKeterangan}>
+            Keterangan:
+            <div className={styles.contentKeterangan}>
+              <p
+                style={{
+                  maxWidth: 930,
+                  height: 140,
+                  overflowX: "auto",
+                  paddingRight: 10,
+                  marginTop: 8,
+                }}
+              >
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. 
+              </p>
+            </div>
+          </div>
+          <Gap height={40} width={0} />
+          <div className={styles.wrapBtnPermintaan}>
+            <button onClick={closeModalBuka} className={styles.btnTolakP}>
+              <img src={"/Tolak.svg"} width={20} height={20} />
+              <p style={{ marginLeft: 8 }}>Tolak</p>
+            </button>
+            <button onClick={closeModalBuka} className={styles.btnKirimP}>
+              <img src={"/Terima.svg"} width={20} height={20} />
+              <p style={{ marginLeft: 8 }}>Terima</p>
+            </button>
+          </div>
+        </Modal>
+        <Gap width={24} height={0} />
         <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
           <Image src={"/Terima.svg"} width={25} height={25} />
           Terima Semua
@@ -330,10 +425,10 @@ function Row(props) {
       </div>
       <React.Fragment>
         <TableRow className={`${styles.tableRow} ${styleRow}`}>
-          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
+          <TableCell onClick={clickRow} style={{ cursor: "pointer" }}>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
+          <TableCell onClick={clickRow} style={{ cursor: "pointer" }}>
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>

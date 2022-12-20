@@ -385,7 +385,6 @@ function Row(props) {
                   >
                     {row.ket_pegawai}
                   </p>
-                  <p style={styleTxtKet}></p>
                 </div>
               </div>
               <div className={styles.wrapperLampiran}>

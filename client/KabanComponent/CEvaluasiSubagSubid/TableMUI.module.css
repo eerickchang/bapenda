@@ -171,9 +171,6 @@
   width: 365px;
 }
 
-.wrapperKeterangan p {
-  margin: 0;
-}
 
 .contentLampiran {
   background: rgba(255, 255, 255, 1);
@@ -201,6 +198,10 @@
   width: 950px;
   display: flex;
   flex-direction: column;
+}
+
+.wrapperKeterangan p {
+  margin: 0;
 }
 
 .contentKeterangan {
