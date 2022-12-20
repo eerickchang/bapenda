@@ -383,10 +383,14 @@ export const CEvaluasiLampiran = () => {
                 EVALUASI LAMPIRAN
               </p>
             </div>
+
             <div className={styles.wrapTutupFilter}>
               <button className={styles.btnTutupForum} onClick={openModal}>
                 <Image src={"/TutupForum.svg"} width={25} height={25} />
                 <p>Tutup Form</p>
+              </button>
+              <button className={styles.btnBukaForum}>
+                <p>Buka Form</p>
               </button>
             </div>
             <Modal
