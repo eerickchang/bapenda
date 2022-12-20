@@ -216,6 +216,7 @@ export const CEvaluasiLampiran = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
+  const [ketAdmin, setKetAdmin] = useState("");
 
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
@@ -308,6 +309,13 @@ export const CEvaluasiLampiran = () => {
     closeModal();
   };
 
+  const btnKirim = () => {
+    closeModalBuka();
+    Axios.post("http://localhost:3001/reqBukaForm", {
+      ketAdmin: ketAdmin,
+    });
+  };
+
   const style = {
     fontFamily: "Poppins",
     fontSize: 17,
@@ -351,35 +359,35 @@ export const CEvaluasiLampiran = () => {
     },
   };
 
-    const customBuka = {
-      content: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        width: 878,
-        borderRadius: 20,
-        paddingLeft: 61,
-        height: 362,
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-        overlay: "#112350",
-        backgroundColor: "white",
-        zIndex: 1001,
-        scroll: false,
-      },
-      overlay: {
-        position: "fixed",
-        marginTop: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "rgba(17, 35, 80, 0.5)",
-        zIndex: 1000,
-      },
-    };
+  const customBuka = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: 878,
+      borderRadius: 20,
+      paddingLeft: 61,
+      height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
 
   const [modalIsTutup, setIsTutupModal] = useState(false);
   const [modalIsOpen, setIsOpenModal] = useState(false);
@@ -466,14 +474,12 @@ export const CEvaluasiLampiran = () => {
               style={customBuka}
               contentLabel="Example Modal"
             >
-              <h2 className={styles.headerTxtModalBuka}>
-                Tolak Lampiran Bukti
-              </h2>
+              <h2 className={styles.headerTxtModalBuka}>Keterangan</h2>
               <Gap height={20} width={0} />
               <input
                 className={styles.inputBuktiLapB}
                 placeholder="Tambah keterangan"
-                // onChange={(e) => setKetAdmin(e.target.value)}
+                onChange={(e) => setKetAdmin(e.target.value)}
               />
               <Gap height={20} width={0} />
               <div className={styles.wrapBtnModalB}>
@@ -482,9 +488,9 @@ export const CEvaluasiLampiran = () => {
                   <p className={styles.txtB}>Batal</p>
                 </button>
                 <Gap width={24} height={0} />
-                <button onClick={closeModalBuka} className={styles.btnBatalB}>
+                <button onClick={btnKirim} className={styles.btnBatalB}>
                   <img src={"/Tolak.svg"} width={20} height={20} />
-                  <p>Tolak</p>
+                  <p>Kirim</p>
                 </button>
               </div>
             </Modal>

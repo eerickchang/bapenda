@@ -1112,6 +1112,15 @@ app.post("/deadline", (req, res) => {
   });
 });
 
+app.post("/reqBukaForm", (req, res) => {
+  const ketAdmin = req.body.ketAdmin;
+  const sqlUpdate =
+    "UPDATE pegawai SET req = 'Ya', ket = ? WHERE jabatan = 'Kaban'";
+  db.query(sqlUpdate, ketAdmin, (err, result) => {
+    console.log(err);
+  });
+});
+
 //AMBIL DATA CAKIN
 app.get("/createRowCakin", (req, res) => {
   const sqlCekRowCakin = "SELECT * FROM cakin";
