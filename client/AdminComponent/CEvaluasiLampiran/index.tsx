@@ -320,6 +320,7 @@ export const CEvaluasiLampiran = () => {
     });
 
     closeModal();
+    window.location.reload();
   };
 
   const btnKirim = () => {
@@ -327,6 +328,7 @@ export const CEvaluasiLampiran = () => {
     Axios.post("http://localhost:3001/reqBukaForm", {
       ketAdmin: ketAdmin,
     });
+    window.location.reload();
   };
 
   const style = {

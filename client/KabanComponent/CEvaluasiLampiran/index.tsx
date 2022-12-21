@@ -15,11 +15,12 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 import Gap from "../Gap";
 import styles from "./TableMUI.module.css";
+import moment from "moment";
 
 Axios.defaults.withCredentials = true;
 
 function Row(props) {
-  const { row, stateChanger, arrSubid } = props;
+  const { row, stateChanger, arrSubid, req, ket, prevMonth } = props;
 
   const [styleRow, setStyleRow] = useState("");
 
@@ -122,6 +123,24 @@ function Row(props) {
     setTimeout(() => {
       setShowModal(false);
     }, 3000);
+  };
+
+  const btnKirim = () => {
+    Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+      ambilRenaksi.data.map((renaksi) => {
+        if (
+          moment(renaksi.end_date).format("YYYY-MM-DD") ==
+          moment(prevMonth).format("YYYY-MM-DD")
+        ) {
+          Axios.post("http://localhost:3001/bukaForm", {
+            idRenaksi: renaksi.id_renaksi,
+          }).then((result) => console.log(result));
+        }
+      });
+    });
+
+    closeModalBuka();
+    window.location.reload();
   };
 
   const btnDw = () => {
@@ -352,20 +371,23 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleTxtKet = {
-      display: "flex",
-      position: "absolute",
-      top: 140,
-      color: "rgba(149, 149, 149, 1)",
-    };
+  const styleTxtKet = {
+    display: "flex",
+    position: "absolute",
+    top: 140,
+    color: "rgba(149, 149, 149, 1)",
+  };
 
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        <button className={styles.btnPermintaan} onClick={openModalBuka}>
-          {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
-          Permintaan
-        </button>
+        {req == "Ya" ? (
+          <button className={styles.btnPermintaan} onClick={openModalBuka}>
+            {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
+            Permintaan
+          </button>
+        ) : null}
+
         <Modal
           isOpen={modalTerima}
           onAfterOpen={afterOpenModalBuka}
@@ -385,10 +407,7 @@ function Row(props) {
                   marginTop: 8,
                 }}
               >
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. 
+                {ket}
               </p>
             </div>
           </div>
@@ -398,7 +417,7 @@ function Row(props) {
               <img src={"/Tolak.svg"} width={20} height={20} />
               <p style={{ marginLeft: 8 }}>Tolak</p>
             </button>
-            <button onClick={closeModalBuka} className={styles.btnKirimP}>
+            <button onClick={btnKirim} className={styles.btnKirimP}>
               <img src={"/Terima.svg"} width={20} height={20} />
               <p style={{ marginLeft: 8 }}>Terima</p>
             </button>
@@ -521,14 +540,27 @@ export const CEvaluasiLampiran = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
+  const [req, setReq] = useState("Tidak");
+  const [ket, setKet] = useState("");
 
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
+  const [prevMonth, setPrevMonth] = useState("");
   const shouldLog = useRef(true);
   useEffect(() => {
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
+
+      setPrevMonth(moment().subtract(1, "month").format("YYYY-MM-01"));
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kaban") {
+            setReq(pegawai.req);
+            setKet(pegawai.ket);
+          }
+        });
+      });
 
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
         Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
@@ -644,6 +676,9 @@ export const CEvaluasiLampiran = () => {
                       row={row}
                       stateChanger={setPegawaiSubid}
                       arrSubid={pegawaiSubid}
+                      req={req}
+                      ket={ket}
+                      prevMonth={prevMonth}
                     />
                   ))}
                 </TableBody>

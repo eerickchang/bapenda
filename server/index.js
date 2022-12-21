@@ -1112,6 +1112,21 @@ app.post("/deadline", (req, res) => {
   });
 });
 
+app.post("/bukaForm", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate = 'UPDATE data_renaksi SET kunci = "" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlUpdate2 =
+    'UPDATE pegawai SET ket = "", req = "" WHERE jabatan = "Kaban"';
+  db.query(sqlUpdate2, (err, result) => {
+    console.log(result);
+  });
+});
+
 app.post("/reqBukaForm", (req, res) => {
   const ketAdmin = req.body.ketAdmin;
   const sqlUpdate =

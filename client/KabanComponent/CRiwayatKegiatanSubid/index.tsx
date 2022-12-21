@@ -508,9 +508,11 @@ export const CRiwayatKegiatanSubid = () => {
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [year, setYear] = useState([]);
   const [subid, setSubid] = useState("");
+  const router = useRouter();
 
   const shouldLog = useRef(true);
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
@@ -540,7 +542,7 @@ export const CRiwayatKegiatanSubid = () => {
         );
       });
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
@@ -916,8 +918,6 @@ export const CRiwayatKegiatanSubid = () => {
     fontWeight: 600,
     color: "rgba(149, 149, 149, 1)",
   };
-
-  const router = useRouter();
 
   const clickBack = () => {
     router.push("/Kaban/RiwayatKegiatan");
