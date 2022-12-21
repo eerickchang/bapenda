@@ -143,6 +143,13 @@ function Row(props) {
     window.location.reload();
   };
 
+  const btnTolakForm = () => {
+    Axios.post("http://localhost:3001/tolakForm");
+    closeModalBuka();
+
+    window.location.reload();
+  };
+
   const btnDw = () => {
     Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
       responseType: "blob",
@@ -203,19 +210,6 @@ function Row(props) {
     setIsOpen(false);
   }
 
-  function openModalTolakAll() {
-    setTolakAllIsOpen(true);
-  }
-
-  function afterOpenModalTolakAll() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
-
-  function closeModalTolakAll() {
-    setTolakAllIsOpen(false);
-  }
-
   const btnTolak = () => {
     setShowModalTolak(true);
     setTimeout(() => {
@@ -223,82 +217,9 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
-
-  const btnTerimaAll = () => {
-    setShowModalTerimaAll(true);
-    setTimeout(() => {
-      setShowModalTerimaAll(false);
-    }, 3000);
-  };
-
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     closeModal();
     btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
   };
 
   const [modalTerima, setIsModalTerima] = useState(false);
@@ -413,7 +334,7 @@ function Row(props) {
           </div>
           <Gap height={40} width={0} />
           <div className={styles.wrapBtnPermintaan}>
-            <button onClick={closeModalBuka} className={styles.btnTolakP}>
+            <button onClick={btnTolakForm} className={styles.btnTolakP}>
               <img src={"/Tolak.svg"} width={20} height={20} />
               <p style={{ marginLeft: 8 }}>Tolak</p>
             </button>

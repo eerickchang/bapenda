@@ -1127,11 +1127,31 @@ app.post("/bukaForm", (req, res) => {
   });
 });
 
+app.post("/tolakForm", (req, res) => {
+  const sqlUpdate =
+    'UPDATE pegawai SET ket = "", req = "" WHERE jabatan = "Kaban"';
+  db.query(sqlUpdate, (err, result) => {
+    console.log(result);
+  });
+
+  const sqlUpdate2 =
+    'UPDATE pegawai SET ket = "", req = "Ditolak" WHERE jabatan = "Admin"';
+  db.query(sqlUpdate2, (err, result) => {
+    console.log(result);
+  });
+});
+
 app.post("/reqBukaForm", (req, res) => {
   const ketAdmin = req.body.ketAdmin;
   const sqlUpdate =
     "UPDATE pegawai SET req = 'Ya', ket = ? WHERE jabatan = 'Kaban'";
   db.query(sqlUpdate, ketAdmin, (err, result) => {
+    console.log(err);
+  });
+
+  const sqlUpdate2 =
+    "UPDATE pegawai SET req = '', ket = '' WHERE jabatan = 'Admin'";
+  db.query(sqlUpdate2, (err, result) => {
     console.log(err);
   });
 });
