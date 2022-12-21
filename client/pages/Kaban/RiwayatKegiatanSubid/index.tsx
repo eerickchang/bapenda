@@ -10,7 +10,7 @@ export default function RiwayatKegiatanSubid() {
   return (
     <div className={styles.container}>
       <SidebarAdmin kotakRiwayatKegiatan={sidebarStyles.kotakAktif} />
-      <Gap width={140} height={80} />
+      <Gap width={175} height={80} />
       <CRiwayatKegiatanSubid/>
     </div>
   );
