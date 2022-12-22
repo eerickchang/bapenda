@@ -320,13 +320,14 @@ function Row(props: rowProps) {
     data.append("file", file);
     Axios.post("http://localhost:3001/uploadFile", data)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.status === "success") {
           Axios.post("http://localhost:3001/feedbackStaff", {
             idRenaksi: row.id_renaksi,
             ketPegawai: ketPegawai,
             fileURL: response.data.file,
             ditolak: row.ditolak,
+            status: row.status,
           }).then((feedbackStaff) => {
             console.log(feedbackStaff);
           });
@@ -335,6 +336,7 @@ function Row(props: rowProps) {
             idRenaksi: row.id_renaksi,
             ketPegawai: ketPegawai,
             ditolak: row.ditolak,
+            status: row.status,
           }).then((feedbackStaff) => {
             console.log(feedbackStaff);
           });
@@ -397,52 +399,52 @@ function Row(props: rowProps) {
     zIndex: 20,
   };
 
-    const customPesan = {
-      content: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        borderRadius: 20,
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-        overlay: "#112350",
-        backgroundColor: "white",
-        zIndex: 1001,
-        scroll: false,
-        padding: "20px 50px"
-      },
-      overlay: {
-        position: "fixed",
-        marginTop: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "rgba(17, 35, 80, 0.5)",
-        zIndex: 1000,
-      },
-    };
-  
+  const customPesan = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      borderRadius: 20,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+      padding: "20px 50px",
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
   const [modalPesanIsOpen, setIsOpenPesanModal] = useState(false);
 
-    setTimeout(() => {}, 3000);
-    function openModalPesan() {
-      setIsOpenPesanModal(true);
-      setTimeout(() => {
-        setIsOpenPesanModal(false);
-      }, 4000);
-    }
-
-    function afterOpenModalPesan() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = "#f00";
-    }
-
-    function closeModalPesan() {
+  setTimeout(() => {}, 3000);
+  function openModalPesan() {
+    setIsOpenPesanModal(true);
+    setTimeout(() => {
       setIsOpenPesanModal(false);
-    }
+    }, 4000);
+  }
+
+  function afterOpenModalPesan() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+
+  function closeModalPesan() {
+    setIsOpenPesanModal(false);
+  }
   return (
     <React.Fragment>
       {row.kirim_ke == "Staff" ? ( //DITOLAK

@@ -71,35 +71,6 @@ export default function CTinjauRenaksiPegawai() {
     // console.log(dataCakin);
   };
 
-  const btnTerimaSemua = () => {
-    console.log(arr);
-    // let moTrima = [];
-    // moTrima = arr.filter((elA) => {
-    //   return pegawai.some((elB) => elA["value"] == elB["id_renaksi"]);
-    // });
-    // moTrima.map((item) => {
-    //   Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-    //     idRenaksi: item.value,
-    //   });
-    // });
-
-    // setPegawai([]);
-
-    // setTimeout(() => {
-    //   Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
-    //     (ambilRenaksi) => {
-    //       ambilRenaksi.data.map((renaksi) => {
-    //         if (renaksi.nip == router.query.nip) {
-    //           setPegawai((nextData) => {
-    //             return [renaksi, ...nextData];
-    //           });
-    //         }
-    //       });
-    //     }
-    //   );
-    // }, 100);
-  };
-
   const custom = {
     content: {
       position: "absolute",
@@ -337,60 +308,66 @@ export default function CTinjauRenaksiPegawai() {
                 <TableBody>
                   {pegawai.map((row) => (
                     <>
-                      <TableRow
-                        hover
-                        className={`${styles.tableRow} ${styleRow}`}
-                      >
-                        <TableCell>
-                          <Checkbox
-                            onChange={handleChange}
-                            name={row.id_renaksi}
-                          />
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          <p style={{ fontWeight: 600 }}>{row.program}</p>
-                        </TableCell>
-                        <TableCell
-                          sx={styleData}
-                          style={{ color: "rgba(218, 142, 72, 1)" }}
-                          onClick={() => fungsi()}
-                        >
-                          {row.nama_thl}
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          {row.kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          {row.sub_kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          {row.tupoksi_inti}
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          {row.tupoksi_tambahan}
-                        </TableCell>
-                        <TableCell sx={styleData} onClick={() => fungsi()}>
-                          {moment(row.start_date).format("MMM")} -{" "}
-                          {moment(row.end_date).format("MMM")}
-                        </TableCell>
-                      </TableRow>
-                      <TableCell
-                        style={{ padding: 0, width: 2000 }}
-                        colSpan={8}
-                      >
-                        <Collapse sx={styleCollapse} in={open} timeout="auto">
-                          <div className={styles.wrapperContentModal}>
-                            <div className={styles.contentFeedback}>
-                              <div className={styles.profilePengirim}>
-                                <Image
-                                  src={"/SidebarProfile.svg"}
-                                  width={40}
-                                  height={40}
-                                />
-                                <p>
-                                  <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
-                                </p>
-                                {/* {row.ditolak == "Kasubid" ? (
+                      {row.ditolak == "Kasubid" && row.kirim_ke == "Kasubid" ? (
+                        <>
+                          <TableRow
+                            hover
+                            className={`${styles.tableRow} ${styleRow}`}
+                          >
+                            <TableCell>
+                              <Checkbox
+                                onChange={handleChange}
+                                name={row.id_renaksi}
+                              />
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              <p style={{ fontWeight: 600 }}>{row.program}</p>
+                            </TableCell>
+                            <TableCell
+                              sx={styleData}
+                              style={{ color: "rgba(218, 142, 72, 1)" }}
+                              onClick={() => fungsi()}
+                            >
+                              {row.nama_thl}
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              {row.kegiatan}
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              {row.sub_kegiatan}
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              {row.tupoksi_inti}
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              {row.tupoksi_tambahan}
+                            </TableCell>
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                              {moment(row.start_date).format("MMM")} -
+                              {moment(row.end_date).format("MMM")}
+                            </TableCell>
+                          </TableRow>
+                          <TableCell
+                            style={{ padding: 0, width: 2000 }}
+                            colSpan={8}
+                          >
+                            <Collapse
+                              sx={styleCollapse}
+                              in={open}
+                              timeout="auto"
+                            >
+                              <div className={styles.wrapperContentModal}>
+                                <div className={styles.contentFeedback}>
+                                  <div className={styles.profilePengirim}>
+                                    <Image
+                                      src={"/SidebarProfile.svg"}
+                                      width={40}
+                                      height={40}
+                                    />
+                                    <p>
+                                      <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
+                                    </p>
+                                    {/* {row.ditolak == "Kasubid" ? (
                                 ) : row.ditolak == "Kabid" ? (
                                   <p>
                                     <b>Kabid</b> - {kabid.nama}
@@ -404,49 +381,88 @@ export default function CTinjauRenaksiPegawai() {
                                     <b>Admin</b> - {admin.nama}
                                   </p>
                                 ) : null} */}
-                              </div>
-                              <div>
-                                {/* <p>"{row.ket_admin}"</p> */}
-                                <p className={styles.feedback}>
-                                  “Perubahan jadwal ditolak karena sudah
-                                  diperlukan untuk menunjang kegiatan mendatang
-                                  di bulan yang akan datang ”
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              className={styles.btnFeedback}
-                              onClick={openModal}
-                            >
-                              <p>Feedback</p>
-                            </button>
-                            <Modal
-                              isOpen={modalIsOpen}
-                              onAfterOpen={afterOpenModal}
-                              onRequestClose={closeModal}
-                              style={customFeedback}
-                              contentLabel="Example Modal"
-                            >
-                              <h2 className={styles.headerTxtModal}>
-                                Feedback
-                              </h2>
-                              <Gap height={20} width={0} />
-                              <input
-                                className={styles.inputBuktiLap}
-                                placeholder="Tambah keterangan"
-                                // onChange={(e) => setKetAdmin(e.target.value)}
-                              />
-                              <Gap height={20} width={0} />
+                                  </div>
+                                  <div>
+                                    {/* <p>"{row.ket_admin}"</p> */}
+                                    <p className={styles.feedback}>
+                                      “Perubahan jadwal ditolak karena sudah
+                                      diperlukan untuk menunjang kegiatan
+                                      mendatang di bulan yang akan datang ”
+                                    </p>
+                                  </div>
+                                </div>
                                 <button
-                                  onClick={() => (closeModal())}
-                                  className={styles.btnKirimFeedback}
+                                  className={styles.btnFeedback}
+                                  onClick={openModal}
                                 >
-                                  <p className={styles.txt}>Kirim</p>
+                                  <p>Feedback</p>
                                 </button>
-                            </Modal>
-                          </div>
-                        </Collapse>
-                      </TableCell>
+                                <Modal
+                                  isOpen={modalIsOpen}
+                                  onAfterOpen={afterOpenModal}
+                                  onRequestClose={closeModal}
+                                  style={customFeedback}
+                                  contentLabel="Example Modal"
+                                >
+                                  <h2 className={styles.headerTxtModal}>
+                                    Feedback
+                                  </h2>
+                                  <Gap height={20} width={0} />
+                                  <input
+                                    className={styles.inputBuktiLap}
+                                    placeholder="Tambah keterangan"
+                                    // onChange={(e) => setKetAdmin(e.target.value)}
+                                  />
+                                  <Gap height={20} width={0} />
+                                  <button
+                                    onClick={() => closeModal()}
+                                    className={styles.btnKirimFeedback}
+                                  >
+                                    <p className={styles.txt}>Kirim</p>
+                                  </button>
+                                </Modal>
+                              </div>
+                            </Collapse>
+                          </TableCell>
+                        </>
+                      ) : (
+                        <>
+                          <TableRow
+                            hover
+                            className={`${styles.tableRow} ${styleRow}`}
+                          >
+                            <TableCell>
+                              <Checkbox
+                                onChange={handleChange}
+                                name={row.id_renaksi}
+                              />
+                            </TableCell>
+                            <TableCell sx={styleData}>
+                              <p style={{ fontWeight: 600 }}>{row.program}</p>
+                            </TableCell>
+                            <TableCell
+                              sx={styleData}
+                              style={{ color: "rgba(218, 142, 72, 1)" }}
+                            >
+                              {row.nama_thl}
+                            </TableCell>
+                            <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                            <TableCell sx={styleData}>
+                              {row.sub_kegiatan}
+                            </TableCell>
+                            <TableCell sx={styleData}>
+                              {row.tupoksi_inti}
+                            </TableCell>
+                            <TableCell sx={styleData}>
+                              {row.tupoksi_tambahan}
+                            </TableCell>
+                            <TableCell sx={styleData}>
+                              {moment(row.start_date).format("MMM")} -
+                              {moment(row.end_date).format("MMM")}
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      )}
                     </>
                   ))}
                 </TableBody>
