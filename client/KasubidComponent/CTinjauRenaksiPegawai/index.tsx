@@ -365,7 +365,8 @@ export default function CTinjauRenaksiPegawai() {
                                       height={40}
                                     />
                                     <p>
-                                      <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
+                                      <b>{row.jabatan}</b> - {row.nama}
+                                      {/*kasubid.nama*/}
                                     </p>
                                     {/* {row.ditolak == "Kasubid" ? (
                                 ) : row.ditolak == "Kabid" ? (
@@ -385,9 +386,7 @@ export default function CTinjauRenaksiPegawai() {
                                   <div>
                                     {/* <p>"{row.ket_admin}"</p> */}
                                     <p className={styles.feedback}>
-                                      “Perubahan jadwal ditolak karena sudah
-                                      diperlukan untuk menunjang kegiatan
-                                      mendatang di bulan yang akan datang ”
+                                      {row.ket_pegawai}
                                     </p>
                                   </div>
                                 </div>
@@ -395,7 +394,7 @@ export default function CTinjauRenaksiPegawai() {
                                   className={styles.btnFeedback}
                                   onClick={openModal}
                                 >
-                                  <p>Feedback</p>
+                                  <p>Tanggapan</p>
                                 </button>
                                 <Modal
                                   isOpen={modalIsOpen}
@@ -411,11 +410,21 @@ export default function CTinjauRenaksiPegawai() {
                                   <input
                                     className={styles.inputBuktiLap}
                                     placeholder="Tambah keterangan"
-                                    // onChange={(e) => setKetAdmin(e.target.value)}
+                                    onChange={(e) =>
+                                      setKetAdmin(e.target.value)
+                                    }
                                   />
                                   <Gap height={20} width={0} />
                                   <button
-                                    onClick={() => closeModal()}
+                                    onClick={() =>
+                                      Axios.post(
+                                        "http://localhost:3001/tanggapan",
+                                        {
+                                          idRenaksi: row.id_renaksi,
+                                          ketAdmin: ketAdmin,
+                                        }
+                                      )
+                                    }
                                     className={styles.btnKirimFeedback}
                                   >
                                     <p className={styles.txt}>Kirim</p>
