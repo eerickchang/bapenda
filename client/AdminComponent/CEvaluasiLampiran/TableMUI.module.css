@@ -60,10 +60,10 @@
 .btnBukaForum{
   position: absolute;
   top: 84px;
-  right: 300px;
+  right: 45px;
   display: flex;
   align-items: center;
-  background:  #FF0164 ;
+  background-color: rgba(27, 221, 187, 1);
   width: 172px;
   height: 51px;
   border-radius: 5px;

@@ -343,6 +343,19 @@ export default function CTinjauRenaksiPegawai() {
                               {row.tupoksi_tambahan}
                             </TableCell>
                             <TableCell sx={styleData} onClick={() => fungsi()}>
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: 245,
+                                  right: 43,
+                                }}
+                              >
+                                <Image
+                                  src={"/Tanggapan.svg"}
+                                  width={40}
+                                  height={40}
+                                />
+                              </div>
                               {moment(row.start_date).format("MMM")} -
                               {moment(row.end_date).format("MMM")}
                             </TableCell>
@@ -367,27 +380,21 @@ export default function CTinjauRenaksiPegawai() {
                                     <p>
                                       <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
                                     </p>
-                                    {/* {row.ditolak == "Kasubid" ? (
-                                ) : row.ditolak == "Kabid" ? (
-                                  <p>
-                                    <b>Kabid</b> - {kabid.nama}
-                                  </p>
-                                ) : row.ditolak == "Kaban" ? (
-                                  <p>
-                                    <b>Kaban</b> - {kaban.nama}
-                                  </p>
-                                ) : row.ditolak == "Admin" ? (
-                                  <p>
-                                    <b>Admin</b> - {admin.nama}
-                                  </p>
-                                ) : null} */}
                                   </div>
                                   <div>
                                     {/* <p>"{row.ket_admin}"</p> */}
                                     <p className={styles.feedback}>
-                                      “Perubahan jadwal ditolak karena sudah
-                                      diperlukan untuk menunjang kegiatan
-                                      mendatang di bulan yang akan datang ”
+                                      “Lorem Ipsum adalah contoh teks atau dummy
+                                      {/* dalam industri percetakan dan penataan
+                                      huruf atau typesetting. Lorem Ipsum telah
+                                      menjadi standar contoh teks sejak tahun
+                                      1500an, saat seorang tukang cetak yang
+                                      tidak dikenal mengambil sebuah kumpulan
+                                      teks dan mengacaknya untuk menjadi sebuah
+                                      buku contoh huruf. Ia tidak hanya bertahan
+                                      selama 5 abad, tapi juga telah beralih ke
+                                      penataan huruf elektronik, tanpa ada */}
+                                      perubahan apapun.”
                                     </p>
                                   </div>
                                 </div>
@@ -427,10 +434,7 @@ export default function CTinjauRenaksiPegawai() {
                         </>
                       ) : (
                         <>
-                          <TableRow
-                            hover
-                            className={`${styles.tableRow} ${styleRow}`}
-                          >
+                          <TableRow hover className={stylesS.tableRow}>
                             <TableCell>
                               <Checkbox
                                 onChange={handleChange}
