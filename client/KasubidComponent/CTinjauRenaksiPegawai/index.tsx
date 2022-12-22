@@ -378,23 +378,14 @@ export default function CTinjauRenaksiPegawai() {
                                       height={40}
                                     />
                                     <p>
-                                      <b>Kasubid</b> - Kasubid{/*kasubid.nama*/}
+                                      <b>{row.jabatan}</b> - {row.nama}
+                                      {/*kasubid.nama*/}
                                     </p>
                                   </div>
                                   <div>
                                     {/* <p>"{row.ket_admin}"</p> */}
                                     <p className={styles.feedback}>
-                                      “Lorem Ipsum adalah contoh teks atau dummy
-                                      {/* dalam industri percetakan dan penataan
-                                      huruf atau typesetting. Lorem Ipsum telah
-                                      menjadi standar contoh teks sejak tahun
-                                      1500an, saat seorang tukang cetak yang
-                                      tidak dikenal mengambil sebuah kumpulan
-                                      teks dan mengacaknya untuk menjadi sebuah
-                                      buku contoh huruf. Ia tidak hanya bertahan
-                                      selama 5 abad, tapi juga telah beralih ke
-                                      penataan huruf elektronik, tanpa ada */}
-                                      perubahan apapun.”
+                                      {row.ket_pegawai}
                                     </p>
                                   </div>
                                 </div>
@@ -402,7 +393,7 @@ export default function CTinjauRenaksiPegawai() {
                                   className={styles.btnFeedback}
                                   onClick={openModal}
                                 >
-                                  <p>Feedback</p>
+                                  <p>Tanggapan</p>
                                 </button>
                                 <Modal
                                   isOpen={modalIsOpen}
@@ -418,11 +409,21 @@ export default function CTinjauRenaksiPegawai() {
                                   <input
                                     className={styles.inputBuktiLap}
                                     placeholder="Tambah keterangan"
-                                    // onChange={(e) => setKetAdmin(e.target.value)}
+                                    onChange={(e) =>
+                                      setKetAdmin(e.target.value)
+                                    }
                                   />
                                   <Gap height={20} width={0} />
                                   <button
-                                    onClick={() => closeModal()}
+                                    onClick={() =>
+                                      Axios.post(
+                                        "http://localhost:3001/tanggapan",
+                                        {
+                                          idRenaksi: row.id_renaksi,
+                                          ketAdmin: ketAdmin,
+                                        }
+                                      )
+                                    }
                                     className={styles.btnKirimFeedback}
                                   >
                                     <p className={styles.txt}>Kirim</p>
