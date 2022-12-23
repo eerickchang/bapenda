@@ -343,6 +343,19 @@ export default function CTinjauRenaksiPegawai() {
                               {row.tupoksi_tambahan}
                             </TableCell>
                             <TableCell sx={styleData} onClick={() => fungsi()}>
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: 245,
+                                  right: 43,
+                                }}
+                              >
+                                <Image
+                                  src={"/Tanggapan.svg"}
+                                  width={40}
+                                  height={40}
+                                />
+                              </div>
                               {moment(row.start_date).format("MMM")} -
                               {moment(row.end_date).format("MMM")}
                             </TableCell>
@@ -368,20 +381,6 @@ export default function CTinjauRenaksiPegawai() {
                                       <b>{row.jabatan}</b> - {row.nama}
                                       {/*kasubid.nama*/}
                                     </p>
-                                    {/* {row.ditolak == "Kasubid" ? (
-                                ) : row.ditolak == "Kabid" ? (
-                                  <p>
-                                    <b>Kabid</b> - {kabid.nama}
-                                  </p>
-                                ) : row.ditolak == "Kaban" ? (
-                                  <p>
-                                    <b>Kaban</b> - {kaban.nama}
-                                  </p>
-                                ) : row.ditolak == "Admin" ? (
-                                  <p>
-                                    <b>Admin</b> - {admin.nama}
-                                  </p>
-                                ) : null} */}
                                   </div>
                                   <div>
                                     {/* <p>"{row.ket_admin}"</p> */}
@@ -436,10 +435,7 @@ export default function CTinjauRenaksiPegawai() {
                         </>
                       ) : (
                         <>
-                          <TableRow
-                            hover
-                            className={`${styles.tableRow} ${styleRow}`}
-                          >
+                          <TableRow hover className={stylesS.tableRow}>
                             <TableCell>
                               <Checkbox
                                 onChange={handleChange}

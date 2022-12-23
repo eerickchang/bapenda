@@ -501,6 +501,7 @@
 .feedback {
   margin: 0;
   height: 80px;
+  width: 572px;
   max-width: 572px;
   max-height: 85px;
   font-family: "Poppins", sans-serif;
@@ -540,8 +541,9 @@
   background-color: rgba(27, 221, 187, 1);
   border: none;
   border-radius: 12px;
-  margin-left: 96px;
-  margin-top: 20px;
+  position: relative;
+  left: 96px;
+  top: 20px;
   cursor: pointer;
 }
 
