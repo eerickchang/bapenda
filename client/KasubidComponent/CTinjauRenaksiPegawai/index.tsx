@@ -414,20 +414,33 @@ export default function CTinjauRenaksiPegawai() {
                                     }
                                   />
                                   <Gap height={20} width={0} />
-                                  <button
-                                    onClick={() =>
-                                      Axios.post(
-                                        "http://localhost:3001/tanggapan",
-                                        {
-                                          idRenaksi: row.id_renaksi,
-                                          ketAdmin: ketAdmin,
-                                        }
-                                      )
-                                    }
-                                    className={styles.btnKirimFeedback}
-                                  >
-                                    <p className={styles.txt}>Kirim</p>
-                                  </button>
+                                  <div style={{display: 'flex', marginLeft: 383}}>
+                                    <button
+                                      onClick={closeModal}
+                                      className={styles.btnKembali}
+                                    >
+                                      <img
+                                        src={"/BatalIcon.svg"}
+                                        width={20}
+                                        height={20}
+                                      />
+                                      <p className={styles.txt}>Batal</p>
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        Axios.post(
+                                          "http://localhost:3001/tanggapan",
+                                          {
+                                            idRenaksi: row.id_renaksi,
+                                            ketAdmin: ketAdmin,
+                                          }
+                                        )
+                                      }
+                                      className={styles.btnKirimFeedback}
+                                    >
+                                      <p className={styles.txt}>Kirim</p>
+                                    </button>
+                                  </div>
                                 </Modal>
                               </div>
                             </Collapse>

@@ -565,10 +565,33 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 585px;
+  margin-left: 32px;
 }
 
 .btnKirimFeedback p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 12px;
+}
+
+.btnKembali {
+  background-color: rgba(27, 221, 187, 0);
+  width: 170px;
+  height: 34px;
+  border: solid 2px rgba(27, 221, 187, 1);
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKembali p {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;

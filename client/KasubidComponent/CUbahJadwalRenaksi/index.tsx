@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import stylesS from "./cUbahJadwalRenaksi.module.css";
 
 import Collapse from "@mui/material/Collapse";
@@ -8,16 +8,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import styles from "./TableMUI.module.css";
-import Image from "next/image";
-import Gap from "../Gap";
 import Axios from "axios";
-import moment from "moment";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import FileDownload from "js-file-download";
+import "jspdf-autotable";
+import moment from "moment";
+import Image from "next/image";
 import Modal from "react-modal";
+import Gap from "../Gap";
+import styles from "./TableMUI.module.css";
 
 Axios.defaults.withCredentials = true;
 
@@ -284,7 +282,7 @@ function Row(props) {
         ) : null}
       </div>
       <React.Fragment>
-        {row.ditolak == "Kasubid" && row.kirim_ke == "Kasubid" ? (
+        {row.ditolak === "Kasubid" && row.kirim_ke === "Kasubid" ? (
           //!! STYLE YG INI ANDRE
           <>
             <TableRow
@@ -325,12 +323,6 @@ function Row(props) {
                         1 files
                       </div>
                       <Gap width={0} height={10} />
-                      {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                     </div>
                   )}
                 </p>
@@ -484,6 +476,15 @@ function Row(props) {
                 )} - ${moment(row.end_date).format("MMM")}`}</p>
               </TableCell>
               <TableCell>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 305,
+                    right: 43,
+                  }}
+                >
+                  <Image src={"/Tanggapan.svg"} width={40} height={40} />
+                </div>
                 <p style={style2}>
                   {row.files === "" ? null : (
                     <div className={styles.wrapFileLampiran}>
@@ -494,12 +495,6 @@ function Row(props) {
                         1 files
                       </div>
                       <Gap width={0} height={10} />
-                      {/* <div style={{ display: "flex" }}>
-                    <div style={{ marginRight: 10 }}>
-                      <Image src={"/IconPDF.svg"} width={25} height={28} />
-                    </div>
-                    2 files
-                  </div> */}
                     </div>
                   )}
                 </p>
