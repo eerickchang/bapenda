@@ -310,7 +310,21 @@ export default function CTinjauRenaksiPegawai() {
                     <>
                       {row.ditolak == "Kasubid" && row.kirim_ke == "Kasubid" ? (
                         <>
+                          <div
+                            style={{
+                              position: "absolute",
+                              marginTop: 10,
+                              right: 43,
+                            }}
+                          >
+                            <Image
+                              src={"/Tanggapan.svg"}
+                              width={40}
+                              height={40}
+                            />
+                          </div>
                           <TableRow
+                            onClick={fungsi}
                             hover
                             className={`${styles.tableRow} ${styleRow}`}
                           >
@@ -320,42 +334,26 @@ export default function CTinjauRenaksiPegawai() {
                                 name={row.id_renaksi}
                               />
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                            <TableCell sx={styleData}>
                               <p style={{ fontWeight: 600 }}>{row.program}</p>
                             </TableCell>
                             <TableCell
                               sx={styleData}
                               style={{ color: "rgba(218, 142, 72, 1)" }}
-                              onClick={() => fungsi()}
                             >
                               {row.nama_thl}
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              {row.kegiatan}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                            <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                            <TableCell sx={styleData}>
                               {row.sub_kegiatan}
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                            <TableCell sx={styleData}>
                               {row.tupoksi_inti}
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                            <TableCell sx={styleData}>
                               {row.tupoksi_tambahan}
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  top: 245,
-                                  right: 43,
-                                }}
-                              >
-                                <Image
-                                  src={"/Tanggapan.svg"}
-                                  width={40}
-                                  height={40}
-                                />
-                              </div>
+                            <TableCell sx={styleData}>
                               {moment(row.start_date).format("MMM")} -
                               {moment(row.end_date).format("MMM")}
                             </TableCell>
@@ -414,7 +412,9 @@ export default function CTinjauRenaksiPegawai() {
                                     }
                                   />
                                   <Gap height={20} width={0} />
-                                  <div style={{display: 'flex', marginLeft: 383}}>
+                                  <div
+                                    style={{ display: "flex", marginLeft: 383 }}
+                                  >
                                     <button
                                       onClick={closeModal}
                                       className={styles.btnKembali}

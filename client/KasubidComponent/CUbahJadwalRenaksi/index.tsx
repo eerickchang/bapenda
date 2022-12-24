@@ -288,14 +288,12 @@ function Row(props) {
             <div
               style={{
                 position: "absolute",
-                // top: 305,
-                marginTop: 30,
+                marginTop: 35,
                 right: 43,
               }}
             >
               <Image src={"/Tanggapan.svg"} width={40} height={40} />
             </div>
-
             <TableRow
               className={`${styles.tableRow} ${styleRow}`}
               onClick={() => {
