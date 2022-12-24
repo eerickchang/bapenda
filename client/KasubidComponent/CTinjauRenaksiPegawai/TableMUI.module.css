@@ -120,28 +120,15 @@
   display: inline-flex;
 }
 
-.inputBuktiLap_Ubah {
-  height: 120px;
-  width: 755px;
-  border: 1px solid black;
-  margin-bottom: 35px;
-  border-radius: 4px;
-}
-
-.inputBuktiLap_Ubah::placeholder {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-}
 
 .inputBuktiLap_Ubah:focus {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 18px;
   outline: none;
 }
 
 .inputBuktiLap {
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
   height: 133px;
   width: 755px;
   border: 1px solid black;
