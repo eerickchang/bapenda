@@ -285,6 +285,17 @@ function Row(props) {
         {row.ditolak === "Kasubid" && row.kirim_ke === "Kasubid" ? (
           //!! STYLE YG INI ANDRE
           <>
+            <div
+              style={{
+                position: "absolute",
+                // top: 305,
+                marginTop: 30,
+                right: 43,
+              }}
+            >
+              <Image src={"/Tanggapan.svg"} width={40} height={40} />
+            </div>
+
             <TableRow
               className={`${styles.tableRow} ${styleRow}`}
               onClick={() => {
@@ -476,15 +487,6 @@ function Row(props) {
                 )} - ${moment(row.end_date).format("MMM")}`}</p>
               </TableCell>
               <TableCell>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 305,
-                    right: 43,
-                  }}
-                >
-                  <Image src={"/Tanggapan.svg"} width={40} height={40} />
-                </div>
                 <p style={style2}>
                   {row.files === "" ? null : (
                     <div className={styles.wrapFileLampiran}>
