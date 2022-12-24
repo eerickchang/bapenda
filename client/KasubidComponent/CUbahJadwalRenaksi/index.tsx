@@ -129,10 +129,12 @@ function Row(props) {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [showModalTolak, setShowModalTolak] = useState(false);
   const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
+  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
   function openModal() {
     setIsOpen(true);

@@ -386,6 +386,8 @@ function Row(props) {
   );
 }
 
+// sudah
+
 export default function CTinjauRenaksiPegawai() {
   const router = useRouter();
   const [domLoaded, setDomLoaded] = useState(false);
