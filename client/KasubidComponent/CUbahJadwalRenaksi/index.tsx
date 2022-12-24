@@ -295,7 +295,6 @@ function Row(props) {
             >
               <Image src={"/Tanggapan.svg"} width={40} height={40} />
             </div>
-
             <TableRow
               className={`${styles.tableRow} ${styleRow}`}
               onClick={() => {
