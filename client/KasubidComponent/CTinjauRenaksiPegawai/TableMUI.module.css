@@ -120,13 +120,12 @@
   display: inline-flex;
 }
 
-
 .inputBuktiLap_Ubah:focus {
   outline: none;
 }
 
 .inputBuktiLap {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 18px;
   height: 133px;

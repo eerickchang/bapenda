@@ -1,0 +1,224 @@
+.container {
+  background-color: #1bddbb;
+  width: 516px;
+  height: 53px;
+  border-radius: 90px;
+  border: none;
+  cursor: pointer;
+}
+
+.container p {
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0%;
+  transition: 0.5s;
+}
+
+.container p:hover {
+  padding-right: 20px;
+}
+
+.btnDaftar {
+  background: rgba(165, 165, 165, 0.43);
+  color: #a5a5a5;
+}
+
+.btnSandi {
+  margin-top: 50px;
+}
+
+/* ? Button di Input renaksi */
+.btnType1 {
+  background-color: #B8BDCA;
+  width: 70px;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btnType1 p{
+  margin: 0;
+}
+
+.btnType2 {
+  background-color: #B8BDCA;
+  color: #fff;
+}
+
+.btnType3 {
+  background-color: #1bddbb;
+  color: #fff;
+  width: 172px;
+  height: 51px;
+  margin-top: 80px;
+  margin-left: 300px;
+  font-size: 20px;
+}
+
+.btnType1 p:hover {
+  padding-right: 0;
+}
+
+.btnType2 p:hover {
+  padding-right: 0;
+}
+
+.btnType3 p:hover {
+  padding-right: 0;
+}
+
+.btnType4{
+  background-color: #B8BDCA;
+  width: 193px;
+  height: 55px;
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 48px;
+  left: 1502px;
+}
+
+.btnType4 p{
+  padding-left: 5px;
+}
+
+/* button pilih file upload  bukti*/
+.btnPilihFile{
+  background-color: white;
+  width: 198px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnKirim{
+  background-color: rgba(27, 221, 187, 1);
+  width: 170px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnbatal{
+  background-color: rgba(255, 1, 100, 1);
+  width: 170px;
+  height: 34px;
+  border: 1px solid rgba(73, 97, 100, 1);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ! BUTTON FROM ADMIN */
+
+.btnColumn1{
+  background-color: rgba(0, 151, 136);
+  width: 250px;
+  height: 150px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.btnColumn2{
+  background-color: rgba(55, 125, 237, 1);
+  width: 250px;
+  height: 150px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.btnColumn3{
+  background-color: rgba(50, 172, 113, 1);
+  width: 250px;
+  height: 150px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.btnColumn4{
+  background-color: rgba(51, 103, 213, 1);
+  width: 250px;
+  height: 150px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.btnColumn1:hover{
+  background: rgba(0, 67, 60, 1);
+}
+.btnColumn2:hover{
+  background: rgba(0, 67, 60, 1);
+}
+.btnColumn3:hover{
+  background: rgba(0, 67, 60, 1);
+}
+.btnColumn4:hover{
+  background: rgba(0, 67, 60, 1);
+}
