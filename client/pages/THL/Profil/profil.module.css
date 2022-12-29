@@ -1,0 +1,161 @@
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.txtHeader {
+  font-family: "Poppins", sans-serif;
+  color: #112350;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0px;
+  margin-left: 5px;
+}
+
+.wrapperTitle {
+  border-bottom: 2.5px solid #1bddbb;
+  text-align: center;
+  align-items: flex-end;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 18px;
+  left: 180px;
+}
+
+.txt{
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+
+.txtJudul {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  /* align-items: center; */
+  font-family: "Poppins", sans-serif;
+  width: 250px;
+  height: 65px;
+  /* background-color: yellow; */
+  font-weight: 700;
+  font-size: 22px;
+  color: #112350;
+  /* position: relative; */
+  padding-top: 20px;
+}
+
+.txtJudulLain {
+  /* align-items: center; */
+  font-family: "Poppins", sans-serif;
+  width: 200px;
+  height: 65px;
+  /* background-color: yellow; */
+  font-weight: 700;
+  font-size: 22px;
+  color: #112350;
+  position: relative;
+  top: 20px;
+  /* margin-right: 40%; */
+}
+
+.lihatDetailWrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lihatDetail {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #112350;
+  margin: auto 0px;
+  position: relative;
+  top: 3px;
+  margin-left: 20px;
+}
+
+.lihatDetailImg {
+  position: relative;
+  top: 46px;
+  margin-left: 5px;
+}
+
+.txtWrapper3 {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  /* background-color: red; */
+  width: 350px;
+}
+
+.barWrapper1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  position: static;
+  width: 380px;
+  height: 703px;
+
+  margin-left: 180px;
+  margin-top: 167px;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.barWrapper2 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  position: static;
+  width: 380px;
+  height: 703px;
+  margin-left: 40px;
+  margin-top: 167px;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.barWrapper3 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  position: static;
+  width: 380px;
+  height: 703px;
+  margin-left: 40px;
+  margin-top: 167px;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.barResize {
+  width: 336.68px;
+  height: 549.4px;
+  margin-bottom: 15%;
+}
+
+.contentKiri {
+  display: flex;
+  /* width: 1311px; */
+}
+
+.contentKanan {
+  display: flex;
+  margin-left: 40px;
+}
