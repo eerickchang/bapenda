@@ -326,38 +326,23 @@ export default function CTinjauRenaksiPegawai() {
                             <TableCell
                               sx={styleData}
                               style={{ color: "rgba(218, 142, 72, 1)" }}
-                              onClick={() => fungsi(row.id_renaksi)}
+                              onClick={() => fungsi()}
                             >
                               {row.nama_thl}
                             </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => fungsi(row.id_renaksi)}
-                            >
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
                               {row.kegiatan}
                             </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => fungsi(row.id_renaksi)}
-                            >
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
                               {row.sub_kegiatan}
                             </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => fungsi(row.id_renaksi)}
-                            >
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
                               {row.tupoksi_inti}
                             </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => fungsi(row.id_renaksi)}
-                            >
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
                               {row.tupoksi_tambahan}
                             </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => fungsi(row.id_renaksi)}
-                            >
+                            <TableCell sx={styleData} onClick={() => fungsi()}>
                               <div
                                 style={{
                                   position: "absolute",
