@@ -406,7 +406,7 @@ function Row(props) {
   return (
     <>
       <React.Fragment>
-        {row.ditolak == "Kabid" && row.kirim_ke == "Kabd" ? (
+        {row.ditolak == "Kabid" && row.kirim_ke == "Kabid" ? (
           //!! STYLE YG INI ANDRE
           <>
             <TableRow
@@ -444,7 +444,7 @@ function Row(props) {
                 <div
                   style={{
                     position: "absolute",
-                    top: 305,
+                    // marginTop: -35,
                     right: 43,
                   }}
                 >
@@ -618,15 +618,6 @@ function Row(props) {
                 </p>
               </TableCell>
               <TableCell>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 305,
-                    right: 43,
-                  }}
-                >
-                  <Image src={"/Tanggapan.svg"} width={40} height={40} />
-                </div>
                 <div style={style2}>
                   {row.files === "" ? null : (
                     <div className={styles.wrapFileLampiran}>
