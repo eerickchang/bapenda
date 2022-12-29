@@ -451,15 +451,6 @@ function Row(props: rowProps) {
         <>
           <TableRow
             className={`${styles.tableRow} ${styleRow}`}
-            onClick={() => {
-              setOpen(!open);
-              {
-                rowClik
-                  ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                    setRowClick(!rowClik))
-                  : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-              }
-            }}
             sx={{ "& > *": { borderBottom: "" } }}
           >
             {/* DATA ROW */}
@@ -481,13 +472,13 @@ function Row(props: rowProps) {
               </p>
             </TableCell>
             <TableCell>
-              {row.thl === null ? null : (
+              {row.nama === null ? null : (
                 <div
                   style={{ display: "flex", padding: 0, alignItems: "center" }}
                 >
-                  {row.foto_thl != "" ? (
+                  {row.foto != "" ? (
                     <Image
-                      src={row.foto_thl}
+                      src={row.foto}
                       // src={"/SidebarProfile.svg"}
                       width={40}
                       height={40}
@@ -504,8 +495,8 @@ function Row(props: rowProps) {
                     />
                   )}
                   <div style={{ marginLeft: 10 }}>
-                    <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                    <p className={stylesS.rekanPegawai}>THL</p>
+                    <p className={stylesS.rekanNama}>{row.nama}</p>
+                    <p className={stylesS.rekanPegawai}>ASN</p>
                   </div>
                 </div>
               )}
@@ -681,7 +672,7 @@ function Row(props: rowProps) {
                   </p>
                 </TableCell>
                 <TableCell>
-                  {row.thl === null ? null : (
+                  {row.nama === null ? null : (
                     <div
                       style={{
                         display: "flex",
@@ -689,9 +680,9 @@ function Row(props: rowProps) {
                         alignItems: "center",
                       }}
                     >
-                      {row.foto_thl != "" ? (
+                      {row.foto != "" ? (
                         <Image
-                          src={row.foto_thl}
+                          src={row.foto}
                           // src={"/SidebarProfile.svg"}
                           width={40}
                           height={40}
@@ -708,8 +699,8 @@ function Row(props: rowProps) {
                         />
                       )}
                       <div style={{ marginLeft: 10 }}>
-                        <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                        <p className={stylesS.rekanPegawai}>THL</p>
+                        <p className={stylesS.rekanNama}>{row.nama}</p>
+                        <p className={stylesS.rekanPegawai}>ASN</p>
                       </div>
                     </div>
                   )}
@@ -748,17 +739,6 @@ function Row(props: rowProps) {
             <>
               <TableRow
                 className={`${styles.tableRow} ${styleRow}`}
-                onClick={() => {
-                  setOpen(!open);
-                  {
-                    rowClik
-                      ? (setStyleRow(
-                          `${styles.tableRow} ${styles.tableRowClick}`
-                        ),
-                        setRowClick(!rowClik))
-                      : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-                  }
-                }}
                 sx={{ "& > *": { borderBottom: "" } }}
               >
                 {/* //! DATA ROW */}
@@ -780,7 +760,7 @@ function Row(props: rowProps) {
                   </p>
                 </TableCell>
                 <TableCell>
-                  {row.thl === null ? null : (
+                  {row.nama === null ? null : (
                     <div
                       style={{
                         display: "flex",
@@ -788,9 +768,9 @@ function Row(props: rowProps) {
                         alignItems: "center",
                       }}
                     >
-                      {row.foto_thl != "" ? (
+                      {row.foto != "" ? (
                         <Image
-                          src={row.foto_thl}
+                          src={row.foto}
                           // src={"/SidebarProfile.svg"}
                           width={40}
                           height={40}
@@ -807,8 +787,8 @@ function Row(props: rowProps) {
                         />
                       )}
                       <div style={{ marginLeft: 10 }}>
-                        <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                        <p className={stylesS.rekanPegawai}>THL</p>
+                        <p className={stylesS.rekanNama}>{row.nama}</p>
+                        <p className={stylesS.rekanPegawai}>ASN</p>
                       </div>
                     </div>
                   )}
@@ -1172,13 +1152,13 @@ function Row(props: rowProps) {
               <p className={stylesS.styleTxtRow}>{row.tupoksi_tambahan}</p>
             </TableCell>
             <TableCell>
-              {row.thl === null ? null : (
+              {row.nama === null ? null : (
                 <div
                   style={{ display: "flex", padding: 0, alignItems: "center" }}
                 >
-                  {row.foto_thl != "" ? (
+                  {row.foto != "" ? (
                     <Image
-                      src={row.foto_thl}
+                      src={row.foto}
                       // src={"/SidebarProfile.svg"}
                       width={40}
                       height={40}
@@ -1195,8 +1175,8 @@ function Row(props: rowProps) {
                     />
                   )}
                   <div style={{ marginLeft: 10 }}>
-                    <p className={stylesS.rekanNama}>{row.nama_thl}</p>
-                    <p className={stylesS.rekanPegawai}>THL</p>
+                    <p className={stylesS.rekanNama}>{row.nama}</p>
+                    <p className={stylesS.rekanPegawai}>ASN</p>
                   </div>
                 </div>
               )}
@@ -1243,7 +1223,7 @@ export default function ContentDaftarKegiatan() {
       image: <Image src="/SidebarProfile.svg" width={90} height={90} />,
       nama: "June E. Silangen,  SE, Ak, ME",
       jabatan: "Kepala Bidang  Pajak Daerah",
-      pegawai: "ASN",
+      pegawai: "THL",
     },
   ];
 
@@ -1262,7 +1242,7 @@ export default function ContentDaftarKegiatan() {
               if (
                 moment(item.end_date).format("YYYY") ===
                   moment().format("YYYY") &&
-                item.nip === response.data.user[0].nip
+                item.thl === response.data.user[0].nip
               ) {
                 setDataRenaksi((nextData) => {
                   return [item, ...nextData];
@@ -1288,7 +1268,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1316,7 +1296,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1344,7 +1324,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1372,7 +1352,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1400,7 +1380,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1428,7 +1408,7 @@ export default function ContentDaftarKegiatan() {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip === response.data.user[0].nip
+                  item.thl === response.data.user[0].nip
                 ) {
                   setDataRenaksi((nextData) => {
                     return [item, ...nextData];
@@ -1506,7 +1486,7 @@ export default function ContentDaftarKegiatan() {
             if (
               moment(item.end_date).format("YYYY") ===
                 moment().format("YYYY") &&
-              item.nip === response.data.user[0].nip
+              item.thl === response.data.user[0].nip
             ) {
               setDataRenaksi((nextData) => {
                 return [item, ...nextData];
@@ -1565,10 +1545,7 @@ export default function ContentDaftarKegiatan() {
                 </div>
                 <div className={stylesS.wrapperTxt}>
                   <p className={stylesS.txtNama}>{asn.nama}</p>
-                  <p className={stylesS.txtJabatan}>
-                    {`${asn.jabatan}
-                    ${asn.sub_bidang}`}
-                  </p>
+                  <p className={stylesS.txtJabatan}>{`${asn.sub_bidang}`}</p>
                   <p className={stylesS.txtPegawai}>{item.pegawai}</p>
                 </div>
               </div>

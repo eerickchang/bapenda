@@ -738,7 +738,7 @@ app.post("/kabidMenerimaRenaksi", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Kaban" WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Kaban", ditolak = "" WHERE id_renaksi = ?';
   db.query(sqlUpdate, idRenaksi, (err, result) => {
     console.log(result);
   });
@@ -775,7 +775,7 @@ app.post("/kabanMenerimaRenaksi", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Admin" WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Admin", ditolak = "" WHERE id_renaksi = ?';
   db.query(sqlUpdate, idRenaksi, (err, result) => {
     console.log(result);
   });
@@ -786,7 +786,7 @@ app.post("/kabanMenerimaRenaksiFinal", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "" WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "" WHERE id_renaksi = ?';
   db.query(sqlUpdate, idRenaksi, (err, result) => {
     console.log(result);
   });
@@ -902,7 +902,7 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   const end_date = req.body.end_date;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
   let data = [reqStartDate, reqEndDate, ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
@@ -954,7 +954,7 @@ app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
   const end_date = req.body.end_date;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Dihapus", kirim_ke = "", ket_admin = ?  WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Dihapus", kirim_ke = "", ditolak = "", ket_admin = ?  WHERE id_renaksi = ?';
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
@@ -999,7 +999,7 @@ app.post("/adminMenerimaRenaksiMRD", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "" WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "" WHERE id_renaksi = ?';
   db.query(sqlUpdate, idRenaksi, (err, result) => {
     console.log(err);
   });
@@ -1024,7 +1024,7 @@ app.post("/adminMenerimaRenaksiFinal", (req, res) => {
   const idRenaksi = req.body.idRenaksi;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "" WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "" WHERE id_renaksi = ?';
   db.query(sqlUpdate, idRenaksi, (err, result) => {
     console.log(result);
   });
@@ -1045,7 +1045,7 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
   const end_date = req.body.end_date;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Selesai", kirim_ke = "", ket_admin = ?, nip = ? WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Selesai", kirim_ke = "", ditolak = "", ket_admin = ?, nip = ? WHERE id_renaksi = ?';
   let data = [ketAdmin, nip, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
