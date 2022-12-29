@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.txtLupa {
+  color: rgba(255, 255, 255, 0.79);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.headerTxt {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.txtNormal {
+  color: rgba(165, 165, 165, 0.81);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  margin: 0px 34px;
+  margin-top: 32px;
+  margin-bottom: 83px;
+}
+
+.txtStyled {
+  font-family: "Inter", sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: white;
+  margin: 0px 30px;
+  margin-top: 25px;
+  border-bottom: 2px solid #1bddbb;
+  height: 50px;
+  width: 125px;
+  text-align: center;
+}
+
+.headerTxtModal {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dialog {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.wrapperBtnModal {
+  display: inline-flex;
+  bottom: 1;
+  position: absolute;
+  bottom: 0;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.message {
+  position: absolute;
+  top: 460px;
+  margin-left: 20px;
+  color: #fff;
+}
+
+.coba {
+  color: rgba(17, 35, 80, 1);
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  border-top: 2px solid rgba(165, 165, 165, 0.8);
+  height: 55px;
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  cursor: pointer;
+}
+
+.coba:active{
+  background-color: rgba(17, 35, 80, 0.1);
+}
