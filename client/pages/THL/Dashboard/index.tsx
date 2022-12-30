@@ -70,7 +70,7 @@ export default function Dashboard() {
                   moment(jumlahKegiatanMAP.start_date).format("YYYY-MM") &&
                 moment().format("YYYY-MM") ===
                   moment(jumlahKegiatanMAP.end_date).format("YYYY-MM") &&
-                masuk.data.user[0].nip === jumlahKegiatanMAP.nip
+                masuk.data.user[0].nip === jumlahKegiatanMAP.thl
               ) {
                 // console.log(ambilRenaksiMAP);
                 setJlhKegiatan((nextData) => {
@@ -117,7 +117,7 @@ export default function Dashboard() {
                   moment(lampiranDisubmitMAP.start_date).format("YYYY-MM") &&
                 moment().format("YYYY-MM") ===
                   moment(lampiranDisubmitMAP.end_date).format("YYYY-MM") &&
-                masuk.data.user[0].nip === lampiranDisubmitMAP.nip
+                masuk.data.user[0].nip === lampiranDisubmitMAP.thl
               ) {
                 // console.log(ambilRenaksiMAP);
                 setLprSubmit((nextData) => {
@@ -163,7 +163,7 @@ export default function Dashboard() {
                 moment(belumSubmitMAP.start_date).format("YYYY-MM") &&
               moment().format("YYYY-MM") ===
                 moment(belumSubmitMAP.end_date).format("YYYY-MM") &&
-              masuk.data.user[0].nip === belumSubmitMAP.nip
+              masuk.data.user[0].nip === belumSubmitMAP.thl
             ) {
               // console.log(ambilRenaksiMAP);
               setBlmSubmit((nextData) => {
