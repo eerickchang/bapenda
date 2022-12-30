@@ -1079,6 +1079,12 @@ app.post("/adminMenerimaRenaksiSelesai", (req, res) => {
     console.log(err);
   });
 
+  const sqlUpdate5 =
+    "UPDATE cakin SET lampiran_diterima = lampiran_diterima + 1 WHERE nip = ? AND bulan = ?";
+  db.query(sqlUpdate5, [thl, bulan], (err, result) => {
+    console.log(err);
+  });
+
   const sqlInsert =
     "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Unggah Lampiran', 'Diterima') ";
   db.query(
