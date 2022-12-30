@@ -905,20 +905,22 @@ app.post("/adminMenerimaRenaksiMJD", (req, res) => {
   const files = req.body.files;
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
+  const thl = req.body.thl;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET status = "Sementara", kirim_ke = "", ditolak = "", req_end_date = "", req_start_date = "", start_date = ?, end_date = ?, ket_admin = ?  WHERE id_renaksi = ?';
   let data = [reqStartDate, reqEndDate, ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
   });
 
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Diterima') ";
+    "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Diterima') ";
   db.query(
     sqlInsert,
     [
       idRenaksi,
+      thl,
       nip,
       reqStartDate,
       reqEndDate,
@@ -940,7 +942,7 @@ app.post("/adminMenolakRenaksiMJD", (req, res) => {
   const nip = req.body.nip;
 
   const sqlUpdate =
-    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ?, ditolak = "Admin"  WHERE id_renaksi = ?';
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ket_admin = ?, ditolak = "Admin" WHERE id_renaksi = ?';
   let data = [ketAdmin, idRenaksi];
   db.query(sqlUpdate, data, (err, result) => {
     console.log(result);
