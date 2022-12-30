@@ -100,67 +100,6 @@ function Row(props) {
   const { row, stateChanger, arrSubid } = props;
   const [open, setOpen] = React.useState(false);
 
-  // const custom = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 362,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
-
-  // ? CUSTOM STYLE MODAL UBAH JADWAL RENAKSI
-  // const customUbah = {
-  //   content: {
-  //     position: "absolute",
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     width: 878,
-  //     borderRadius: 20,
-  //     paddingLeft: 61,
-  //     height: 433,
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //     overlay: "#112350",
-  //     backgroundColor: "white",
-  //     zIndex: 1001,
-  //     scroll: false,
-  //   },
-  //   overlay: {
-  //     position: "fixed",
-  //     marginTop: 0,
-  //     top: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //     right: 0,
-  //     backgroundColor: "rgba(17, 35, 80, 0.5)",
-  //     zIndex: 1000,
-  //   },
-  // };
-
   //style row
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
@@ -306,12 +245,10 @@ function Row(props) {
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalTolakAllIsOpen, setTolakAllIsOpen] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [showModalTolak, setShowModalTolak] = useState(false);
   const [showModalTerimaAll, setShowModalTerimaAll] = useState(false);
-  const [showModalTolakAll, setShowModalTolakAll] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -326,18 +263,6 @@ function Row(props) {
     setIsOpen(false);
   }
 
-  function openModalTolakAll() {
-    setTolakAllIsOpen(true);
-  }
-
-  function afterOpenModalTolakAll() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#f00";
-  }
-
-  function closeModalTolakAll() {
-    setTolakAllIsOpen(false);
-  }
 
   const btnTolak = () => {
     setShowModalTolak(true);
@@ -346,12 +271,6 @@ function Row(props) {
     }, 3000);
   };
 
-  const btnTolakAll = () => {
-    setShowModalTolakAll(true);
-    setTimeout(() => {
-      setShowModalTolakAll(false);
-    }, 3000);
-  };
 
   const btnTerimaAll = () => {
     setShowModalTerimaAll(true);
@@ -361,67 +280,10 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
 
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
     closeModal();
     btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
   };
 
   const router = useRouter();
