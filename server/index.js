@@ -959,6 +959,7 @@ app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
   const files = req.body.files;
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
+  const thl = req.body.thl;
 
   const sqlUpdate =
     'UPDATE data_renaksi SET status = "Dihapus", kirim_ke = "", ditolak = "", ket_admin = ?  WHERE id_renaksi = ?';
@@ -968,11 +969,12 @@ app.post("/adminMenerimaRenaksiDihapus", (req, res) => {
   });
 
   const sqlInsert =
-    "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Diterima') ";
+    "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Diterima') ";
   db.query(
     sqlInsert,
     [
       idRenaksi,
+      thl,
       nip,
       req_start_date,
       req_end_date,

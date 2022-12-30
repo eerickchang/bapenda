@@ -103,6 +103,7 @@ function Row(props) {
       files: row.files,
       start_date: row.start_date,
       end_date: row.end_date,
+      thl: row.thl,
     });
     stateChanger([]);
 
