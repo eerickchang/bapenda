@@ -461,6 +461,7 @@ app.post("/tutupRenaksi", (req, res) => {
   const ket_admin = req.body.ket_admin;
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
+  const thl = req.body.thl;
 
   if (status != "Selesai" || status != "Menunggu Renaksi Diterima") {
     const sqlUpdate =
@@ -490,11 +491,12 @@ app.post("/tutupRenaksi", (req, res) => {
 
   if (status == "Menunggu Renaksi Diterima") {
     const sqlInsert =
-      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Mengirim Renaksi', 'Ditolak') ";
+      "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,?,'Mengirim Renaksi', 'Ditolak') ";
     db.query(
       sqlInsert,
       [
         idRenaksi,
+        thl,
         nip,
         req_start_date,
         req_end_date,
@@ -510,11 +512,12 @@ app.post("/tutupRenaksi", (req, res) => {
     );
   } else if (status == "Menunggu Jadwal Diubah") {
     const sqlInsert =
-      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Ditolak') ";
+      "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,?,'Ubah Jadwal', 'Ditolak') ";
     db.query(
       sqlInsert,
       [
         idRenaksi,
+        thl,
         nip,
         req_start_date,
         req_end_date,
@@ -530,11 +533,12 @@ app.post("/tutupRenaksi", (req, res) => {
     );
   } else if (status == "Menunggu Renaksi Dihapus") {
     const sqlInsert =
-      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Ditolak') ";
+      "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,?,'Hapus Kegiatan', 'Ditolak') ";
     db.query(
       sqlInsert,
       [
         idRenaksi,
+        thl,
         nip,
         req_start_date,
         req_end_date,
@@ -550,11 +554,12 @@ app.post("/tutupRenaksi", (req, res) => {
     );
   } else if (status == "Selesai") {
     const sqlInsert =
-      "INSERT INTO riwayat_kegiatan (id_renaksi, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,'Unggah Lampiran', 'Ditolak') ";
+      "INSERT INTO riwayat_kegiatan (id_renaksi, thl, nip, req_start_date, req_end_date, files, ket_pegawai, ket_admin, start_date, end_date, status, kondisi) VALUES (?,?,?,?,?,?,?,?,?,?,'Unggah Lampiran', 'Ditolak') ";
     db.query(
       sqlInsert,
       [
         idRenaksi,
+        thl,
         nip,
         req_start_date,
         req_end_date,

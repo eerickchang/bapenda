@@ -362,6 +362,7 @@ function Row(props: rowProps) {
       ket_admin: row.ket_admin,
       start_date: row.start_date,
       end_date: row.end_date,
+      thl: row.thl,
     }).then((tutupRenaksi) => {
       console.log(tutupRenaksi);
     });
