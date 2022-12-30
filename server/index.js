@@ -299,7 +299,7 @@ app.get("/ambilRenaksi", (req, res) => {
 //AMBIL DATA RENAKSI STATUS = 'SEMUA'
 app.get("/ambilRiwayatKegiatan", (req, res) => {
   const sqlSelect =
-    "SELECT riwayat_kegiatan.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.program, riwayat_kegiatan.end_date, riwayat_kegiatan.start_date, data_renaksi.nip, riwayat_kegiatan.ket_pegawai, riwayat_kegiatan.ket_admin, riwayat_kegiatan.req_start_date, riwayat_kegiatan.req_end_date, riwayat_kegiatan.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
+    "SELECT riwayat_kegiatan.id_renaksi, data_renaksi.kegiatan, data_renaksi.sub_kegiatan, data_renaksi.tupoksi_tambahan, data_renaksi.tupoksi_inti, data_renaksi.program, riwayat_kegiatan.end_date, riwayat_kegiatan.start_date, riwayat_kegiatan.thl, data_renaksi.nip, riwayat_kegiatan.ket_pegawai, riwayat_kegiatan.ket_admin, riwayat_kegiatan.req_start_date, riwayat_kegiatan.req_end_date, riwayat_kegiatan.files, pegawai.nip, pegawai.nama, pegawai.sub_bidang, pegawai.bidang, pegawai.jabatan, pegawai.foto, riwayat_kegiatan.nip, riwayat_kegiatan.status, riwayat_kegiatan.kondisi FROM riwayat_kegiatan INNER JOIN pegawai ON riwayat_kegiatan.nip=pegawai.nip LEFT OUTER JOIN data_renaksi ON riwayat_kegiatan.id_renaksi=data_renaksi.id_renaksi";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });

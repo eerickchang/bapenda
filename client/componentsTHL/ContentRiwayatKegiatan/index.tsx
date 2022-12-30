@@ -523,7 +523,7 @@ export const ContentRiwayatKegiatan = () => {
               if (
                 moment(item.end_date).format("YYYY") ===
                   moment().format("YYYY") &&
-                item.nip == dataPegawai.data.user[0].nip &&
+                item.thl == dataPegawai.data.user[0].nip &&
                 item.status == "Unggah Lampiran"
               ) {
                 setDataRenaksi((nextData) => {
@@ -660,7 +660,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.thl == response.data.user[0].nip &&
                   item.status == "Unggah Lampiran"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -688,7 +688,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.thl == response.data.user[0].nip &&
                           item.status == "Unggah Lampiran"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -721,7 +721,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.thl == response.data.user[0].nip &&
                   item.status == "Hapus Kegiatan"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -749,7 +749,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.thl == response.data.user[0].nip &&
                           item.status == "Hapus Kegiatan"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -782,7 +782,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.nip == response.data.user[0].nip &&
+                  item.thl == response.data.user[0].nip &&
                   item.status == "Ubah Jadwal"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -810,7 +810,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.nip == response.data.user[0].nip &&
+                          item.thl == response.data.user[0].nip &&
                           item.status == "Ubah Jadwal"
                         ) {
                           setDataRenaksi((nextData) => {
