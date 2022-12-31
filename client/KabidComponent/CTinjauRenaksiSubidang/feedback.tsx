@@ -30,7 +30,8 @@ export default function CTinjauRenaksiSubidangFeedback() {
             if (
               renaksi.sub_bidang === router.query.sub_bidang &&
               moment(renaksi.end_date).format("YYYY") ===
-                moment().format("YYYY")
+                moment().format("YYYY") &&
+              renaksi.ditolak === "Kabid"
             ) {
               setSemuaRenaksi((nextData) => {
                 return [renaksi, ...nextData];

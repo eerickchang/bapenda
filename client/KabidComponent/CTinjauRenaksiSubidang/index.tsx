@@ -30,7 +30,8 @@ export default function CTinjauRenaksiSubidang() {
             if (
               renaksi.sub_bidang === router.query.sub_bidang &&
               moment(renaksi.end_date).format("YYYY") ===
-                moment().format("YYYY")
+                moment().format("YYYY") &&
+              renaksi.ditolak === ""
             ) {
               setSemuaRenaksi((nextData) => {
                 return [renaksi, ...nextData];
@@ -54,10 +55,8 @@ export default function CTinjauRenaksiSubidang() {
   const [tahunClick, setTahunClick] = useState("");
   const [semuaRenaksi, setSemuaRenaksi] = useState([]);
 
-
-
   const columns = [
-    { id: "no", label: "No", align: "center" },
+    { id: "no", label: "Tahun", align: "center" },
     { id: "jabatan", label: "Jabatan", align: "center" },
     {
       id: "asn",
@@ -102,8 +101,6 @@ export default function CTinjauRenaksiSubidang() {
       align: "center",
     },
   ];
-
-
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
