@@ -88,7 +88,7 @@ export default function CLihatSemuaRenaksi() {
     fontWeight: 400,
     fontSize: 18,
     width: 60,
-    overflow: 'hidden'
+    overflow: "hidden",
   };
 
   const styleHeaders = {
@@ -97,7 +97,7 @@ export default function CLihatSemuaRenaksi() {
     fontWeight: 600,
     fontSize: 22,
     color: "#fff",
-    maxWidth: 50
+    maxWidth: 50,
   };
 
   const styleContainer = {
@@ -124,28 +124,26 @@ export default function CLihatSemuaRenaksi() {
 
   return (
     <div className={styles.container}>
-        <div className={styles.wrapperTitle}>
-          <div>
-            <Image
-              style={{ cursor: "pointer" }}
-              onClick={clickBack}
-              src={"/Back.svg"}
-              width={45}
-              height={45}
-            />
-          </div>
-          <div>
-            <Image src={"/HapusRenaksiTitle.svg"} width={50} height={40} />
-          </div>
-          <p style={{ marginLeft: 5, marginBottom: 10 }}>
-            Renaksi Sub Bidang {router.query.subid}
-          </p>
+      <div className={styles.wrapperTitle}>
+        <div>
+          <Image
+            style={{ cursor: "pointer" }}
+            onClick={clickBack}
+            src={"/Back.svg"}
+            width={45}
+            height={45}
+          />
         </div>
+        <div>
+          <Image src={"/HapusRenaksiTitle.svg"} width={50} height={40} />
+        </div>
+        <p style={{ marginLeft: 5, marginBottom: 10 }}>
+          Renaksi Sub Bidang {router.query.subid}
+        </p>
+      </div>
 
       <Gap height={100} width={0} />
-      <TableContainer
-        sx={styleContainer}
-      >
+      <TableContainer sx={styleContainer}>
         <Table
           stickyHeader
           // aria-label="sticky table"

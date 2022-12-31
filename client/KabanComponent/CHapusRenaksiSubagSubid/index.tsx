@@ -265,7 +265,7 @@ function Row(props) {
             <p style={style1}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <p style={style2}>{row.status}</p>
+            <p style={style2}>{row.tupoksi_inti}</p>
           </TableCell>
           <TableCell>
             <p style={style2}>{row.kegiatan}</p>

@@ -313,6 +313,7 @@ function Row(props) {
       pathname: "/Kaban/TinjauRenaksiLihatSemua",
       query: {
         subid: row.sub_bidang,
+        bidang: row.bidang,
       },
     });
   };
