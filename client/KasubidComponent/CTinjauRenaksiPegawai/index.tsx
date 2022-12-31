@@ -330,27 +330,21 @@ export default function CTinjauRenaksiPegawai() {
                         <TableCell
                           sx={styleData}
                           style={{ color: "rgba(218, 142, 72, 1)" }}
-                          
                         >
                           {row.nama_thl}
                         </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.sub_kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.tupoksi_inti}
-                        </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
+                        <TableCell sx={styleData}>
                           {row.tupoksi_tambahan}
                         </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>
                           {moment(row.start_date).format("MMM")} -
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
                       </TableRow>
+                      <Gap height={16} width={0} />
                     </>
                   ))}
                 </TableBody>

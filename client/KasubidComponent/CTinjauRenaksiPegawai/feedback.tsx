@@ -318,22 +318,14 @@ export default function CTinjauRenaksiPegawaiFeedback() {
                         </TableCell>
                         <TableCell
                           sx={styleData}
-                          onClick={() => (
-                            setRowSelected(row.id_renaksi)
-                          )}
+                          onClick={() => setRowSelected(row.id_renaksi)}
                         >
                           <p style={{ fontWeight: 600 }}>{row.program}</p>
                         </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.sub_kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.tupoksi_inti}
-                        </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
+                        <TableCell sx={styleData}>
                           {moment(row.start_date).format("MMM")} -
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
@@ -342,6 +334,7 @@ export default function CTinjauRenaksiPegawaiFeedback() {
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
                       </TableRow>
+                      <Gap height={16} width={0}/>
                     </>
                   ))}
                 </TableBody>
