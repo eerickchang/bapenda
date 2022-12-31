@@ -48,7 +48,10 @@ export default function CTinjauRenaksiPegawaiFeedback() {
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
+            if (
+              renaksi.nip == router.query.nip &&
+              renaksi.ditolak == "Kasubid"
+            ) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -170,9 +173,8 @@ export default function CTinjauRenaksiPegawaiFeedback() {
   const [rowSelected, setRowSelected] = useState("6185");
 
   function openModalTolakAll() {
-    console.log(arr);
-    // setArrTolak(arr);
-    // setTolakAllIsOpen(true);
+    setArrTolak(arr);
+    setTolakAllIsOpen(true);
   }
 
   const btnTolak = () => {
@@ -191,7 +193,10 @@ export default function CTinjauRenaksiPegawaiFeedback() {
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
+            if (
+              renaksi.nip == router.query.nip &&
+              renaksi.ditolak == "Kasubid"
+            ) {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -248,16 +253,6 @@ export default function CTinjauRenaksiPegawaiFeedback() {
     borderBottomRightRadius: 20,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     marginTop: -1.8,
-  };
-
-  const fungsi = () => {
-    setOpen(!open);
-    {
-      rowClik
-        ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-          setRowClick(!rowClik))
-        : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-    }
   };
 
   return (
@@ -318,29 +313,18 @@ export default function CTinjauRenaksiPegawaiFeedback() {
                         </TableCell>
                         <TableCell
                           sx={styleData}
-                          onClick={() => (
-                            setRowSelected(row.id_renaksi)
-                          )}
+                          onClick={() => setRowSelected(row.id_renaksi)}
                         >
                           <p style={{ fontWeight: 600 }}>{row.program}</p>
                         </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.sub_kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.tupoksi_inti}
-                        </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
+                        <TableCell sx={styleData}>
                           {moment(row.start_date).format("MMM")} -
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
-                        <TableCell sx={styleData} >
-                          {moment(row.start_date).format("MMM")} -
-                          {moment(row.end_date).format("MMM")}
-                        </TableCell>
+                        <TableCell sx={styleData}>{row.ket_pegawai}</TableCell>
                       </TableRow>
                     </>
                   ))}

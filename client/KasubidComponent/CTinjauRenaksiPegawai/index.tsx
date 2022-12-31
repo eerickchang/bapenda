@@ -48,7 +48,7 @@ export default function CTinjauRenaksiPegawai() {
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
+            if (renaksi.nip == router.query.nip && renaksi.ditolak == "") {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -167,12 +167,9 @@ export default function CTinjauRenaksiPegawai() {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const [rowSelected, setRowSelected] = useState("6185");
-
   function openModalTolakAll() {
-    console.log(arr);
-    // setArrTolak(arr);
-    // setTolakAllIsOpen(true);
+    setArrTolak(arr);
+    setTolakAllIsOpen(true);
   }
 
   const btnTolak = () => {
@@ -191,7 +188,7 @@ export default function CTinjauRenaksiPegawai() {
       Axios.get("http://localhost:3001/kasubidAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.nip == router.query.nip) {
+            if (renaksi.nip == router.query.nip && renaksi.ditolak == "") {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -319,34 +316,22 @@ export default function CTinjauRenaksiPegawai() {
                             name={row.id_renaksi}
                           />
                         </TableCell>
-                        <TableCell
-                          sx={styleData}
-                          onClick={() => (
-                            setRowSelected(row.id_renaksi), fungsi()
-                          )}
-                        >
+                        <TableCell sx={styleData} onClick={() => fungsi()}>
                           <p style={{ fontWeight: 600 }}>{row.program}</p>
                         </TableCell>
                         <TableCell
                           sx={styleData}
                           style={{ color: "rgba(218, 142, 72, 1)" }}
-                          
                         >
                           {row.nama_thl}
                         </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.sub_kegiatan}
-                        </TableCell>
-                        <TableCell sx={styleData} >
-                          {row.tupoksi_inti}
-                        </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>{row.kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.sub_kegiatan}</TableCell>
+                        <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
+                        <TableCell sx={styleData}>
                           {row.tupoksi_tambahan}
                         </TableCell>
-                        <TableCell sx={styleData} >
+                        <TableCell sx={styleData}>
                           {moment(row.start_date).format("MMM")} -
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
