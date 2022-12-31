@@ -301,6 +301,13 @@ function Row(props) {
     });
   };
 
+  const clickRowSubidFeedback = () => {
+    router.push({
+      pathname: "/Kabid/TinjauRenaksiSubidangFeedback",
+      query: { sub_bidang: row.sub_bidang },
+    });
+  };
+
   const style1 = {
     fontFamily: "Poppins",
     fontSize: 18,
@@ -317,98 +324,240 @@ function Row(props) {
   return (
     <>
       <React.Fragment>
-        <TableRow hover className={styles.styleRow}>
-          <TableCell
-            onClick={() => clickRowSubid()}
-            className={styles.styleData}
-            style={style2}
-          >
-            {row.sub_bidang}
-          </TableCell>
-          <TableCell
-            onClick={() => clickRowSubid()}
-            className={styles.styleData}
-            style={style1}
-          >
-            <p style={{ fontWeight: 600 }}>{row.nama}</p>
-          </TableCell>
-          <TableCell>
-            <div className={styles.styleTxtRow}>
-              <div style={{ flexDirection: "row", display: "flex" }}>
-                <button
-                  className={styles.btnTerima}
-                  onClick={() => btnTerima()}
-                >
-                  <Image src={"/Terima.svg"} width={20} height={20} /> Terima
-                </button>
-                {showModal ? (
-                  <div
-                    className={styles.modal}
-                    onClick={() => setShowModal(false)}
-                  >
-                    <p>
-                      Renaksi Renbang <b>Diterima</b>
-                      <div className={styles.checkCircle}>
-                        <Image
-                          src={"/Check-circle.svg"}
-                          width={25}
-                          height={25}
-                        />
+        {row.ditolak == "Kabid" && row.kirim_ke == "Kabid" ? (
+          //!! STYLE YG INI ANDRE
+          <>
+            <TableRow hover className={styles.styleRow}>
+              <TableCell
+                onClick={() => clickRowSubid()}
+                className={styles.styleData}
+                style={style2}
+              >
+                {row.sub_bidang}
+              </TableCell>
+              <TableCell
+                onClick={() => clickRowSubid()}
+                className={styles.styleData}
+                style={style1}
+              >
+                <p style={{ fontWeight: 600 }}>{row.nama}</p>
+              </TableCell>
+              <TableCell>
+                <div className={styles.styleTxtRow}>
+                  <div style={{ flexDirection: "row", display: "flex" }}>
+                    <button
+                      className={styles.btnTerima}
+                      onClick={() => btnTerima()}
+                    >
+                      <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                      Terima
+                    </button>
+                    {showModal ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModal(false)}
+                      >
+                        <p>
+                          Renaksi Renbang <b>Diterima</b>
+                          <div className={styles.checkCircle}>
+                            <Image
+                              src={"/Check-circle.svg"}
+                              width={25}
+                              height={25}
+                            />
+                          </div>
+                        </p>
                       </div>
-                    </p>
-                  </div>
-                ) : null}
-                <Gap width={40} height={0} />
-                <button
-                  className={styles.btnTolak}
-                  onClick={() => (openModal(), console.log(row.nama))}
-                >
-                  <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
-                </button>
-                <Modal
-                  isOpen={modalIsOpen}
-                  onAfterOpen={afterOpenModal}
-                  onRequestClose={closeModal}
-                  style={custom}
-                  contentLabel="Example Modal"
-                >
-                  <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
-                  <Gap height={20} width={0} />
-                  <input
-                    className={styles.inputBuktiLap}
-                    placeholder="Tambah keterangan"
-                    onChange={(e) => setKetAdmin(e.target.value)}
-                  />
-                  <Gap height={20} width={0} />
-                  <div className={styles.wrapBtnModal}>
-                    <button onClick={closeModal} className={styles.btnKirim}>
-                      <img src={"/BatalIcon.svg"} width={20} height={20} />
-                      <p className={styles.txt}>Batal</p>
+                    ) : null}
+                    <Gap width={40} height={0} />
+                    <button
+                      className={styles.btnTolak}
+                      onClick={() => (openModal(), console.log(row.nama))}
+                    >
+                      <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
                     </button>
-                    <Gap width={24} height={0} />
-                    <button onClick={btnTolakExp} className={styles.btnBatal}>
-                      <img src={"/Tolak.svg"} width={20} height={20} />
-                      <p>Tolak</p>
-                    </button>
-                  </div>
-                </Modal>
-                {showModal ? (
-                  <div
-                    className={styles.modal}
-                    onClick={() => setShowModal(false)}
-                  >
-                    <p>
-                      Renaksi Sub Bidang Renbang <b>Ditolak</b>
-                    </p>
-                    <div className={styles.checkCircle}>
-                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                    <div
+                      style={{
+                        position: "absolute",
+                        // marginTop: -35,
+                        right: 43,
+                      }}
+                    >
+                      <Image src={"/Tanggapan.svg"} width={40} height={40} />
                     </div>
+                    <Modal
+                      isOpen={modalIsOpen}
+                      onAfterOpen={afterOpenModal}
+                      onRequestClose={closeModal}
+                      style={custom}
+                      contentLabel="Example Modal"
+                    >
+                      <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
+                      <Gap height={20} width={0} />
+                      <input
+                        className={styles.inputBuktiLap}
+                        placeholder="Tambah keterangan"
+                        onChange={(e) => setKetAdmin(e.target.value)}
+                      />
+                      <Gap height={20} width={0} />
+                      <div className={styles.wrapBtnModal}>
+                        <button
+                          onClick={closeModal}
+                          className={styles.btnKirim}
+                        >
+                          <img src={"/BatalIcon.svg"} width={20} height={20} />
+                          <p className={styles.txt}>Batal</p>
+                        </button>
+                        <Gap width={24} height={0} />
+                        <button
+                          onClick={btnTolakExp}
+                          className={styles.btnBatal}
+                        >
+                          <img src={"/Tolak.svg"} width={20} height={20} />
+                          <p>Tolak</p>
+                        </button>
+                      </div>
+                    </Modal>
+                    {showModal ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModal(false)}
+                      >
+                        <p>
+                          Renaksi Sub Bidang Renbang <b>Ditolak</b>
+                        </p>
+                        <div className={styles.checkCircle}>
+                          <Image
+                            src={"/Check-circle.svg"}
+                            width={25}
+                            height={25}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
-            </div>
-          </TableCell>
-        </TableRow>
+                </div>
+              </TableCell>
+            </TableRow>
+          </>
+        ) : (
+          <>
+            <TableRow hover className={styles.styleRow}>
+              <TableCell
+                onClick={() => clickRowSubid()}
+                className={styles.styleData}
+                style={style2}
+              >
+                {row.sub_bidang}
+              </TableCell>
+              <TableCell
+                onClick={() => clickRowSubid()}
+                className={styles.styleData}
+                style={style1}
+              >
+                <p style={{ fontWeight: 600 }}>{row.nama}</p>
+              </TableCell>
+              <TableCell>
+                <div className={styles.styleTxtRow}>
+                  <div style={{ flexDirection: "row", display: "flex" }}>
+                    <button
+                      className={styles.btnTerima}
+                      onClick={() => btnTerima()}
+                    >
+                      <Image src={"/Terima.svg"} width={20} height={20} />{" "}
+                      Terima
+                    </button>
+                    {showModal ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModal(false)}
+                      >
+                        <p>
+                          Renaksi Renbang <b>Diterima</b>
+                          <div className={styles.checkCircle}>
+                            <Image
+                              src={"/Check-circle.svg"}
+                              width={25}
+                              height={25}
+                            />
+                          </div>
+                        </p>
+                      </div>
+                    ) : null}
+                    <Gap width={40} height={0} />
+                    <button
+                      className={styles.btnTolak}
+                      onClick={() => (openModal(), console.log(row.nama))}
+                    >
+                      <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
+                    </button>
+                    <div
+                      onClick={() => clickRowSubidFeedback()}
+                      style={{
+                        position: "absolute",
+                        // marginTop: -35,
+                        right: 43,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <Image src={"/Tanggapan.svg"} width={40} height={40} />
+                    </div>
+                    <Modal
+                      isOpen={modalIsOpen}
+                      onAfterOpen={afterOpenModal}
+                      onRequestClose={closeModal}
+                      style={custom}
+                      contentLabel="Example Modal"
+                    >
+                      <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
+                      <Gap height={20} width={0} />
+                      <input
+                        className={styles.inputBuktiLap}
+                        placeholder="Tambah keterangan"
+                        onChange={(e) => setKetAdmin(e.target.value)}
+                      />
+                      <Gap height={20} width={0} />
+                      <div className={styles.wrapBtnModal}>
+                        <button
+                          onClick={closeModal}
+                          className={styles.btnKirim}
+                        >
+                          <img src={"/BatalIcon.svg"} width={20} height={20} />
+                          <p className={styles.txt}>Batal</p>
+                        </button>
+                        <Gap width={24} height={0} />
+                        <button
+                          onClick={btnTolakExp}
+                          className={styles.btnBatal}
+                        >
+                          <img src={"/Tolak.svg"} width={20} height={20} />
+                          <p>Tolak</p>
+                        </button>
+                      </div>
+                    </Modal>
+                    {showModal ? (
+                      <div
+                        className={styles.modal}
+                        onClick={() => setShowModal(false)}
+                      >
+                        <p>
+                          Renaksi Sub Bidang Renbang <b>Ditolak</b>
+                        </p>
+                        <div className={styles.checkCircle}>
+                          <Image
+                            src={"/Check-circle.svg"}
+                            width={25}
+                            height={25}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </TableCell>
+            </TableRow>
+          </>
+        )}
       </React.Fragment>
     </>
   );
@@ -470,12 +619,6 @@ export default function CTinjauRenaksi() {
 
   const router = useRouter();
 
-  const lihatSemua = () => {
-    // setActiveDropdown(!activeDropdown);
-    // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatSemua");
-  };
-
   const [showModal, setShowModal] = useState(false);
 
   const style = {
@@ -504,6 +647,7 @@ export default function CTinjauRenaksi() {
             <Gap height={50} width={0} />
             <TableContainer
               style={{
+                paddingLeft: 2,
                 paddingRight: 40,
                 paddingBottom: 20,
               }}
