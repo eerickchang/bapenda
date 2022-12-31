@@ -226,7 +226,7 @@ export default function CTinjauRenaksiSubidangFeedback() {
                       sx={styleRow}
                       style={{ width: 250 }}
                     >
-                      {row.tupoksi_tambahan}
+                      {row.ket_pegawai}
                     </TableCell>
                   </TableRow>
                 );
