@@ -309,189 +309,48 @@ export default function CTinjauRenaksiPegawai() {
                 <TableBody>
                   {pegawai.map((row) => (
                     <>
-                      {row.ditolak == "Kasubid" && row.kirim_ke == "Kasubid" ? (
-                        <>
-                          <TableRow
-                            hover
-                            className={`${styles.tableRow} ${styleRow}`}
-                          >
-                            <TableCell>
-                              <Checkbox
-                                onChange={handleChange}
-                                name={row.id_renaksi}
-                              />
-                            </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              onClick={() => (
-                                setRowSelected(row.id_renaksi), fungsi()
-                              )}
-                            >
-                              <p style={{ fontWeight: 600 }}>{row.program}</p>
-                            </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              style={{ color: "rgba(218, 142, 72, 1)" }}
-                              onClick={() => fungsi()}
-                            >
-                              {row.nama_thl}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              {row.kegiatan}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              {row.sub_kegiatan}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              {row.tupoksi_inti}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              {row.tupoksi_tambahan}
-                            </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  // top: 245,
-                                  right: 43,
-                                }}
-                              >
-                                <Image
-                                  src={"/Tanggapan.svg"}
-                                  width={40}
-                                  height={40}
-                                />
-                              </div>
-                              {moment(row.start_date).format("MMM")} -
-                              {moment(row.end_date).format("MMM")}
-                            </TableCell>
-                          </TableRow>
-                          <TableCell
-                            style={{ padding: 0, width: 2000 }}
-                            colSpan={8}
-                          >
-                            <Collapse
-                              sx={styleCollapse}
-                              in={open}
-                              timeout="auto"
-                            >
-                              <div className={styles.wrapperContentModal}>
-                                <div className={styles.contentFeedback}>
-                                  <div className={styles.profilePengirim}>
-                                    <Image
-                                      src={"/SidebarProfile.svg"}
-                                      width={40}
-                                      height={40}
-                                    />
-                                    <p>
-                                      <b>{row.jabatan}</b> - {row.nama}
-                                      {/*kasubid.nama*/}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    {/* <p>"{row.ket_admin}"</p> */}
-                                    <p className={styles.feedback}>
-                                      {row.ket_pegawai}
-                                    </p>
-                                  </div>
-                                </div>
-                                <button
-                                  className={styles.btnFeedback}
-                                  onClick={openModal}
-                                >
-                                  <p>Tanggapan</p>
-                                </button>
-                                <Modal
-                                  isOpen={modalIsOpen}
-                                  onAfterOpen={afterOpenModal}
-                                  onRequestClose={closeModal}
-                                  style={customFeedback}
-                                  contentLabel="Example Modal"
-                                >
-                                  <h2 className={styles.headerTxtModal}>
-                                    Feedback
-                                  </h2>
-                                  <Gap height={20} width={0} />
-                                  <input
-                                    className={styles.inputBuktiLap}
-                                    placeholder="Tambah keterangan"
-                                    onChange={(e) =>
-                                      setKetAdmin(e.target.value)
-                                    }
-                                  />
-                                  <Gap height={20} width={0} />
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      marginLeft: 383,
-                                    }}
-                                  >
-                                    <button
-                                      onClick={closeModal}
-                                      className={styles.btnKembali}
-                                    >
-                                      <img
-                                        src={"/BatalIcon.svg"}
-                                        width={20}
-                                        height={20}
-                                      />
-                                      <p className={styles.txt}>Batal</p>
-                                    </button>
-                                    <button
-                                      onClick={() =>
-                                        Axios.post(
-                                          "http://localhost:3001/tanggapan",
-                                          {
-                                            idRenaksi: row.id_renaksi,
-                                            ketAdmin: ketAdmin,
-                                          }
-                                        )
-                                      }
-                                      className={styles.btnKirimFeedback}
-                                    >
-                                      <p className={styles.txt}>Kirim</p>
-                                    </button>
-                                  </div>
-                                </Modal>
-                              </div>
-                            </Collapse>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableRow hover className={stylesS.tableRow}>
-                            <TableCell>
-                              <Checkbox
-                                onChange={handleChange}
-                                name={row.id_renaksi}
-                              />
-                            </TableCell>
-                            <TableCell sx={styleData}>
-                              <p style={{ fontWeight: 600 }}>{row.program}</p>
-                            </TableCell>
-                            <TableCell
-                              sx={styleData}
-                              style={{ color: "rgba(218, 142, 72, 1)" }}
-                            >
-                              {row.nama_thl}
-                            </TableCell>
-                            <TableCell sx={styleData}>{row.kegiatan}</TableCell>
-                            <TableCell sx={styleData}>
-                              {row.sub_kegiatan}
-                            </TableCell>
-                            <TableCell sx={styleData}>
-                              {row.tupoksi_inti}
-                            </TableCell>
-                            <TableCell sx={styleData}>
-                              {row.tupoksi_tambahan}
-                            </TableCell>
-                            <TableCell sx={styleData}>
-                              {moment(row.start_date).format("MMM")} -
-                              {moment(row.end_date).format("MMM")}
-                            </TableCell>
-                          </TableRow>
-                        </>
-                      )}
+                      <TableRow
+                        hover
+                        className={`${styles.tableRow} ${styleRow}`}
+                      >
+                        <TableCell>
+                          <Checkbox
+                            onChange={handleChange}
+                            name={row.id_renaksi}
+                          />
+                        </TableCell>
+                        <TableCell
+                          sx={styleData}
+                          onClick={() => (
+                            setRowSelected(row.id_renaksi), fungsi()
+                          )}
+                        >
+                          <p style={{ fontWeight: 600 }}>{row.program}</p>
+                        </TableCell>
+                        <TableCell
+                          sx={styleData}
+                          style={{ color: "rgba(218, 142, 72, 1)" }}
+                          
+                        >
+                          {row.nama_thl}
+                        </TableCell>
+                        <TableCell sx={styleData} >
+                          {row.kegiatan}
+                        </TableCell>
+                        <TableCell sx={styleData} >
+                          {row.sub_kegiatan}
+                        </TableCell>
+                        <TableCell sx={styleData} >
+                          {row.tupoksi_inti}
+                        </TableCell>
+                        <TableCell sx={styleData} >
+                          {row.tupoksi_tambahan}
+                        </TableCell>
+                        <TableCell sx={styleData} >
+                          {moment(row.start_date).format("MMM")} -
+                          {moment(row.end_date).format("MMM")}
+                        </TableCell>
+                      </TableRow>
                     </>
                   ))}
                 </TableBody>
