@@ -317,7 +317,7 @@ function Row(props) {
           contentLabel="Example Modal"
         >
           <div className={styles.wrapperKeterangan}>
-            Keterangan:
+            Permintaan Buka Form Evaluasi Lampiran:
             <div className={styles.contentKeterangan}>
               <p
                 style={{

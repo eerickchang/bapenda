@@ -167,11 +167,12 @@ export default function CTinjauRenaksiPegawai() {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const [rowSelected, setRowSelected] = useState([]);
+  const [rowSelected, setRowSelected] = useState("6185");
 
   function openModalTolakAll() {
-    setArrTolak(arr);
-    setTolakAllIsOpen(true);
+    console.log(arr);
+    // setArrTolak(arr);
+    // setTolakAllIsOpen(true);
   }
 
   const btnTolak = () => {
@@ -320,7 +321,12 @@ export default function CTinjauRenaksiPegawai() {
                                 name={row.id_renaksi}
                               />
                             </TableCell>
-                            <TableCell sx={styleData} onClick={() => fungsi()}>
+                            <TableCell
+                              sx={styleData}
+                              onClick={() => (
+                                setRowSelected(row.id_renaksi), fungsi()
+                              )}
+                            >
                               <p style={{ fontWeight: 600 }}>{row.program}</p>
                             </TableCell>
                             <TableCell
@@ -415,7 +421,10 @@ export default function CTinjauRenaksiPegawai() {
                                   />
                                   <Gap height={20} width={0} />
                                   <div
-                                    style={{ display: "flex", marginLeft: 383 }}
+                                    style={{
+                                      display: "flex",
+                                      marginLeft: 383,
+                                    }}
                                   >
                                     <button
                                       onClick={closeModal}
