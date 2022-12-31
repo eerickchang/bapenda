@@ -352,7 +352,7 @@ export default function CTinjauRenaksiPegawai() {
                               <div
                                 style={{
                                   position: "absolute",
-                                  top: 245,
+                                  // top: 245,
                                   right: 43,
                                 }}
                               >

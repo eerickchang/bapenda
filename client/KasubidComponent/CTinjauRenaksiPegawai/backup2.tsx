@@ -260,15 +260,6 @@ function Row(props) {
         </div>
         {row.ditolak == "Kasubid" && row.kirim_ke == "Kasubid" ? (
           <>
-            <div
-              style={{
-                position: "absolute",
-                marginTop: 10,
-                right: 43,
-              }}
-            >
-              <Image src={"/Tanggapan.svg"} width={40} height={40} />
-            </div>
             <TableRow
               // onClick={() => console.log(arr)}
               hover
@@ -291,6 +282,15 @@ function Row(props) {
               <TableCell sx={styleData}>{row.tupoksi_inti}</TableCell>
               <TableCell sx={styleData}>{row.tupoksi_tambahan}</TableCell>
               <TableCell sx={styleData}>
+                <div
+                  style={{
+                    position: "absolute",
+                    // marginTop: 10,
+                    right: 43,
+                  }}
+                >
+                  <Image src={"/Tanggapan.svg"} width={40} height={40} />
+                </div>
                 {moment(row.start_date).format("MMM")} -
                 {moment(row.end_date).format("MMM")}
               </TableCell>
