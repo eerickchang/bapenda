@@ -427,6 +427,7 @@ function Row(props) {
             </div>
           </TableCell>
         </TableRow>
+        <Gap height={16} width={0} />
       </React.Fragment>
     </>
   );

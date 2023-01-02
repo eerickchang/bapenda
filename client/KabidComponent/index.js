@@ -29,7 +29,6 @@ import CHapusRenaksi from "./CHapusRenaksi";
 import CUbahJadwalRenaksi from "./CUbahJadwalRenaksi";
 import CProfilAdm from "./CProfilAdm";
 import CNotifAdm from "./CNotifAdm";
-import CRiwayatKegiatanAdm from "./CRiwayatKegiatanAdm";
 import TxtInputRenaksiProgram from "./TxtInputRenaksiProgram";
 import CLihatSemuaRenaksi from "./CLihatSemuaRenaksi";
 
@@ -67,7 +66,6 @@ export {
   CUbahJadwalRenaksi,
   CEvaluasiLampiran,
   CHapusRenaksi,
-  CRiwayatKegiatanAdm,
   CNotifAdm,
   CTinjauRenaksi,
   TxtInputRenaksiProgram,

@@ -586,6 +586,10 @@ export default function ContentDaftarKegiatan() {
   }, []);
 
   const router = useRouter();
+    const clickBack = () => {
+      router.push("/Kabid/DaftarKegiatanSubid");
+      // console.log(dataCakin);
+    };
 
   const styleHeader = {
     fontFamily: "Poppins",
@@ -599,7 +603,16 @@ export default function ContentDaftarKegiatan() {
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.wrapperTitle}>
-            <Image src={"/DaftarKegiatan2.svg"} width={50} height={50} />
+            <Image
+              style={{ cursor: "pointer" }}
+              onClick={clickBack}
+              src={"/Back.svg"}
+              width={50}
+              height={50}
+            />
+            <div style={{ marginTop: 10 }}>
+              <Image src={"/DaftarKegiatan2.svg"} width={40} height={40} />
+            </div>
             <p style={{ marginLeft: 10 }}>DAFTAR KEGIATAN</p>
           </div>
           <Gap height={146} width={0} />

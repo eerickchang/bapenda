@@ -318,6 +318,16 @@ function Row(props) {
     });
   };
 
+  const clickRowFeedback = () => {
+    router.push({
+      pathname: "/Kaban/TinjauRenaksiLihatSemuaFeedback",
+      query: {
+        subid: row.sub_bidang,
+        bidang: row.bidang,
+      },
+    });
+  };
+
   const style1 = {
     fontFamily: "Poppins",
     fontSize: 18,
@@ -396,6 +406,17 @@ function Row(props) {
                 >
                   <Image src={"/Tolak.svg"} width={20} height={20} /> Tolak
                 </button>
+                <div
+                  onClick={() => clickRowFeedback()}
+                  style={{
+                    position: "absolute",
+                    // marginTop: -35,
+                    right: 43,
+                    cursor: "pointer",
+                  }}
+                >
+                  <Image src={"/Tanggapan.svg"} width={40} height={40} />
+                </div>
                 <Modal
                   isOpen={modalIsOpen}
                   onAfterOpen={afterOpenModal}
@@ -440,6 +461,7 @@ function Row(props) {
             </div>
           </TableCell>
         </TableRow>
+        <Gap height={16} width={0} />
       </React.Fragment>
     </>
   );
@@ -493,6 +515,17 @@ export const CTinjauRenaksi = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
     console.log(dataRenaksi);
   };
+ const router = useRouter();
+
+    const clickRowRenaksiKabid = () => {
+      router.push({
+        pathname: "/Kaban/RenaksiKabid",
+        // query: {
+        //   subid: row.sub_bidang,
+        //   bidang: row.bidang,
+        // },
+      });
+    };
 
   const style = {
     fontFamily: "Poppins",
@@ -507,6 +540,35 @@ export const CTinjauRenaksi = () => {
     paddingBottom: 20,
   };
 
+  const style2 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 600,
+    color: "#000",
+    // cursor: "pointer",
+  };
+
+  const style3 = {
+    fontFamily: "Poppins",
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#000",
+    // cursor: "pointer",
+  };
+
+  const styleAksi = {
+    flexDirection: "row",
+    display: "flex",
+    fontFamily: "Poppins",
+    fontWeight: 400,
+    fontSize: 18,
+    width: 130,
+    justifyContent: "space-between",
+    cursor: "pointer",
+  };
+
+
+
   return (
     <>
       {domLoaded && (
@@ -519,6 +581,45 @@ export const CTinjauRenaksi = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
+            <TableContainer style={styleContainer}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={style} width={700}>
+                      Kepala Bidang
+                    </TableCell>
+                    <TableCell style={style} width={700}>
+                      Aksi
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow className={`${styles.tableRow}`}>
+                    <TableCell style={style2}>
+                      <p>Seluruh Kepala Bidang</p>
+                    </TableCell>
+                    <TableCell style={style3}>
+                      <div style={styleAksi} onClick={clickRowRenaksiKabid}>
+                        <Image
+                          src={"/LihatDetail.svg"}
+                          width={25}
+                          height={25}
+                        />
+                        Lihat detail
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                  {/* {pegawaiSubid.map((row) => (
+                    <Row
+                      key={row.id_renaksi}
+                      row={row}
+                      stateChanger={setPegawaiSubid}
+                    />
+                  ))} */}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Gap height={50} width={0} />
             <TableContainer style={styleContainer}>
               <Table>
                 <TableHead>
@@ -540,6 +641,7 @@ export const CTinjauRenaksi = () => {
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawaiSubid}
+                      arrSubid={pegawaiSubid}
                     />
                   ))}
                 </TableBody>

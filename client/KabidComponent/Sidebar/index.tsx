@@ -58,7 +58,7 @@ export default function Sidebar({
     router.push("/Kabid/HapusRenaksi");
   };
   const clickRiwayatKegiatan = () => {
-    router.push("/Kabid/RiwayatKegiatan");
+    router.push("/Kabid/RiwayatKegiatanSubid");
   };
 
   const clickProfil = () => {

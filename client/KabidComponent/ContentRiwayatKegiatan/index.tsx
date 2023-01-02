@@ -20,6 +20,7 @@ import "jspdf-autotable";
 import FileDownload from "js-file-download";
 
 import Modal from "react-modal";
+import { useRouter } from "next/router";
 
 Axios.defaults.withCredentials = true;
 
@@ -914,16 +915,28 @@ export const ContentRiwayatKegiatan = () => {
 
   const styleContainer = { paddingLeft: 2, paddingRight: 40 };
 
+  const router = useRouter();
+  const clickBack = () => {
+    router.push("/Kabid/RiwayatKegiatanSubid");
+    // console.log(dataCakin);
+  };
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
           <div className={stylesS.container}>
             <div className={styles.wrapperTitle}>
+              <Image
+                style={{ cursor: "pointer" }}
+                onClick={clickBack}
+                src={"/Back.svg"}
+                width={45}
+                height={45}
+              />
               <div>
                 <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>
+              <p style={{ marginLeft: 8, marginBottom: 10 }}>
                 RIWAYAT KEGIATAN TAHUN {thnSkrg}
               </p>
             </div>
