@@ -1,0 +1,105 @@
+<TableBody>
+  {/* AMBIL DATA ROW */}
+  {tampilkanCakin == "Rows Andre"
+    ? rows
+        // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map((row) => {
+          return (
+            <TableRow hover>
+              <TableCell align="center" sx={styleRowNama}>
+                <Image src={"/User1.svg"} width={50} height={50} />
+                <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.jabatan}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {moment(row.bulan).format("MMM")}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.jumlah_kegiatan}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.lampiran_disubmit}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.lampiran_bsubmit}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.hasil_kinerja}
+              </TableCell>
+
+              {/* {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          sx={{
+                            border: 1,
+                            borderColor: "#1BDDBB",
+                            fontFamily: "Poppins",
+                            fontWeight: 400,
+                            fontSize: 18,
+                          }}
+                          key={column.id}
+                          align={column.align}
+                        >
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })} */}
+            </TableRow>
+          );
+        })
+    : rowsGeo
+        .map((row) => {
+          return (
+            <TableRow hover>
+              <TableCell align="center" sx={styleRowNama}>
+                <Image src={"/User1.svg"} width={50} height={50} />
+                <p style={{ margin: 0, marginLeft: 10 }}>{row.nama}</p>
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.jabatan}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {moment(row.bulan).format("MMM")}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.jumlah_kegiatan}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.lampiran_disubmit}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.lampiran_bsubmit}
+              </TableCell>
+              <TableCell align="center" sx={styleRow}>
+                {row.hasil_kinerja}
+              </TableCell>
+
+              {/* {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          sx={{
+                            border: 1,
+                            borderColor: "#1BDDBB",
+                            fontFamily: "Poppins",
+                            fontWeight: 400,
+                            fontSize: 18,
+                          }}
+                          key={column.id}
+                          align={column.align}
+                        >
+                          {column.format && typeof value === "number"
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })} */}
+            </TableRow>
+          );
+        })}
+</TableBody>;

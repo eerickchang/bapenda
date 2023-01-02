@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ContentInputRenaksi, Gap, Sidebar } from "../../../KasubagComponent";
 import styles from "./InputRenaksi.module.css";
-import sidebarStyles from "../../../KasubagComponent/SidebarStaff/sidebar.module.css";
+import sidebarStyles from "../../../KasubagComponent/Sidebar/sidebar.module.css";
 import Axios from "axios";
 
 export default function InputRenaksi() {

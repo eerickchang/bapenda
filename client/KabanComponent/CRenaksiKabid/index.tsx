@@ -547,7 +547,7 @@ export const CRenaksiKabid = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
+            <TableContainer style={{ paddingLeft: 40, paddingRight: 40 }}>
               <Table>
                 <TableHead>
                   <TableRow>

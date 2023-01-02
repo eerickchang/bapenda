@@ -128,9 +128,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <TableCell sx={{ height: 100, color: "rgb(233, 124, 0)" }}>
                   <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
                 </TableCell>
@@ -234,11 +234,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     {row.ket_pegawai}
                   </p>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <p className={stylesS.styleTxtRowDitolak}>
                     {row.sub_kegiatan}
                   </p>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <p className={stylesS.styleTxtRowDitolak}>{row.kondisi}</p>
                 </TableCell>
@@ -338,9 +338,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 <TableCell sx={{ height: 100, color: "rgb(233, 124, 0)" }}>
                   <p className={stylesS.styleTxtRow}>{row.ket_pegawai}</p>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <p className={stylesS.styleTxtRow}>{row.sub_kegiatan}</p>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <p className={stylesS.styleTxtRow}>{row.kondisi}</p>
                 </TableCell>
@@ -454,11 +454,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     {row.ket_pegawai}
                   </p>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <p className={stylesS.styleTxtRowDitolak}>
                     {row.sub_kegiatan}
                   </p>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <p className={stylesS.styleTxtRowDitolak}>{row.kondisi}</p>
                 </TableCell>
@@ -1054,9 +1054,9 @@ export const ContentRiwayatKegiatan = () => {
                     <TableCell width={400} style={styleHeader}>
                       Keterangan
                     </TableCell>
-                    <TableCell width={400} style={styleHeader}>
+                    {/* <TableCell width={400} style={styleHeader}>
                       Diajukan
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell width={400} style={styleHeader}>
                       Kondisi
                     </TableCell>

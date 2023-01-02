@@ -184,7 +184,10 @@ export default function CLihatSemuaRenaksiFeedback() {
                     <TableCell align="center" sx={styleData}>
                       {row.sub_kegiatan}
                     </TableCell>
-                    <TableCell align="center" sx={styleData}>
+                    <TableCell
+                      align="center"
+                      sx={styleData}
+                    >
                       {row.tupoksi_inti}
                     </TableCell>
                     <TableCell align="center" sx={styleData}>

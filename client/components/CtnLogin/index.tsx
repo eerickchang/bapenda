@@ -49,10 +49,11 @@ export default function CtnLogin() {
         router.push("/THL/Dashboard");
       } else if (response.data[0].jabatan === "Kasubid") {
         router.push("Kasubid/Dashboard");
-      } else if (
-        response.data[0].jabatan === "Kabid" ||
-        response.data[0].jabatan === "Sekretaris"
-      ) {
+      } else if (response.data[0].jabatan === "Kasubag") {
+        router.push("Kasubag/Dashboard");
+      } else if (response.data[0].jabatan === "Sekretaris") {
+        router.push("Sekretaris/Dashboard");
+      } else if (response.data[0].jabatan === "Kabid") {
         router.push("Kabid/Dashboard");
       }
     });

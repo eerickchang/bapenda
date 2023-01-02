@@ -621,10 +621,10 @@ export const CTinjauRenaksi = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell style={style} width={700}>
-                      Sub Bidang
+                      Sub Bagian
                     </TableCell>
                     <TableCell style={style} width={700}>
-                      Kepala Sub Bidang
+                      Kepala Sub Bagian
                     </TableCell>
                     <TableCell style={style} width={700}>
                       Aksi
