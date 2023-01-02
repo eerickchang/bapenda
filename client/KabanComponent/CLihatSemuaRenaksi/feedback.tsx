@@ -27,7 +27,10 @@ export default function CLihatSemuaRenaksiFeedback() {
       Axios.get("http://localhost:3001/KabanAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === router.query.subid) {
+            if (
+              renaksi.sub_bidang === router.query.subid &&
+              renaksi.ditolak == "Kaban"
+            ) {
               setSemuaRenaksi((nextData) => {
                 return [renaksi, ...nextData];
               });
