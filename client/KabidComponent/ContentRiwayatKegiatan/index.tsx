@@ -509,7 +509,9 @@ export const ContentRiwayatKegiatan = () => {
   const [year, setYear] = useState([]);
 
   const shouldLog = useRef(true);
+  const router = useRouter();
   useEffect(() => {
+    if (!router.isReady) return;
     if (shouldLog.current) {
       shouldLog.current = false;
       setDomLoaded(true);
@@ -536,7 +538,7 @@ export const ContentRiwayatKegiatan = () => {
         );
       });
     }
-  }, []);
+  }, [router.query, router.isReady]);
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);
   const [activeDropdownUnduh, setActiveDropdownUnduh] = useState(false);
@@ -918,7 +920,6 @@ export const ContentRiwayatKegiatan = () => {
 
   const styleContainer = { paddingLeft: 2, paddingRight: 40 };
 
-  const router = useRouter();
   const clickBack = () => {
     router.push("/Kabid/RiwayatKegiatanSubid");
     // console.log(dataCakin);

@@ -14,7 +14,7 @@ import Axios from "axios";
 
 Axios.defaults.withCredentials = true;
 
-export default function ContentRiwayatKegiatanSubid() {
+export default function ContentDaftarKegiatanSubid() {
   const [kasubid, setKasubid] = useState([]);
 
   const shouldLog = useRef(true);
@@ -42,12 +42,11 @@ export default function ContentRiwayatKegiatanSubid() {
   const router = useRouter();
 
   const clickRow = (data) => {
-    // console.log(data);
     router.push({
       pathname: "/Kabid/DaftarKegiatan",
-      // query: {
-      //   subid: data,
-      // },
+      query: {
+        subid: data,
+      },
     });
   };
 
@@ -78,7 +77,7 @@ export default function ContentRiwayatKegiatanSubid() {
         <div>
           <Image src={"/RiwayatIcon.svg"} width={40} height={40} />
         </div>
-        <p style={{ marginLeft: 8, marginBottom: 10 }}>RIWAYAT KEGIATAN</p>
+        <p style={{ marginLeft: 8, marginBottom: 10 }}>DAFTAR KEGIATAN</p>
       </div>
       <Gap height={153} width={0} />
       <div className={styles.wrapTable}>
@@ -94,7 +93,10 @@ export default function ContentRiwayatKegiatanSubid() {
             <TableBody>
               {kasubid.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.nip}>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <div className={styles.styleProfileKasub}>
                       {row.foto != "" ? (
                         <Image src={row.foto} width={45} height={45} />
@@ -105,10 +107,16 @@ export default function ContentRiwayatKegiatanSubid() {
                       <p>{row.nama}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
                   </TableCell>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     {row.bidang}
                   </TableCell>
                 </TableRow>

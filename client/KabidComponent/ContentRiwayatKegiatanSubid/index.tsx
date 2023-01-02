@@ -107,10 +107,16 @@ export default function ContentDaftarKegiatanSubid() {
                       <p>{row.nama}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
                   </TableCell>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     {row.bidang}
                   </TableCell>
                 </TableRow>
