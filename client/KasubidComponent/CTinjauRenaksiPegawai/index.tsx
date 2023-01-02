@@ -336,6 +336,7 @@ export default function CTinjauRenaksiPegawai() {
                           {moment(row.end_date).format("MMM")}
                         </TableCell>
                       </TableRow>
+                      <Gap height={16} width={0} />
                     </>
                   ))}
                 </TableBody>

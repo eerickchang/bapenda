@@ -326,6 +326,7 @@ export default function CTinjauRenaksiPegawaiFeedback() {
                         </TableCell>
                         <TableCell sx={styleData}>{row.ket_pegawai}</TableCell>
                       </TableRow>
+                      <Gap height={16} width={0}/>
                     </>
                   ))}
                 </TableBody>
