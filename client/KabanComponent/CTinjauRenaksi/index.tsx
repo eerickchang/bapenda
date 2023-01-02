@@ -36,8 +36,6 @@ function Row(props) {
     Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
       (ambilRenaksi) => {
         let renaksi = ambilRenaksi.data;
-        console.log("Renaksi: ", renaksi);
-        console.log("Subid: ", arrSubid);
 
         let renaksiSDarrSubid = [];
         renaksiSDarrSubid = renaksi.filter((elA) => {
@@ -49,8 +47,6 @@ function Row(props) {
             idRenaksi: item.id_renaksi,
           });
         });
-
-        console.log("Renaksi Arr: ", renaksiSDarrSubid);
       }
     );
 
@@ -63,8 +59,6 @@ function Row(props) {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
             let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
 
             pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
               return renaksi.some(
@@ -77,8 +71,6 @@ function Row(props) {
                 return [item, ...nextData];
               });
             });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
@@ -106,8 +98,6 @@ function Row(props) {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
             let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
 
             pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
               return renaksi.some(
@@ -120,8 +110,6 @@ function Row(props) {
                 return [item, ...nextData];
               });
             });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
@@ -137,7 +125,6 @@ function Row(props) {
     Axios.get(`http://localhost:3001/downloadFile${row.files}`, {
       responseType: "blob",
     }).then((res) => {
-      console.log(res);
       FileDownload(res.data, `${row.files}`);
     });
   };
@@ -249,8 +236,6 @@ function Row(props) {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
             let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
 
             pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
               return renaksi.some(
@@ -263,8 +248,6 @@ function Row(props) {
                 return [item, ...nextData];
               });
             });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
@@ -474,6 +457,7 @@ export const CTinjauRenaksi = () => {
   const [thnSkrg, setThnSkrg] = useState("");
   const [dataRenaksi, setDataRenaksi] = useState([]);
   const [subid, setSubid] = useState("");
+  const [reqKabid, setReqKabid] = useState([]);
 
   const [pegawaiSubag, setPegawaiSubag] = useState([]);
   const [pegawaiSubid, setPegawaiSubid] = useState([]);
@@ -483,14 +467,24 @@ export const CTinjauRenaksi = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+        (ambilRenaksi) => {
+          ambilRenaksi.data.map((renaksi) => {
+            if (renaksi.jabatan == "Kabid" || renaksi.jabatan == "Sekretaris") {
+              setReqKabid((nextData) => {
+                return [renaksi, ...nextData];
+              });
+            }
+          });
+        }
+      );
+
       Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
         Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
           (ambilRenaksi) => {
             let pegawaiYgAdaRenaksi = [];
             let kasubid = ambilKasubid.data;
             let renaksi = ambilRenaksi.data;
-            console.log("Kasubid: ", kasubid);
-            console.log("Renaksi: ", renaksi);
 
             pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
               return renaksi.some(
@@ -503,8 +497,6 @@ export const CTinjauRenaksi = () => {
                 return [item, ...nextData];
               });
             });
-
-            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
           }
         );
       });
@@ -513,19 +505,18 @@ export const CTinjauRenaksi = () => {
 
   const btnFilterBulan = () => {
     // setActiveDropdownBulan(!activeDropdownBulan);
-    console.log(dataRenaksi);
   };
- const router = useRouter();
+  const router = useRouter();
 
-    const clickRowRenaksiKabid = () => {
-      router.push({
-        pathname: "/Kaban/RenaksiKabid",
-        // query: {
-        //   subid: row.sub_bidang,
-        //   bidang: row.bidang,
-        // },
-      });
-    };
+  const clickRowRenaksiKabid = () => {
+    router.push({
+      pathname: "/Kaban/RenaksiKabid",
+      // query: {
+      //   subid: row.sub_bidang,
+      //   bidang: row.bidang,
+      // },
+    });
+  };
 
   const style = {
     fontFamily: "Poppins",
@@ -567,8 +558,6 @@ export const CTinjauRenaksi = () => {
     cursor: "pointer",
   };
 
-
-
   return (
     <>
       {domLoaded && (
@@ -581,44 +570,51 @@ export const CTinjauRenaksi = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer style={styleContainer}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell style={style} width={700}>
-                      Kepala Bidang
-                    </TableCell>
-                    <TableCell style={style} width={700}>
-                      Aksi
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow className={`${styles.tableRow}`}>
-                    <TableCell style={style2}>
-                      <p>Seluruh Kepala Bidang</p>
-                    </TableCell>
-                    <TableCell style={style3}>
-                      <div style={styleAksi} onClick={clickRowRenaksiKabid}>
-                        <Image
-                          src={"/LihatDetail.svg"}
-                          width={25}
-                          height={25}
-                        />
-                        Lihat detail
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                  {/* {pegawaiSubid.map((row) => (
+
+            {/* TABEL YANG KABID */}
+            {reqKabid.length == 0 ? null : (
+              <>
+                <TableContainer style={styleContainer}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={style} width={700}>
+                          Kepala Bidang
+                        </TableCell>
+                        <TableCell style={style} width={700}>
+                          Aksi
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow className={`${styles.tableRow}`}>
+                        <TableCell style={style2}>
+                          <p>Seluruh Kepala Bidang</p>
+                        </TableCell>
+                        <TableCell style={style3}>
+                          <div style={styleAksi} onClick={clickRowRenaksiKabid}>
+                            <Image
+                              src={"/LihatDetail.svg"}
+                              width={25}
+                              height={25}
+                            />
+                            Lihat detail
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                      {/* {pegawaiSubid.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
                       stateChanger={setPegawaiSubid}
                     />
                   ))} */}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            )}
+
             <Gap height={50} width={0} />
             <TableContainer style={styleContainer}>
               <Table>

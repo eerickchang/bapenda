@@ -697,10 +697,10 @@ export const CRenaksiKabid = () => {
       shouldLog.current = false;
       setDomLoaded(true);
 
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === router.query.subid) {
+            if (renaksi.jabatan == "Kabid" || renaksi.jabatan == "Sekretaris") {
               setPegawai((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -744,15 +744,9 @@ export const CRenaksiKabid = () => {
                 />
               </div>
               <div>
-                <Image
-                  src={"/TinjauRenaksiTitle.svg"}
-                  width={50}
-                  height={40}
-                />
+                <Image src={"/TinjauRenaksiTitle.svg"} width={50} height={40} />
               </div>
-              <p style={{ marginLeft: 5, marginBottom: 10 }}>
-                TINJAU RENAKSI
-              </p>
+              <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
             <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
