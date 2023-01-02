@@ -524,7 +524,7 @@ export const ContentRiwayatKegiatan = () => {
               if (
                 moment(item.end_date).format("YYYY") ===
                   moment().format("YYYY") &&
-                item.bidang == dataPegawai.data.user[0].bidang &&
+                item.sub_bidang == router.query.subid &&
                 item.status == "Unggah Lampiran"
               ) {
                 setDataRenaksi((nextData) => {
@@ -662,7 +662,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == router.query.subid &&
                   item.status == "Unggah Lampiran"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -690,7 +690,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == router.query.subid &&
                           item.status == "Unggah Lampiran"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -723,7 +723,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == router.query.subid &&
                   item.status == "Hapus Kegiatan"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -751,7 +751,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == router.query.subid &&
                           item.status == "Hapus Kegiatan"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -784,7 +784,7 @@ export const ContentRiwayatKegiatan = () => {
                 if (
                   moment(item.end_date).format("YYYY") ===
                     moment().format("YYYY") &&
-                  item.bidang == response.data.user[0].bidang &&
+                  item.sub_bidang == router.query.subid &&
                   item.status == "Ubah Jadwal"
                 ) {
                   setDataRenaksi((nextData) => {
@@ -812,7 +812,7 @@ export const ContentRiwayatKegiatan = () => {
                         if (
                           moment(item.end_date).format("YYYY") ===
                             moment(`${i}`).format("YYYY") &&
-                          item.bidang == response.data.user[0].bidang &&
+                          item.sub_bidang == router.query.subid &&
                           item.status == "Ubah Jadwal"
                         ) {
                           setDataRenaksi((nextData) => {
@@ -843,7 +843,10 @@ export const ContentRiwayatKegiatan = () => {
     XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
 
     //DOWNLOAD
-    XLSX.writeFile(workBook, `Riwayat Kegiatan Renaksi ${asn.bidang}.xlsx`);
+    XLSX.writeFile(
+      workBook,
+      `Riwayat Kegiatan Renaksi ${router.query.subid}.xlsx`
+    );
   };
 
   const btnDwPDF = () => {
@@ -856,7 +859,7 @@ export const ContentRiwayatKegiatan = () => {
 
     doc.setFontSize(15);
 
-    const title = `Riwayat Kegiatan Renaksi ${asn.bidang}`;
+    const title = `Riwayat Kegiatan Renaksi ${router.query.subid}`;
     const headers = [
       [
         "Program",
@@ -890,7 +893,7 @@ export const ContentRiwayatKegiatan = () => {
 
     doc.text(title, marginLeft, 40);
     doc.autoTable(content);
-    doc.save(`Riwayat Kegiatan Renaksi ${asn.bidang}`);
+    doc.save(`Riwayat Kegiatan Renaksi ${router.query.subid}`);
   };
 
   const unduh = [

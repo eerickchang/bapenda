@@ -22,13 +22,18 @@ export default function ContentDaftarKegiatanSubid() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
-        ambilPegawai.data.map((pegawai) => {
-          if (pegawai.jabatan == "Kasubid") {
-            setKasubid((nextData) => {
-              return [...nextData, pegawai];
-            });
-          }
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.jabatan == "Kasubid" &&
+              pegawai.bidang == masuk.data.user[0].bidang
+            ) {
+              setKasubid((nextData) => {
+                return [...nextData, pegawai];
+              });
+            }
+          });
         });
       });
     }
@@ -37,12 +42,11 @@ export default function ContentDaftarKegiatanSubid() {
   const router = useRouter();
 
   const clickRow = (data) => {
-    // console.log(data);
     router.push({
-      pathname: "/Kabid/DaftarKegiatan",
-      // query: {
-      //   subid: data,
-      // },
+      pathname: "/Kabid/RiwayatKegiatan",
+      query: {
+        subid: data,
+      },
     });
   };
 
@@ -89,7 +93,10 @@ export default function ContentDaftarKegiatanSubid() {
             <TableBody>
               {kasubid.map((row) => (
                 <TableRow hover className={styles.styleRow} key={row.nip}>
-                  <TableCell onClick={() => clickRow()} style={style2}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <div className={styles.styleProfileKasub}>
                       {row.foto != "" ? (
                         <Image src={row.foto} width={45} height={45} />

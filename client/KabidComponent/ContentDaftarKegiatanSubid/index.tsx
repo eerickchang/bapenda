@@ -22,13 +22,18 @@ export default function ContentRiwayatKegiatanSubid() {
     if (shouldLog.current) {
       shouldLog.current = false;
 
-      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
-        ambilPegawai.data.map((pegawai) => {
-          if (pegawai.jabatan == "Kasubid") {
-            setKasubid((nextData) => {
-              return [...nextData, pegawai];
-            });
-          }
+      Axios.get("http://localhost:3001/masuk").then((masuk) => {
+        Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+          ambilPegawai.data.map((pegawai) => {
+            if (
+              pegawai.jabatan == "Kasubid" &&
+              pegawai.bidang == masuk.data.user[0].bidang
+            ) {
+              setKasubid((nextData) => {
+                return [...nextData, pegawai];
+              });
+            }
+          });
         });
       });
     }

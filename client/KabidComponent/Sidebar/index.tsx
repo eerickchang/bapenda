@@ -35,7 +35,7 @@ export default function Sidebar({
   };
 
   const clickDaftarKegiatan = () => {
-    router.push("/Kabid/DaftarKegiatan");
+    router.push("/Kabid/DaftarKegiatanSubid");
   };
 
   const clickInputRenaksi = () => {
