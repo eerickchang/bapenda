@@ -196,7 +196,7 @@ export default function CLihatSemuaRenaksiFeedback() {
                       sx={styleData}
                       style={{ width: 150 }}
                     >
-                      tanggapan
+                      {row.ket_pegawai}
                     </TableCell>
                   </TableRow>
                 );
