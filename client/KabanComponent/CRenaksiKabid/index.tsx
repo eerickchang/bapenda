@@ -93,36 +93,17 @@ function Row(props) {
   const [rowClik, setRowClick] = useState(true);
   const [styleRow, setStyleRow] = useState("");
 
-  const btnTerimaSemua = () => {
-    Axios.get("http://localhost:3001/masuk").then((masuk) => {
-      Axios.get("http://localhost:3001/kasubidAmbilRenaksiMJD").then(
-        (ambilRenaksi) => {
-          ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === masuk.data.user[0].sub_bidang) {
-              Axios.post("http://localhost:3001/kasubidMenerimaRenaksi", {
-                idRenaksi: renaksi.id_renaksi,
-              });
-            }
-          });
-        }
-      );
-    });
-
-    stateChanger([]);
-    // window.location.reload();
-  };
-
   const btnTerima = () => {
-    Axios.post("http://localhost:3001/kabanMenerimaRenaksi", {
+    Axios.post("http://localhost:3001/kabanMenerimaRenaksiFinal", {
       idRenaksi: row.id_renaksi,
     });
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === subid) {
+            if (renaksi.jabatan == "Kabid" || renaksi.jabatan == "Sekretaris") {
               stateChanger((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -232,17 +213,17 @@ function Row(props) {
   };
 
   const btnTolakExp = () => {
-    Axios.post("http://localhost:3001/kabanMenolakRenaksiRow", {
+    Axios.post("http://localhost:3001/kabanMenolakRenaksiKabid", {
       idRenaksi: row.id_renaksi,
       ketAdmin: ketAdmin,
     });
     stateChanger([]);
 
     setTimeout(() => {
-      Axios.get("http://localhost:3001/kabanAmbilRenaksiSelesai").then(
+      Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
         (ambilRenaksi) => {
           ambilRenaksi.data.map((renaksi) => {
-            if (renaksi.sub_bidang === subid) {
+            if (renaksi.jabatan == "Kabid" || renaksi.jabatan == "Sekretaris") {
               stateChanger((nextData) => {
                 return [renaksi, ...nextData];
               });
@@ -254,38 +235,6 @@ function Row(props) {
 
     closeModal();
     btnTolak();
-  };
-
-  const btnTolakAllExp = () => {
-    // const data = new FormData();
-    // data.append("file", file);
-
-    // Axios.post("http://localhost:3001/uploadFile", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success") {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //         fileURL: response.data.file,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     } else {
-    //       Axios.post("http://localhost:3001/unggahLaporan", {
-    //         idRenaksi: row.id_renaksi,
-    //         ketPegawai: ketPegawai,
-    //       }).then((unggahLaporan) => {
-    //         console.log(unggahLaporan);
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    closeModalTolakAll();
-    btnTolakAll();
   };
 
   const style1 = {
@@ -324,154 +273,148 @@ function Row(props) {
     <>
       <React.Fragment>
         {/* <> */}
-          <TableRow
-            className={`${styles.tableRow} ${styleRow}`}
-            onClick={() => {
-              setOpen(!open);
-              {
-                rowClik
-                  ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
-                    setRowClick(!rowClik))
-                  : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
-              }
-            }}
-            // sx={{ "& > *": { borderBottom: "" } }}
-          >
-            <TableCell>
-              <p style={style2}>{row.program}</p>
-            </TableCell>
-            <TableCell>
-              <p style={style2}>{row.kegiatan}</p>
-            </TableCell>
-            <TableCell>
-              <p style={style2}>{row.sub_kegiatan}</p>
-            </TableCell>
-            <TableCell>
-              <p style={style2}>{row.tupoksi_inti}</p>
-            </TableCell>
-            <TableCell>
-              <p style={style2}>{row.tupoksi_tambahan}</p>
-            </TableCell>
-            <TableCell>
-              <p style={style2}>
-                {`${moment(row.start_date).format("MMM")} -
+        <TableRow
+          className={`${styles.tableRow} ${styleRow}`}
+          onClick={() => {
+            setOpen(!open);
+            {
+              rowClik
+                ? (setStyleRow(`${styles.tableRow} ${styles.tableRowClick}`),
+                  setRowClick(!rowClik))
+                : (setStyleRow(styles.tableRow), setRowClick(!rowClik));
+            }
+          }}
+          // sx={{ "& > *": { borderBottom: "" } }}
+        >
+          <TableCell>
+            <p style={style2}>{row.program}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.sub_kegiatan}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.tupoksi_inti}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.tupoksi_tambahan}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>
+              {`${moment(row.start_date).format("MMM")} -
                 ${moment(row.end_date).format("MMM")}`}
-              </p>
-            </TableCell>
-          </TableRow>
-          {/* <div className={styles.backgroundRowExpand}> */}
-          <TableCell style={{ padding: 0 }} colSpan={6}>
-            <Collapse style={styleCollapse} in={open} timeout="auto">
-              <div className={styles.wrapperExpand}>
-                <div className={styles.wrapperKeterangan}>
-                  Keterangan:
-                  <div className={styles.contentKeterangan}>
-                    <p
-                      style={{
-                        maxWidth: 930,
-                        height: 140,
-                        overflow: "auto",
-                        paddingRight: 10,
-                        marginTop: 8,
-                      }}
-                    >
-                      {row.ket_pegawai}
-                    </p>
-                  </div>
-                </div>
-                <div className={styles.wrapperLampiran}>
-                  Lampiran:
-                  {row.files === "" ? null : (
-                    <div className={styles.contentLampiran} onClick={btnDw}>
-                      <div className={styles.fileLampiran}>
-                        <Image src={"/IconPDF.svg"} width={35} height={40} />
-                        <p style={{ marginLeft: 10 }}> File Laporan</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className={styles.wrapperBtnTerimaTolak}>
-                  <Gap width={0} height={50} />
-                  <button onClick={btnTerima} className={styles.styleBtn}>
-                    <Image src={"/Terima.svg"} width={30} height={30} />
-                    <p>Terima</p>
-                  </button>
-                  {showModal ? (
-                    <div
-                      className={styles.modal}
-                      onClick={() => setShowModal(false)}
-                    >
-                      <p>
-                        Ubah Jadwal {row.nama} <b>Diterima</b>
-                      </p>
-                      <div className={styles.checkCircle}>
-                        <Image
-                          src={"/Check-circle.svg"}
-                          width={25}
-                          height={25}
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-                  <Gap width={0} height={20} />
-                  <button
-                    onClick={openModal}
+            </p>
+          </TableCell>
+        </TableRow>
+        {/* <div className={styles.backgroundRowExpand}> */}
+        <TableCell style={{ padding: 0 }} colSpan={6}>
+          <Collapse style={styleCollapse} in={open} timeout="auto">
+            <div className={styles.wrapperExpand}>
+              <div className={styles.wrapperKeterangan}>
+                Keterangan:
+                <div className={styles.contentKeterangan}>
+                  <p
                     style={{
-                      fontWeight: 700,
-                      background: "rgba(255, 1, 100, 1)",
+                      maxWidth: 930,
+                      height: 140,
+                      overflow: "auto",
+                      paddingRight: 10,
+                      marginTop: 8,
                     }}
-                    className={styles.styleBtn}
-                    // onClick={btnTolak}
                   >
-                    <Image src={"/Tolak.svg"} width={30} height={30} />
-                    <p>Tolak</p>
-                  </button>
-                  <Modal
-                    isOpen={modalIsOpen}
-                    onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    style={custom}
-                    contentLabel="Example Modal"
-                  >
-                    <h2 className={styles.headerTxtModal}>
-                      Tolak Lampiran Bukti
-                    </h2>
-                    <Gap height={20} width={0} />
-                    <input
-                      className={styles.inputBuktiLap}
-                      placeholder="Tambah keterangan"
-                      onChange={(e) => setKetAdmin(e.target.value)}
-                    />
-                    <Gap height={20} width={0} />
-                    <div className={styles.wrapBtnModal}>
-                      <button onClick={closeModal} className={styles.btnKirim}>
-                        <img src={"/BatalIcon.svg"} width={20} height={20} />
-                        <p className={styles.txt}>Batal</p>
-                      </button>
-                      <Gap width={24} height={0} />
-                      <button onClick={btnTolakExp} className={styles.btnBatal}>
-                        <img src={"/Tolak.svg"} width={20} height={20} />
-                        <p>Tolak</p>
-                      </button>
-                    </div>
-                  </Modal>
-                  {showModalTolak ? (
-                    <div
-                      className={styles.modal}
-                      onClick={() => setShowModalTolak(false)}
-                    >
-                      <p>
-                        Ubah Jadwal {row.nama} <b>Ditolak</b>
-                      </p>
-                      <div className={styles.checkCircle}>
-                        <Image src={"/Tolak.svg"} width={25} height={25} />
-                      </div>
-                    </div>
-                  ) : null}
+                    {row.ket_pegawai}
+                  </p>
                 </div>
               </div>
-            </Collapse>
-          </TableCell>
+              <div className={styles.wrapperLampiran}>
+                Lampiran:
+                {row.files === "" ? null : (
+                  <div className={styles.contentLampiran} onClick={btnDw}>
+                    <div className={styles.fileLampiran}>
+                      <Image src={"/IconPDF.svg"} width={35} height={40} />
+                      <p style={{ marginLeft: 10 }}> File Laporan</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className={styles.wrapperBtnTerimaTolak}>
+                <Gap width={0} height={50} />
+                <button onClick={btnTerima} className={styles.styleBtn}>
+                  <Image src={"/Terima.svg"} width={30} height={30} />
+                  <p>Terima</p>
+                </button>
+                {showModal ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModal(false)}
+                  >
+                    <p>
+                      Ubah Jadwal {row.nama} <b>Diterima</b>
+                    </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Check-circle.svg"} width={25} height={25} />
+                    </div>
+                  </div>
+                ) : null}
+                <Gap width={0} height={20} />
+                <button
+                  onClick={openModal}
+                  style={{
+                    fontWeight: 700,
+                    background: "rgba(255, 1, 100, 1)",
+                  }}
+                  className={styles.styleBtn}
+                  // onClick={btnTolak}
+                >
+                  <Image src={"/Tolak.svg"} width={30} height={30} />
+                  <p>Tolak</p>
+                </button>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onAfterOpen={afterOpenModal}
+                  onRequestClose={closeModal}
+                  style={custom}
+                  contentLabel="Example Modal"
+                >
+                  <h2 className={styles.headerTxtModal}>Tolak Renaksi</h2>
+                  <Gap height={20} width={0} />
+                  <input
+                    className={styles.inputBuktiLap}
+                    placeholder="Tambah keterangan"
+                    onChange={(e) => setKetAdmin(e.target.value)}
+                  />
+                  <Gap height={20} width={0} />
+                  <div className={styles.wrapBtnModal}>
+                    <button onClick={closeModal} className={styles.btnKirim}>
+                      <img src={"/BatalIcon.svg"} width={20} height={20} />
+                      <p className={styles.txt}>Batal</p>
+                    </button>
+                    <Gap width={24} height={0} />
+                    <button onClick={btnTolakExp} className={styles.btnBatal}>
+                      <img src={"/Tolak.svg"} width={20} height={20} />
+                      <p>Tolak</p>
+                    </button>
+                  </div>
+                </Modal>
+                {showModalTolak ? (
+                  <div
+                    className={styles.modal}
+                    onClick={() => setShowModalTolak(false)}
+                  >
+                    <p>
+                      Ubah Jadwal {row.nama} <b>Ditolak</b>
+                    </p>
+                    <div className={styles.checkCircle}>
+                      <Image src={"/Tolak.svg"} width={25} height={25} />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </Collapse>
+        </TableCell>
         {/* </> */}
       </React.Fragment>
     </>
