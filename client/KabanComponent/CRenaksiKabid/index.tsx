@@ -287,6 +287,12 @@ function Row(props) {
           // sx={{ "& > *": { borderBottom: "" } }}
         >
           <TableCell>
+            <p style={style2}>{row.nama}</p>
+          </TableCell>
+          <TableCell>
+            <p style={style2}>{row.bidang}</p>
+          </TableCell>
+          <TableCell>
             <p style={style2}>{row.program}</p>
           </TableCell>
           <TableCell>
@@ -309,7 +315,7 @@ function Row(props) {
           </TableCell>
         </TableRow>
         {/* <div className={styles.backgroundRowExpand}> */}
-        <TableCell style={{ padding: 0 }} colSpan={6}>
+        <TableCell style={{ padding: 0 }} colSpan={8}>
           <Collapse style={styleCollapse} in={open} timeout="auto">
             <div className={styles.wrapperExpand}>
               <div className={styles.wrapperKeterangan}>
@@ -490,26 +496,32 @@ export const CRenaksiKabid = () => {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>TINJAU RENAKSI</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer style={{ paddingLeft: 40, paddingRight: 40 }}>
+            <TableContainer style={{ paddingLeft: 80, paddingRight: 80 }}>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
+                      Pegawai
+                    </TableCell>
+                    <TableCell style={style} >
+                      Bidang
+                    </TableCell>
+                    <TableCell style={style} >
                       Program
                     </TableCell>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
                       Kegiatan
                     </TableCell>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
                       Sub Kegiatan
                     </TableCell>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
                       Tupoksi Inti
                     </TableCell>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
                       Tupoksi Tambahan
                     </TableCell>
-                    <TableCell style={style} width={500}>
+                    <TableCell style={style} >
                       Rencana
                     </TableCell>
                   </TableRow>
