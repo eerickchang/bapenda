@@ -432,7 +432,7 @@ export default function ContentDaftarKegiatan() {
   }, [router.query, router.isReady]);
 
   const clickBack = () => {
-    router.push("/Sekretaris/DaftarKegiatanSubid");
+    router.push("/Kabid/DaftarKegiatanSubid");
     // console.log(dataCakin);
   };
 

@@ -170,7 +170,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 export default function CDaftarKegiatanSubid() {
   const router = useRouter();
   const clickBack = () => {
-    router.push("/Admin/DaftarKegiatan");
+    router.push("/Kabid/DaftarKegiatan");
     // console.log(dataCakin);
   };
 

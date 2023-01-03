@@ -405,10 +405,10 @@ function Row(props) {
           className={`${styles.tableRow} ${styleRow}`}
           // sx={{ "& > *": { borderBottom: "" } }}
         >
-          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
+          <TableCell onClick={clickRow} style={{ cursor: "pointer" }}>
             <p style={style1}>{row.sub_bidang}</p>
           </TableCell>
-          <TableCell onClick={clickRow} style={{cursor: 'pointer'}}>
+          <TableCell onClick={clickRow} style={{ cursor: "pointer" }}>
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>
@@ -536,6 +536,32 @@ export const CHapusRenaksi = () => {
           }
         );
       });
+
+      Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiDihapus").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubag.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              setPegawaiSubag((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
     }
   }, []);
 
@@ -585,11 +611,11 @@ export const CHapusRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawaiSubid.map((row) => (
+                  {pegawaiSubag.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawaiSubid}
+                      stateChanger={setPegawaiSubag}
                     />
                   ))}
                 </TableBody>

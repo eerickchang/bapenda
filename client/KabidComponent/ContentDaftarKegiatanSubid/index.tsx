@@ -43,7 +43,7 @@ export default function ContentDaftarKegiatanSubid() {
 
   const clickRow = (data) => {
     router.push({
-      pathname: "/Sekretaris/DaftarKegiatan",
+      pathname: "/Kabid/DaftarKegiatan",
       query: {
         subid: data,
       },

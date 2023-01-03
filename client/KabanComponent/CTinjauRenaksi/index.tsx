@@ -500,6 +500,28 @@ export const CTinjauRenaksi = () => {
           }
         );
       });
+
+      Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
+        Axios.get("http://localhost:3001/kabanAmbilRenaksiMRD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubag.data;
+            let renaksi = ambilRenaksi.data;
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              setPegawaiSubag((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+          }
+        );
+      });
     }
   }, []);
 
@@ -632,12 +654,12 @@ export const CTinjauRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawaiSubid.map((row) => (
+                  {pegawaiSubag.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawaiSubid}
-                      arrSubid={pegawaiSubid}
+                      stateChanger={setPegawaiSubag}
+                      arrSubid={pegawaiSubag}
                     />
                   ))}
                 </TableBody>

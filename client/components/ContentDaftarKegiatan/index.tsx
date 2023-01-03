@@ -16,6 +16,9 @@ import Modal from "react-modal";
 import Gap from "../Gap";
 import btnStyles from "../Button/button.module.css";
 import Axios from "axios";
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import FileDownload from "js-file-download";
 import { positions } from "@mui/system";
 
