@@ -920,7 +920,7 @@ export const CRiwayatKegiatanSubid = () => {
   };
 
   const clickBack = () => {
-    router.push("/Kaban/RiwayatKegiatan");
+    router.push("/Admin/RiwayatKegiatan");
     // console.log(dataCakin);
   };
 

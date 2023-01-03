@@ -517,7 +517,18 @@ function Row(props) {
               </p>
             </TableCell>
             <TableCell>
-              <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+              <p className={stylesS.styleTxtRowDitolak}>Ditolak</p>
+              {row.status == "Menunggu Renaksi Diterima" ? (
+                <p className={styles.descDT}>Renaksi Ditolak</p>
+              ) : row.status == "Menunggu Jadwal Diubah" ? (
+                <p className={styles.descDT}>Pengajuan Ubah Jadwal Ditolak</p>
+              ) : row.status == "Menunggu Renaksi Dihapus" ? (
+                <p className={styles.descDT}>
+                  Pengajuan Penghapusan Renaksi Ditolak
+                </p>
+              ) : row.status == "Selesai" ? (
+                <p className={styles.descDT}>Lampiran Bukti Ditolak</p>
+              ) : null}
             </TableCell>
           </TableRow>
         ) : row.status != "Selesai" &&

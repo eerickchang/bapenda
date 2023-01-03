@@ -16,6 +16,7 @@ Axios.defaults.withCredentials = true;
 
 export default function CTinjauRenaksi() {
   const [kasubid, setKasubid] = useState([]);
+  const [kasubag, setKasubag] = useState([]);
   const rowsSubagian = [
     {
       id: 1,
@@ -43,6 +44,16 @@ export default function CTinjauRenaksi() {
         ambilPegawai.data.map((pegawai) => {
           if (pegawai.jabatan == "Kasubid") {
             setKasubid((nextData) => {
+              return [...nextData, pegawai];
+            });
+          }
+        });
+      });
+
+      Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
+        ambilPegawai.data.map((pegawai) => {
+          if (pegawai.jabatan == "Kasubag") {
+            setKasubag((nextData) => {
               return [...nextData, pegawai];
             });
           }
@@ -104,19 +115,33 @@ export default function CTinjauRenaksi() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowsSubagian.map((row) => (
-                <TableRow hover className={styles.styleRow} key={row.id}>
-                  <TableCell onClick={clickRow} style={style2}>
+              {kasubag.map((row) => (
+                <TableRow hover className={styles.styleRow} key={row.nip}>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
                     <div className={styles.styleProfileKasub}>
-                      <Image src={"/User1.svg"} width={45} height={45} />{" "}
-                      <p>{row.sub}</p>
+                      {row.foto != "" ? (
+                        <Image src={row.foto} width={45} height={45} />
+                      ) : (
+                        <Image src={"/User1.svg"} width={45} height={45} />
+                      )}
+
+                      <p>{row.nama}</p>
                     </div>
                   </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    <p style={{ fontWeight: 600 }}>{row.sub}</p>
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    <p style={{ fontWeight: 600 }}>{row.sub_bidang}</p>
                   </TableCell>
-                  <TableCell onClick={clickRow} style={style2}>
-                    {row.keterangan}
+                  <TableCell
+                    onClick={() => clickRow(row.sub_bidang)}
+                    style={style2}
+                  >
+                    {row.bidang}
                   </TableCell>
                 </TableRow>
               ))}

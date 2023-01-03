@@ -97,8 +97,6 @@ function Row(props) {
   const [styleRow, setStyleRow] = useState("");
   const [ketAdmin, setKetAdmin] = useState("");
 
-
-
   const router = useRouter();
 
   const clickRow = () => {
@@ -124,20 +122,19 @@ function Row(props) {
     color: "#000",
   };
 
-    const styleAksi = {
-      flexDirection: "row",
-      display: "flex",
-      fontFamily: "Poppins",
-      fontWeight: 400,
-      fontSize: 18,
-      width: 130,
-      justifyContent: "space-between",
-      cursor: "pointer",
-    };
+  const styleAksi = {
+    flexDirection: "row",
+    display: "flex",
+    fontFamily: "Poppins",
+    fontWeight: 400,
+    fontSize: 18,
+    width: 130,
+    justifyContent: "space-between",
+    cursor: "pointer",
+  };
 
   return (
     <>
- 
       <React.Fragment>
         <TableRow
           className={`${styles.tableRow} ${styleRow}`}
@@ -203,6 +200,32 @@ export const CUbahJadwalRenaksi = () => {
           }
         );
       });
+
+      Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
+        Axios.get("http://localhost:3001/adminAmbilRenaksiMJD").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubag.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              setPegawaiSubag((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
     }
   }, []);
 
@@ -260,11 +283,11 @@ export const CUbahJadwalRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawaiSubid.map((row) => (
+                  {pegawaiSubag.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawaiSubid}
+                      stateChanger={setPegawaiSubag}
                     />
                   ))}
                 </TableBody>

@@ -354,10 +354,7 @@ function Row(props) {
             <p style={style2}>{row.nama}</p>
           </TableCell>
           <TableCell>
-            <div
-              onClick={clickRow}
-              style={styleAksi}
-            >
+            <div onClick={clickRow} style={styleAksi}>
               <Image src={"/LihatDetail.svg"} width={25} height={25} />
               Lihat detail
             </div>
@@ -401,6 +398,32 @@ export const CHapusRenaksi = () => {
 
             pegawaiYgAdaRenaksi.map((item) => {
               setPegawaiSubid((nextData) => {
+                return [item, ...nextData];
+              });
+            });
+
+            console.log("Pegawai Ada Renaksi: ", pegawaiYgAdaRenaksi);
+          }
+        );
+      });
+
+      Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
+        Axios.get("http://localhost:3001/adminAmbilRenaksiDihapus").then(
+          (ambilRenaksi) => {
+            let pegawaiYgAdaRenaksi = [];
+            let kasubid = ambilKasubag.data;
+            let renaksi = ambilRenaksi.data;
+            console.log("Kasubid: ", kasubid);
+            console.log("Renaksi: ", renaksi);
+
+            pegawaiYgAdaRenaksi = kasubid.filter((elA) => {
+              return renaksi.some(
+                (elB) => elA["sub_bidang"] === elB["sub_bidang"]
+              );
+            });
+
+            pegawaiYgAdaRenaksi.map((item) => {
+              setPegawaiSubag((nextData) => {
                 return [item, ...nextData];
               });
             });
@@ -458,11 +481,11 @@ export const CHapusRenaksi = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {pegawaiSubid.map((row) => (
+                  {pegawaiSubag.map((row) => (
                     <Row
                       key={row.id_renaksi}
                       row={row}
-                      stateChanger={setPegawaiSubid}
+                      stateChanger={setPegawaiSubag}
                     />
                   ))}
                 </TableBody>

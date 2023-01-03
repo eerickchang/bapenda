@@ -408,7 +408,6 @@ function Row(props) {
     // console.log(dataRenaksi);
   };
 
-  
   const styleTxtRowDitolak = {
     fontFamily: "Poppins",
     fontSize: 18,
@@ -438,34 +437,34 @@ function Row(props) {
       </div>
       <React.Fragment>
         {row.kirim_ke == "Staff" ? (
-        <TableRow hover className={styles.styleRow}>
+          <TableRow hover className={styles.styleRow}>
             <TableCell>
               {/* <div
                 style={{ display: "flex", padding: 10, alignItems: "center" }}
               > */}
-                {row.foto === "" ? (
-                  <Image
-                    src={"/SidebarProfile.svg"}
-                    width={70}
-                    height={70}
-                    alt="User 2"
-                    style={{ borderRadius: 150 }}
-                  />
-                ) : (
-                  <Image
-                    src={row.foto}
-                    width={70}
-                    height={70}
-                    alt="User 2"
-                    style={{ borderRadius: 150 }}
-                  />
-                )}
-                {/* //!{ambil data} */}
-                <div style={{ marginLeft: 10 }}>
-                  <p className={stylesS.rekanNama}>{row.nama}</p>
-                  <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
-                  <p className={stylesS.rekanAsn}>ASN</p>
-                </div>
+              {row.foto === "" ? (
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              ) : (
+                <Image
+                  src={row.foto}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
+              )}
+              {/* //!{ambil data} */}
+              <div style={{ marginLeft: 10 }}>
+                <p className={stylesS.rekanNama}>{row.nama}</p>
+                <p className={stylesS.rekanPegawai}>{row.jabatan}</p>
+                <p className={stylesS.rekanAsn}>ASN</p>
+              </div>
               {/* </div> */}
             </TableCell>
             <TableCell>
@@ -481,7 +480,9 @@ function Row(props) {
               <p className={stylesS.styleTupoksiDitolak}>Inti</p>
               <p className={stylesS.styleTxtRowDitolak}>{row.tupoksi_inti}</p>
               <p className={stylesS.styleTupoksiTambahanDitolak}>Tambahan</p>
-              <p className={stylesS.styleTxtRowDitolak}>{row.tupoksi_tambahan}</p>
+              <p className={stylesS.styleTxtRowDitolak}>
+                {row.tupoksi_tambahan}
+              </p>
             </TableCell>
             <TableCell>
               {/* ambil data rencana */}
@@ -491,21 +492,32 @@ function Row(props) {
               </p>
             </TableCell>
             <TableCell>
-              <p className={stylesS.styleTxtRowDitolak}>{row.status}</p>
+              <p className={stylesS.styleTxtRowDitolak}>Ditolak</p>
+              {row.status == "Menunggu Renaksi Diterima" ? (
+                <p className={styles.descDT}>Renaksi Ditolak</p>
+              ) : row.status == "Menunggu Jadwal Diubah" ? (
+                <p className={styles.descDT}>Pengajuan Ubah Jadwal Ditolak</p>
+              ) : row.status == "Menunggu Renaksi Dihapus" ? (
+                <p className={styles.descDT}>
+                  Pengajuan Penghapusan Renaksi Ditolak
+                </p>
+              ) : row.status == "Selesai" ? (
+                <p className={styles.descDT}>Lampiran Bukti Ditolak</p>
+              ) : null}
             </TableCell>
           </TableRow>
-          ) : row.status != "Selesai" &&
+        ) : row.status != "Selesai" &&
           row.status != "Menunggu Renaksi Diterima" ? (
           <TableRow hover className={styles.styleRow}>
             <div style={{ display: "flex", padding: 30, alignItems: "center" }}>
               {row.foto === "" ? (
-                  <Image
-                    src={"/SidebarProfile.svg"}
-                    width={70}
-                    height={70}
-                    alt="User 2"
-                    style={{ borderRadius: 150}}
-                  />
+                <Image
+                  src={"/SidebarProfile.svg"}
+                  width={70}
+                  height={70}
+                  alt="User 2"
+                  style={{ borderRadius: 150 }}
+                />
               ) : (
                 <Image
                   src={row.foto}
