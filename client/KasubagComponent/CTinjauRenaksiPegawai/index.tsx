@@ -63,11 +63,11 @@ export default function CTinjauRenaksiPegawai() {
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatSemua");
+    router.push("/Kasubag/TinjauRenaksiLihatSemua");
   };
 
   const clickBack = () => {
-    router.push("/Kasubid/TinjauRenaksi");
+    router.push("/Kasubag/TinjauRenaksi");
     // console.log(dataCakin);
   };
 

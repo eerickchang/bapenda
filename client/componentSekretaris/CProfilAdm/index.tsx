@@ -74,7 +74,7 @@ export default function CProfilAdm() {
           ambilPegawai.data.map((pegawai) => {
             if (
               pegawai.bidang == response.data.user[0].bidang &&
-              pegawai.jabatan == "Kasubid"
+              pegawai.jabatan == "Kasubag"
             ) {
               setSubid((nextData) => {
                 return [...nextData, pegawai];
@@ -319,7 +319,7 @@ export default function CProfilAdm() {
   const clickCakinBidang = (bidangParams) => {
     if (bidangParams == bidang) {
       router.push({
-        pathname: "/Kabid/CakinSubidang",
+        pathname: "/Sekretaris/CakinSubidang",
         query: {
           bidang: bidang,
           nama: bidang,
@@ -328,7 +328,7 @@ export default function CProfilAdm() {
       });
     } else if (bidangParams == subid[0].sub_bidang) {
       router.push({
-        pathname: "/Kabid/CakinSubidang",
+        pathname: "/Sekretaris/CakinSubidang",
         query: {
           bidang: bidang,
           subid: subid[0].sub_bidang,
@@ -338,7 +338,7 @@ export default function CProfilAdm() {
       });
     } else if (bidangParams == subid[1].sub_bidang) {
       router.push({
-        pathname: "/Kabid/CakinSubidang",
+        pathname: "/Sekretaris/CakinSubidang",
         query: {
           bidang: bidang,
           subid: subid[1].sub_bidang,
@@ -348,7 +348,7 @@ export default function CProfilAdm() {
       });
     } else if (bidangParams == subid[2].sub_bidang) {
       router.push({
-        pathname: "/Kabid/CakinSubidang",
+        pathname: "/Sekretaris/CakinSubidang",
         query: {
           bidang: bidang,
           subid: subid[2].sub_bidang,

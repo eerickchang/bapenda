@@ -227,14 +227,14 @@ function Row(props) {
   const router = useRouter();
   const clickRowPegawai = () => {
     router.push({
-      pathname: "/Kasubid/TinjauRenaksiPegawai",
+      pathname: "/Kasubag/TinjauRenaksiPegawai",
       query: { nip: row.nip },
     });
   };
 
   const clickRowPegawaiFeedback = () => {
     router.push({
-      pathname: "/Kasubid/TinjauRenaksiPegawaiFeedback",
+      pathname: "/Kasubag/TinjauRenaksiPegawaiFeedback",
       query: { nip: row.nip },
     });
   };
@@ -299,7 +299,7 @@ function Row(props) {
                     position: "absolute",
                     // marginTop: -35,
                     right: 43,
-                    cursor: 'pointer'
+                    cursor: "pointer",
                   }}
                 >
                   <Image src={"/Tanggapan.svg"} width={40} height={40} />
@@ -325,7 +325,7 @@ function Row(props) {
             </div>
           </TableCell>
         </TableRow>
-        <Gap height={16} width={0}/>
+        <Gap height={16} width={0} />
       </React.Fragment>
     </>
   );
@@ -387,7 +387,7 @@ export default function ContentDaftarKegiatan() {
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatSemua");
+    router.push("/Kasubag/TinjauRenaksiLihatSemua");
   };
 
   const [showModal, setShowModal] = useState(false);

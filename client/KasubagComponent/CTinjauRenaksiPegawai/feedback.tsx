@@ -61,11 +61,11 @@ export default function CTinjauRenaksiPegawaiFeedback() {
   const lihatSemua = () => {
     // setActiveDropdown(!activeDropdown);
     // console.log(dataRenaksi);
-    router.push("/Kasubid/TinjauRenaksiLihatSemua");
+    router.push("/Kasubag/TinjauRenaksiLihatSemua");
   };
 
   const clickBack = () => {
-    router.push("/Kasubid/TinjauRenaksi");
+    router.push("/Kasubag/TinjauRenaksi");
     // console.log(dataCakin);
   };
 
@@ -321,7 +321,7 @@ export default function CTinjauRenaksiPegawaiFeedback() {
                         </TableCell>
                         <TableCell sx={styleData}>{row.ket_pegawai}</TableCell>
                       </TableRow>
-                      <Gap height={16} width={0}/>
+                      <Gap height={16} width={0} />
                     </>
                   ))}
                 </TableBody>

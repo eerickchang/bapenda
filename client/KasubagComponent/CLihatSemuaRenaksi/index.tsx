@@ -61,7 +61,7 @@ export default function CLihatSemuaRenaksi() {
   const router = useRouter();
 
   const clickBack = () => {
-    router.push("/Kasubid/TinjauRenaksi");
+    router.push("/Kasubag/TinjauRenaksi");
   };
 
   const [activeDropdownTahun, setActiveDropdownTahun] = useState(false);

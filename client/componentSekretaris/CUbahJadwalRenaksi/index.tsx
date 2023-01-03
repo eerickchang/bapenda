@@ -154,13 +154,13 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
     setTimeout(() => {
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
-        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
           Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
             (ambilRenaksi) => {
               let bidangUserSDKabid = [];
               let pegawaiYgAdaRenaksi = [];
               let userLoggedIn = masuk.data.user;
-              let kasubid = ambilKasubid.data;
+              let kasubid = ambilKasubag.data;
               let renaksi = ambilRenaksi.data;
               console.log("User Logged In: ", userLoggedIn);
               console.log("Kasubid: ", kasubid);
@@ -314,13 +314,13 @@ export default function CUbahJadwalRenaksi() {
 
       Axios.get("http://localhost:3001/masuk").then((masuk) => {
         setBidang(masuk.data.user[0].bidang);
-        Axios.get("http://localhost:3001/ambilKasubid").then((ambilKasubid) => {
+        Axios.get("http://localhost:3001/ambilKasubag").then((ambilKasubag) => {
           Axios.get("http://localhost:3001/kabidAmbilRenaksiMJD").then(
             (ambilRenaksi) => {
               let bidangUserSDKabid = [];
               let pegawaiYgAdaRenaksi = [];
               let userLoggedIn = masuk.data.user;
-              let kasubid = ambilKasubid.data;
+              let kasubid = ambilKasubag.data;
               let renaksi = ambilRenaksi.data;
               console.log("User Logged In: ", userLoggedIn);
               console.log("Kasubid: ", kasubid);

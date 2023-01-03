@@ -245,6 +245,39 @@ app.post("/inputRenaksiKasubid", (req, res) => {
   );
 });
 
+// INPUT RENAKSI KASUBAG
+app.post("/inputRenaksiKasubag", (req, res) => {
+  const program = req.body.program;
+  const kegiatan = req.body.kegiatan;
+  const tupoksiInti = req.body.tupoksiInti;
+  const subKegiatan = req.body.subKegiatan;
+  const nip = req.body.nip;
+  const tupoksiTambahan = req.body.tupoksiTambahan;
+  const thl = req.body.thl;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+
+  const sqlInsert =
+    "INSERT INTO data_renaksi (program, kegiatan, tupoksi_inti, sub_kegiatan, nip, tupoksi_tambahan, thl, start_date, end_date, status, kirim_ke) VALUES (?,?,?,?,?,?,?,?,?, 'Menunggu Renaksi Diterima', 'Sekretaris')";
+  db.query(
+    sqlInsert,
+    [
+      program,
+      kegiatan,
+      tupoksiInti,
+      subKegiatan,
+      nip,
+      tupoksiTambahan,
+      thl,
+      startDate,
+      endDate,
+    ],
+    (err, result) => {
+      console.log(result);
+    }
+  );
+});
+
 // INPUT RENAKSI KABID
 app.post("/inputRenaksiKabid", (req, res) => {
   const program = req.body.program;
@@ -686,6 +719,30 @@ app.post("/kasubidMenolakRenaksi", (req, res) => {
   });
 });
 
+//KASUBAG MENERIMA RENAKSI
+app.post("/kasubagMenerimaRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Sekretaris", ditolak = "" WHERE id_renaksi = ?';
+  db.query(sqlUpdate, idRenaksi, (err, result) => {
+    console.log(result);
+  });
+});
+
+//KASUBAG MENOLAK RENAKSI
+app.post("/kasubagMenolakRenaksi", (req, res) => {
+  const idRenaksi = req.body.idRenaksi;
+  const ketAdmin = req.body.ketAdmin;
+
+  const sqlUpdate =
+    'UPDATE data_renaksi SET kirim_ke = "Staff", ditolak = "Kasubag", ket_admin = ? WHERE id_renaksi = ?';
+  let data = [ketAdmin, idRenaksi];
+  db.query(sqlUpdate, data, (err, result) => {
+    console.log(result);
+  });
+});
+
 //AMBIL SEMUA PEGAWAI DENGAN JABATAN STAFF
 app.get("/ambilPegawai", (req, res) => {
   const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan = "Staff"';
@@ -697,6 +754,14 @@ app.get("/ambilPegawai", (req, res) => {
 //AMBIL SEMUA KASUBID DENGAN JABATAN KASUBID
 app.get("/ambilKasubid", (req, res) => {
   const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan = "Kasubid"';
+  db.query(sqlSelect, (err, result) => {
+    res.send(result);
+  });
+});
+
+//AMBIL SEMUA KASUBAG DENGAN JABATAN KASUBAG
+app.get("/ambilKasubag", (req, res) => {
+  const sqlSelect = 'SELECT * FROM pegawai WHERE jabatan = "Kasubag"';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });

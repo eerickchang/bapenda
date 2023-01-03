@@ -26,7 +26,7 @@ export default function ContentDaftarKegiatanSubid() {
         Axios.get("http://localhost:3001/pegawai").then((ambilPegawai) => {
           ambilPegawai.data.map((pegawai) => {
             if (
-              pegawai.jabatan == "Kasubid" &&
+              pegawai.jabatan == "Kasubag" &&
               pegawai.bidang == masuk.data.user[0].bidang
             ) {
               setKasubid((nextData) => {
