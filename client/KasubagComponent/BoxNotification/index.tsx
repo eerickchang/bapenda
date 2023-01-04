@@ -32,7 +32,7 @@ export default function BoxNotification() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.notifHeader} onClick={handleClickNotif}>
+      {/* <div className={styles.notifHeader} onClick={handleClickNotif}>
         <p className={styles.txtHeader}>Notifikasi</p>
         <Image
           src="/NotifBiru.svg"
@@ -49,7 +49,7 @@ export default function BoxNotification() {
             <p className={styles.txtMessage}>{item.message}</p>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
