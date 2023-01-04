@@ -446,6 +446,10 @@ export const CEvaluasiLampiran = () => {
     setIsTutupModal(false);
   }
 
+
+
+  
+
   function openModalBuka() {
     setIsOpenModal(true);
   }
