@@ -344,6 +344,7 @@ export default function CLihatSemuaRenaksi() {
                 <TableHead>
                   <TableRow>
                     <TableCell sx={styleHeader}></TableCell>
+                    <TableCell sx={styleHeader}>Pegawai</TableCell>
                     <TableCell sx={styleHeader}>Program</TableCell>
                     <TableCell sx={styleHeader}>THL</TableCell>
                     <TableCell sx={styleHeader}>Kegiatan</TableCell>
@@ -363,6 +364,9 @@ export default function CLihatSemuaRenaksi() {
                           value={row.nip}
                         />
                         {/* {row.id_renaksi} */}
+                      </TableCell>
+                      <TableCell width={350} sx={styleData}>
+                        <p style={{ fontWeight: 600 }}>{row.nama}</p>
                       </TableCell>
                       <TableCell width={350} sx={styleData}>
                         <p style={{ fontWeight: 600 }}>{row.program}</p>
