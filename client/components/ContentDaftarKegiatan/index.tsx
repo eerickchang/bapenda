@@ -734,7 +734,7 @@ function Row(props: rowProps) {
                   <div className={styles.wrapperExpand}>
                     <div className={styles.wrapperTanggapan}>
                       <p>Tanggapan:</p>
-                      <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                      <p className={styles.txtTanggapan}>{row.ket_pegawai}</p>
                     </div>
                     <div className={styles.wrapperLampiran}>
                       <p>Lampiran:</p>
@@ -1221,7 +1221,7 @@ function Row(props: rowProps) {
               <div className={styles.wrapperExpand}>
                 <div className={styles.wrapperTanggapan}>
                   <p>Tanggapan:</p>
-                  <p className={styles.txtTanggapan}>{row.ket_admin}</p>
+                  <p className={styles.txtTanggapan}>{row.ket_pegawai}</p>
                 </div>
                 <div className={styles.wrapperLampiran}>
                   <p>Lampiran:</p>

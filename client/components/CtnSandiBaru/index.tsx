@@ -1,10 +1,10 @@
-import React from 'react'
-import Button from '../Button';
-import Gap from '../Gap';
-import TxtInput from '../TxtInput';
-import styles from './ctnSandiBaru.module.css'
+import React from "react";
+import Button from "../Button";
+import Gap from "../Gap";
+import TxtInput from "../TxtInput";
+import styles from "./ctnSandiBaru.module.css";
 import btnStyles from "../Button/button.module.css";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
 
 export default function CtnSandiBaru() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CtnSandiBaru() {
       <div className={styles.headerTxt}>
         <p className={styles.txtNormal}>Daftar</p>
         <p className={styles.txtNormal}>Masuk</p>
-        <p className={styles.txtStyled}>Sandi</p>
+        {/* <p className={styles.txtStyled}>Sandi</p> */}
       </div>
       <p className={styles.txtVerif}>Kata Sandi Baru</p>
       <Gap height={38} width={0} />
@@ -28,7 +28,7 @@ export default function CtnSandiBaru() {
         placeholder="Masukkan Kata Sandi Baru"
         width={25}
         height={30}
-        type='password'
+        type="password"
       />
       <Gap height={40} width={20} />
       <TxtInput
@@ -38,7 +38,7 @@ export default function CtnSandiBaru() {
         placeholder="Konfirmasi Kata Sandi"
         width={33}
         height={19}
-        type='password'
+        type="password"
       />
       <Button
         className={`${btnStyles.container} ${btnStyles.btnSandi}`}

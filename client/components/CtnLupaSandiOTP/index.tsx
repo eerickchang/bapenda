@@ -1,10 +1,10 @@
-import React from 'react'
-import Button from '../Button';
-import Gap from '../Gap';
-import TxtInput from '../TxtInput';
-import styles from './ctnLupaSandiOTP.module.css'
-import btnStyles from '../Button/button.module.css'
-import {useRouter} from 'next/router'
+import React from "react";
+import Button from "../Button";
+import Gap from "../Gap";
+import TxtInput from "../TxtInput";
+import styles from "./ctnLupaSandiOTP.module.css";
+import btnStyles from "../Button/button.module.css";
+import { useRouter } from "next/router";
 
 export default function CtnLupaSandiOTP() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CtnLupaSandiOTP() {
       <div className={styles.headerTxt}>
         <p className={styles.txtNormal}>Daftar</p>
         <p className={styles.txtNormal}>Masuk</p>
-        <p className={styles.txtStyled}>Sandi</p>
+        {/* <p className={styles.txtStyled}>Sandi</p> */}
       </div>
       <p className={styles.txtVerif}>Verifikasi OTP</p>
       <Gap height={38} width={0} />
@@ -26,7 +26,7 @@ export default function CtnLupaSandiOTP() {
         placeholder="Masukkan kode OTP dari SMS yang diterima"
         width={30}
         height={30}
-        type='number'
+        type="number"
       />
       <Button
         title="Verifikasi"

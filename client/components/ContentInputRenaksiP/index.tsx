@@ -153,22 +153,22 @@ export default function ContentInputRenaksiP() {
 
   const [activeFormat, setActiveFormat] = useState(false);
 
-    const menuRef = useRef();
+  const menuRef = useRef();
 
-    useEffect(() => {
-      const handler = (e) => {
-        if (!menuRef.current.contains(e.target)) {
-          setActiveFormat(false);
-          console.log(menuRef.current);
-        }
-      };
+  // useEffect(() => {
+  //   const handler = (e) => {
+  //     if (!menuRef.current.contains(e.target)) {
+  //       setActiveFormat(false);
+  //       console.log(menuRef.current);
+  //     }
+  //   };
 
-      document.addEventListener("mousedown", handler);
+  //   document.addEventListener("mousedown", handler);
 
-      return () => {
-        document.removeEventListener("mousedown", handler);
-      };
-    });
+  //   return () => {
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // });
 
   const optionsTupoksi = [
     {
@@ -352,7 +352,7 @@ export default function ContentInputRenaksiP() {
         </div>
         <p style={{ marginLeft: 5, marginBottom: 10 }}>MASUKAN RENAKSI</p>
       </div>
-      <div
+      {/* <div
         className={styles.wrapperBtnExcel}
         onClick={(e) => setActiveFormat(!activeFormat)}
       >
@@ -377,7 +377,7 @@ export default function ContentInputRenaksiP() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
       <Gap height={146} width={0} />
       <div className={styles.wrapperInput}>
         <div>

@@ -4,7 +4,7 @@ import Gap from "../Gap";
 import TxtInput from "../TxtInput";
 import styles from "./ctnLupaSandi.module.css";
 import btnStyles from "../Button/button.module.css";
-import {useRouter} from 'next/router';
+import { useRouter } from "next/router";
 
 export default function CtnLupaSandi() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CtnLupaSandi() {
       <div className={styles.headerTxt}>
         <p className={styles.txtNormal}>Daftar</p>
         <p className={styles.txtNormal}>Masuk</p>
-        <p className={styles.txtStyled}>Sandi</p>
+        {/* <p className={styles.txtStyled}>Sandi</p> */}
       </div>
       {/* <Gap height={55} width={0} /> */}
       <TxtInput

@@ -116,7 +116,7 @@ export default function CtnLogin() {
       <div className={styles.headerTxt}>
         <p className={styles.txtNormal}>Daftar</p>
         <p className={styles.txtStyled}>Masuk</p>
-        <p className={styles.txtNormal}>Sandi</p>
+        {/* <p className={styles.txtNormal}>Sandi</p> */}
       </div>
       <div className={styles.txtInput}>
         <TxtInput
@@ -141,9 +141,10 @@ export default function CtnLogin() {
           onChange={(e) => setSandi(e.target.value)}
         />
         <Gap height={100} width={0} />
-        <p onClick={openModal} className={styles.txtLupa}>
+        <Gap height={44} width={0} />
+        {/* <p onClick={openModal} className={styles.txtLupa}>
           Lupa kata sandi?
-        </p>
+        </p> */}
         <Gap height={45} width={0} />
         <Button
           className={`${btnStyles.container}`}

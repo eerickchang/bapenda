@@ -508,7 +508,7 @@ export const CUbahJadwalRenaksi = () => {
   const styleContainer = {
     paddingLeft: 2,
     paddingRight: 40,
-    paddingBottom: 20,
+    paddingBottom: 32,
   };
 
   return (

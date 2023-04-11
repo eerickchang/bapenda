@@ -709,7 +709,9 @@ export default function ContentDaftarKegiatan() {
               <p style={{ marginLeft: 5, marginBottom: 10 }}>DAFTAR KEGIATAN</p>
             </div>
             <Gap height={150} width={0} />
-            <TableContainer style={{ paddingLeft: 2, paddingRight: 40 }}>
+            <TableContainer
+              style={{ paddingLeft: 2, paddingRight: 40, paddingBottom: 32 }}
+            >
               <Table sx={{ tableLayout: "fixed" }}>
                 <TableHead>
                   <TableRow>

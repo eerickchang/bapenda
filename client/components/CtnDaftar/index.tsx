@@ -89,7 +89,7 @@ export default function CtnDaftar() {
       <div className={styles.headerTxt}>
         <p className={styles.txtStyled}>Daftar</p>
         <p className={styles.txtNormal}>Masuk</p>
-        <p className={styles.txtNormal}>Sandi</p>
+        {/* <p className={styles.txtNormal}>Sandi</p> */}
       </div>
       <div className={styles.content}>
         <div className={styles.contentKiri}>
