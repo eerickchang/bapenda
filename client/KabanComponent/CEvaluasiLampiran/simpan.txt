@@ -1,0 +1,42 @@
+{req == "Ya" ? (
+          <button className={styles.btnPermintaan} onClick={openModalBuka}>
+            {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
+            Permintaan
+          </button>
+        ) : null}
+
+        <Modal
+          isOpen={modalTerima}
+          onAfterOpen={afterOpenModalBuka}
+          onRequestClose={closeModalBuka}
+          style={customBuka}
+          contentLabel="Example Modal"
+        >
+          <div className={styles.wrapperKeterangan}>
+            Permintaan Buka Form Evaluasi Lampiran:
+            <div className={styles.contentKeterangan}>
+              <p
+                style={{
+                  maxWidth: 930,
+                  height: 140,
+                  overflowX: "auto",
+                  paddingRight: 10,
+                  marginTop: 8,
+                }}
+              >
+                {ket}
+              </p>
+            </div>
+          </div>
+          <Gap height={40} width={0} />
+          <div className={styles.wrapBtnPermintaan}>
+            <button onClick={btnTolakForm} className={styles.btnTolakP}>
+              <img src={"/Tolak.svg"} width={20} height={20} />
+              <p style={{ marginLeft: 8 }}>Tolak</p>
+            </button>
+            <button onClick={btnKirim} className={styles.btnKirimP}>
+              <img src={"/Terima.svg"} width={20} height={20} />
+              <p style={{ marginLeft: 8 }}>Terima</p>
+            </button>
+          </div>
+        </Modal>
