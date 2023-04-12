@@ -302,14 +302,7 @@ function Row(props) {
   return (
     <>
       <div className={stylesS.wrapFilter}>
-        {req == "Ya" ? (
-          <button className={styles.btnPermintaan} onClick={openModalBuka}>
-            {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
-            Permintaan
-          </button>
-        ) : null}
-
-        <Modal
+        {/* <Modal
           isOpen={modalTerima}
           onAfterOpen={afterOpenModalBuka}
           onRequestClose={closeModalBuka}
@@ -343,7 +336,7 @@ function Row(props) {
               <p style={{ marginLeft: 8 }}>Terima</p>
             </button>
           </div>
-        </Modal>
+        </Modal> */}
         <Gap width={24} height={0} />
         <button className={styles.btnTerimaAll} onClick={btnTerimaSemua}>
           <Image src={"/Terima.svg"} width={25} height={25} />
@@ -555,10 +548,119 @@ export const CEvaluasiLampiran = () => {
     paddingBottom: 20,
   };
 
+  const [modalTerima, setIsModalTerima] = useState(false);
+  function afterOpenModalBuka() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = "#f00";
+  }
+  function closeModalBuka() {
+    setIsModalTerima(false);
+  }
+  const customBuka = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      // width: 1000,
+      borderRadius: 20,
+      padding: 50,
+      // height: 362,
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      overlay: "#112350",
+      backgroundColor: "white",
+      zIndex: 1001,
+      scroll: false,
+    },
+    overlay: {
+      position: "fixed",
+      marginTop: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(17, 35, 80, 0.5)",
+      zIndex: 1000,
+    },
+  };
+
+  const btnTolakForm = () => {
+    Axios.post("http://localhost:3001/tolakForm");
+    closeModalBuka();
+
+    window.location.reload();
+  };
+
+  const btnKirim = () => {
+    Axios.get("http://localhost:3001/ambilRenaksi").then((ambilRenaksi) => {
+      ambilRenaksi.data.map((renaksi) => {
+        if (
+          moment(renaksi.end_date).format("YYYY-MM-DD") ==
+          moment(prevMonth).format("YYYY-MM-DD")
+        ) {
+          Axios.post("http://localhost:3001/bukaForm", {
+            idRenaksi: renaksi.id_renaksi,
+          }).then((result) => console.log(result));
+        }
+      });
+    });
+
+    closeModalBuka();
+    window.location.reload();
+  };
+
+  function openModalBuka() {
+    setIsModalTerima(true);
+  }
+
   return (
     <>
       {domLoaded && (
         <div className={stylesS.wrap}>
+          {req == "Ya" ? (
+            <button className={styles.btnPermintaan} onClick={openModalBuka}>
+              {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
+              Permintaan
+            </button>
+          ) : null}
+
+          <Modal
+            isOpen={modalTerima}
+            onAfterOpen={afterOpenModalBuka}
+            onRequestClose={closeModalBuka}
+            style={customBuka}
+            contentLabel="Example Modal"
+          >
+            <div className={styles.wrapperKeterangan}>
+              Permintaan Buka Form Evaluasi Lampiran:
+              <div className={styles.contentKeterangan}>
+                <p
+                  style={{
+                    maxWidth: 930,
+                    height: 140,
+                    overflowX: "auto",
+                    paddingRight: 10,
+                    marginTop: 8,
+                  }}
+                >
+                  {ket}
+                </p>
+              </div>
+            </div>
+            <Gap height={40} width={0} />
+            <div className={styles.wrapBtnPermintaan}>
+              <button onClick={btnTolakForm} className={styles.btnTolakP}>
+                <img src={"/Tolak.svg"} width={20} height={20} />
+                <p style={{ marginLeft: 8 }}>Tolak</p>
+              </button>
+              <button onClick={btnKirim} className={styles.btnKirimP}>
+                <img src={"/Terima.svg"} width={20} height={20} />
+                <p style={{ marginLeft: 8 }}>Terima</p>
+              </button>
+            </div>
+          </Modal>
           <div className={stylesS.container}>
             <div className={stylesS.wrapperTitle}>
               <div>

@@ -293,13 +293,15 @@ function Row(props) {
                 >
                   <Image src={"/Terima.svg"} width={20} height={20} /> Terima
                 </button>
+                {/* BKENG KONDISI DISINI */}
+
                 <div
                   onClick={() => clickRowPegawaiFeedback()}
                   style={{
                     position: "absolute",
                     // marginTop: -35,
                     right: 43,
-                    cursor: 'pointer'
+                    cursor: "pointer",
                   }}
                 >
                   <Image src={"/Tanggapan.svg"} width={40} height={40} />
@@ -325,7 +327,7 @@ function Row(props) {
             </div>
           </TableCell>
         </TableRow>
-        <Gap height={16} width={0}/>
+        <Gap height={16} width={0} />
       </React.Fragment>
     </>
   );
