@@ -620,7 +620,7 @@ export const CEvaluasiLampiran = () => {
       {domLoaded && (
         <div className={stylesS.wrap}>
           {req == "Ya" ? (
-            <button className={styles.btnPermintaan} onClick={openModalBuka}>
+            <button className={styles.btnPermintaan2} onClick={openModalBuka}>
               {/* <Image src={"/Terima.svg"} width={25} height={25} /> */}
               Permintaan
             </button>
