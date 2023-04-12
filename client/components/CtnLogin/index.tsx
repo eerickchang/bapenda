@@ -145,7 +145,7 @@ export default function CtnLogin() {
         {/* <p onClick={openModal} className={styles.txtLupa}>
           Lupa kata sandi?
         </p> */}
-        <Gap height={45} width={0} />
+        <Gap height={71} width={0} />
         <Button
           className={`${btnStyles.container}`}
           title="Masuk"

@@ -63,6 +63,7 @@ export default function ContentDaftarKegiatanSubid() {
     fontWeight: 400,
     color: "#000",
     cursor: "pointer",
+    // marginBottom: 20
   };
 
   const styleContainer = {

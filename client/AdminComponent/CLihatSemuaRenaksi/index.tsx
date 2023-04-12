@@ -328,7 +328,7 @@ export default function CLihatSemuaRenaksi() {
                 }
               }}
             >
-              <p style={{ margin: 0 }}>Keterangan Kaban</p>
+              <p style={{ margin: 0, cursor: "pointer" }}>Keterangan Kaban</p>
             </div>
             <Gap height={35} width={0} />
             <Collapse
